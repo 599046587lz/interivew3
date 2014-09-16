@@ -8,9 +8,10 @@ var session    = require('express-session');
 var MongoStore = require('connect-mongo')(session);
 
 var club = require('./routes/club');
+var interview = require('./routes/interview');
+var room = require('./routes/room');
 
 var app = express();
-var models = require('./models');
 var config = require('./config');
 
 // view engine setup
@@ -33,7 +34,9 @@ app.use(session({
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/club',club);
+app.use('/club', club);
+app.use('/interview', interview);
+app.use('/room', room);
 
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -47,7 +50,7 @@ app.use(function(req, res, next) {
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
-    app.use(function(err, req, res, next) {
+    app.use(function(err, req, res) {
         res.status(err.status || 500);
         res.render('error', {
             message: err.message,
@@ -58,7 +61,7 @@ if (app.get('env') === 'development') {
 
 // production error handler
 // no stacktraces leaked to user
-app.use(function(err, req, res, next) {
+app.use(function(err, req, res) {
     res.status(err.status || 500);
     res.render('error', {
         message: err.message,

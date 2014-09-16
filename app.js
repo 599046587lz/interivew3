@@ -4,10 +4,14 @@ var favicon = require('static-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var session    = require('express-session');
+var MongoStore = require('connect-mongo')(session);
 
 var club = require('./routes/club');
 
 var app = express();
+var models = require('./models');
+var config = require('./config');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -18,6 +22,15 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
+app.use(session({
+    secret: config.cookie_secret,
+    store: new MongoStore({
+        db : config.db.db,
+        host: config.db.host
+    }),
+    resave: true,
+    saveUninitialized: true
+}));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/club',club);

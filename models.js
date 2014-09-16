@@ -38,7 +38,3 @@ exports.Interviewee = new Schema({
     done: [Number],
     extra: Object
 });
-
-exports.WaitingRoom = new Schema({
-
-});

@@ -1,0 +1,19 @@
+#!/usr/bin/env node
+var debug = require('debug')('interview');
+var app = require('../app');
+
+app.set('port', process.env.PORT || 3000);
+
+var server = app.listen(app.get('port'), function() {
+  debug('Express server listening on port ' + server.address().port);
+});
+var io = require('socket.io')(server);
+io.on('connection', function (socket){
+    /**
+     * @params data {cid:cid}
+     */
+    socket.on('init', function(data){
+        socket.join(data['cid']);
+    })
+});
+global.io = io;

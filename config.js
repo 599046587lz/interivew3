@@ -5,5 +5,6 @@ module.exports = {
     db:{
         host: 'localhost',
         db: 'interview'
-    }
+    },
+    cookie_secret: 'redhome2014interview'
 };

@@ -1,9 +1,5 @@
-/**
- * Created by bangbang93 on 14-9-21.
- */
-
-
 var Interviewee = require('../models').Interviewee;
+
 exports.getStuBySid = function (sid, cid, callback) {
     Interviewee.find({sid: sid,cid: cid},function (err, docs){
         callback(err, docs);

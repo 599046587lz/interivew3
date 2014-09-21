@@ -7,7 +7,7 @@ exports.sign = function (sid, cid, callback) {
 		if(err) {
 			callback(err);
 		} else {
-			if(!docs) {
+			if(0 == docs.length) {
 				callback(null,false);
 			} else {
 				Interviewee.sign(sid, cid, function (err) {
@@ -27,7 +27,7 @@ exports.selectDep = function (sid, cid, did, callback) {
 	var data = {
 		sid: sid,
 		volunteer: did,
-		signTime: date,
+		signTime: date
 	};
 	Interviewee.addInterviewee(data,cid,function (err) {
 		if(err) {
@@ -35,5 +35,5 @@ exports.selectDep = function (sid, cid, did, callback) {
 		} else {
 			callback(null,true);
 		}
-	})
+	});
 };

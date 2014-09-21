@@ -20,7 +20,7 @@ exports.sign = function (sid, cid, callback) {
 			}
 		}
 	});
-}
+};
 
 exports.selectDep = function (sid, cid, did, callback) {
 	var date = new Date();
@@ -36,4 +36,4 @@ exports.selectDep = function (sid, cid, did, callback) {
 			callback(null,true);
 		}
 	})
-}
+};

@@ -4,7 +4,7 @@
 var express = require('express');
 var router = express.Router();
 
-var Interviewee = require("../module/Interviewee");
+var Interviewee = require("../modules/interviewee");
 /**
  * @params sid
  * @return Object {status: 'success'|'selectDep'}

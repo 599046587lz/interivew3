@@ -25,6 +25,7 @@ exports.Club = new Schema({
 
 exports.Interviewee = new Schema({
     sid: Number,
+    cid: Number,
     name: String,
     sex: Boolean,
     major: String,
@@ -34,7 +35,8 @@ exports.Interviewee = new Schema({
     volunteer: [Number],
     message: String,
     signTime: Date,
-    rate: Object,//{did:{score: Number, comment: String, interviewer: String}}
+    rate: [Object],//{did: Number,score: Number, comment: String, interviewer: String}
     done: [Number],
-    extra: Object
+    extra: Object,
+    busy: Boolean   //是否正在面试
 });

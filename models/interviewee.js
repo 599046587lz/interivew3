@@ -4,7 +4,7 @@ exports.getStuBySid = function (sid, cid, callback) {
     Interviewee.find({sid: sid,cid: cid},function (err, docs){
         callback(err, docs);
     });
-};
+}
 
 exports.sign = function (sid, cid, callback) {
     var date = new Date();
@@ -15,7 +15,7 @@ exports.sign = function (sid, cid, callback) {
             callback(err);
         }
     });
-};
+}
 
 exports.addInterviewee = function (data, cid, callback){
     var IntervieweeEntity = new Interviewee();

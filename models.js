@@ -13,7 +13,7 @@ var Schema = mongoose.Schema;
 //    location: String
 //});
 
-exports.Club = new Schema({
+var Club = new Schema({
     cid: Number,
     name: String,
     logo: Buffer,
@@ -23,7 +23,9 @@ exports.Club = new Schema({
     maxDep: Number //应试者最多可以选择的部门
 });
 
-exports.Interviewee = new Schema({
+exports.Club = mongoose.model('club', Club);
+
+var Interviewee = new Schema({
     sid: Number,
     cid: Number,
     name: String,
@@ -40,3 +42,5 @@ exports.Interviewee = new Schema({
     extra: Object,
     busy: Boolean   //是否正在面试
 });
+
+exports.Interviewee = mongoose.model('interviewee', Interviewee);

@@ -35,7 +35,7 @@ var Interviewee = new Schema({
     email: String,
     qq: String,
     volunteer: [Number],
-    message: String,
+    notion: String,
     signTime: Date,
     rate: [Object],//{did: Number,score: Number, comment: String, interviewer: String}
     done: [Number],

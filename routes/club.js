@@ -53,6 +53,20 @@ router.get('/logout', r.checkLogin, function (req,res){
  * @return Object {status: 'success'|'failed', count:Number}
  */
 router.post('/upload/archive', function (req, res){
+    var file = req.files.archive;
+    if(!file){
+        return res.send(403);
+    } else {
+        club.handleArchive(file, req.session['cid'], function (err){
+            if (err){
+                res.json(err);
+            } else {
+                res.json({
+                    status:'success'
+                });
+            }
+        });
+    }
 
 });
 

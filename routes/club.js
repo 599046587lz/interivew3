@@ -54,15 +54,16 @@ router.get('/logout', r.checkLogin, function (req,res){
  */
 router.post('/upload/archive', function (req, res){
     var file = req.files.archive;
-    if(!file){
+    if(!file || !req.session['cid']){
         return res.send(403);
     } else {
-        club.handleArchive(file, req.session['cid'], function (err){
+        club.handleArchive(file, req.session['cid'], function (err, length){
             if (err){
                 res.json(err);
             } else {
                 res.json({
-                    status:'success'
+                    status:'success',
+                    count: length
                 });
             }
         });

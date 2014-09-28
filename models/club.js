@@ -34,3 +34,11 @@ exports.getClubByName = function(name, callback){
         }
     });
 };
+
+exports.update = function (cid, club, callback) {
+    Club.update({
+        cid: cid
+    },club,function (err, numEffect) {
+        callback(err);
+    });
+};

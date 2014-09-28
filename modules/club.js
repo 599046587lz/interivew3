@@ -95,3 +95,18 @@ exports.handleArchive = function (file, cid, callback){
         }
     }));
 };
+
+exports.update = function (cid, club, callback) {
+    var pro = ['name','logo','departments','interviewer','password','maxDep'];
+    var newClub = {};
+
+    for(var i in pro) {
+        if(undefined != club[pro[i]]) {
+            newClub[pro[i]] = club[pro[i]];
+        }
+    }
+
+    Club.update(cid,newClub,function (err){
+        callback(err);
+    });
+};

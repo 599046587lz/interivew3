@@ -76,7 +76,21 @@ router.post('/upload/archive', function (req, res){
  * @return Department
  */
 router.get('/profile', function (req, res){
-
+    var name = req.session.club;
+    if(!name) {
+        res.send(403);
+    }
+    club.getClubByName(name, function (err, club){
+        if(err) {
+            res.json(err);
+        } else {
+            if(false == club) {
+                res.json({status: "failed"});
+            } else {
+                res.json(club);
+            }
+        }
+    });
 });
 
 /**
@@ -84,8 +98,20 @@ router.get('/profile', function (req, res){
  * @params Department
  * @return Object {status: 'success'|'failed'}
  */
-router.post('/profile', function(req, res){
+router.post('/profile', function (req, res){
+    var cid = req.session.cid;
+    if(!name) {
+        res.send(403);
+    }
+    var dep = req.param['Department'];
 
+    club.update(cid,dep,function (err){
+        if(err) {
+            res.json(500,err);
+        } else {
+            res.json({status: "success"});
+        }
+    });
 });
 
 module.exports = router;

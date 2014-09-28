@@ -86,17 +86,15 @@ exports.handleArchive = function (file, cid, callback){
                         Interviewee.addInterviewee(interviewee, cid, function (err){
                             if (err){
                                 return callback(err);
-                            } else {
-                                return callback();
                             }
                         })
                     }
                 }
-            })
+            });
+            callback(null, data.length);
         }
     }));
 };
-
 exports.update = function (cid, club, callback) {
     var pro = ['name','logo','departments','interviewer','password','maxDep'];
     var newClub = {};

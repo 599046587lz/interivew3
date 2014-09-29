@@ -36,8 +36,9 @@ router.post('/rate', function(req, res){
     var sid = req.param('sid'),
         score = req.param('score'),
         comment = req.param('comment'),
-        did = req.session['did'];
-    Interviewee.rateInterviewee(sid, score, comment, did, function (err){
+        did = req.session['did'],
+        interviewer = req.session['interviewer'];
+    Interviewee.rateInterviewee(sid, score, comment, did, interviewer, function (err){
         if (err){
             res.json(500, err + {
                 status: 'failed'

@@ -56,7 +56,7 @@ exports.getNextInterviewee = function (did, cb){
     })
 };
 
-exports.rateInterviewee = function (sid, score, commit, did, cb){
+exports.rateInterviewee = function (sid, score, commit, did, interviewer, cb){
     Interviewee.findOne({
         sid: sid
     },function (err, doc){
@@ -71,7 +71,8 @@ exports.rateInterviewee = function (sid, score, commit, did, cb){
             } else {
                 doc.rate['did'] = {
                     score: score,
-                    commit: commit
+                    commit: commit,
+                    interviewer: interviewer
                 };
                 doc.done.push(did);
                 doc.save();

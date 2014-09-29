@@ -55,3 +55,28 @@ exports.getNextInterviewee = function (did, cb){
         }
     })
 };
+
+exports.rateInterviewee = function (sid, score, commit, did, cb){
+    Interviewee.findOne({
+        sid: sid
+    },function (err, doc){
+        if (err){
+            return cb(err);
+        } else {
+            if (!doc){
+                return cb({
+                    message:'could not find interviewee',
+                    code: 1
+                });
+            } else {
+                doc.rate['did'] = {
+                    score: score,
+                    commit: commit
+                };
+                doc.done.push(did);
+                doc.save();
+                cb();
+            }
+        }
+    })
+};

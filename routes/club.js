@@ -76,7 +76,7 @@ router.post('/upload/archive', function (req, res){
  * @return Department
  */
 router.get('/profile', function (req, res){
-    var name = req.session.club;
+    var name = req.session['club'];
     if(!name) {
         res.send(403);
     }
@@ -99,7 +99,7 @@ router.get('/profile', function (req, res){
  * @return Object {status: 'success'|'failed'}
  */
 router.post('/profile', function (req, res){
-    var cid = req.session.cid;
+    var cid = req.session['club'];
     if(!name) {
         res.send(403);
     }

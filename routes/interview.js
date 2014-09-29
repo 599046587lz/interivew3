@@ -13,6 +13,7 @@ var Interviewee = require('../modules/interviewee');
 router.post('/recommand', function (req, res){
     var interviewee = req.param('interviewee');
     var department = req.param('department');
+
 });
 
 /**
@@ -22,7 +23,22 @@ router.post('/recommand', function (req, res){
  * @return Object {status: 'success'|'failed'}
  */
 router.post('/rate', function(req, res){
-    
+    var sid = req.param('sid'),
+        score = req.param('score'),
+        comment = req.param('comment'),
+        did = req.session['did'];
+    Interviewee.rateInterviewee(sid, score, comment, did, function (err){
+        if (err){
+            res.json(500, err + {
+                status: 'failed'
+            });
+        } else {
+            res.json({
+                status: 'success'
+            })
+        }
+    })
+
 });
 
 /**

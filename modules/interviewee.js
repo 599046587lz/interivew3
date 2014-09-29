@@ -57,3 +57,9 @@ exports.rateInterviewee = function (sid, score, commit, did, cb){
         cb(err);
     })
 };
+
+exports.recommend = function (sid, rdid, cb){
+    Interviewee.recommend(sid, rdid, function (err){
+        cb(err);
+    })
+};

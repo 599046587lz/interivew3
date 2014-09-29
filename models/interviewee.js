@@ -80,3 +80,24 @@ exports.rateInterviewee = function (sid, score, commit, did, cb){
         }
     })
 };
+
+exports.recommend = function (sid, rdid, cb){
+    Interviewee.findOne({
+        sid: sid
+    }, function (err, doc){
+        if (err){
+            return cb(err);
+        } else {
+            if (!doc){
+                return cb({
+                    message:'could not find interviewee',
+                    code: 1
+                });
+            } else {
+                doc.volunteer.push(rdid);
+                doc.save();
+                cb();
+            }
+        }
+    })
+};

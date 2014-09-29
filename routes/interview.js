@@ -10,10 +10,20 @@ var Interviewee = require('../modules/interviewee');
  * @params department
  * @return Object {status: 'success'|'failed'}
  */
-router.post('/recommand', function (req, res){
-    var interviewee = req.param('interviewee');
+router.post('/recommend', function (req, res){
+    var sid = req.param('sid');
     var department = req.param('department');
-
+    Interviewee.recommend(sid, department, function (err){
+        if (err){
+            res.json(500, err + {
+                status: 'failed'
+            });
+        } else {
+            res.json({
+                status: 'success'
+            })
+        }
+    })
 });
 
 /**

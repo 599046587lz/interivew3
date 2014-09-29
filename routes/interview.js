@@ -3,6 +3,7 @@
  */
 var express = require('express');
 var router = express.Router();
+var Interviewee = require('../modules/interviewee');
 
 /**
  * @params sid
@@ -21,7 +22,7 @@ router.post('/recommand', function (req, res){
  * @return Object {status: 'success'|'failed'}
  */
 router.post('/rate', function(req, res){
-
+    
 });
 
 /**
@@ -29,6 +30,14 @@ router.post('/rate', function(req, res){
  */
 router.get('/call', function (req, res){
     var department = req.session['did'];
+    Interviewee.getNextInterviewee(department, function (err, interviewee){
+        if (err){
+            return res.json(500, err);
+        } else {
+            res.json(interviewee);
+            global.io.to(req.session['club']).emit('call', interviewee);
+        }
+    })
 });
 
 module.exports = router;

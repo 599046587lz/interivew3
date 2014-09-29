@@ -52,8 +52,14 @@ exports.getNextInterviewee = function (did, cb){
     })
 };
 
-exports.rateInterviewee = function (sid, score, commit, did, cb){
-    Interviewee.rateInterviewee(sid, score, commit, did, function (err){
+exports.rateInterviewee = function (sid, score, commit, did, interviewer, cb){
+    Interviewee.rateInterviewee(sid, score, commit, did, interviewer, function (err){
+        cb(err);
+    })
+};
+
+exports.recommend = function (sid, rdid, cb){
+    Interviewee.recommend(sid, rdid, function (err){
         cb(err);
     })
 };

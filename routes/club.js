@@ -39,6 +39,24 @@ router.post('/login', function (req, res) {
 });
 
 /**
+ * @params Number did 部门ID
+ * @params String interviewerName 面试官姓名
+ * @return Object {status: 'success'|'failed'}
+ */
+router.post('/setIdentify', function (req, res){
+    var name = req.session['club'];
+    if(!name) {
+        return res.send(403);
+    }
+    req.session['did'] = req.param('did');
+    req.session['interviewer'] = req.param('interviewerName');
+    res.json({
+        status:'success'
+    })
+
+});
+
+/**
  *
  */
 router.get('/logout', r.checkLogin, function (req,res){

@@ -37,3 +37,17 @@ exports.selectDep = function (sid, cid, did, callback) {
 		}
 	});
 };
+
+exports.getNextInterviewee = function (did, cb){
+    Interviewee.getNextInterviewee(did, function (err, interviewee){
+        if (err){
+            cb (err);
+        } else {
+            if (!!interviewee){
+                cb (null, interviewee);
+            } else {
+                cb (null, {});
+            }
+        }
+    })
+};

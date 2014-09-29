@@ -33,3 +33,25 @@ exports.addInterviewee = function (data, cid, callback){
     IntervieweeEntity.save();
     callback();
 };
+
+exports.getNextInterviewee = function (did, cb){
+    Interviewee.findOne({
+        volunteer: [did],
+        busy: false,
+        $where: function(){
+            var volunteer = this.volunteer;
+            var done = this.done;
+            return volunteer.sort().toString() != done.sort().toString();
+        }
+    }, function (err, doc){
+        if (err){
+            cb(err);
+        } else {
+            if (doc){
+                cb(null, doc);
+            } else {
+                cb(null ,null);
+            }
+        }
+    })
+};

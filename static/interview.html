@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <!--<base href="http://interview.redhome.cc/"/>-->
+    <link href="interview.css" rel="stylesheet"/>
+    <link href="lib/css/jquery.jscrollpane.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="lib/css/square/blue.css"/>
+    <link rel="stylesheet" href="lib/css/jquery.qtip.min.css"/>
+    <!--<script src="https://raw.githubusercontent.com/aui/artTemplate/master/dist/template.js"></script>-->
+    <!--<script src="http://backbonejs.org/backbone-min.js"></script>-->
+    <!--<script src="http://underscorejs.org/underscore-min.js"></script>-->
+    <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="lib/js/jquery.raty.js"></script>
+    <script src="lib/js/jquery.jscrollpane.min.js"></script>
+    <script src="lib/js/jquery.mousewheel.js"></script>
+    <script src="lib/js/icheck.min.js"></script>
+    <script src="lib/js/jquery.qtip.min.js"></script>
+    <script src="interview.js"></script>
+
+</head>
+<body>
+<div id="header">
+    <span class="nav"><img src="" alt=""/></span>
+    <span class="depart">外联部</span>
+    <span class="time">当前已经面试: <span class="min">0</span> 分 <span class="sec">58</span> 秒</span>
+    <span class="done">已经完成:<span class="count">12</span></span>
+    <span class="wait">等待人数<span class="count">25</span></span>
+</div>
+
+<div id="main">
+    <div class="profile">
+        <table>
+            <tr>
+                <th class="title">资料预览<div class="circle"></div></th>
+                <th class="val"></th>
+            </tr>
+            <tr>
+                <td class="prop">学号</td>
+                <td class="val">--</td>
+            </tr>
+            <tr>
+                <td class="prop">姓名</td>
+                <td class="val">--</td>
+            </tr>
+            <tr>
+                <td class="prop">性别</td>
+                <td class="val"></td>
+            </tr>
+            <tr>
+                <td class="prop">专业</td>
+                <td class="val">--</td>
+            </tr>
+            <tr>
+                <td class="prop">电话</td>
+                <td class="val">--</td>
+            </tr>
+            <tr>
+                <td class="prop">邮箱</td>
+                <td class="val">--</td>
+            </tr>
+            <tr>
+                <td class="prop">QQ</td>
+                <td class="val">--</td>
+            </tr>
+            <tr>
+                <td class="prop">简介</td>
+                <td class="val">--</td>
+            </tr>
+
+
+
+            <tr>
+            <td class="prop">简介</td>
+            <td class="val">--</td>
+        </tr> <tr>
+            <td class="prop">简介</td>
+            <td class="val">--</td>
+        </tr> <tr>
+            <td class="prop">简介</td>
+            <td class="val">--</td>
+        </tr>
+            <!--{{each extra}}-->
+            <!--<tr>-->
+                <!--<td class="prop">{{$index}}</td>-->
+            <!--<tr class="val">{{$value}}</tr>-->
+            <!--</tr>-->
+            <!--{{/each}-->
+        </table>
+        <div class="vl"></div>
+    </div>
+    <div class="rate">
+        <table>
+            <tr>
+                <th class="title">评价
+                <div class="circle"></div>
+                </th>
+
+            </tr>
+            <tr>
+                <td class="name">等级:</td>
+                <td class="val"><div class="stars"></div>
+                    <input id="score" type="text"/></td>
+            </tr>
+            <tr>
+                <td class="name">评语:</td>
+                <td class="val"><textarea name="" class="comment" cols="30" rows="10"></textarea></td>
+            </tr>
+        </table>
+        <div class="commit">提交</div>
+    </div>
+    <div class="handle">
+        <div class="recommend">推荐</div>
+        <div class="skip">跳过</div>
+    </div>
+    <div class="call">
+        <div class="special">插队</div>
+        <div class="next">下一位</div>
+    </div>
+    <div id="selectDep">
+        <h3>请选择部门</h3>
+        <ul>
+            <li>
+                <input type="radio" name="depart" id="depart-1" value="1"/>
+                <label for="depart-1">人力资源中心</label>
+            </li>
+            <li>
+                <input type="radio" name="depart" id="depart-2" value="2"/>
+                <label for="depart-2">depart-2</label>
+            </li>
+            <li>
+                <input type="radio" name="depart" id="depart-3" value="3"/>
+                <label for="depart-3">depart-3</label>
+            </li>
+
+        </ul>
+        <div class="confirm">确定</div>
+    </div>
+    <div id="appointSid">
+        <h3>请输入学号</h3>
+        <div class="sid">
+            <input type="text" name="sid" id=""/>
+        </div>
+        <div class="confirm">确定</div>
+    </div>
+</div>
+
+<script id="profile" type="text/html">
+    <table class="profile">
+        <tr>
+            <th class="prop">资料预览</th>
+            <th class="val"></th>
+        </tr>
+        <tr>
+            <td class="prop">学号</td>
+            <td class="val">--</td>
+        </tr>
+        <tr>
+            <td class="prop">姓名</td>
+            <td class="val">--</td>
+        </tr>
+        <tr>
+            <td class="prop">性别</td>
+            <td class="val"></td>
+        </tr>
+        <tr>
+            <td class="prop">专业</td>
+            <td class="val">--</td>
+        </tr>
+        <tr>
+            <td class="prop">电话</td>
+            <td class="val">--</td>
+        </tr>
+        <tr>
+            <td class="prop">邮箱</td>
+            <td class="val">--</td>
+        </tr>
+        <tr>
+            <td class="prop">QQ</td>
+            <td class="val">--</td>
+        </tr>
+        <tr>
+            <td class="prop">简介</td>
+            <td class="val">--</td>
+        </tr>
+        {{each extra}}
+        <tr>
+            <td class="prop">{{$index}}</td>
+        <tr class="val">{{$value}}</tr>
+        </tr>
+        {{/each}
+    </table>
+</script>
+</body>
+</html>

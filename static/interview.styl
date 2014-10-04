@@ -3,6 +3,7 @@ color_bg = #edeff0
 color_white = white
 color_assist = #335dfb
 color_focus = #b3ce1d
+color_focus_text = #728310
 
 h_header = 50px
 
@@ -33,6 +34,7 @@ body
     .time, .done, .wait
         r(0 0 0 10)
 
+
 #main
     size(900)
     Rcenter()
@@ -50,7 +52,10 @@ body
         font(white, 16)
         margin-top 10px
         size(null, 60)
-
+    th.title
+        font-size 16px
+        color color_assist
+        position relative
     .profile
         height 330px
         overflow-y scroll
@@ -60,35 +65,33 @@ body
             size(null, 30)
             line-height 25px
 
-        .title
-            position relative
+
 
         .prop,.title
-            size(65)
+            size(70)
             text-align right
         .val
-            padding-left 70px
+            padding-left 75px
         .vl
-            vl(2, color_bg)
-            lt(95, 0)
+            vl(3, color_bg)
+            lt(100, 0)
 
         .circle
             circle(14, 2 ,color_focus)
-            Acenter('vertical')
-            tr(null, -18)
+            tr(3, -20)
 
     .handle
         .recommend
             background color_assist
             button(80, 30)
             Acenter('vertical')
-            left 40px
+            left 71px
 
         .skip
             Acenter('vertical')
             button(80, 30)
             background color_assist
-            right 40px
+            right 71px
 
 
     .call
@@ -97,13 +100,13 @@ body
             border-radius 5px
             button(200, 50)
             Acenter('vertical')
-            right 5px
-            font(null, 18)
+            right 11px
+            font(color_focus_text, 18)
 
         .special
             button(100, 30)
             border-radius 5px
-            right 220px
+            left 61px
             Acenter('vertical')
             background color_focus
 
@@ -111,12 +114,13 @@ body
         size(null, 330)
         .title
             text-align left
-            position relative
+            padding-left 3px
             padding-bottom 40px
+
         .circle
             circle(14, 2 ,color_focus)
             position: absolute 
-            right 30px
+            right 25px
             top 2px
         .name
             size(80)
@@ -134,28 +138,42 @@ body
            button(76, 20)
            rb(25, 20)
            background color_focus
+           font(color_focus_text)
        #score
            display none
 
+tip()
+    h3
+        line-height 23px
+        text-align center
+        font(null,14)
+    .confirm
+        button(70, 25)
+        background color_focus
+        font(color_focus_text, 16)
+        Rcenter()
+        border-radius 3px
 #selectDep
     /*position absolute*/
     size(120)
     display none
     /*top 600px*/
 
+
     ul
         list-style none
         Rcenter()
     li
         margin 3px 0
-        cursor pointer
+        /*cursor pointer*/
         line-height 22px
         height 22px
+        text-align center
+        div
+            lt(0)
     label
         cursor pointer
-    .confirm
-        background red
-        button(120, 30)
+    tip()
     /*display none*/
 #appointSid
     /*position absolute*/
@@ -166,7 +184,13 @@ body
     size(120)
     input
         size(90%)
-    .confirm
-        button(80, 50)
-        background darkred
-        Rcenter()
+        margin 5px 0
+    tip()
+#skip
+    size(120)
+    display none
+    tip()
+
+#confirmCommit
+    size(120)
+    tip()

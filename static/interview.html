@@ -8,6 +8,7 @@
     <link href="lib/css/jquery.jscrollpane.css" rel="stylesheet"/>
     <link rel="stylesheet" href="lib/css/square/blue.css"/>
     <link rel="stylesheet" href="lib/css/jquery.qtip.min.css"/>
+    <link rel="stylesheet" href="lib/css/notifIt.css"/>
     <!--<script src="https://raw.githubusercontent.com/aui/artTemplate/master/dist/template.js"></script>-->
     <!--<script src="http://backbonejs.org/backbone-min.js"></script>-->
     <!--<script src="http://underscorejs.org/underscore-min.js"></script>-->
@@ -17,6 +18,7 @@
     <script src="lib/js/jquery.mousewheel.js"></script>
     <script src="lib/js/icheck.min.js"></script>
     <script src="lib/js/jquery.qtip.min.js"></script>
+    <script src="lib/js/notifIt.js"></script>
     <script src="interview.js"></script>
 
 </head>
@@ -24,9 +26,9 @@
 <div id="header">
     <span class="nav"><img src="" alt=""/></span>
     <span class="depart">外联部</span>
-    <span class="time">当前已经面试: <span class="min">0</span> 分 <span class="sec">58</span> 秒</span>
+    <span class="time">当前已经面试: <span class="min">0</span> 分 <span class="sec">0</span> 秒</span>
     <span class="done">已经完成:<span class="count">12</span></span>
-    <span class="wait">等待人数<span class="count">25</span></span>
+    <span class="wait">等待人数:<span class="count">25</span></span>
 </div>
 
 <div id="main">
@@ -68,19 +70,6 @@
                 <td class="prop">简介</td>
                 <td class="val">--</td>
             </tr>
-
-
-
-            <tr>
-            <td class="prop">简介</td>
-            <td class="val">--</td>
-        </tr> <tr>
-            <td class="prop">简介</td>
-            <td class="val">--</td>
-        </tr> <tr>
-            <td class="prop">简介</td>
-            <td class="val">--</td>
-        </tr>
             <!--{{each extra}}-->
             <!--<tr>-->
                 <!--<td class="prop">{{$index}}</td>-->
@@ -118,6 +107,10 @@
         <div class="special">插队</div>
         <div class="next">下一位</div>
     </div>
+    <div id="skip">
+        <h3>点击确定跳过此人</h3>
+        <div class="confirm">确定</div>
+    </div>
     <div id="selectDep">
         <h3>请选择部门</h3>
         <ul>
@@ -144,6 +137,10 @@
         </div>
         <div class="confirm">确定</div>
     </div>
+    <!--<div id="confirmCommit">-->
+        <!--<h3>请确认提交</h3>-->
+        <!--<div class="confirm">确定</div>-->
+    <!--</div>-->
 </div>
 
 <script id="profile" type="text/html">

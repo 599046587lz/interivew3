@@ -200,6 +200,11 @@ body {
   margin-top: 10px;
   height: 60px;
 }
+#main th.title {
+  font-size: 16px;
+  color: #335dfb;
+  position: relative;
+}
 #main .profile {
   height: 330px;
   overflow-y: scroll;
@@ -211,23 +216,20 @@ body {
   height: 30px;
   line-height: 25px;
 }
-#main .profile .title {
-  position: relative;
-}
 #main .profile .prop,
 #main .profile .title {
-  width: 65px;
+  width: 70px;
   text-align: right;
 }
 #main .profile .val {
-  padding-left: 70px;
+  padding-left: 75px;
 }
 #main .profile .vl {
-  width: 2px;
+  width: 3px;
   height: 100%;
   background: #edeff0;
   position: absolute;
-  left: 95px;
+  left: 100px;
   top: 0;
 }
 #main .profile .circle {
@@ -236,11 +238,8 @@ body {
   border-radius: 14px;
   border: 2px #b3ce1d solid;
   position: absolute;
-  margin: auto 0;
-  top: 0;
-  bottom: 0;
-  position: absolute;
-  right: -18px;
+  top: 3px;
+  right: -20px;
 }
 #main .handle .recommend {
   background: #335dfb;
@@ -253,7 +252,7 @@ body {
   margin: auto 0;
   top: 0;
   bottom: 0;
-  left: 40px;
+  left: 71px;
 }
 #main .handle .skip {
   position: absolute;
@@ -266,7 +265,7 @@ body {
   text-align: center;
   cursor: pointer;
   background: #335dfb;
-  right: 40px;
+  right: 71px;
 }
 #main .call .next {
   background: #b3ce1d;
@@ -280,7 +279,8 @@ body {
   margin: auto 0;
   top: 0;
   bottom: 0;
-  right: 5px;
+  right: 11px;
+  color: #728310;
   font-size: 18px;
 }
 #main .call .special {
@@ -290,7 +290,7 @@ body {
   text-align: center;
   cursor: pointer;
   border-radius: 5px;
-  right: 220px;
+  left: 61px;
   position: absolute;
   margin: auto 0;
   top: 0;
@@ -302,7 +302,7 @@ body {
 }
 #main .rate .title {
   text-align: left;
-  position: relative;
+  padding-left: 3px;
   padding-bottom: 40px;
 }
 #main .rate .circle {
@@ -311,7 +311,7 @@ body {
   border-radius: 14px;
   border: 2px #b3ce1d solid;
   position: absolute;
-  right: 30px;
+  right: 25px;
   top: 2px;
 }
 #main .rate .name {
@@ -340,6 +340,7 @@ body {
   right: 25px;
   bottom: 20px;
   background: #b3ce1d;
+  color: #728310;
 }
 #main #score {
   display: none;
@@ -358,20 +359,35 @@ body {
 }
 #selectDep li {
   margin: 3px 0;
-  cursor: pointer;
+/*cursor pointer*/
   line-height: 22px;
   height: 22px;
+  text-align: center;
+}
+#selectDep li div {
+  position: absolute;
+  left: 0;
 }
 #selectDep label {
   cursor: pointer;
 }
+#selectDep h3 {
+  line-height: 23px;
+  text-align: center;
+  font-size: 14px;
+}
 #selectDep .confirm {
-  background: #f00;
-  width: 120px;
-  height: 30px;
-  line-height: 30px;
+  width: 70px;
+  height: 25px;
+  line-height: 25px;
   text-align: center;
   cursor: pointer;
+  background: #b3ce1d;
+  color: #728310;
+  font-size: 16px;
+  position: relative;
+  margin: 0 auto;
+  border-radius: 3px;
 }
 #appointSid {
 /*position absolute*/
@@ -383,14 +399,66 @@ body {
 }
 #appointSid input {
   width: 90%;
+  margin: 5px 0;
+}
+#appointSid h3 {
+  line-height: 23px;
+  text-align: center;
+  font-size: 14px;
 }
 #appointSid .confirm {
-  width: 80px;
-  height: 50px;
-  line-height: 50px;
+  width: 70px;
+  height: 25px;
+  line-height: 25px;
   text-align: center;
   cursor: pointer;
-  background: #8b0000;
+  background: #b3ce1d;
+  color: #728310;
+  font-size: 16px;
   position: relative;
   margin: 0 auto;
+  border-radius: 3px;
+}
+#skip {
+  width: 120px;
+  display: none;
+}
+#skip h3 {
+  line-height: 23px;
+  text-align: center;
+  font-size: 14px;
+}
+#skip .confirm {
+  width: 70px;
+  height: 25px;
+  line-height: 25px;
+  text-align: center;
+  cursor: pointer;
+  background: #b3ce1d;
+  color: #728310;
+  font-size: 16px;
+  position: relative;
+  margin: 0 auto;
+  border-radius: 3px;
+}
+#confirmCommit {
+  width: 120px;
+}
+#confirmCommit h3 {
+  line-height: 23px;
+  text-align: center;
+  font-size: 14px;
+}
+#confirmCommit .confirm {
+  width: 70px;
+  height: 25px;
+  line-height: 25px;
+  text-align: center;
+  cursor: pointer;
+  background: #b3ce1d;
+  color: #728310;
+  font-size: 16px;
+  position: relative;
+  margin: 0 auto;
+  border-radius: 3px;
 }

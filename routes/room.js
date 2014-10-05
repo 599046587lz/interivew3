@@ -15,14 +15,14 @@ router.get('/sign', function(req, res){
 	if(!cid) {
 		res.send(403);
 	}
-	Interviewee.sign(sid, cid, function (err, success) {
+	Interviewee.sign(sid, cid, function (err, interviewee) {
 		if(err) {
 			res.json(500, err);
 		} else {
-			if(success) {
-				res.json({status: 'success'});
+			if(!!interviewee) {
+				res.json(interviewee);
 			} else {
-				res.json({status: 'selectDep'});
+				res.send(205);
 			}
 		}
 	});
@@ -45,9 +45,9 @@ router.post('/selectDep', function (req, res){
 			res.json(500,err);
 		} else {
 			if(success) {
-				res.json({status: 'success'});
+				res.json(204);
 			} else {
-				res.json({status: 'failed'});
+				res.json(500);
 			}
 		}
 	});

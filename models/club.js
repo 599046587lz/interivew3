@@ -3,6 +3,7 @@
  */
 var Club = require('../models').Club;
 
+
 exports.login = function (user, pwd, callback){
     Club.find({
         name:user

@@ -15,13 +15,9 @@ router.post('/recommend', function (req, res){
     var department = req.param('department');
     Interviewee.recommend(sid, department, function (err){
         if (err){
-            res.json(500, err + {
-                status: 'failed'
-            });
+            res.send(500);
         } else {
-            res.json({
-                status: 'success'
-            })
+            res.json(204);
         }
     })
 });
@@ -30,7 +26,7 @@ router.post('/recommend', function (req, res){
  * @params sid
  * @params score
  * @params comment
- * @return Object {status: 'success'|'failed'}
+ * @return HTTP 204
  */
 router.post('/rate', function(req, res){
     var sid = req.param('sid'),
@@ -40,13 +36,9 @@ router.post('/rate', function(req, res){
         interviewer = req.session['interviewer'];
     Interviewee.rateInterviewee(sid, score, comment, did, interviewer, function (err){
         if (err){
-            res.json(500, err + {
-                status: 'failed'
-            });
+            res.send(500);
         } else {
-            res.json({
-                status: 'success'
-            })
+            res.send(204);
         }
     })
 
@@ -63,6 +55,30 @@ router.get('/call', function (req, res){
         } else {
             res.json(interviewee);
             global.io.to(req.session['club']).emit('call', interviewee);
+        }
+    })
+});
+
+/**
+ *
+ */
+router.post('/skip', function (req, res){
+
+});
+
+/**
+ *
+ */
+router.get('/queue', function (req, res){
+    var cid = req.session['cid'],
+        did = req.session['did'];
+    Interviewee.getDepartmentQueueLength(cid, did, function (err, count){
+        if (err){
+            res.json(500, err);
+        } else {
+            res.json({
+                count: count
+            })
         }
     })
 });

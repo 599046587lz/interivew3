@@ -8,27 +8,49 @@ exports.getStuBySid = function (sid, cid, callback) {
 
 exports.sign = function (sid, cid, callback) {
     var date = new Date();
-    Interviewee.update({sid: sid,cid: cid},{signTime: date},function (err, numAffected){
-        if(!err && 1==numAffected) {
-            callback(null);
-        } else {
+    Interviewee.findOneAndUpdate({
+        sid: sid,
+        cid: cid
+    },{
+        signTime: date
+    }, function (err, doc){
+        if (err){
             callback(err);
+        } else {
+            if (!!doc){
+                callback(null, doc);
+            } else {
+                callback(null, false);
+            }
         }
     });
+//    Interviewee.update({sid: sid,cid: cid},{signTime: date},function (err, numAffected){
+//        if(!err && 1==numAffected) {
+//            callback(null);
+//        } else {
+//            callback(err);
+//        }
+//    });
 };
 
 exports.addInterviewee = function (data, cid, callback){
     var IntervieweeEntity = new Interviewee();
-    IntervieweeEntity.sid = data.sid;
+    var fields = ['sid', 'name', 'sex', 'major', 'phone', 'email', 'qq', 'volunteer', 'notion'];
+    fields.forEach(function (e){
+        IntervieweeEntity[e] = data[e];
+        delete data[e];
+    });
     IntervieweeEntity.cid = cid;
-    IntervieweeEntity.name = data.name;
-    IntervieweeEntity.sex = data.sex;
-    IntervieweeEntity.major = data.major;
-    IntervieweeEntity.phone = data.phone;
-    IntervieweeEntity.email = data.email;
-    IntervieweeEntity.qq = data.qq;
-    IntervieweeEntity.volunteer = data.volunteer;
-    IntervieweeEntity.notion = data.notion;
+//    IntervieweeEntity.sid = data.sid;
+//    IntervieweeEntity.cid = cid;
+//    IntervieweeEntity.name = data.name;
+//    IntervieweeEntity.sex = data.sex;
+//    IntervieweeEntity.major = data.major;
+//    IntervieweeEntity.phone = data.phone;
+//    IntervieweeEntity.email = data.email;
+//    IntervieweeEntity.qq = data.qq;
+//    IntervieweeEntity.volunteer = data.volunteer;
+//    IntervieweeEntity.notion = data.notion;
     IntervieweeEntity.extra = data;
     IntervieweeEntity.save();
     callback();
@@ -99,6 +121,21 @@ exports.recommend = function (sid, rdid, cb){
                 doc.save();
                 cb();
             }
+        }
+    })
+};
+
+exports.countQueue = function (cid, did, cb){
+    Interviewee.find({
+        cid: cid,
+        volunteer: [did],
+        'done.count': {$ne: 'volunteer.count'},
+        signTime: {$ne: null}
+    }, function (err, doc){
+        if (err){
+            cb(err);
+        } else {
+            cb(null, doc.length);
         }
     })
 };

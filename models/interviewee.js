@@ -59,25 +59,27 @@ exports.addInterviewee = function (data, cid, callback){
 exports.getNextInterviewee = function (cid, did, cb){
     Interviewee.findOne({
         cid: cid,
-        volunteer: [did],
+        volunteer: did,
         busy: false,
         $where: function(){
             var volunteer = this.volunteer;
             var done = this.done;
-            return volunteer.sort().toString() != done.sort().toString();
+            return volunteer.length != done.length;
         }
-    }, function (err, doc){
+    }).sort({
+        signTime: 'asc'
+    }).exec(function (err, doc){
         if (err){
             cb(err);
         } else {
-            if (doc){
+            if (!!doc){
                 doc.busy = true;
                 cb(null, doc);
             } else {
                 cb(null ,null);
             }
         }
-    })
+    });
 };
 
 exports.rateInterviewee = function (cid, sid, score, commit, did, interviewer, cb){

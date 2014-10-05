@@ -3,11 +3,11 @@
 var Interviewee = require('../models/interviewee');
 
 exports.sign = function (sid, cid, callback) {
-	Interviewee.getStuBySid(sid, cid, function (err, docs){
+	Interviewee.getStuBySid(sid, cid, function (err, doc){
 		if(err) {
 			callback(err);
 		} else {
-			if(0 == docs.length) {
+			if(!doc) {
 				callback(null,false);
 			} else {
 				Interviewee.sign(sid, cid, function (err, interviewee) {
@@ -54,8 +54,10 @@ exports.getNextInterviewee = function (cid, did, cb){
 
 exports.getSpecifyInterviewee = function (sid, cid, cb){
     Interviewee.getStuBySid(sid, cid, function (err, interviewee){
-        interviewee.busy = true;
-        interviewee.save();
+        if (!!interviewee){
+            interviewee.busy = true;
+            interviewee.save();
+        }
         cb(err, interviewee);
     })
 };
@@ -76,4 +78,10 @@ exports.getDepartmentQueueLength = function (cid, did, cb){
     Interviewee.countQueue(cid, did, function (err, count){
         cb(err, count);
     })
+};
+
+exports.getIntervieweeBySid = function (sid, cid, cb){
+    Interviewee.getStuBySid(sid, cid, function (err, doc){
+        cb(err, doc);
+    });
 };

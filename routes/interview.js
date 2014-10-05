@@ -68,7 +68,11 @@ router.get('/call', function (req, res){
             if (err){
                 return res.json(500, err);
             } else {
-                res.json(interviewee);
+                if (!!interviewee){
+                    res.json(interviewee);
+                } else {
+                    res.send(404);
+                }
                 global.io.to(req.session['club']).emit('call', interviewee);
             }
         })

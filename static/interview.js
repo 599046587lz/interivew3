@@ -14,21 +14,19 @@ var update_queue = function(){
     return;
     $.getJSON();
 };
-// ajax helper
-var ajaxHandler = function(func){
-    return function(data, status, xhr){
-        switch (xhr.status){
-            case "500":err('服务器错误');break;
-            case '403':relogin();break;
-            case '200':
-                if(data.status && data.status == 'failed'){
-                    err('网络出错,请稍候重试');
-                }else{
-                    func();
-                }
-                break;
-        };
-    };
+var HTTPCode = {
+    204:{
+        text:'操作成功',
+        action:function(){}
+    },
+    500:{
+        text:'服务器错误',
+        action:function(){}
+    },
+    403:{
+        text:'没有权限,禁止访问',
+        action:function(){}
+    }
 };
 // global var -- club
 var set_club = function(){

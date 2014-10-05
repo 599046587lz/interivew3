@@ -96,7 +96,8 @@ router.post('/upload/archive', function (req, res){
  */
 router.get('/profile', function (req, res){
     var name = req.session['club'];
-    debug(JSON.stringify(req.session));
+    console.dir(req.session);
+    console.dir(req.cookies);
     if(!name) {
         res.send(403);
     }

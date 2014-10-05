@@ -1,8 +1,8 @@
 var Interviewee = require('../models').Interviewee;
 
 exports.getStuBySid = function (sid, cid, callback) {
-    Interviewee.find({sid: sid,cid: cid},function (err, docs){
-        callback(err, docs);
+    Interviewee.findOne({sid: sid,cid: cid},function (err, doc){
+        callback(err, doc);
     });
 };
 

@@ -99,9 +99,11 @@ exports.update = function (cid, club, callback) {
     var pro = ['name','logo','departments','interviewer','password','maxDep'];
     var newClub = {};
 
-    for(var i in pro) {
-        if(undefined != club[pro[i]]) {
-            newClub[pro[i]] = club[pro[i]];
+    if(undefined != club) {
+        for(var i in pro) {
+            if(undefined != club[pro[i]]) {
+                newClub[pro[i]] = club[pro[i]];
+            }
         }
     }
 

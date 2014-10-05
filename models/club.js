@@ -5,11 +5,11 @@ var Club = require('../models').Club;
 
 
 exports.login = function (user, pwd, callback){
-    Club.find({
+    Club.findOne({
         name:user
     },'password', function(err, doc){
         if (err){
-            return process.nextTick(callback(err));
+            return callback(err);
         } else {
             if (doc.pwd == pwd){
                 return callback(null, true);

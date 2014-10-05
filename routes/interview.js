@@ -103,4 +103,17 @@ router.get('/queue', function (req, res){
     })
 });
 
+
+/**
+ * @param sid
+ */
+router.post('/skip', function (req, res){
+    Interviewee.skip(req.session['cid'], req.param('sid'), function(err){
+        if(err){
+            res.send(500);
+        }else{
+            res.send(204);
+        }
+    });
+});
 module.exports = router;

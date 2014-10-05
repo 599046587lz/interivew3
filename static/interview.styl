@@ -1,0 +1,196 @@
+@import './lib/css/popple.styl'
+color_bg = #edeff0
+color_white = white
+color_assist = #335dfb
+color_focus = #b3ce1d
+color_focus_text = #728310
+
+h_header = 50px
+
+
+reset()
+
+circle(diameter = 50, bold = 1, color = black)
+    size(diameter, diameter)
+    border-radius unitize(diameter)
+    border unitize(bold) color solid
+
+body
+    margin 0
+    background color_bg
+
+#header
+    position relative
+    size(100%, h_header)
+    /*line-height h_header*/
+    background color_white
+
+    span
+        display inline-block
+        line-height h_header
+
+    .depart
+        font-size 20px
+    .time, .done, .wait
+        r(0 0 0 10)
+
+
+#main
+    size(900)
+    Rcenter()
+    margin-top 100px
+
+    .profile, .handle, .call, .rate
+        size(445)
+        l(null)
+        background: color_white
+
+    .profile, .handle
+        margin-right 10px
+
+    .call, .handle
+        font(white, 16)
+        margin-top 10px
+        size(null, 60)
+    th.title
+        font-size 16px
+        color color_assist
+        position relative
+    .profile
+        height 330px
+        overflow-y scroll
+        outline none
+
+        .title, .prop, .val
+            size(null, 30)
+            line-height 25px
+
+
+
+        .prop,.title
+            size(70)
+            text-align right
+        .val
+            padding-left 75px
+        .vl
+            vl(3, color_bg)
+            lt(100, 0)
+
+        .circle
+            circle(14, 2 ,color_focus)
+            tr(3, -20)
+
+    .handle
+        .recommend
+            background color_assist
+            button(80, 30)
+            Acenter('vertical')
+            left 71px
+
+        .skip
+            Acenter('vertical')
+            button(80, 30)
+            background color_assist
+            right 71px
+
+
+    .call
+        .next
+            background color_focus
+            border-radius 5px
+            button(200, 50)
+            Acenter('vertical')
+            right 11px
+            font(color_focus_text, 18)
+
+        .special
+            button(100, 30)
+            border-radius 5px
+            left 61px
+            Acenter('vertical')
+            background color_focus
+
+    .rate
+        size(null, 330)
+        .title
+            text-align left
+            padding-left 3px
+            padding-bottom 40px
+
+        .circle
+            circle(14, 2 ,color_focus)
+            position: absolute 
+            right 25px
+            top 2px
+        .name
+            size(80)
+            text-align right
+            vertical-align top
+        .val
+            padding-left 10px
+        textarea
+            size(324, 175)
+            background color_bg
+            resize none
+            outline none
+            border none
+       .commit
+           button(76, 20)
+           rb(25, 20)
+           background color_focus
+           font(color_focus_text)
+       #score
+           display none
+
+tip()
+    h3
+        line-height 23px
+        text-align center
+        font(null,14)
+    .confirm
+        button(70, 25)
+        background color_focus
+        font(color_focus_text, 16)
+        Rcenter()
+        border-radius 3px
+#selectDep
+    /*position absolute*/
+    size(120)
+    display none
+    /*top 600px*/
+
+
+    ul
+        list-style none
+        Rcenter()
+    li
+        margin 3px 0
+        /*cursor pointer*/
+        line-height 22px
+        height 22px
+        text-align center
+        div
+            lt(0)
+    label
+        cursor pointer
+    tip()
+    /*display none*/
+#appointSid
+    /*position absolute*/
+    /*top 500px*/
+    /*right 0*/
+    display none
+    text-align center
+    size(120)
+    input
+        size(90%)
+        margin 5px 0
+    tip()
+#skip
+    size(120)
+    display none
+    tip()
+
+#confirmCommit
+    size(120)
+    tip()

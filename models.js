@@ -16,7 +16,7 @@ var Schema = mongoose.Schema;
 var Club = new Schema({
     cid: Number,
     name: String,
-    logo: Buffer,
+    logo: String,
     departments: [Object],  //Department
     interviewer: [String],
     password: String,

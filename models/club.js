@@ -2,6 +2,7 @@
  * Created by bangbang93 on 14-9-16.
  */
 var Club = require('../models').Club;
+var debug = require('debug')('interview');
 
 
 exports.login = function (user, pwd, callback){
@@ -11,7 +12,7 @@ exports.login = function (user, pwd, callback){
         if (err){
             return callback(err);
         } else {
-            if (!!doc && doc.pwd == pwd){
+            if (!!doc && doc.password == pwd){
                 return callback(null, true);
             } else {
                 return callback(null, false);
@@ -21,13 +22,14 @@ exports.login = function (user, pwd, callback){
 };
 
 exports.getClubByName = function(name, callback){
-    Club.find({
+    Club.findOne({
         name: name
     }, function (err, doc){
         if (err){
             return callback(err);
         } else {
             if (!!doc){
+                delete doc.password;
                 return callback(null, doc);
             } else {
                 return callback(null, false);

@@ -2,7 +2,7 @@
  * Created by bangbang93 on 14-9-15.
  */
 var express = require('express');
-var debug = require(debug)('interview');
+var debug = require('debug')('interview');
 var router = express.Router();
 
 var club = require('../modules/club');
@@ -16,12 +16,15 @@ var r = require('./');
 router.post('/login', function (req, res) {
     var user = req.param('user');
     var password = req.param('password');
+    if (!user || !password){
+        return res.send(403);
+    }
     club.login(user, password, function (err, success){
         if (err){
             return res.json(500, err);
         } else {
             if (success){
-                req.session.user = user;
+                req.session['user'] = user;
                 club.getClubByName(user, function (err, clubInfo){
                     if (err){
                         return res.json(500, err);
@@ -93,6 +96,7 @@ router.post('/upload/archive', function (req, res){
  */
 router.get('/profile', function (req, res){
     var name = req.session['club'];
+    debug(JSON.stringify(req.session));
     if(!name) {
         res.send(403);
     }
@@ -115,8 +119,8 @@ router.get('/profile', function (req, res){
  * @return Object {status: 'success'|'failed'}
  */
 router.post('/profile', function (req, res){
-    var cid = req.session['club'];
-    if(!name) {
+    var cid = req.session['cid'];
+    if(!cid) {
         res.send(403);
     }
     var dep = req.param['Department'];

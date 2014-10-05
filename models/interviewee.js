@@ -56,8 +56,9 @@ exports.addInterviewee = function (data, cid, callback){
     callback();
 };
 
-exports.getNextInterviewee = function (did, cb){
+exports.getNextInterviewee = function (cid, did, cb){
     Interviewee.findOne({
+        cid: cid,
         volunteer: [did],
         busy: false,
         $where: function(){
@@ -79,8 +80,9 @@ exports.getNextInterviewee = function (did, cb){
     })
 };
 
-exports.rateInterviewee = function (sid, score, commit, did, interviewer, cb){
+exports.rateInterviewee = function (cid, sid, score, commit, did, interviewer, cb){
     Interviewee.findOne({
+        cid: cid,
         sid: sid
     },function (err, doc){
         if (err){
@@ -106,8 +108,9 @@ exports.rateInterviewee = function (sid, score, commit, did, interviewer, cb){
     })
 };
 
-exports.recommend = function (sid, rdid, cb){
+exports.recommend = function (cid, sid, rdid, cb){
     Interviewee.findOne({
+        cid: cid,
         sid: sid
     }, function (err, doc){
         if (err){

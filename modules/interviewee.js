@@ -38,8 +38,8 @@ exports.selectDep = function (sid, cid, did, callback) {
 	});
 };
 
-exports.getNextInterviewee = function (did, cb){
-    Interviewee.getNextInterviewee(did, function (err, interviewee){
+exports.getNextInterviewee = function (cid, did, cb){
+    Interviewee.getNextInterviewee(cid, did, function (err, interviewee){
         if (err){
             cb (err);
         } else {
@@ -60,14 +60,14 @@ exports.getSpecifyInterviewee = function (sid, cid, cb){
     })
 };
 
-exports.rateInterviewee = function (sid, score, commit, did, interviewer, cb){
-    Interviewee.rateInterviewee(sid, score, commit, did, interviewer, function (err){
+exports.rateInterviewee = function (cid, sid, score, commit, did, interviewer, cb){
+    Interviewee.rateInterviewee(cid, sid, score, commit, did, interviewer, function (err){
         cb(err);
     })
 };
 
-exports.recommend = function (sid, rdid, cb){
-    Interviewee.recommend(sid, rdid, function (err){
+exports.recommend = function (cid, sid, rdid, cb){
+    Interviewee.recommend(cid, sid, rdid, function (err){
         cb(err);
     })
 };

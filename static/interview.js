@@ -1,41 +1,42 @@
 /**
  * Created by karboom on 14-9-28.
  */
+var urlRoot = 'http://192.168.120.67:3000/';
+
 // functions
 var relogin = function(){
     window.loaction = '/';
 };
-// update queue info
-var update_queue = function(){
-    var queue = {done:3,wait:50};
-    var root = $('#header');
-    root.find('.done .count').text(queue.done);
-    root.find('.wait .count').text(queue.wait);
-    return;
-    $.getJSON();
-};
+
 var HTTPCode = {
     204:{
         text:'操作成功',
-        action:function(){}
+        action:function(){
+            success(HTTPCode[204].text);
+        }
     },
     500:{
         text:'服务器错误',
-        action:function(){}
+        action:function(){
+            err(HTTPCode[500].text);
+        }
     },
     403:{
         text:'没有权限,禁止访问',
-        action:function(){}
+        action:function(){
+//            console.log(HTTPCode);
+            err(HTTPCode[403].text);
+//            err('error');
+        }
+    },
+    404:{
+        text:'没有找到信息',
+        action:function(){
+            err(HTTPCode[404].text);
+        }
     }
 };
-// global var -- club
-var set_club = function(){
-    window.club = { departments: [{did:1,name:'人力资源中心'},{did:5,name:'技术'},{did:4,name:'设计'},{did:3,name:'运营部'},{did:2,name:'外联部'}]};
-    return;
-    $.getJSON('profile', ajaxHandler(function(){
-        window.club = data;
-    }));
-};
+
 // -err
 var err = function(text){
     notif({
@@ -52,6 +53,57 @@ var success = function(text){
         type:'success'
     })
 };
+
+$.ajaxSetup({
+    statusCode:(function(){
+        var tmp = {};
+        for (var i in HTTPCode){
+            tmp[i] = HTTPCode[i].action;
+        }
+        return tmp;
+    })()
+});
+
+//$.ajax({
+//    url:urlRoot+'club/login',
+//    type:'post',
+//    async:false,
+//    data:{user:'redhome',password:1},
+//    complete:function(){
+//        console.dir(arguments);
+//    }
+//});
+//
+//$.ajax({
+//    url:urlRoot+'club/setIdentify',
+//    type:'post',
+//    async:false,
+//    data:{interviewerName:'%E8%84%86%E7%9A%AE%E7%8C%AA',did:1}
+//});
+// update queue info
+var update_queue = function(){
+    var queue = {done:3,wait:50};
+    var root = $('#header');
+    root.find('.done .count').text(queue.done);
+    root.find('.wait .count').text(queue.wait);
+    return;
+    $.getJSON();
+};
+
+// global var -- club
+var set_club = function(){
+//    window.club = { departments: [{did:1,name:'人力资源中心'},{did:5,name:'技术'},{did:4,name:'设计'},{did:3,name:'运营部'},{did:2,name:'外联部'}]};
+//    return;
+    $.ajax({
+        url:urlRoot+'club/profile',
+        type:'get',
+        async:false,
+        success:function(data){
+            window.club = data;
+        }
+    });
+};
+
 // -clock
 var add_clock=function(){
     var root = $("#header").find(".time");
@@ -95,12 +147,12 @@ var fix_vl = function(){
 };
 
 var set_property = function(){
-    var extra = ['籍贯', '政治面貌', '出生地'];
-    var html ='';
-    for(var i in extra){
-        html += '<tr><td class="prop">'+ extra[i] +'</td><td class="val">--</td></tr>';
-    }
-    $('#main .profile table').append(html);
+//    var extra = ['籍贯', '政治面貌', '出生地'];
+//    var html ='';
+//    for(var i in extra){
+//        html += '<tr><td class="prop">'+ extra[i] +'</td><td class="val">--</td></tr>';
+//    }
+//    $('#main .profile table').append(html);
     return;
     $.getJSON('');
 };

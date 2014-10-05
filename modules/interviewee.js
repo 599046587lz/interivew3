@@ -10,11 +10,11 @@ exports.sign = function (sid, cid, callback) {
 			if(0 == docs.length) {
 				callback(null,false);
 			} else {
-				Interviewee.sign(sid, cid, function (err) {
+				Interviewee.sign(sid, cid, function (err, interviewee) {
 					if(err) {
 						callback(err);
 					} else {
-						callback(null,true);
+						callback(null, interviewee);
 					}
 				});
 			}
@@ -61,5 +61,11 @@ exports.rateInterviewee = function (sid, score, commit, did, interviewer, cb){
 exports.recommend = function (sid, rdid, cb){
     Interviewee.recommend(sid, rdid, function (err){
         cb(err);
+    })
+};
+
+exports.getDepartmentQueueLength = function (cid, did, cb){
+    Interviewee.countQueue(cid, did, function (err, count){
+        cb(err, count);
     })
 };

@@ -70,6 +70,7 @@ exports.getNextInterviewee = function (did, cb){
             cb(err);
         } else {
             if (doc){
+                doc.busy = true;
                 cb(null, doc);
             } else {
                 cb(null ,null);
@@ -97,6 +98,7 @@ exports.rateInterviewee = function (sid, score, commit, did, interviewer, cb){
                     interviewer: interviewer
                 };
                 doc.done.push(did);
+                doc.busy = false;
                 doc.save();
                 cb();
             }

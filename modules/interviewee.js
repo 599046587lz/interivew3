@@ -52,6 +52,14 @@ exports.getNextInterviewee = function (did, cb){
     })
 };
 
+exports.getSpecifyInterviewee = function (sid, cid, cb){
+    Interviewee.getStuBySid(sid, cid, function (err, interviewee){
+        interviewee.busy = true;
+        interviewee.save();
+        cb(err, interviewee);
+    })
+};
+
 exports.rateInterviewee = function (sid, score, commit, did, interviewer, cb){
     Interviewee.rateInterviewee(sid, score, commit, did, interviewer, function (err){
         cb(err);

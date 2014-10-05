@@ -50,14 +50,27 @@ router.post('/rate', function(req, res){
  */
 router.get('/call', function (req, res){
     var department = req.session['did'];
-    Interviewee.getNextInterviewee(department, function (err, interviewee){
-        if (err){
-            return res.json(500, err);
-        } else {
-            res.json(interviewee);
-            global.io.to(req.session['club']).emit('call', interviewee);
-        }
-    })
+    var sid = req.param('sid');
+    if (!sid){
+        Interviewee.getNextInterviewee(department, function (err, interviewee){
+            if (err){
+                return res.json(500, err);
+            } else {
+                res.json(interviewee);
+                global.io.to(req.session['club']).emit('call', interviewee);
+            }
+        })
+    } else {
+        var cid = req.session['cid'];
+        Interviewee.getSpecifyInterviewee(sid, cid, function (err, interviewee){
+            if (err){
+                return res.json(500, err);
+            } else {
+                res.json(interviewee);
+                global.io.to(req.session['club']).emit('call', interviewee);
+            }
+        })
+    }
 });
 
 /**

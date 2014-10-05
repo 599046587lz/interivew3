@@ -63,3 +63,20 @@ exports.recommend = function (sid, rdid, cb){
         cb(err);
     })
 };
+
+exports.skip = function(cid, sid, cb){
+    Interviewee.getStuBySid(sid, cid, function(err, doc){
+        if(err){
+            cb(err);
+        }else{
+            doc.signTime = new Date();
+            doc.save(function(err){
+                if(err){
+                    cb(err);
+                }else{
+                    cb(null);
+                }
+            });
+        };
+    })
+};

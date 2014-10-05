@@ -2,6 +2,7 @@
  * Created by bangbang93 on 14-9-15.
  */
 var express = require('express');
+var debug = require(debug)('interview');
 var router = express.Router();
 
 var club = require('../modules/club');
@@ -27,7 +28,7 @@ router.post('/login', function (req, res) {
                     } else {
                         req.session.club = clubInfo.name;
                         req.session.cid = clubInfo.cid;
-                        return res.json(204);
+                        return res.send(204);
                     }
                 });
             } else {

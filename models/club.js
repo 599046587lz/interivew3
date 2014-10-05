@@ -11,7 +11,7 @@ exports.login = function (user, pwd, callback){
         if (err){
             return callback(err);
         } else {
-            if (doc.pwd == pwd){
+            if (!!doc && doc.pwd == pwd){
                 return callback(null, true);
             } else {
                 return callback(null, false);

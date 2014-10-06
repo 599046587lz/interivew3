@@ -68,13 +68,10 @@ exports.getNextInterviewee = function (cid, did, cb){
         volunteer: did,
         busy: false,
         signTime:{$ne:null}
-    }).$where((function (did) {
-        return function () {
-            var volunteer = this.volunteer;
-            var done = this.done;
-            return (volunteer.length != done.length) && (done.indexOf(did) == -1);
-        }
-    })(did)).sort({
+    }).$where(new Function('var volunteer = this.volunteer;' +
+    'var done = this.done;' +
+    'return (volunteer.length != done.length) && (done.indexOf(' + did + ') == -1);'
+    )).sort({
         signTime: 'asc'
     }).exec(function (err, doc){
         if (err){

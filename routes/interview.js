@@ -47,7 +47,7 @@ router.post('/rate', function(req, res){
 });
 
 /**
- * @params optional sid   //TODO
+ * @params optional sid
  * @return Interviewee
  */
 router.get('/call', function (req, res){

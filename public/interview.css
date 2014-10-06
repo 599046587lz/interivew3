@@ -164,8 +164,16 @@ body {
   display: inline-block;
   line-height: 50px;
 }
+.nav{
+    float:left;
+    margin-right: 10px;
+}
+.nav img{
+    height:50px;
+}
 #header .depart {
   font-size: 20px;
+    float: left;
 }
 #header .time,
 #header .done,

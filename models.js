@@ -35,14 +35,35 @@ var rate = new Schema({
 var Interviewee = new Schema({
     sid: Number,
     cid: Number,
-    name: String,
-    sex: Boolean,   //false gay;true girl
-    major: String,
-    phone: String,
-    email: String,
-    qq: String,
+    name: {
+        type:String,
+        default: ''
+    },
+    sex: {
+        type: Number,
+        default: 2   //0女1男2秀吉
+    },
+    major: {
+        type:String,
+        default: ''
+    },
+    phone: {
+        type:String,
+        default: ''
+    },
+    email: {
+        type:String,
+        default: ''
+    },
+    qq: {
+        type:String,
+        default: ''
+    },
     volunteer: [Number],
-    notion: String,
+    notion: {
+        type:String,
+        default: ''
+    },
     signTime: Date,
     rate: [rate],//{did: Number,score: Number, comment: String, interviewer: String}
     done: [Number],

@@ -83,7 +83,6 @@ exports.handleArchive = function (file, cid, callback){
                                             default:
                                                 var volunteerReg = /志愿(\d)+/;
                                                 if (volunteerReg.test(e)){
-//                                    var number = volunteerReg.match(e)[1];
                                                     title.push('volunteer'); break;
                                                 } else {
                                                     title.push(e);

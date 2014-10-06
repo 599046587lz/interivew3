@@ -4,7 +4,6 @@ ioURL   = 'http://interview.redhome.cc/';
 interviewee_queue = [];
 interviewee_data_queue = [];
 reconnect_times = 0;
-
 // -set club
 var set_club = function(){
 	club = {};
@@ -117,8 +116,8 @@ storage.prototype = {
 			localStorage.setItem(this.name, this.val)
 		}
 	},
-	display:function(_target){
-		$(_target).html(this.val);
+	display:function(_selector){
+		$(_selector).html(this.val);
 	}
 }
 
@@ -133,18 +132,25 @@ var check_queue = function(){
 	var _target = $(".oncalling");
 	var message = message.replace(/(室|试)/g, "是");
 	var len = _target.find("li").length;
+
 	if (len < 3){
 		_target.prepend(html);	
 	} else {
 		_target.find("li:last").remove();
 		_target.prepend(html).fadeIn(100);
 	}
-	$(".stu-" + data.sid).remove();
+	_target.find("._default").remove();
+	if (!!$(".stu-" + data.sid)){
+		$(".stu-" + data.sid).remove();
+		waiting.cut();
+		waiting.display('.waiting');
+	}
 	var iframe = $("iframe").eq(0);
 	var src = ttsAPI.replace(/_WORDS_/ig, encodeURIComponent(message));
 	iframe.attr("src", src);
 	interviewed.add();
 	interviewed.display('.interviewed');
+
 }
 
 var set_interval = function(){
@@ -274,6 +280,9 @@ var waitline = function(data){
 	output = output.replace(/%DEPARTMENT%/ig, department);
 	output = output.replace(/%ROOM%/ig, room);
 	$(".list tbody").append(output);
+	$(".list ._default").remove();
+	waiting.add();
+	waiting.display('.waiting');
 }
 
 $(function(){

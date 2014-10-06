@@ -75,22 +75,7 @@ $.ajaxSetup({
     })()
 });
 
-//$.ajax({
-//    url:urlRoot+'club/login',
-//    type:'post',
-//    async:false,
-//    data:{user:'redhome',password:1},
-//    success:function(){
-//        console.dir(arguments);
-//    }
-//});
 
-//$.ajax({
-//    url:urlRoot+'club/setIdentify',
-//    type:'post',
-//    async:false,
-//    data:{interviewerName:'%E8%84%86%E7%9A%AE%E7%8C%AA',did:1}
-//});
 // update queue info
 var update_queue = function(stat){
 //    var queue = {done:3,wait:50};
@@ -400,7 +385,8 @@ var recommend = function(){
             department:$('#selectDep').find('.checked input').val()
         },
         success:function(){
-            finish();
+            $('.qtip').hide();
+            success('操作成功');
         }
     });
 };
@@ -437,21 +423,7 @@ $(document).ready(function(){
 
     rate.find(".commit").click(commit);
 
-//    rate.find('.commit').qtip({
-//        content:{
-//            text: $('#confirmCommit')
-//        },
-//        show: {
-//            event: 'click'
-//        },
-//        hide : {
-//            event: 'unfocus'
-//        },
-//        position:{
-//            at: 'bottom center',
-//            my: 'top center'
-//        }
-//    });
+
 
     // handle module
     var handle = $('#main .handle');

@@ -147,11 +147,7 @@ exports.countQueue = function (cid, did, cb){
         volunteer: did,
         busy: {$ne:true},
         signTime: {$ne: null},
-        $where: function(){
-            var volunteer = this.volunteer;
-            var done = this.done;
-            return volunteer.length != done.length;
-        }
+        done: {$ne:did}
     }, function (err, doc){
         if (err){
             cb(err);

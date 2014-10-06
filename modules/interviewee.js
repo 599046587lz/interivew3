@@ -47,7 +47,7 @@ exports.getNextInterviewee = function (cid, did, cb){
             if (!!interviewee){
                 cb (null, interviewee);
             } else {
-                cb (null, {});
+                cb (null, null);
             }
         }
     })

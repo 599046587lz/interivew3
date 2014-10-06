@@ -54,6 +54,7 @@ router.get('/call', function (req, res){
     var department = req.session['did'];
     var sid = req.param('sid');
     var cid = req.session['cid'];
+    var did = req.session['did'];
     if (!cid){
         res.send(403);
     }

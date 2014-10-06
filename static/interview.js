@@ -1,7 +1,14 @@
 /**
  * Created by karboom on 14-9-28.
  */
-var urlRoot = 'http://localhost/';
+var urlRoot = 'http://interview.redhome.cc/';
+
+
+window.onbeforeunload = function(e) {
+    if(window.interviewee){
+        return '如果现在刷新页面,当前面试者资料将丢失,请慎重!';
+    }
+};
 
 // functions
 var relogin = function(){
@@ -401,6 +408,8 @@ $(document).ready(function(){
     set_depName();
     set_depList();
     set_property();
+
+
     //set qtip
     $.fn.qtip.defaults.show.event = 'click';
     $.fn.qtip.defaults.hide.event = 'unfocus';

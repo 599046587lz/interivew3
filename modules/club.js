@@ -44,7 +44,6 @@ exports.getClubById = function (cid, cb){
 
 exports.handleArchive = function (file, cid, callback){
     Club.getClubById(cid, function (err, club){
-        console.log(club);
         var departments = club.departments;
         var deps = {};
         departments.forEach(function (e){
@@ -93,8 +92,8 @@ exports.handleArchive = function (file, cid, callback){
                                     });
                                     isFirstLine = false;
                                 } else {
+                                    var interviewee = {};
                                     for (var i=0;i<e.length;i++){
-                                        var interviewee = {};
                                         if (title[i] != 'volunteer') {
                                             interviewee[title[i]] = e[i];
                                         } else {
@@ -113,13 +112,13 @@ exports.handleArchive = function (file, cid, callback){
                                             }
                                         }
                                     }
+                                    Interviewee.addInterviewee(interviewee, cid, function (err){
+                                        if (err){
+                                            return callback(err);
+                                        }
+                                    })
                                 }
                             });
-                            Interviewee.addInterviewee(interviewee, cid, function (err){
-                                if (err){
-                                    return callback(err);
-                                }
-                            })
                         }
                     });
                     callback(null, data.length);

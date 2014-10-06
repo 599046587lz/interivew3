@@ -78,7 +78,6 @@ router.post('/upload/archive', function (req, res){
         return res.send(403);
     } else {
         var xlsxReg = /\.xlsx$/i;
-        console.log(file);
         if (!xlsxReg.test(file.originalname)){
             return res.send(406);
         }

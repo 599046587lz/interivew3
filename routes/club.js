@@ -132,9 +132,19 @@ router.post('/profile', function (req, res){
     if(!cid) {
         res.send(403);
     }
-    var dep = req.param('departments');
+    var dep = req.param('departments'),
+        name = req.param('name'),
+        password = req.param('password'),
+        logo = req.param('logo'),
+        maxDep = req.param('maxDep');
 
-    Club.update(cid, dep, function (err){
+    Club.update(cid, {
+        departments: dep,
+        name: name,
+        password: password,
+        logo: logo,
+        maxDep: maxDep
+    }, function (err){
         if(err) {
             res.json(500, err);
         } else {

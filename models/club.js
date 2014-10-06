@@ -57,9 +57,9 @@ exports.getClubById = function(cid, callback){
 };
 
 exports.update = function (cid, club, callback) {
-    Club.update({
+    Club.findOneAndUpdate({
         cid: cid
-    },club,function (err, numEffect) {
+    }, club, function (err, numEffect) {
         callback(err);
     });
 };

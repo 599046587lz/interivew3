@@ -36,7 +36,7 @@ router.get('/sign', function(req, res){
 router.post('/selectDep', function (req, res){
 	var sid = req.param('sid');
 	var did = req.param('did');
-	var cid = req.session.cid;
+	var cid = req.session['cid'];
 	if(!cid) {
 		res.send(403);
 	}
@@ -45,12 +45,13 @@ router.post('/selectDep', function (req, res){
 			res.json(500,err);
 		} else {
 			if(success) {
-				res.json(204);
+				res.json(200, {});//TODO 返回学生信息
 			} else {
-				res.json(500);
+				res.send(500);
 			}
 		}
 	});
 });
+
 
 module.exports = router;

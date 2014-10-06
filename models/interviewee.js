@@ -1,8 +1,8 @@
 var Interviewee = require('../models').Interviewee;
 
 exports.getStuBySid = function (sid, cid, callback) {
-    Interviewee.find({sid: sid,cid: cid},function (err, docs){
-        callback(err, docs);
+    Interviewee.findOne({sid: sid,cid: cid},function (err, doc){
+        callback(err, doc);
     });
 };
 
@@ -56,30 +56,35 @@ exports.addInterviewee = function (data, cid, callback){
     callback();
 };
 
-exports.getNextInterviewee = function (did, cb){
+exports.getNextInterviewee = function (cid, did, cb){
     Interviewee.findOne({
-        volunteer: [did],
+        cid: cid,
+        volunteer: did,
         busy: false,
         $where: function(){
             var volunteer = this.volunteer;
             var done = this.done;
-            return volunteer.sort().toString() != done.sort().toString();
+            return volunteer.length != done.length;
         }
-    }, function (err, doc){
+    }).sort({
+        signTime: 'asc'
+    }).exec(function (err, doc){
         if (err){
             cb(err);
         } else {
-            if (doc){
+            if (!!doc){
+                doc.busy = true;
                 cb(null, doc);
             } else {
                 cb(null ,null);
             }
         }
-    })
+    });
 };
 
-exports.rateInterviewee = function (sid, score, commit, did, interviewer, cb){
+exports.rateInterviewee = function (cid, sid, score, commit, did, interviewer, cb){
     Interviewee.findOne({
+        cid: cid,
         sid: sid
     },function (err, doc){
         if (err){
@@ -97,6 +102,7 @@ exports.rateInterviewee = function (sid, score, commit, did, interviewer, cb){
                     interviewer: interviewer
                 };
                 doc.done.push(did);
+                doc.busy = false;
                 doc.save();
                 cb();
             }
@@ -104,8 +110,9 @@ exports.rateInterviewee = function (sid, score, commit, did, interviewer, cb){
     })
 };
 
-exports.recommend = function (sid, rdid, cb){
+exports.recommend = function (cid, sid, rdid, cb){
     Interviewee.findOne({
+        cid: cid,
         sid: sid
     }, function (err, doc){
         if (err){
@@ -136,6 +143,19 @@ exports.countQueue = function (cid, did, cb){
             cb(err);
         } else {
             cb(null, doc.length);
+        }
+    })
+};
+
+exports.exportByDid = function (cid, did, cb){
+    Interviewee.find({
+        cid: cid,
+        volunteer: did
+    }, function (err, docs){
+        if (err){
+            return cb(err);
+        } else {
+            cb(null, docs);
         }
     })
 };

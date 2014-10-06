@@ -1,11 +1,12 @@
 var express = require('express');
 var path = require('path');
-var favicon = require('_static-favicon');
+var favicon = require('static-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session    = require('express-session');
 var MongoStore = require('connect-mongo')(session);
+var multer = require('multer');
 
 var club = require('./routes/club');
 var interview = require('./routes/interview');
@@ -22,6 +23,9 @@ app.use(favicon());
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
+app.use(multer({
+    dest: '/tmp/interview'
+}));
 app.use(cookieParser());
 app.use(session({
     secret: config.cookie_secret,
@@ -33,6 +37,12 @@ app.use(session({
     saveUninitialized: true
 }));
 app.use(express.static(path.join(__dirname, 'public')));
+
+
+app.use(function (req, res, next){
+    res.header('Access-Control-Allow-Origin','*');
+    next();
+});
 
 app.use('/club', club);
 app.use('/interview', interview);

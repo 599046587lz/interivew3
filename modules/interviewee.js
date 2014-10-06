@@ -53,7 +53,7 @@ exports.getNextInterviewee = function (cid, did, cb){
     })
 };
 
-exports.getSpecifyInterviewee = function (sid, cid, cb){
+exports.getSpecifyInterviewee = function (sid, cid, did, cb){
     Interviewee.getStuBySid(sid, cid, did, function (err, interviewee){
         if (!!interviewee){
             interviewee.busy = true;

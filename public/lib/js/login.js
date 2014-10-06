@@ -24,7 +24,7 @@ $(".button").click(function(){
 	$.ajax({
 		url  : baseURL + "/club/login",
 		type : 'post',
-		data : {user: account, password: password},
+		data : {user: account, password: $.md5(password)},
 		dataType : 'json',
 		beforeSend : function(){
 			$(".button").val("登录中...");

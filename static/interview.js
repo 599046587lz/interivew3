@@ -1,7 +1,7 @@
 /**
  * Created by karboom on 14-9-28.
  */
-var urlRoot = 'http://192.168.120.67:3000/';
+var urlRoot = 'http://localhost/';
 
 // functions
 var relogin = function(){
@@ -194,7 +194,7 @@ var add_profile = function(){
     var interviewee = window.interviewee;
     tbs[0].innerText = interviewee.sid;
     tbs[1].innerText = interviewee.name;
-    tbs[2].innerText = interviewee.sex ? '男':'女';
+    tbs[2].innerText = !interviewee.sex ? '男':'女';
     tbs[3].innerText = interviewee.major;
     tbs[4].innerText = interviewee.phone;
     tbs[5].innerText = interviewee.email;
@@ -242,13 +242,12 @@ var finish = function(){
     del_rate();
     clear_clock();
     window.interviewee = null;
-    //todo update_queue(finish)
     update_queue();
 };
 var start = function(){
     start_clock();
     add_profile();
-    //todo update_queue(start)
+    $('.qtip').hide();
 };
 //action(routes)
 var next = function(){

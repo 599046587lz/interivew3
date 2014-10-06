@@ -112,14 +112,14 @@ exports.handleArchive = function (file, cid, callback){
                                                 });
                                             }
                                         }
-                                        Interviewee.addInterviewee(interviewee, cid, function (err){
-                                            if (err){
-                                                return callback(err);
-                                            }
-                                        })
                                     }
                                 }
                             });
+                            Interviewee.addInterviewee(interviewee, cid, function (err){
+                                if (err){
+                                    return callback(err);
+                                }
+                            })
                         }
                     });
                     callback(null, data.length);

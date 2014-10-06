@@ -142,7 +142,7 @@ var check_queue = function(){
 		_target.prepend(html).fadeIn(100);
 	}
 	_target.find("._default").remove();
-	if (!!$(".stu-" + data.sid)){
+	if ($(".stu-" + data.sid).length){
 		console.log($(".stu-" + data.sid));
 		$(".stu-" + data.sid).remove();
 		waiting.cut();

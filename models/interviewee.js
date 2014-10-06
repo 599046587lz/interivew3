@@ -91,7 +91,7 @@ exports.getNextInterviewee = function (cid, did, cb){
     });
 };
 
-exports.rateInterviewee = function (cid, sid, score, commit, did, interviewer, cb){
+exports.rateInterviewee = function (cid, sid, score, comment, did, interviewer, cb){
     Interviewee.findOne({
         cid: cid,
         sid: sid
@@ -110,7 +110,7 @@ exports.rateInterviewee = function (cid, sid, score, commit, did, interviewer, c
                 }
                 doc.rate.push({
                     score: score,
-                    commit: commit,
+                    comment: comment,
                     interviewer: interviewer
                 });
                 doc.done.push(did);

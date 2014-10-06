@@ -141,7 +141,8 @@ var stop_clock=function(){
 
 var clear_clock=function(){
     var root = $('#header .time');
-    root.find('.min, .sec').text('0');
+    root.find('.min, .sec').text('0').css({color:'black'});
+
 };
 
 // -profile

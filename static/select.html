@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Document</title>
+	<link rel="stylesheet" type="text/css" href="lib/css/reset.css">
+	<link rel="stylesheet" type="text/css" href="lib/css/select.css">
+	<link rel="stylesheet" type="text/css" href="lib/css/notifIt.css" />
+	<script type="text/javascript" src="lib/js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="lib/js/select.js"></script>
+	<script type="text/javascript" src="lib/js/jquery.enplaceholder.js"></script>
+	<script type="text/javascript" src="lib/js/notifIt.js"></script>
+	<script type="text/javascript">
+	$(document).ready(function(){		
+		$('input').placeholder({isUseSpan:false});
+	});
+	</script>
+</head>
+<!--[if lt IE 9]>
+	<script src="http://www.redhome.cc/wp-content/themes/redhome/js/html5.js"></script>
+<![endif]-->
+<body>
+<header class="select">
+	<a href="">
+		<img src="./img/title_small.png" alt="社团招新面试系统"/>
+	</a>
+</header>
+<section class="container">
+	<section class="interview">
+		<a href="javascript:;">
+			<span>
+				进行面试
+			</span>
+		</a>
+	</section>
+	<section class="selection" style="height:0;opacity:0;">
+		<label>
+			请选择部门:
+			<select id="_select">
+				<option disabled>正在加载中...</option>
+			</select>
+		</label>
+		<label>请输入姓名:<input type="text" name="interviewer" placeholder="姓名"></label>
+		<input type="button" value="开始面试" class="_interview">
+	</section>
+	<section class="upload">
+		<a href="">
+			<span>
+				上传资料
+			</span>
+		</a>
+	</section>
+	<section class="room">
+		<a href="room.html">
+			<span>
+				叫号大厅
+			</span>
+		</a>
+	</section>
+</section>
+</body>
+</html>

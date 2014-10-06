@@ -78,16 +78,18 @@ var ajaxHandler = function(func){
 
 // -CLASS storage
 // -param  obj - String
-function storage(obj){
+function storage(obj,val){
+	if (!val)
+		val = 0;
 	if(typeof(Storage) !== "undefined") {
 		if (typeof localStorage[obj] !== 'undefined') {
 			this.val = localStorage[obj];
 		} else {
-			localStorage[obj] = 0;
+			localStorage[obj] = val;
 			this.val = localStorage[obj];
 		}
 	} else {
-	  this.val = 0;
+	  this.val = val;
 	}
 	this.name = obj;
 	//return this.obj;
@@ -141,6 +143,7 @@ var check_queue = function(){
 	}
 	_target.find("._default").remove();
 	if (!!$(".stu-" + data.sid)){
+		console.log($(".stu-" + data.sid));
 		$(".stu-" + data.sid).remove();
 		waiting.cut();
 		waiting.display('.waiting');
@@ -150,7 +153,7 @@ var check_queue = function(){
 	iframe.attr("src", src);
 	interviewed.add();
 	interviewed.display('.interviewed');
-
+	waiting_html.set($(".list").html());
 }
 
 var set_interval = function(){
@@ -283,6 +286,7 @@ var waitline = function(data){
 	$(".list ._default").remove();
 	waiting.add();
 	waiting.display('.waiting');
+	waiting_html.set($(".list").html());
 }
 
 $(function(){
@@ -290,8 +294,12 @@ $(function(){
 	set_interval();
 	interviewed = new storage("interviewed");
 	waiting     = new storage("waiting");
+	waiting_html= new storage("waiting_html");
+
 	interviewed.display('.interviewed');
 	waiting.display('.waiting');
+	if ( waiting_html.val != '0')
+		waiting_html.display('.list');
 //bind events
 	//signin button function
 	$("#add").click(function(){

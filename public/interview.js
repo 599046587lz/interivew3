@@ -134,7 +134,7 @@ var add_clock=function(){
         min.text(1 + 1*min.text());
         //chekc time and give tip
         if(min.text() > 6){
-            root.find('.min, .sec').css({color:'yellow'});
+            root.find('.min, .sec').css({color:'darkorange'});
         }
         if(min.text() > 15){
             root.find('.min, .sec').css({color:'red'});
@@ -201,15 +201,16 @@ var add_profile = function(){
     var interviewee = window.interviewee;
     tbs[0].innerText = interviewee.sid;
     tbs[1].innerText = interviewee.name;
-    tbs[2].innerText = !interviewee.sex ? '男':'女';
-    tbs[3].innerText = interviewee.major;
-    tbs[4].innerText = interviewee.phone;
-    tbs[5].innerText = interviewee.email;
-    tbs[6].innerText = interviewee.qq;
-    tbs[7].innerText = interviewee.notion;
+    (interviewee.sex != 2) && (tbs[2].innerText = interviewee.sex ? '男':'女');
+
+    interviewee.major && (tbs[3].innerText = interviewee.major);
+    interviewee.phone && (tbs[4].innerText = interviewee.phone);
+    interviewee.email && (tbs[5].innerText = interviewee.email);
+    interviewee.qq && (tbs[6].innerText = interviewee.qq);
+    interviewee.notion && (tbs[7].innerText = (interviewee.notion);
     var keys = Object.keys(interviewee.extra);
     for (var i in keys){
-        tbs[(8+1*i)].innerText = interviewee.extra[keys[i]];
+        interviewee.extra[keys[i]] && (tbs[(8+1*i)].innerText = interviewee.extra[keys[i]]);
     }
 };
 // -selectDep
@@ -408,6 +409,7 @@ $(document).ready(function(){
     set_depName();
     set_depList();
     set_property();
+    update_queue();
 
 
     //set qtip

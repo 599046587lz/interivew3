@@ -5,7 +5,11 @@ var urlRoot = 'http://192.168.120.67:3000/';
 
 // functions
 var relogin = function(){
-    window.loaction = '/';
+    window.location = '/';
+};
+
+var set_depName = function(){
+    $('#header .depart').text(window.location.hash.replace('#',''));
 };
 
 var HTTPCode = {
@@ -69,11 +73,11 @@ $.ajaxSetup({
 //    type:'post',
 //    async:false,
 //    data:{user:'redhome',password:1},
-//    complete:function(){
+//    success:function(){
 //        console.dir(arguments);
 //    }
 //});
-//
+
 //$.ajax({
 //    url:urlRoot+'club/setIdentify',
 //    type:'post',
@@ -81,13 +85,22 @@ $.ajaxSetup({
 //    data:{interviewerName:'%E8%84%86%E7%9A%AE%E7%8C%AA',did:1}
 //});
 // update queue info
-var update_queue = function(){
-    var queue = {done:3,wait:50};
+var update_queue = function(stat){
+//    var queue = {done:3,wait:50};
     var root = $('#header');
-    root.find('.done .count').text(queue.done);
-    root.find('.wait .count').text(queue.wait);
-    return;
-    $.getJSON();
+    var done = root.find('.done .count').text();
+    root.find('.done .count').text(1*done + 1);
+//    root.find('.wait .count').text(queue.wait);
+//    return;
+    $.ajax({
+        url:urlRoot + 'interview/queue',
+        type:'get',
+        statusCode:{},
+        success:function(data){
+            var root = $('#header');
+            root.find('.wait .count').text(data.count);
+        }
+    });
 };
 
 // global var -- club
@@ -146,6 +159,8 @@ var fix_vl = function(){
     root.find('.vl').css({height:height});
 };
 
+
+
 var set_property = function(){
 //    var extra = ['籍贯', '政治面貌', '出生地'];
 //    var html ='';
@@ -153,8 +168,19 @@ var set_property = function(){
 //        html += '<tr><td class="prop">'+ extra[i] +'</td><td class="val">--</td></tr>';
 //    }
 //    $('#main .profile table').append(html);
-    return;
-    $.getJSON('');
+//    return;
+    $.ajax({
+        url:urlRoot + 'club/extra',
+        type:'get',
+        async:false,
+        success:function(data){
+            var html ='';
+            for(var i in data){
+                html += '<tr><td class="prop">'+ data[i] +'</td><td class="val">--</td></tr>';
+            }
+            $('#main .profile table').append(html);
+        }
+    });
 };
 
 var del_profile = function(){
@@ -179,7 +205,21 @@ var add_profile = function(){
         tbs[(8+1*i)].innerText = interviewee.extra[keys[i]];
     }
 };
+// -selectDep
+var set_depList = function(){
+    var selectDep = $('#selectDep');
+    var departs = window.club.departments;
+    var html = '';
+    for (var i in departs){
+        html += "<li><input type=\"radio\" name=\"depart\" id=\"depart-"+ departs[i]['did']+"\" value=\""+departs[i]['did'] +"\"/><label for=\"depart-"+departs[i]['did']+"\">"+departs[i]['name']+"</label></li>";
+    };
+    selectDep.find('ul').html(html);
 
+    selectDep.find('input').iCheck({checkboxClass: 'icheckbox_square-blue',
+        radioClass: 'iradio_square-blue'});
+
+    selectDep.find('.confirm').click(recommend);
+};
 // -rate
 var del_rate = function(){
     var root = $('#main .rate');
@@ -203,6 +243,7 @@ var finish = function(){
     clear_clock();
     window.interviewee = null;
     //todo update_queue(finish)
+    update_queue();
 };
 var start = function(){
     start_clock();
@@ -215,26 +256,32 @@ var next = function(){
         err('请先评定,推荐,或者跳过当前面试者');
         return;
     };
-    window.interviewee = {
-        sid: 12062136,
-        name: '赵健',
-        sex: 1,
-        major: '计算机',
-        phone: 186065206363,
-        email: 'mail@karboom.me',
-        qq: 823448759,
-        notion: '活着真好',
-        extra: {
-            '籍贯' : '东北',
-            '政治面貌' : '党员'
-        }
-    };
-    start();
-    return;
-    $.getJSON('call', ajaxHandler(function(){
-        window.interviewee = data;
+//    window.interviewee = {
+//        sid: 12062136,
+//        name: '赵健',
+//        sex: 1,
+//        major: '计算机',
+//        phone: 186065206363,
+//        email: 'mail@karboom.me',
+//        qq: 823448759,
+//        notion: '活着真好',
+//        extra: {
+//            '籍贯' : '东北',
+//            '政治面貌' : '党员'
+//        }
+//    };
+//    start();
+//    return;
+    $.ajax({
+        url:urlRoot + 'interview/call',
+//        async:false,
+        type:'get',
+        success:function(data){
 
-    }));
+            window.interviewee = data;
+            start();
+        }
+    });
 
 
 };
@@ -244,26 +291,33 @@ var specialCall = function(){
         err('请先评定,推荐,或者跳过当前面试者');
         return;
     };
-    window.interviewee = {
-        sid: 11111111,
-        name: '赵健',
-        sex: 1,
-        major: '计算机',
-        phone: 186065206363,
-        email: 'mail@karboom.me',
-        qq: 823448759,
-        notion: '活着真好',
-        extra: {
-            '籍贯' : '东北',
-            '政治面貌' : '党员'
+//    window.interviewee = {
+//        sid: 11111111,
+//        name: '赵健',
+//        sex: 1,
+//        major: '计算机',
+//        phone: 186065206363,
+//        email: 'mail@karboom.me',
+//        qq: 823448759,
+//        notion: '活着真好',
+//        extra: {
+//            '籍贯' : '东北',
+//            '政治面貌' : '党员'
+//        }
+//    };
+//    start();
+//    return;
+//    var data = {sid:$('#appointSid input').val()};
+    $.ajax({
+        url:urlRoot + 'interview/call',
+        type:'get',
+        data:{sid:$('#appointSid input').val()},
+        success:function(data){
+
+            window.interviewee = data;
+            start();
         }
-    };
-    start();
-    return;
-    var data = {sid:$('#appointSid input').val()};
-    $.getJSON('call', ajaxHandler(function(){
-        window.interviewee = data;
-    }));
+    })
 };
 
 var commit = function(){
@@ -275,32 +329,47 @@ var commit = function(){
         err('请评定星级');
         return;
     };
-    var data = {
-        sid:window.interviewee.sid,
-        score:$('#main .rate .stars').raty('score'),
-        comment:$('#main .rate .comment').val()
-    };
-    $.post('rate', data, function(data){
-        if('success' == data.status){
+//    var data = {
+//        sid:window.interviewee.sid,
+//        score:$('#main .rate .stars').raty('score'),
+//        comment:$('#main .rate .comment').val()
+//    };
+
+    $.ajax({
+        url:urlRoot + 'interview/rate',
+        type:'post',
+        data:{
+            sid:window.interviewee.sid,
+            score:$('#main .rate .stars').raty('score'),
+            comment:$('#main .rate .comment').val()
+        },
+        success:function(){
             finish();
-        }else{
-            err('网络错误,请稍候重试');
-        };
-    }, 'json');
+        }
+    });
 };
 
 var skip = function(){
+    console.dir(window.interviewee);
     if(!window.interviewee){
         err('尚未有面试者');
         return;
     };
-    finish();
-    return;
-    $.post();
+//    finish();
+//    return;
+    $.ajax({
+        url:urlRoot + 'interview/skip',
+        type:'post',
+        data:{sid:window.interviewee.sid},
+        success:function(){
+
+            finish();
+        }
+    });
 };
 
 var recommend = function(){
-     if(!window.interviewee){
+    if(!window.interviewee){
         err('尚未有面试者');
         return;
     };
@@ -308,21 +377,30 @@ var recommend = function(){
         err('请选择部门');
         return;
     };
-    var data = {
-        sid:window.interviewee.sid,
-        department:$('#selectDep').find('.checked input').val()
-    };
-
-    finish();
-    return;
-    $.post('recommend', data, ajaxHandler(function(){
-        alert(123);
-        finish();
-    }));
+//    var data = {
+//        sid:window.interviewee.sid,
+//        department:$('#selectDep').find('.checked input').val()
+//    };
+//
+//    finish();
+//    return;
+    $.ajax({
+        url:urlRoot + 'interview/recommend',
+        type:'post',
+        data:{
+            sid:window.interviewee.sid,
+            department:$('#selectDep').find('.checked input').val()
+        },
+        success:function(){
+            finish();
+        }
+    });
 };
 // start
 $(document).ready(function(){
     set_club();
+    set_depName();
+    set_depList();
     set_property();
     //set qtip
     $.fn.qtip.defaults.show.event = 'click';
@@ -406,19 +484,7 @@ $(document).ready(function(){
     });
 
     call.find('.next').click(next);
-    // selectDep module
-    var selectDep = $('#selectDep');
-    var departs = window.club.departments;
-    var html = '';
-    for (var i in departs){
-        html += "<li><input type=\"radio\" name=\"depart\" id=\"depart-"+ departs[i]['did']+"\" value=\""+departs[i]['did'] +"\"/><label for=\"depart-"+departs[i]['did']+"\">"+departs[i]['name']+"</label></li>";
-    };
-    selectDep.find('ul').html(html);
 
-    selectDep.find('input').iCheck({checkboxClass: 'icheckbox_square-blue',
-        radioClass: 'iradio_square-blue'});
-
-    selectDep.find('.confirm').click(recommend);
 
     // skip module
     $('#skip .confirm').click(skip);

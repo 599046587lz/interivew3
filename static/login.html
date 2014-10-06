@@ -1,0 +1,37 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>叫号大厅</title>
+	<link rel="stylesheet" type="text/css" href="lib/css/reset.css">
+	<link rel="stylesheet" type="text/css" href="lib/css/login.css">
+	<link rel="stylesheet" type="text/css" href="lib/css/notifIt.css" />
+	<script type="text/javascript" src="lib/js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="lib/js/login.js"></script>
+	<script type="text/javascript" src="lib/js/jquery.enplaceholder.js"></script>
+	<script type="text/javascript" src="lib/js/icheck.min.js"></script>
+	<script type="text/javascript" src="lib/js/socket.io.js"></script>
+	<script type="text/javascript" src="lib/js/notifIt.js"></script>
+	<script type="text/javascript">
+	$(document).ready(function(){		
+		$('input').placeholder({isUseSpan:false});
+	});
+	</script>
+</head>
+<!--[if lt IE 9]>
+	<script src="http://www.redhome.cc/wp-content/themes/redhome/js/html5.js"></script>
+<![endif]-->
+<body>
+<div class="login">
+	<div class="main">
+		<h1 class="hidden">社团招新面试系统</h1>
+		<h1 class="align_c"><img src="./img/title.png" /></h1>
+		<div class="balloon"></div>
+		<form name="login" action="" method="post" id="form">
+			<input type="text" value="" placeholder="帐号" name="account" class="input account align_c" required>
+			<input type="password" placeholder="密码" name="password" class="input password align_c" required>
+			<input type="button" value="登录" class="button align_c">
+		</form>
+	</div>
+</div>
+</body>
+</html>

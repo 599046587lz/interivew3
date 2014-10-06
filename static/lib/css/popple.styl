@@ -1,1 +1,227 @@
-/home/karboom/projects/popple/popple.styl
+// # helper #
+exist(variable = ())
+    return true if length(variable)
+    return true if variable is 0
+    return false
+font_default = ,"微软雅黑","黑体"
+unitize(value = ())
+    if length(value) is 0
+        error('unitize() needs least one argument')
+
+    if length(value) is 1
+        if typeof(value) is 'unit' and value is not 0
+            return unit(value) ? value : value px
+        else
+            return value
+
+    if length(value) > 1
+        tmp = ()
+        for val, key in value
+            push(tmp, unitize(val))
+        return tmp
+
+// # function #
+reset()
+    unquote("/*CSS Reset Begin*/")
+    html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,address,cite,code,del,dfn,em,img,ins,kbd,q,samp,small,strong,sub,sup,var,b,i,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,figcaption,figure,footer,header,hgroup,menu,nav,section,summary,time,mark,audio,video
+        margin: 0
+        padding: 0
+        border: 0
+        outline: 0
+        font-size: 100%
+        vertical-align: baseline
+        background: transparent
+
+    body
+        line-height 1.5
+        font-family "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", "WenQuanYi Micro Hei", sans-serif
+        font-size 14px
+
+    article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section
+        display: block
+
+    nav ul li
+        list-style: none
+
+    blockquote,q
+        quotes: none
+
+    blockquote:before,
+    blockquote:after,
+    q:before,
+    q:after
+        content: ''
+        content: none
+
+    a
+        margin: 0
+        padding: 0
+        font-size: 100%
+        vertical-align: baseline
+        background: transparent
+
+    ins
+        background-color: #ff9
+        color: #000
+        text-decoration: none
+
+    mark
+        background-color: #ff9
+        color: #000
+        font-style: italic
+        font-weight: bold
+
+    del
+        text-decoration: line-through
+
+    abbr[title],
+    dfn[title]
+        border-bottom: 1px dotted
+        cursor: help
+
+    table
+        border-collapse: collapse
+        border-spacing: 0
+
+    hr
+        display: block
+        height: 1px
+        border: 0
+        border-top: 1px solid #ccc
+        margin: 1em 0
+        padding: 0
+
+    input,
+    select
+        vertical-align: middle
+    unquote("/*CSS Reset End*/")
+    unquote("/*CSS Base Begin*/")
+    .align_c
+        margin 0 auto
+    li
+        list-style-type none
+    a:hover
+        text-decoration none
+    a:visited
+        text-decoration none
+    a 
+        text-decoration none
+    unquote("/*CSS Base End*/")
+load()
+    for val, key in arguments
+        error('can not load component "' + val + '" of undefined') if typeof(val) is not 'function'
+        {val}()
+// # describe #
+// c = complete, h = horizontal, v = vertical
+Acenter(type = 'c')
+	position absolute
+	if type is 'c'
+		margin auto
+		top 0
+		right 0
+		bottom 0
+		left 0
+		return
+
+	if type is 'h'
+		margin 0 auto
+		right 0
+		left 0
+		return
+
+	if type is 'v'
+		margin auto 0
+		top 0
+		bottom 0
+        return
+
+Rcenter()
+    position relative
+    margin 0 auto
+    return
+/*border(up =(), right = () , down = () , left = () , bType = solid , color = #fff )
+    up = unitize(up) if exist(up)
+    right = unitize(right) if exist(right)
+    down = unitize(down) if exist(down)
+    left=unitize(left) if exist(left)
+    border-color color 
+    border-style bType 
+    border-top-width up if up
+    border-right-width right if right
+    border-bottom-width down if down
+    border-left-width left if left*/
+size(width = (), height = ())
+    width unitize(width) if exist(width)
+    height unitize(height) if exist(height)
+    return
+
+/*font(color = (), size = () , h =() , family = () )
+    size = unitize(size) if exist(size)
+    h = unitize(h) if exist(h)
+    color color if color
+    font-size size if size
+    font-family family if family
+    line-height h if h*/
+lt(left = (), top = ())
+    position absolute
+    left unitize(left) if exist(left)
+    top unitize(top) if exist(top)
+
+tr(top = (), right = ())
+    position absolute
+    top unitize(top) if exist(top)
+    right unitize(right) if exist(right)
+
+rb(right = (), bottom = ())
+    position absolute
+    right unitize(right) if exist(right)
+    bottom unitize(bottom) if exist(bottom)
+    return
+
+bl(bottom = (), left = ())
+    position absolute
+    bottom unitize(bottom) if exist(bottom)
+    left unitize(left) if exist(left)
+    return
+
+l(margin = ())
+    position relative
+    float left
+    margin unitize(margin) if exist(margin)
+    return
+
+r(margin = ())
+    position relative
+    float right
+    margin unitize(margin) if exist(margin)
+    return
+// # component #
+
+gird(w = 500, h = 500, row = 3, column = 3, gap_h = 2%, gap_v = 2%)
+    size(w, h)
+    display block
+    padding 0
+    list-style none
+
+    >li
+        w = (100% - (column - 1) * gap_h) / column
+        h = (100% - (row - 1) * gap_v) / row
+
+        size(w, h)
+        l(gap 0 0 gap)
+
+        &:nth-child({column}n+1)
+            margin-left 0
+        &:nth-child(-n+{column})
+            margin-top 0
+
+list(w = 300, h = (), h_l = 50, gap = 5)
+    size(w, h)
+    display block
+    padding 0
+    list-style none
+    >li
+        size(100%, h_l)
+        margin-top unitize(gap)
+        &:first-child
+            margin-top 0

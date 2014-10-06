@@ -143,8 +143,13 @@ exports.countQueue = function (cid, did, cb){
     Interviewee.find({
         cid: cid,
         volunteer: [did],
-        'done.count': {$ne: 'volunteer.count'},
-        signTime: {$ne: null}
+        busy: {$ne:true},
+        signTime: {$ne: null},
+        $where: function(){
+            var volunteer = this.volunteer;
+            var done = this.done;
+            return volunteer.length != done.length;
+        }
     }, function (err, doc){
         if (err){
             cb(err);

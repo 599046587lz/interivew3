@@ -138,7 +138,7 @@ router.post('/profile', function (req, res){
         if(err) {
             res.json(500, err);
         } else {
-            res.json(204);
+            res.send(204);
         }
     });
 });

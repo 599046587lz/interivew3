@@ -29,6 +29,7 @@ exports.getClubByName = function(name, callback){
             return callback(err);
         } else {
             if (!!doc){
+                doc = doc.toObject();
                 delete doc.password;
                 return callback(null, doc);
             } else {

@@ -56,6 +56,9 @@ var reconnect = function(){
 	socket = io.connect(ioURL);
 	socket.emit('init', {cid: club.cid});
 };
+var refit = function(){
+	$(".list_wrap").jScrollPane();
+}
 // ajax helper
 var ajaxHandler = function(func){
 	return function(data, status, xhr){
@@ -93,7 +96,7 @@ function storage(obj,val){
 	}
 	this.name = obj;
 	//return this.obj;
-}
+};
 storage.prototype = {
 	add: function(){
 		this.val = Number(this.val) + 1;
@@ -121,7 +124,7 @@ storage.prototype = {
 	display:function(_selector){
 		$(_selector).html(this.val);
 	}
-}
+};
 
 // Interviewee Queue
 var check_queue = function(){
@@ -147,6 +150,7 @@ var check_queue = function(){
 		$(".stu-" + data.sid).remove();
 		waiting.cut();
 		waiting.display('.waiting');
+		refit();
 	}
 	var iframe = $("iframe").eq(0);
 	var src = ttsAPI.replace(/_WORDS_/ig, encodeURIComponent(message));
@@ -154,11 +158,11 @@ var check_queue = function(){
 	interviewed.add();
 	interviewed.display('.interviewed');
 	waiting_html.set($(".list").html());
-}
+};
 
 var set_interval = function(){
-	setInterval(check_queue, 10000);
-}
+	interval = setInterval(check_queue, 10000);
+};
 
 //init Departments
 var set_department = function(){
@@ -182,6 +186,7 @@ var set_department = function(){
 		var _count = $("[name=department]:checked").length;
 		if (_count > club.maxDep){
 			var _result = $(this).parents("li").find("input").iCheck('uncheck');
+			err('至多选择' + club.maxDep + '个部门!');
 		}
 	});
 }
@@ -287,15 +292,15 @@ var waitline = function(data){
 	waiting.add();
 	waiting.display('.waiting');
 	waiting_html.set($(".list").html());
+	refit();
 }
 
 $(function(){
-	set_club();
+	//set_club();
 	set_interval();
 	interviewed = new storage("interviewed");
 	waiting     = new storage("waiting");
 	waiting_html= new storage("waiting_html");
-
 	interviewed.display('.interviewed');
 	waiting.display('.waiting');
 	if ( waiting_html.val != '0')
@@ -319,6 +324,11 @@ $(function(){
 								+ room + " 教室参加 " + department + " 面试" ;
 		interviewee_queue.push(message);
 		interviewee_data_queue.push(data);
+		if ( interviewee_queue.length === 0 ){
+			check_queue();
+			clearInterval(interval);
+			set_interval();
+		};
 	});
 	socket.on('disconnect', function(){
 		if ( reconnect_times < 4 ){

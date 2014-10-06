@@ -52,6 +52,9 @@ body {
   color: #fff;
   margin-top: 0;
 }
+#room .list_wrap{
+  height: 272px;
+}
 #room .list {
   width: 800px;
   max-height: 272px;

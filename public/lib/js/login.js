@@ -22,7 +22,7 @@ $(".button").click(function(){
 	var password = $("[name=password]").val();
 	
 	$.ajax({
-		url  : baseURL + "/club/login",
+		url  : baseURL + "login",
 		type : 'post',
 		data : {user: account, password: $.md5(password)},
 		dataType : 'json',

@@ -132,7 +132,7 @@ var check_queue = function(){
 		return ;
 	var data = interviewee_data_queue.pop();
 	_message = message.replace(/\s/ig,'');
-	var html = "<li style=\"display:none;\"><span class=\"ring\"></span>" + _message + "</li>"
+	var html = "<li><span class=\"ring\"></span>" + _message + "</li>"
 	var _target = $(".oncalling");
 	var message = message.replace(/(室|试)/g, "是");
 	var len = _target.find("li").length;

@@ -39,6 +39,11 @@ exports.getClubByName = function(name, callback){
     });
 };
 
+/**
+ *
+ * @param cid
+ * @param callback
+ */
 exports.getClubById = function(cid, callback){
     Club.findOne({
         cid: cid

@@ -131,17 +131,63 @@ exports.handleArchive = function (file, cid, callback){
 exports.update = function (cid, data, callback) {
     var pro = ['name','logo','departments','interviewer','password','maxDep'];
     var newClub = {};
+    var hasDepartmentModify = false;
 
     if(undefined != data) {
         for(var i in pro) {
-            if(undefined != data[pro[i]]) {
-                newClub[pro[i]] = data[pro[i]];
+            if (pro.hasOwnProperty(i)){
+                if(undefined != data[pro[i]]) {
+                    if (pro[i] == 'departments') {
+                        newClub[pro[i]] = [];
+                        Club.getClubById(cid, function (err, club){
+                            if (err){
+                                return callback(err);
+                            } else {
+                                var dep = data['departments'];
+                                var oldDep = club.departments;
+                                if (dep.length == oldDep.length){
+                                    for (var j = 0; j< dep.length ;j++){
+                                        if (dep[j].name != oldDep.name){
+                                            hasDepartmentModify = true;
+                                            break;
+                                        }
+                                    }
+                                } else {
+                                    hasDepartmentModify = true;
+                                }
+                            }
+                            if (hasDepartmentModify){
+                                Interviewee.removeByCid(cid, function (err){
+                                    if (err){
+                                        callback(err);
+                                    } else {
+                                        callback(null, true);
+                                    }
+                                })
+                            } else {
+                                callback(null, false);
+                            }
+                        });
+                        data[pro[i]].forEach(function (e, index){
+                            var dep = {};
+                            dep.did = index;
+                            dep.name = e.name;
+                            dep.location = e.location;
+                            newClub[pro[i]].push(dep);
+                        })
+
+                    } else {
+                        newClub[pro[i]] = data[pro[i]];
+                    }
+
+                }
             }
         }
     }
-
     Club.update(cid, newClub, function (err){
-        callback(err);
+        if (err) {
+            callback(err);
+        }
     });
 };
 

@@ -62,6 +62,7 @@ router.get('/call', function (req, res){
             if (err){
                 return res.json(500, err);
             } else {
+                interviewee = interviewee.toObject();
                 interviewee.did = department;
                 res.json(interviewee);
                 global.io.to(cid).emit('call', interviewee);

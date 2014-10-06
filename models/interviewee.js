@@ -71,7 +71,7 @@ exports.getNextInterviewee = function (cid, did, cb){
         $where: function(){
             var volunteer = this.volunteer;
             var done = this.done;
-            return volunteer.length != done.length;
+            return (volunteer.length != done.length) && (done.indexOf(did) == -1);
         }
     }).sort({
         signTime: 'asc'

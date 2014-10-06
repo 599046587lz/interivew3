@@ -146,3 +146,16 @@ exports.countQueue = function (cid, did, cb){
         }
     })
 };
+
+exports.exportByDid = function (cid, did, cb){
+    Interviewee.find({
+        cid: cid,
+        volunteer: did
+    }, function (err, docs){
+        if (err){
+            return cb(err);
+        } else {
+            cb(null, docs);
+        }
+    })
+};

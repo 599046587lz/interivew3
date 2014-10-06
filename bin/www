@@ -13,6 +13,7 @@ io.on('connection', function (socket){
      * @params data {cid:cid}
      */
     socket.on('init', function(data){
+        console.log('init' + JSON.stringify(data));
         socket.join(data['cid']);
     })
 });

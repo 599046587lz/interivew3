@@ -18,7 +18,7 @@ router.post('/recommend', function (req, res){
         if (err){
             res.send(500);
         } else {
-            res.json(204);
+            res.send(204);
         }
     })
 });
@@ -59,8 +59,11 @@ router.get('/call', function (req, res){
             if (err){
                 return res.json(500, err);
             } else {
+                interviewee = interviewee.toObject();
+                interviewee.did = department;
                 res.json(interviewee);
-                global.io.to(req.session['club']).emit('call', interviewee);
+                console.dir(interviewee);
+                global.io.to(cid).emit('call', interviewee);
             }
         })
     } else {
@@ -69,21 +72,17 @@ router.get('/call', function (req, res){
                 return res.json(500, err);
             } else {
                 if (!!interviewee){
+                    interviewee = interviewee.toObject();
+                    interviewee.did = department;
                     res.json(interviewee);
+                    console.dir(interviewee);
+                    global.io.to(cid).emit('call', interviewee);
                 } else {
                     res.send(404);
                 }
-                global.io.to(req.session['club']).emit('call', interviewee);
             }
         })
     }
-});
-
-/**
- *
- */
-router.post('/skip', function (req, res){
-
 });
 
 /**
@@ -108,7 +107,12 @@ router.get('/queue', function (req, res){
  * @param sid
  */
 router.post('/skip', function (req, res){
-    Interviewee.skip(req.session['cid'], req.param('sid'), function(err){
+    var cid = req.session['cid'],
+        sid = req.param('sid');
+    if (!cid || !sid){
+        return res.send(403);
+    }
+    Interviewee.skip(cid, sid, function(err){
         if(err){
             res.send(500);
         }else{
@@ -116,4 +120,5 @@ router.post('/skip', function (req, res){
         }
     });
 });
+
 module.exports = router;

@@ -201,16 +201,16 @@ var add_profile = function(){
     var interviewee = window.interviewee;
     tbs[0].innerText = interviewee.sid;
     tbs[1].innerText = interviewee.name;
-    (interviewee.sex != 2) && (tbs[2].innerText = interviewee.sex ? '男':'女');
+    tbs[2].innerText = interviewee.sex !=2 ? (interviewee.sex? '男':'女') : '--';
 
-    interviewee.major && (tbs[3].innerText = interviewee.major);
-    interviewee.phone && (tbs[4].innerText = interviewee.phone);
-    interviewee.email && (tbs[5].innerText = interviewee.email);
-    interviewee.qq && (tbs[6].innerText = interviewee.qq);
-    interviewee.notion && (tbs[7].innerText = (interviewee.notion);
+    tbs[3].innerText = interviewee.major || '--';
+    tbs[4].innerText = interviewee.phone || '--';
+    tbs[5].innerText = interviewee.email || '--';
+    tbs[6].innerText = interviewee.qq || '--';
+    tbs[7].innerText = interviewee.notion || '--';
     var keys = Object.keys(interviewee.extra);
     for (var i in keys){
-        interviewee.extra[keys[i]] && (tbs[(8+1*i)].innerText = interviewee.extra[keys[i]]);
+        tbs[(8+1*i)].innerText = interviewee.extra[keys[i]] || '--';
     }
 };
 // -selectDep
@@ -248,6 +248,7 @@ var finish = function(){
     success('操作成功');
     del_profile();
     del_rate();
+    stop_clock();
     clear_clock();
     window.interviewee = null;
     update_queue();

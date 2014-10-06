@@ -57,6 +57,10 @@ exports.addInterviewee = function (data, cid, callback){
 //    IntervieweeEntity.qq = data.qq;
 //    IntervieweeEntity.volunteer = data.volunteer;
 //    IntervieweeEntity.notion = data.notion;
+    if (!!interviewee.signTime){
+        IntervieweeEntity.signTime = interviewee.signTime;
+        delete interviewee.signTime;
+    }
     IntervieweeEntity.extra = interviewee;
     IntervieweeEntity.save();
     callback();

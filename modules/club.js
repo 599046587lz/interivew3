@@ -95,14 +95,16 @@ exports.handleArchive = function (file, cid, callback){
                                     var interviewee = {};
                                     for (var i=0;i<e.length;i++){
                                         if (title[i] != 'volunteer') {
-                                            interviewee[title[i]] = e[i];
+                                            interviewee['volunteer'] = e[i];
                                         } else {
                                             var d = deps[e[i]];
                                             if (!!d){
-                                                if (!interviewee[title[i]]){
-                                                    interviewee[title[i]] = [];
+                                                if (!interviewee['volunteer']){
+                                                    interviewee['volunteer'] = [];
                                                 }
-                                                interviewee[title[i]].push(d);
+                                                if (interviewee['volunteer'].indexOf(d) == -1){
+                                                    interviewee['volunteer'].push(d);
+                                                }
                                             } else {
                                                 callback({
                                                     code: 404,

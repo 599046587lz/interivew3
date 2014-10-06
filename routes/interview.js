@@ -11,17 +11,14 @@ var Interviewee = require('../modules/interviewee');
  * @return Object {status: 'success'|'failed'}
  */
 router.post('/recommend', function (req, res){
-    var sid = req.param('sid');
-    var department = req.param('department');
-    Interviewee.recommend(sid, department, function (err){
+    var sid = req.param('sid'),
+        department = req.param('department'),
+        cid = req.session['cid'];
+    Interviewee.recommend(cid, sid, department, function (err){
         if (err){
-            res.json(500, err + {
-                status: 'failed'
-            });
+            res.send(500);
         } else {
-            res.json({
-                status: 'success'
-            })
+            res.send(204);
         }
     })
 });
@@ -30,39 +27,76 @@ router.post('/recommend', function (req, res){
  * @params sid
  * @params score
  * @params comment
- * @return Object {status: 'success'|'failed'}
+ * @return HTTP 204
  */
 router.post('/rate', function(req, res){
     var sid = req.param('sid'),
         score = req.param('score'),
         comment = req.param('comment'),
         did = req.session['did'],
-        interviewer = req.session['interviewer'];
-    Interviewee.rateInterviewee(sid, score, comment, did, interviewer, function (err){
+        interviewer = req.session['interviewer'],
+        cid = req.session['cid'];
+    Interviewee.rateInterviewee(cid, sid, score, comment, did, interviewer, function (err){
         if (err){
-            res.json(500, err + {
-                status: 'failed'
-            });
+            res.send(500);
         } else {
-            res.json({
-                status: 'success'
-            })
+            res.send(204);
         }
     })
 
 });
 
 /**
+ * @params optional sid
  * @return Interviewee
  */
 router.get('/call', function (req, res){
     var department = req.session['did'];
-    Interviewee.getNextInterviewee(department, function (err, interviewee){
+    var sid = req.param('sid');
+    var cid = req.session['cid'];
+    if (!sid){
+        Interviewee.getNextInterviewee(cid, department, function (err, interviewee){
+            if (err){
+                return res.json(500, err);
+            } else {
+                interviewee.did = department;
+                res.json(interviewee);
+                console.dir(interviewee);
+                global.io.to(cid).emit('call', interviewee);
+            }
+        })
+    } else {
+        Interviewee.getSpecifyInterviewee(sid, cid, function (err, interviewee){
+            if (err){
+                return res.json(500, err);
+            } else {
+                if (!!interviewee){
+                    interviewee = interviewee.toObject();
+                    interviewee.did = department;
+                    res.json(interviewee);
+                    console.dir(interviewee);
+                    global.io.to(cid).emit('call', interviewee);
+                } else {
+                    res.send(404);
+                }
+            }
+        })
+    }
+});
+
+/**
+ *
+ */
+router.get('/queue', function (req, res){
+    var cid = req.session['cid'],
+        did = req.session['did'];
+    Interviewee.getDepartmentQueueLength(cid, did, function (err, count){
         if (err){
-            return res.json(500, err);
+            res.json(500, err);
         } else {
-            res.json(interviewee);
-            global.io.to(req.session['club']).emit('call', interviewee);
+            res.json({
+                count: count
+            })
         }
     })
 });
@@ -72,7 +106,12 @@ router.get('/call', function (req, res){
  * @param sid
  */
 router.post('/skip', function (req, res){
-    Interviewee.skip(req.session['cid'], req.param('sid'), function(err){
+    var cid = req.session['cid'],
+        sid = req.param('sid');
+    if (!cid || !sid){
+        return res.send(403);
+    }
+    Interviewee.skip(cid, sid, function(err){
         if(err){
             res.send(500);
         }else{
@@ -80,4 +119,5 @@ router.post('/skip', function (req, res){
         }
     });
 });
+
 module.exports = router;

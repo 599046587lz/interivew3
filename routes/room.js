@@ -15,14 +15,14 @@ router.get('/sign', function(req, res){
 	if(!cid) {
 		res.send(403);
 	}
-	Interviewee.sign(sid, cid, function (err, success) {
+	Interviewee.sign(sid, cid, function (err, interviewee) {
 		if(err) {
 			res.json(500, err);
 		} else {
-			if(success) {
-				res.json({status: 'success'});
+			if(!!interviewee) {
+				res.json(interviewee);
 			} else {
-				res.json({status: 'selectDep'});
+				res.send(205);
 			}
 		}
 	});
@@ -36,21 +36,26 @@ router.get('/sign', function(req, res){
 router.post('/selectDep', function (req, res){
 	var sid = req.param('sid');
 	var did = req.param('did');
-	var cid = req.session.cid;
+	var cid = req.session['cid'];
 	if(!cid) {
 		res.send(403);
 	}
-	Interviewee.selectDep(sid, cid, did, function (err, success) {
+	Interviewee.selectDep(sid, cid, did, function (err, interviewee) {
 		if(err) {
-			res.json(500,err);
+			if (!!err.sid){
+                res.json(404, err);
+            } else {
+                res.json(500,err);
+            }
 		} else {
-			if(success) {
-				res.json({status: 'success'});
+			if(interviewee) {
+				res.json(200, interviewee);
 			} else {
-				res.json({status: 'failed'});
+				res.send(500);
 			}
 		}
 	});
 });
+
 
 module.exports = router;

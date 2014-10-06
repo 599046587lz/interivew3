@@ -67,6 +67,7 @@ exports.getNextInterviewee = function (cid, did, cb){
         cid: cid,
         volunteer: did,
         busy: false,
+        signTime:{$ne:null},
         $where: function(){
             var volunteer = this.volunteer;
             var done = this.done;

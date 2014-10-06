@@ -47,7 +47,10 @@ var Interviewee = new Schema({
     rate: [rate],//{did: Number,score: Number, comment: String, interviewer: String}
     done: [Number],
     extra: Object,
-    busy: Boolean   //是否正在面试
+    busy: {
+        type: Boolean,
+        default: false
+    }   //是否正在面试
 });
 
 exports.Interviewee = mongoose.model('interviewee', Interviewee);

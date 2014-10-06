@@ -109,6 +109,7 @@ exports.rateInterviewee = function (cid, sid, score, comment, did, interviewer, 
                     doc.rate = [];
                 }
                 doc.rate.push({
+                    did: did,
                     score: score,
                     comment: comment,
                     interviewer: interviewer

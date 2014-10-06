@@ -56,7 +56,7 @@ exports.handleArchive = function (file, cid, callback){
                 } else {
                     var title = [];
                     var isFirstLine = true;
-                    Interviewee.removeByCid(cid, function (err, count){
+                    Interviewee.removeByCid(cid, function (err){
                         if (err){
                             callback(err);
                         } else {

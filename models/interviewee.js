@@ -142,7 +142,7 @@ exports.recommend = function (cid, sid, rdid, cb){
 exports.countQueue = function (cid, did, cb){
     Interviewee.find({
         cid: cid,
-        volunteer: [did],
+        volunteer: 2,
         busy: {$ne:true},
         signTime: {$ne: null},
         $where: function(){

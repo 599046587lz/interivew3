@@ -325,11 +325,11 @@ $(function(){
 								+ room + " 教室参加 " + department + " 面试" ;
 		interviewee_queue.push(message);
 		interviewee_data_queue.push(data);
-		if ( interviewee_queue.length === 1 ){
+/*		if ( interviewee_queue.length === 1 ){
 			check_queue();
 			clearInterval(interval);
 			set_interval();
-		};
+		};*/
 	});
 	socket.on('disconnect', function(){
 		if ( reconnect_times < 4 ){

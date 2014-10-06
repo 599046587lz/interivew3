@@ -78,7 +78,6 @@ var ajaxHandler = function(func){
 		};
 	};
 };
-
 // -CLASS storage
 // -param  obj - String
 function storage(obj,val){
@@ -133,11 +132,10 @@ var check_queue = function(){
 		return ;
 	var data = interviewee_data_queue.pop();
 	_message = message.replace(/\s/ig,'');
-	var html = "<li style=\"style:none;\"><span class=\"ring\"></span>" + _message + "</li>"
+	var html = "<li style=\"display:none;\"><span class=\"ring\"></span>" + _message + "</li>"
 	var _target = $(".oncalling");
 	var message = message.replace(/(室|试)/g, "是");
 	var len = _target.find("li").length;
-
 	if (len < 3){
 		_target.prepend(html);	
 	} else {
@@ -158,6 +156,7 @@ var check_queue = function(){
 	interviewed.add();
 	interviewed.display('.interviewed');
 	waiting_html.set($(".list").html());
+	current_html.set($(".oncalling").html());
 };
 
 var set_interval = function(){
@@ -229,7 +228,6 @@ var signin = function(){
 				waitline(data);
 			}
 		}
-
 	});
 };
 // -select departments div fadein
@@ -277,15 +275,14 @@ var waitline = function(data){
 	console.log(data);
 	var template = "<tr class=\"stu-%SID%\"> \n <td>%NUMBER%</td> \n <td>%SID%</td> \n "
 								+"<td>%NAME%</td> \n <td>%DEPARTMENT%</td> \n <td>%ROOM%";
-	var output = template.replace(/%NUMBER%/ig, data.sid);
+	var output = template.replace(/%NUMBER%/ig, wait_num.add());
 	var depart = data.volunteer;
-	var depart = depart[0] + ((depart.length != 1) ? "等" + depart.length + "个部门" : "");
+	var departs = depart[0] + ((depart.length != 1) ? "等" + depart.length + "个部门" : "");
 	var did = $("[name=department][value=" + depart[0] + "]");
 	var room = did.attr("data-id");
-	var department = did.parents("label").text();
 	output = output.replace(/%SID%/ig, data.sid);
 	output = output.replace(/%NAME%/ig, data.name);
-	output = output.replace(/%DEPARTMENT%/ig, department);
+	output = output.replace(/%DEPARTMENT%/ig, departs);
 	output = output.replace(/%ROOM%/ig, room);
 	$(".list tbody").append(output);
 	$(".list ._default").remove();
@@ -293,7 +290,7 @@ var waitline = function(data){
 	waiting.display('.waiting');
 	waiting_html.set($(".list").html());
 	refit();
-}
+};
 
 $(function(){
 	set_club();
@@ -301,10 +298,14 @@ $(function(){
 	interviewed = new storage("interviewed");
 	waiting     = new storage("waiting");
 	waiting_html= new storage("waiting_html");
+	wait_num    = new storage("wait_num");
+	current_html= new storage("current_html");
 	interviewed.display('.interviewed');
 	waiting.display('.waiting');
 	if ( waiting_html.val != '0')
 		waiting_html.display('.list');
+	if ( current_html.val != '0')
+		current_html.display('.oncalling');
 //bind events
 	//signin button function
 	$("#add").click(function(){
@@ -324,7 +325,7 @@ $(function(){
 								+ room + " 教室参加 " + department + " 面试" ;
 		interviewee_queue.push(message);
 		interviewee_data_queue.push(data);
-		if ( interviewee_queue.length === 0 ){
+		if ( interviewee_queue.length === 1 ){
 			check_queue();
 			clearInterval(interval);
 			set_interval();

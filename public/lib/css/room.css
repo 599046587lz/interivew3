@@ -84,6 +84,12 @@ body {
 #room .list th {
   color: #335dfb;
 }
+#room .list td:first-child, #room .list th:first-child{
+  width: 60px !important;
+}
+#room td + td + td + td, #room th + th + th + th {
+  width: 260px !important;
+}
 #room .func_bar {
   width: 100%;
   height: 60px;

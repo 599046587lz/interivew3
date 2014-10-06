@@ -23,19 +23,19 @@ exports.sign = function (sid, cid, callback) {
 };
 
 exports.selectDep = function (sid, cid, did, callback) {
-	var date = new Date();
-	var data = {
-		sid: sid,
-		volunteer: did,
-		signTime: date
-	};
-	Interviewee.addInterviewee(data,cid,function (err) {
-		if(err) {
-			callback(err);
-		} else {
-			callback(null,true);
-		}
-	});
+    Interviewee.getStuByAPI(sid, function (err, interviewee){
+        interviewee.volunteer = did;
+        interviewee.signTime = new Date();
+        console.log(interviewee);
+        Interviewee.addInterviewee(interviewee, cid, function (err) {
+            if(err) {
+                callback(err);
+            } else {
+                console.log(interviewee);
+                callback(null, interviewee);
+            }
+        });
+    });
 };
 
 exports.getNextInterviewee = function (cid, did, cb){
@@ -84,7 +84,7 @@ exports.getIntervieweeBySid = function (sid, cid, cb) {
     Interviewee.getStuBySid(sid, cid, function (err, doc) {
         cb(err, doc);
     });
-}
+};
 
 exports.skip = function(cid, sid, cb){
     Interviewee.getStuBySid(sid, cid, function(err, doc){

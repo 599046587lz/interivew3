@@ -77,9 +77,18 @@ router.post('/upload/archive', function (req, res){
     if(!file || !req.session['cid']){
         return res.send(403);
     } else {
+        var xlsxReg = /\.xlsx$/i;
+        console.log(file);
+        if (!xlsxReg.test(file.originalname)){
+            return res.send(406);
+        }
         Club.handleArchive(file, req.session['cid'], function (err, length){
             if (err){
-                res.json(500, err);
+                if (!!err.line){
+                    res.json(404, err);
+                } else {
+                    res.json(500, err);
+                }
             } else {
                 res.json({
                     status:'success',
@@ -97,8 +106,6 @@ router.post('/upload/archive', function (req, res){
  */
 router.get('/profile', function (req, res){
     var name = req.session['club'];
-    console.dir(req.session);
-    console.dir(req.cookies);
     if(!name) {
         res.send(403);
     }

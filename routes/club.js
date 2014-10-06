@@ -144,11 +144,11 @@ router.post('/profile', function (req, res){
         password: password,
         logo: logo,
         maxDep: maxDep
-    }, function (err){
+    }, function (err, clearData){
         if(err) {
             res.json(500, err);
         } else {
-            res.send(204);
+            res.send(clearData?205:204);
         }
     });
 });

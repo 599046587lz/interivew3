@@ -10,9 +10,20 @@ var Interviewee = require('../modules/interviewee');
  * @params department
  * @return Object {status: 'success'|'failed'}
  */
-router.post('/recommand', function (req, res){
-    var interviewee = req.param('interviewee');
+router.post('/recommend', function (req, res){
+    var sid = req.param('sid');
     var department = req.param('department');
+    Interviewee.recommend(sid, department, function (err){
+        if (err){
+            res.json(500, err + {
+                status: 'failed'
+            });
+        } else {
+            res.json({
+                status: 'success'
+            })
+        }
+    })
 });
 
 /**
@@ -22,7 +33,23 @@ router.post('/recommand', function (req, res){
  * @return Object {status: 'success'|'failed'}
  */
 router.post('/rate', function(req, res){
-    
+    var sid = req.param('sid'),
+        score = req.param('score'),
+        comment = req.param('comment'),
+        did = req.session['did'],
+        interviewer = req.session['interviewer'];
+    Interviewee.rateInterviewee(sid, score, comment, did, interviewer, function (err){
+        if (err){
+            res.json(500, err + {
+                status: 'failed'
+            });
+        } else {
+            res.json({
+                status: 'success'
+            })
+        }
+    })
+
 });
 
 /**
@@ -40,4 +67,17 @@ router.get('/call', function (req, res){
     })
 });
 
+
+/**
+ * @param sid
+ */
+router.post('/skip', function (req, res){
+    Interviewee.skip(req.session['cid'], req.param('sid'), function(err){
+        if(err){
+            res.send(500);
+        }else{
+            res.send(204);
+        }
+    });
+});
 module.exports = router;

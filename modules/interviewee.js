@@ -51,3 +51,32 @@ exports.getNextInterviewee = function (did, cb){
         }
     })
 };
+
+exports.rateInterviewee = function (sid, score, commit, did, interviewer, cb){
+    Interviewee.rateInterviewee(sid, score, commit, did, interviewer, function (err){
+        cb(err);
+    })
+};
+
+exports.recommend = function (sid, rdid, cb){
+    Interviewee.recommend(sid, rdid, function (err){
+        cb(err);
+    })
+};
+
+exports.skip = function(cid, sid, cb){
+    Interviewee.getStuBySid(sid, cid, function(err, doc){
+        if(err){
+            cb(err);
+        }else{
+            doc.signTime = new Date();
+            doc.save(function(err){
+                if(err){
+                    cb(err);
+                }else{
+                    cb(null);
+                }
+            });
+        };
+    })
+};

@@ -81,7 +81,7 @@ var update_queue = function(stat){
 //    var queue = {done:3,wait:50};
     var root = $('#header');
     var done = root.find('.done .count').text();
-    root.find('.done .count').text(1*done + 1);
+    root.find('.done .count').text() != 0 && root.find('.done .count').text(1*done + 1);
 //    root.find('.wait .count').text(queue.wait);
 //    return;
     $.ajax({

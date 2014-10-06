@@ -132,9 +132,9 @@ router.post('/profile', function (req, res){
     if(!cid) {
         res.send(403);
     }
-    var dep = req.param['department'];
+    var dep = req.param('departments');
 
-    Club.update(cid,dep,function (err){
+    Club.update(cid, dep, function (err){
         if(err) {
             res.json(500, err);
         } else {

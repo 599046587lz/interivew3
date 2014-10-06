@@ -164,6 +164,9 @@ router.get('/extra', function (req, res){
         if (err){
             res.json(500, err);
         } else {
+            if (!doc){
+                return res.send(404);
+            }
             var extra = doc.extra;
             var fields = [];
             for (var i in extra){

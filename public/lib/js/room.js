@@ -56,6 +56,9 @@ var reconnect = function(){
 	socket = io.connect(ioURL);
 	socket.emit('init', {cid: club.cid});
 };
+var refit = function(){
+	$(".list_wrap").jScrollPane();
+}
 // ajax helper
 var ajaxHandler = function(func){
 	return function(data, status, xhr){
@@ -147,6 +150,7 @@ var check_queue = function(){
 		$(".stu-" + data.sid).remove();
 		waiting.cut();
 		waiting.display('.waiting');
+		refit();
 	}
 	var iframe = $("iframe").eq(0);
 	var src = ttsAPI.replace(/_WORDS_/ig, encodeURIComponent(message));
@@ -288,10 +292,11 @@ var waitline = function(data){
 	waiting.add();
 	waiting.display('.waiting');
 	waiting_html.set($(".list").html());
+	refit();
 }
 
 $(function(){
-	set_club();
+	//set_club();
 	set_interval();
 	interviewed = new storage("interviewed");
 	waiting     = new storage("waiting");

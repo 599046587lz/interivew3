@@ -35,10 +35,16 @@ exports.sign = function (sid, cid, callback) {
 
 exports.addInterviewee = function (data, cid, callback){
     var IntervieweeEntity = new Interviewee();
+    var interviewee = {};
+    for(var i in data) {
+        if (data.hasOwnProperty(i)){
+            interviewee[i] = data[i];
+        }
+    }
     var fields = ['sid', 'name', 'sex', 'major', 'phone', 'email', 'qq', 'volunteer', 'notion'];
     fields.forEach(function (e){
-        IntervieweeEntity[e] = data[e];
-        delete data[e];
+        IntervieweeEntity[e] = interviewee[e];
+        delete interviewee[e];
     });
     IntervieweeEntity.cid = cid;
 //    IntervieweeEntity.sid = data.sid;
@@ -51,7 +57,7 @@ exports.addInterviewee = function (data, cid, callback){
 //    IntervieweeEntity.qq = data.qq;
 //    IntervieweeEntity.volunteer = data.volunteer;
 //    IntervieweeEntity.notion = data.notion;
-    IntervieweeEntity.extra = data;
+    IntervieweeEntity.extra = interviewee;
     IntervieweeEntity.save();
     callback();
 };
@@ -156,6 +162,18 @@ exports.exportByDid = function (cid, did, cb){
             return cb(err);
         } else {
             cb(null, docs);
+        }
+    })
+};
+
+exports.removeByCid = function (cid, cb){
+    Interviewee.remove({
+        cid: cid
+    }, function (err, result){
+        if (err) {
+            cb(err);
+        } else {
+            cb(null, result.nRemoved);
         }
     })
 };

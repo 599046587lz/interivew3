@@ -40,12 +40,16 @@ router.post('/selectDep', function (req, res){
 	if(!cid) {
 		res.send(403);
 	}
-	Interviewee.selectDep(sid, cid, did, function (err, success) {
+	Interviewee.selectDep(sid, cid, did, function (err, interviewee) {
 		if(err) {
-			res.json(500,err);
+			if (!!err.sid){
+                res.json(404, err);
+            } else {
+                res.json(500,err);
+            }
 		} else {
-			if(success) {
-				res.json(200, {});//TODO 返回学生信息
+			if(interviewee) {
+				res.json(200, interviewee);
 			} else {
 				res.send(500);
 			}

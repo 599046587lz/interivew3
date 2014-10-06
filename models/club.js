@@ -38,6 +38,23 @@ exports.getClubByName = function(name, callback){
     });
 };
 
+exports.getClubById = function(cid, callback){
+    Club.findOne({
+        cid: cid
+    }, function (err, doc){
+        if (err){
+            return callback(err);
+        } else {
+            if (!!doc){
+                delete doc.password;
+                return callback(null, doc);
+            } else {
+                return callback(null, false);
+            }
+        }
+    });
+};
+
 exports.update = function (cid, club, callback) {
     Club.update({
         cid: cid

@@ -68,8 +68,8 @@ exports.getSpecifyInterviewee = function (sid, cid, did, cb){
     })
 };
 
-exports.rateInterviewee = function (cid, sid, score, commit, did, interviewer, cb){
-    Interviewee.rateInterviewee(cid, sid, score, commit, did, interviewer, function (err){
+exports.rateInterviewee = function (cid, sid, score, comment, did, interviewer, cb){
+    Interviewee.rateInterviewee(cid, sid, score, comment, did, interviewer, function (err){
         cb(err);
     })
 };

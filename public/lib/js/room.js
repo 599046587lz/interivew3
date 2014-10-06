@@ -296,7 +296,7 @@ var waitline = function(data){
 }
 
 $(function(){
-	//set_club();
+	set_club();
 	set_interval();
 	interviewed = new storage("interviewed");
 	waiting     = new storage("waiting");

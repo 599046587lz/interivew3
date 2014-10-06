@@ -1,43 +1,53 @@
 /**
  * Created by karboom on 14-9-28.
  */
+var urlRoot = 'http://interview.redhome.cc/';
+
+
+window.onbeforeunload = function(e) {
+    if(window.interviewee){
+        return '如果现在刷新页面,当前面试者资料将丢失,请慎重!';
+    }
+};
+
 // functions
 var relogin = function(){
-    window.loaction = '/';
+    window.location = '/';
 };
-// update queue info
-var update_queue = function(){
-    var queue = {done:3,wait:50};
-    var root = $('#header');
-    root.find('.done .count').text(queue.done);
-    root.find('.wait .count').text(queue.wait);
-    return;
-    $.getJSON();
+
+var set_depName = function(){
+    $('#header .depart').text(window.location.hash.replace('#',''));
 };
-// ajax helper
-var ajaxHandler = function(func){
-    return function(data, status, xhr){
-        switch (xhr.status){
-            case "500":err('服务器错误');break;
-            case '403':relogin();break;
-            case '200':
-                if(data.status && data.status == 'failed'){
-                    err('网络出错,请稍候重试');
-                }else{
-                    func();
-                }
-                break;
-        };
-    };
+
+var HTTPCode = {
+    204:{
+        text:'操作成功',
+        action:function(){
+            success(HTTPCode[204].text);
+        }
+    },
+    500:{
+        text:'服务器错误',
+        action:function(){
+            err(HTTPCode[500].text);
+        }
+    },
+    403:{
+        text:'没有权限,禁止访问',
+        action:function(){
+//            console.log(HTTPCode);
+            err(HTTPCode[403].text);
+//            err('error');
+        }
+    },
+    404:{
+        text:'没有找到信息',
+        action:function(){
+            err(HTTPCode[404].text);
+        }
+    }
 };
-// global var -- club
-var set_club = function(){
-    window.club = { departments: [{did:1,name:'人力资源中心'},{did:5,name:'技术'},{did:4,name:'设计'},{did:3,name:'运营部'},{did:2,name:'外联部'}]};
-    return;
-    $.getJSON('profile', ajaxHandler(function(){
-        window.club = data;
-    }));
-};
+
 // -err
 var err = function(text){
     notif({
@@ -54,6 +64,66 @@ var success = function(text){
         type:'success'
     })
 };
+
+$.ajaxSetup({
+    statusCode:(function(){
+        var tmp = {};
+        for (var i in HTTPCode){
+            tmp[i] = HTTPCode[i].action;
+        }
+        return tmp;
+    })()
+});
+
+//$.ajax({
+//    url:urlRoot+'club/login',
+//    type:'post',
+//    async:false,
+//    data:{user:'redhome',password:1},
+//    success:function(){
+//        console.dir(arguments);
+//    }
+//});
+
+//$.ajax({
+//    url:urlRoot+'club/setIdentify',
+//    type:'post',
+//    async:false,
+//    data:{interviewerName:'%E8%84%86%E7%9A%AE%E7%8C%AA',did:1}
+//});
+// update queue info
+var update_queue = function(stat){
+//    var queue = {done:3,wait:50};
+    var root = $('#header');
+    var done = root.find('.done .count').text();
+    root.find('.done .count').text(1*done + 1);
+//    root.find('.wait .count').text(queue.wait);
+//    return;
+    $.ajax({
+        url:urlRoot + 'interview/queue',
+        type:'get',
+        statusCode:{},
+        success:function(data){
+            var root = $('#header');
+            root.find('.wait .count').text(data.count);
+        }
+    });
+};
+
+// global var -- club
+var set_club = function(){
+//    window.club = { departments: [{did:1,name:'人力资源中心'},{did:5,name:'技术'},{did:4,name:'设计'},{did:3,name:'运营部'},{did:2,name:'外联部'}]};
+//    return;
+    $.ajax({
+        url:urlRoot+'club/profile',
+        type:'get',
+        async:false,
+        success:function(data){
+            window.club = data;
+        }
+    });
+};
+
 // -clock
 var add_clock=function(){
     var root = $("#header").find(".time");
@@ -96,15 +166,28 @@ var fix_vl = function(){
     root.find('.vl').css({height:height});
 };
 
+
+
 var set_property = function(){
-    var extra = ['籍贯', '政治面貌', '出生地'];
-    var html ='';
-    for(var i in extra){
-        html += '<tr><td class="prop">'+ extra[i] +'</td><td class="val">--</td></tr>';
-    }
-    $('#main .profile table').append(html);
-    return;
-    $.getJSON('');
+//    var extra = ['籍贯', '政治面貌', '出生地'];
+//    var html ='';
+//    for(var i in extra){
+//        html += '<tr><td class="prop">'+ extra[i] +'</td><td class="val">--</td></tr>';
+//    }
+//    $('#main .profile table').append(html);
+//    return;
+    $.ajax({
+        url:urlRoot + 'club/extra',
+        type:'get',
+        async:false,
+        success:function(data){
+            var html ='';
+            for(var i in data){
+                html += '<tr><td class="prop">'+ data[i] +'</td><td class="val">--</td></tr>';
+            }
+            $('#main .profile table').append(html);
+        }
+    });
 };
 
 var del_profile = function(){
@@ -118,7 +201,7 @@ var add_profile = function(){
     var interviewee = window.interviewee;
     tbs[0].innerText = interviewee.sid;
     tbs[1].innerText = interviewee.name;
-    tbs[2].innerText = interviewee.sex ? '男':'女';
+    tbs[2].innerText = !interviewee.sex ? '男':'女';
     tbs[3].innerText = interviewee.major;
     tbs[4].innerText = interviewee.phone;
     tbs[5].innerText = interviewee.email;
@@ -129,7 +212,21 @@ var add_profile = function(){
         tbs[(8+1*i)].innerText = interviewee.extra[keys[i]];
     }
 };
+// -selectDep
+var set_depList = function(){
+    var selectDep = $('#selectDep');
+    var departs = window.club.departments;
+    var html = '';
+    for (var i in departs){
+        html += "<li><input type=\"radio\" name=\"depart\" id=\"depart-"+ departs[i]['did']+"\" value=\""+departs[i]['did'] +"\"/><label for=\"depart-"+departs[i]['did']+"\">"+departs[i]['name']+"</label></li>";
+    };
+    selectDep.find('ul').html(html);
 
+    selectDep.find('input').iCheck({checkboxClass: 'icheckbox_square-blue',
+        radioClass: 'iradio_square-blue'});
+
+    selectDep.find('.confirm').click(recommend);
+};
 // -rate
 var del_rate = function(){
     var root = $('#main .rate');
@@ -152,12 +249,12 @@ var finish = function(){
     del_rate();
     clear_clock();
     window.interviewee = null;
-    //todo update_queue(finish)
+    update_queue();
 };
 var start = function(){
     start_clock();
     add_profile();
-    //todo update_queue(start)
+    $('.qtip').hide();
 };
 //action(routes)
 var next = function(){
@@ -165,26 +262,32 @@ var next = function(){
         err('请先评定,推荐,或者跳过当前面试者');
         return;
     };
-    window.interviewee = {
-        sid: 12062136,
-        name: '赵健',
-        sex: 1,
-        major: '计算机',
-        phone: 186065206363,
-        email: 'mail@karboom.me',
-        qq: 823448759,
-        notion: '活着真好',
-        extra: {
-            '籍贯' : '东北',
-            '政治面貌' : '党员'
-        }
-    };
-    start();
-    return;
-    $.getJSON('call', ajaxHandler(function(){
-        window.interviewee = data;
+//    window.interviewee = {
+//        sid: 12062136,
+//        name: '赵健',
+//        sex: 1,
+//        major: '计算机',
+//        phone: 186065206363,
+//        email: 'mail@karboom.me',
+//        qq: 823448759,
+//        notion: '活着真好',
+//        extra: {
+//            '籍贯' : '东北',
+//            '政治面貌' : '党员'
+//        }
+//    };
+//    start();
+//    return;
+    $.ajax({
+        url:urlRoot + 'interview/call',
+//        async:false,
+        type:'get',
+        success:function(data){
 
-    }));
+            window.interviewee = data;
+            start();
+        }
+    });
 
 
 };
@@ -194,26 +297,33 @@ var specialCall = function(){
         err('请先评定,推荐,或者跳过当前面试者');
         return;
     };
-    window.interviewee = {
-        sid: 11111111,
-        name: '赵健',
-        sex: 1,
-        major: '计算机',
-        phone: 186065206363,
-        email: 'mail@karboom.me',
-        qq: 823448759,
-        notion: '活着真好',
-        extra: {
-            '籍贯' : '东北',
-            '政治面貌' : '党员'
+//    window.interviewee = {
+//        sid: 11111111,
+//        name: '赵健',
+//        sex: 1,
+//        major: '计算机',
+//        phone: 186065206363,
+//        email: 'mail@karboom.me',
+//        qq: 823448759,
+//        notion: '活着真好',
+//        extra: {
+//            '籍贯' : '东北',
+//            '政治面貌' : '党员'
+//        }
+//    };
+//    start();
+//    return;
+//    var data = {sid:$('#appointSid input').val()};
+    $.ajax({
+        url:urlRoot + 'interview/call',
+        type:'get',
+        data:{sid:$('#appointSid input').val()},
+        success:function(data){
+
+            window.interviewee = data;
+            start();
         }
-    };
-    start();
-    return;
-    var data = {sid:$('#appointSid input').val()};
-    $.getJSON('call', ajaxHandler(function(){
-        window.interviewee = data;
-    }));
+    })
 };
 
 var commit = function(){
@@ -225,32 +335,47 @@ var commit = function(){
         err('请评定星级');
         return;
     };
-    var data = {
-        sid:window.interviewee.sid,
-        score:$('#main .rate .stars').raty('score'),
-        comment:$('#main .rate .comment').val()
-    };
-    $.post('rate', data, function(data){
-        if('success' == data.status){
+//    var data = {
+//        sid:window.interviewee.sid,
+//        score:$('#main .rate .stars').raty('score'),
+//        comment:$('#main .rate .comment').val()
+//    };
+
+    $.ajax({
+        url:urlRoot + 'interview/rate',
+        type:'post',
+        data:{
+            sid:window.interviewee.sid,
+            score:$('#main .rate .stars').raty('score'),
+            comment:$('#main .rate .comment').val()
+        },
+        success:function(){
             finish();
-        }else{
-            err('网络错误,请稍候重试');
-        };
-    }, 'json');
+        }
+    });
 };
 
 var skip = function(){
+    console.dir(window.interviewee);
     if(!window.interviewee){
         err('尚未有面试者');
         return;
     };
-    finish();
-    return;
-    $.post();
+//    finish();
+//    return;
+    $.ajax({
+        url:urlRoot + 'interview/skip',
+        type:'post',
+        data:{sid:window.interviewee.sid},
+        success:function(){
+
+            finish();
+        }
+    });
 };
 
 var recommend = function(){
-     if(!window.interviewee){
+    if(!window.interviewee){
         err('尚未有面试者');
         return;
     };
@@ -258,22 +383,33 @@ var recommend = function(){
         err('请选择部门');
         return;
     };
-    var data = {
-        sid:window.interviewee.sid,
-        department:$('#selectDep').find('.checked input').val()
-    };
-
-    finish();
-    return;
-    $.post('recommend', data, ajaxHandler(function(){
-        alert(123);
-        finish();
-    }));
+//    var data = {
+//        sid:window.interviewee.sid,
+//        department:$('#selectDep').find('.checked input').val()
+//    };
+//
+//    finish();
+//    return;
+    $.ajax({
+        url:urlRoot + 'interview/recommend',
+        type:'post',
+        data:{
+            sid:window.interviewee.sid,
+            department:$('#selectDep').find('.checked input').val()
+        },
+        success:function(){
+            finish();
+        }
+    });
 };
 // start
 $(document).ready(function(){
     set_club();
+    set_depName();
+    set_depList();
     set_property();
+
+
     //set qtip
     $.fn.qtip.defaults.show.event = 'click';
     $.fn.qtip.defaults.hide.event = 'unfocus';
@@ -356,19 +492,7 @@ $(document).ready(function(){
     });
 
     call.find('.next').click(next);
-    // selectDep module
-    var selectDep = $('#selectDep');
-    var departs = window.club.departments;
-    var html = '';
-    for (var i in departs){
-        html += "<li><input type=\"radio\" name=\"depart\" id=\"depart-"+ departs[i]['did']+"\" value=\""+departs[i]['did'] +"\"/><label for=\"depart-"+departs[i]['did']+"\">"+departs[i]['name']+"</label></li>";
-    };
-    selectDep.find('ul').html(html);
 
-    selectDep.find('input').iCheck({checkboxClass: 'icheckbox_square-blue',
-        radioClass: 'iradio_square-blue'});
-
-    selectDep.find('.confirm').click(recommend);
 
     // skip module
     $('#skip .confirm').click(skip);

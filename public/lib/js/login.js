@@ -1,5 +1,5 @@
 //baseURL = 'http://interview.redhome.cc/';
-baseURL = 'http://www.dou.com/club/';
+baseURL = 'http://interview.redhome.cc';
 
 var err = function(text){
     notif({
@@ -22,7 +22,7 @@ $(".button").click(function(){
 	var password = $("[name=password]").val();
 	
 	$.ajax({
-		url  : baseURL + "login",
+		url  : baseURL + "/club/login",
 		type : 'post',
 		data : {user: account, password: password},
 		dataType : 'json',

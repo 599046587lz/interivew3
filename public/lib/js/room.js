@@ -140,7 +140,7 @@ var check_queue = function(){
 		_target.prepend(html);	
 	} else {
 		_target.find("li:last").remove();
-		_target.prepend(html).fadeIn(100);
+		_target.prepend(html).show(1000);
 	}
 	_target.find("._default").remove();
 	if ($(".stu-" + data.sid).length){

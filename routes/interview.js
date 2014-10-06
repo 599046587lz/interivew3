@@ -54,6 +54,9 @@ router.get('/call', function (req, res){
     var department = req.session['did'];
     var sid = req.param('sid');
     var cid = req.session['cid'];
+    if (!cid){
+        res.send(403);
+    }
     if (!sid){
         Interviewee.getNextInterviewee(cid, department, function (err, interviewee){
             if (err){

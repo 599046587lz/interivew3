@@ -95,7 +95,7 @@ exports.handleArchive = function (file, cid, callback){
                                     var interviewee = {};
                                     for (var i=0;i<e.length;i++){
                                         if (title[i] != 'volunteer') {
-                                            interviewee['volunteer'] = e[i];
+                                            interviewee[title[i]] = e[i];
                                         } else {
                                             var d = deps[e[i]];
                                             if (!!d){

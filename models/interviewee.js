@@ -105,11 +105,14 @@ exports.rateInterviewee = function (cid, sid, score, commit, did, interviewer, c
                     code: 1
                 });
             } else {
-                doc.rate['did'] = {
+                if (!doc.rate){
+                    doc.rate = [];
+                }
+                doc.rate.push({
                     score: score,
                     commit: commit,
                     interviewer: interviewer
-                };
+                });
                 doc.done.push(did);
                 doc.busy = false;
                 doc.save();

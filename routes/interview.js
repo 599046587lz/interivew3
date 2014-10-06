@@ -64,7 +64,6 @@ router.get('/call', function (req, res){
             } else {
                 interviewee.did = department;
                 res.json(interviewee);
-                console.dir(interviewee);
                 global.io.to(cid).emit('call', interviewee);
             }
         })
@@ -77,7 +76,6 @@ router.get('/call', function (req, res){
                     interviewee = interviewee.toObject();
                     interviewee.did = department;
                     res.json(interviewee);
-                    console.dir(interviewee);
                     global.io.to(cid).emit('call', interviewee);
                 } else {
                     res.send(404);

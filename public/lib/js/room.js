@@ -277,9 +277,10 @@ var waitline = function(data){
 								+"<td>%NAME%</td> \n <td>%DEPARTMENT%</td> \n <td>%ROOM%";
 	var output = template.replace(/%NUMBER%/ig, wait_num.add());
 	var depart = data.volunteer;
-	var departs = depart[0] + ((depart.length != 1) ? "等" + depart.length + "个部门" : "");
 	var did = $("[name=department][value=" + depart[0] + "]");
 	var room = did.attr("data-id");
+	var departs =  did.parents("label").text();
+	departs = departs + ((depart.length != 1) ? "等" + depart.length + "个部门" : "");	
 	output = output.replace(/%SID%/ig, data.sid);
 	output = output.replace(/%NAME%/ig, data.name);
 	output = output.replace(/%DEPARTMENT%/ig, departs);

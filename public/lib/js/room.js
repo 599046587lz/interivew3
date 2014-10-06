@@ -1,5 +1,5 @@
 ttsAPI = "http://translate.google.cn/translate_tts?ie=UTF-8&q=_WORDS_&tl=zh-CN";
-baseURL = 'http://www.dou.com';
+baseURL = 'http://interview.redhome.cc';
 interviewee_queue = [];
 
 var set_club = function(){

@@ -1,0 +1,44 @@
+input {
+	padding: 4px 2px;
+}
+
+.part {
+	display: block;
+	width: 30%;
+	margin: 20px auto;
+}
+
+#deproom {
+	padding: 
+}
+
+.dep {
+	float: left;
+	width: 40%;
+}
+
+.room {
+	width: 40%;
+	margin-left: 8%;
+}
+
+#add {
+	margin-left: 20px;
+	font-size: 20px;
+	cursor: pointer;
+}
+
+.each {
+	display: none;
+}
+
+.del {
+	margin-left: 10px;
+	font-size: 20px;
+	cursor: pointer;
+	font-family: consolas;
+}
+
+#loading {
+	display: none;
+}

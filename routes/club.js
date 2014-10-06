@@ -5,7 +5,8 @@ var express = require('express');
 var debug = require('debug')('interview');
 var router = express.Router();
 
-var club = require('../modules/club');
+var Club = require('../modules/club');
+var Interviewee = require('../modules/interviewee');
 var r = require('./');
 
 /**
@@ -19,13 +20,13 @@ router.post('/login', function (req, res) {
     if (!user || !password){
         return res.send(403);
     }
-    club.login(user, password, function (err, success){
+    Club.login(user, password, function (err, success){
         if (err){
             return res.json(500, err);
         } else {
             if (success){
                 req.session['user'] = user;
-                club.getClubByName(user, function (err, clubInfo){
+                Club.getClubByName(user, function (err, clubInfo){
                     if (err){
                         return res.json(500, err);
                     } else {
@@ -72,11 +73,11 @@ router.get('/logout', r.checkLogin, function (req,res){
  * @return Object {status: 'success'|'failed', count:Number}
  */
 router.post('/upload/archive', function (req, res){
-    var file = req.files.archive;
+    var file = req.param('archive');
     if(!file || !req.session['cid']){
         return res.send(403);
     } else {
-        club.handleArchive(file, req.session['cid'], function (err, length){
+        Club.handleArchive(file, req.session['cid'], function (err, length){
             if (err){
                 res.json(err);
             } else {
@@ -101,7 +102,7 @@ router.get('/profile', function (req, res){
     if(!name) {
         res.send(403);
     }
-    club.getClubByName(name, function (err, club){
+    Club.getClubByName(name, function (err, club){
         if(err) {
             res.json(err);
         } else {
@@ -124,9 +125,9 @@ router.post('/profile', function (req, res){
     if(!cid) {
         res.send(403);
     }
-    var dep = req.param['Department'];
+    var dep = req.param['department'];
 
-    club.update(cid,dep,function (err){
+    Club.update(cid,dep,function (err){
         if(err) {
             res.json(500, err);
         } else {
@@ -136,10 +137,41 @@ router.post('/profile', function (req, res){
 });
 
 /**
- *
+ *  @return array fields
  */
 router.get('/extra', function (req, res){
-
+    var cid = req.session['cid'];
+    if (!!cid){
+        res.send(403);
+    }
+    Interviewee.getIntervieweeBySid({$ne: null}, cid, function (err, doc){
+        if (err){
+            res.json(500, err);
+        } else {
+            var extra = doc.extra;
+            var fields = [];
+            for (var i in extra){
+                if (extra.hasOwnProperty(i)){
+                    fields.push(i);
+                }
+            }
+            res.json(fields);
+        }
+    } )
 });
 
+router.get('/export', function (req, res){
+    var cid = req.session['cid'],
+        did = req.param('did');
+    if (!cid || !did){
+        return res.send(403);
+    }
+    Club.exportInterviewees(cid ,did ,function (err, docs){
+        if (err){
+            res.json(500, err);
+        } else {
+            res.json(docs);
+        }
+    })
+});
 module.exports = router;

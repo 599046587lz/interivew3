@@ -1,0 +1,114 @@
+@media screen and (max-width: 1920px) {
+  body {
+    background: url("../../img/background_1920.jpg") no-repeat;
+  }
+}
+@media screen and (max-width: 1600px) {
+  body {
+    background: url("../../img/background_1600.jpg") no-repeat;
+  }
+}
+@media screen and (max-width: 1440px) {
+  body {
+    background: url("../../img/background_1440.jpg") no-repeat;
+  }
+}
+@media screen and (max-width: 1366px) {
+  body {
+    background: url("../../img/background_1366.jpg") no-repeat;
+  }
+}
+@media screen and (max-width: 1024px) {
+  body {
+    background: url("../../img/background_1024.jpg") no-repeat;
+  }
+}
+@media screen and (min-width: 1921px) {
+  body {
+    background: url("../../img/background_2560.jpg") no-repeat;
+  }
+}
+.align_c {
+  margin: 0 auto;
+}
+.login {
+  width: 100%;
+  height: 100%;
+}
+.login .main {
+  position: absolute;
+  margin: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 480px;
+  height: 280px;
+  background: #e6e6e6;
+  background: rgba(230,230,230,0.9);
+  border-radius: 5px;
+  -moz-opacity: 0.9;
+  -khtml-opacity: 0.9;
+  filter: alpha ( opacity = 90 );
+}
+.login .main .hidden {
+  display: none;
+}
+.login .main h1 {
+  width: 380px;
+  margin-top: -25px;
+}
+.login .main .balloon {
+  width: 45px;
+  height: 56px;
+  background: url("../../img/balloon.png") no-repeat;
+  position: absolute;
+  right: 0;
+  top: -1px;
+}
+.login form {
+  z-index: 1;
+}
+.login form .input {
+  font: bold 14px/33px '黑体';
+  border: 1px solid #e4e4e4;
+  width: 381px;
+  height: 33px;
+  display: block;
+}
+.login form .account {
+  margin-top: 44px;
+}
+.login form .account::-webkit-input-placeholder,
+.login form .password::-webkit-input-placeholder {
+  color: #d2d2d2;
+  font: italic 14px/33px '黑体';
+}
+.login form .account:-moz-placeholder,
+.login form .password:-moz-placeholder {
+  color: #d2d2d2;
+  font: italic 14px/33px '黑体';
+}
+.login form .account::-moz-placeholder,
+.login form .password::-moz-placeholder {
+  color: #d2d2d2;
+  font: italic 14px/33px '黑体';
+}
+.login form .account:-ms-input-placeholder,
+.login form .password:-ms-input-placeholder {
+  color: #d2d2d2;
+  font: italic 14px/33px '黑体';
+}
+.login form .password {
+  margin-top: 17px;
+}
+.login form .button {
+  margin-top: 44px;
+  display: block;
+  width: 381px;
+  height: 33px;
+  border: none;
+  background: #b3ce1e;
+  color: #71830f;
+  font: bold 16px/33px '黑体';
+}

@@ -111,3 +111,12 @@ exports.update = function (cid, club, callback) {
         callback(err);
     });
 };
+
+exports.exportInterviewees = function (cid, did, cb){
+    Interviewee.exportByDid(cid, did, function (err, docs){
+        docs.forEach(function (e, index){
+            docs[index] = e.toObject();
+        });
+        cb(err ,docs);
+    })
+};

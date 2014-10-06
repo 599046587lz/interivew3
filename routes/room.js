@@ -36,7 +36,7 @@ router.get('/sign', function(req, res){
 router.post('/selectDep', function (req, res){
 	var sid = req.param('sid');
 	var did = req.param('did');
-	var cid = req.session.cid;
+	var cid = req.session['cid'];
 	if(!cid) {
 		res.send(403);
 	}

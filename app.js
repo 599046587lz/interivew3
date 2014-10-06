@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session    = require('express-session');
 var MongoStore = require('connect-mongo')(session);
+var multer = require('multer');
 
 var club = require('./routes/club');
 var interview = require('./routes/interview');
@@ -22,6 +23,9 @@ app.use(favicon());
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
+app.use(multer({
+    dest: '/tmp/interview'
+}));
 app.use(cookieParser());
 app.use(session({
     secret: config.cookie_secret,

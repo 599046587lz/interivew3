@@ -73,13 +73,13 @@ router.get('/logout', r.checkLogin, function (req,res){
  * @return Object {status: 'success'|'failed', count:Number}
  */
 router.post('/upload/archive', function (req, res){
-    var file = req.param('archive');
+    var file = req.files['archive'];
     if(!file || !req.session['cid']){
         return res.send(403);
     } else {
         Club.handleArchive(file, req.session['cid'], function (err, length){
             if (err){
-                res.json(err);
+                res.json(500, err);
             } else {
                 res.json({
                     status:'success',
@@ -141,7 +141,7 @@ router.post('/profile', function (req, res){
  */
 router.get('/extra', function (req, res){
     var cid = req.session['cid'];
-    if (!!cid){
+    if (!cid){
         res.send(403);
     }
     Interviewee.getIntervieweeBySid({$ne: null}, cid, function (err, doc){

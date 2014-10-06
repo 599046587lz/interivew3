@@ -36,7 +36,7 @@ var Interviewee = new Schema({
     sid: Number,
     cid: Number,
     name: String,
-    sex: Boolean,
+    sex: Boolean,   //false gay;true girl
     major: String,
     phone: String,
     email: String,

@@ -56,64 +56,69 @@ exports.handleArchive = function (file, cid, callback){
                 } else {
                     var title = [];
                     var isFirstLine = true;
-                    data.forEach(function (e){
-                        if (isFirstLine){
-                            e.forEach(function (e){
-                                switch (e.toLowerCase()) {
-                                    case '学号':
-                                        title.push('sid'); break;
-                                    case '姓名':
-                                        title.push('name'); break;
-                                    case '性别':
-                                        title.push('sex'); break;
-                                    case '专业':
-                                        title.push('major'); break;
-                                    case '电话':
-                                        title.push('phone'); break;
-                                    case '邮箱':
-                                        title.push('email'); break;
-                                    case 'qq':
-                                        title.push('qq'); break;
-                                    case '感想':
-                                        title.push('message'); break;
-                                    default:
-                                        var volunteerReg = /志愿(\d)+/;
-                                        if (volunteerReg.test(e)){
+                    Interviewee.removeByCid(cid, function (err, count){
+                        if (err){
+                            callback(err);
+                        } else {
+                            data.forEach(function (e){
+                                if (isFirstLine){
+                                    e.forEach(function (e){
+                                        switch (e.toLowerCase()) {
+                                            case '学号':
+                                                title.push('sid'); break;
+                                            case '姓名':
+                                                title.push('name'); break;
+                                            case '性别':
+                                                title.push('sex'); break;
+                                            case '专业':
+                                                title.push('major'); break;
+                                            case '电话':
+                                                title.push('phone'); break;
+                                            case '邮箱':
+                                                title.push('email'); break;
+                                            case 'qq':
+                                                title.push('qq'); break;
+                                            case '感想':
+                                                title.push('message'); break;
+                                            default:
+                                                var volunteerReg = /志愿(\d)+/;
+                                                if (volunteerReg.test(e)){
 //                                    var number = volunteerReg.match(e)[1];
-                                            title.push('volunteer'); break;
-                                        } else {
-                                            title.push(e);
+                                                    title.push('volunteer'); break;
+                                                } else {
+                                                    title.push(e);
+                                                }
                                         }
+                                    });
+                                    isFirstLine = false;
+                                } else {
+                                    for (var i=0;i<e.length;i++){
+                                        var interviewee = {};
+                                        if (title[i] != 'volunteer') {
+                                            interviewee[title[i]] = e[i];
+                                        } else {
+                                            var d = deps[e[i]];
+                                            if (!!d){
+                                                if (!interviewee[title[i]]){
+                                                    interviewee[title[i]] = [];
+                                                }
+                                                interviewee[title[i]].push(d);
+                                            } else {
+                                                callback({
+                                                    code: 404,
+                                                    line: i,
+                                                    interviewee: interviewee
+                                                });
+                                            }
+                                        }
+                                        Interviewee.addInterviewee(interviewee, cid, function (err){
+                                            if (err){
+                                                return callback(err);
+                                            }
+                                        })
+                                    }
                                 }
                             });
-                            isFirstLine = false;
-                        } else {
-                            for (var i=0;i<e.length;i++){
-                                var interviewee = {};
-                                if (title[i] != 'volunteer') {
-                                    interviewee[title[i]] = e[i];
-                                } else {
-                                    var d = deps[e[i]];
-                                    if (!!d){
-                                        if (!interviewee[title[i]]){
-                                            interviewee[title[i]] = [];
-                                        }
-                                        interviewee[title[i]].push(d);
-                                    } else {
-                                        callback({
-                                            code: 404,
-                                            line: i,
-                                            interviewee: interviewee
-                                        });
-                                    }
-                                }
-                                console.log(interviewee);
-                                Interviewee.addInterviewee(interviewee, cid, function (err){
-                                    if (err){
-                                        return callback(err);
-                                    }
-                                })
-                            }
                         }
                     });
                     callback(null, data.length);

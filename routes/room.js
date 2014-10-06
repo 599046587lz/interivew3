@@ -42,7 +42,11 @@ router.post('/selectDep', function (req, res){
 	}
 	Interviewee.selectDep(sid, cid, did, function (err, interviewee) {
 		if(err) {
-			res.json(500,err);
+			if (!!err.sid){
+                res.json(404, err);
+            } else {
+                res.json(500,err);
+            }
 		} else {
 			if(interviewee) {
 				res.json(200, interviewee);

@@ -1,5 +1,4 @@
 var Interviewee = require('../models').Interviewee;
-var request = require('request');
 
 exports.getStuBySid = function (sid, cid, callback) {
     Interviewee.findOne({sid: sid,cid: cid},function (err, doc){
@@ -36,10 +35,16 @@ exports.sign = function (sid, cid, callback) {
 
 exports.addInterviewee = function (data, cid, callback){
     var IntervieweeEntity = new Interviewee();
+    var interviewee = {};
+    for(var i in data) {
+        if (data.hasOwnProperty(i)){
+            interviewee[i] = data[i];
+        }
+    }
     var fields = ['sid', 'name', 'sex', 'major', 'phone', 'email', 'qq', 'volunteer', 'notion'];
     fields.forEach(function (e){
-        IntervieweeEntity[e] = data[e];
-        delete data[e];
+        IntervieweeEntity[e] = interviewee[e];
+        delete interviewee[e];
     });
     IntervieweeEntity.cid = cid;
 //    IntervieweeEntity.sid = data.sid;
@@ -52,7 +57,7 @@ exports.addInterviewee = function (data, cid, callback){
 //    IntervieweeEntity.qq = data.qq;
 //    IntervieweeEntity.volunteer = data.volunteer;
 //    IntervieweeEntity.notion = data.notion;
-    IntervieweeEntity.extra = data;
+    IntervieweeEntity.extra = interviewee;
     IntervieweeEntity.save();
     callback();
 };
@@ -161,25 +166,14 @@ exports.exportByDid = function (cid, did, cb){
     })
 };
 
-exports.getStuByAPI = function (sid, cb){
-    request.get('http://portal.hdu.edu.cn/eapdomain/peopleservlet?id=' + sid + '&key=hduredhome2007neusoft', function (err, res, body){
-        if (err){
-            return cb(err);
+exports.removeByCid = function (cid, cb){
+    Interviewee.remove({
+        cid: cid
+    }, function (err, result){
+        if (err) {
+            cb(err);
         } else {
-            var reg = /<user_type>(.*?)<\/user_type><user_id>(.*?)<\/user_id><user_name>(.*?)<\/user_name><user_birth>(.*?)<\/user_birth><user_depart>(.*?)<\/user_depart><user_special>(.*?)<\/user_special>/;
-            var match = reg.exec(body);
-            if (match[1] == 0){
-                return cb({
-                    code: 404,
-                    sid: sid
-                });
-            } else {
-                return cb(null, {
-                    sid: sid,
-                    name: match[3],
-                    major: match[6]
-                })
-            }
+            cb(null, result.nRemoved);
         }
     })
 };

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<link rel="stylesheet" href="lib/css/update.css"/>
+	<script type="text/javascript" src="lib/js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="lib/js/update.js"></script>
+	<script type="text/javascript" src="lib/js/jquery.upload.js"></script>
+</head>
+<body>
+	<div style="width:80%;margin:auto">
+		<input class="part" name="logo" type="file" placeholder=""></input>
+		<div><img id="logo" /></div>
+		<input class="part" name="name" type="input" placeholder="社团名称"></input>
+		<div class="part" id="deproom">
+			<div id="dephead" style="padding:8px;"><span>部门——教室</span><span id="add">+</span></div>
+			<div id="depbody"><div class="each"><input class="dep"></input><input class="room"></input><span class="del">x</span></div></div>
+			<div style="clear:both;"></div>
+		</div>
+		<input class="part" id="select" type="button" name="archive" value="选择文件"></input>
+		<div id="preview"></div>
+		<p id="loading">上传中...</p>
+		<button class="part" id="submit" >提交</button>
+	</div>
+</body>
+</html>

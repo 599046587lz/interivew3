@@ -54,10 +54,15 @@ exports.getNextInterviewee = function (cid, did, cb){
 };
 
 exports.getSpecifyInterviewee = function (sid, cid, cb){
-    Interviewee.getStuBySid(sid, cid, function (err, interviewee){
+    Interviewee.getStuBySid(sid, cid, did, function (err, interviewee){
         if (!!interviewee){
             interviewee.busy = true;
             interviewee.save();
+        } else {
+            cb({
+                code: 404,
+                sid: sid
+            })
         }
         cb(err, interviewee);
     })
@@ -93,6 +98,7 @@ exports.skip = function(cid, sid, cb){
             cb(err);
         } else {
             doc.signTime = new Date();
+            doc.busy = false;
             doc.save(function(err){
                 if(err){
                     cb(err);

@@ -73,7 +73,7 @@ router.get('/call', function (req, res){
             }
         })
     } else {
-        Interviewee.getSpecifyInterviewee(sid, cid, function (err, interviewee){
+        Interviewee.getSpecifyInterviewee(sid, cid, did, function (err, interviewee){
             if (err){
                 return res.json(500, err);
             } else {

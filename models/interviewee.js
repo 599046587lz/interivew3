@@ -6,11 +6,12 @@ exports.getStuBySid = function (sid, cid, callback) {
     });
 };
 
-exports.sign = function (sid, cid, callback) {
+exports.sign = function (sid, cid, did, callback) {
     var date = new Date();
     Interviewee.findOneAndUpdate({
         sid: sid,
-        cid: cid
+        cid: cid,
+        volunteer: did
     },{
         signTime: date
     }, function (err, doc){

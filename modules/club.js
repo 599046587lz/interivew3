@@ -5,6 +5,7 @@
 var Club = require('../models/club');
 var Interviewee = require('../models/interviewee');
 var excel = require('excel');
+var debug = require('debug');
 
 exports.login = function (user, pwd, callback){
     Club.login(user, pwd, function (err, success){
@@ -127,19 +128,19 @@ exports.handleArchive = function (file, cid, callback){
         });
     })
 };
-exports.update = function (cid, club, callback) {
+exports.update = function (cid, data, callback) {
     var pro = ['name','logo','departments','interviewer','password','maxDep'];
     var newClub = {};
 
-    if(undefined != club) {
+    if(undefined != data) {
         for(var i in pro) {
-            if(undefined != club[pro[i]]) {
-                newClub[pro[i]] = club[pro[i]];
+            if(undefined != data[pro[i]]) {
+                newClub[pro[i]] = data[pro[i]];
             }
         }
     }
 
-    Club.update(cid,newClub,function (err){
+    Club.update(cid, newClub, function (err){
         callback(err);
     });
 };

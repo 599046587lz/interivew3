@@ -16,7 +16,7 @@ var relogin = function(){
 };
 
 var set_depName = function(){
-    $('#header .depart').text(window.location.hash.replace('#',''));
+    $('#header .depart').text(decodeURIComponent(window.location.hash.replace('#','')));
 };
 
 var HTTPCode = {
@@ -198,6 +198,7 @@ var add_profile = function(){
     for (var i in keys){
         tbs[(8+1*i)].innerText = interviewee.extra[keys[i]] || '--';
     }
+    $('#main .profile').jScrollPane();
 };
 // -selectDep
 var set_depList = function(){

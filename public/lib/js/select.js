@@ -86,7 +86,7 @@ var setInterviewer = function(){
 				setTimeout(function(){
 					var _did = $("#_select").val();
 					var name = $("#_select [value=" + _did + "]").text();
-					window.location.href = "interview.html#" + name;
+					window.location.href = "interview.html#" + encodeURIComponent(name);
 				}, 500);				
 			},
 			500 : function(){

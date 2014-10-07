@@ -1,7 +1,17 @@
 var Interviewee = require('../models').Interviewee;
 
-exports.getStuBySid = function (sid, cid, callback) {
-    Interviewee.findOne({sid: sid,cid: cid},function (err, doc){
+exports.getStuBySid = function (sid, cid, did, callback) {
+    var data = {
+        sid: sid,
+        cid: cid
+    };
+    if (typeof did == 'function') {
+        callback = did;
+        did = null;
+    } else {
+        data['did'] = did;
+    }
+    Interviewee.findOne(data, function (err, doc){
         callback(err, doc);
     });
 };
@@ -66,6 +76,7 @@ exports.getNextInterviewee = function (cid, did, cb){
         } else {
             if (!!doc){
                 doc.busy = true;
+                doc.save();
                 cb(null, doc);
             } else {
                 cb(null ,null);

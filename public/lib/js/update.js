@@ -14,7 +14,7 @@ jQuery(document).ready(function(){
         var exp = $("#export");
         for (var i in data.departments) {
             dep.append("<div class=\"each\"><input class=\"dep\" value=\"" +data.departments[i]["name"] + "\" /><input class=\"room\" value=\"" +data.departments[i]["location"] + "\" /><span class=\"del\">x</span></div>").show();
-            exp.append("<a href=\"export.html#\"" + data.departments[i]["did"] + " class='expDep'>" + data.departments[i]["name"] + "</a>");
+            exp.append("<a href=\"export.html#" + data.departments[i]["did"] + "\" class='expDep'>" + data.departments[i]["name"] + "</a>");
         }
 	}});
 //	$("[name=logo]").on("change",function () {

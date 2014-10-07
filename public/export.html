@@ -43,11 +43,11 @@ var _export = function(){
         + " %MAJOR% </td> <td> %RATE% </td> <td> %COMMENT% </td> <td> %INTERVIEWER% </td>";
     var output = "";
     $.ajax({
-        url: '',
+        url: '/club/export',
         data: {did: window.location.hash.replace("#", "")},
-        type:'get',
+        type: 'get',
         dataType: 'json',
-        statusCode: function(){
+        statusCode: {
             200: function(data){
                 for ( var i in data ){
                     if (data[i]){
@@ -60,7 +60,7 @@ var _export = function(){
                 $("#export tbody").append(output);
                 }
             }
-        },
+        }
     });
 };
 $(function(){

@@ -189,6 +189,7 @@ exports.exportByDid = function (cid, did, cb){
                         break;
                     }
                 }
+                docs[index] = docs[index].toObject();
                 docs[index].rate = rate;
             });
             cb(null, docs);

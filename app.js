@@ -38,12 +38,6 @@ app.use(session({
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-
-app.use(function (req, res, next){
-    res.header('Access-Control-Allow-Origin','*');
-    next();
-});
-
 app.use('/club', club);
 app.use('/interview', interview);
 app.use('/room', room);

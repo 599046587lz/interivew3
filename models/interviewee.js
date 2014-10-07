@@ -59,30 +59,40 @@ exports.addInterviewee = function (data, cid, callback){
     callback();
 };
 
+var getLock = false;
 exports.getNextInterviewee = function (cid, did, cb){
-    Interviewee.findOne({
-        cid: cid,
-        volunteer: did,
-        busy: false,
-        signTime:{$ne:null}
-    }).$where(new Function('var volunteer = this.volunteer;' +
-    'var done = this.done;' +
-    'return (volunteer.length != done.length) && (done.indexOf(' + did + ') == -1);'
-    )).sort({
-        signTime: 'asc'
-    }).exec(function (err, doc){
-        if (err){
-            cb(err);
-        } else {
-            if (!!doc){
-                doc.busy = true;
-                doc.save();
-                cb(null, doc);
+    if (!getLock){
+        process.nextTick(exports.getNextInterviewee(cid, did, cb));
+    } else {
+        getLock = true;
+        Interviewee.findOne({
+            cid: cid,
+            volunteer: did,
+            busy: false,
+            signTime:{$ne:null}
+        }).$where(new Function('var volunteer = this.volunteer;' +
+                'var done = this.done;' +
+                'return (volunteer.length != done.length) && (done.indexOf(' + did + ') == -1);'
+        )).sort({
+            signTime: 'asc'
+        }).exec(function (err, doc){
+            if (err){
+                cb(err);
+                getLock = false;
             } else {
-                cb(null ,null);
+                if (!!doc){
+                    doc.busy = true;
+                    doc.save(function (){
+                        getLock = false;
+                    });
+                    cb(null, doc);
+                } else {
+                    cb(null ,null);
+                    getLock = false;
+                }
             }
-        }
-    });
+        });
+    }
 };
 
 exports.rateInterviewee = function (cid, sid, score, comment, did, interviewer, cb){

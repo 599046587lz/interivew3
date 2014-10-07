@@ -1,7 +1,10 @@
-ttsAPI = "http://translate.google.cn/translate_tts?ie=UTF-8&q=_WORDS_&tl=zh-CN";
+ttsAPI  = "http://translate.google.cn/translate_tts?ie=UTF-8&q=_WORDS_&tl=zh-CN";
 baseURL = 'http://interview.redhome.cc';
+ioURL   = 'http://interview.redhome.cc/';
 interviewee_queue = [];
-
+interviewee_data_queue = [];
+reconnect_times = 0;
+// -set club
 var set_club = function(){
 	club = {};
 	$.ajax({
@@ -18,6 +21,7 @@ var set_club = function(){
 			200 : function(data){
 				club = data;
 				set_department();
+				//socket.io works;
 				socket.emit('init',{cid: club.cid});
 			},
 			500 : function(){
@@ -40,11 +44,21 @@ var success = function(text){
         msg:text,
         position:'center',
         type:'success'
-    })
+    });
 };
+// -relogin
 var relogin = function(){
 	window.location.href = 'login.html';
 };
+
+var reconnect = function(){
+	++reconnect_times;
+	socket = io.connect(ioURL);
+	socket.emit('init', {cid: club.cid});
+};
+var refit = function(){
+	$(".list_wrap").jScrollPane();
+}
 // ajax helper
 var ajaxHandler = function(func){
 	return function(data, status, xhr){
@@ -64,46 +78,61 @@ var ajaxHandler = function(func){
 		};
 	};
 };
-
-function storage(obj){
+// -CLASS storage
+// -param  obj - String
+function storage(obj,val){
+	if (!val)
+		val = 0;
 	if(typeof(Storage) !== "undefined") {
-		if (!localStorage[obj]) {
-			localStorage[obj] = 0;
-			this.obj = localStorage[obj];
+		if (typeof localStorage[obj] !== 'undefined') {
+			this.val = localStorage[obj];
+		} else {
+			localStorage[obj] = val;
+			this.val = localStorage[obj];
 		}
 	} else {
-	  this.obj = 0;
+	  this.val = val;
 	}
-	return this.obj;
-}
+	this.name = obj;
+	//return this.obj;
+};
 storage.prototype = {
-	init: function(){
-
-	},
 	add: function(){
-		this.obj = Number(this.obj) + 1
-		return this.obj;
+		this.val = Number(this.val) + 1;
+		this.setStorage();
+		return this.val;
 	},
 	cut: function(){
-		this.obj = Number(this.obj) - 1
-		return this.obj;
+		this.val = Number(this.val) - 1;
+		this.setStorage();
+		return this.val;
 	},		
 	val: function(){
-		return this.obj;
+		return this.val;
 	},
 	set: function(val){
-		this.obj = val;
-		return this.obj;
+		this.val = val;
+		this.setStorage();
+		return this.val;
+	},
+	setStorage: function(){
+		if(typeof(Storage) !== "undefined"){
+			localStorage.setItem(this.name, this.val)
+		}
+	},
+	display:function(_selector){
+		$(_selector).html(this.val);
 	}
-}
+};
 
 // Interviewee Queue
 var check_queue = function(){
 	var message = interviewee_queue.pop();
 	if (!message)
 		return ;
+	var data = interviewee_data_queue.pop();
 	_message = message.replace(/\s/ig,'');
-	var html = "<li style=\"style:none;\"><span class=\"ring\"></span>" + _message + "</li>"
+	var html = "<li><span class=\"ring\"></span>" + _message + "</li>"
 	var _target = $(".oncalling");
 	var message = message.replace(/(室|试)/g, "是");
 	var len = _target.find("li").length;
@@ -111,16 +140,28 @@ var check_queue = function(){
 		_target.prepend(html);	
 	} else {
 		_target.find("li:last").remove();
-		_target.prepend(html).fadeIn(100);
+		_target.prepend(html).show(1000);
+	}
+	_target.find("._default").remove();
+	if ($(".stu-" + data.sid).length){
+		console.log($(".stu-" + data.sid));
+		$(".stu-" + data.sid).remove();
+		waiting.cut();
+		waiting.display('.waiting');
+		refit();
 	}
 	var iframe = $("iframe").eq(0);
 	var src = ttsAPI.replace(/_WORDS_/ig, encodeURIComponent(message));
-	iframe.attr("src", src);	
-}
+	iframe.attr("src", src);
+	interviewed.add();
+	interviewed.display('.interviewed');
+	waiting_html.set($(".list").html());
+	current_html.set($(".oncalling").html());
+};
 
 var set_interval = function(){
-	setInterval(check_queue, 10000);
-}
+	interval = setInterval(check_queue, 10000);
+};
 
 //init Departments
 var set_department = function(){
@@ -142,8 +183,9 @@ var set_department = function(){
       radioClass: 'iradio_square-blue'});
 	selectDep.find('label,ins').on('click', function(){
 		var _count = $("[name=department]:checked").length;
-		if (_count > 3){
+		if (_count > club.maxDep){
 			var _result = $(this).parents("li").find("input").iCheck('uncheck');
+			err('至多选择' + club.maxDep + '个部门!');
 		}
 	});
 }
@@ -164,7 +206,7 @@ var signin = function(){
 
 		},
 		success : function(data){
-			console.log(data);
+			//console.log(data);
 		},
 		statusCode : {
 			404 : function(){
@@ -183,10 +225,9 @@ var signin = function(){
 			200 : function(data){
 				success("签到成功!");
 				console.log(data);
-				//waitline(data.person);
+				waitline(data);
 			}
 		}
-
 	});
 };
 // -select departments div fadein
@@ -207,12 +248,13 @@ var selectDepart = function(){
 		did.push($(this).val());
 	});
 	$.ajax({
-		url : baseURL + '/room/selectDep',
+		url : baseURL + '/room/selectDep/',
 		type : 'post',
 		data : {sid: stuID,did: did},
+		dataType: 'json',
 		statusCode : {
 			404 : function(){
-				err("Page not found!");
+				err("学号不存在，请重试!");
 			},
 			403 : function(){
 				err("未登录或登录超时!");
@@ -223,28 +265,48 @@ var selectDepart = function(){
 			},
 			200 : function(data){
 				success("签到成功!");
-				//waitline(data.person);
+				waitline(data);
+				$('#selectDep').fadeOut();
 			}
 		}
 	});
 };
-var waitline = function(person){
-	var template = "<tr data-id=\"%SID%\"> \n <td>%NUMBER%</td> \n <td>%SID%</td> \n "
+var waitline = function(data){
+	console.log(data);
+	var template = "<tr class=\"stu-%SID%\"> \n <td>%NUMBER%</td> \n <td>%SID%</td> \n "
 								+"<td>%NAME%</td> \n <td>%DEPARTMENT%</td> \n <td>%ROOM%";
-	var output = template.replace(/%NUMBER%/ig, person.rate.sid);
-	var depart = person.volunteer;
-	var depart = depart[0] + ((depart.length != 1) ? "等" + depart.length + "个部门" : "");
-	output = output.replace(/%SID%/ig, person.rate.sid);
-	output = output.replace(/%NAME%/ig, person.rate.sid);
-	output = output.replace(/%DEPARTMENT%/ig, '');
-	output = output.replace(/%ROOM%/ig, person.room);
+	var output = template.replace(/%NUMBER%/ig, wait_num.add());
+	var depart = data.volunteer;
+	var did = $("[name=department][value=" + depart[0] + "]");
+	var room = did.attr("data-id");
+	var departs =  did.parents("label").text();
+	departs = departs + ((depart.length != 1) ? "等" + depart.length + "个部门" : "");	
+	output = output.replace(/%SID%/ig, data.sid);
+	output = output.replace(/%NAME%/ig, data.name);
+	output = output.replace(/%DEPARTMENT%/ig, departs);
+	output = output.replace(/%ROOM%/ig, room);
 	$(".list tbody").append(output);
-}
+	$(".list ._default").remove();
+	waiting.add();
+	waiting.display('.waiting');
+	waiting_html.set($(".list").html());
+	refit();
+};
 
 $(function(){
 	set_club();
 	set_interval();
-	check_queue();
+	interviewed = new storage("interviewed");
+	waiting     = new storage("waiting");
+	waiting_html= new storage("waiting_html");
+	wait_num    = new storage("wait_num");
+	current_html= new storage("current_html");
+	interviewed.display('.interviewed');
+	waiting.display('.waiting');
+	if ( waiting_html.val != '0')
+		waiting_html.display('.list');
+	if ( current_html.val != '0')
+		current_html.display('.oncalling');
 //bind events
 	//signin button function
 	$("#add").click(function(){
@@ -254,8 +316,7 @@ $(function(){
 	$("#subDep").click(function(){
 		selectDepart();
 	});
-	socket = io.connect('http://192.168.120.67:3000/');
-
+	socket = io.connect(ioURL);
 	socket.on('call', function(data){
 		console.log(data);
 		var did = $("[name=department][value=" + data.did + "]");
@@ -264,6 +325,19 @@ $(function(){
 		var message = "请 " + data.name + " 同学到 " 
 								+ room + " 教室参加 " + department + " 面试" ;
 		interviewee_queue.push(message);
+		interviewee_data_queue.push(data);
+/*		if ( interviewee_queue.length === 1 ){
+			check_queue();
+			clearInterval(interval);
+			set_interval();
+		};*/
 	});
-
+	socket.on('disconnect', function(){
+		if ( reconnect_times < 4 ){
+			console.log(reconnect_times);
+			setTimeout(reconnect, 2000);
+		}
+		else
+			err('网络超时,请刷新页面再试！!');
+	});
 });

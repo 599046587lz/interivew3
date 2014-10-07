@@ -75,28 +75,13 @@ $.ajaxSetup({
     })()
 });
 
-//$.ajax({
-//    url:urlRoot+'club/login',
-//    type:'post',
-//    async:false,
-//    data:{user:'redhome',password:1},
-//    success:function(){
-//        console.dir(arguments);
-//    }
-//});
 
-//$.ajax({
-//    url:urlRoot+'club/setIdentify',
-//    type:'post',
-//    async:false,
-//    data:{interviewerName:'%E8%84%86%E7%9A%AE%E7%8C%AA',did:1}
-//});
 // update queue info
 var update_queue = function(stat){
 //    var queue = {done:3,wait:50};
     var root = $('#header');
     var done = root.find('.done .count').text();
-    root.find('.done .count').text(1*done + 1);
+    root.find('.done .count').text() != 0 && root.find('.done .count').text(1*done + 1);
 //    root.find('.wait .count').text(queue.wait);
 //    return;
     $.ajax({
@@ -156,7 +141,8 @@ var stop_clock=function(){
 
 var clear_clock=function(){
     var root = $('#header .time');
-    root.find('.min, .sec').text('0');
+    root.find('.min, .sec').text('0').css({color:'black'});
+
 };
 
 // -profile
@@ -201,16 +187,16 @@ var add_profile = function(){
     var interviewee = window.interviewee;
     tbs[0].innerText = interviewee.sid;
     tbs[1].innerText = interviewee.name;
-    (interviewee.sex != 2) && (tbs[2].innerText = interviewee.sex ? '男':'女');
+    tbs[2].innerText = interviewee.sex !=2 ? (interviewee.sex? '男':'女') : '--';
 
-    interviewee.major && (tbs[3].innerText = interviewee.major);
-    interviewee.phone && (tbs[4].innerText = interviewee.phone);
-    interviewee.email && (tbs[5].innerText = interviewee.email);
-    interviewee.qq && (tbs[6].innerText = interviewee.qq);
-    interviewee.notion && (tbs[7].innerText = (interviewee.notion);
+    tbs[3].innerText = interviewee.major || '--';
+    tbs[4].innerText = interviewee.phone || '--';
+    tbs[5].innerText = interviewee.email || '--';
+    tbs[6].innerText = interviewee.qq || '--';
+    tbs[7].innerText = interviewee.notion || '--';
     var keys = Object.keys(interviewee.extra);
     for (var i in keys){
-        interviewee.extra[keys[i]] && (tbs[(8+1*i)].innerText = interviewee.extra[keys[i]]);
+        tbs[(8+1*i)].innerText = interviewee.extra[keys[i]] || '--';
     }
 };
 // -selectDep
@@ -248,6 +234,7 @@ var finish = function(){
     success('操作成功');
     del_profile();
     del_rate();
+    stop_clock();
     clear_clock();
     window.interviewee = null;
     update_queue();
@@ -399,7 +386,8 @@ var recommend = function(){
             department:$('#selectDep').find('.checked input').val()
         },
         success:function(){
-            finish();
+            $('.qtip').hide();
+            success('操作成功');
         }
     });
 };
@@ -436,21 +424,7 @@ $(document).ready(function(){
 
     rate.find(".commit").click(commit);
 
-//    rate.find('.commit').qtip({
-//        content:{
-//            text: $('#confirmCommit')
-//        },
-//        show: {
-//            event: 'click'
-//        },
-//        hide : {
-//            event: 'unfocus'
-//        },
-//        position:{
-//            at: 'bottom center',
-//            my: 'top center'
-//        }
-//    });
+
 
     // handle module
     var handle = $('#main .handle');

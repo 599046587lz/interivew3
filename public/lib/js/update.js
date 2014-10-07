@@ -1,7 +1,7 @@
 jQuery(document).ready(function(){
 	$(".each").fadeIn(1000);
 	$("#add").click(function (){
-		$("#depbody").append("<div class=\"each\"><input class=\"dep\"></input><input class=\"room\"></input><span class=\"del\">x</span></div>");
+		$("#depbody").append("<div class=\"each\"><input class=\"dep\" /><input class=\"room\" /><span class=\"del\">x</span></div>");
 		$(".each:last").slideDown();
 	});
 	$("#depbody").on('click' , ".del", function(){
@@ -10,11 +10,15 @@ jQuery(document).ready(function(){
 	$.ajax({url:"/club/profile",type:"get",success: function (data, status, xhr){
 		$("#logo").attr("src",data.logo);
 		$("[name=name]").val(data.name);
+        var dep = $("#depbody");
+        for (var i in data.departments) {
+            dep.append("<div class=\"each\"><input class=\"dep\" value=\"" +data.departments[i]["name"] + "\" /><input class=\"room\" value=\"" +data.departments[i]["location"] + "\" /><span class=\"del\">x</span></div>").show();
+
+        }
 	}});
 	$("[name=logo]").on("change",function () {
 		$("#logo").attr("src",$(this).val());
 	});
-
 
 		$("#submit").click(function () {
 			//提交修改表单
@@ -61,33 +65,4 @@ jQuery(document).ready(function(){
 			});
 		}
 	});
-	// $("#select").on("change",function () {
-	// 	var exl = $(this).val();
-	// 	var exlReg = /\.xlsx/i;
-	// 	//if("" == exl) return;
-	// 	if(exlReg.test(exl)) {
-	// 		console.log("aaaaaaaaa");
-	// 		$.upload({
-	// 			url: "/club/upload/archive",
-	// 			fileName: "archive",
-	// 			params: {},
-	// 			dataType: "json",
-	// 			onSend: function () {
-	// 				$("#loading").show();
-	// 				return true;
-	// 			},
-	// 			onComplate: function (data) {
-	// 				$("#loading").hide();
-	// 				if("success" == data.status) {
-	// 					alert("上传成功");
-	// 				} else {
-	// 					alert("上传失败");
-	// 				}
-	// 			}
-	// 		});
-	// 	} else {
-	// 		$(this).val("");
-	// 		alert("文件类型不正确");
-	// 	}
-	// });
 });

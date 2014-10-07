@@ -194,18 +194,17 @@ exports.update = function (cid, data, callback) {
 
 exports.exportInterviewees = function (cid, did, cb){
     Interviewee.exportByDid(cid, did, function (err, docs){
+        var newDocs = [];
         docs.forEach(function (e, index){
             e = e.toObject();
-            var rate = e.rate;
-            for (var i = 0;i< rate.length;i++){
-                if (rate[i].did == did){
-                    rate = rate[i];
+            for (var i = 0;i< e.rate.length;i++){
+                if (e.rate[i].did == did){
+                    e.rate = e.rate[i];
                     break;
                 }
             }
-            docs[index] = docs[index].toObject();
-            docs[index].rate = rate;
+            newDocs.push(e);
         });
-        cb(err ,docs);
+        cb(err ,newDocs);
     })
 };

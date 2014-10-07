@@ -5,7 +5,7 @@
 var Club = require('../models/club');
 var Interviewee = require('../models/interviewee');
 var excel = require('excel');
-//var debug = require('debug');
+var debug = require('debug')('interview');
 
 exports.login = function (user, pwd, callback){
     Club.login(user, pwd, function (err, success){
@@ -49,6 +49,7 @@ exports.handleArchive = function (file, cid, callback){
         departments.forEach(function (e){
              deps[e.name] = e.did;
         });
+        debug(JSON.stringify(deps));
         process.nextTick(function () {
             excel(file.path, function (err, data){
                 if (err){
@@ -97,7 +98,7 @@ exports.handleArchive = function (file, cid, callback){
                                             interviewee[title[i]] = e[i];
                                         } else {
                                             var d = deps[e[i]];
-                                            if (!!d){
+                                            if (d === undefined || d === null){
                                                 if (!interviewee['volunteer']){
                                                     interviewee['volunteer'] = [];
                                                 }

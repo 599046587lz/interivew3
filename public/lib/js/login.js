@@ -1,5 +1,6 @@
 //baseURL = 'http://interview.redhome.cc/';
-baseURL = 'http://interview.redhome.cc';
+//baseURL = 'http://interview.redhome.cc';
+baseURL = '';
 
 var err = function(text){
     notif({

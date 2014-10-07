@@ -176,10 +176,20 @@ exports.exportByDid = function (cid, did, cb){
     Interviewee.find({
         cid: cid,
         volunteer: did
-    }, function (err, docs){
+    }, 'name sid rate notion phone qq email major sex', function (err, docs){
         if (err){
             return cb(err);
         } else {
+            docs.forEach(function (e, index){
+                e = e.toObject();
+                var rate = e.rate;
+                for (var i = 0;i< rate.length;i++){
+                    if (rate[i].did == did){
+                        rate = rate[i];
+                        break;
+                    }
+                }
+            });
             cb(null, docs);
         }
     })

@@ -2,7 +2,7 @@
  * Created by bangbang93 on 14-9-15.
  */
 var express = require('express');
-var debug = require('debug')('interview');
+//var debug = require('debug')('interview');
 var router = express.Router();
 
 var Club = require('../modules/club');

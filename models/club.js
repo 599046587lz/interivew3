@@ -2,7 +2,7 @@
  * Created by bangbang93 on 14-9-16.
  */
 var Club = require('../models').Club;
-var debug = require('debug')('interview');
+//var debug = require('debug')('interview');
 
 
 exports.login = function (user, pwd, callback){
@@ -64,7 +64,7 @@ exports.getClubById = function(cid, callback){
 exports.update = function (cid, club, callback) {
     Club.findOneAndUpdate({
         cid: cid
-    }, club, function (err, numEffect) {
+    }, club, function (err) {
         callback(err);
     });
 };

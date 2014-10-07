@@ -55,8 +55,10 @@ exports.addInterviewee = function (data, cid, callback){
         delete interviewee.signTime;
     }
     IntervieweeEntity.extra = interviewee;
-    IntervieweeEntity.save();
-    callback();
+    IntervieweeEntity.save(function (err){
+        callback(err);
+    });
+
 };
 
 //var getLock = false;

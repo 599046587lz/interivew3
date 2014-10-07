@@ -16,9 +16,9 @@ jQuery(document).ready(function(){
 
         }
 	}});
-	$("[name=logo]").on("change",function () {
-		$("#logo").attr("src",$(this).val());
-	});
+//	$("[name=logo]").on("change",function () {
+//		$("#logo").attr("src",$(this).val());
+//	});
 
 		$("#submit").click(function () {
 			//提交修改表单

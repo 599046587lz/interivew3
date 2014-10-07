@@ -59,16 +59,16 @@ exports.addInterviewee = function (data, cid, callback){
     callback();
 };
 
-var getLock = false;
+//var getLock = false;
 exports.getNextInterviewee = function (cid, did, cb){
-    if (!getLock){
-        return process.nextTick((function (cid, did, cb){
-            return function (){
-                exports.getNextInterviewee(cid, did, cb);
-            }
-        })(cid ,did, cb));
-    } else {
-        getLock = true;
+//    if (!getLock){
+//        return process.nextTick((function (cid, did, cb){
+//            return function (){
+//                exports.getNextInterviewee(cid, did, cb);
+//            }
+//        })(cid ,did, cb));
+//    } else {
+//        getLock = true;
         Interviewee.findOne({
             cid: cid,
             volunteer: did,
@@ -82,21 +82,21 @@ exports.getNextInterviewee = function (cid, did, cb){
         }).exec(function (err, doc){
             if (err){
                 cb(err);
-                getLock = false;
+//                getLock = false;
             } else {
                 if (!!doc){
                     doc.busy = true;
                     doc.save(function (){
-                        getLock = false;
+//                        getLock = false;
                     });
                     cb(null, doc);
                 } else {
                     cb(null ,null);
-                    getLock = false;
+//                    getLock = false;
                 }
             }
         });
-    }
+//    }
 };
 
 exports.rateInterviewee = function (cid, sid, score, comment, did, interviewer, cb){

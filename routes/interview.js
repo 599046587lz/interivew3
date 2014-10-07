@@ -61,7 +61,11 @@ router.get('/call', function (req, res){
     if (!sid){
         Interviewee.getNextInterviewee(cid, department, function (err, interviewee){
             if (err){
-                return res.json(500, err);
+                if (!!err['sid']){
+                    return res.json(err.code || 500, err);
+                } else {
+                    return res.json(500, err);
+                }
             } else {
                 if (!!interviewee){
                     interviewee = interviewee.toObject();
@@ -76,7 +80,11 @@ router.get('/call', function (req, res){
     } else {
         Interviewee.getSpecifyInterviewee(sid, cid, did, function (err, interviewee){
             if (err){
-                return res.json(500, err);
+                if (!!err['sid']){
+                    return res.json(err.code || 500, err);
+                } else {
+                    return res.json(500, err);
+                }
             } else {
                 if (!!interviewee){
                     interviewee = interviewee.toObject();

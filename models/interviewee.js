@@ -175,7 +175,7 @@ exports.countQueue = function (cid, did, cb){
 exports.exportByDid = function (cid, did, cb){
     Interviewee.find({
         cid: cid,
-        volunteer: did
+        'rate.did': did
     }, 'name sid rate notion phone qq email major sex', function (err, docs){
         if (err){
             return cb(err);

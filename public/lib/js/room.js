@@ -1,6 +1,8 @@
 ttsAPI  = "http://translate.google.cn/translate_tts?ie=UTF-8&q=_WORDS_&tl=zh-CN";
-baseURL = 'http://interview.redhome.cc';
-ioURL   = 'http://interview.redhome.cc/';
+//baseURL = 'http://interview.redhome.cc';
+baseURL = '';
+//ioURL   = 'http://interview.redhome.cc/';
+ioURL   = '/';
 interviewee_queue = [];
 interviewee_data_queue = [];
 reconnect_times = 0;

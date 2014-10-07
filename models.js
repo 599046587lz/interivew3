@@ -65,7 +65,10 @@ var Interviewee = new mongoose.Schema({
     signTime: Date,
     rate: [rate],//{did: Number,score: Number, comment: String, interviewer: String}
     done: [Number],
-    extra: Object,
+    extra: {
+        type: Object,
+        default: {}
+    },
     busy: {
         type: Boolean,
         default: false

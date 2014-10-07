@@ -13,7 +13,7 @@ io.on('connection', function (socket){
      * @params data {cid:cid}
      */
     socket.on('init', function(data){
-        if (!!data['cid']){
+        if (!data['cid']){
             socket.disconnect();
         }
         socket.join(data['cid']);

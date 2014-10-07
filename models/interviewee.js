@@ -124,6 +124,7 @@ exports.rateInterviewee = function (cid, sid, score, comment, did, interviewer, 
                 });
                 doc.done.push(did);
                 doc.busy = false;
+                doc.signTime = new Date();
                 doc.save();
                 cb();
             }

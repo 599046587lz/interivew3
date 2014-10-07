@@ -249,8 +249,12 @@ body {
   top: 3px;
   right: -20px;
 }
+#main .handle{
+    background: #335dfb;
+}
 #main .handle .recommend {
   background: #335dfb;
+  border:1px solid #2F4DBB;
   width: 80px;
   height: 30px;
   line-height: 30px;
@@ -263,6 +267,7 @@ body {
   left: 71px;
 }
 #main .handle .skip {
+  border: 1px solid #2F4DBB;
   position: absolute;
   margin: auto 0;
   top: 0;
@@ -303,7 +308,7 @@ body {
   margin: auto 0;
   top: 0;
   bottom: 0;
-  background: #b3ce1d;
+  background: #4b6ffa;
 }
 #main .rate {
   height: 330px;

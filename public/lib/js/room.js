@@ -282,7 +282,7 @@ var waitline = function(data){
 	var departs =  did.parents("label").text();
 	var departments = departs;
 	for (i = 1; i < depart.length ; ++i){
-		department += ', ' + $("[name=department][value=" + depart[i] + "]").parents("label").text();
+		departments += ', ' + $("[name=department][value=" + depart[i] + "]").parents("label").text();
 	}
 	departs = departs + ((depart.length != 1) ? "等" + depart.length + "个部门" : "");	
 	output = output.replace(/%SID%/ig, data.sid);

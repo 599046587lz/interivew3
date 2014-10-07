@@ -9,7 +9,7 @@ exports.getStuBySid = function (sid, cid, did, callback) {
         callback = did;
         did = null;
     } else {
-        data['did'] = did;
+        data['volunteer'] = did;
     }
     Interviewee.findOne(data, function (err, doc){
         callback(err, doc);

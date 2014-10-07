@@ -198,6 +198,7 @@ var add_profile = function(){
     for (var i in keys){
         tbs[(8+1*i)].innerText = interviewee.extra[keys[i]] || '--';
     }
+    $('#main .profile').jScrollPane();
 };
 // -selectDep
 var set_depList = function(){

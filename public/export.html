@@ -52,8 +52,8 @@ var _export = function(){
                 for ( var i in data ){
                     if (data[i]){
                         if (data[i].rate != []){
-                            var out = "<tr>\n <td> data[i].sid </td> <td> data[i].name </td> <td> "
-                                    + " data[i].major </td> <td> data[i].rate.score </td> <td> data[i].rate.comment </td> <td> data[i].rate.interviewer </td>";
+                            var out = "<tr>\n <td> "+data[i].sid+" </td> <td> "+data[i].name+" </td> <td> "
+                                    +  data[i].major+ " </td> <td> " +data[i].rate.score+" </td> <td>"+ data[i].rate.comment+" </td> <td>"+ data[i].rate.interviewer+" </td>";
                             output += out;
                         }
                     }

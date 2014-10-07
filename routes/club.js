@@ -2,7 +2,7 @@
  * Created by bangbang93 on 14-9-15.
  */
 var express = require('express');
-var debug = require('debug')('interview');
+//var debug = require('debug')('interview');
 var router = express.Router();
 
 var Club = require('../modules/club');
@@ -78,7 +78,6 @@ router.post('/upload/archive', function (req, res){
         return res.send(403);
     } else {
         var xlsxReg = /\.xlsx$/i;
-        console.log(file);
         if (!xlsxReg.test(file.originalname)){
             return res.send(406);
         }
@@ -132,13 +131,23 @@ router.post('/profile', function (req, res){
     if(!cid) {
         res.send(403);
     }
-    var dep = req.param['department'];
+    var dep = req.param('departments'),
+        name = req.param('name'),
+        password = req.param('password'),
+        logo = req.param('logo'),
+        maxDep = req.param('maxDep');
 
-    Club.update(cid,dep,function (err){
+    Club.update(cid, {
+        departments: dep,
+        name: name,
+        password: password,
+        logo: logo,
+        maxDep: maxDep
+    }, function (err, clearData){
         if(err) {
             res.json(500, err);
         } else {
-            res.json(204);
+            res.send(clearData?205:204);
         }
     });
 });
@@ -155,6 +164,9 @@ router.get('/extra', function (req, res){
         if (err){
             res.json(500, err);
         } else {
+            if (!doc){
+                return res.send(404);
+            }
             var extra = doc.extra;
             var fields = [];
             for (var i in extra){

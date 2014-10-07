@@ -2,7 +2,7 @@
  * Created by bangbang93 on 14-9-16.
  */
 var Club = require('../models').Club;
-var debug = require('debug')('interview');
+//var debug = require('debug')('interview');
 
 
 exports.login = function (user, pwd, callback){
@@ -29,6 +29,7 @@ exports.getClubByName = function(name, callback){
             return callback(err);
         } else {
             if (!!doc){
+                doc = doc.toObject();
                 delete doc.password;
                 return callback(null, doc);
             } else {
@@ -38,6 +39,11 @@ exports.getClubByName = function(name, callback){
     });
 };
 
+/**
+ *
+ * @param cid
+ * @param callback
+ */
 exports.getClubById = function(cid, callback){
     Club.findOne({
         cid: cid
@@ -56,9 +62,9 @@ exports.getClubById = function(cid, callback){
 };
 
 exports.update = function (cid, club, callback) {
-    Club.update({
+    Club.findOneAndUpdate({
         cid: cid
-    },club,function (err, numEffect) {
+    }, club, function (err) {
         callback(err);
     });
 };

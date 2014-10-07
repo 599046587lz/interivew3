@@ -47,24 +47,29 @@ exports.getNextInterviewee = function (cid, did, cb){
             if (!!interviewee){
                 cb (null, interviewee);
             } else {
-                cb (null, {});
+                cb (null, null);
             }
         }
     })
 };
 
-exports.getSpecifyInterviewee = function (sid, cid, cb){
-    Interviewee.getStuBySid(sid, cid, function (err, interviewee){
+exports.getSpecifyInterviewee = function (sid, cid, did, cb){
+    Interviewee.getStuBySid(sid, cid, did, function (err, interviewee){
         if (!!interviewee){
             interviewee.busy = true;
             interviewee.save();
+        } else {
+            cb({
+                code: 404,
+                sid: sid
+            })
         }
         cb(err, interviewee);
     })
 };
 
-exports.rateInterviewee = function (cid, sid, score, commit, did, interviewer, cb){
-    Interviewee.rateInterviewee(cid, sid, score, commit, did, interviewer, function (err){
+exports.rateInterviewee = function (cid, sid, score, comment, did, interviewer, cb){
+    Interviewee.rateInterviewee(cid, sid, score, comment, did, interviewer, function (err){
         cb(err);
     })
 };
@@ -93,6 +98,7 @@ exports.skip = function(cid, sid, cb){
             cb(err);
         } else {
             doc.signTime = new Date();
+            doc.busy = false;
             doc.save(function(err){
                 if(err){
                     cb(err);

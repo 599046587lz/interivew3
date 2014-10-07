@@ -5,6 +5,7 @@
 var Club = require('../models/club');
 var Interviewee = require('../models/interviewee');
 var excel = require('excel');
+//var debug = require('debug');
 
 exports.login = function (user, pwd, callback){
     Club.login(user, pwd, function (err, success){
@@ -43,7 +44,6 @@ exports.getClubById = function (cid, cb){
 
 exports.handleArchive = function (file, cid, callback){
     Club.getClubById(cid, function (err, club){
-        console.log(club);
         var departments = club.departments;
         var deps = {};
         departments.forEach(function (e){
@@ -56,7 +56,7 @@ exports.handleArchive = function (file, cid, callback){
                 } else {
                     var title = [];
                     var isFirstLine = true;
-                    Interviewee.removeByCid(cid, function (err, count){
+                    Interviewee.removeByCid(cid, function (err){
                         if (err){
                             callback(err);
                         } else {
@@ -79,11 +79,10 @@ exports.handleArchive = function (file, cid, callback){
                                             case 'qq':
                                                 title.push('qq'); break;
                                             case '感想':
-                                                title.push('message'); break;
+                                                title.push('notion'); break;
                                             default:
                                                 var volunteerReg = /志愿(\d)+/;
                                                 if (volunteerReg.test(e)){
-//                                    var number = volunteerReg.match(e)[1];
                                                     title.push('volunteer'); break;
                                                 } else {
                                                     title.push(e);
@@ -92,17 +91,19 @@ exports.handleArchive = function (file, cid, callback){
                                     });
                                     isFirstLine = false;
                                 } else {
+                                    var interviewee = {};
                                     for (var i=0;i<e.length;i++){
-                                        var interviewee = {};
                                         if (title[i] != 'volunteer') {
                                             interviewee[title[i]] = e[i];
                                         } else {
                                             var d = deps[e[i]];
                                             if (!!d){
-                                                if (!interviewee[title[i]]){
-                                                    interviewee[title[i]] = [];
+                                                if (!interviewee['volunteer']){
+                                                    interviewee['volunteer'] = [];
                                                 }
-                                                interviewee[title[i]].push(d);
+                                                if (interviewee['volunteer'].indexOf(d) == -1){
+                                                    interviewee['volunteer'].push(d);
+                                                }
                                             } else {
                                                 callback({
                                                     code: 404,
@@ -111,12 +112,12 @@ exports.handleArchive = function (file, cid, callback){
                                                 });
                                             }
                                         }
-                                        Interviewee.addInterviewee(interviewee, cid, function (err){
-                                            if (err){
-                                                return callback(err);
-                                            }
-                                        })
                                     }
+                                    Interviewee.addInterviewee(interviewee, cid, function (err){
+                                        if (err){
+                                            return callback(err);
+                                        }
+                                    })
                                 }
                             });
                         }
@@ -127,20 +128,66 @@ exports.handleArchive = function (file, cid, callback){
         });
     })
 };
-exports.update = function (cid, club, callback) {
+exports.update = function (cid, data, callback) {
     var pro = ['name','logo','departments','interviewer','password','maxDep'];
     var newClub = {};
+    var hasDepartmentModify = false;
 
-    if(undefined != club) {
+    if(undefined != data) {
         for(var i in pro) {
-            if(undefined != club[pro[i]]) {
-                newClub[pro[i]] = club[pro[i]];
+            if (pro.hasOwnProperty(i)){
+                if(undefined != data[pro[i]]) {
+                    if (pro[i] == 'departments') {
+                        newClub[pro[i]] = [];
+                        Club.getClubById(cid, function (err, club){
+                            if (err){
+                                return callback(err);
+                            } else {
+                                var dep = data['departments'];
+                                var oldDep = club.departments;
+                                if (dep.length == oldDep.length){
+                                    for (var j = 0; j< dep.length ;j++){
+                                        if (dep[j].name != oldDep.name){
+                                            hasDepartmentModify = true;
+                                            break;
+                                        }
+                                    }
+                                } else {
+                                    hasDepartmentModify = true;
+                                }
+                            }
+                            if (hasDepartmentModify){
+                                Interviewee.removeByCid(cid, function (err){
+                                    if (err){
+                                        callback(err);
+                                    } else {
+                                        callback(null, true);
+                                    }
+                                })
+                            } else {
+                                callback(null, false);
+                            }
+                        });
+                        data[pro[i]].forEach(function (e, index){
+                            var dep = {};
+                            dep.did = index;
+                            dep.name = e.name;
+                            dep.location = e.location;
+                            newClub[pro[i]].push(dep);
+                        })
+
+                    } else {
+                        newClub[pro[i]] = data[pro[i]];
+                    }
+
+                }
             }
         }
     }
-
-    Club.update(cid,newClub,function (err){
-        callback(err);
+    Club.update(cid, newClub, function (err){
+        if (err) {
+            callback(err);
+        }
     });
 };
 

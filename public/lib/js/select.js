@@ -11,7 +11,7 @@ var set_club = function(){
 			},
 			403 : function(){
 				err("未登录或登录超时!");
-				//relogin();	
+				relogin();	
 			},
 			200 : function(data){
 				club = data;

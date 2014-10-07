@@ -24,13 +24,6 @@ exports.sign = function (sid, cid, callback) {
             }
         }
     });
-//    Interviewee.update({sid: sid,cid: cid},{signTime: date},function (err, numAffected){
-//        if(!err && 1==numAffected) {
-//            callback(null);
-//        } else {
-//            callback(err);
-//        }
-//    });
 };
 
 exports.addInterviewee = function (data, cid, callback){
@@ -47,16 +40,10 @@ exports.addInterviewee = function (data, cid, callback){
         delete interviewee[e];
     });
     IntervieweeEntity.cid = cid;
-//    IntervieweeEntity.sid = data.sid;
-//    IntervieweeEntity.cid = cid;
-//    IntervieweeEntity.name = data.name;
-//    IntervieweeEntity.sex = data.sex;
-//    IntervieweeEntity.major = data.major;
-//    IntervieweeEntity.phone = data.phone;
-//    IntervieweeEntity.email = data.email;
-//    IntervieweeEntity.qq = data.qq;
-//    IntervieweeEntity.volunteer = data.volunteer;
-//    IntervieweeEntity.notion = data.notion;
+    if (!!interviewee.signTime){
+        IntervieweeEntity.signTime = interviewee.signTime;
+        delete interviewee.signTime;
+    }
     IntervieweeEntity.extra = interviewee;
     IntervieweeEntity.save();
     callback();
@@ -67,12 +54,11 @@ exports.getNextInterviewee = function (cid, did, cb){
         cid: cid,
         volunteer: did,
         busy: false,
-        $where: function(){
-            var volunteer = this.volunteer;
-            var done = this.done;
-            return volunteer.length != done.length;
-        }
-    }).sort({
+        signTime:{$ne:null}
+    }).$where(new Function('var volunteer = this.volunteer;' +
+    'var done = this.done;' +
+    'return (volunteer.length != done.length) && (done.indexOf(' + did + ') == -1);'
+    )).sort({
         signTime: 'asc'
     }).exec(function (err, doc){
         if (err){
@@ -88,7 +74,7 @@ exports.getNextInterviewee = function (cid, did, cb){
     });
 };
 
-exports.rateInterviewee = function (cid, sid, score, commit, did, interviewer, cb){
+exports.rateInterviewee = function (cid, sid, score, comment, did, interviewer, cb){
     Interviewee.findOne({
         cid: cid,
         sid: sid
@@ -102,11 +88,15 @@ exports.rateInterviewee = function (cid, sid, score, commit, did, interviewer, c
                     code: 1
                 });
             } else {
-                doc.rate['did'] = {
+                if (!doc.rate){
+                    doc.rate = [];
+                }
+                doc.rate.push({
+                    did: did,
                     score: score,
-                    commit: commit,
+                    comment: comment,
                     interviewer: interviewer
-                };
+                });
                 doc.done.push(did);
                 doc.busy = false;
                 doc.save();
@@ -141,9 +131,10 @@ exports.recommend = function (cid, sid, rdid, cb){
 exports.countQueue = function (cid, did, cb){
     Interviewee.find({
         cid: cid,
-        volunteer: [did],
-        'done.count': {$ne: 'volunteer.count'},
-        signTime: {$ne: null}
+        volunteer: did,
+        busy: {$ne:true},
+        signTime: {$ne: null},
+        done: {$ne:did}
     }, function (err, doc){
         if (err){
             cb(err);

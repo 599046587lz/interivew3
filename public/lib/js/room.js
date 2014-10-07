@@ -274,16 +274,21 @@ var selectDepart = function(){
 var waitline = function(data){
 	console.log(data);
 	var template = "<tr class=\"stu-%SID%\"> \n <td>%NUMBER%</td> \n <td>%SID%</td> \n "
-								+"<td>%NAME%</td> \n <td>%DEPARTMENT%</td> \n <td>%ROOM%";
+								+"<td>%NAME%</td> \n <td class=\"depart\" title=\"%DEPARTMENTS%\">%DEPARTMENT%</td> \n <td>%ROOM%";
 	var output = template.replace(/%NUMBER%/ig, wait_num.add());
 	var depart = data.volunteer;
 	var did = $("[name=department][value=" + depart[0] + "]");
 	var room = did.attr("data-id");
 	var departs =  did.parents("label").text();
+	var departments = departs;
+	for (i = 1; i < depart.length ; ++i){
+		department += ', ' + $("[name=department][value=" + depart[i] + "]").parents("label").text();
+	}
 	departs = departs + ((depart.length != 1) ? "等" + depart.length + "个部门" : "");	
 	output = output.replace(/%SID%/ig, data.sid);
 	output = output.replace(/%NAME%/ig, data.name);
 	output = output.replace(/%DEPARTMENT%/ig, departs);
+	output = output.replace(/%DEPARTMENTS%/ig, departments);
 	output = output.replace(/%ROOM%/ig, room);
 	$(".list tbody").append(output);
 	$(".list ._default").remove();

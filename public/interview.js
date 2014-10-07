@@ -16,7 +16,7 @@ var relogin = function(){
 };
 
 var set_depName = function(){
-    $('#header .depart').text(window.location.hash.replace('#',''));
+    $('#header .depart').text(decodeURIComponent(window.location.hash.replace('#','')));
 };
 
 var HTTPCode = {

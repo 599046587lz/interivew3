@@ -62,7 +62,11 @@ exports.addInterviewee = function (data, cid, callback){
 var getLock = false;
 exports.getNextInterviewee = function (cid, did, cb){
     if (!getLock){
-        process.nextTick(exports.getNextInterviewee(cid, did, cb));
+        return process.nextTick((function (cid, did, cb){
+            return function (){
+                exports.getNextInterviewee(cid, did, cb);
+            }
+        })(cid ,did, cb));
     } else {
         getLock = true;
         Interviewee.findOne({

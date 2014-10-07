@@ -87,7 +87,7 @@ body {
 #room .list td:first-child, #room .list th:first-child{
   width: 60px !important;
 }
-#room td + td + td + td, #room th + th + th + th {
+#room .depart {
   width: 260px !important;
 }
 #room .func_bar {

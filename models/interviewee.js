@@ -24,13 +24,6 @@ exports.sign = function (sid, cid, callback) {
             }
         }
     });
-//    Interviewee.update({sid: sid,cid: cid},{signTime: date},function (err, numAffected){
-//        if(!err && 1==numAffected) {
-//            callback(null);
-//        } else {
-//            callback(err);
-//        }
-//    });
 };
 
 exports.addInterviewee = function (data, cid, callback){
@@ -47,16 +40,6 @@ exports.addInterviewee = function (data, cid, callback){
         delete interviewee[e];
     });
     IntervieweeEntity.cid = cid;
-//    IntervieweeEntity.sid = data.sid;
-//    IntervieweeEntity.cid = cid;
-//    IntervieweeEntity.name = data.name;
-//    IntervieweeEntity.sex = data.sex;
-//    IntervieweeEntity.major = data.major;
-//    IntervieweeEntity.phone = data.phone;
-//    IntervieweeEntity.email = data.email;
-//    IntervieweeEntity.qq = data.qq;
-//    IntervieweeEntity.volunteer = data.volunteer;
-//    IntervieweeEntity.notion = data.notion;
     if (!!interviewee.signTime){
         IntervieweeEntity.signTime = interviewee.signTime;
         delete interviewee.signTime;

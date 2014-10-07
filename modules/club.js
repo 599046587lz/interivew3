@@ -5,7 +5,7 @@
 var Club = require('../models/club');
 var Interviewee = require('../models/interviewee');
 var excel = require('excel');
-var debug = require('debug');
+//var debug = require('debug');
 
 exports.login = function (user, pwd, callback){
     Club.login(user, pwd, function (err, success){

@@ -195,7 +195,16 @@ exports.update = function (cid, data, callback) {
 exports.exportInterviewees = function (cid, did, cb){
     Interviewee.exportByDid(cid, did, function (err, docs){
         docs.forEach(function (e, index){
-            docs[index] = e.toObject();
+            e = e.toObject();
+            var rate = e.rate;
+            for (var i = 0;i< rate.length;i++){
+                if (rate[i].did == did){
+                    rate = rate[i];
+                    break;
+                }
+            }
+            docs[index] = docs[index].toObject();
+            docs[index].rate = rate;
         });
         cb(err ,docs);
     })

@@ -180,18 +180,6 @@ exports.exportByDid = function (cid, did, cb){
         if (err){
             return cb(err);
         } else {
-            docs.forEach(function (e, index){
-                e = e.toObject();
-                var rate = e.rate;
-                for (var i = 0;i< rate.length;i++){
-                    if (rate[i].did == did){
-                        rate = rate[i];
-                        break;
-                    }
-                }
-                docs[index] = docs[index].toObject();
-                docs[index].rate = rate;
-            });
             cb(null, docs);
         }
     })

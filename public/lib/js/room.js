@@ -200,7 +200,7 @@ var signin = function(){
 		return false;
 	}
 	$.ajax({
-		url : baseURL + '/room/sign/',
+		url : baseURL + '/room/sign',
 		type : 'get',
 		data : {sid: stuID},
 		dataType : 'json',
@@ -250,7 +250,7 @@ var selectDepart = function(){
 		did.push($(this).val());
 	});
 	$.ajax({
-		url : baseURL + '/room/selectDep/',
+		url : baseURL + '/room/selectDep',
 		type : 'post',
 		data : {sid: stuID,did: did},
 		dataType: 'json',

@@ -1,4 +1,4 @@
-baseURL = 'http://interview.redhome.cc';
+baseURL = '';
 
 var set_club = function(){
 	club = {};

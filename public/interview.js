@@ -1,7 +1,7 @@
 /**
  * Created by karboom on 14-9-28.
  */
-var urlRoot = 'http://interview.redhome.cc/';
+var urlRoot = '/';
 
 
 window.onbeforeunload = function(e) {

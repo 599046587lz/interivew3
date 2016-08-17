@@ -44,6 +44,14 @@ header img {
   color: #fff;
 }
 .container .selection {
-  height: 44px;
+  overflow: hidden;
+  height: 0;
   line-height: 44px;
+  transition: height .5s;
+  -moz-transition: height .5s;
+  -webkit-transition: height .5s;
+  -o-transition: height .5s;
+}
+.container .selection.active {
+  height: 44px;
 }

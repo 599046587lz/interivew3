@@ -99,7 +99,12 @@ var setInterviewer = function(){
 $(function(){
 	set_club();
 	$(".interview a").click(function(){
-		$(".selection").animate({opacity:1,height:'44px'}, 500);
+		var selection = $('.selection');
+		if (selection.hasClass('active')) {
+			selection.removeClass('active')
+		} else {
+			selection.addClass('active')
+		}
 	});
 	$("._interview").click(function(){
 		setInterviewer();

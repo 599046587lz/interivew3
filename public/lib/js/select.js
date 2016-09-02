@@ -98,13 +98,17 @@ var setInterviewer = function(){
 
 $(function(){
 	set_club();
-	$(".interview a").click(function(){
-		var selection = $('.selection');
-		if (selection.hasClass('active')) {
-			selection.removeClass('active')
-		} else {
-			selection.addClass('active')
-		}
+	$(".interview").click(function(){
+		$('.dimmer').fadeIn();
+	});
+	$(".dimmer").click(function () {
+		$(this).fadeOut();
+	});
+	$(".dimmer .card").click(function (e) {
+		e.stopPropagation();
+	});
+	$(".close").click(function () {
+		$(".dimmer").fadeOut();
 	});
 	$("._interview").click(function(){
 		setInterviewer();

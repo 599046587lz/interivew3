@@ -14,6 +14,7 @@
         dataType: 'json',
         params: {},
         onSend: noop,
+        onSendStart: noop,
         onComplate: noop
     };
 
@@ -43,6 +44,9 @@
         iframe.appendTo("body");
         form.appendTo("body");
 
+        form.submit(function () {
+            opts.onSendStart();
+        });
         // iframe 在提交完成之后
         iframe.load(function() {
             var contents = $(this).contents().get(0);
@@ -69,7 +73,6 @@ var onChooseFile = function(fileInputDOM) {
     var exlReg = /\.xlsx/i;
 
     if(exlReg.test(exl)) {
-        $("#loading").show();
         var form = $(fileInputDOM).parent();
         form.submit();
     } else {

@@ -1,6 +1,6 @@
 .topBar, header {
     width: 100%;
-    height: 45px;
+    height: 50px;
     background: #7a9ece;
     box-shadow: 0 0 15px #aaa;
 }
@@ -10,11 +10,69 @@
 .topBar .back {
     display: inline-block;
     float: left;
-    padding: 10px;
+    padding: 12px;
 }
 .topBar .title {
     text-align: center;
     color: #ffffff;
-    line-height: 45px;
+    line-height: 50px;
     font-size: 15px;
+}
+.smallCircle {
+    width: 15px;
+    height: 15px;
+    display: inline-block;
+    border: 2px solid #91beb9;
+    border-radius: 100px;
+}
+.loading {
+    position: relative;
+    pointer-events: none;
+    transition: all 0s linear,opacity .1s ease;
+    color: transparent!important;
+    moz-user-select: -moz-none;
+    -moz-user-select: none;
+    -o-user-select:none;
+    -khtml-user-select:none;
+    -webkit-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+}
+.loading:before {
+    position: absolute;
+    content: '';
+    top: 50%;
+    left: 50%;
+    margin: -11px 0 0 -12px;
+    width: 15px;
+    height: 15px;
+    border-radius: 500rem;
+    border: .2em solid rgba(0,0,0,.15);
+}
+.loading:after {
+    position: absolute;
+    content: '';
+    top: 50%;
+    left: 50%;
+    margin: -11px 0 0 -12px;
+    width: 15px;
+    height: 15px;
+    -webkit-animation: button-spin .6s linear;
+    animation: button-spin .6s linear;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    border-radius: 500rem;
+    border-color: #FFF transparent transparent;
+    border-style: solid;
+    border-width: .2em;
+    box-shadow: 0 0 0 1px transparent;
+}
+
+@keyframes button-spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }

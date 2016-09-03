@@ -2,27 +2,37 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title></title>
+	<title>录入信息</title>
+	<link rel="stylesheet" href="lib/css/reset.css"/>
 	<link rel="stylesheet" href="lib/css/update.css"/>
+	<link rel="stylesheet" href="lib/css/common.css"/>
 	<script type="text/javascript" src="lib/js/jquery-1.11.1.min.js"></script>
 	<script type="text/javascript" src="lib/js/update.js"></script>
 	<script type="text/javascript" src="lib/js/jquery.upload.js"></script>
 </head>
 <body>
-	<div style="width:80%;margin:auto">
-		<input class="part" name="logo" type="file" placeholder="" />
-		<div><img id="logo" /></div>
-		<input class="part" name="name" placeholder="社团名称" />
-		<div class="part" id="deproom">
-			<div id="dephead" style="padding:8px;"><span>部门——教室</span><span id="add">+</span></div>
-			<div id="depbody"><div class="each"><input class="dep" /><input class="room" /><span class="del">x</span></div></div>
-			<div style="clear:both;"></div>
+<div class="topBar">
+	<a class="back" href="">
+		<img src="./img/back.png" alt=""/>
+	</a>
+	<div class="title">录入面试者信息</div>
+</div>
+<div class="container">
+	<div class="clubName"></div>
+	<div class="writeInfo">
+		<div class="department">
+			<span class="smallCircle"></span>
+			<span class="title">部门</span>
 		</div>
-		<input class="part" id="select" type="button" name="archive" value="选择文件" />
-		<div id="preview"></div>
-		<p id="loading">上传中...</p>
-		<button class="part" id="submit" >提交</button>
-        <div id="export" class="part"></div>
+		<div class="classroom">
+			<span class="smallCircle"></span>
+			<span class="title">教室</span>
+		</div>
 	</div>
+
+	<div id="select">选择文件</div>
+	<div id="submit">提交</div>
+</div>
+
 </body>
 </html>

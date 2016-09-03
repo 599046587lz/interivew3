@@ -5,5 +5,16 @@
     box-shadow: 0 0 15px #aaa;
 }
 .topBar img, header img {
-    margin: 10px 15px;
+    height: 20px;
+}
+.topBar .back {
+    display: inline-block;
+    float: left;
+    padding: 10px;
+}
+.topBar .title {
+    text-align: center;
+    color: #ffffff;
+    line-height: 45px;
+    font-size: 15px;
 }

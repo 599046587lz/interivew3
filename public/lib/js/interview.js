@@ -409,7 +409,7 @@ $(document).ready(function(){
     $.fn.qtip.defaults.style.classes = 'qtip-light';
 
     // profile module
-    var profile = $('#main .profile');
+    var profile = $('.main .scrollContainer');
     profile.jScrollPane();
 
     //rate module

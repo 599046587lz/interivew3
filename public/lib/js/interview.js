@@ -16,7 +16,7 @@ var relogin = function(){
 };
 
 var set_depName = function(){
-    $('#header .depart').text(decodeURIComponent(window.location.hash.replace('#','')));
+    $('.topBar .title').text(decodeURIComponent(window.location.hash.replace('#','')));
 };
 
 var HTTPCode = {
@@ -413,7 +413,7 @@ $(document).ready(function(){
     profile.jScrollPane();
 
     //rate module
-    var rate = $('#main .rate');
+    var rate = $('.main .rate');
     rate.find('.stars').raty({
         starOff : 'img/star-off.png',
         starOn  : 'img/star-on.png',

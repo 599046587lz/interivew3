@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <title>正在进行面试</title>
     <!--<base href="http://interview.redhome.cc/"/>-->
-    <link href="interview.css" rel="stylesheet"/>
-    <link href="lib/css/jquery.jscrollpane.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="lib/css/reset.css"/>
+    <link rel="stylesheet" href="lib/css/common.css"/>
+    <link rel="stylesheet" href="lib/css/interview.css"/>
+    <link rel="stylesheet" href="lib/css/jquery.jscrollpane.css"/>
     <link rel="stylesheet" href="lib/css/square/blue.css"/>
     <link rel="stylesheet" href="lib/css/jquery.qtip.min.css"/>
     <link rel="stylesheet" href="lib/css/notifIt.css"/>
@@ -19,175 +21,235 @@
     <script src="lib/js/icheck.min.js"></script>
     <script src="lib/js/jquery.qtip.min.js"></script>
     <script src="lib/js/notifIt.js"></script>
-    <script src="interview.js"></script>
+    <script src="lib/js/interview.js"></script>
 
 </head>
 <body>
-<div id="header">
-    <a href="select.html" class="nav"><img src="img/back.png" alt=""/></a>
-    <span class="depart"></span>
-    <span class="time">当前已经面试: <span class="min">0</span> 分 <span class="sec">0</span> 秒</span>
-    <span class="done">已经完成:<span class="count">0</span></span>
-    <span class="wait">等待人数:<span class="count">0</span></span>
+<div class="topBar">
+    <a href="" class="back">
+        <img src="img/back.png" alt=""/>
+    </a>
+    <div class="right">
+        <span class="wait">等待人数：<span class="count">0</span></span>
+        <span class="done">已经完成：<span class="count">0</span></span>
+        <span class="time">当前已经面试： <span class="min">0</span> 分 <span class="sec">0</span> 秒</span>
+    </div>
+    <div class="title"></div>
 </div>
 
-<div id="main">
+<div class="main">
     <div class="profile">
-        <table>
-            <tr>
-                <th class="title">资料预览<div class="circle"></div></th>
-                <th class="val"></th>
-            </tr>
-            <tr>
-                <td class="prop">学号</td>
-                <td class="val">--</td>
-            </tr>
-            <tr>
-                <td class="prop">姓名</td>
-                <td class="val">--</td>
-            </tr>
-            <tr>
-                <td class="prop">性别</td>
-                <td class="val"></td>
-            </tr>
-            <tr>
-                <td class="prop">专业</td>
-                <td class="val">--</td>
-            </tr>
-            <tr>
-                <td class="prop">电话</td>
-                <td class="val">--</td>
-            </tr>
-            <tr>
-                <td class="prop">邮箱</td>
-                <td class="val">--</td>
-            </tr>
-            <tr>
-                <td class="prop">QQ</td>
-                <td class="val">--</td>
-            </tr>
-            <tr>
-                <td class="prop">个人想法</td>
-                <td class="val">--</td>
-            </tr>
-            <!--{{each extra}}-->
-            <!--<tr>-->
-                <!--<td class="prop">{{$index}}</td>-->
-            <!--<tr class="val">{{$value}}</tr>-->
-            <!--</tr>-->
-            <!--{{/each}-->
-        </table>
-        <div class="vl"></div>
-    </div>
-    <div class="rate">
-        <table>
-            <tr>
-                <th class="title">评价
-                <div class="circle"></div>
-                </th>
-
-            </tr>
-            <tr>
-                <td class="name">等级:</td>
-                <td class="val"><div class="stars"></div>
-                    <input id="score" type="text"/></td>
-            </tr>
-            <tr>
-                <td class="name">评语:</td>
-                <td class="val"><textarea name="" class="comment" cols="30" rows="10"></textarea></td>
-            </tr>
-        </table>
-        <div class="commit">提交</div>
-    </div>
-    <div class="handle">
-        <div class="recommend">推荐</div>
-        <div class="skip">跳过</div>
-    </div>
-    <div class="call">
-        <div class="special">插队</div>
-        <div class="next">下一位</div>
-    </div>
-    <div id="skip">
-        <h3>点击确定跳过此人</h3>
-        <div class="confirm">确定</div>
-    </div>
-    <div id="selectDep">
-        <h3>请选择部门</h3>
-        <ul>
-            <li>
-                <input type="radio" name="depart" id="depart-1" value="1"/>
-                <label for="depart-1">人力资源中心</label>
-            </li>
-            <li>
-                <input type="radio" name="depart" id="depart-2" value="2"/>
-                <label for="depart-2">depart-2</label>
-            </li>
-            <li>
-                <input type="radio" name="depart" id="depart-3" value="3"/>
-                <label for="depart-3">depart-3</label>
-            </li>
-
-        </ul>
-        <div class="confirm">确定</div>
-    </div>
-    <div id="appointSid">
-        <h3>请输入学号</h3>
-        <div class="sid">
-            <input type="text" name="sid" id=""/>
+        <span class="smallCircle"></span>
+        <span class="title">资料预览</span>
+        <div class="card">
+            <div class="basicInfo">
+                <div class="infoName left floated">
+                    <div>学号</div>
+                    <div>姓名</div>
+                    <div>性别</div>
+                    <div>专业</div>
+                    <div>电话</div>
+                    <div>邮箱</div>
+                    <div>QQ</div>
+                    <div>个人想法</div>
+                </div>
+                <div class="infoDetail">
+                    <div>123</div>
+                    <div>321</div>
+                    <div>22</div>
+                    <div>11</div>
+                    <div>33</div>
+                    <div>44</div>
+                    <div>55</div>
+                    <div>23</div>
+                </div>
+            </div>
+            <div class="action">
+                <div class="recommend left floated">推荐</div>
+                <div class="skip right floated">跳过</div>
+            </div>
         </div>
-        <div class="confirm">确定</div>
     </div>
-    <!--<div id="confirmCommit">-->
-        <!--<h3>请确认提交</h3>-->
+    <div class="rate right floated">
+        <span class="smallCircle"></span>
+        <span class="title">评价</span>
+        <div class="card">
+            <div class="rateInfo">
+                <div>
+                    <span>等级：</span>
+                    <div class="stars"></div>
+                    <input id="score" type="text" hidden/>
+                </div>
+                <div>
+                    <span>评语：</span>
+                    <textarea name="" class="comment" cols="32" rows="7"></textarea>
+                </div>
+                <div class="submit right floated">
+                    提交
+                </div>
+            </div>
+            <div class="action">
+                <div class="special left floated">插队</div>
+                <div class="next right floated">下一位</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--<div id="main">-->
+    <!--<div class="profile">-->
+        <!--<div>资料预览<div class="circle"></div></div>-->
+        <!--<table>-->
+            <!--<tr>-->
+                <!--<td class="prop">学号</td>-->
+                <!--<td class="val">&#45;&#45;</td>-->
+            <!--</tr>-->
+            <!--<tr>-->
+                <!--<td class="prop">姓名</td>-->
+                <!--<td class="val">&#45;&#45;</td>-->
+            <!--</tr>-->
+            <!--<tr>-->
+                <!--<td class="prop">性别</td>-->
+                <!--<td class="val"></td>-->
+            <!--</tr>-->
+            <!--<tr>-->
+                <!--<td class="prop">专业</td>-->
+                <!--<td class="val">&#45;&#45;</td>-->
+            <!--</tr>-->
+            <!--<tr>-->
+                <!--<td class="prop">电话</td>-->
+                <!--<td class="val">&#45;&#45;</td>-->
+            <!--</tr>-->
+            <!--<tr>-->
+                <!--<td class="prop">邮箱</td>-->
+                <!--<td class="val">&#45;&#45;</td>-->
+            <!--</tr>-->
+            <!--<tr>-->
+                <!--<td class="prop">QQ</td>-->
+                <!--<td class="val">&#45;&#45;</td>-->
+            <!--</tr>-->
+            <!--<tr>-->
+                <!--<td class="prop">个人想法</td>-->
+                <!--<td class="val">&#45;&#45;</td>-->
+            <!--</tr>-->
+            <!--&lt;!&ndash;{{each extra}}&ndash;&gt;-->
+            <!--&lt;!&ndash;<tr>&ndash;&gt;-->
+                <!--&lt;!&ndash;<td class="prop">{{$index}}</td>&ndash;&gt;-->
+            <!--&lt;!&ndash;<tr class="val">{{$value}}</tr>&ndash;&gt;-->
+            <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+            <!--&lt;!&ndash;{{/each}&ndash;&gt;-->
+        <!--</table>-->
+        <!--<div class="vl"></div>-->
+    <!--</div>-->
+    <!--<div class="rate">-->
+        <!--<table>-->
+            <!--<tr>-->
+                <!--<th class="title">评价-->
+                <!--<div class="circle"></div>-->
+                <!--</th>-->
+
+            <!--</tr>-->
+            <!--<tr>-->
+                <!--<td class="name">等级:</td>-->
+                <!--<td class="val"><div class="stars"></div>-->
+                    <!--<input id="score" type="text"/></td>-->
+            <!--</tr>-->
+            <!--<tr>-->
+                <!--<td class="name">评语:</td>-->
+                <!--<td class="val"><textarea name="" class="comment" cols="30" rows="10"></textarea></td>-->
+            <!--</tr>-->
+        <!--</table>-->
+        <!--<div class="commit">提交</div>-->
+    <!--</div>-->
+    <!--<div class="handle">-->
+        <!--<div class="recommend">推荐</div>-->
+        <!--<div class="skip">跳过</div>-->
+    <!--</div>-->
+    <!--<div class="call">-->
+        <!--<div class="special">插队</div>-->
+        <!--<div class="next">下一位</div>-->
+    <!--</div>-->
+    <!--<div id="skip">-->
+        <!--<h3>点击确定跳过此人</h3>-->
         <!--<div class="confirm">确定</div>-->
     <!--</div>-->
-</div>
+    <!--<div id="selectDep">-->
+        <!--<h3>请选择部门</h3>-->
+        <!--<ul>-->
+            <!--<li>-->
+                <!--<input type="radio" name="depart" id="depart-1" value="1"/>-->
+                <!--<label for="depart-1">人力资源中心</label>-->
+            <!--</li>-->
+            <!--<li>-->
+                <!--<input type="radio" name="depart" id="depart-2" value="2"/>-->
+                <!--<label for="depart-2">depart-2</label>-->
+            <!--</li>-->
+            <!--<li>-->
+                <!--<input type="radio" name="depart" id="depart-3" value="3"/>-->
+                <!--<label for="depart-3">depart-3</label>-->
+            <!--</li>-->
 
-<script id="profile" type="text/html">
-    <table class="profile">
-        <tr>
-            <th class="prop">资料预览</th>
-            <th class="val"></th>
-        </tr>
-        <tr>
-            <td class="prop">学号</td>
-            <td class="val">--</td>
-        </tr>
-        <tr>
-            <td class="prop">姓名</td>
-            <td class="val">--</td>
-        </tr>
-        <tr>
-            <td class="prop">性别</td>
-            <td class="val"></td>
-        </tr>
-        <tr>
-            <td class="prop">专业</td>
-            <td class="val">--</td>
-        </tr>
-        <tr>
-            <td class="prop">电话</td>
-            <td class="val">--</td>
-        </tr>
-        <tr>
-            <td class="prop">邮箱</td>
-            <td class="val">--</td>
-        </tr>
-        <tr>
-            <td class="prop">QQ</td>
-            <td class="val">--</td>
-        </tr>
-        <tr>
-            <td class="prop">简介</td>
-            <td class="val">--</td>
-        </tr>
-        {{each extra}}
-        <tr>
-            <td class="prop">{{$index}}</td>
-        <tr class="val">{{$value}}</tr>
-        </tr>
-        {{/each}
-    </table>
-</script>
+        <!--</ul>-->
+        <!--<div class="confirm">确定</div>-->
+    <!--</div>-->
+    <!--<div id="appointSid">-->
+        <!--<h3>请输入学号</h3>-->
+        <!--<div class="sid">-->
+            <!--<input type="text" name="sid" id=""/>-->
+        <!--</div>-->
+        <!--<div class="confirm">确定</div>-->
+    <!--</div>-->
+    <!--&lt;!&ndash;<div id="confirmCommit">&ndash;&gt;-->
+        <!--&lt;!&ndash;<h3>请确认提交</h3>&ndash;&gt;-->
+        <!--&lt;!&ndash;<div class="confirm">确定</div>&ndash;&gt;-->
+    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+<!--</div>-->
+
+<!--<script id="profile" type="text/html">-->
+    <!--<table class="profile">-->
+        <!--<tr>-->
+            <!--<th class="prop">资料预览</th>-->
+            <!--<th class="val"></th>-->
+        <!--</tr>-->
+        <!--<tr>-->
+            <!--<td class="prop">学号</td>-->
+            <!--<td class="val">&#45;&#45;</td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+            <!--<td class="prop">姓名</td>-->
+            <!--<td class="val">&#45;&#45;</td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+            <!--<td class="prop">性别</td>-->
+            <!--<td class="val"></td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+            <!--<td class="prop">专业</td>-->
+            <!--<td class="val">&#45;&#45;</td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+            <!--<td class="prop">电话</td>-->
+            <!--<td class="val">&#45;&#45;</td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+            <!--<td class="prop">邮箱</td>-->
+            <!--<td class="val">&#45;&#45;</td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+            <!--<td class="prop">QQ</td>-->
+            <!--<td class="val">&#45;&#45;</td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+            <!--<td class="prop">简介</td>-->
+            <!--<td class="val">&#45;&#45;</td>-->
+        <!--</tr>-->
+        <!--{{each extra}}-->
+        <!--<tr>-->
+            <!--<td class="prop">{{$index}}</td>-->
+        <!--<tr class="val">{{$value}}</tr>-->
+        <!--</tr>-->
+        <!--{{/each}-->
+    <!--</table>-->
+<!--</script>-->
 </body>
 </html>

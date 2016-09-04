@@ -315,15 +315,15 @@ var specialCall = function(){
     })
 };
 
-var commit = function(){
+var submit = function(){
     if(!window.interviewee){
         err('尚未有面试者');
         return;
-    };
+    }
     if(!check_stars()){
         err('请评定星级');
         return;
-    };
+    }
 //    var data = {
 //        sid:window.interviewee.sid,
 //        score:$('#main .rate .stars').raty('score'),
@@ -367,11 +367,11 @@ var recommend = function(){
     if(!window.interviewee){
         err('尚未有面试者');
         return;
-    };
+    }
     if($('#selectDep .checked').length == 0){
         err('请选择部门');
         return;
-    };
+    }
 //    var data = {
 //        sid:window.interviewee.sid,
 //        department:$('#selectDep').find('.checked input').val()
@@ -422,20 +422,16 @@ $(document).ready(function(){
         targetType : 'score',
         targetKeep : true
     });
+    rate.find(".submit").click(submit);
 
-    rate.find(".commit").click(commit);
-
-
-
-    // handle module
-    var handle = $('#main .handle');
-    handle.find('.recommend').qtip({
+    // action
+    $('.recommend').qtip({
         content:{
             text: $('#selectDep')
         }
     });
 
-    handle.find('.skip').qtip({
+    $('.skip').qtip({
         content:{
             text: $('#skip')
         },
@@ -450,9 +446,8 @@ $(document).ready(function(){
             my: 'top center'
         }
     });
-    // call module
-    var call = $('#main .call');
-    call.find('.special').qtip({
+
+    $('.special').qtip({
         content:{
             text: $('#appointSid')
         },
@@ -468,7 +463,7 @@ $(document).ready(function(){
         }
     });
 
-    call.find('.next').click(next);
+    $('.next').click(next);
 
 
     // skip module

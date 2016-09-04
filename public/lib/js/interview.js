@@ -400,6 +400,10 @@ $(document).ready(function(){
     set_property();
     update_queue();
 
+    //back button
+    $('.back').click(function () {
+       window.history.back();
+    });
 
     //set qtip
     $.fn.qtip.defaults.show.event = 'click';

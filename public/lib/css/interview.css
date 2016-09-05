@@ -1,6 +1,10 @@
 body{
   background: #edefef;
 }
+h3 {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
 textarea {
   background: #edeff0;
   border: none;
@@ -103,4 +107,17 @@ textarea {
 }
 .rateInfo span {
   vertical-align: top;
+}
+.recommendContent .confirm, .skipContent .confirm, .specialContent .confirm{
+  background: #a0cecb;
+  color: #ffffff;
+  text-align: center;
+  margin: 10px auto 2px auto;
+  width: 40px;
+  line-height: 20px;
+  cursor: pointer;
+}
+.recommendContent label {
+  padding-left: 5px;
+  line-height: 30px;
 }

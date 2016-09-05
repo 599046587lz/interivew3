@@ -26,6 +26,9 @@
     display: inline-block;
     padding-right: 10px;
 }
+.hide {
+    display: none;
+}
 .smallCircle {
     width: 15px;
     height: 15px;

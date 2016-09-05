@@ -79,7 +79,7 @@ $.ajaxSetup({
 // update queue info
 var update_queue = function(stat){
 //    var queue = {done:3,wait:50};
-    var root = $('#header');
+    var root = $('.topBar');
     var done = root.find('.done .count').text();
     root.find('.done .count').text() != 0 && root.find('.done .count').text(1*done + 1);
 //    root.find('.wait .count').text(queue.wait);
@@ -89,7 +89,6 @@ var update_queue = function(stat){
         type:'get',
         statusCode:{},
         success:function(data){
-            var root = $('#header');
             root.find('.wait .count').text(data.count);
         }
     });
@@ -111,7 +110,7 @@ var set_club = function(){
 
 // -clock
 var add_clock=function(){
-    var root = $("#header").find(".time");
+    var root = $(".topBar").find(".time");
     var sec = root.find(".sec");
     var min = root.find(".min");
     if ("59" == sec.text()) {
@@ -140,19 +139,9 @@ var stop_clock=function(){
 };
 
 var clear_clock=function(){
-    var root = $('#header .time');
-    root.find('.min, .sec').text('0').css({color:'black'});
-
+    var root = $('.topBar .time');
+    root.find('.min, .sec').text('0').css({color:'#ffffff'});
 };
-
-// -profile
-var fix_vl = function(){
-    var root = $('#main .profile');
-    var height = root.find('table').css('height');
-    root.find('.vl').css({height:height});
-};
-
-
 
 var set_property = function(){
 //    var extra = ['籍贯', '政治面貌', '出生地'];
@@ -177,32 +166,30 @@ var set_property = function(){
 };
 
 var del_profile = function(){
-    var root = $("#main .profile table");
-    root.find('td.val').text('--');
+    $('.infoDetail div').text('--');
 };
 
 var add_profile = function(){
-    var root = $('#main .profile table');
-    var tbs = root.find('td.val');
+    var items =  $('.infoDetail div');
     var interviewee = window.interviewee;
-    tbs[0].innerText = interviewee.sid;
-    tbs[1].innerText = interviewee.name;
-    tbs[2].innerText = interviewee.sex !=2 ? (interviewee.sex? '男':'女') : '--';
+    items[0].innerText = interviewee.sid;
+    items[1].innerText = interviewee.name;
+    items[2].innerText = interviewee.sex*1 !=2 ? (interviewee.sex? '男':'女') : '--';
 
-    tbs[3].innerText = interviewee.major || '--';
-    tbs[4].innerText = interviewee.phone || '--';
-    tbs[5].innerText = interviewee.email || '--';
-    tbs[6].innerText = interviewee.qq || '--';
-    tbs[7].innerText = interviewee.notion || '--';
-    var keys = Object.keys(interviewee.extra);
-    for (var i in keys){
-        tbs[(8+1*i)].innerText = interviewee.extra[keys[i]] || '--';
-    }
-    $('#main .profile').jScrollPane();
+    items[3].innerText = interviewee.major || '--';
+    items[4].innerText = interviewee.phone || '--';
+    items[5].innerText = interviewee.email || '--';
+    items[6].innerText = interviewee.qq || '--';
+    items[7].innerText = interviewee.notion || '--';
+    // var keys = Object.keys(interviewee.extra);
+    // for (var i in keys){
+    //     tbs[(8+1*i)].innerText = interviewee.extra[keys[i]] || '--';
+    // }
+    $('.scrollContainer').jScrollPane();
 };
 // -selectDep
 var set_depList = function(){
-    var selectDep = $('#selectDep');
+    var selectDep = $('.recommendContent');
     var departs = window.club.departments;
     var html = '';
     for (var i in departs){
@@ -217,17 +204,13 @@ var set_depList = function(){
 };
 // -rate
 var del_rate = function(){
-    var root = $('#main .rate');
+    var root = $('.rate');
     root.find('.comment').val('');
     root.find('.stars').raty('score',0);
 };
 
 var check_stars =function(){
-    if($('#score').val()){
-        return true;
-    }else{
-        return false;
-    }
+    return $('#score').val();
 };
 // logic helper
 var finish = function(){
@@ -250,7 +233,7 @@ var next = function(){
      if(window.interviewee){
         err('请先评定,推荐,或者跳过当前面试者');
         return;
-    };
+    }
 //    window.interviewee = {
 //        sid: 12062136,
 //        name: '赵健',
@@ -306,9 +289,8 @@ var specialCall = function(){
     $.ajax({
         url:urlRoot + 'interview/call',
         type:'get',
-        data:{sid:$('#appointSid input').val()},
+        data:{sid:$('.specialContent input').val()},
         success:function(data){
-
             window.interviewee = data;
             start();
         }
@@ -324,6 +306,9 @@ var submit = function(){
         err('请评定星级');
         return;
     }
+    if (!confirm('确认提交？'))  {
+        return;
+    }
 //    var data = {
 //        sid:window.interviewee.sid,
 //        score:$('#main .rate .stars').raty('score'),
@@ -335,8 +320,8 @@ var submit = function(){
         type:'post',
         data:{
             sid:window.interviewee.sid,
-            score:$('#main .rate .stars').raty('score'),
-            comment:$('#main .rate .comment').val()
+            score:$('.rate .stars').raty('score'),
+            comment:$('.rate .comment').val()
         },
         success:function(){
             finish();
@@ -368,7 +353,7 @@ var recommend = function(){
         err('尚未有面试者');
         return;
     }
-    if($('#selectDep .checked').length == 0){
+    if($('.recommendContent .checked').length == 0){
         err('请选择部门');
         return;
     }
@@ -384,7 +369,7 @@ var recommend = function(){
         type:'post',
         data:{
             sid:window.interviewee.sid,
-            department:$('#selectDep').find('.checked input').val()
+            department:$('.recommendContent').find('.checked input').val()
         },
         success:function(){
             $('.qtip').hide();
@@ -397,7 +382,7 @@ $(document).ready(function(){
     set_club();
     set_depName();
     set_depList();
-    set_property();
+    // set_property();
     update_queue();
 
     //back button
@@ -407,7 +392,7 @@ $(document).ready(function(){
 
     //set qtip
     $.fn.qtip.defaults.show.event = 'click';
-    $.fn.qtip.defaults.hide.event = 'unfocus';
+    $.fn.qtip.defaults.hide.event = 'click';
     $.fn.qtip.defaults.position.my = 'top center';
     $.fn.qtip.defaults.position.at = 'bottom center';
     $.fn.qtip.defaults.style.classes = 'qtip-light';
@@ -431,19 +416,13 @@ $(document).ready(function(){
     // action
     $('.recommend').qtip({
         content:{
-            text: $('#selectDep')
+            text: $('.recommendContent')
         }
     });
 
     $('.skip').qtip({
         content:{
-            text: $('#skip')
-        },
-        show:{
-            event:'click'
-        },
-        hide:{
-            event:'unfocus'
+            text: $('.skipContent')
         },
         position:{
             at: 'bottom center',
@@ -453,13 +432,7 @@ $(document).ready(function(){
 
     $('.special').qtip({
         content:{
-            text: $('#appointSid')
-        },
-        show:{
-            event:'click'
-        },
-        hide:{
-            event: 'unfocus'
+            text: $('.specialContent')
         },
         position:{
             at: 'bottom center',
@@ -471,8 +444,8 @@ $(document).ready(function(){
 
 
     // skip module
-    $('#skip .confirm').click(skip);
+    $('.skipContent .confirm').click(skip);
 
     // appointSid
-    $('#appointSid .confirm').click(specialCall);
+    $('.specialContent .confirm').click(specialCall);
 });

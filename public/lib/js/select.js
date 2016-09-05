@@ -63,8 +63,8 @@ var relogin = function (){
 
 var setInterviewer = function(){
 	var did = $("#_select").val();
-	var interviewer = $("[name=interviewer]").val();
-	if ( interviewer == ""){
+	var interviewer = $("input[name=interviewer]").val();
+	if ( !interviewer ){
 		err("请输入姓名");
 		return false;
 	}
@@ -86,7 +86,7 @@ var setInterviewer = function(){
 				setTimeout(function(){
 					var _did = $("#_select").val();
 					var name = $("#_select [value=" + _did + "]").text();
-					window.location.href = "interview.html#" + encodeURIComponent(name);
+					window.location.href = "interview.html#" + encodeURIComponent(name) + '-' + encodeURIComponent(interviewer);
 				}, 500);				
 			},
 			500 : function(){

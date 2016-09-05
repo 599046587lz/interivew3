@@ -3,6 +3,7 @@
     height: 50px;
     background: #7a9ece;
     box-shadow: 0 0 15px #aaa;
+    color: #ffffff;
 }
 .topBar img, header img {
     height: 20px;
@@ -11,12 +12,22 @@
     display: inline-block;
     float: left;
     padding: 12px;
+    padding-left: 22px;
 }
 .topBar .title {
     text-align: center;
-    color: #ffffff;
     line-height: 50px;
     font-size: 15px;
+    margin: auto;
+    max-width: 500px;
+}
+.topBar .right {
+    float: right;
+    display: inline-block;
+    padding-right: 10px;
+}
+.hide {
+    display: none;
 }
 .smallCircle {
     width: 15px;
@@ -24,6 +35,12 @@
     display: inline-block;
     border: 2px solid #91beb9;
     border-radius: 100px;
+}
+.right.floated{
+    float: right;
+}
+.left.floated {
+    float: left;
 }
 .loading {
     position: relative;

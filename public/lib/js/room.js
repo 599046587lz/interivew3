@@ -301,6 +301,9 @@ var waitline = function(data){
 };
 
 $(function(){
+	$('.back').click(function () {
+		window.history.back();
+	});
 	set_club();
 	set_interval();
 	interviewed = new storage("interviewed");

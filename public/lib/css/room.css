@@ -1,170 +1,83 @@
 body {
   background: #edeff0;
 }
-#header {
+table {
   width: 100%;
-  height: 44px;
-  background: #fff;
 }
-#header ._nav {
-  height: 44px;
+input[name=sid] {
+  width: 120px;
+  vertical-align: baseline;
+  margin-right: 15px;
 }
-#header ._nav li {
-  float: left;
-  width: 100px;
-  height: 44px;
-  line-height: 44px;
-  font-size: 14px;
-  color: #606060;
+table tr {
+  line-height: 45px;
   text-align: center;
-  background: url("../../img/nav_li_bg.png") no-repeat right;
 }
-#header ._nav .navigation {
-  width: 58px;
-  background:  none;
-}
-#room {
-  width: 800px;
-  margin-top: 66px;
-}
-#room .ring {
-  display: inline-block;
-  width: 14px;
-  height: 14px;
-  border-radius: 14px;
-  border: 2px solid #b9d22f;
-  margin: 0 10px 0 15px;
-}
-#room .current {
-  width: 800px;
-}
-#room .current li {
-  background: #fff;
-  color: #335dfb;
-  font-size: 20px;
-  line-height: 40px;
-  margin-top: 8px;
-}
-#room .current li:first-child {
-  background: #335dfb;
-  height: 70px;
-  line-height: 70px;
-  font-size: 28px;
-  color: #fff;
-  margin-top: 0;
-}
-#room .list_wrap{
-  max-height: 272px;
-}
-#room .list {
-  width: 800px;
-  max-height: 272px;
-  overflow-y: scroll;
-  outline: none;
-  text-align: center;
-  border-collapse: separate;
-}
-#room .list tr {
-  overflow: hidden;
-}
-#room .list td,
-#room .list th {
-  width: 160px;
-  height: 32px;
-  line-height: 32px;
-  font-size: 14px;
-}
-#room .list td {
-  color: #686868;
-  border-spacing: 5px;
-  background: #fff;
-  border-top: #edeff0 4px solid;
-  border-bottom: #edeff0 4px solid;
-}
-#room .list th {
-  color: #335dfb;
-}
-#room .list td:first-child, #room .list th:first-child{
-  width: 60px !important;
-}
-#room .depart {
-  width: 260px !important;
-}
-#room .func_bar {
-  width: 100%;
-  height: 60px;
-  background: #fff;
-  border-top: #edeff0 4px solid;
-  line-height: 60px;
-  font-size: 14px;
-  position: relative;
-}
-#room .count {
-  display: inline-block;
-  height: 60px;
-  float: left;
-  padding-left: 38px;
-}
-#room .signin {
-  float: right;
-  padding-right: 38px;
-}
-#room .signin label {
-  vertical-align: middle;
-}
-#room #add {
-  border: none;
-  background: #4b6ffa;
-  color: #fff;
-  font-family: inherit;
-  width: 80px;
-  height: 40px;
+table thead {
+  color: #7a9ece;
+  font-weight: bold;
   font-size: 15px;
-  border-radius: 5px;
-  cursor: pointer;
 }
-#selectDep {
-  width: 598px;
-  border: #dedede 1px solid;
-  display: inline-block;
-  background: #fff;
-  position: absolute;
-  top: 52px;
-  right: 37px;
+.room {
+  width: 800px;
+  margin: 60px auto;
 }
-#selectDep ._select {
-  text-align: center;
-  background: #ededed;
-  line-height: 32px;
-  font-size: 12px;
-  font-weight: normal;
+.room .current .calling {
+  color: #313132;
+  font-size: 20px;
+  font-weight: bold;
+  vertical-align: text-bottom;
+  padding-left: 5px;
 }
-#departments {
-  display: inline-block;
+.room .waitingList {
+  margin-top: 10px;
   width: 100%;
-  color: #7c7c7c;
+  background: #ffffff;
+  max-height: 315px;
 }
-#departments li {
-  float: left;
-  line-height: 22px;
-  margin: 3px 10px;
-}
-#departments li label {
-  height: 25px;
-  display: block;
-}
-#subDep {
-  color: #728310;
-  background: #b3ce1d;
-  width: 65px;
-  height: 20px;
-  border-radius: 3px;
-  border: none;
-  font-family: inherit;
-  font-size: 10px;
-  padding: 0;
-  float: right;
+.room .selectDepContainer {
   text-align: center;
-  margin: 0 10px 10px 10px;
+  margin-top: 20px;
+}
+.room .selectDep {
+  display: inline-block;
+  min-width: 500px;
+}
+.room .info {
+  line-height: 45px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-top: 10px;
+  background: #ffffff;
+  color: #000000;
+}
+.selectDep .header {
+  background: #7a9ece;
+  line-height: 40px;
+  color: #ffffff;
+}
+.selectDep .content {
+  padding: 10px;
+  background: #ffffff;
+  text-align: left;
+  overflow: auto;
+}
+.selectDep .list {
+  display: inline-block;
+}
+.selectDep .content .item {
+  display: inline-block;
+  padding-right: 10px;
+  line-height: 30px;
+}
+.selectDep .submit, .info .submit{
+  width: 80px;
+  line-height: 25px;
+  text-align: center;
+  background: #a0cecb;
+  color: #ffffff;
+  font-size: 15px;
+  border-radius: 30px;
   cursor: pointer;
+  display: inline-block;
 }

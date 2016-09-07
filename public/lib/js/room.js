@@ -6,9 +6,9 @@ ioURL   = '/';
 interviewee_queue = [];
 interviewee_data_queue = [];
 reconnect_times = 0;
+club = {};
 // -set club
 var set_club = function(){
-	club = {};
 	$.ajax({
 		url : baseURL + '/club/profile',
 		type : 'get',
@@ -59,7 +59,7 @@ var reconnect = function(){
 	socket.emit('init', {cid: club.cid});
 };
 var refit = function(){
-	$(".list_wrap").jScrollPane();
+	$(".waitingList").jScrollPane();
 }
 // ajax helper
 var ajaxHandler = function(func){
@@ -133,15 +133,13 @@ var check_queue = function(){
 	if (!message)
 		return ;
 	var data = interviewee_data_queue.pop();
-	_message = message.replace(/\s/ig,'');
-	var html = "<li><span class=\"ring\"></span>" + _message + "</li>"
-	var _target = $(".oncalling");
-	var message = message.replace(/(室|试)/g, "是");
-	var len = _target.find("li").length;
+	var html = "<div><span class='smallCircle'></span><span class='calling'>" + message.replace(/\s/ig,'') + "</span></div>";
+	var _target = $(".current");
+	var len = _target.find("div").length;
 	if (len < 3){
 		_target.prepend(html);	
 	} else {
-		_target.find("li:last").remove();
+		_target.find("div:last").remove();
 		_target.prepend(html).show(1000);
 	}
 	_target.find("._default").remove();
@@ -149,16 +147,17 @@ var check_queue = function(){
 		console.log($(".stu-" + data.sid));
 		$(".stu-" + data.sid).remove();
 		waiting.cut();
-		waiting.display('.waiting');
+		waiting.display('.waitingNumber');
 		refit();
 	}
 	var iframe = $("iframe").eq(0);
-	var src = ttsAPI.replace(/_WORDS_/ig, encodeURIComponent(message));
+	var src = ttsAPI.replace(/_WORDS_/ig, encodeURIComponent(message.replace(/(室|试)/g, "是")));
 	iframe.attr("src", src);
+
 	interviewed.add();
-	interviewed.display('.interviewed');
-	waiting_html.set($(".list").html());
-	current_html.set($(".oncalling").html());
+	interviewed.display('.interviewedNumber');
+	waiting_html.set($(".waitingList tbody").html());
+	current_html.set(_target.html());
 };
 
 var set_interval = function(){
@@ -167,8 +166,9 @@ var set_interval = function(){
 
 //init Departments
 var set_department = function(){
+	var listContainer = $('.selectDep .content .list');
 	var output      = ""; 
-	var template    = "<li>\n<label><input type=\"checkbox\" name=\"department\" data-id=\"ROOM\" value=\"DID\">NAME</label></li>";
+	var template    = "<div class='item'><label><input type=\"checkbox\" name=\"department\" data-id=\"ROOM\" value=\"DID\">NAME</label></div>";
 	var dep = club.departments;
 	for( var i in dep){
 		if (dep[i]){
@@ -179,24 +179,24 @@ var set_department = function(){
 			output += out;
 		}
 	}
-	$("#departments").html(output);
-  var selectDep = $('#selectDep');
-  selectDep.find('input').iCheck({checkboxClass: 'icheckbox_square-blue',
+	listContainer.html(output);
+  	listContainer.find('input').iCheck({checkboxClass: 'icheckbox_square-blue',
       radioClass: 'iradio_square-blue'});
-	selectDep.find('label,ins').on('click', function(){
+	listContainer.find('label,ins').on('click', function(){
 		var _count = $("[name=department]:checked").length;
 		if (_count > club.maxDep){
-			var _result = $(this).parents("li").find("input").iCheck('uncheck');
+			$(this).parent().find('input').iCheck('uncheck');
 			err('至多选择' + club.maxDep + '个部门!');
 		}
 	});
 }
 // -signin
 var signin = function(){
-	var stuID = $("#sign").val();
-	if(stuID == ""){
+	var input = $("input[name=sid]");
+	var stuID = input.val();
+	if(!stuID){
 		err("请输入学号");
-		$("#sign").focus();
+		input.focus();
 		return false;
 	}
 	$.ajax({
@@ -234,18 +234,18 @@ var signin = function(){
 };
 // -select departments div fadein
 var selectDepDiv = function(){
-	var selectDep = $('#selectDep');
+	var selectDep = $('.selectDepContainer');
 	selectDep.find('input').iCheck('uncheck');
 	selectDep.fadeIn();
 };
 var selectDepart = function(){
 	var did = [];
-	var stuID = $("#sign").val();
+	var stuID = $("input[name=sid]").val();
 	var department = $("[name=department]:checked");
 	if (!department.length){
 		err("请至少勾选一个部门！");
 		return false;
-	};
+	}
 	department.each(function(){
 		did.push($(this).val());
 	});
@@ -268,61 +268,72 @@ var selectDepart = function(){
 			200 : function(data){
 				success("签到成功!");
 				waitline(data);
-				$('#selectDep').fadeOut();
+				$('.selectDepContainer').fadeOut();
 			}
 		}
 	});
 };
 var waitline = function(data){
 	console.log(data);
-	var template = "<tr class=\"stu-%SID%\"> \n <td>%NUMBER%</td> \n <td>%SID%</td> \n "
-								+"<td>%NAME%</td> \n <td class=\"depart\" title=\"%DEPARTMENTS%\">%DEPARTMENT%</td> \n <td>%ROOM%";
+	var waitingContainer = $('.waitingList tbody');
+	var template = "<tr class=\"stu-%SID%\">" +
+		"<td>%NUMBER%</td>" +
+		"<td>%SID%</td>" +
+		"<td>%NAME%</td>" +
+		"<td class=\"depart\" title=\"%DEPARTMENTS%\">%DEPARTMENT%</td>" +
+		"<td>%ROOM%</td>" +
+		"</tr>";
 	var output = template.replace(/%NUMBER%/ig, wait_num.add());
 	var depart = data.volunteer;
 	var did = $("[name=department][value=" + depart[0] + "]");
 	var room = did.attr("data-id");
-	var departs =  did.parents("label").text();
+	var departs =  did.parents('label').text();
 	var departments = departs;
 	for (i = 1; i < depart.length ; ++i){
-		departments += ', ' + $("[name=department][value=" + depart[i] + "]").parents("label").text();
+		departments += ', ' + $("[name=department][value=" + depart[i] + "]").parents('label').text();
 	}
-	departs = departs + ((depart.length != 1) ? "等" + depart.length + "个部门" : "");	
+	departs = departs + ((depart.length != 1) ? "等" + depart.length + "个部门" : "");
 	output = output.replace(/%SID%/ig, data.sid);
 	output = output.replace(/%NAME%/ig, data.name);
 	output = output.replace(/%DEPARTMENT%/ig, departs);
 	output = output.replace(/%DEPARTMENTS%/ig, departments);
 	output = output.replace(/%ROOM%/ig, room);
-	$(".list tbody").append(output);
-	$(".list ._default").remove();
+	waitingContainer.append(output);
+	$(".waitingList ._default").remove();
 	waiting.add();
-	waiting.display('.waiting');
-	waiting_html.set($(".list").html());
+	waiting.display('.waitingNumber');
+	waiting_html.set(waitingContainer.html());
 	refit();
 };
 
 $(function(){
+	$('.back').click(function () {
+		window.history.back();
+	});
 	set_club();
 	set_interval();
+	//已面试人数
 	interviewed = new storage("interviewed");
+	//等待人数
 	waiting     = new storage("waiting");
 	waiting_html= new storage("waiting_html");
+	//等待者的最大号码
 	wait_num    = new storage("wait_num");
 	current_html= new storage("current_html");
-	interviewed.display('.interviewed');
-	waiting.display('.waiting');
+	interviewed.display('.interviewedNumber');
+	waiting.display('waitingNumber');
 	if ( waiting_html.val != '0')
-		waiting_html.display('.list');
+		waiting_html.display('.waitingList body');
 	if ( current_html.val != '0')
-		current_html.display('.oncalling');
-//bind events
+		current_html.display('.current');
+
+	refit();
+	//bind events
 	//signin button function
-	$("#add").click(function(){
-		signin();
-	})
+	$(".signin .submit").click(signin);
 	//select department submit button
-	$("#subDep").click(function(){
-		selectDepart();
-	});
+	$(".selectDep .submit").click(selectDepart);
+
 	socket = io.connect(ioURL);
 	socket.on('call', function(data){
 		console.log(data);

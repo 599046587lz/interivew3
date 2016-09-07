@@ -3,8 +3,9 @@
 	<meta charset="utf-8">
 	<title>叫号大厅</title>
 	<link rel="stylesheet" type="text/css" href="lib/css/reset.css">
+	<link rel="stylesheet" type="text/css" href="lib/css/common.css">
 	<link rel="stylesheet" type="text/css" href="lib/css/room.css">
-  <link rel="stylesheet" type="text/css" href="lib/css/square/blue.css"/>
+  	<link rel="stylesheet" type="text/css" href="lib/css/square/blue.css"/>
 	<link rel="stylesheet" type="text/css" href="lib/css/jquery.jscrollpane.css" />
 	<link rel="stylesheet" type="text/css" href="lib/css/notifIt.css" />
 	<script type="text/javascript" src="lib/js/jquery-1.11.1.min.js"></script>
@@ -25,65 +26,58 @@
 	<script src="http://www.redhome.cc/wp-content/themes/redhome/js/html5.js"></script>
 <![endif]-->
 <body>
-<header id="header" class="align_c">
-	<ul class="_nav">
-		<li class="navigation"> 
-			<a href="select.html"><img src="./img/back.png" /></a> 
-		</li>
-		<li>叫号大厅</li>
-	</ul>
-</header>
-<section id="room" class="align_c">
-	<section class="current">
-		<ul class="oncalling">
-			<li class="_default"><span class="ring"></span>暂无呼叫</li>
-		</ul>
-	</section>
-	<div class="list_wrap">
-		<table class="list">
+<div class="topBar">
+	<a href="" class="back">
+		<img src="./img/back.png" />
+	</a>
+	<div class="title">叫号大厅</div>
+</div>
+<div class="room">
+	<div class="current">
+		<div class="_default">
+			<span class="smallCircle"></span><span class="calling">暂无呼叫</span>
+		</div>
+	</div>
+	<div class="waitingList">
+		<table>
 			<thead>
-				<tr>
-					<th>号码</th>
-					<th>学号</th>
-					<th>姓名</th>
-					<th class="depart">意向部门</th>
-					<th>面试教室</th>
-				</tr>
+			<tr>
+				<td>号码</td>
+				<td>学号</td>
+				<td>姓名</td>
+				<td>意向部门</td>
+				<td>面试教室</td>
+			</tr>
 			</thead>
 			<tbody>
-				<tr class="_default">
-					<td>--</td>
-					<td>--------</td>
-					<td>------</td>
-					<td class="depart">------</td>
-					<td>---</td>
-				</tr>
+			<tr class="_default">
+				<td>23</td>
+				<td>23</td>
+				<td>23</td>
+				<td>23</td>
+				<td>23</td>
+			</tr>
 			</tbody>
 		</table>
 	</div>
-	<section class="func_bar">
-		<span class="count">
-			已面试 <b class="interviewed">0</b> 人，还有 <b class="waiting">0</b> 人等待中。
-		</span>
-		<section class="signin">
-			<label for="sign">请输入报名者学号</label>
-			<input type="text" id="sign" name="studentID" placeholder="学号" />
-			<input type="button" value="签到" id="add" />
-			<section class="feedback">
-
-			</section>
-		</section>
-		<section id="selectDep" style="display:none;">
-			<h3 class="_select">选择意向部门</h3>
-			<ul id="departments">
-				<li>
-					<label><input type="checkbox" name="department" value="">部门载入中...</label>
-				</li>
-			</ul>
-			<input type="button" value="提交" id="subDep">
-		</section>
-	</section>
-</section>
-<iframe src="" id="frameboard" style="display:none;" frameborder="0"></iframe>
+	<div class="info">
+		<span>已面试 <span class="interviewedNumber">0</span> 人，还有 <span class="waitingNumber">0</span> 人等待</span>
+		<div class="signin right floated">
+			<span>请输入签到者学号：</span>
+			<input type="text" name="sid">
+			<div class="submit">签到</div>
+		</div>
+	</div>
+	<div class="selectDepContainer hide">
+		<div class="selectDep">
+			<div class="header">选择意向部门</div>
+			<div class="content">
+				<div class="list"></div>
+				<div class="submit right floated">提交</div>
+			</div>
+		</div>
+	</div>
+</div>
+<iframe src="" id="frameboard" class="hide" frameborder="0"></iframe>
 </body>
 </html>

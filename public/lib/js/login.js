@@ -40,7 +40,9 @@ $(".button").click(function(){
 			},
 			204 : function(){
 				success('登陆成功!');
-				window.location.href = "select.html";
+				setTimeout(function () {
+						window.location.href = "select.html";
+					}, 500)
 			},
 			500 : function(){
 				err('服务器错误,请重试!');

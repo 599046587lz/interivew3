@@ -51,7 +51,7 @@ body
     width: 80%;
     display: inline-block;
 }
-.right_content input {
+.right_content input,.right_content .button{
     width: 100%;
     color: #ffffff;
     font-size: 22px;
@@ -71,7 +71,7 @@ input.password{
     margin-top: 20px;
     background-image: url("../../img/lock.png");
 }
-input.button{
+.right_content .button{
     padding: 0;
     margin-top: 50px;
     cursor: pointer;

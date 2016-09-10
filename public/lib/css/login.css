@@ -1,114 +1,84 @@
-@media screen and (max-width: 1920px) {
-  body {
-    background: url("../../img/background_1920.jpg") no-repeat;
-  }
+*
+{
+    margin: 0;
+    padding: 0;
 }
-@media screen and (max-width: 1600px) {
-  body {
-    background: url("../../img/background_1600.jpg") no-repeat;
-  }
+html
+{
+    width: 100%;
+    height: 100%;
 }
-@media screen and (max-width: 1440px) {
-  body {
-    background: url("../../img/background_1440.jpg") no-repeat;
-  }
+body
+{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: url("../../img/background.png") no-repeat;
+    background-size: cover;
+    background-position-y: 100%;
+    background-position-x: 50%;
 }
-@media screen and (max-width: 1366px) {
-  body {
-    background: url("../../img/background_1366.jpg") no-repeat;
-  }
+.main {
+    position: absolute;
+    margin: auto;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    min-width: 800px;
+    max-width: 1200px;
+    width: 60%;
+    height: 300px;
 }
-@media screen and (max-width: 1024px) {
-  body {
-    background: url("../../img/background_1024.jpg") no-repeat;
-  }
+.left_content {
+    width: 49%;
+    border-right: 1px solid #d8dae1;
+    padding: 20px 0;
+    float: left;
 }
-@media screen and (min-width: 1921px) {
-  body {
-    background: url("../../img/background_2560.jpg") no-repeat;
-  }
+.left_content .image_content {
+    padding-right: 50px;
 }
-.align_c {
-  margin: 0 auto;
+.left_content img {
+    width: 100%;
 }
-.login {
-  width: 100%;
-  height: 100%;
+.right_content {
+    width: 50%;
+    float: right;
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
-.login .main {
-  position: absolute;
-  margin: auto;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  width: 480px;
-  height: 280px;
-  background: #e6e6e6;
-  background: rgba(230,230,230,0.9);
-  border-radius: 5px;
-  -moz-opacity: 0.9;
-  -khtml-opacity: 0.9;
-  filter: alpha ( opacity = 90 );
+.right_content form {
+    width: 80%;
+    display: inline-block;
 }
-.login .main .hidden {
-  display: none;
+.right_content input {
+    width: 100%;
+    color: #ffffff;
+    font-size: 22px;
+    border: none;
+    background-color: rgba(19,30,47,0.6);
+    line-height: 45px;
+    background-repeat: no-repeat;
+    background-size: 22px;
+    background-position-x: 10px;
+    background-position-y: 9px;
+    padding-left: 43px;
 }
-.login .main h1 {
-  width: 380px;
-  margin-top: -25px;
+input.account{
+    background-image: url("../../img/user.png");
 }
-.login .main .balloon {
-  width: 45px;
-  height: 56px;
-  background: url("../../img/balloon.png") no-repeat;
-  position: absolute;
-  right: 0;
-  top: -1px;
+input.password{
+    margin-top: 20px;
+    background-image: url("../../img/lock.png");
 }
-.login form {
-  z-index: 1;
-}
-.login form .input {
-  font: bold 14px/33px '黑体';
-  border: 1px solid #e4e4e4;
-  width: 381px;
-  height: 33px;
-  display: block;
-}
-.login form .account {
-  margin-top: 44px;
-}
-.login form .account::-webkit-input-placeholder,
-.login form .password::-webkit-input-placeholder {
-  color: #d2d2d2;
-  font: italic 14px/33px '黑体';
-}
-.login form .account:-moz-placeholder,
-.login form .password:-moz-placeholder {
-  color: #d2d2d2;
-  font: italic 14px/33px '黑体';
-}
-.login form .account::-moz-placeholder,
-.login form .password::-moz-placeholder {
-  color: #d2d2d2;
-  font: italic 14px/33px '黑体';
-}
-.login form .account:-ms-input-placeholder,
-.login form .password:-ms-input-placeholder {
-  color: #d2d2d2;
-  font: italic 14px/33px '黑体';
-}
-.login form .password {
-  margin-top: 17px;
-}
-.login form .button {
-  margin-top: 44px;
-  display: block;
-  width: 381px;
-  height: 33px;
-  border: none;
-  background: #b3ce1e;
-  color: #71830f;
-  font: bold 16px/33px '黑体';
+input.button{
+    padding: 0;
+    margin-top: 50px;
+    cursor: pointer;
+    background: transparent;
+    border: 2px solid #dcdde3;
+    border-radius: 120px;
+    outline: none;
 }

@@ -28,32 +28,15 @@ $(".button").click(function(){
 		data : {user: account, password: $.md5(password)},
 		dataType : 'json',
 		beforeSend : function(){
-			$(".button").val("登录中...");
-		},
-		success : function(data){
-/*			if (data.status == 'failed'){
-				err('登陆失败');
-				$("[name=account]").focus().val('');
-				$("[name=password]").val('');
-				setTimeout($(".button").val("登录"),2000)
-			}
-			} else {
-				window.location.href = '/Select';
-			};*/
+			$(".button").addClass('loading');
 		},
 		statusCode : {
 			404 : function(){
 				err("Page not found!");
-				setTimeout(function(){
-					$(".button").val("登录")
-				}, 2000);	
 			},
 			403 : function(){
 				err("帐号或密码错误！");
 				$("[name=account]").focus();
-				setTimeout(function(){
-					$(".button").val("登录")
-				}, 2000);		
 			},
 			204 : function(){
 				success('登陆成功!');
@@ -62,8 +45,10 @@ $(".button").click(function(){
 			500 : function(){
 				err('服务器错误,请重试!');
 			}
+		},
+		complete: function () {
+			$(".button").removeClass('loading');
 		}
 	});
-
 });
 });

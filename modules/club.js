@@ -118,7 +118,7 @@ exports.handleArchive = function (file, cid, callback){
                                 }
                                 else {
                                     var d = deps[worksheet[cellName].v];
-                                    if (!isNaN(d)) {
+                                    if (!isNaN(d * 1)) {
                                         if (!interviewee['volunteer']) {
                                             interviewee['volunteer'] = [];
                                         }

@@ -42,6 +42,9 @@
 .left.floated {
     float: left;
 }
+.underline{
+    text-decoration: underline;
+}
 .loading {
     position: relative;
     pointer-events: none;

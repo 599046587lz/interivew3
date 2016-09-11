@@ -36,7 +36,7 @@ exports.selectDep = function (sid, cid, did, callback) {
                 callback(null, interviewee);
             }
         });
-    });
+    });9
 };
 
 exports.addDep = function (sid, name, cid, did, callback){

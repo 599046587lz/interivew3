@@ -70,6 +70,10 @@ var Interviewee = new mongoose.Schema({
         type: Boolean,
         default: false
     }   //是否正在面试
+/*    calling:{
+        type: Boolean,
+        default: false
+    } //是否正在和叫号大厅传输该学生信息*/
 });
 
 exports.Interviewee = mongoose.model('interviewee', Interviewee);

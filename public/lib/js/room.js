@@ -336,6 +336,7 @@ $(function(){
 
 	socket = io.connect(ioURL);
 	socket.on('call', function(data){
+		socket.emit('success');
 		console.log(data);
 		var did = $("[name=department][value=" + data.did + "]");
 		var room = did.attr("data-id").split("").join(" ");

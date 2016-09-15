@@ -59,8 +59,8 @@ router.get('/call', function (req, res){
         res.send(403);
     }
     if (!sid){
-        Interviewee.getNextInterviewee(cid, department, function (err, interviewee){
-            if (err){
+        Interviewee.getNextInterviewee(cid, department, function (err, interviewee) {
+            if (err) {
                 if (!!err['sid']){
                     return res.json(err.code || 500, err);
                 } else {
@@ -70,8 +70,20 @@ router.get('/call', function (req, res){
                 if (!!interviewee){
                     interviewee = interviewee.toObject();
                     interviewee.did = department;
-                    res.json(interviewee);
+                    var timer = setTimeout(function (){
+                        Interviewee.recoverInterviewee(interviewee.sid, cid, did, function (err) {
+                            if(err)
+                                res.send(501);
+                            else
+                                res.send(500);
+                        })
+                    }, 1000);
                     global.io.to(cid).emit('call', interviewee);
+                    global.io.to(cid).on('success', function () {
+                        clearTimeout(timer);
+                        res.json(interviewee);
+                    });
+
                 } else {
                     res.send(404);
                 }
@@ -89,8 +101,21 @@ router.get('/call', function (req, res){
                 if (!!interviewee){
                     interviewee = interviewee.toObject();
                     interviewee.did = department;
-                    res.json(interviewee);
+                    var timer = setTimeout(function (){
+                        Interviewee.recoverInterviewee(interviewee.sid, cid, did, function (err) {
+                            if(err)
+                                res.send(501);
+                            else
+                                res.send(500);
+                        })
+                    }, 1000);
                     global.io.to(cid).emit('call', interviewee);
+                    global.io.to(cid).on('success', function () {
+                        clearTimeout(timer);
+                        res.json(interviewee);
+                    });
+
+
                 } else {
                     res.send(404);
                 }

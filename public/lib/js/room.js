@@ -214,6 +214,9 @@ var signin = function(){
 			404 : function(){
 				err("Page not found!");
 			},
+			204 : function () {
+				err("该学生已经签到过了!")
+			},
 			403 : function(){
 				err("未登录或登录超时!");
 				relogin();	

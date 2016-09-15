@@ -70,14 +70,14 @@ router.get('/call', function (req, res){
                 if (!!interviewee){
                     interviewee = interviewee.toObject();
                     interviewee.did = department;
-                    var timer = setTimeout(function (){
+                   var timer = setTimeout(function (){
                         Interviewee.recoverInterviewee(interviewee.sid, cid, did, function (err) {
                             if(err)
                                 res.send(501);
                             else
                                 res.send(500);
                         })
-                    }, 1000);
+                   }, 1000);
                     global.io.to(cid).emit('call', interviewee);
                     global.io.to(cid).on('success', function () {
                         clearTimeout(timer);

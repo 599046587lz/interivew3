@@ -17,20 +17,26 @@ exports.getStuBySid = function (sid, cid, did, callback) {
 };
 
 exports.sign = function (sid, cid, callback) {
-    var date = new Date();
-    Interviewee.findOneAndUpdate({
+
+    Interviewee.findOne({
         sid: sid,
-        cid: cid
-    },{
-        signTime: date
-    }, function (err, doc){
-        if (err){
+        cid: cid,
+    }).exec(function(err,doc){
+        if(err)
             callback(err);
-        } else {
-            if (!!doc){
-                callback(null, doc);
-            } else {
-                callback(null, false);
+        else{
+            if(!doc){
+                callback(205);
+            }
+            else{
+                if(doc.signTime){
+                    callback(204);
+                }
+                else{
+                    doc.signTime = new Date();
+                    doc.save();
+                    callback(null, doc);
+                }
             }
         }
     });

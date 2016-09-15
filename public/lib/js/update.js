@@ -63,7 +63,7 @@ $(function () {
                     if ("success" == data.status) {
                         alert("上传成功");
                     } else if (404 == data.code) {
-                        alert("文件内容不正确");
+                        alert("第" + data.line + "行学号为" + data.interviewee.sid +"的信息在 学号，性别，qq，电话中有格式错误");
                     } else {
                         alert("上传失败");
                     }

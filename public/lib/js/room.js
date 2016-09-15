@@ -109,7 +109,7 @@ storage.prototype = {
 		this.setStorage();
 		return this.val;
 	},		
-	val: function(){
+	get: function(){
 		return this.val;
 	},
 	set: function(val){
@@ -321,9 +321,9 @@ $(function(){
 	wait_num    = new storage("wait_num");
 	current_html= new storage("current_html");
 	interviewed.display('.interviewedNumber');
-	waiting.display('waitingNumber');
+	waiting.display('.waitingNumber');
 	if ( waiting_html.val != '0')
-		waiting_html.display('.waitingList body');
+		waiting_html.display('.waitingList tbody');
 	if ( current_html.val != '0')
 		current_html.display('.current');
 

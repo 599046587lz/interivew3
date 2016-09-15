@@ -250,14 +250,15 @@ var next = function(){
 //    };
 //    start();
 //    return;
+    $('.next').addClass('loading');
     $.ajax({
         url:urlRoot + 'interview/call',
 //        async:false,
         type:'get',
         success:function(data){
-
             window.interviewee = data;
             start();
+            $('.next').removeClass('loading');
         }
     });
 

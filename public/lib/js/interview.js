@@ -258,6 +258,8 @@ var next = function(){
         success:function(data){
             window.interviewee = data;
             start();
+        },
+        complete: function () {
             $('.next').removeClass('loading');
         }
     });

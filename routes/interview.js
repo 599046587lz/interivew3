@@ -74,7 +74,7 @@ router.get('/call', function (req, res){
                         Interviewee.recoverInterviewee(interviewee.sid, cid, did, function (err) {
                             res.status(err).json({sid: interviewee.sid});
                         })
-                   }, 20000);
+                   }, 2000);
                     var room = global.io.to(cid);
                     room.emit('call', interviewee);
                     for (var socketId in room.connected) {
@@ -108,24 +108,25 @@ router.get('/call', function (req, res){
                     interviewee.did = department;
                     var timer = setTimeout(function (){
                         Interviewee.recoverInterviewee(interviewee.sid, cid, did, function (err) {
-                            if(err)
-                                res.send(501);
-                            else
-                                res.send(500);
+                            res.status(err).json({sid: interviewee.sid});
                         })
-                    }, 1000);
-                    global.io.to(cid).emit('call', interviewee);
-                    global.io.to(cid).on('success', function () {
-                        clearTimeout(timer);
-                        res.json(interviewee);
-                    });
+                    }, 2000);
+                    var room = global.io.to(cid);
+                    room.emit('call', interviewee);
+                    for (var socketId in room.connected) {
+                        var socket = room.connected[socketId];
+                        socket.on('success', function () {
+                            clearTimeout(timer);
+                            res.json(interviewee);
+                        });
+                    }
 
 
                 } else {
                     res.send(404);
                 }
             }
-        })
+        });
     }
 });
 
@@ -152,11 +153,12 @@ router.get('/queue', function (req, res){
  */
 router.post('/skip', function (req, res){
     var cid = req.session['cid'],
-        sid = req.param('sid');
+        sid = req.param('sid'),
+        did = req.session['did'];
     if (!cid || !sid){
         return res.send(403);
     }
-    Interviewee.skip(cid, sid, function(err){
+    Interviewee.skip(cid, sid, did, function(err){
         if(err){
             res.send(500);
         }else{

@@ -8,7 +8,7 @@ exports.sign = function (sid, cid, callback) {
 			callback(err);
 		} else {
 			if(!doc) {
-				callback(null,false);
+				callback(205);
 			} else {
 				Interviewee.sign(sid, cid, function (err, interviewee) {
 					if(err) {
@@ -127,13 +127,14 @@ exports.getIntervieweeBySid = function (sid, cid, cb) {
     });
 };
 
-exports.skip = function(cid, sid, cb){
+exports.skip = function(cid, sid, did, cb){
     Interviewee.getStuBySid(sid, cid, function(err, doc){
         if(err) {
             cb(err);
         } else {
             doc.signTime = new Date();
             doc.busy = false;
+            doc.volunteer.splice(doc.volunteer.indexOf(did), 1);
             doc.save(function(err){
                 if(err){
                     cb(err);

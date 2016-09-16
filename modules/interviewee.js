@@ -8,7 +8,7 @@ exports.sign = function (sid, cid, callback) {
 			callback(err);
 		} else {
 			if(!doc) {
-				callback(null,false);
+				callback(205);
 			} else {
 				Interviewee.sign(sid, cid, function (err, interviewee) {
 					if(err) {
@@ -90,17 +90,23 @@ exports.recoverInterviewee = function(sid, cid, did,cb){
 
 exports.getSpecifyInterviewee = function (sid, cid, did, cb){
     Interviewee.getStuBySid(sid, cid, did, function (err, interviewee){
-        if (!!interviewee){
-            interviewee.busy = true;
-            interviewee.save();
-        } else {
-            cb({
-                code: 404,
-                sid: sid
-            })
+        if(err){
+            cb(err);
         }
-        cb(err, interviewee);
-    })
+        else {
+            if (!!interviewee && interviewee.done.indexOf(did * 1) == -1) {
+                interviewee.busy = true;
+                interviewee.save();
+                cb(null, interviewee);
+            }
+            else {
+                cb({
+                    code: 404,
+                    sid: sid
+                });
+            }
+        }
+    });
 };
 
 exports.rateInterviewee = function (cid, sid, score, comment, did, interviewer, cb){
@@ -127,13 +133,14 @@ exports.getIntervieweeBySid = function (sid, cid, cb) {
     });
 };
 
-exports.skip = function(cid, sid, cb){
+exports.skip = function(cid, sid, did, cb){
     Interviewee.getStuBySid(sid, cid, function(err, doc){
         if(err) {
             cb(err);
         } else {
             doc.signTime = new Date();
             doc.busy = false;
+            doc.volunteer.splice(doc.volunteer.indexOf(did), 1);
             doc.save(function(err){
                 if(err){
                     cb(err);

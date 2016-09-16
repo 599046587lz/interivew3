@@ -107,6 +107,7 @@ exports.getNextInterviewee = function (cid, did, cb){
 //    }
 };
 
+
 exports.rateInterviewee = function (cid, sid, score, comment, did, interviewer, cb){
     Interviewee.findOne({
         cid: cid,

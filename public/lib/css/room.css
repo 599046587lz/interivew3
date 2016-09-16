@@ -34,6 +34,7 @@ table thead {
   width: 100%;
   background: #ffffff;
   max-height: 315px;
+  height: 315px;
 }
 .room .selectDepContainer {
   text-align: center;

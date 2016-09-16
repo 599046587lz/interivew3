@@ -90,17 +90,23 @@ exports.recoverInterviewee = function(sid, cid, did,cb){
 
 exports.getSpecifyInterviewee = function (sid, cid, did, cb){
     Interviewee.getStuBySid(sid, cid, did, function (err, interviewee){
-        if (!!interviewee){
-            interviewee.busy = true;
-            interviewee.save();
-        } else {
-            cb({
-                code: 404,
-                sid: sid
-            })
+        if(err){
+            cb(err);
         }
-        cb(err, interviewee);
-    })
+        else {
+            if (!!interviewee && interviewee.done.indexOf(did * 1) == -1) {
+                interviewee.busy = true;
+                interviewee.save();
+                cb(null, interviewee);
+            }
+            else {
+                cb({
+                    code: 404,
+                    sid: sid
+                });
+            }
+        }
+    });
 };
 
 exports.rateInterviewee = function (cid, sid, score, comment, did, interviewer, cb){

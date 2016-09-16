@@ -74,13 +74,16 @@ exports.recoverInterviewee = function(sid, cid, did,cb){
     Interviewee.getStuBySid(sid, cid, did, function (err, interviewee){
         if(!!interviewee){
             interviewee.busy = false;
-            interviewee.save();
-        }
-        else{
-            cb({
-                code: 404,
-                sid: sid
+            interviewee.save(function (err) {
+                if (err) {
+                    cb(500);
+                } else {
+                    cb(400);
+                }
             });
+
+        } else {
+            cb(400);
         }
     });
 };

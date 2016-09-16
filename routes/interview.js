@@ -72,17 +72,22 @@ router.get('/call', function (req, res){
                     interviewee.did = department;
                    var timer = setTimeout(function (){
                         Interviewee.recoverInterviewee(interviewee.sid, cid, did, function (err) {
-                            if(err)
-                                res.send(501);
-                            else
-                                res.send(500);
+                            res.status(err).json({sid: interviewee.sid});
                         })
-                   }, 1000);
-                    global.io.to(cid).emit('call', interviewee);
-                    global.io.to(cid).on('success', function () {
+                   }, 20000);
+                    var room = global.io.to(cid);
+                    room.emit('call', interviewee);
+                    for (var socketId in room.connected) {
+                        var socket = room.connected[socketId];
+                        socket.on('success', function () {
+                            clearTimeout(timer);
+                            res.json(interviewee);
+                        });
+                    }
+/*                    global.io.in(cid).on('success', function () {
                         clearTimeout(timer);
                         res.json(interviewee);
-                    });
+                    });*/
 
                 } else {
                     res.send(404);

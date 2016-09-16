@@ -70,6 +70,21 @@ exports.getNextInterviewee = function (cid, did, cb){
     })
 };
 
+exports.recoverInterviewee = function(sid, cid, did,cb){
+    Interviewee.getStuBySid(sid, cid, did, function (err, interviewee){
+        if(!!interviewee){
+            interviewee.busy = false;
+            interviewee.save();
+        }
+        else{
+            cb({
+                code: 404,
+                sid: sid
+            });
+        }
+    });
+};
+
 exports.getSpecifyInterviewee = function (sid, cid, did, cb){
     Interviewee.getStuBySid(sid, cid, did, function (err, interviewee){
         if (!!interviewee){

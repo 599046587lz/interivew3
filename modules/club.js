@@ -113,7 +113,7 @@ exports.handleArchive = function (file, cid, callback){
                         for(var rowNum = 0; rowNum < letterSeq.length; rowNum++){
                             var cellName = letterSeq[rowNum] + colNum;
                             if(cellName in worksheet) {  //空白单元格不会出现在worksheet中，因此需要事先检测
-                                if (title[rowNum] != 'volunteer') {
+                                if (title[rowNum] != 'volunteer'){
                                     interviewee[title[rowNum]] = worksheet[cellName].v;
                                 }
                                 else {
@@ -126,7 +126,7 @@ exports.handleArchive = function (file, cid, callback){
                                             interviewee['volunteer'].push(d);
                                         }
                                         else {
-                                            callback({
+                                            return callback({
                                                 code: 404,
                                                 line: colNum,
                                                 interviewee: interviewee
@@ -136,11 +136,18 @@ exports.handleArchive = function (file, cid, callback){
                                 }
                             }
                         }
+                        if(isNaN((interviewee['sid'] + interviewee['sex'] + interviewee['phone'] + interviewee['qq']) * 1)) { //判断这四项是否都是数字
+                            return callback({
+                                code: 404,
+                                line: colNum,
+                                interviewee: interviewee
+                            });
+                        }
                         Interviewee.addInterviewee(interviewee, cid, function (err){
                             if (err){
                                 return callback(err);
                             }
-                        })
+                        });
 
                     }
 

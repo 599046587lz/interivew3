@@ -17,13 +17,9 @@ router.get('/sign', function(req, res){
 	}
 	Interviewee.sign(sid, cid, function (err, interviewee) {
 		if(err) {
-			res.json(500, err);
+			res.send(err);
 		} else {
-			if(!!interviewee) {
-				res.json(interviewee);
-			} else {
-				res.send(205);
-			}
+			res.json(interviewee);
 		}
 	});
 });

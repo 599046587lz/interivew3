@@ -214,6 +214,9 @@ var signin = function(){
 			404 : function(){
 				err("Page not found!");
 			},
+			204 : function () {
+				err("该学生已经签到过了!")
+			},
 			403 : function(){
 				err("未登录或登录超时!");
 				relogin();	
@@ -336,6 +339,7 @@ $(function(){
 
 	socket = io.connect(ioURL);
 	socket.on('call', function(data){
+		socket.emit('success');
 		console.log(data);
 		var did = $("[name=department][value=" + data.did + "]");
 		var room = did.attr("data-id").split("").join(" ");

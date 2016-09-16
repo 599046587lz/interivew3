@@ -1,4 +1,4 @@
-ttsAPI  = "http://translate.google.cn/translate_tts?ie=UTF-8&q=_WORDS_&tl=zh-CN";
+ttsAPI  = "http://tts.baidu.com/text2audio?idx=1&tex=_WORDS_&cuid=baidu_speech_demo&cod=2&lan=zh&ctp=1&pdt=1&spd=3&per=0&vol=5&pit=5";
 //baseURL = 'http://interview.redhome.cc';
 baseURL = '';
 //ioURL   = 'http://interview.redhome.cc/';
@@ -133,7 +133,7 @@ var check_queue = function(){
 	if (!message)
 		return ;
 	var data = interviewee_data_queue.pop();
-	var html = "<div><span class='smallCircle'></span><span class='calling'>" + message.replace(/\s/ig,'') + "</span></div>";
+	var html = "<div><span class='smallCircle'></span><span class='calling'>" + message + "</span></div>";
 	var _target = $(".current");
 	var len = _target.find("div").length;
 	if (len < 3){
@@ -151,7 +151,7 @@ var check_queue = function(){
 		refit();
 	}
 	var iframe = $("iframe").eq(0);
-	var src = ttsAPI.replace(/_WORDS_/ig, encodeURIComponent(message.replace(/(室|试)/g, "是")));
+	var src = ttsAPI.replace(/_WORDS_/ig, encodeURIComponent(message));
 	iframe.attr("src", src);
 
 	interviewed.add();
@@ -344,8 +344,8 @@ $(function(){
 		var did = $("[name=department][value=" + data.did + "]");
 		var room = did.attr("data-id").split("").join(" ");
 		var department = did.parents("label").text();
-		var message = "请 " + data.name + " 同学到 " 
-								+ room + " 教室参加 " + department + " 面试" ;
+		var message = "请" + data.name + "同学到"
+								+ room + "教室参加" + department + "面试" ;
 		interviewee_queue.push(message);
 		interviewee_data_queue.push(data);
 /*		if ( interviewee_queue.length === 1 ){

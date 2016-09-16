@@ -77,11 +77,14 @@ $.ajaxSetup({
 
 
 // update queue info
-var update_queue = function(stat){
+var update_queue = function(doneNumber){
 //    var queue = {done:3,wait:50};
     var root = $('.topBar');
-    var done = root.find('.done .count').text();
-    root.find('.done .count').text() != 0 && root.find('.done .count').text(1*done + 1);
+    if (!doneNumber) {
+        doneNumber = root.find('.done .count').text() * 1 + 1;
+        localStorage.setItem('doneNumber', doneNumber);
+    }
+    root.find('.done .count').text(doneNumber);
 //    root.find('.wait .count').text(queue.wait);
 //    return;
     $.ajax({
@@ -386,7 +389,7 @@ $(document).ready(function(){
     set_depName();
     set_depList();
     // set_property();
-    update_queue();
+    update_queue(localStorage.getItem('doneNumber'));
 
     //back button
     $('.back').click(function () {

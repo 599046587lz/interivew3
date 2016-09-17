@@ -15,6 +15,8 @@ var room = require('./routes/room');
 var app = express();
 var config = require('./config');
 
+global.token = '57dbfcf39882410001b0c195';
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');

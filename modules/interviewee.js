@@ -1,6 +1,7 @@
 var Interviewee = require('../models/interviewee');
 var request = require('request');
 var iconv = require('iconv-lite');
+var unit = require('../static/lib/unit.json');
 
 exports.sign = function (sid, cid, callback) {
 	Interviewee.getStuBySid(sid, cid, function (err, doc){
@@ -153,16 +154,17 @@ exports.skip = function(cid, sid, did, cb){
 };
 
 exports.getStuByAPI = function (sid, cb){
-    request.get('http://portal.hdu.edu.cn/eapdomain/peopleservlet?id=' + sid + '&key=hduredhome2007neusoft', {
-        encoding: null
+    request.get('https://api.hdu.edu.cn/person/student/' + sid, {
+        encoding: null,
+        headers: {
+            'X-Access-Token': global.token
+        }
     }, function (err, res, body) {
         if (err){
             return cb(err);
         } else {
-            body = iconv.decode(body, 'gbk');
-            var reg = /<user_type>(.*?)<\/user_type><user_id>(.*?)<\/user_id><user_name>(.*?)<\/user_name><user_birth>(.*?)<\/user_birth><user_depart>(.*?)<\/user_depart><user_special>(.*?)<\/user_special>/;
-            var match = reg.exec(body);
-            if (match[1] == 0){
+            body = JSON.parse(body.toString());
+            if (!body.STAFFID){
                 return cb({
                     code: 404,
                     sid: sid
@@ -170,8 +172,8 @@ exports.getStuByAPI = function (sid, cb){
             } else {
                 return cb(null, {
                     sid: sid,
-                    name: match[3],
-                    major: match[6]
+                    name: body.STAFFNAME,
+                    major: body.MAJORCODE + "(" + unit[body.UNITCODE] + ")"
                 })
             }
         }

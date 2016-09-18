@@ -69,7 +69,7 @@ exports.handleArchive = function (file, cid, callback){
                     var endCol = parseInt(refInfo[5]);
                     var title = [];
                     for (var key in worksheet){
-                        if(new RegExp("[A-Z]" + refInfo[2]).test(key)) {    //判断是否为首行
+                        if(new RegExp("[A-Z]" + refInfo[2] + "$").test(key)) {    //判断是否为首行
                             var cell = worksheet[key].v;
                             switch (cell.toLowerCase()) {
                                 case '学号':

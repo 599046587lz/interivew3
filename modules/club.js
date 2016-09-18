@@ -136,7 +136,7 @@ exports.handleArchive = function (file, cid, callback){
                                 }
                             }
                         }
-                        if(isNaN((interviewee['sid'] + interviewee['sex'] + interviewee['phone'] + interviewee['qq']) * 1)) { //判断这四项是否都是数字
+                        if(isNaN((interviewee['sid'] + interviewee['sex'] + interviewee['phone'] + (interviewee['qq']) || 1) * 1)) { //判断这四项是否都是数字
                             return callback({
                                 code: 404,
                                 line: colNum,

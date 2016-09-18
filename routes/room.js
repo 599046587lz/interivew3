@@ -60,10 +60,16 @@ router.post('/addDep',function(req,res){
 		res.send(403);
 	}
 	else{
-		var sid = req.param('sid');
-		var did = req.param('did');
-		var name = req.param('name');
-		Interviewee.addDep(sid, name, cid, did, function(err,interviewee){
+		var info = {
+			sid: req.param('sid'),
+			volunteer: req.param('did'),
+			sex: req.param('sex'),
+			name: req.param('name'),
+			qq: req.param('qq'),
+			phone: req.param('phone'),
+			signTime: new Date()
+		};
+		Interviewee.addDep(cid, info, function(err,interviewee){
 			if(err) {
 				if (!!err.sid){
 					res.json(404, err);

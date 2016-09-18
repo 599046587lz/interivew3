@@ -242,9 +242,21 @@ var selectDepDiv = function(){
 	selectDep.fadeIn();
 };
 var selectDepart = function(){
+	var pass = true;
+	var form = $('.selectDep .form');
+	var data = {};
 	var did = [];
 	var stuID = $("input[name=sid]").val();
 	var department = $("[name=department]:checked");
+	form.each(function () {
+		var item = $(this).find('input, select');
+		var val = item.val();
+		if (!val) pass = false;
+		data[item.attr('name')] = val;
+	});
+	if (!pass) {
+		return err("请将信息填写完整");
+	}
 	if (!department.length){
 		err("请至少勾选一个部门！");
 		return false;
@@ -252,10 +264,12 @@ var selectDepart = function(){
 	department.each(function(){
 		did.push($(this).val());
 	});
+	data.sid = stuID;
+	data.did = did;
 	$.ajax({
-		url : baseURL + '/room/selectDep',
+		url : baseURL + '/room/addDep',
 		type : 'post',
-		data : {sid: stuID,did: did},
+		data : data,
 		dataType: 'json',
 		statusCode : {
 			404 : function(){
@@ -271,6 +285,7 @@ var selectDepart = function(){
 			200 : function(data){
 				success("签到成功!");
 				waitline(data);
+				$('.selectDep .form input').val('');
 				$('.selectDepContainer').fadeOut();
 			}
 		}
@@ -336,6 +351,13 @@ $(function(){
 	$(".signin .submit").click(signin);
 	//select department submit button
 	$(".selectDep .submit").click(selectDepart);
+	//select dep hide event
+	$('.selectDepContainer').click(function () {
+		$(this).fadeOut();
+	});
+	$('.selectDep').click(function (e) {
+		e.stopPropagation();
+	});
 
 	socket = io.connect(ioURL);
 	socket.on('call', function(data){

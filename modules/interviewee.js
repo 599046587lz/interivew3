@@ -40,13 +40,7 @@ exports.selectDep = function (sid, cid, did, callback) {
     });9
 };
 
-exports.addDep = function (sid, name, cid, did, callback){
-    var interviewee = {
-        sid: sid,
-        volunteer: did,
-        name: name,
-        signTime: new Date()
-    };
+exports.addDep = function (cid, interviewee, callback){
     Interviewee.addInterviewee(interviewee, cid, function (err) {
         if(err) {
             callback(err);

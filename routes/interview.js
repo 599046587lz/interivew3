@@ -106,22 +106,7 @@ router.get('/call', function (req, res){
                 if (!!interviewee){
                     interviewee = interviewee.toObject();
                     interviewee.did = department;
-                    var timer = setTimeout(function (){
-                        Interviewee.recoverInterviewee(interviewee.sid, cid, did, function (err) {
-                            res.status(err).json({sid: interviewee.sid});
-                        })
-                    }, 2000);
-                    var room = global.io.to(cid);
-                    room.emit('call', interviewee);
-                    for (var socketId in room.connected) {
-                        var socket = room.connected[socketId];
-                        socket.on('success', function () {
-                            clearTimeout(timer);
-                            res.json(interviewee);
-                        });
-                    }
-
-
+                    res.json(interviewee);
                 } else {
                     res.send(404);
                 }

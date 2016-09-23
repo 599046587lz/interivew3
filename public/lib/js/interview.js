@@ -292,6 +292,8 @@ var specialCall = function(){
 //    start();
 //    return;
 //    var data = {sid:$('#appointSid input').val()};
+    var $this = $(this);
+    $this.addClass('loading');
     $.ajax({
         url:urlRoot + 'interview/call',
         type:'get',
@@ -299,6 +301,9 @@ var specialCall = function(){
         success:function(data){
             window.interviewee = data;
             start();
+        },
+        complete: function () {
+            $this.removeClass('loading');
         }
     })
 };
@@ -320,7 +325,8 @@ var submit = function(){
 //        score:$('#main .rate .stars').raty('score'),
 //        comment:$('#main .rate .comment').val()
 //    };
-
+    var $this = $(this);
+    $this.addClass('loading');
     $.ajax({
         url:urlRoot + 'interview/rate',
         type:'post',
@@ -331,6 +337,9 @@ var submit = function(){
         },
         success:function(){
             finish();
+        },
+        complete: function () {
+            $this.removeClass('loading');
         }
     });
 };
@@ -343,13 +352,17 @@ var skip = function(){
     };
 //    finish();
 //    return;
+    var $this = $(this);
+    $this.addClass('loading');
     $.ajax({
         url:urlRoot + 'interview/skip',
         type:'post',
         data:{sid:window.interviewee.sid},
         success:function(){
-
             finish();
+        },
+        complete: function () {
+            $this.removeClass('loading');
         }
     });
 };
@@ -370,6 +383,8 @@ var recommend = function(){
 //
 //    finish();
 //    return;
+    var $this = $(this);
+    $this.addClass('loading');
     $.ajax({
         url:urlRoot + 'interview/recommend',
         type:'post',
@@ -380,6 +395,9 @@ var recommend = function(){
         success:function(){
             $('.qtip').hide();
             success('操作成功');
+        },
+        complete: function () {
+            $this.removeClass('loading');
         }
     });
 };

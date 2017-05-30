@@ -32,8 +32,8 @@ app.use(cookieParser());
 app.use(session({
     secret: config.cookie_secret,
     store: new MongoStore({
-        db : config.db.db,
-        host: config.db.host
+        url: `mongodb://${ config.db.host }/${ config.db.db }`,
+        auto_reconnect:true
     }),
     resave: true,
     saveUninitialized: true

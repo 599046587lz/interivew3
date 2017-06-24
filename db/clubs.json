@@ -1,0 +1,44 @@
+{ 
+    "_id" : ObjectId("57af0661cd6d47643561fe50"), 
+    "cid" : NumberInt(1), 
+    "name" : "jerry", 
+    "logo" : "", 
+    "password" : "202cb962ac59075b964b07152d234b70", 
+    "maxDep" : NumberInt(3), 
+    "interviewer" : [
+        "asd"
+    ], 
+    "departments" : [
+        {
+            "did" : NumberInt(0), 
+            "name" : "技术部", 
+            "location" : "8"
+        }, 
+        {
+            "did" : NumberInt(1), 
+            "name" : "设计部", 
+            "location" : "8"
+        }, 
+        {
+            "did" : NumberInt(2), 
+            "name" : "公关部", 
+            "location" : "8"
+        }, 
+        {
+            "did" : NumberInt(3), 
+            "name" : "人力资源部", 
+            "location" : "8"
+        }, 
+        {
+            "did" : NumberInt(4), 
+            "name" : "活动运营部", 
+            "location" : "8"
+        }, 
+        {
+            "did" : NumberInt(5), 
+            "name" : "产品运营部", 
+            "location" : "8"
+        }
+    ], 
+    "__v" : NumberInt(0)
+}

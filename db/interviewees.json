@@ -1,0 +1,6235 @@
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171c2"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16198705), 
+    "busy" : false, 
+    "done" : [
+
+    ], 
+    "rate" : [
+
+    ], 
+    "volunteer" : [
+        NumberInt(2), 
+        NumberInt(5)
+    ], 
+    "qq" : "1296866924", 
+    "phone" : "18768113662", 
+    "major" : "医信", 
+    "sex" : NumberInt(0), 
+    "name" : "李心丽", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171c8"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16222527), 
+    "busy" : false, 
+    "done" : [
+
+    ], 
+    "rate" : [
+
+    ], 
+    "volunteer" : [
+        NumberInt(1)
+    ], 
+    "qq" : "782867662", 
+    "phone" : "13372411420", 
+    "major" : "数字媒体与技术", 
+    "sex" : NumberInt(1), 
+    "name" : "张思远", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171cb"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16272126), 
+    "busy" : false, 
+    "done" : [
+
+    ], 
+    "rate" : [
+
+    ], 
+    "volunteer" : [
+        NumberInt(0)
+    ], 
+    "qq" : "445756895", 
+    "phone" : "15557322302", 
+    "major" : "网络工程", 
+    "sex" : NumberInt(1), 
+    "name" : "全凯杰", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171d1"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(15061415), 
+    "busy" : false, 
+    "done" : [
+
+    ], 
+    "rate" : [
+
+    ], 
+    "notion" : "向大神学技术", 
+    "volunteer" : [
+        NumberInt(0)
+    ], 
+    "qq" : "1071903689", 
+    "phone" : "18100173036", 
+    "major" : "电子科学与技术", 
+    "sex" : NumberInt(1), 
+    "name" : "李云健", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e217221"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16031614), 
+    "busy" : false, 
+    "done" : [
+
+    ], 
+    "rate" : [
+
+    ], 
+    "volunteer" : [
+        NumberInt(3), 
+        NumberInt(2), 
+        NumberInt(5)
+    ], 
+    "qq" : "1179686005", 
+    "phone" : "18767186091", 
+    "major" : "电子商务", 
+    "sex" : NumberInt(0), 
+    "name" : "王晶", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e21716d"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(15058318), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(0), 
+        NumberInt(1)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(0), 
+            "score" : NumberInt(3), 
+            "comment" : "加了旅行家 院学生会\n基础一般，自学HTML\n大二\n", 
+            "interviewer" : "赵逸文", 
+            "_id" : ObjectId("57dfd8286064fa309e217224")
+        }, 
+        {
+            "did" : NumberInt(1), 
+            "score" : NumberInt(4), 
+            "comment" : "有设计感", 
+            "interviewer" : "林初东", 
+            "_id" : ObjectId("57dfdbc46064fa309e217231")
+        }
+    ], 
+    "volunteer" : [
+        NumberInt(1), 
+        NumberInt(0)
+    ], 
+    "qq" : "734950585", 
+    "phone" : "18368519355", 
+    "major" : "卓越", 
+    "sex" : NumberInt(1), 
+    "name" : "梁宸瑜", 
+    "__v" : NumberInt(2), 
+    "signTime" : ISODate("2016-09-19T12:36:20.459+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e217170"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16011505), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(2)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(2), 
+            "score" : NumberInt(5), 
+            "comment" : "爱好广泛，新奇，坚持不行，看得开，", 
+            "interviewer" : "孙文毅", 
+            "_id" : ObjectId("57dfdc206064fa309e217232")
+        }
+    ], 
+    "volunteer" : [
+        NumberInt(2)
+    ], 
+    "qq" : "445907022", 
+    "phone" : "18767157565", 
+    "major" : "机械设计制造及其自动化", 
+    "sex" : NumberInt(1), 
+    "name" : "顾紫东", 
+    "__v" : NumberInt(3), 
+    "signTime" : ISODate("2016-09-19T14:02:48.741+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e217171"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16015236), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(5)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(5), 
+            "score" : NumberInt(3), 
+            "comment" : "太官方，官腔。面试了很多社团。心理方面有兴趣。", 
+            "interviewer" : "徐琼洁", 
+            "_id" : ObjectId("57dfdc296064fa309e217233")
+        }
+    ], 
+    "volunteer" : [
+        NumberInt(5)
+    ], 
+    "qq" : "610748812", 
+    "phone" : "13362131494", 
+    "major" : "车辆工程", 
+    "sex" : NumberInt(1), 
+    "name" : "张锴", 
+    "__v" : NumberInt(2), 
+    "signTime" : ISODate("2016-09-19T13:17:08.725+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e217172"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16031330), 
+    "busy" : false, 
+    "done" : [
+
+    ], 
+    "rate" : [
+
+    ], 
+    "volunteer" : [
+        NumberInt(0)
+    ], 
+    "qq" : "1130383048", 
+    "phone" : "17376501416", 
+    "major" : "工商管理", 
+    "sex" : NumberInt(1), 
+    "name" : "易涛", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e217174"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16031612), 
+    "busy" : false, 
+    "done" : [
+
+    ], 
+    "rate" : [
+
+    ], 
+    "volunteer" : [
+        NumberInt(3), 
+        NumberInt(1), 
+        NumberInt(5)
+    ], 
+    "qq" : "2755288291", 
+    "phone" : "18767138752", 
+    "major" : "未知", 
+    "sex" : NumberInt(0), 
+    "name" : "孙慧静", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e21717a"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16038507), 
+    "busy" : false, 
+    "done" : [
+
+    ], 
+    "rate" : [
+
+    ], 
+    "volunteer" : [
+        NumberInt(3), 
+        NumberInt(4), 
+        NumberInt(5)
+    ], 
+    "qq" : "834173441", 
+    "phone" : "15068881319", 
+    "major" : "工业工程（中德）", 
+    "sex" : NumberInt(0), 
+    "name" : "郑淇文", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e217196"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16061210), 
+    "busy" : false, 
+    "done" : [
+
+    ], 
+    "rate" : [
+
+    ], 
+    "volunteer" : [
+        NumberInt(0), 
+        NumberInt(1)
+    ], 
+    "qq" : "793991833", 
+    "phone" : "13357155457", 
+    "major" : "电器类（电气自动化）", 
+    "sex" : NumberInt(1), 
+    "name" : "陈永鑫", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e217197"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16061211), 
+    "busy" : false, 
+    "done" : [
+
+    ], 
+    "rate" : [
+
+    ], 
+    "volunteer" : [
+        NumberInt(3), 
+        NumberInt(0), 
+        NumberInt(5)
+    ], 
+    "qq" : "467674853", 
+    "phone" : "18767115206", 
+    "major" : "电气类", 
+    "sex" : NumberInt(1), 
+    "name" : "陈哲", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e21719a"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16061231), 
+    "busy" : false, 
+    "done" : [
+
+    ], 
+    "rate" : [
+
+    ], 
+    "volunteer" : [
+
+    ], 
+    "qq" : "1822783628", 
+    "phone" : "18768126301", 
+    "major" : "电气类", 
+    "sex" : NumberInt(1), 
+    "name" : "谢振宇", 
+    "__v" : NumberInt(2), 
+    "signTime" : ISODate("2016-09-20T13:33:58.179+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e21719b"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16061322), 
+    "busy" : false, 
+    "done" : [
+
+    ], 
+    "rate" : [
+
+    ], 
+    "volunteer" : [
+        NumberInt(1), 
+        NumberInt(0), 
+        NumberInt(4)
+    ], 
+    "qq" : "735318487", 
+    "phone" : "18767117767", 
+    "major" : "电气类", 
+    "sex" : NumberInt(1), 
+    "name" : "滕凯", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e21719c"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16061422), 
+    "busy" : false, 
+    "done" : [
+
+    ], 
+    "rate" : [
+
+    ], 
+    "volunteer" : [
+        NumberInt(0), 
+        NumberInt(1), 
+        NumberInt(2)
+    ], 
+    "qq" : "984197407", 
+    "phone" : "18286644494", 
+    "major" : "电器类（电气自动化）", 
+    "sex" : NumberInt(1), 
+    "name" : "冉东", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e21719f"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16061435), 
+    "busy" : false, 
+    "done" : [
+
+    ], 
+    "rate" : [
+
+    ], 
+    "notion" : "吃苦耐劳，心地善良", 
+    "volunteer" : [
+        NumberInt(1), 
+        NumberInt(0)
+    ], 
+    "qq" : "351407997", 
+    "phone" : "18229988353", 
+    "major" : "电气类", 
+    "sex" : NumberInt(1), 
+    "name" : "周梦轩", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171a3"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16061812), 
+    "busy" : false, 
+    "done" : [
+
+    ], 
+    "rate" : [
+
+    ], 
+    "volunteer" : [
+        NumberInt(0), 
+        NumberInt(1), 
+        NumberInt(2)
+    ], 
+    "qq" : "295634049", 
+    "phone" : "17376512349", 
+    "major" : "自动化", 
+    "sex" : NumberInt(1), 
+    "name" : "洪瑞贤", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171a6"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16061904), 
+    "busy" : false, 
+    "done" : [
+
+    ], 
+    "rate" : [
+
+    ], 
+    "notion" : "走心", 
+    "volunteer" : [
+
+    ], 
+    "qq" : "1249700164", 
+    "phone" : "18767133887", 
+    "major" : "电气类", 
+    "sex" : NumberInt(0), 
+    "name" : "和云芳", 
+    "__v" : NumberInt(1), 
+    "signTime" : ISODate("2016-09-20T13:33:53.091+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171a7"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16062003), 
+    "busy" : false, 
+    "done" : [
+
+    ], 
+    "rate" : [
+
+    ], 
+    "volunteer" : [
+        NumberInt(0), 
+        NumberInt(4)
+    ], 
+    "qq" : "1719967344", 
+    "phone" : "18767193163", 
+    "major" : "电气类", 
+    "sex" : NumberInt(0), 
+    "name" : "师晓敏", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171ab"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16062020), 
+    "busy" : false, 
+    "done" : [
+
+    ], 
+    "rate" : [
+
+    ], 
+    "volunteer" : [
+        NumberInt(0), 
+        NumberInt(3)
+    ], 
+    "qq" : "563177783", 
+    "phone" : "18767121377", 
+    "major" : "自动化", 
+    "sex" : NumberInt(1), 
+    "name" : "牟国鑫", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171ac"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16062021), 
+    "busy" : false, 
+    "done" : [
+
+    ], 
+    "rate" : [
+
+    ], 
+    "volunteer" : [
+        NumberInt(1), 
+        NumberInt(5)
+    ], 
+    "qq" : "413200324", 
+    "phone" : "15858108365", 
+    "major" : "自动化", 
+    "sex" : NumberInt(1), 
+    "name" : "彭熠凡", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171ad"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16062022), 
+    "busy" : false, 
+    "done" : [
+
+    ], 
+    "rate" : [
+
+    ], 
+    "volunteer" : [
+        NumberInt(4), 
+        NumberInt(0), 
+        NumberInt(1)
+    ], 
+    "qq" : "625129958", 
+    "phone" : "13372400842", 
+    "major" : "自动化", 
+    "sex" : NumberInt(1), 
+    "name" : "钱泓伍", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171af"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16070210), 
+    "busy" : false, 
+    "done" : [
+
+    ], 
+    "rate" : [
+
+    ], 
+    "volunteer" : [
+        NumberInt(1), 
+        NumberInt(4)
+    ], 
+    "qq" : "1207706643", 
+    "phone" : "13357144874", 
+    "major" : "应用统计学", 
+    "sex" : NumberInt(0), 
+    "name" : "周陈倩", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171b0"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16071123), 
+    "busy" : false, 
+    "done" : [
+
+    ], 
+    "rate" : [
+
+    ], 
+    "volunteer" : [
+        NumberInt(2), 
+        NumberInt(1), 
+        NumberInt(5)
+    ], 
+    "qq" : "1398767228", 
+    "phone" : "18767195110", 
+    "major" : "光电", 
+    "sex" : NumberInt(1), 
+    "name" : "张旭东", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171b1"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16081110), 
+    "busy" : false, 
+    "done" : [
+
+    ], 
+    "rate" : [
+
+    ], 
+    "volunteer" : [
+        NumberInt(0), 
+        NumberInt(4)
+    ], 
+    "qq" : "420427888", 
+    "email" : "Garfield_Gzx@163.com", 
+    "phone" : "18622765599", 
+    "major" : "通信工程", 
+    "sex" : NumberInt(1), 
+    "name" : "桂振轩", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171b4"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16081117), 
+    "busy" : false, 
+    "done" : [
+
+    ], 
+    "rate" : [
+
+    ], 
+    "volunteer" : [
+        NumberInt(0)
+    ], 
+    "qq" : "313364591", 
+    "phone" : "13372414942", 
+    "major" : "通信工程", 
+    "sex" : NumberInt(1), 
+    "name" : "潘程", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171b6"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16081706), 
+    "busy" : false, 
+    "done" : [
+
+    ], 
+    "rate" : [
+
+    ], 
+    "volunteer" : [
+        NumberInt(3), 
+        NumberInt(4)
+    ], 
+    "qq" : "1141419585", 
+    "phone" : "18768118259", 
+    "major" : "通信工程", 
+    "sex" : NumberInt(0), 
+    "name" : "王妍", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171b7"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16081802), 
+    "busy" : false, 
+    "done" : [
+
+    ], 
+    "rate" : [
+
+    ], 
+    "volunteer" : [
+        NumberInt(0), 
+        NumberInt(2), 
+        NumberInt(4)
+    ], 
+    "qq" : "2685491150", 
+    "phone" : "18767159309", 
+    "major" : "通信工程", 
+    "sex" : NumberInt(0), 
+    "name" : "蒋月", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171b9"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16141132), 
+    "busy" : false, 
+    "done" : [
+
+    ], 
+    "rate" : [
+
+    ], 
+    "volunteer" : [
+        NumberInt(0), 
+        NumberInt(2), 
+        NumberInt(3)
+    ], 
+    "qq" : "732070028", 
+    "phone" : "18768111773", 
+    "major" : "会计", 
+    "sex" : NumberInt(1), 
+    "name" : "任汝迪", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171bc"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16141711), 
+    "busy" : false, 
+    "done" : [
+
+    ], 
+    "rate" : [
+
+    ], 
+    "volunteer" : [
+        NumberInt(4), 
+        NumberInt(1), 
+        NumberInt(5)
+    ], 
+    "qq" : "3468882016", 
+    "phone" : "18767138093", 
+    "major" : "会计", 
+    "sex" : NumberInt(0), 
+    "name" : "蒋蜀韵", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171bd"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16141718), 
+    "busy" : false, 
+    "done" : [
+
+    ], 
+    "rate" : [
+
+    ], 
+    "notion" : "学啥都快", 
+    "volunteer" : [
+        NumberInt(3), 
+        NumberInt(2), 
+        NumberInt(5)
+    ], 
+    "qq" : "806500189", 
+    "phone" : "18767156101", 
+    "major" : "会计", 
+    "sex" : NumberInt(0), 
+    "name" : "徐佳璐", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e217201"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16071110), 
+    "busy" : false, 
+    "done" : [
+
+    ], 
+    "rate" : [
+
+    ], 
+    "notion" : "我想加入 学习更多知识 结识更多伙伴。", 
+    "volunteer" : [
+        NumberInt(0), 
+        NumberInt(3), 
+        NumberInt(5)
+    ], 
+    "qq" : "792911138", 
+    "phone" : "18335603228", 
+    "major" : "光电信息科学与工程", 
+    "sex" : NumberInt(1), 
+    "name" : "贾同", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e217203"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16081110), 
+    "busy" : false, 
+    "done" : [
+
+    ], 
+    "rate" : [
+
+    ], 
+    "notion" : "强烈渴望学习软件技术！", 
+    "volunteer" : [
+        NumberInt(0), 
+        NumberInt(4), 
+        NumberInt(1)
+    ], 
+    "qq" : "420427888", 
+    "email" : "Garfield_Gzx@163.com", 
+    "phone" : "18622765599", 
+    "major" : "通信工程", 
+    "sex" : NumberInt(1), 
+    "name" : "桂振轩", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e217204"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16081121), 
+    "busy" : false, 
+    "done" : [
+
+    ], 
+    "rate" : [
+
+    ], 
+    "notion" : "希望能学到一门切实有用的技能", 
+    "volunteer" : [
+        NumberInt(0), 
+        NumberInt(1), 
+        NumberInt(3)
+    ], 
+    "qq" : "1622825012", 
+    "phone" : "13362133435", 
+    "major" : "通信", 
+    "sex" : NumberInt(1), 
+    "name" : "王瑞", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e217206"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16081306), 
+    "busy" : false, 
+    "done" : [
+
+    ], 
+    "rate" : [
+
+    ], 
+    "notion" : "虽然我没有过硬的技术能力，也没有很棒的口才，但可以肯定的是，我热衷于学习各样新技能，我渴望一个更优秀的自己，带着一颗坚持不懈的心。", 
+    "volunteer" : [
+        NumberInt(0), 
+        NumberInt(3), 
+        NumberInt(1)
+    ], 
+    "qq" : "1156639747", 
+    "phone" : "15967776192", 
+    "major" : "通信工程", 
+    "sex" : NumberInt(0), 
+    "name" : "林喜悦", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e217207"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16081312), 
+    "busy" : false, 
+    "done" : [
+
+    ], 
+    "rate" : [
+
+    ], 
+    "notion" : "我是新生，对程序设计不懂，但我热爱这个事情，我会持之以恒去学去练。", 
+    "volunteer" : [
+        NumberInt(0), 
+        NumberInt(1)
+    ], 
+    "qq" : "2021254879", 
+    "phone" : "18768126172", 
+    "major" : "通信工程", 
+    "sex" : NumberInt(1), 
+    "name" : "李俊", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e217208"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16081528), 
+    "busy" : false, 
+    "done" : [
+
+    ], 
+    "rate" : [
+
+    ], 
+    "notion" : "。。信息齐全 我还有什么说的\n那个短号是电信的", 
+    "volunteer" : [
+        NumberInt(0), 
+        NumberInt(4), 
+        NumberInt(1)
+    ], 
+    "qq" : "1013721538", 
+    "phone" : "13372130124", 
+    "major" : "通信工程类", 
+    "sex" : NumberInt(1), 
+    "name" : "杨演超", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e21720b"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16081816), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(0)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(0), 
+            "score" : NumberInt(2), 
+            "comment" : "0基础", 
+            "interviewer" : "李程胜", 
+            "_id" : ObjectId("57e28170878b5a6d62c659f0")
+        }
+    ], 
+    "notion" : "希望进入技术部，学到更多知识，交更多朋友。", 
+    "volunteer" : [
+        NumberInt(0)
+    ], 
+    "qq" : "8309307", 
+    "phone" : "18768106280", 
+    "major" : "通信工程专业", 
+    "sex" : NumberInt(1), 
+    "name" : "金骄阳", 
+    "__v" : NumberInt(2), 
+    "signTime" : ISODate("2016-09-21T12:47:44.068+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e21720c"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16081904), 
+    "busy" : false, 
+    "done" : [
+
+    ], 
+    "rate" : [
+
+    ], 
+    "notion" : "大一通信新生孙雨潼申请加入红家！\n向往技术流的社团活动！\n向往和谐的团员关系！\n热爱红家！从我做起！", 
+    "volunteer" : [
+        NumberInt(0), 
+        NumberInt(1), 
+        NumberInt(3)
+    ], 
+    "qq" : "2668084916", 
+    "phone" : "18767157657", 
+    "major" : "通信工程", 
+    "sex" : NumberInt(0), 
+    "name" : "孙雨潼", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e21720e"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16141221), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(1)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(1), 
+            "score" : NumberInt(4), 
+            "comment" : "可以的吧", 
+            "interviewer" : "林初东", 
+            "_id" : ObjectId("57e28cba878b5a6d62c65a33")
+        }
+    ], 
+    "notion" : "我是理科生，却很喜欢美术", 
+    "volunteer" : [
+        NumberInt(1)
+    ], 
+    "qq" : "844715742", 
+    "phone" : "17376501542", 
+    "major" : "会计", 
+    "sex" : NumberInt(0), 
+    "name" : "俞佳璇", 
+    "__v" : NumberInt(1), 
+    "signTime" : ISODate("2016-09-21T13:35:54.988+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e217218"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16222555), 
+    "busy" : false, 
+    "done" : [
+
+    ], 
+    "rate" : [
+
+    ], 
+    "notion" : "希望能参加社团学习计算机有关的技术 并且锻炼自己", 
+    "volunteer" : [
+        NumberInt(1), 
+        NumberInt(3), 
+        NumberInt(5)
+    ], 
+    "qq" : "702429162", 
+    "phone" : "18757725885", 
+    "major" : "数字媒体技术", 
+    "sex" : NumberInt(1), 
+    "name" : "杨联政", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e217219"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16227006), 
+    "busy" : false, 
+    "done" : [
+
+    ], 
+    "rate" : [
+
+    ], 
+    "notion" : "我是一位学传播的理科生，希望加入红色家园这个大家庭中，平时喜欢玩微博微信，而且是个小微商，你们可以找我哦✌️✌️", 
+    "volunteer" : [
+        NumberInt(1), 
+        NumberInt(3), 
+        NumberInt(0)
+    ], 
+    "qq" : "1057374232", 
+    "phone" : "18768117591", 
+    "major" : "传播学", 
+    "sex" : NumberInt(0), 
+    "name" : "金洁超", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e217220"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(111111111), 
+    "busy" : false, 
+    "done" : [
+
+    ], 
+    "rate" : [
+
+    ], 
+    "notion" : "来自我国大西北的一位生性豪放不拘小节放荡不羁爱好和平的妹子", 
+    "volunteer" : [
+        NumberInt(3), 
+        NumberInt(2), 
+        NumberInt(1)
+    ], 
+    "qq" : "873243057", 
+    "phone" : "18257184779", 
+    "major" : "会计", 
+    "sex" : NumberInt(0), 
+    "name" : "马琪", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e21716c"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(15051406), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(0)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(0), 
+            "score" : NumberInt(4), 
+            "comment" : "有一定语言基础，但是缺少实践经验。", 
+            "interviewer" : "李程胜", 
+            "_id" : ObjectId("57dfd9986064fa309e217229")
+        }
+    ], 
+    "volunteer" : [
+        NumberInt(0)
+    ], 
+    "qq" : "1007140034", 
+    "phone" : "15968812092", 
+    "major" : "卓越理工实验班", 
+    "sex" : NumberInt(0), 
+    "name" : "黄燕", 
+    "__v" : NumberInt(1), 
+    "signTime" : ISODate("2016-09-19T12:27:04.096+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e217199"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16061221), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(5), 
+        NumberInt(2)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(5), 
+            "score" : NumberInt(4), 
+            "comment" : "略有官腔。报了科协，膳管会。", 
+            "interviewer" : "徐琼洁", 
+            "_id" : ObjectId("57dfe0436064fa309e217247")
+        }, 
+        {
+            "did" : NumberInt(2), 
+            "score" : NumberInt(3), 
+            "comment" : "有演讲经历，有耐心，", 
+            "interviewer" : "孙文毅", 
+            "_id" : ObjectId("57dfe54b6064fa309e21725c")
+        }
+    ], 
+    "volunteer" : [
+        NumberInt(5), 
+        NumberInt(2)
+    ], 
+    "qq" : "1206630865", 
+    "phone" : "15911605424", 
+    "major" : "电气类", 
+    "sex" : NumberInt(1), 
+    "name" : "刘丁珲", 
+    "__v" : NumberInt(3), 
+    "signTime" : ISODate("2016-09-19T14:14:40.152+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e217180"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16041720), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(5)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(5), 
+            "score" : NumberInt(3), 
+            "comment" : "内向，宿管，红十字，科协，校学生会，杭电之声，", 
+            "interviewer" : "徐琼洁", 
+            "_id" : ObjectId("57dfe5ef6064fa309e21725e")
+        }
+    ], 
+    "volunteer" : [
+        NumberInt(5)
+    ], 
+    "qq" : "1083026808", 
+    "phone" : "13357192442", 
+    "major" : "电子信息类", 
+    "sex" : NumberInt(1), 
+    "name" : "刘子仪", 
+    "__v" : NumberInt(2), 
+    "signTime" : ISODate("2016-09-19T14:09:09.009+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e217192"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16051712), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(2)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(2), 
+            "score" : NumberInt(3), 
+            "comment" : "英语秀，模仿能力强，不是很容易下决定，", 
+            "interviewer" : "孙文毅", 
+            "_id" : ObjectId("57dfe6cc6064fa309e217264")
+        }
+    ], 
+    "volunteer" : [
+        NumberInt(2)
+    ], 
+    "qq" : "429357264", 
+    "phone" : "18767127630", 
+    "major" : "计科", 
+    "sex" : NumberInt(1), 
+    "name" : "顾盼", 
+    "__v" : NumberInt(2), 
+    "signTime" : ISODate("2016-09-19T14:07:29.570+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e217187"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16051116), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(1), 
+        NumberInt(0)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(1), 
+            "score" : NumberInt(3), 
+            "comment" : "声音沙哑", 
+            "interviewer" : "林初东", 
+            "_id" : ObjectId("57dfe7f76064fa309e217269")
+        }, 
+        {
+            "did" : NumberInt(0), 
+            "score" : NumberInt(4), 
+            "comment" : "看过易语言，学过一点C，", 
+            "interviewer" : "李程胜", 
+            "_id" : ObjectId("57dff674ad164b39b33df0eb")
+        }
+    ], 
+    "volunteer" : [
+        NumberInt(0), 
+        NumberInt(1)
+    ], 
+    "qq" : "1377792584", 
+    "phone" : "17376513514", 
+    "major" : "计科", 
+    "sex" : NumberInt(1), 
+    "name" : "来泽涛", 
+    "__v" : NumberInt(2), 
+    "signTime" : ISODate("2016-09-19T14:30:12.648+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171bf"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16154113), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(4)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(4), 
+            "score" : NumberInt(4), 
+            "comment" : "性格爽朗\n喜欢玩贴吧、微博，发说说比较多\n排版意识可以，审美可以\n会写东西\n校学生会、校科协\n", 
+            "interviewer" : "汪斯敏", 
+            "_id" : ObjectId("57dff0777207893860c74619")
+        }
+    ], 
+    "volunteer" : [
+        NumberInt(4)
+    ], 
+    "qq" : "1127665976", 
+    "phone" : "18768112203", 
+    "major" : "统计", 
+    "sex" : NumberInt(0), 
+    "name" : "徐晓颜", 
+    "__v" : NumberInt(1), 
+    "signTime" : ISODate("2016-09-19T14:04:39.651+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e21716f"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16011434), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(2)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(2), 
+            "score" : NumberInt(4), 
+            "comment" : "校青协，只对公关部感兴趣\n对时间有规划\n有自主性，学习目的强\n委婉 语言沟通能力良好\n", 
+            "interviewer" : "孙文毅", 
+            "_id" : ObjectId("57dfe1ed6064fa309e21724e")
+        }
+    ], 
+    "notion" : "总在你不注意的时候偷学", 
+    "volunteer" : [
+        NumberInt(2)
+    ], 
+    "qq" : "844104310", 
+    "phone" : "13372402409", 
+    "major" : "机械自动化", 
+    "sex" : NumberInt(1), 
+    "name" : "周海龙", 
+    "__v" : NumberInt(2), 
+    "signTime" : ISODate("2016-09-19T13:43:04.760+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e217177"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16036822), 
+    "busy" : false, 
+    "done" : [
+
+    ], 
+    "rate" : [
+
+    ], 
+    "notion" : "对新鲜事物有极大兴趣，易学，爱学不曾尝试的东西", 
+    "volunteer" : [
+        NumberInt(0), 
+        NumberInt(5), 
+        NumberInt(4)
+    ], 
+    "qq" : "1452682438", 
+    "phone" : "15088667649", 
+    "major" : "工业工程", 
+    "sex" : NumberInt(1), 
+    "name" : "吴志威", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e217178"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16036831), 
+    "busy" : false, 
+    "done" : [
+
+    ], 
+    "rate" : [
+
+    ], 
+    "notion" : "有热情，有毅力，专注坚持", 
+    "volunteer" : [
+        NumberInt(3), 
+        NumberInt(5), 
+        NumberInt(0)
+    ], 
+    "qq" : "1363162925", 
+    "phone" : "13372410641", 
+    "major" : "工业工程", 
+    "sex" : NumberInt(1), 
+    "name" : "赵一览", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e21718a"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16051131), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(1)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(1), 
+            "score" : NumberInt(3), 
+            "comment" : "", 
+            "interviewer" : "林初东", 
+            "_id" : ObjectId("57dfded26064fa309e217240")
+        }
+    ], 
+    "notion" : "遵纪守法，吃苦耐劳的三好青年，能保质保量的完成任务。。。。。。。。除了单身没有什么缺点了", 
+    "volunteer" : [
+        NumberInt(1)
+    ], 
+    "qq" : "995576393", 
+    "phone" : "13362136494", 
+    "major" : "计算机科学与技术", 
+    "sex" : NumberInt(1), 
+    "name" : "吴泓达", 
+    "__v" : NumberInt(3), 
+    "signTime" : ISODate("2016-09-19T14:18:36.060+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e217191"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16051530), 
+    "busy" : false, 
+    "done" : [
+
+    ], 
+    "rate" : [
+
+    ], 
+    "notion" : "想学点技术，督促自己", 
+    "volunteer" : [
+        NumberInt(0)
+    ], 
+    "qq" : "450992658", 
+    "email" : "xingyayu084799@163.com", 
+    "phone" : "15712663675", 
+    "major" : "计科", 
+    "sex" : NumberInt(1), 
+    "name" : "颜扬帆", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e217195"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16061206), 
+    "busy" : false, 
+    "done" : [
+
+    ], 
+    "rate" : [
+
+    ], 
+    "notion" : "清纯可爱不做作，智商一直在线", 
+    "volunteer" : [
+        NumberInt(1), 
+        NumberInt(0), 
+        NumberInt(3)
+    ], 
+    "qq" : "951672968", 
+    "phone" : "17376503421", 
+    "major" : "电气类", 
+    "sex" : NumberInt(0), 
+    "name" : "张云帆", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e21719e"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16061434), 
+    "busy" : false, 
+    "done" : [
+
+    ], 
+    "rate" : [
+
+    ], 
+    "notion" : "我对未知充满热情", 
+    "volunteer" : [
+        NumberInt(1), 
+        NumberInt(2), 
+        NumberInt(3)
+    ], 
+    "qq" : "1156868206", 
+    "phone" : "18767119202", 
+    "major" : "电气类", 
+    "sex" : NumberInt(1), 
+    "name" : "郑捷文", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171a0"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16061436), 
+    "busy" : false, 
+    "done" : [
+
+    ], 
+    "rate" : [
+
+    ], 
+    "notion" : "熟练运用ppt excel word 简单使用pscc 有一颗热忱的心", 
+    "volunteer" : [
+        NumberInt(1), 
+        NumberInt(0), 
+        NumberInt(4)
+    ], 
+    "qq" : "270535925", 
+    "phone" : "13357142574", 
+    "major" : "电气类", 
+    "sex" : NumberInt(1), 
+    "name" : "朱曦宇", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171a1"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16061437), 
+    "busy" : false, 
+    "done" : [
+
+    ], 
+    "rate" : [
+
+    ], 
+    "notion" : "内敛的外表下有一颗火热的心", 
+    "volunteer" : [
+        NumberInt(1), 
+        NumberInt(0)
+    ], 
+    "qq" : "1767544550", 
+    "phone" : "13357143427", 
+    "major" : "电气类", 
+    "sex" : NumberInt(1), 
+    "name" : "邹添", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171ae"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16062023), 
+    "busy" : false, 
+    "done" : [
+
+    ], 
+    "rate" : [
+
+    ], 
+    "notion" : "心思细腻，乐观开朗", 
+    "volunteer" : [
+        NumberInt(3), 
+        NumberInt(2), 
+        NumberInt(5)
+    ], 
+    "qq" : "1016170132", 
+    "phone" : "18767137623", 
+    "major" : "电气类", 
+    "sex" : NumberInt(1), 
+    "name" : "田昊", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171b5"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16081324), 
+    "busy" : false, 
+    "done" : [
+
+    ], 
+    "rate" : [
+
+    ], 
+    "notion" : "爱好广泛，吃苦耐劳，沉稳冷静，渴望向各位前辈们学习请教的技术小白", 
+    "volunteer" : [
+        NumberInt(3)
+    ], 
+    "qq" : "103131440", 
+    "phone" : "18767137601", 
+    "major" : "通信工程", 
+    "sex" : NumberInt(1), 
+    "name" : "吴逸芃", 
+    "__v" : NumberInt(1), 
+    "signTime" : ISODate("2016-09-20T13:20:27.302+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171ba"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16141704), 
+    "busy" : false, 
+    "done" : [
+
+    ], 
+    "rate" : [
+
+    ], 
+    "notion" : "我会好好学习的", 
+    "volunteer" : [
+        NumberInt(3), 
+        NumberInt(1), 
+        NumberInt(5)
+    ], 
+    "qq" : "751695196", 
+    "email" : " ", 
+    "phone" : "18767155127", 
+    "major" : "会计", 
+    "sex" : NumberInt(0), 
+    "name" : "陈飘", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171c5"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16221114), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(1)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(1), 
+            "score" : NumberInt(5), 
+            "comment" : "ps／美术生，审美能力还行", 
+            "interviewer" : "老王", 
+            "_id" : ObjectId("57e28b42878b5a6d62c65a2a")
+        }
+    ], 
+    "notion" : "我不聪明，但我知道笨鸟先飞，我并不一定懂事情，但我愿意学", 
+    "volunteer" : [
+        NumberInt(1)
+    ], 
+    "qq" : "375654275", 
+    "phone" : "18268184652", 
+    "major" : "产品设计", 
+    "sex" : NumberInt(0), 
+    "name" : "徐莉琴", 
+    "__v" : NumberInt(1), 
+    "signTime" : ISODate("2016-09-21T13:29:38.206+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171c7"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16221611), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(1)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(1), 
+            "score" : NumberInt(4), 
+            "comment" : "有设计认知", 
+            "interviewer" : "linchudong", 
+            "_id" : ObjectId("57e13cc6d32cd018bb97d7d1")
+        }
+    ], 
+    "notion" : "我是要成为画霸的男人", 
+    "volunteer" : [
+        NumberInt(1)
+    ], 
+    "qq" : "2631148951", 
+    "phone" : "17376516076", 
+    "major" : "数字媒体与技术", 
+    "sex" : NumberInt(0), 
+    "name" : "潘卓", 
+    "__v" : NumberInt(1), 
+    "signTime" : ISODate("2016-09-20T13:42:30.846+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171d3"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16031101), 
+    "busy" : false, 
+    "done" : [
+
+    ], 
+    "rate" : [
+
+    ], 
+    "notion" : "小学获温州摄影一等奖，初中获省摄影A级证书，高中参加摄影艺考，被浙传上视摄影专业录取。希望加入红色家园网络工作室，锻炼自己。", 
+    "volunteer" : [
+        NumberInt(1), 
+        NumberInt(4), 
+        NumberInt(3)
+    ], 
+    "qq" : "569541016", 
+    "phone" : "13357192749", 
+    "major" : "工商管理", 
+    "sex" : NumberInt(0), 
+    "name" : "蔡呈妍", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171d4"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16031104), 
+    "busy" : false, 
+    "done" : [
+
+    ], 
+    "rate" : [
+
+    ], 
+    "notion" : "我是一个活泼开朗的人，喜欢在社交平台上与人沟通交流、活跃气氛。有较丰富的管理经验，曾任高中生活委员、语文课代表。", 
+    "volunteer" : [
+        NumberInt(3), 
+        NumberInt(2), 
+        NumberInt(1)
+    ], 
+    "qq" : "774114725", 
+    "phone" : "13858189324", 
+    "major" : "工商管理", 
+    "sex" : NumberInt(0), 
+    "name" : "丁钒", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171d5"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16031106), 
+    "busy" : false, 
+    "done" : [
+
+    ], 
+    "rate" : [
+
+    ], 
+    "notion" : "我活泼开朗，喜欢交朋友，喜欢在网络上与他人沟通交流，对事物充满热情。希望能加入红色家园～", 
+    "volunteer" : [
+        NumberInt(3)
+    ], 
+    "qq" : "976935734", 
+    "phone" : "18767183921", 
+    "major" : "工商管理", 
+    "sex" : NumberInt(0), 
+    "name" : "何颖昭", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171d6"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16031114), 
+    "busy" : false, 
+    "done" : [
+
+    ], 
+    "rate" : [
+
+    ], 
+    "notion" : "大一新生一枚~希望可以在贵组织中学到新的东西，认识新的朋友，提升自己的能力，让大学生活丰富多彩~", 
+    "volunteer" : [
+        NumberInt(3), 
+        NumberInt(2), 
+        NumberInt(4)
+    ], 
+    "qq" : "940735658", 
+    "email" : "18347084198@163.com", 
+    "phone" : "17376512330", 
+    "major" : "工商管理", 
+    "sex" : NumberInt(0), 
+    "name" : "于晓萌", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171d7"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16031127), 
+    "busy" : false, 
+    "done" : [
+
+    ], 
+    "rate" : [
+
+    ], 
+    "notion" : "计算机方面均略有涉猎", 
+    "volunteer" : [
+        NumberInt(0), 
+        NumberInt(4), 
+        NumberInt(5)
+    ], 
+    "qq" : "100971206", 
+    "email" : "rouroujun945@gmail.com", 
+    "phone" : "13357198493", 
+    "major" : "工商管理", 
+    "sex" : NumberInt(1), 
+    "name" : "娄嵩楠", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171cf"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16272229), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(3), 
+        NumberInt(0)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(3), 
+            "score" : NumberInt(4), 
+            "comment" : "第一志愿是人资，报了杭电助手，比较想来我们，", 
+            "interviewer" : "高浩蓝", 
+            "_id" : ObjectId("57e138afd32cd018bb97d7c3")
+        }, 
+        {
+            "did" : NumberInt(0), 
+            "score" : NumberInt(3), 
+            "comment" : "0基础", 
+            "interviewer" : "李程胜", 
+            "_id" : ObjectId("57e139edd32cd018bb97d7c6")
+        }
+    ], 
+    "volunteer" : [
+        NumberInt(3), 
+        NumberInt(0)
+    ], 
+    "qq" : "895317202", 
+    "phone" : "18767195385", 
+    "major" : "网络工程", 
+    "sex" : NumberInt(1), 
+    "name" : "王宇坤", 
+    "__v" : NumberInt(2), 
+    "signTime" : ISODate("2016-09-20T13:30:21.315+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171c0"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16154136), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(1)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(1), 
+            "score" : NumberInt(4), 
+            "comment" : "有基础，还可以", 
+            "interviewer" : "王梓昱", 
+            "_id" : ObjectId("57e13c3dd32cd018bb97d7cf")
+        }
+    ], 
+    "volunteer" : [
+        NumberInt(1)
+    ], 
+    "qq" : "772812427", 
+    "phone" : "18767183155", 
+    "major" : "统计", 
+    "sex" : NumberInt(1), 
+    "name" : "陈栋韬", 
+    "__v" : NumberInt(3), 
+    "signTime" : ISODate("2016-09-20T13:44:24.040+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171d8"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16031218), 
+    "busy" : false, 
+    "done" : [
+
+    ], 
+    "rate" : [
+
+    ], 
+    "notion" : "我是一个崇拜技术大神的女生，虽然我没什么技术，但我非常想接触一下。我的专业课程包括了人力资源管理，我对此非常感兴趣，因此我选择了人力资源部。\n    我擅长团队合作，性格比较热情，非常好相处，同时又很负责。选择人力资源部，相信可以让我发挥长处。\n    红家给了我非常好的印象，像一个温馨和谐的大家庭。我希望可以尽我所能使它变得更好，期待与红家一起努力，一起成长。", 
+    "volunteer" : [
+        NumberInt(3)
+    ], 
+    "qq" : "892001440", 
+    "phone" : "17364508849", 
+    "major" : "工商管理", 
+    "sex" : NumberInt(0), 
+    "name" : "余宸", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171de"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16032218), 
+    "busy" : false, 
+    "done" : [
+
+    ], 
+    "rate" : [
+
+    ], 
+    "notion" : "我对技术和设计有着浓厚的兴趣，我具有较强的学习能力，希望能够在这里学习并提高自己。", 
+    "volunteer" : [
+        NumberInt(0), 
+        NumberInt(1), 
+        NumberInt(4)
+    ], 
+    "qq" : "729167185", 
+    "phone" : "18767171909", 
+    "major" : "信管", 
+    "sex" : NumberInt(1), 
+    "name" : "金锐", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171df"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16036810), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(5)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(5), 
+            "score" : NumberInt(4), 
+            "comment" : "会讲话，幽默", 
+            "interviewer" : "徐琼洁", 
+            "_id" : ObjectId("57dfd9206064fa309e217227")
+        }
+    ], 
+    "notion" : "本萌新来自四川（有四川的学长多多照顾一下哦），性格活泼开朗外向大方幽默风趣，我有时也会爱上自己，在大学中希望加入贵社团，在社团中不断学习，不断得到锻炼，渴望奢求能加入贵社团，可以说这是我大学中想仅仅不多的目标，并且跪求实现。", 
+    "volunteer" : [
+        NumberInt(5)
+    ], 
+    "qq" : "493139110", 
+    "phone" : "17376512685", 
+    "major" : "工业工程", 
+    "sex" : NumberInt(1), 
+    "name" : "陈肯", 
+    "__v" : NumberInt(1), 
+    "signTime" : ISODate("2016-09-19T12:25:04.060+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171e0"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16038509), 
+    "busy" : false, 
+    "done" : [
+
+    ], 
+    "rate" : [
+
+    ], 
+    "notion" : "我来自浙江舟山，希望能加入这个社团贡献一份自己的力量", 
+    "volunteer" : [
+        NumberInt(4), 
+        NumberInt(2), 
+        NumberInt(1)
+    ], 
+    "qq" : "574459726", 
+    "phone" : "15088669430", 
+    "major" : "工业工程（中德）", 
+    "sex" : NumberInt(1), 
+    "name" : "董正源", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171e1"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16038512), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(0)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(0), 
+            "score" : NumberInt(3), 
+            "comment" : "C学到指针。", 
+            "interviewer" : "李程胜", 
+            "_id" : ObjectId("57e27b6e878b5a6d62c659d1")
+        }
+    ], 
+    "notion" : "学习能力强，学习计算机兴趣浓厚", 
+    "volunteer" : [
+        NumberInt(0)
+    ], 
+    "qq" : "716018242", 
+    "email" : "pplzhv@icloud.com", 
+    "phone" : "17376510621", 
+    "major" : "工业技术管理", 
+    "sex" : NumberInt(1), 
+    "name" : "李金豪", 
+    "__v" : NumberInt(1), 
+    "signTime" : ISODate("2016-09-21T12:22:06.385+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e217211"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16154119), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(0)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(0), 
+            "score" : NumberInt(2), 
+            "comment" : "无基础，喜欢数学，对互联网了解很少，无自学经历，认为有自学能力，但存疑。", 
+            "interviewer" : "李程胜", 
+            "_id" : ObjectId("57e2836d878b5a6d62c659f8")
+        }
+    ], 
+    "notion" : "学习有关这些知识", 
+    "volunteer" : [
+        NumberInt(0)
+    ], 
+    "qq" : "875045000", 
+    "phone" : "18767175861", 
+    "major" : "统计", 
+    "sex" : NumberInt(1), 
+    "name" : "陈友祝", 
+    "__v" : NumberInt(2), 
+    "signTime" : ISODate("2016-09-21T12:56:13.930+0000")
+}
+{ 
+    "_id" : ObjectId("57e279f7878b5a6d62c659cd"), 
+    "signTime" : ISODate("2016-09-21T13:25:07.284+0000"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16071223), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(3)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(3), 
+            "score" : NumberInt(3), 
+            "comment" : "光电专业，技术部，非常喜欢技术，看了一本书，临时想报人资，只报了红家，", 
+            "interviewer" : "高浩蓝", 
+            "_id" : ObjectId("57e27e18878b5a6d62c659e0")
+        }
+    ], 
+    "volunteer" : [
+        NumberInt(3)
+    ], 
+    "qq" : "405337836", 
+    "phone" : "18767170165", 
+    "sex" : NumberInt(1), 
+    "name" : "张天宇", 
+    "__v" : NumberInt(2)
+}
+{ 
+    "_id" : ObjectId("57e27e14878b5a6d62c659df"), 
+    "signTime" : ISODate("2016-09-21T12:50:28.600+0000"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(1606210), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(3)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(3), 
+            "score" : NumberInt(2), 
+            "comment" : "自动化，1602101.  报了技术部（第一志愿）与人资， 报了杭电助手，还是对人资有点兴趣。", 
+            "interviewer" : "高浩蓝", 
+            "_id" : ObjectId("57e28214878b5a6d62c659f3")
+        }
+    ], 
+    "volunteer" : [
+        NumberInt(3)
+    ], 
+    "qq" : "350652460", 
+    "phone" : "18767133597", 
+    "sex" : NumberInt(0), 
+    "name" : "黄璐洁", 
+    "__v" : NumberInt(1)
+}
+{ 
+    "_id" : ObjectId("57e27c15878b5a6d62c659d8"), 
+    "signTime" : ISODate("2016-09-21T12:54:41.875+0000"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16051212), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(0)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(0), 
+            "score" : NumberInt(2), 
+            "comment" : "专业对口，C基础薄弱，对后台有兴趣，自学能力可以，对技术部了解的挺多，准备报ACM等", 
+            "interviewer" : "杨彦朋", 
+            "_id" : ObjectId("57e28311878b5a6d62c659f7")
+        }
+    ], 
+    "volunteer" : [
+        NumberInt(0)
+    ], 
+    "qq" : "403062249", 
+    "phone" : "18767188922", 
+    "sex" : NumberInt(1), 
+    "name" : "段航", 
+    "__v" : NumberInt(1)
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171e9"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16041844), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(0)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(0), 
+            "score" : NumberInt(1), 
+            "comment" : "比较跳。无基础。有一点自学经历。以后电子信息方向。无其他社团。", 
+            "interviewer" : "杨彦朋", 
+            "_id" : ObjectId("57e28e70878b5a6d62c65a3a")
+        }
+    ], 
+    "notion" : "……", 
+    "volunteer" : [
+        NumberInt(0)
+    ], 
+    "qq" : "805105940", 
+    "phone" : "13393186418", 
+    "major" : "卓越", 
+    "sex" : NumberInt(1), 
+    "name" : "赵誉", 
+    "__v" : NumberInt(1), 
+    "signTime" : ISODate("2016-09-21T13:43:12.261+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171e3"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16041109), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(1), 
+        NumberInt(5)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(1), 
+            "score" : NumberInt(5), 
+            "comment" : "挺好的", 
+            "interviewer" : "林初东", 
+            "_id" : ObjectId("57dfe52e6064fa309e21725b")
+        }, 
+        {
+            "did" : NumberInt(5), 
+            "score" : NumberInt(1), 
+            "comment" : "没来", 
+            "interviewer" : "徐琼洁", 
+            "_id" : ObjectId("57dff03f7207893860c74617")
+        }
+    ], 
+    "notion" : "各位红家的前辈好，我叫白欣平，在假期的时候关注了红家这个校级社团，觉得十分的专业有组织性，而且还可以学到知识，对我的专业也很有帮助，所以我希望可以加入这个大家庭，希望有机会可以和大家一起学习成长，希望可以给我一次机会，谢谢各位学长。", 
+    "volunteer" : [
+        NumberInt(1), 
+        NumberInt(5)
+    ], 
+    "qq" : "1937784165", 
+    "phone" : "13019861143", 
+    "major" : "电子信息类", 
+    "sex" : NumberInt(1), 
+    "name" : "白欣平", 
+    "__v" : NumberInt(2), 
+    "signTime" : ISODate("2016-09-19T14:03:43.810+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171ec"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16051110), 
+    "busy" : false, 
+    "done" : [
+
+    ], 
+    "rate" : [
+
+    ], 
+    "notion" : "，，，", 
+    "volunteer" : [
+        NumberInt(0), 
+        NumberInt(4), 
+        NumberInt(5)
+    ], 
+    "qq" : "1509446542", 
+    "phone" : "18767156126", 
+    "major" : "计算机技术与科学", 
+    "sex" : NumberInt(1), 
+    "name" : "戴澳港", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171ed"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16051113), 
+    "busy" : false, 
+    "done" : [
+
+    ], 
+    "rate" : [
+
+    ], 
+    "notion" : "我确实没有什么基础，但我对计算机非常喜爱，希望能够在这里边学边做，做的越来越好", 
+    "volunteer" : [
+        NumberInt(0)
+    ], 
+    "qq" : "997607625", 
+    "phone" : "18768122629", 
+    "major" : "计算机科学与技术", 
+    "sex" : NumberInt(1), 
+    "name" : "度朝腾", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171f1"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16051133), 
+    "busy" : false, 
+    "done" : [
+
+    ], 
+    "rate" : [
+
+    ], 
+    "notion" : "小弟姓武，名尚岩，字隠山，乃河南郑州人。此次毛遂自荐，报名红色家园，不仅是为了拓宽自己的眼界，更是为了向学校的建设尽自己一份绵薄之力，希望学长考虑。", 
+    "volunteer" : [
+        NumberInt(0), 
+        NumberInt(1), 
+        NumberInt(4)
+    ], 
+    "qq" : "1079872973", 
+    "phone" : "13357192647", 
+    "major" : "计算机科学与技术", 
+    "sex" : NumberInt(1), 
+    "name" : "武尚岩", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171f3"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16051224), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(1), 
+        NumberInt(0)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(1), 
+            "score" : NumberInt(2), 
+            "comment" : "", 
+            "interviewer" : "老王", 
+            "_id" : ObjectId("57e286a2878b5a6d62c65a0d")
+        }, 
+        {
+            "did" : NumberInt(0), 
+            "score" : NumberInt(3), 
+            "comment" : "基本无基础，有一点点html5基础。有兴趣。没有明确方向。有一点自学能力。，意向不错。iOS方向。", 
+            "interviewer" : "杨彦朋", 
+            "_id" : ObjectId("57e28894878b5a6d62c65a1a")
+        }
+    ], 
+    "notion" : "我喜欢编程，喜欢和志同道合的朋友在一起研究，虽然我现在只是有一点点基础。我是一个沉迷的人，认定一件事情就一定要将它做好，为此可以废寝忘食。我还是一个好玩的人，喜欢看电影、看书、听歌，也能打打游戏。", 
+    "volunteer" : [
+        NumberInt(0), 
+        NumberInt(1)
+    ], 
+    "qq" : "2514559604", 
+    "email" : "viruswjc@gmail.com", 
+    "phone" : "15216277873", 
+    "major" : "计算机科学与技术", 
+    "sex" : NumberInt(1), 
+    "name" : "万俊超", 
+    "__v" : NumberInt(3), 
+    "signTime" : ISODate("2016-09-21T13:22:30.114+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171f4"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16051226), 
+    "busy" : false, 
+    "done" : [
+
+    ], 
+    "rate" : [
+
+    ], 
+    "notion" : "本人性格开朗，乐于助人，为人诚恳，认真负责。虽然还是个小白，但是对计算机有浓厚兴趣，希望能在日常的学习工作中能够得到更好的提升，以致力于为红色家园增添一份力，为杭电学子和老师提供更好的服务。", 
+    "volunteer" : [
+        NumberInt(2)
+    ], 
+    "qq" : "605685770", 
+    "phone" : "18767169276", 
+    "major" : "计算机与科学专业", 
+    "sex" : NumberInt(1), 
+    "name" : "吴斌虎", 
+    "__v" : NumberInt(2), 
+    "signTime" : ISODate("2016-09-21T13:40:02.076+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171f8"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16051306), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(1)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(1), 
+            "score" : NumberInt(4), 
+            "comment" : "有ps基础，有点跳", 
+            "interviewer" : "老王", 
+            "_id" : ObjectId("57e28230878b5a6d62c659f4")
+        }
+    ], 
+    "notion" : "没有基础…但是希望可以通过努力融入红色家园这个大家庭，比较喜欢绘画和听音乐", 
+    "volunteer" : [
+        NumberInt(1)
+    ], 
+    "qq" : "1007875124", 
+    "phone" : "13396564884", 
+    "major" : "计算机科学与技术类", 
+    "sex" : NumberInt(0), 
+    "name" : "王嘉", 
+    "__v" : NumberInt(2), 
+    "signTime" : ISODate("2016-09-21T12:50:56.161+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171f5"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16051228), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(0)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(0), 
+            "score" : NumberInt(4), 
+            "comment" : "c，c++,了解不多，数学基础好，自学能力不错，无其他组织。态度较好", 
+            "interviewer" : "杨彦朋", 
+            "_id" : ObjectId("57e28430878b5a6d62c659ff")
+        }
+    ], 
+    "notion" : "很高兴能有这次加入红色家园技术部的机会。\n我来自浙江省金华一中领军班，高中时学习的是物理竞赛，自学了高等数学（上、下），大学物理基础知识，理论力学与线性代数等也有所涉猎。计算机知识还需从基础学起，但竞赛的经历使我拥有强大的学习能力。我相信自己能够很快掌握作为一名“家园软件工程师”所需的技能。\n机会喜爱有准备的人。我，已经准备好了。", 
+    "volunteer" : [
+        NumberInt(0)
+    ], 
+    "qq" : "1019772657", 
+    "phone" : "18767180793", 
+    "major" : "计算机科学与技术", 
+    "sex" : NumberInt(1), 
+    "name" : "杨磊", 
+    "__v" : NumberInt(1), 
+    "signTime" : ISODate("2016-09-21T12:59:28.644+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171fa"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16051321), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(0)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(0), 
+            "score" : NumberInt(4), 
+            "comment" : "py、c略有基础。有C基础。有自学能力。学习态度还不错。IT俱乐部。", 
+            "interviewer" : "杨彦朋", 
+            "_id" : ObjectId("57e28cec878b5a6d62c65a36")
+        }
+    ], 
+    "notion" : "有基本编程能力 不怕苦 学技术", 
+    "volunteer" : [
+        NumberInt(0)
+    ], 
+    "qq" : "739023340", 
+    "phone" : "18768121051", 
+    "major" : "计算机科学与技术", 
+    "sex" : NumberInt(1), 
+    "name" : "秦子敬", 
+    "__v" : NumberInt(1), 
+    "signTime" : ISODate("2016-09-21T13:36:44.507+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171fe"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16061518), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(0)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(0), 
+            "score" : NumberInt(3), 
+            "comment" : "无编程基础，意向明确强烈，态度较为热情，有自学意识，有一定社交能力，加青协。", 
+            "interviewer" : "李程胜", 
+            "_id" : ObjectId("57e2853e878b5a6d62c65a02")
+        }
+    ], 
+    "notion" : "语言表达能力好，乐于与人相处", 
+    "volunteer" : [
+        NumberInt(0)
+    ], 
+    "qq" : "1136266241", 
+    "phone" : "13336153804", 
+    "major" : "电气类", 
+    "sex" : NumberInt(1), 
+    "name" : "李唯实", 
+    "__v" : NumberInt(1), 
+    "signTime" : ISODate("2016-09-21T13:03:58.583+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171ff"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16061806), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(0)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(0), 
+            "score" : NumberInt(3), 
+            "comment" : "有一定编程基础，会考VB满分，有一定自学经历和能力。院学生会等（2个），喜欢计算机，但无体现。", 
+            "interviewer" : "李程胜", 
+            "_id" : ObjectId("57e28666878b5a6d62c65a0b")
+        }
+    ], 
+    "notion" : "我是一个不善言辞也不宅的姑娘，没有什么“远大志向”，却对编程的世界生生向往，只求一条路，让女孩找到她心爱的熊，即使四围黑暗，纷飞细雪，怀中红家也让她对那些视而不见。此外，如果我掌握了技术，我要为人民写代码。你不教我吗？", 
+    "volunteer" : [
+        NumberInt(0)
+    ], 
+    "qq" : "374991618", 
+    "phone" : "15858125029", 
+    "major" : "电气类", 
+    "sex" : NumberInt(0), 
+    "name" : "周洁雅", 
+    "__v" : NumberInt(1), 
+    "signTime" : ISODate("2016-09-21T13:08:54.241+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e21720f"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16141602), 
+    "busy" : false, 
+    "done" : [
+
+    ], 
+    "rate" : [
+
+    ], 
+    "notion" : "我叫陈琪，来自浙江台州，是会计学院的一员。我加入社团一方面是想拥有丰富的大学生活，让自己更加充实，另一方面是想多结交一些朋友，很多人说自己最好的朋友都是在社团中认识的，我希望可以多认识学长学姐，建立更好的人际关系。还有就是通过社团锻炼自己的口才和社交能力，以便将来可以更好地适应社会。红色家园是一个富于热情和创意的组织，我希望加入这个温馨的大家庭，得到锻炼与成长。", 
+    "volunteer" : [
+        NumberInt(3), 
+        NumberInt(4), 
+        NumberInt(5)
+    ], 
+    "qq" : "1549710376", 
+    "phone" : "13357193904", 
+    "major" : "会计类专业", 
+    "sex" : NumberInt(0), 
+    "name" : "陈琪", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e217217"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16222540), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(1), 
+        NumberInt(0)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(1), 
+            "score" : NumberInt(4), 
+            "comment" : "", 
+            "interviewer" : "老王", 
+            "_id" : ObjectId("57e28e15878b5a6d62c65a39")
+        }, 
+        {
+            "did" : NumberInt(0), 
+            "score" : NumberInt(3), 
+            "comment" : "无基础，英语协会，偏向技术部", 
+            "interviewer" : "杨彦朋", 
+            "_id" : ObjectId("57e29027878b5a6d62c65a3d")
+        }
+    ], 
+    "notion" : "现为大一小透明，但不希望永远是小透明！只要有目标，就会有热情和冲动！不会的却又需要的，我会拼掉小命（！）来学！有大大的脑洞和用不完的力气！在红色家园里，希望能get到各种技术，从前辈们身上学到宝贵的经验，成为一个有价值的人！谢谢！", 
+    "volunteer" : [
+        NumberInt(1), 
+        NumberInt(0)
+    ], 
+    "qq" : "524494439", 
+    "phone" : "18767161727", 
+    "major" : "数字媒体技术", 
+    "sex" : NumberInt(0), 
+    "name" : "王若兰", 
+    "__v" : NumberInt(2), 
+    "signTime" : ISODate("2016-09-21T13:50:31.528+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e21721b"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16272125), 
+    "busy" : false, 
+    "done" : [
+
+    ], 
+    "rate" : [
+
+    ], 
+    "notion" : "时刻具备积极、阳光、向上的精神，这是我一直带在身边的品质。我渴望让磨砺与责任充实课余生活。我擅长画画，特别是板绘，也爱交朋友，对编程技术很感兴趣。学无止境，为了追求更好，我恳切申请加入红色家园，我会为这里带来一束阳光。", 
+    "volunteer" : [
+        NumberInt(1), 
+        NumberInt(0), 
+        NumberInt(3)
+    ], 
+    "qq" : "2384149985", 
+    "phone" : "13357144694", 
+    "major" : "网络工程", 
+    "sex" : NumberInt(1), 
+    "name" : "吕文杰", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e217173"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16031428), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(2), 
+        NumberInt(4), 
+        NumberInt(3), 
+        NumberInt(1)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(2), 
+            "score" : NumberInt(3), 
+            "comment" : "单纯，文科，社交能力有待，兴趣广泛，自学，", 
+            "interviewer" : "孙文毅", 
+            "_id" : ObjectId("57dfd7176064fa309e217222")
+        }, 
+        {
+            "did" : NumberInt(4), 
+            "score" : NumberInt(4), 
+            "comment" : "挺积极的，开朗\n感性，兴趣广泛\n有想法，也会去做\n还报了管理学生会，\n会写抒情\n排版不错，审美可以", 
+            "interviewer" : "汪斯敏", 
+            "_id" : ObjectId("57dfdb376064fa309e217230")
+        }, 
+        {
+            "did" : NumberInt(3), 
+            "score" : NumberInt(2), 
+            "comment" : "向往HR，喜欢策划， 报了院学生会，不太喜欢干累活。", 
+            "interviewer" : "高浩蓝", 
+            "_id" : ObjectId("57dfe2c66064fa309e217251")
+        }, 
+        {
+            "did" : NumberInt(1), 
+            "score" : NumberInt(4), 
+            "comment" : "", 
+            "interviewer" : "林初东", 
+            "_id" : ObjectId("57dfebd16064fa309e21727b")
+        }
+    ], 
+    "volunteer" : [
+        NumberInt(3), 
+        NumberInt(2), 
+        NumberInt(4), 
+        NumberInt(1)
+    ], 
+    "qq" : "1030526604", 
+    "phone" : "18248410776", 
+    "major" : "工商管理", 
+    "sex" : NumberInt(1), 
+    "name" : "钱黄福", 
+    "__v" : NumberInt(5), 
+    "signTime" : ISODate("2016-09-19T13:44:49.425+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171e2"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16038516), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(4), 
+        NumberInt(1), 
+        NumberInt(0)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(4), 
+            "score" : NumberInt(4), 
+            "comment" : "性格开朗，兴趣广泛\n报了管理学生会，艺术团\n审美一般\n作文能力可以，不会抒情", 
+            "interviewer" : "汪斯敏", 
+            "_id" : ObjectId("57dfdc586064fa309e217234")
+        }, 
+        {
+            "did" : NumberInt(1), 
+            "score" : NumberInt(2), 
+            "comment" : "", 
+            "interviewer" : "林初东", 
+            "_id" : ObjectId("57dfe6726064fa309e217262")
+        }, 
+        {
+            "did" : NumberInt(0), 
+            "score" : NumberInt(2), 
+            "comment" : "小白", 
+            "interviewer" : "羊羊羊", 
+            "_id" : ObjectId("57dff3abad164b39b33df0e7")
+        }
+    ], 
+    "notion" : "我是一直对软件很有兴趣希望能加入这个组织", 
+    "volunteer" : [
+        NumberInt(0), 
+        NumberInt(1), 
+        NumberInt(4)
+    ], 
+    "qq" : "1228914382", 
+    "phone" : "17376515056", 
+    "major" : "工业工程中德", 
+    "sex" : NumberInt(1), 
+    "name" : "吕正胤", 
+    "__v" : NumberInt(3), 
+    "signTime" : ISODate("2016-09-19T14:18:19.461+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e21718c"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16051215), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(0)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(0), 
+            "score" : NumberInt(4), 
+            "comment" : "自学C、py、C#,不深。\n无其他社团", 
+            "interviewer" : "赵逸文", 
+            "_id" : ObjectId("57dfdd116064fa309e217237")
+        }
+    ], 
+    "volunteer" : [
+        NumberInt(0)
+    ], 
+    "qq" : "1771767902", 
+    "phone" : "17376513637", 
+    "major" : "卓越", 
+    "sex" : NumberInt(1), 
+    "name" : "康子博", 
+    "__v" : NumberInt(2), 
+    "signTime" : ISODate("2016-09-19T13:33:29.026+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e217190"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16051422), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(0)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(0), 
+            "score" : NumberInt(4), 
+            "comment" : "态度很好，但是想搞ACM，可能有冲突", 
+            "interviewer" : "李程胜", 
+            "_id" : ObjectId("57dfdd186064fa309e217238")
+        }
+    ], 
+    "volunteer" : [
+        NumberInt(0)
+    ], 
+    "qq" : " ", 
+    "phone" : "13336184420", 
+    "major" : "卓越", 
+    "sex" : NumberInt(1), 
+    "name" : "孟凡月", 
+    "__v" : NumberInt(3), 
+    "signTime" : ISODate("2016-09-19T14:08:13.135+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e217175"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16032202), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(1)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(1), 
+            "score" : NumberInt(5), 
+            "comment" : "有基础", 
+            "interviewer" : "林初东", 
+            "_id" : ObjectId("57dfdd716064fa309e21723a")
+        }
+    ], 
+    "volunteer" : [
+        NumberInt(1)
+    ], 
+    "qq" : "2311612502", 
+    "phone" : "15706791762", 
+    "major" : "信管", 
+    "sex" : NumberInt(0), 
+    "name" : "陈晓萍", 
+    "__v" : NumberInt(2), 
+    "signTime" : ISODate("2016-09-19T13:28:36.267+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e217184"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16042010), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(2), 
+        NumberInt(4), 
+        NumberInt(0)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(2), 
+            "score" : NumberInt(4), 
+            "comment" : "比较好相处，喜欢运动，", 
+            "interviewer" : "孙文毅", 
+            "_id" : ObjectId("57dfd94f6064fa309e217228")
+        }, 
+        {
+            "did" : NumberInt(4), 
+            "score" : NumberInt(4), 
+            "comment" : "容易相处，懒癌，执行力不太好\n就联，篮球俱乐部\n排版可以\n不爱写文章，性格还可以", 
+            "interviewer" : "汪斯敏", 
+            "_id" : ObjectId("57dfddb56064fa309e21723b")
+        }, 
+        {
+            "did" : NumberInt(0), 
+            "score" : NumberInt(2), 
+            "comment" : "好相处、交际\n就联\n无基础无任何自学经历", 
+            "interviewer" : "赵逸文", 
+            "_id" : ObjectId("57dfe2fc6064fa309e217253")
+        }
+    ], 
+    "volunteer" : [
+        NumberInt(4), 
+        NumberInt(0), 
+        NumberInt(2)
+    ], 
+    "qq" : "1248767795", 
+    "phone" : "13396560614", 
+    "major" : "电子信息", 
+    "sex" : NumberInt(1), 
+    "name" : "曹超伟", 
+    "__v" : NumberInt(3), 
+    "signTime" : ISODate("2016-09-19T13:07:08.206+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e217176"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16032211), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(3)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(3), 
+            "score" : NumberInt(5), 
+            "comment" : "适合人资（只报了人资），高花超级喜欢， 人可爱，性格活泼；", 
+            "interviewer" : "高浩蓝", 
+            "_id" : ObjectId("57dfde286064fa309e21723e")
+        }
+    ], 
+    "volunteer" : [
+        NumberInt(3)
+    ], 
+    "qq" : "936414256", 
+    "phone" : "18768105036", 
+    "major" : "信管", 
+    "sex" : NumberInt(0), 
+    "name" : "林紫莺", 
+    "__v" : NumberInt(2), 
+    "signTime" : ISODate("2016-09-19T13:30:40.173+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e21718e"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16051302), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(2), 
+        NumberInt(0)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(2), 
+            "score" : NumberInt(4), 
+            "comment" : "看剧，运动，活泼", 
+            "interviewer" : "孙文毅", 
+            "_id" : ObjectId("57dfdf096064fa309e217241")
+        }, 
+        {
+            "did" : NumberInt(0), 
+            "score" : NumberInt(4), 
+            "comment" : "没有任何基础，但是喜欢学习", 
+            "interviewer" : "李程胜", 
+            "_id" : ObjectId("57dfe9aa6064fa309e21726f")
+        }
+    ], 
+    "volunteer" : [
+        NumberInt(0), 
+        NumberInt(2)
+    ], 
+    "qq" : "839809484", 
+    "phone" : "18767138530", 
+    "major" : "计科", 
+    "sex" : NumberInt(0), 
+    "name" : "刘佳文", 
+    "__v" : NumberInt(3), 
+    "signTime" : ISODate("2016-09-19T13:35:38.907+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e21717b"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16041323), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(0), 
+        NumberInt(4), 
+        NumberInt(5)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(0), 
+            "score" : NumberInt(3), 
+            "comment" : "自学C语言 基础一般\n微信感兴趣\n软硬结合 方向不是非常明确", 
+            "interviewer" : "赵逸文", 
+            "_id" : ObjectId("57dfd9c46064fa309e21722a")
+        }, 
+        {
+            "did" : NumberInt(4), 
+            "score" : NumberInt(3), 
+            "comment" : "喜欢篮球\n之前没有关注在杭电\n排版可以，审美可以\n不爱写东西\n篮球俱乐部，院学生会", 
+            "interviewer" : "汪斯敏", 
+            "_id" : ObjectId("57dfdf436064fa309e217242")
+        }, 
+        {
+            "did" : NumberInt(5), 
+            "score" : NumberInt(1), 
+            "comment" : "没来", 
+            "interviewer" : "徐琼洁", 
+            "_id" : ObjectId("57dfe8ea6064fa309e21726d")
+        }
+    ], 
+    "volunteer" : [
+        NumberInt(0), 
+        NumberInt(4), 
+        NumberInt(5)
+    ], 
+    "qq" : "729741716", 
+    "phone" : "13396560645", 
+    "major" : "大英招生（电子信息学院）", 
+    "sex" : NumberInt(1), 
+    "name" : "金高飞", 
+    "__v" : NumberInt(3), 
+    "signTime" : ISODate("2016-09-19T13:32:26.686+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e217179"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16038503), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(4), 
+        NumberInt(0), 
+        NumberInt(1)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(4), 
+            "score" : NumberInt(3), 
+            "comment" : "就报了红家\n审美一般还可以\n文案书写不太会写抒情\n", 
+            "interviewer" : "汪斯敏", 
+            "_id" : ObjectId("57dfd87a6064fa309e217225")
+        }, 
+        {
+            "did" : NumberInt(0), 
+            "score" : NumberInt(3), 
+            "comment" : "希望转计算机\n技术无基础\nPS有基础，不拿手\n无其他社团\n不喜欢社交\n微信感兴趣", 
+            "interviewer" : "赵逸文", 
+            "_id" : ObjectId("57dfdf456064fa309e217243")
+        }, 
+        {
+            "did" : NumberInt(1), 
+            "score" : NumberInt(4), 
+            "comment" : "一个萌妹子", 
+            "interviewer" : "林初东", 
+            "_id" : ObjectId("57dfea406064fa309e217272")
+        }
+    ], 
+    "volunteer" : [
+        NumberInt(1), 
+        NumberInt(0), 
+        NumberInt(4)
+    ], 
+    "qq" : "1148285354", 
+    "phone" : "17788576581", 
+    "major" : "工业工程", 
+    "sex" : NumberInt(0), 
+    "name" : "姜妍", 
+    "__v" : NumberInt(3), 
+    "signTime" : ISODate("2016-09-19T13:38:08.575+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171e8"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16041831), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(3), 
+        NumberInt(0), 
+        NumberInt(5)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(3), 
+            "score" : NumberInt(4), 
+            "comment" : "只报了红家", 
+            "interviewer" : "高浩蓝", 
+            "_id" : ObjectId("57dfd8fc6064fa309e217226")
+        }, 
+        {
+            "did" : NumberInt(0), 
+            "score" : NumberInt(3), 
+            "comment" : "对技术和编程感兴趣，但是从来没有编程过。愿意学习。", 
+            "interviewer" : "李程胜", 
+            "_id" : ObjectId("57dfdf866064fa309e217244")
+        }, 
+        {
+            "did" : NumberInt(5), 
+            "score" : NumberInt(4), 
+            "comment" : "只有红家，", 
+            "interviewer" : "徐琼洁", 
+            "_id" : ObjectId("57dfea716064fa309e217274")
+        }
+    ], 
+    "notion" : "性格开朗，愿意融入新团体，求一起进步", 
+    "volunteer" : [
+        NumberInt(0), 
+        NumberInt(3), 
+        NumberInt(5)
+    ], 
+    "qq" : "1094067200", 
+    "phone" : "17376513775", 
+    "major" : "电子信息类", 
+    "sex" : NumberInt(1), 
+    "name" : "宋浩杰", 
+    "__v" : NumberInt(3), 
+    "signTime" : ISODate("2016-09-19T13:38:57.146+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171a9"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16062008), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(3), 
+        NumberInt(5)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(3), 
+            "score" : NumberInt(3), 
+            "comment" : "报了很多，喜欢服务大众，报了焦点；", 
+            "interviewer" : "高浩蓝", 
+            "_id" : ObjectId("57dfe01c6064fa309e217246")
+        }, 
+        {
+            "did" : NumberInt(5), 
+            "score" : NumberInt(1), 
+            "comment" : "没来", 
+            "interviewer" : "徐琼洁", 
+            "_id" : ObjectId("57dfeaf06064fa309e217275")
+        }
+    ], 
+    "volunteer" : [
+        NumberInt(5), 
+        NumberInt(3)
+    ], 
+    "qq" : "1501144697", 
+    "phone" : "18767123519", 
+    "major" : "电气类", 
+    "sex" : NumberInt(1), 
+    "name" : "陈凡", 
+    "__v" : NumberInt(2), 
+    "signTime" : ISODate("2016-09-19T13:41:04.179+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e21717c"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16041324), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(0), 
+        NumberInt(1)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(0), 
+            "score" : NumberInt(1), 
+            "comment" : "对工作室不了解，而且表示没有时间学习代码，专业方向和工作室方向也相反。", 
+            "interviewer" : "李程胜", 
+            "_id" : ObjectId("57dfdb1e6064fa309e21722f")
+        }, 
+        {
+            "did" : NumberInt(1), 
+            "score" : NumberInt(4), 
+            "comment" : "", 
+            "interviewer" : "林初东", 
+            "_id" : ObjectId("57dfe0446064fa309e217248")
+        }
+    ], 
+    "volunteer" : [
+        NumberInt(0), 
+        NumberInt(1)
+    ], 
+    "qq" : "709685256", 
+    "phone" : "13357192484", 
+    "major" : "电子信息", 
+    "sex" : NumberInt(1), 
+    "name" : "李杰", 
+    "__v" : NumberInt(3), 
+    "signTime" : ISODate("2016-09-19T13:40:39.584+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e21716e"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16011210), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(3), 
+        NumberInt(4), 
+        NumberInt(5)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(3), 
+            "score" : NumberInt(4), 
+            "comment" : "", 
+            "interviewer" : "高浩蓝", 
+            "_id" : ObjectId("57dfdafa6064fa309e21722e")
+        }, 
+        {
+            "did" : NumberInt(4), 
+            "score" : NumberInt(3), 
+            "comment" : "喜欢新鲜的东西\n看得多\n排版一般，审美一般\n爱写东西，写的一般\n没有报其他社团", 
+            "interviewer" : "汪斯敏", 
+            "_id" : ObjectId("57dfe1256064fa309e21724a")
+        }, 
+        {
+            "did" : NumberInt(5), 
+            "score" : NumberInt(4), 
+            "comment" : "有点不正经。", 
+            "interviewer" : "徐琼洁", 
+            "_id" : ObjectId("57dfef657207893860c74613")
+        }
+    ], 
+    "volunteer" : [
+        NumberInt(5), 
+        NumberInt(3), 
+        NumberInt(4)
+    ], 
+    "qq" : "466188004", 
+    "email" : " ", 
+    "phone" : "18634236066", 
+    "major" : "机械设计制造及其自动化", 
+    "sex" : NumberInt(1), 
+    "name" : "黄安鹏", 
+    "__v" : NumberInt(3), 
+    "signTime" : ISODate("2016-09-19T14:00:05.772+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e217189"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16051125), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(4), 
+        NumberInt(1), 
+        NumberInt(0)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(4), 
+            "score" : NumberInt(3), 
+            "comment" : "不怎么喜欢玩微博、贴吧\n美学类估计不太行\n审美不太行\n抒情类还行", 
+            "interviewer" : "汪斯敏", 
+            "_id" : ObjectId("57dfe00e6064fa309e217245")
+        }, 
+        {
+            "did" : NumberInt(1), 
+            "score" : NumberInt(2), 
+            "comment" : "应该比较忙", 
+            "interviewer" : "林初东", 
+            "_id" : ObjectId("57dfe1876064fa309e21724c")
+        }, 
+        {
+            "did" : NumberInt(0), 
+            "score" : NumberInt(3), 
+            "comment" : "喜欢算法，IOI大神，有算法编程基础，想要写一些不一样的东西", 
+            "interviewer" : "李程胜", 
+            "_id" : ObjectId("57dfe4136064fa309e217257")
+        }
+    ], 
+    "volunteer" : [
+        NumberInt(1), 
+        NumberInt(0), 
+        NumberInt(4)
+    ], 
+    "phone" : "15689563523", 
+    "major" : "卓越理工实验班", 
+    "sex" : NumberInt(1), 
+    "name" : "申宝杰", 
+    "__v" : NumberInt(3), 
+    "signTime" : ISODate("2016-09-19T13:11:47.600+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e217186"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16051102), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(4)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(4), 
+            "score" : NumberInt(4), 
+            "comment" : "喜欢打音游，喜欢手工\n对运营有一定的认识，不错\n排版一般，审美一般\n不爱写东西\n报了校学生会\n", 
+            "interviewer" : "汪斯敏", 
+            "_id" : ObjectId("57dfe2196064fa309e21724f")
+        }
+    ], 
+    "volunteer" : [
+        NumberInt(4)
+    ], 
+    "qq" : "769994389", 
+    "phone" : "18767175886", 
+    "major" : "计科", 
+    "sex" : NumberInt(0), 
+    "name" : "黄琛", 
+    "__v" : NumberInt(2), 
+    "signTime" : ISODate("2016-09-19T14:02:39.325+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e21718d"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16051301), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(2), 
+        NumberInt(0)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(2), 
+            "score" : NumberInt(4), 
+            "comment" : "导演，组织能力强，英语补习班，想加强表达能力，", 
+            "interviewer" : "孙文毅", 
+            "_id" : ObjectId("57dfddbb6064fa309e21723c")
+        }, 
+        {
+            "did" : NumberInt(0), 
+            "score" : NumberInt(3), 
+            "comment" : "没有任何计算机基础，但是比较喜欢前端。", 
+            "interviewer" : "李程胜", 
+            "_id" : ObjectId("57dfe24d6064fa309e217250")
+        }
+    ], 
+    "volunteer" : [
+        NumberInt(0), 
+        NumberInt(2)
+    ], 
+    "qq" : "904410953", 
+    "phone" : "18768110525", 
+    "major" : "计科", 
+    "sex" : NumberInt(0), 
+    "name" : "陈惠玲", 
+    "__v" : NumberInt(3), 
+    "signTime" : ISODate("2016-09-19T14:02:25.914+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e21718f"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16051328), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(0), 
+        NumberInt(1), 
+        NumberInt(4)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(0), 
+            "score" : NumberInt(3), 
+            "comment" : "内向\n略有C语言基础\n科协\n方向不明确\n知乎\nPS基础", 
+            "interviewer" : "赵逸文", 
+            "_id" : ObjectId("57dfe0e06064fa309e217249")
+        }, 
+        {
+            "did" : NumberInt(1), 
+            "score" : NumberInt(4), 
+            "comment" : "有基础，审美要培样，感觉很忙", 
+            "interviewer" : "林初东", 
+            "_id" : ObjectId("57dfe2d56064fa309e217252")
+        }, 
+        {
+            "did" : NumberInt(4), 
+            "score" : NumberInt(2), 
+            "comment" : "排版不行，审美不行\n不爱写东\n报了校科协和院科协", 
+            "interviewer" : "汪斯敏", 
+            "_id" : ObjectId("57dfe4276064fa309e217258")
+        }
+    ], 
+    "notion" : "喜欢计算机，热爱产品研发和APP研发", 
+    "volunteer" : [
+        NumberInt(1), 
+        NumberInt(0), 
+        NumberInt(4)
+    ], 
+    "qq" : "1198827029", 
+    "email" : "shuai1198827029@126.com", 
+    "phone" : "13396543435", 
+    "major" : "卓越理工实验班", 
+    "sex" : NumberInt(1), 
+    "name" : "徐帅", 
+    "__v" : NumberInt(3), 
+    "signTime" : ISODate("2016-09-19T13:12:07.442+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e21717d"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16041336), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(3), 
+        NumberInt(0), 
+        NumberInt(5)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(3), 
+            "score" : NumberInt(4), 
+            "comment" : "腼腆，", 
+            "interviewer" : "高浩蓝", 
+            "_id" : ObjectId("57dfd74d6064fa309e217223")
+        }, 
+        {
+            "did" : NumberInt(0), 
+            "score" : NumberInt(1), 
+            "comment" : "无基础、无方向、无其他社团、不太适合交际", 
+            "interviewer" : "赵逸文", 
+            "_id" : ObjectId("57dfdaf76064fa309e21722d")
+        }, 
+        {
+            "did" : NumberInt(5), 
+            "score" : NumberInt(5), 
+            "comment" : "腼腆，社团没报。", 
+            "interviewer" : "徐琼洁", 
+            "_id" : ObjectId("57dfe3166064fa309e217254")
+        }
+    ], 
+    "volunteer" : [
+        NumberInt(3), 
+        NumberInt(0), 
+        NumberInt(5)
+    ], 
+    "qq" : "997268842", 
+    "phone" : "13362892804", 
+    "major" : "电子信息", 
+    "sex" : NumberInt(1), 
+    "name" : "孙星宇", 
+    "__v" : NumberInt(3), 
+    "signTime" : ISODate("2016-09-19T13:07:34.029+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e217188"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16051122), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(3)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(3), 
+            "score" : NumberInt(3), 
+            "comment" : "喜欢运动，说话有点口音，偏向于技术部，没报其他社团。", 
+            "interviewer" : "高浩蓝", 
+            "_id" : ObjectId("57dfe3e96064fa309e217256")
+        }
+    ], 
+    "volunteer" : [
+        NumberInt(3)
+    ], 
+    "qq" : "1363624729", 
+    "phone" : "13357192242", 
+    "major" : "计科", 
+    "sex" : NumberInt(1), 
+    "name" : "蒲志承", 
+    "__v" : NumberInt(2), 
+    "signTime" : ISODate("2016-09-19T14:14:28.803+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e217181"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16041722), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(1), 
+        NumberInt(0)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(1), 
+            "score" : NumberInt(4), 
+            "comment" : "很想加入", 
+            "interviewer" : "林初东", 
+            "_id" : ObjectId("57dfe42f6064fa309e217259")
+        }, 
+        {
+            "did" : NumberInt(0), 
+            "score" : NumberInt(3), 
+            "comment" : "没基础，只是感兴趣", 
+            "interviewer" : "李程胜", 
+            "_id" : ObjectId("57dfe63c6064fa309e217261")
+        }
+    ], 
+    "volunteer" : [
+        NumberInt(1), 
+        NumberInt(0)
+    ], 
+    "qq" : "815985637", 
+    "phone" : "13357188943", 
+    "major" : "电子信息", 
+    "sex" : NumberInt(1), 
+    "name" : "马宇轩", 
+    "__v" : NumberInt(2), 
+    "signTime" : ISODate("2016-09-19T13:21:00.721+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e217194"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16058525), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(0)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(0), 
+            "score" : NumberInt(4), 
+            "comment" : "有兴趣、略有C基础。\n无独立开发经历\n学习态度还可以\n对计算机不是很了解\n报了ACM、宿管会", 
+            "interviewer" : "赵逸文", 
+            "_id" : ObjectId("57dfe5986064fa309e21725d")
+        }
+    ], 
+    "volunteer" : [
+        NumberInt(0)
+    ], 
+    "qq" : "1427019390", 
+    "email" : " ", 
+    "phone" : "18768119307", 
+    "major" : "软件工程", 
+    "sex" : NumberInt(1), 
+    "name" : "易大富", 
+    "__v" : NumberInt(1), 
+    "signTime" : ISODate("2016-09-19T13:18:16.716+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171f0"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16051119), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(3), 
+        NumberInt(0), 
+        NumberInt(5)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(3), 
+            "score" : NumberInt(2), 
+            "comment" : "有耐心，开朗，推荐给技术部", 
+            "interviewer" : "高浩蓝", 
+            "_id" : ObjectId("57dfe6146064fa309e21725f")
+        }, 
+        {
+            "did" : NumberInt(0), 
+            "score" : NumberInt(4), 
+            "comment" : "虽然没有接触过编程，但是表示自己能够吃苦，会尽力完成", 
+            "interviewer" : "李程胜", 
+            "_id" : ObjectId("57dfe78d6064fa309e217267")
+        }, 
+        {
+            "did" : NumberInt(5), 
+            "score" : NumberInt(1), 
+            "comment" : "没来", 
+            "interviewer" : "徐琼洁", 
+            "_id" : ObjectId("57dff06f7207893860c74618")
+        }
+    ], 
+    "notion" : "在学校努力学习，曾获得三好学生证书，参加过校运动会，喜欢流行歌，喜欢探索新事物，喜欢交朋友，打过暑假工！复读过……", 
+    "volunteer" : [
+        NumberInt(5), 
+        NumberInt(3), 
+        NumberInt(0)
+    ], 
+    "qq" : "1825833798", 
+    "phone" : "18767126002", 
+    "major" : "计算机科学与技术", 
+    "sex" : NumberInt(1), 
+    "name" : "刘成钦", 
+    "__v" : NumberInt(4), 
+    "signTime" : ISODate("2016-09-19T14:04:31.892+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e21721e"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16051111), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(4), 
+        NumberInt(0)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(4), 
+            "score" : NumberInt(3), 
+            "comment" : "兴趣偏技术类\n会用微博\n排版还行，审美还可以\n写东西还可以\n目前只报了红家", 
+            "interviewer" : "汪斯敏", 
+            "_id" : ObjectId("57dfe67a6064fa309e217263")
+        }, 
+        {
+            "did" : NumberInt(0), 
+            "score" : NumberInt(2), 
+            "comment" : "无基础\n 棋社\n学习意向不强烈", 
+            "interviewer" : "赵逸文", 
+            "_id" : ObjectId("57dff3c6ad164b39b33df0e8")
+        }
+    ], 
+    "notion" : "学长学姐们好，我是16级新生丁宇航，在技术方面可能有些欠缺与不足，但是我愿意学习，弥补不足。", 
+    "volunteer" : [
+        NumberInt(0), 
+        NumberInt(4)
+    ], 
+    "qq" : "704710694", 
+    "phone" : "17376514806", 
+    "major" : "计算机科学与技术类", 
+    "sex" : NumberInt(1), 
+    "name" : "丁宇航", 
+    "__v" : NumberInt(2), 
+    "signTime" : ISODate("2016-09-19T14:18:46.501+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e21717e"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16041339), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(4), 
+        NumberInt(0)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(4), 
+            "score" : NumberInt(2), 
+            "comment" : "对产品运营有一些兴趣\n红家是第一次面试\n不了解红家是做什么的！\n对排版认识还可以\n不爱写东西", 
+            "interviewer" : "汪斯敏", 
+            "_id" : ObjectId("57dfda256064fa309e21722b")
+        }, 
+        {
+            "did" : NumberInt(0), 
+            "score" : NumberInt(1), 
+            "comment" : "无基础\n跳\n非常跳\n无组织经历\n企图干涉家园发展", 
+            "interviewer" : "赵逸文", 
+            "_id" : ObjectId("57dfe6e96064fa309e217265")
+        }
+    ], 
+    "volunteer" : [
+        NumberInt(0), 
+        NumberInt(4)
+    ], 
+    "qq" : "351617322", 
+    "phone" : "15712691603", 
+    "major" : "电子信息", 
+    "sex" : NumberInt(1), 
+    "name" : "王涛", 
+    "__v" : NumberInt(2), 
+    "signTime" : ISODate("2016-09-19T13:23:53.216+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171e7"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16041734), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(5), 
+        NumberInt(0)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(5), 
+            "score" : NumberInt(4), 
+            "comment" : "想去产品运营，招协，校学生会。", 
+            "interviewer" : "徐琼洁", 
+            "_id" : ObjectId("57dfe77d6064fa309e217266")
+        }, 
+        {
+            "did" : NumberInt(0), 
+            "score" : NumberInt(5), 
+            "comment" : "招协，学生会，后台，计算机研究兴趣浓厚。 折腾过VPS， VPN ， 搭过自己博客， 小学参加过信息竞赛", 
+            "interviewer" : "姜永铭", 
+            "_id" : ObjectId("57dff66bad164b39b33df0ea")
+        }
+    ], 
+    "notion" : "我是来自浙江兰溪的吴致远,有幸加入杭电大家庭.从小我就喜爱折腾计算机.高中经常帮助师友解决计算机.希望能进入红色家园这个社团,锻炼自己各方面能力.", 
+    "volunteer" : [
+        NumberInt(0), 
+        NumberInt(5)
+    ], 
+    "qq" : "398906457", 
+    "phone" : "15258933166", 
+    "major" : "电子信息类", 
+    "sex" : NumberInt(1), 
+    "name" : "吴致远", 
+    "__v" : NumberInt(3), 
+    "signTime" : ISODate("2016-09-19T14:30:03.421+0000")
+}
+{ 
+    "_id" : ObjectId("57dfdd556064fa309e217239"), 
+    "signTime" : ISODate("2016-09-19T14:20:12.242+0000"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16052323), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(4)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(4), 
+            "score" : NumberInt(3), 
+            "comment" : "对产品运营有兴趣\n不喜欢写东西\n审美感觉一般\n暂时还没有，想参加体育部", 
+            "interviewer" : "汪斯敏", 
+            "_id" : ObjectId("57dfe7d16064fa309e217268")
+        }
+    ], 
+    "volunteer" : [
+        NumberInt(4)
+    ], 
+    "qq" : "1505401292", 
+    "phone" : "13336085443", 
+    "sex" : NumberInt(1), 
+    "name" : "王林", 
+    "__v" : NumberInt(2)
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e217185"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16051101), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(5), 
+        NumberInt(4)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(5), 
+            "score" : NumberInt(5), 
+            "comment" : "报了院青协，准备院学生会。想法不错", 
+            "interviewer" : "徐琼洁", 
+            "_id" : ObjectId("57dfde566064fa309e21723f")
+        }, 
+        {
+            "did" : NumberInt(4), 
+            "score" : NumberInt(3), 
+            "comment" : "有礼貌\n活泼开朗，喜欢玩微博微信，会原创\n审美一般\n抒情不太好，会记叙\n院青协", 
+            "interviewer" : "汪斯敏", 
+            "_id" : ObjectId("57dfe8c66064fa309e21726c")
+        }
+    ], 
+    "volunteer" : [
+        NumberInt(4), 
+        NumberInt(5)
+    ], 
+    "qq" : "875307277", 
+    "phone" : "18767175889", 
+    "major" : "计科", 
+    "sex" : NumberInt(0), 
+    "name" : "蔡晨暄", 
+    "__v" : NumberInt(2), 
+    "signTime" : ISODate("2016-09-19T13:31:50.919+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e21718b"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16051136), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(0)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(0), 
+            "score" : NumberInt(5), 
+            "comment" : "自学C、py、Java、C++，py相对了解\n编程知识非常丰富\n没有其他社团\n方向不太清楚\n可能出国", 
+            "interviewer" : "赵逸文", 
+            "_id" : ObjectId("57dfea0c6064fa309e217271")
+        }
+    ], 
+    "volunteer" : [
+        NumberInt(0)
+    ], 
+    "qq" : "1415976578", 
+    "phone" : "13372411406", 
+    "major" : "计科", 
+    "sex" : NumberInt(1), 
+    "name" : "杨骏垒", 
+    "__v" : NumberInt(1), 
+    "signTime" : ISODate("2016-09-19T13:37:16.324+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e217205"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16081126), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(3), 
+        NumberInt(0)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(3), 
+            "score" : NumberInt(3), 
+            "comment" : "等了很久，有耐心。想去技术部，不是很适合人资。", 
+            "interviewer" : "高浩蓝", 
+            "_id" : ObjectId("57dfe9256064fa309e21726e")
+        }, 
+        {
+            "did" : NumberInt(0), 
+            "score" : NumberInt(2), 
+            "comment" : "没有任何基础，太内向", 
+            "interviewer" : "李程胜", 
+            "_id" : ObjectId("57dfeb126064fa309e217276")
+        }
+    ], 
+    "notion" : "我来自浙江宁波，我平时喜欢网络工作，我希望能提高自己能力", 
+    "volunteer" : [
+        NumberInt(0), 
+        NumberInt(3)
+    ], 
+    "qq" : "1140935505", 
+    "phone" : "13566061470", 
+    "major" : "通信工程", 
+    "sex" : NumberInt(1), 
+    "name" : "虞帅权", 
+    "__v" : NumberInt(2), 
+    "signTime" : ISODate("2016-09-19T13:41:38.848+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e21720a"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16081813), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(4), 
+        NumberInt(5), 
+        NumberInt(3)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(4), 
+            "score" : NumberInt(3), 
+            "comment" : "礼貌可以\n性格外向，兴趣广泛\n蛮会玩贴吧\n排版还行，审美还算可以？？？\n报了就联\n算会写东西", 
+            "interviewer" : "汪斯敏", 
+            "_id" : ObjectId("57dfe9e66064fa309e217270")
+        }, 
+        {
+            "did" : NumberInt(5), 
+            "score" : NumberInt(2), 
+            "comment" : "PASS", 
+            "interviewer" : "徐琼洁", 
+            "_id" : ObjectId("57dfeb4c6064fa309e217277")
+        }, 
+        {
+            "did" : NumberInt(3), 
+            "score" : NumberInt(3), 
+            "comment" : "外向，想去微信，微博，报了就联，部门排第二。不太可能来我们部门。", 
+            "interviewer" : "高浩蓝", 
+            "_id" : ObjectId("57dfef407207893860c74612")
+        }
+    ], 
+    "notion" : "爱红家的水笔", 
+    "volunteer" : [
+        NumberInt(4), 
+        NumberInt(5), 
+        NumberInt(3)
+    ], 
+    "qq" : "1012445184", 
+    "phone" : "17376515325", 
+    "major" : "通信工程", 
+    "sex" : NumberInt(1), 
+    "name" : "韩怿珉", 
+    "__v" : NumberInt(3), 
+    "signTime" : ISODate("2016-09-19T13:59:28.081+0000")
+}
+{ 
+    "_id" : ObjectId("57dfdc766064fa309e217235"), 
+    "signTime" : ISODate("2016-09-19T13:51:45.057+0000"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16058322), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(2), 
+        NumberInt(3), 
+        NumberInt(0)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(2), 
+            "score" : NumberInt(5), 
+            "comment" : "擅长于陌生人交流，有社会经历 \n希望多交流，锻炼自己，", 
+            "interviewer" : "孙文毅", 
+            "_id" : ObjectId("57dfe3e56064fa309e217255")
+        }, 
+        {
+            "did" : NumberInt(3), 
+            "score" : NumberInt(3), 
+            "comment" : "软工，也想去公关，人不错，想去校科协，", 
+            "interviewer" : "高浩蓝", 
+            "_id" : ObjectId("57dfeb7f6064fa309e217278")
+        }, 
+        {
+            "did" : NumberInt(0), 
+            "score" : NumberInt(2), 
+            "comment" : "基本无基础、自学能力一般\n校科协，宿管会\n意向不强烈", 
+            "interviewer" : "赵逸文", 
+            "_id" : ObjectId("57dfed716064fa309e21727f")
+        }
+    ], 
+    "volunteer" : [
+        NumberInt(0), 
+        NumberInt(2), 
+        NumberInt(3)
+    ], 
+    "qq" : "772515421", 
+    "phone" : "17364500614", 
+    "sex" : NumberInt(1), 
+    "name" : "王超", 
+    "__v" : NumberInt(3)
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e21717f"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16041626), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(1), 
+        NumberInt(5), 
+        NumberInt(0)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(1), 
+            "score" : NumberInt(4), 
+            "comment" : "还不错", 
+            "interviewer" : "林初东", 
+            "_id" : ObjectId("57dfda2b6064fa309e21722c")
+        }, 
+        {
+            "did" : NumberInt(5), 
+            "score" : NumberInt(3), 
+            "comment" : "有点扭捏，腼腆，太紧张说不出话，", 
+            "interviewer" : "徐琼洁", 
+            "_id" : ObjectId("57dfe12d6064fa309e21724b")
+        }, 
+        {
+            "did" : NumberInt(0), 
+            "score" : NumberInt(4), 
+            "comment" : "basic、pascal\n有一点编程基础\n无其他社团\n有兴趣", 
+            "interviewer" : "赵逸文", 
+            "_id" : ObjectId("57dfeb8d6064fa309e217279")
+        }
+    ], 
+    "volunteer" : [
+        NumberInt(1), 
+        NumberInt(0), 
+        NumberInt(5)
+    ], 
+    "qq" : "869975393", 
+    "phone" : "15858123526", 
+    "major" : "电子信息类", 
+    "sex" : NumberInt(1), 
+    "name" : "龙啸", 
+    "__v" : NumberInt(3), 
+    "signTime" : ISODate("2016-09-19T13:43:41.014+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e217182"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16041725), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(3), 
+        NumberInt(1)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(3), 
+            "score" : NumberInt(3), 
+            "comment" : "人不错，实在，第一志愿，心态不错，可能会进别的社团", 
+            "interviewer" : "高浩蓝", 
+            "_id" : ObjectId("57dfea526064fa309e217273")
+        }, 
+        {
+            "did" : NumberInt(1), 
+            "score" : NumberInt(4), 
+            "comment" : "有点黑", 
+            "interviewer" : "林初东", 
+            "_id" : ObjectId("57dfebbd6064fa309e21727a")
+        }
+    ], 
+    "volunteer" : [
+        NumberInt(3), 
+        NumberInt(1)
+    ], 
+    "qq" : "1143354115", 
+    "phone" : "13336184425", 
+    "major" : "电子信息类", 
+    "sex" : NumberInt(1), 
+    "name" : "曲梦杰", 
+    "__v" : NumberInt(2), 
+    "signTime" : ISODate("2016-09-19T13:44:29.883+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171bb"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16141709), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(3), 
+        NumberInt(5), 
+        NumberInt(4)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(3), 
+            "score" : NumberInt(4), 
+            "comment" : "内向 红十字  上进心，想学东西", 
+            "interviewer" : "高浩蓝", 
+            "_id" : ObjectId("57dfdc936064fa309e217236")
+        }, 
+        {
+            "did" : NumberInt(5), 
+            "score" : NumberInt(5), 
+            "comment" : "科协被刷。文静脾气好。", 
+            "interviewer" : "徐琼洁", 
+            "_id" : ObjectId("57dfe48d6064fa309e21725a")
+        }, 
+        {
+            "did" : NumberInt(4), 
+            "score" : NumberInt(3), 
+            "comment" : "文科生\n不玩微博贴吧\n审美一般。。。排版一般般。。。\n不爱写东西\n红十字会，\n科协被刷", 
+            "interviewer" : "汪斯敏", 
+            "_id" : ObjectId("57dfec9d6064fa309e21727c")
+        }
+    ], 
+    "volunteer" : [
+        NumberInt(3), 
+        NumberInt(4), 
+        NumberInt(5)
+    ], 
+    "qq" : "2523828561", 
+    "phone" : "18767138651", 
+    "major" : "会计", 
+    "sex" : NumberInt(0), 
+    "name" : "胡珂", 
+    "__v" : NumberInt(3), 
+    "signTime" : ISODate("2016-09-19T13:48:13.919+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171f2"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16051205), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(3), 
+        NumberInt(0), 
+        NumberInt(5)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(3), 
+            "score" : NumberInt(2), 
+            "comment" : "来自甘肃，计科妹子，喜欢技术部，更适合技术部", 
+            "interviewer" : "高浩蓝", 
+            "_id" : ObjectId("57dfe1946064fa309e21724d")
+        }, 
+        {
+            "did" : NumberInt(0), 
+            "score" : NumberInt(3), 
+            "comment" : "因为没有接触过电脑所以没有任何基础，但是被计算机的神奇所吸引。暑假自学过编程。", 
+            "interviewer" : "李程胜", 
+            "_id" : ObjectId("57dfecf26064fa309e21727e")
+        }, 
+        {
+            "did" : NumberInt(5), 
+            "score" : NumberInt(3), 
+            "comment" : "想去技术。", 
+            "interviewer" : "徐琼洁", 
+            "_id" : ObjectId("57dff2257207893860c7461c")
+        }
+    ], 
+    "notion" : "杨晓妹", 
+    "volunteer" : [
+        NumberInt(0), 
+        NumberInt(3), 
+        NumberInt(5)
+    ], 
+    "qq" : "372016832", 
+    "phone" : "13396560694", 
+    "major" : "计算机科学与技术", 
+    "sex" : NumberInt(0), 
+    "name" : "杨晓妹", 
+    "__v" : NumberInt(3), 
+    "signTime" : ISODate("2016-09-19T14:11:49.258+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e217183"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16041912), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(1), 
+        NumberInt(0)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(1), 
+            "score" : NumberInt(3), 
+            "comment" : "还算活跃", 
+            "interviewer" : "林初东", 
+            "_id" : ObjectId("57dfedf56064fa309e217280")
+        }, 
+        {
+            "did" : NumberInt(0), 
+            "score" : NumberInt(3), 
+            "comment" : "有兴趣\n编程无基础\nPS 视频\n自学能力不错\n适合设计部", 
+            "interviewer" : "赵逸文", 
+            "_id" : ObjectId("57dfef047207893860c74611")
+        }
+    ], 
+    "volunteer" : [
+        NumberInt(0), 
+        NumberInt(1)
+    ], 
+    "qq" : "447047276", 
+    "phone" : "18767188965", 
+    "major" : "电子信息", 
+    "sex" : NumberInt(1), 
+    "name" : "崔钊", 
+    "__v" : NumberInt(2), 
+    "signTime" : ISODate("2016-09-19T13:58:28.720+0000")
+}
+{ 
+    "_id" : ObjectId("57dfe61c6064fa309e217260"), 
+    "signTime" : ISODate("2016-09-19T14:15:35.334+0000"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16154118), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(5), 
+        NumberInt(4), 
+        NumberInt(0)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(5), 
+            "score" : NumberInt(3), 
+            "comment" : "报名心情驿站，院青协。", 
+            "interviewer" : "徐琼洁", 
+            "_id" : ObjectId("57dfeca66064fa309e21727d")
+        }, 
+        {
+            "did" : NumberInt(4), 
+            "score" : NumberInt(4), 
+            "comment" : "爱听音乐\n微博会会发一点东西\n排版意识可以\n偏抒情，写东西还可以，比较有创意\n经济青协", 
+            "interviewer" : "汪斯敏", 
+            "_id" : ObjectId("57dfefa27207893860c74614")
+        }, 
+        {
+            "did" : NumberInt(0), 
+            "score" : NumberInt(3), 
+            "comment" : "Pascal、\n有自学经历\n有兴趣\n基本无基础", 
+            "interviewer" : "赵逸文", 
+            "_id" : ObjectId("57dff307ad164b39b33df0e6")
+        }
+    ], 
+    "volunteer" : [
+        NumberInt(0), 
+        NumberInt(4), 
+        NumberInt(5)
+    ], 
+    "qq" : "1134040125", 
+    "phone" : "18767139863", 
+    "sex" : NumberInt(0), 
+    "name" : "周艳", 
+    "__v" : NumberInt(3)
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e217213"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16154125), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(3), 
+        NumberInt(5)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(3), 
+            "score" : NumberInt(3), 
+            "comment" : "更偏向于运营，一般", 
+            "interviewer" : "高浩蓝", 
+            "_id" : ObjectId("57dfe8046064fa309e21726a")
+        }, 
+        {
+            "did" : NumberInt(5), 
+            "score" : NumberInt(4), 
+            "comment" : "没报别的。撸串。", 
+            "interviewer" : "徐琼洁", 
+            "_id" : ObjectId("57dfefeb7207893860c74615")
+        }
+    ], 
+    "notion" : "爱交流，爱吃喝玩乐，爱运动", 
+    "volunteer" : [
+        NumberInt(3), 
+        NumberInt(5)
+    ], 
+    "qq" : "1844928898", 
+    "phone" : "13372413746", 
+    "major" : "统计学", 
+    "sex" : NumberInt(1), 
+    "name" : "黄钊", 
+    "__v" : NumberInt(2), 
+    "signTime" : ISODate("2016-09-19T14:02:19.570+0000")
+}
+{ 
+    "_id" : ObjectId("57dfddee6064fa309e21723d"), 
+    "signTime" : ISODate("2016-09-19T14:08:28.313+0000"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16051204), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(5), 
+        NumberInt(1), 
+        NumberInt(0)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(5), 
+            "score" : NumberInt(5), 
+            "comment" : "活动组织者，很好，要了。", 
+            "interviewer" : "徐琼洁", 
+            "_id" : ObjectId("57dfe8996064fa309e21726b")
+        }, 
+        {
+            "did" : NumberInt(1), 
+            "score" : NumberInt(4), 
+            "comment" : "有设计感", 
+            "interviewer" : "林初东", 
+            "_id" : ObjectId("57dff0187207893860c74616")
+        }, 
+        {
+            "did" : NumberInt(0), 
+            "score" : NumberInt(4), 
+            "comment" : "微微\n基本无基础c\n有兴趣\n意向强烈", 
+            "interviewer" : "赵逸文", 
+            "_id" : ObjectId("57dff15c7207893860c7461a")
+        }
+    ], 
+    "volunteer" : [
+        NumberInt(0), 
+        NumberInt(1), 
+        NumberInt(5)
+    ], 
+    "qq" : "1037989035", 
+    "phone" : "15088669248", 
+    "sex" : NumberInt(0), 
+    "name" : "熊慧琳", 
+    "__v" : NumberInt(3)
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171e4"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16041112), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(0)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(0), 
+            "score" : NumberInt(2), 
+            "comment" : "无基础\n无自学经历\n学习意向不强烈\n自学能力一般\n科协", 
+            "interviewer" : "赵逸文", 
+            "_id" : ObjectId("57dff4eaad164b39b33df0e9")
+        }
+    ], 
+    "notion" : "我是一个内向的人，我工作认真，希望能加入这个大家庭，出自己的一份力。虽然我现在可能不会编码，但是我会努力学习，强化自己", 
+    "volunteer" : [
+        NumberInt(0)
+    ], 
+    "qq" : "1263798172", 
+    "phone" : "13336189145", 
+    "major" : "电子信息", 
+    "sex" : NumberInt(1), 
+    "name" : "池谢源", 
+    "__v" : NumberInt(1), 
+    "signTime" : ISODate("2016-09-19T14:23:38.517+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e217193"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16058520), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(0)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(0), 
+            "score" : NumberInt(3), 
+            "comment" : "学过部分C语言，对程序设计的兴趣很浓厚，对加入工作室有很强的意向。", 
+            "interviewer" : "李程胜", 
+            "_id" : ObjectId("57dff1f77207893860c7461b")
+        }
+    ], 
+    "volunteer" : [
+        NumberInt(0)
+    ], 
+    "qq" : "1322023401", 
+    "phone" : "17376515082", 
+    "major" : "软件工程", 
+    "sex" : NumberInt(1), 
+    "name" : "宋天琪", 
+    "__v" : NumberInt(1), 
+    "signTime" : ISODate("2016-09-19T14:11:03.658+0000"), 
+    "notion" : "有责任心\n上进心强\n学习能力强\n做事认真\n幽默风趣\n乐于助人\n在暑假期间自学过c语言相关知识\n求各位大大收留"
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171b8"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16123916), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(2)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(2), 
+            "score" : NumberInt(3), 
+            "comment" : "", 
+            "interviewer" : "孙文毅", 
+            "_id" : ObjectId("57e133a5d32cd018bb97d7af")
+        }
+    ], 
+    "notion" : "安稳", 
+    "volunteer" : [
+        NumberInt(2)
+    ], 
+    "qq" : "3422513452", 
+    "phone" : "18767157930", 
+    "major" : "编辑出版学", 
+    "sex" : NumberInt(0), 
+    "name" : "索朗央吉", 
+    "__v" : NumberInt(2), 
+    "signTime" : ISODate("2016-09-20T13:31:27.389+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171c4"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16201220), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(3)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(3), 
+            "score" : NumberInt(4), 
+            "comment" : "想进两个社团，性格不错，时间安排不知道是否能协调好，", 
+            "interviewer" : "高浩蓝", 
+            "_id" : ObjectId("57e13352d32cd018bb97d7ae")
+        }
+    ], 
+    "volunteer" : [
+        NumberInt(3)
+    ], 
+    "qq" : "1012667473", 
+    "phone" : "13276765717", 
+    "major" : "环境科学与工程", 
+    "sex" : NumberInt(1), 
+    "name" : "李想", 
+    "__v" : NumberInt(2), 
+    "signTime" : ISODate("2016-09-20T13:33:10.657+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171a8"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16062007), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(4)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(4), 
+            "score" : NumberInt(2), 
+            "comment" : "比较跳，喜欢动漫，不玩微博、贴吧，不爱写东西，不了解产品运营，报了很多社团", 
+            "interviewer" : "汪斯敏", 
+            "_id" : ObjectId("57e138aed32cd018bb97d7c2")
+        }
+    ], 
+    "notion" : "想提升一下自己", 
+    "volunteer" : [
+        NumberInt(4)
+    ], 
+    "qq" : "957480436", 
+    "phone" : "18767130207", 
+    "major" : "自动化", 
+    "sex" : NumberInt(1), 
+    "name" : "陈崇泼", 
+    "__v" : NumberInt(1), 
+    "signTime" : ISODate("2016-09-20T13:25:02.651+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171b3"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16081114), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(0)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(0), 
+            "score" : NumberInt(3), 
+            "comment" : "衡水毕业。不怎么玩游戏。学习能力比较强。", 
+            "interviewer" : "姜永铭", 
+            "_id" : ObjectId("57e1358dd32cd018bb97d7b2")
+        }
+    ], 
+    "volunteer" : [
+        NumberInt(0)
+    ], 
+    "qq" : "337635025", 
+    "phone" : "18768126355", 
+    "major" : "通信工程", 
+    "sex" : NumberInt(1), 
+    "name" : "李哲源", 
+    "__v" : NumberInt(2), 
+    "signTime" : ISODate("2016-09-20T13:28:40.755+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171c3"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16201219), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(2)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(2), 
+            "score" : NumberInt(4), 
+            "comment" : "潮汕，有爱心", 
+            "interviewer" : "孙文毅", 
+            "_id" : ObjectId("57e135aad32cd018bb97d7b3")
+        }
+    ], 
+    "volunteer" : [
+        NumberInt(2)
+    ], 
+    "qq" : "759757929", 
+    "phone" : "18767192921", 
+    "major" : "环境科学与工程", 
+    "sex" : NumberInt(1), 
+    "name" : "李树霖", 
+    "__v" : NumberInt(2), 
+    "signTime" : ISODate("2016-09-20T13:36:43.667+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171aa"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16062010), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(1)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(1), 
+            "score" : NumberInt(4), 
+            "comment" : "还不错呢，有热情，能自学", 
+            "interviewer" : "王梓昱", 
+            "_id" : ObjectId("57e13666d32cd018bb97d7b5")
+        }
+    ], 
+    "volunteer" : [
+        NumberInt(1)
+    ], 
+    "qq" : "714487377", 
+    "phone" : "18767130651", 
+    "major" : "卓越", 
+    "sex" : NumberInt(1), 
+    "name" : "邓欣豪", 
+    "__v" : NumberInt(2), 
+    "signTime" : ISODate("2016-09-20T13:44:45.531+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171a4"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16061814), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(3), 
+        NumberInt(1)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(3), 
+            "score" : NumberInt(3), 
+            "comment" : "开朗，技术第一，想法挺细致的，", 
+            "interviewer" : "高浩蓝", 
+            "_id" : ObjectId("57e1368cd32cd018bb97d7b6")
+        }, 
+        {
+            "did" : NumberInt(1), 
+            "score" : NumberInt(3), 
+            "comment" : "0基础，理解一般，", 
+            "interviewer" : "王梓昱", 
+            "_id" : ObjectId("57e13869d32cd018bb97d7be")
+        }
+    ], 
+    "volunteer" : [
+        NumberInt(3), 
+        NumberInt(1)
+    ], 
+    "qq" : "1953125697", 
+    "phone" : "13216176819", 
+    "major" : "电气类", 
+    "sex" : NumberInt(1), 
+    "name" : "解柏森", 
+    "__v" : NumberInt(2), 
+    "signTime" : ISODate("2016-09-20T13:23:53.036+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171c9"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16271109), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(1), 
+        NumberInt(0)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(1), 
+            "score" : NumberInt(2), 
+            "comment" : "设计感有点弱", 
+            "interviewer" : "linchudong", 
+            "_id" : ObjectId("57e13747d32cd018bb97d7b7")
+        }, 
+        {
+            "did" : NumberInt(0), 
+            "score" : NumberInt(3), 
+            "comment" : "有兴趣没基础", 
+            "interviewer" : "姜永铭", 
+            "_id" : ObjectId("57e13874d32cd018bb97d7c0")
+        }
+    ], 
+    "volunteer" : [
+        NumberInt(1), 
+        NumberInt(0)
+    ], 
+    "qq" : "956523207", 
+    "phone" : "18169844892", 
+    "major" : "信息安全", 
+    "sex" : NumberInt(0), 
+    "name" : "周昕桐", 
+    "__v" : NumberInt(2), 
+    "signTime" : ISODate("2016-09-20T13:24:04.245+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171a5"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16061903), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(0)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(0), 
+            "score" : NumberInt(4), 
+            "comment" : "C学到函数\n对最新IT资讯有了解但是很少\n但是有硬件倾向", 
+            "interviewer" : "李程胜", 
+            "_id" : ObjectId("57e13778d32cd018bb97d7b9")
+        }
+    ], 
+    "volunteer" : [
+        NumberInt(0)
+    ], 
+    "qq" : "569265292", 
+    "phone" : "13372411764", 
+    "major" : "自动化", 
+    "sex" : NumberInt(0), 
+    "name" : "耿爽", 
+    "__v" : NumberInt(1), 
+    "signTime" : ISODate("2016-09-20T13:19:52.991+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171d2"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(15072111), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(4), 
+        NumberInt(0)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(4), 
+            "score" : NumberInt(4), 
+            "comment" : "喜欢打游戏，微博贴吧玩得多，看得多，\n不爱写东西，推荐去技术部。", 
+            "interviewer" : "汪斯敏", 
+            "_id" : ObjectId("57e134aad32cd018bb97d7b1")
+        }, 
+        {
+            "did" : NumberInt(0), 
+            "score" : NumberInt(4), 
+            "comment" : "大二，卓越，有一定编程基础。研究过算法。", 
+            "interviewer" : "姜永铭", 
+            "_id" : ObjectId("57e1378fd32cd018bb97d7ba")
+        }
+    ], 
+    "notion" : "好好学技术", 
+    "volunteer" : [
+        NumberInt(0), 
+        NumberInt(4)
+    ], 
+    "qq" : "869612625", 
+    "phone" : "15968178376", 
+    "major" : "理工班", 
+    "sex" : NumberInt(1), 
+    "name" : "王鸣珂", 
+    "__v" : NumberInt(2), 
+    "signTime" : ISODate("2016-09-20T13:20:15.414+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e217198"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16061212), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(4)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(4), 
+            "score" : NumberInt(3), 
+            "comment" : "微博原创少，转发多，觉得自己是个段子手，还报了校科协、校会以及其他，", 
+            "interviewer" : "汪斯敏", 
+            "_id" : ObjectId("57e137bbd32cd018bb97d7bb")
+        }
+    ], 
+    "volunteer" : [
+        NumberInt(4)
+    ], 
+    "qq" : "1273857865", 
+    "phone" : "17376517661", 
+    "major" : "电气类", 
+    "sex" : NumberInt(1), 
+    "name" : "程愉凯", 
+    "__v" : NumberInt(2), 
+    "signTime" : ISODate("2016-09-20T13:40:04.922+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171a2"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16061514), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(3), 
+        NumberInt(5)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(3), 
+            "score" : NumberInt(3), 
+            "comment" : "只报了家园，人资排在技术后面，对人资没什么了解，但是挺感兴趣的，一轮过了", 
+            "interviewer" : "高浩蓝", 
+            "_id" : ObjectId("57e13447d32cd018bb97d7b0")
+        }, 
+        {
+            "did" : NumberInt(5), 
+            "score" : NumberInt(4), 
+            "comment" : "当过社长，有点腼腆，想考研，没有报别的社团。\n", 
+            "interviewer" : "徐琼洁", 
+            "_id" : ObjectId("57e1384ad32cd018bb97d7bd")
+        }
+    ], 
+    "volunteer" : [
+        NumberInt(3), 
+        NumberInt(5)
+    ], 
+    "qq" : "1425646554", 
+    "phone" : "18658778682", 
+    "major" : "自动化", 
+    "sex" : NumberInt(1), 
+    "name" : "金仁操", 
+    "__v" : NumberInt(3), 
+    "signTime" : ISODate("2016-09-20T13:42:31.547+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e217202"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16071120), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(0)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(0), 
+            "score" : NumberInt(4), 
+            "comment" : "有C基础，有竞赛经历，有算法学习经历，有一定热情，有自学经历，无其他社团。", 
+            "interviewer" : "杨彦朋", 
+            "_id" : ObjectId("57e13875d32cd018bb97d7c1")
+        }
+    ], 
+    "notion" : "我想加入红色家园工作室的技术部，我热爱编程，想加入技术部提升自我，我会C语言基础，过了二级C考试，有基本的编程能力，有一定的自学能力。", 
+    "volunteer" : [
+        NumberInt(0)
+    ], 
+    "qq" : "2308093774", 
+    "phone" : "18257189855", 
+    "major" : "光电信息科学与工程", 
+    "sex" : NumberInt(1), 
+    "name" : "吴奔道", 
+    "__v" : NumberInt(2), 
+    "signTime" : ISODate("2016-09-20T13:24:05.227+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171ca"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16271203), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(2), 
+        NumberInt(0)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(2), 
+            "score" : NumberInt(4), 
+            "comment" : "爱好看动漫，画画；98年的；学生会主席团；", 
+            "interviewer" : "孙文毅", 
+            "_id" : ObjectId("57e1375cd32cd018bb97d7b8")
+        }, 
+        {
+            "did" : NumberInt(0), 
+            "score" : NumberInt(3), 
+            "comment" : "基本无基础，有一点点C基础，有自学经历，但自学能力不强，容易放弃，没有其他社团，专业对口，耿直的girl。", 
+            "interviewer" : "杨彦朋", 
+            "_id" : ObjectId("57e13930d32cd018bb97d7c4")
+        }
+    ], 
+    "notion" : "菜鸡，求抱大腿", 
+    "volunteer" : [
+        NumberInt(0), 
+        NumberInt(2)
+    ], 
+    "qq" : "1913769985", 
+    "phone" : "18767175772", 
+    "major" : "信安", 
+    "sex" : NumberInt(0), 
+    "name" : "李颖琦", 
+    "__v" : NumberInt(2), 
+    "signTime" : ISODate("2016-09-20T13:27:12.051+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171ce"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16272227), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(0)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(0), 
+            "score" : NumberInt(4), 
+            "comment" : "做过简单的静态网页，对android有兴趣", 
+            "interviewer" : "姜永铭", 
+            "_id" : ObjectId("57e139d8d32cd018bb97d7c5")
+        }
+    ], 
+    "volunteer" : [
+        NumberInt(0)
+    ], 
+    "qq" : "857344759", 
+    "phone" : "18767139929", 
+    "major" : "网络工程", 
+    "sex" : NumberInt(1), 
+    "name" : "吕岩", 
+    "__v" : NumberInt(2), 
+    "signTime" : ISODate("2016-09-20T13:30:00.493+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171cd"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16272226), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(0)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(0), 
+            "score" : NumberInt(3), 
+            "comment" : "基本无基础，对互联网基本无了解，无自学经历，自学能力不强，报了杭电助手，对计算机有学习热情（存疑），有一定学习热情。", 
+            "interviewer" : "杨彦朋", 
+            "_id" : ObjectId("57e13a51d32cd018bb97d7c7")
+        }
+    ], 
+    "volunteer" : [
+        NumberInt(0)
+    ], 
+    "qq" : "1165340075", 
+    "phone" : "18768127331", 
+    "major" : "网络空间", 
+    "sex" : NumberInt(1), 
+    "name" : "卢绍鹏", 
+    "__v" : NumberInt(1), 
+    "signTime" : ISODate("2016-09-20T13:32:01.887+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171d0"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16938101), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(4), 
+        NumberInt(3), 
+        NumberInt(2)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(4), 
+            "score" : NumberInt(3), 
+            "comment" : "喜欢健身、打游戏，贴吧很水，不爱写东西，想法一般，排版意识可以， 没有报其他社团。", 
+            "interviewer" : "汪斯敏", 
+            "_id" : ObjectId("57e13603d32cd018bb97d7b4")
+        }, 
+        {
+            "did" : NumberInt(3), 
+            "score" : NumberInt(3), 
+            "comment" : "班长，只报了红家，想去对外的部门，可能不太适合我们人资，", 
+            "interviewer" : "高浩蓝", 
+            "_id" : ObjectId("57e13a78d32cd018bb97d7c8")
+        }, 
+        {
+            "did" : NumberInt(2), 
+            "score" : NumberInt(4), 
+            "comment" : " 台州气质；其他社团未了解；对公关感兴趣；班长", 
+            "interviewer" : "孙文毅", 
+            "_id" : ObjectId("57e13c52d32cd018bb97d7d0")
+        }
+    ], 
+    "volunteer" : [
+        NumberInt(3), 
+        NumberInt(2), 
+        NumberInt(4)
+    ], 
+    "qq" : "292706930", 
+    "phone" : "18758195748", 
+    "major" : "电子商务", 
+    "sex" : NumberInt(1), 
+    "name" : "陈诚", 
+    "__v" : NumberInt(3), 
+    "signTime" : ISODate("2016-09-20T13:40:34.974+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e21719d"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16061425), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(1)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(1), 
+            "score" : NumberInt(3), 
+            "comment" : "", 
+            "interviewer" : "linchudong", 
+            "_id" : ObjectId("57e13af0d32cd018bb97d7ca")
+        }
+    ], 
+    "volunteer" : [
+        NumberInt(1)
+    ], 
+    "qq" : "540032723", 
+    "phone" : "17376512249", 
+    "major" : "电气类", 
+    "sex" : NumberInt(1), 
+    "name" : "吴沛剑", 
+    "__v" : NumberInt(2), 
+    "signTime" : ISODate("2016-09-20T13:34:40.569+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171cc"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16272128), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(2), 
+        NumberInt(4), 
+        NumberInt(0)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(2), 
+            "score" : NumberInt(3), 
+            "comment" : "喜欢聊天、分享；当过班委；", 
+            "interviewer" : "孙文毅", 
+            "_id" : ObjectId("57e13873d32cd018bb97d7bf")
+        }, 
+        {
+            "did" : NumberInt(4), 
+            "score" : NumberInt(2), 
+            "comment" : "喜欢打游戏，喜欢运动，贴吧看得多，不爱写东西，排版意识不太行，审美一般，还报了勤义", 
+            "interviewer" : "汪斯敏", 
+            "_id" : ObjectId("57e13b4bd32cd018bb97d7cb")
+        }, 
+        {
+            "did" : NumberInt(0), 
+            "score" : NumberInt(2), 
+            "comment" : "无基础，无自学经历，对互联网基本无了解。有学习的意愿，自学能力不强。加了杭电勤义。", 
+            "interviewer" : "杨彦朋", 
+            "_id" : ObjectId("57e13ce7d32cd018bb97d7d2")
+        }
+    ], 
+    "volunteer" : [
+        NumberInt(0), 
+        NumberInt(2), 
+        NumberInt(4)
+    ], 
+    "qq" : "1904115209", 
+    "phone" : "13180226003", 
+    "major" : "网络工程", 
+    "sex" : NumberInt(1), 
+    "name" : "司晓磊", 
+    "__v" : NumberInt(3), 
+    "signTime" : ISODate("2016-09-20T13:43:03.717+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171b2"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16081113), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(0)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(0), 
+            "score" : NumberInt(2), 
+            "comment" : "没什么热情", 
+            "interviewer" : "李程胜", 
+            "_id" : ObjectId("57e13b86d32cd018bb97d7cc")
+        }
+    ], 
+    "volunteer" : [
+        NumberInt(0)
+    ], 
+    "phone" : "18767107356", 
+    "major" : "通信工程", 
+    "sex" : NumberInt(1), 
+    "name" : "姜宇", 
+    "__v" : NumberInt(1), 
+    "signTime" : ISODate("2016-09-20T13:37:10.032+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171be"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16151124), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(5), 
+        NumberInt(3)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(5), 
+            "score" : NumberInt(4), 
+            "comment" : "党员之家，校会。颜值超高。三个社团", 
+            "interviewer" : "徐琼洁", 
+            "_id" : ObjectId("57e13834d32cd018bb97d7bc")
+        }, 
+        {
+            "did" : NumberInt(3), 
+            "score" : NumberInt(3), 
+            "comment" : "组织部部长，报了校会，党家，都想进，不是很了解我们，想去公关，发个任务试试吧", 
+            "interviewer" : "高浩蓝", 
+            "_id" : ObjectId("57e13bffd32cd018bb97d7cd")
+        }
+    ], 
+    "volunteer" : [
+        NumberInt(3), 
+        NumberInt(5)
+    ], 
+    "qq" : "554652006", 
+    "phone" : "18767172177", 
+    "major" : "国贸", 
+    "sex" : NumberInt(1), 
+    "name" : "马乐群", 
+    "__v" : NumberInt(2), 
+    "signTime" : ISODate("2016-09-20T13:39:11.257+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171c6"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16221154), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(1), 
+        NumberInt(0)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(1), 
+            "score" : NumberInt(4), 
+            "comment" : "可以", 
+            "interviewer" : "linchudong", 
+            "_id" : ObjectId("57e13a7cd32cd018bb97d7c9")
+        }, 
+        {
+            "did" : NumberInt(0), 
+            "score" : NumberInt(1), 
+            "comment" : "连兴趣都没有。啥是编程都不知道。但是会PS，我觉得比较适合设计部", 
+            "interviewer" : "姜永铭", 
+            "_id" : ObjectId("57e13c25d32cd018bb97d7ce")
+        }
+    ], 
+    "notion" : "我会简单装卸主机，用会声会影剪辑调音，做系统，希望能学习编程ps技术，我会努力学习的!", 
+    "volunteer" : [
+        NumberInt(1), 
+        NumberInt(0)
+    ], 
+    "qq" : "1809509320", 
+    "phone" : "15088673412", 
+    "major" : "产品设计", 
+    "sex" : NumberInt(1), 
+    "name" : "陈子蒙", 
+    "__v" : NumberInt(2), 
+    "signTime" : ISODate("2016-09-20T13:39:49.630+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171c1"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16198703), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(3)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(3), 
+            "score" : NumberInt(4), 
+            "comment" : "喜欢做电子商务，喜欢玩，报了宿管会，校先锋，人资第一志愿，考虑的挺细致的，能力强", 
+            "interviewer" : "高浩蓝", 
+            "_id" : ObjectId("57e13d8dd32cd018bb97d7d3")
+        }
+    ], 
+    "volunteer" : [
+        NumberInt(3)
+    ], 
+    "qq" : "342453978", 
+    "phone" : "13396540864", 
+    "major" : "医信", 
+    "sex" : NumberInt(0), 
+    "name" : "金莹", 
+    "__v" : NumberInt(1), 
+    "signTime" : ISODate("2016-09-20T13:45:49.126+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e217212"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16154123), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(0)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(0), 
+            "score" : NumberInt(3), 
+            "comment" : "C基础,转计科专业，对计算机感兴趣", 
+            "interviewer" : "杨彦朋", 
+            "_id" : ObjectId("57e280dd878b5a6d62c659ed")
+        }
+    ], 
+    "notion" : "对程序设计有较大兴趣", 
+    "volunteer" : [
+        NumberInt(0)
+    ], 
+    "qq" : "335034654", 
+    "phone" : "13357142094", 
+    "major" : "统计", 
+    "sex" : NumberInt(1), 
+    "name" : "何智彬", 
+    "__v" : NumberInt(1), 
+    "signTime" : ISODate("2016-09-21T12:45:17.900+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171da"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16031729), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(4), 
+        NumberInt(3)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(4), 
+            "score" : NumberInt(3), 
+            "comment" : "喜欢运动，不怎么玩微博、贴吧，\n不喜欢写东西\n排版一般般\n审美一般般\n管理青协", 
+            "interviewer" : "汪斯敏", 
+            "_id" : ObjectId("57e27ade878b5a6d62c659cf")
+        }, 
+        {
+            "did" : NumberInt(3), 
+            "score" : NumberInt(2), 
+            "comment" : "没来", 
+            "interviewer" : "高浩蓝", 
+            "_id" : ObjectId("57e28089878b5a6d62c659e9")
+        }
+    ], 
+    "notion" : "来自浙江金华，想学一点东西，想结交更多的朋友，希望自己能在红色家园里快乐成长！", 
+    "volunteer" : [
+        NumberInt(3), 
+        NumberInt(4)
+    ], 
+    "qq" : "615136399", 
+    "phone" : "15757933663", 
+    "major" : "物流管理", 
+    "sex" : NumberInt(1), 
+    "name" : "赵期坚", 
+    "__v" : NumberInt(3), 
+    "signTime" : ISODate("2016-09-21T13:38:32.978+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e217216"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16221603), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(5), 
+        NumberInt(1), 
+        NumberInt(4), 
+        NumberInt(3)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(5), 
+            "score" : NumberInt(3), 
+            "comment" : "招协 青协 留一个。书法。想去设计", 
+            "interviewer" : "徐琼洁", 
+            "_id" : ObjectId("57e27af7878b5a6d62c659d0")
+        }, 
+        {
+            "did" : NumberInt(1), 
+            "score" : NumberInt(4), 
+            "comment" : "不错，有基础", 
+            "interviewer" : "林初东", 
+            "_id" : ObjectId("57e28041878b5a6d62c659e8")
+        }, 
+        {
+            "did" : NumberInt(4), 
+            "score" : NumberInt(3), 
+            "comment" : "微博会原创、贴吧会玩\n文笔不怎么样\n审美可以，排版一般般\n校青协、招协", 
+            "interviewer" : "汪斯敏", 
+            "_id" : ObjectId("57e283bf878b5a6d62c659fc")
+        }, 
+        {
+            "did" : NumberInt(3), 
+            "score" : NumberInt(1), 
+            "comment" : "不在", 
+            "interviewer" : "高浩蓝", 
+            "_id" : ObjectId("57e28b28878b5a6d62c65a27")
+        }
+    ], 
+    "notion" : "处在杭电唯二的艺术类专业~对平面设计比较感兴趣，如海报宣传单制作等。脑洞比较大。很想加入设计部~向前辈们学习.提升各种技能。", 
+    "volunteer" : [
+        NumberInt(1), 
+        NumberInt(3), 
+        NumberInt(5), 
+        NumberInt(4)
+    ], 
+    "qq" : "748093857", 
+    "phone" : "17376506312", 
+    "major" : "数字媒体艺术", 
+    "sex" : NumberInt(0), 
+    "name" : "陈璇", 
+    "__v" : NumberInt(5), 
+    "signTime" : ISODate("2016-09-21T13:29:12.658+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171db"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16032101), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(4), 
+        NumberInt(1), 
+        NumberInt(3)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(4), 
+            "score" : NumberInt(3), 
+            "comment" : "喜欢看书、画画\n微博、贴吧玩的不多\n会写正经的，文艺抒情也可以？\n排版意识还可以，审美一般\n没报其他", 
+            "interviewer" : "汪斯敏", 
+            "_id" : ObjectId("57e27c06878b5a6d62c659d6")
+        }, 
+        {
+            "did" : NumberInt(1), 
+            "score" : NumberInt(5), 
+            "comment" : "有绘画基础，有ps基础，理解能力不错", 
+            "interviewer" : "老王", 
+            "_id" : ObjectId("57e281ba878b5a6d62c659f2")
+        }, 
+        {
+            "did" : NumberInt(3), 
+            "score" : NumberInt(4), 
+            "comment" : "慢热型，  设计第一志愿， 问题回答还不错，", 
+            "interviewer" : "高浩蓝", 
+            "_id" : ObjectId("57e2882b878b5a6d62c65a16")
+        }
+    ], 
+    "notion" : "我叫范郦楠，来自浙江绍兴。我热爱绘画设计。同时我想通过参加这个社团，培养我的能力。", 
+    "volunteer" : [
+        NumberInt(1), 
+        NumberInt(3), 
+        NumberInt(4)
+    ], 
+    "qq" : "773992398", 
+    "phone" : "18767162903", 
+    "major" : "信息管理与信息系统", 
+    "sex" : NumberInt(0), 
+    "name" : "范郦楠", 
+    "__v" : NumberInt(3), 
+    "signTime" : ISODate("2016-09-21T13:16:27.674+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171dd"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16032124), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(0)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(0), 
+            "score" : NumberInt(3), 
+            "comment" : "基础基本为0学过可视化编程", 
+            "interviewer" : "李程胜", 
+            "_id" : ObjectId("57e27c12878b5a6d62c659d7")
+        }
+    ], 
+    "notion" : "本人从小热爱计算机，十分有幸加入杭电，听闻贵社团是维护杭电的官网与公众号，我十分高兴，并且希望贡献自己的绵薄之力", 
+    "volunteer" : [
+        NumberInt(0)
+    ], 
+    "qq" : "1284658010", 
+    "email" : "15049300903@163.com", 
+    "phone" : "13372401164", 
+    "major" : "信息管理与信息系统", 
+    "sex" : NumberInt(1), 
+    "name" : "武军凯", 
+    "__v" : NumberInt(3), 
+    "signTime" : ISODate("2016-09-21T13:11:49.183+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e21721f"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16198715), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(3), 
+        NumberInt(2), 
+        NumberInt(0)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(3), 
+            "score" : NumberInt(4), 
+            "comment" : "实在的男孩；技术部第一，人资第二；报了院科协，  喜欢学技术，    希望他可以进我们人资。  ", 
+            "interviewer" : "高浩蓝", 
+            "_id" : ObjectId("57e27bb2878b5a6d62c659d3")
+        }, 
+        {
+            "did" : NumberInt(2), 
+            "score" : NumberInt(4), 
+            "comment" : "喜欢运动；有点内向……", 
+            "interviewer" : "孙文毅", 
+            "_id" : ObjectId("57e27cb4878b5a6d62c659da")
+        }, 
+        {
+            "did" : NumberInt(0), 
+            "score" : NumberInt(3), 
+            "comment" : "0基础", 
+            "interviewer" : "李程胜", 
+            "_id" : ObjectId("57e27ea6878b5a6d62c659e2")
+        }
+    ], 
+    "volunteer" : [
+        NumberInt(3), 
+        NumberInt(2), 
+        NumberInt(0)
+    ], 
+    "qq" : "524453845", 
+    "phone" : "18767159676", 
+    "major" : "医信", 
+    "sex" : NumberInt(1), 
+    "name" : "冯苗慧", 
+    "__v" : NumberInt(3), 
+    "signTime" : ISODate("2016-09-21T12:35:50.080+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e217209"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16081629), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(3), 
+        NumberInt(4), 
+        NumberInt(0)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(3), 
+            "score" : NumberInt(1), 
+            "comment" : "技术第一，比较适合技术，报了院科协，与日语协会，最后留两个社团，非常想进技术部，不适合人资。", 
+            "interviewer" : "高浩蓝", 
+            "_id" : ObjectId("57e27ccb878b5a6d62c659dc")
+        }, 
+        {
+            "did" : NumberInt(4), 
+            "score" : NumberInt(2), 
+            "comment" : "微博原创不多、贴吧看得多\n不爱写东西\n排版不行\n审美不行\n院科协、日语协会", 
+            "interviewer" : "汪斯敏", 
+            "_id" : ObjectId("57e27f56878b5a6d62c659e5")
+        }, 
+        {
+            "did" : NumberInt(0), 
+            "score" : NumberInt(3), 
+            "comment" : "喜欢计算机，有一定基础，有竞赛基础，更喜欢算法，可能会去ACM，存疑，报了其他2个社团。", 
+            "interviewer" : "李程胜", 
+            "_id" : ObjectId("57e28ccc878b5a6d62c65a34")
+        }
+    ], 
+    "notion" : "虽然没什么技术。但我愿意凭借兴趣做出贡献。不断学习取得进步。ε٩( º∀º )۶з", 
+    "volunteer" : [
+        NumberInt(3), 
+        NumberInt(4), 
+        NumberInt(0)
+    ], 
+    "qq" : "874751700", 
+    "phone" : "13388607845", 
+    "major" : "通信工程类", 
+    "sex" : NumberInt(1), 
+    "name" : "张洛铭", 
+    "__v" : NumberInt(4), 
+    "signTime" : ISODate("2016-09-21T13:36:12.558+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e217214"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16198708), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(1), 
+        NumberInt(4), 
+        NumberInt(0)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(1), 
+            "score" : NumberInt(4), 
+            "comment" : "", 
+            "interviewer" : "老王", 
+            "_id" : ObjectId("57e27ba7878b5a6d62c659d2")
+        }, 
+        {
+            "did" : NumberInt(4), 
+            "score" : NumberInt(3), 
+            "comment" : "之前印象：不自信、不太想要\n微博不太原创、贴吧会发帖\n不爱写东西\n排版意识一般，审美不太好\n院科协\n", 
+            "interviewer" : "汪斯敏", 
+            "_id" : ObjectId("57e27cb1878b5a6d62c659d9")
+        }, 
+        {
+            "did" : NumberInt(0), 
+            "score" : NumberInt(3), 
+            "comment" : "没写过代码但是基本会点", 
+            "interviewer" : "李程胜", 
+            "_id" : ObjectId("57e27dde878b5a6d62c659de")
+        }
+    ], 
+    "notion" : "我来自浙江绍兴，毕业于绍兴鲁迅中学。我性格开朗，待人友好，工作勤奋，认真负责，能吃苦耐劳，尽职尽责，有耐心。我希望可以加入红色家园这么一个优秀的校级组织，尽管可能对于某些知识还不是特别了解，但我一定会去努力学习的，希望我可以加入你们。", 
+    "volunteer" : [
+        NumberInt(4), 
+        NumberInt(1), 
+        NumberInt(0)
+    ], 
+    "qq" : "3101782615", 
+    "phone" : "18857558038", 
+    "major" : "医学信息工程专业", 
+    "sex" : NumberInt(1), 
+    "name" : "蔡铭辉", 
+    "__v" : NumberInt(3), 
+    "signTime" : ISODate("2016-09-21T12:32:30.139+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171f6"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16051231), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(4), 
+        NumberInt(0)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(4), 
+            "score" : NumberInt(4), 
+            "comment" : "兴趣爱好广泛，喜欢文学类和其他\n不太了解产品运营\n微博、贴吧刷的多，不发\n平时会写，记叙和文艺？\n排版意识还行，审美还行\n暂时只报了红家\n", 
+            "interviewer" : "汪斯敏", 
+            "_id" : ObjectId("57e27e59878b5a6d62c659e1")
+        }, 
+        {
+            "did" : NumberInt(0), 
+            "score" : NumberInt(2), 
+            "comment" : "无基础。意向一般。有一点自学意识。态度一般。", 
+            "interviewer" : "杨彦朋", 
+            "_id" : ObjectId("57e28b64878b5a6d62c65a2c")
+        }
+    ], 
+    "notion" : "没经验没技术的小白，希望能在这个平台和其他同学一起成长。", 
+    "volunteer" : [
+        NumberInt(0), 
+        NumberInt(4)
+    ], 
+    "qq" : "709021972", 
+    "email" : "zqy709@126.com", 
+    "phone" : "18767160807", 
+    "major" : "计算机科学与技术", 
+    "sex" : NumberInt(1), 
+    "name" : "张齐宇", 
+    "__v" : NumberInt(2), 
+    "signTime" : ISODate("2016-09-21T13:30:12.706+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e21720d"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16141209), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(2), 
+        NumberInt(5), 
+        NumberInt(3)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(2), 
+            "score" : NumberInt(4), 
+            "comment" : "喜欢看书看足球F1；表达能力不错；", 
+            "interviewer" : "孙文毅", 
+            "_id" : ObjectId("57e27bbe878b5a6d62c659d4")
+        }, 
+        {
+            "did" : NumberInt(5), 
+            "score" : NumberInt(4), 
+            "comment" : "关注体育电子设备方面。话剧社，读书会，红十字，想留三个。话剧组织，模联主持人。活动组织考虑一般。", 
+            "interviewer" : "徐琼洁", 
+            "_id" : ObjectId("57e27d50878b5a6d62c659dd")
+        }, 
+        {
+            "did" : NumberInt(3), 
+            "score" : NumberInt(3), 
+            "comment" : "兴趣爱好广泛，喜欢看足球，知乎； 红十字二面刚刚结束，还报了院级读书会；       想进两个校级社团。   蛮适合人资（第一志愿）；", 
+            "interviewer" : "高浩蓝", 
+            "_id" : ObjectId("57e27f1d878b5a6d62c659e4")
+        }
+    ], 
+    "notion" : "不懂技术，保持敬畏，渴望了解，希望成长。\n几乎什么特长都没有，热情与活力也许是唯一的优点。", 
+    "volunteer" : [
+        NumberInt(3), 
+        NumberInt(2), 
+        NumberInt(5)
+    ], 
+    "qq" : "510530006", 
+    "phone" : "18767152509", 
+    "major" : "会计学类", 
+    "sex" : NumberInt(0), 
+    "name" : "孔瑶坤", 
+    "__v" : NumberInt(3), 
+    "signTime" : ISODate("2016-09-21T12:37:49.568+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171dc"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16032115), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(0)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(0), 
+            "score" : NumberInt(3), 
+            "comment" : "0基础,偶尔了解下手机行情", 
+            "interviewer" : "李程胜", 
+            "_id" : ObjectId("57e27f59878b5a6d62c659e6")
+        }
+    ], 
+    "notion" : "我叫李志强，来自山西大同。平时爱好打篮球。我渴望学习到有关互联网的所有知识。虽然有点笨，但一定会刻苦努力的。同时也渴望在这里遇到一群志同道合的好伙伴，一起搞事情！", 
+    "volunteer" : [
+        NumberInt(0)
+    ], 
+    "qq" : "2438176385", 
+    "phone" : "17376508844", 
+    "major" : "信息管理与信息系统", 
+    "sex" : NumberInt(1), 
+    "name" : "李志强", 
+    "__v" : NumberInt(1), 
+    "signTime" : ISODate("2016-09-21T12:38:49.020+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171fb"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16051532), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(4), 
+        NumberInt(1), 
+        NumberInt(0)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(4), 
+            "score" : NumberInt(2), 
+            "comment" : "微博、贴吧不太玩\n不喜欢写东西\n排版意识不错，审美可以\n还报了杭电助手", 
+            "interviewer" : "汪斯敏", 
+            "_id" : ObjectId("57e2809b878b5a6d62c659eb")
+        }, 
+        {
+            "did" : NumberInt(1), 
+            "score" : NumberInt(2), 
+            "comment" : "有ps基础，", 
+            "interviewer" : "老王", 
+            "_id" : ObjectId("57e285ad878b5a6d62c65a07")
+        }, 
+        {
+            "did" : NumberInt(0), 
+            "score" : NumberInt(5), 
+            "comment" : "有较多编程经验，学过前端后端和PASCAL。", 
+            "interviewer" : "李程胜", 
+            "_id" : ObjectId("57e286df878b5a6d62c65a0f")
+        }
+    ], 
+    "notion" : "( •̀ .̫ •́ )✧计科新生，设计没啥经验，开发倒是有一些…但是…但是设计也很好玩啊！收零基础萌新吗……", 
+    "volunteer" : [
+        NumberInt(1), 
+        NumberInt(0), 
+        NumberInt(4)
+    ], 
+    "qq" : "619732576", 
+    "email" : "haolinaihui@gmail.com", 
+    "phone" : "13867704112", 
+    "major" : "计算机科学与技术", 
+    "sex" : NumberInt(1), 
+    "name" : "叶文炜", 
+    "__v" : NumberInt(3), 
+    "signTime" : ISODate("2016-09-21T13:10:55.521+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e217210"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16151127), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(4), 
+        NumberInt(2), 
+        NumberInt(0)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(4), 
+            "score" : NumberInt(2), 
+            "comment" : "微博、贴吧不太玩\n写说说但不多\n排版意识有点，审美一般\n还报了一个理财社团\n有点拽", 
+            "interviewer" : "汪斯敏", 
+            "_id" : ObjectId("57e2814f878b5a6d62c659ef")
+        }, 
+        {
+            "did" : NumberInt(2), 
+            "score" : NumberInt(3), 
+            "comment" : "聊天，有点怕生，有班委经历，", 
+            "interviewer" : "孙文毅", 
+            "_id" : ObjectId("57e2849c878b5a6d62c65a01")
+        }, 
+        {
+            "did" : NumberInt(0), 
+            "score" : NumberInt(1), 
+            "comment" : "态度略微傲慢，无编程，无自学经历。", 
+            "interviewer" : "李程胜", 
+            "_id" : ObjectId("57e285a1878b5a6d62c65a05")
+        }
+    ], 
+    "notion" : "阳光男孩，热情开朗，态度热正，有责任心。相信我！", 
+    "volunteer" : [
+        NumberInt(0), 
+        NumberInt(2), 
+        NumberInt(4)
+    ], 
+    "qq" : "1923225156", 
+    "phone" : "18767106905", 
+    "major" : "国际经济与贸易", 
+    "sex" : NumberInt(1), 
+    "name" : "汤玉洋", 
+    "__v" : NumberInt(3), 
+    "signTime" : ISODate("2016-09-21T13:05:37.169+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e21721a"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16272102), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(2), 
+        NumberInt(1), 
+        NumberInt(0)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(2), 
+            "score" : NumberInt(4), 
+            "comment" : "东北人，希望多练下口才，喜欢钢琴，锻炼，会安排时间。好学，", 
+            "interviewer" : "孙文毅", 
+            "_id" : ObjectId("57e2818c878b5a6d62c659f1")
+        }, 
+        {
+            "did" : NumberInt(1), 
+            "score" : NumberInt(4), 
+            "comment" : "有绘画基础有ps基础", 
+            "interviewer" : "老王", 
+            "_id" : ObjectId("57e2881f878b5a6d62c65a15")
+        }, 
+        {
+            "did" : NumberInt(0), 
+            "score" : NumberInt(4), 
+            "comment" : "无基础，有一点自学经历。学习态度不错。", 
+            "interviewer" : "杨彦朋", 
+            "_id" : ObjectId("57e28925878b5a6d62c65a1f")
+        }
+    ], 
+    "notion" : "马皓然马正气一身正气，现阶段已修身为己任，渴望知识，求大神带。可以写一些小文章，专业的东东还不懂但一心向学。求大神带。", 
+    "volunteer" : [
+        NumberInt(2), 
+        NumberInt(0), 
+        NumberInt(1)
+    ], 
+    "qq" : "1308596215", 
+    "phone" : "18767186762", 
+    "major" : "网络工程", 
+    "sex" : NumberInt(0), 
+    "name" : "马皓然", 
+    "__v" : NumberInt(3), 
+    "signTime" : ISODate("2016-09-21T13:20:37.421+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e21721c"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16272127), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(1), 
+        NumberInt(0), 
+        NumberInt(3)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(1), 
+            "score" : NumberInt(3), 
+            "comment" : "0基础，说的不全面", 
+            "interviewer" : "老王", 
+            "_id" : ObjectId("57e28003878b5a6d62c659e7")
+        }, 
+        {
+            "did" : NumberInt(0), 
+            "score" : NumberInt(3), 
+            "comment" : "C刚开始学", 
+            "interviewer" : "李程胜", 
+            "_id" : ObjectId("57e2825c878b5a6d62c659f5")
+        }, 
+        {
+            "did" : NumberInt(3), 
+            "score" : NumberInt(1), 
+            "comment" : "没来", 
+            "interviewer" : "高浩蓝", 
+            "_id" : ObjectId("57e28893878b5a6d62c65a19")
+        }
+    ], 
+    "notion" : "宅男一个，经常发呆，想学习更多与电脑有关的知识。(移动短号不知道是啥，那短号是假的)", 
+    "volunteer" : [
+        NumberInt(0), 
+        NumberInt(1), 
+        NumberInt(3)
+    ], 
+    "qq" : "1035907927", 
+    "phone" : "17816877477", 
+    "major" : "网络工程", 
+    "sex" : NumberInt(1), 
+    "name" : "沈登极", 
+    "__v" : NumberInt(4), 
+    "signTime" : ISODate("2016-09-21T13:18:15.455+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171f7"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16051234), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(3), 
+        NumberInt(1), 
+        NumberInt(0)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(3), 
+            "score" : NumberInt(3), 
+            "comment" : "工作经验：一直担任班长，长期在学生会工作，报了两个社团：红色家园和校青协。觉得自己可以胜任人资工作。   有点傲~", 
+            "interviewer" : "高浩蓝", 
+            "_id" : ObjectId("57e283b6878b5a6d62c659fb")
+        }, 
+        {
+            "did" : NumberInt(1), 
+            "score" : NumberInt(4), 
+            "comment" : "0基础，设计感还不错", 
+            "interviewer" : "老王", 
+            "_id" : ObjectId("57e2894c878b5a6d62c65a20")
+        }, 
+        {
+            "did" : NumberInt(0), 
+            "score" : NumberInt(3), 
+            "comment" : "0基础，看了几页C。有强烈意愿。", 
+            "interviewer" : "李程胜", 
+            "_id" : ObjectId("57e28ba0878b5a6d62c65a2f")
+        }
+    ], 
+    "notion" : "低调奢华有内涵", 
+    "volunteer" : [
+        NumberInt(0), 
+        NumberInt(1), 
+        NumberInt(3)
+    ], 
+    "qq" : "616402917", 
+    "phone" : "17376500164", 
+    "major" : "计算机科学与技术", 
+    "sex" : NumberInt(1), 
+    "name" : "张伟光", 
+    "__v" : NumberInt(3), 
+    "signTime" : ISODate("2016-09-21T13:31:12.057+0000")
+}
+{ 
+    "_id" : ObjectId("57e27cc9878b5a6d62c659db"), 
+    "signTime" : ISODate("2016-09-21T12:59:16.811+0000"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16061517), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(0)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(0), 
+            "score" : NumberInt(3), 
+            "comment" : "无编程基础，意向不强，无自学经历，自学能力不强，喜欢计算机，对互联网基本无了解。", 
+            "interviewer" : "李程胜", 
+            "_id" : ObjectId("57e28424878b5a6d62c659fe")
+        }
+    ], 
+    "volunteer" : [
+        NumberInt(0)
+    ], 
+    "qq" : "850897282", 
+    "phone" : "18767158673", 
+    "sex" : NumberInt(1), 
+    "name" : "李胡杨", 
+    "__v" : NumberInt(1)
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171d9"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16031716), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(3), 
+        NumberInt(0)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(3), 
+            "score" : NumberInt(3), 
+            "comment" : "人力资源第一志愿，目前只报了红家，回答问题：记名字游戏； ", 
+            "interviewer" : "高浩蓝", 
+            "_id" : ObjectId("57e28542878b5a6d62c65a03")
+        }, 
+        {
+            "did" : NumberInt(0), 
+            "score" : NumberInt(2), 
+            "comment" : "无基础，意向一般，想转计算机。自学能力一般。有一点跳。", 
+            "interviewer" : "杨彦朋", 
+            "_id" : ObjectId("57e2874c878b5a6d62c65a10")
+        }
+    ], 
+    "notion" : "学生性格腼腆。希望入贵社学习技术，增长见识，广交好友。同时帮助贵社发扬光大", 
+    "volunteer" : [
+        NumberInt(3), 
+        NumberInt(0)
+    ], 
+    "qq" : "1149078175", 
+    "phone" : "18814824811", 
+    "major" : "物流管理", 
+    "sex" : NumberInt(1), 
+    "name" : "董汪权", 
+    "__v" : NumberInt(3), 
+    "signTime" : ISODate("2016-09-21T13:12:44.138+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171eb"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16051106), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(1), 
+        NumberInt(0)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(1), 
+            "score" : NumberInt(2), 
+            "comment" : "感觉去技术好点", 
+            "interviewer" : "林初东", 
+            "_id" : ObjectId("57e28566878b5a6d62c65a04")
+        }, 
+        {
+            "did" : NumberInt(0), 
+            "score" : NumberInt(3), 
+            "comment" : "无基础。自学动漫绘画。自学能力一般。", 
+            "interviewer" : "杨彦朋", 
+            "_id" : ObjectId("57e28658878b5a6d62c65a0a")
+        }
+    ], 
+    "notion" : "自己很喜欢计算机，励志当一名码农。奈何高中没有电脑，无法学习，所以是个零基础的萌新。希望能加入红家，向各位大神借鉴学习~我自己也会努力充实自己的!", 
+    "volunteer" : [
+        NumberInt(0), 
+        NumberInt(1)
+    ], 
+    "qq" : "1065098064", 
+    "phone" : "13336153624", 
+    "major" : "计算机科学与技术", 
+    "sex" : NumberInt(0), 
+    "name" : "肖雪", 
+    "__v" : NumberInt(3), 
+    "signTime" : ISODate("2016-09-21T13:24:42.559+0000")
+}
+{ 
+    "_id" : ObjectId("57e27bcb878b5a6d62c659d5"), 
+    "signTime" : ISODate("2016-09-21T13:05:46.918+0000"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16205111), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(1), 
+        NumberInt(0)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(1), 
+            "score" : NumberInt(1), 
+            "comment" : "有一些ps基础，推荐技术，理解能力还不错", 
+            "interviewer" : "老王", 
+            "_id" : ObjectId("57e283ce878b5a6d62c659fd")
+        }, 
+        {
+            "did" : NumberInt(0), 
+            "score" : NumberInt(3), 
+            "comment" : "打算转计科，无基础。对计算机感兴趣。极客、校青协。大一无电脑。表达能力不错。", 
+            "interviewer" : "杨彦朋", 
+            "_id" : ObjectId("57e285aa878b5a6d62c65a06")
+        }
+    ], 
+    "volunteer" : [
+        NumberInt(0), 
+        NumberInt(1)
+    ], 
+    "qq" : "1093332977", 
+    "phone" : "18767160169", 
+    "sex" : NumberInt(1), 
+    "name" : "陈泽欢", 
+    "__v" : NumberInt(3)
+}
+{ 
+    "_id" : ObjectId("57e27a45878b5a6d62c659ce"), 
+    "signTime" : ISODate("2016-09-21T13:09:18.897+0000"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16205221), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(1), 
+        NumberInt(0), 
+        NumberInt(3)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(1), 
+            "score" : NumberInt(2), 
+            "comment" : "", 
+            "interviewer" : "老王", 
+            "_id" : ObjectId("57e27ed5878b5a6d62c659e3")
+        }, 
+        {
+            "did" : NumberInt(0), 
+            "score" : NumberInt(2), 
+            "comment" : "0基础\n", 
+            "interviewer" : "李程胜", 
+            "_id" : ObjectId("57e28091878b5a6d62c659ea")
+        }, 
+        {
+            "did" : NumberInt(3), 
+            "score" : NumberInt(2), 
+            "comment" : "16205221，材料，设计 技术 人资（第二志愿），报了社联，    刚开始问题回答地没什么方向，比较模糊。         ", 
+            "interviewer" : "高浩蓝", 
+            "_id" : ObjectId("57e2867e878b5a6d62c65a0c")
+        }
+    ], 
+    "volunteer" : [
+        NumberInt(0), 
+        NumberInt(1), 
+        NumberInt(3)
+    ], 
+    "qq" : "1399144381", 
+    "phone" : "18066310956", 
+    "sex" : NumberInt(1), 
+    "name" : "南瑞环", 
+    "__v" : NumberInt(3)
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171ee"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16051114), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(1), 
+        NumberInt(0), 
+        NumberInt(4)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(1), 
+            "score" : NumberInt(2), 
+            "comment" : "感觉去技术好点", 
+            "interviewer" : "林初东", 
+            "_id" : ObjectId("57e28393878b5a6d62c659fa")
+        }, 
+        {
+            "did" : NumberInt(0), 
+            "score" : NumberInt(3), 
+            "comment" : "有学校教的VB基础，基本无基础，有自学经历，认为计算机有兴趣，但无体现。", 
+            "interviewer" : "李程胜", 
+            "_id" : ObjectId("57e2878c878b5a6d62c65a11")
+        }, 
+        {
+            "did" : NumberInt(4), 
+            "score" : NumberInt(3), 
+            "comment" : "玩微博，\n审美一般\n只报了家园", 
+            "interviewer" : "汪斯敏", 
+            "_id" : ObjectId("57e2885e878b5a6d62c65a17")
+        }
+    ], 
+    "notion" : "大一刚入学，技术方面比较薄弱，想要为社团提供一份力，想要在这里学到更多的东西", 
+    "volunteer" : [
+        NumberInt(0), 
+        NumberInt(4), 
+        NumberInt(1)
+    ], 
+    "qq" : "1159176517", 
+    "phone" : "18767125593", 
+    "major" : "计算机科学与技术", 
+    "sex" : NumberInt(1), 
+    "name" : "蒋光哲", 
+    "__v" : NumberInt(3), 
+    "signTime" : ISODate("2016-09-21T13:17:18.449+0000")
+}
+{ 
+    "_id" : ObjectId("57e285fe878b5a6d62c65a09"), 
+    "signTime" : ISODate("2016-09-21T13:29:27.821+0000"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16062104), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(5), 
+        NumberInt(3)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(5), 
+            "score" : NumberInt(1), 
+            "comment" : "没来", 
+            "interviewer" : "徐琼洁", 
+            "_id" : ObjectId("57e287a5878b5a6d62c65a14")
+        }, 
+        {
+            "did" : NumberInt(3), 
+            "score" : NumberInt(1), 
+            "comment" : "不要", 
+            "interviewer" : "高浩蓝", 
+            "_id" : ObjectId("57e28b37878b5a6d62c65a29")
+        }
+    ], 
+    "volunteer" : [
+        NumberInt(3), 
+        NumberInt(5)
+    ], 
+    "qq" : "2770325472", 
+    "phone" : "18768119756", 
+    "sex" : NumberInt(0), 
+    "name" : "王丽", 
+    "__v" : NumberInt(2)
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171e5"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16041205), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(4), 
+        NumberInt(1), 
+        NumberInt(0), 
+        NumberInt(5)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(4), 
+            "score" : NumberInt(4), 
+            "comment" : "玩微博，喜欢写东西\n审美还可以\n只报了家园", 
+            "interviewer" : "汪斯敏", 
+            "_id" : ObjectId("57e285c5878b5a6d62c65a08")
+        }, 
+        {
+            "did" : NumberInt(1), 
+            "score" : NumberInt(4), 
+            "comment" : "可以的", 
+            "interviewer" : "林初东", 
+            "_id" : ObjectId("57e288af878b5a6d62c65a1c")
+        }, 
+        {
+            "did" : NumberInt(0), 
+            "score" : NumberInt(3), 
+            "comment" : "无其他社团，喜欢做推广。无基础。态度不错。无自学经历。", 
+            "interviewer" : "杨彦朋", 
+            "_id" : ObjectId("57e28a24878b5a6d62c65a23")
+        }, 
+        {
+            "did" : NumberInt(5), 
+            "score" : NumberInt(3), 
+            "comment" : "只有红色家园。有点懒，社团面试时需要写500字介绍选择了放弃。学习部部长，有组织活动经历。", 
+            "interviewer" : "徐琼洁", 
+            "_id" : ObjectId("57e28bc9878b5a6d62c65a30")
+        }
+    ], 
+    "notion" : "学长or学姐好！我是电子信息学院新生汪舒丽，我真诚的想加入红色家园。日常生活中我是一个热情开朗、积极向上的人，对于工作也有自己的态度，认真、负责、尽力这些我认为是最基本的。作为一名电子新生，能将所学的知识运用于实践，而并非仅仅局限于课本，应该是最理想的状态。毋庸置疑，红色家园一定是这样一个能让我锻炼自己、利用网络服务于全校师生的平台。也希望这个平台能给我这样一个机会，为繁荣校园文化尽一份微薄之力。", 
+    "volunteer" : [
+        NumberInt(0), 
+        NumberInt(1), 
+        NumberInt(4), 
+        NumberInt(5)
+    ], 
+    "qq" : "1727361135", 
+    "phone" : "13336154047", 
+    "major" : "电子信息类", 
+    "sex" : NumberInt(0), 
+    "name" : "汪舒丽", 
+    "__v" : NumberInt(5), 
+    "signTime" : ISODate("2016-09-21T13:31:53.841+0000")
+}
+{ 
+    "_id" : ObjectId("57e280b9878b5a6d62c659ec"), 
+    "signTime" : ISODate("2016-09-21T13:34:10.563+0000"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16151122), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(2), 
+        NumberInt(4), 
+        NumberInt(0)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(2), 
+            "score" : NumberInt(3), 
+            "comment" : "喜欢篮球打游戏，出去玩的经历比较少，没经历，兴趣社团1个，", 
+            "interviewer" : "孙文毅", 
+            "_id" : ObjectId("57e28374878b5a6d62c659f9")
+        }, 
+        {
+            "did" : NumberInt(4), 
+            "score" : NumberInt(3), 
+            "comment" : "爱玩游戏\n不玩微博\n审美一般\n理财协会、", 
+            "interviewer" : "汪斯敏", 
+            "_id" : ObjectId("57e2896e878b5a6d62c65a21")
+        }, 
+        {
+            "did" : NumberInt(0), 
+            "score" : NumberInt(2), 
+            "comment" : "有吉他自学经验能力，无基础，可能转到计算机专业，意向不强。", 
+            "interviewer" : "李程胜", 
+            "_id" : ObjectId("57e28c52878b5a6d62c65a32")
+        }
+    ], 
+    "volunteer" : [
+        NumberInt(0), 
+        NumberInt(2), 
+        NumberInt(4)
+    ], 
+    "qq" : "595020186", 
+    "phone" : "18767182781", 
+    "sex" : NumberInt(1), 
+    "name" : "陈小磊", 
+    "__v" : NumberInt(3)
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171f9"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16051312), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(4), 
+        NumberInt(1), 
+        NumberInt(0)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(4), 
+            "score" : NumberInt(3), 
+            "comment" : "微博、贴吧不太玩\n不爱写东西\n审美还行？排版意识还可以\n还报了院青协、招协", 
+            "interviewer" : "汪斯敏", 
+            "_id" : ObjectId("57e2848c878b5a6d62c65a00")
+        }, 
+        {
+            "did" : NumberInt(1), 
+            "score" : NumberInt(3), 
+            "comment" : "待定", 
+            "interviewer" : "林初东", 
+            "_id" : ObjectId("57e289b3878b5a6d62c65a22")
+        }, 
+        {
+            "did" : NumberInt(0), 
+            "score" : NumberInt(2), 
+            "comment" : "无基础，有一定自学能力，但不强，专业对口，黑客情节。", 
+            "interviewer" : "李程胜", 
+            "_id" : ObjectId("57e28ad1878b5a6d62c65a25")
+        }
+    ], 
+    "notion" : "在学ps,其他都不会", 
+    "volunteer" : [
+        NumberInt(0), 
+        NumberInt(1), 
+        NumberInt(4)
+    ], 
+    "qq" : "820292301", 
+    "phone" : "13396549342", 
+    "major" : "计科", 
+    "sex" : NumberInt(1), 
+    "name" : "傅凯强", 
+    "__v" : NumberInt(3), 
+    "signTime" : ISODate("2016-09-21T13:27:45.608+0000")
+}
+{ 
+    "_id" : ObjectId("57e28147878b5a6d62c659ee"), 
+    "signTime" : ISODate("2016-09-21T13:25:02.706+0000"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16151134), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(1), 
+        NumberInt(0)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(1), 
+            "score" : NumberInt(3), 
+            "comment" : "可以考虑吧", 
+            "interviewer" : "林初东", 
+            "_id" : ObjectId("57e287a4878b5a6d62c65a12")
+        }, 
+        {
+            "did" : NumberInt(0), 
+            "score" : NumberInt(2), 
+            "comment" : "无基础，基本无自学经历，自学能力一般，喜欢计算机，专业不对口，对计算机感兴趣，但无体现。", 
+            "interviewer" : "李程胜", 
+            "_id" : ObjectId("57e28a2e878b5a6d62c65a24")
+        }
+    ], 
+    "volunteer" : [
+        NumberInt(0), 
+        NumberInt(1)
+    ], 
+    "qq" : "2770600045", 
+    "phone" : "18767152080", 
+    "sex" : NumberInt(1), 
+    "name" : "袁意泊", 
+    "__v" : NumberInt(2)
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171ea"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16041934), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(4)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(4), 
+            "score" : NumberInt(4), 
+            "comment" : "对技术感兴趣\n对产品运营有一定了解\n喜欢写东西\n审美还可以\n校青协，航模\n", 
+            "interviewer" : "汪斯敏", 
+            "_id" : ObjectId("57e28b15878b5a6d62c65a26")
+        }
+    ], 
+    "notion" : "我报考电子信息的原因就是我对App和编程兴趣浓厚，也一直希望参与其中", 
+    "volunteer" : [
+        NumberInt(4)
+    ], 
+    "qq" : "954447429", 
+    "phone" : "18768127697", 
+    "major" : "电子信息", 
+    "sex" : NumberInt(1), 
+    "name" : "王方博", 
+    "__v" : NumberInt(1), 
+    "signTime" : ISODate("2016-09-21T13:28:53.015+0000")
+}
+{ 
+    "_id" : ObjectId("57e286a4878b5a6d62c65a0e"), 
+    "signTime" : ISODate("2016-09-21T13:36:15.079+0000"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16222537), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(1), 
+        NumberInt(4)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(1), 
+            "score" : NumberInt(4), 
+            "comment" : "可以下一轮", 
+            "interviewer" : "林初东", 
+            "_id" : ObjectId("57e28b2b878b5a6d62c65a28")
+        }, 
+        {
+            "did" : NumberInt(4), 
+            "score" : NumberInt(4), 
+            "comment" : "画画\n玩微博\n喜欢写东西\n审美还可以\n友启", 
+            "interviewer" : "汪斯敏", 
+            "_id" : ObjectId("57e28ccf878b5a6d62c65a35")
+        }
+    ], 
+    "volunteer" : [
+        NumberInt(1), 
+        NumberInt(4)
+    ], 
+    "qq" : "492898538", 
+    "phone" : "18767166539", 
+    "sex" : NumberInt(0), 
+    "name" : "刘丹丹", 
+    "__v" : NumberInt(2)
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171e6"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16041210), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(4), 
+        NumberInt(3), 
+        NumberInt(0)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(4), 
+            "score" : NumberInt(2), 
+            "comment" : "不想报这个X\n微博会看，贴吧不太玩\n会写一些记录，文笔不太好\n审美一般，排版意识不好\n还报了校青协、体育俱乐部其他蛮多社团\n", 
+            "interviewer" : "汪斯敏", 
+            "_id" : ObjectId("57e28295878b5a6d62c659f6")
+        }, 
+        {
+            "did" : NumberInt(3), 
+            "score" : NumberInt(1), 
+            "comment" : "没来", 
+            "interviewer" : "高浩蓝", 
+            "_id" : ObjectId("57e288f9878b5a6d62c65a1d")
+        }, 
+        {
+            "did" : NumberInt(0), 
+            "score" : NumberInt(2), 
+            "comment" : "无基础，偏社交类，无自学经历，意向人资。", 
+            "interviewer" : "李程胜", 
+            "_id" : ObjectId("57e28b60878b5a6d62c65a2b")
+        }
+    ], 
+    "notion" : "高中期间，成绩不算突出。担任了三年的生活委员，所以对管理以及协作方面有所了解。可能这也算是个优势。 想要加入志愿者协会，一方面是被学长学姐的介绍吸引的，听了以后确实很诱人，活动丰富，也想从中学生活以及社交技巧，尤其是是社交。", 
+    "volunteer" : [
+        NumberInt(3), 
+        NumberInt(0), 
+        NumberInt(4)
+    ], 
+    "qq" : "825283092", 
+    "phone" : "17364507874", 
+    "major" : "电子信息类", 
+    "sex" : NumberInt(1), 
+    "name" : "陈吉", 
+    "__v" : NumberInt(3), 
+    "signTime" : ISODate("2016-09-21T13:30:08.930+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e2171fc"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16051723), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(4), 
+        NumberInt(0), 
+        NumberInt(3)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(4), 
+            "score" : NumberInt(3), 
+            "comment" : "认真，不是很了解运营\n玩微博\n校青协 国护\n审美还可以", 
+            "interviewer" : "汪斯敏", 
+            "_id" : ObjectId("57e287a4878b5a6d62c65a13")
+        }, 
+        {
+            "did" : NumberInt(0), 
+            "score" : NumberInt(3), 
+            "comment" : "小白，态度较好", 
+            "interviewer" : "李程胜", 
+            "_id" : ObjectId("57e28905878b5a6d62c65a1e")
+        }, 
+        {
+            "did" : NumberInt(3), 
+            "score" : NumberInt(1), 
+            "comment" : "没来", 
+            "interviewer" : "高浩蓝", 
+            "_id" : ObjectId("57e28b86878b5a6d62c65a2d")
+        }
+    ], 
+    "notion" : "我是一名大学新生…我积极向上……向往更高更强…我是计算机学院的…我希望能在红色网络中锻炼自己的技术…让自己越变越强…同时我也会尽心尽力地工作…为红色网络做贡献……………说那么多虚的…简单点就是我喜欢互联网…我想搞互联网…", 
+    "volunteer" : [
+        NumberInt(0), 
+        NumberInt(3), 
+        NumberInt(4)
+    ], 
+    "qq" : "373001744", 
+    "phone" : "13357146945", 
+    "major" : "计算机科学与技术", 
+    "sex" : NumberInt(1), 
+    "name" : "欧阳晋悦", 
+    "__v" : NumberInt(4), 
+    "signTime" : ISODate("2016-09-21T13:30:48.567+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e21721d"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16272137), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(4), 
+        NumberInt(0)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(4), 
+            "score" : NumberInt(3), 
+            "comment" : "对产品运营不太了解\n排版一般\n校科协\n杭电之声\n", 
+            "interviewer" : "汪斯敏", 
+            "_id" : ObjectId("57e28bf5878b5a6d62c65a31")
+        }, 
+        {
+            "did" : NumberInt(0), 
+            "score" : NumberInt(3), 
+            "comment" : "无基础，喜欢这一块，有自学经历和一定能力，对心理学感兴趣，报了2个社团。", 
+            "interviewer" : "李程胜", 
+            "_id" : ObjectId("57e28d96878b5a6d62c65a38")
+        }
+    ], 
+    "notion" : "来自辽宁铁岭，PPT可以做一些，喜欢搞“机”，比较喜欢鼓捣电脑，一些电脑问题都可以解决", 
+    "volunteer" : [
+        NumberInt(0), 
+        NumberInt(4)
+    ], 
+    "qq" : "1475473559", 
+    "phone" : "17376510114", 
+    "major" : "网络工程", 
+    "sex" : NumberInt(1), 
+    "name" : "张瑞明", 
+    "__v" : NumberInt(2), 
+    "signTime" : ISODate("2016-09-21T13:39:34.833+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e217215"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16221110), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(5), 
+        NumberInt(1)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(5), 
+            "score" : NumberInt(1), 
+            "comment" : "没来", 
+            "interviewer" : "徐琼洁", 
+            "_id" : ObjectId("57e28866878b5a6d62c65a18")
+        }, 
+        {
+            "did" : NumberInt(1), 
+            "score" : NumberInt(4), 
+            "comment" : "绘画基础，审美要提高", 
+            "interviewer" : "老王", 
+            "_id" : ObjectId("57e28cee878b5a6d62c65a37")
+        }
+    ], 
+    "notion" : "大一产设新生！希望可以和学长学技术", 
+    "volunteer" : [
+        NumberInt(1), 
+        NumberInt(5)
+    ], 
+    "qq" : "1325788647", 
+    "phone" : "13588582792", 
+    "major" : "产品设计", 
+    "sex" : NumberInt(0), 
+    "name" : "王维敏", 
+    "__v" : NumberInt(2), 
+    "signTime" : ISODate("2016-09-21T13:36:46.852+0000")
+}
+{ 
+    "_id" : ObjectId("57dfd4b56064fa309e217200"), 
+    "cid" : NumberInt(1), 
+    "sid" : NumberInt(16062027), 
+    "busy" : false, 
+    "done" : [
+        NumberInt(1), 
+        NumberInt(0)
+    ], 
+    "rate" : [
+        {
+            "did" : NumberInt(1), 
+            "score" : NumberInt(4), 
+            "comment" : "", 
+            "interviewer" : "老王", 
+            "_id" : ObjectId("57e28e8f878b5a6d62c65a3b")
+        }, 
+        {
+            "did" : NumberInt(0), 
+            "score" : NumberInt(3), 
+            "comment" : "有一定C语言和JAVA基础，有爱好，有自学经历和能力，感觉有一定能力和潜力，但是非常内向。", 
+            "interviewer" : "李程胜", 
+            "_id" : ObjectId("57e28f88878b5a6d62c65a3c")
+        }
+    ], 
+    "notion" : "我是自动化学院十班学生韦俊东。我从小到大，对科技比较感兴趣，喜欢捣鼓一些电子类的东西，对编程感兴趣。早就想学习网页制作，软件编写，无奈高中学习任务重，没机会学习。暑假看了一些计算机入门知识，学习了一点c语言和Java基本知识，希望能够来到贵团技术部继续学习，并能用于实践，结合自己课上所学为社团贡献自己的一份力的同时也能提升自己各方面的能力。", 
+    "volunteer" : [
+        NumberInt(0), 
+        NumberInt(1)
+    ], 
+    "qq" : "1907995391", 
+    "phone" : "18768110870", 
+    "major" : "电气类", 
+    "sex" : NumberInt(1), 
+    "name" : "韦俊东", 
+    "__v" : NumberInt(2), 
+    "signTime" : ISODate("2016-09-21T13:47:52.925+0000")
+}

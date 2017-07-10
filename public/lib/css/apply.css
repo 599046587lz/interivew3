@@ -1,0 +1,321 @@
+body {
+    text-align: center;
+    font-family: "黑体", "Adobe Fan Heiti Std B";
+}
+
+.section {
+    width: 210px;
+    margin: 20px auto;
+    text-align: left;
+    color: rgb(102, 102, 102);
+    white-space: nowrap;
+}
+
+.item {
+    border: solid 1px white;
+    color: rgb(102, 102, 102);
+    height: 40px;
+    margin: 20px auto 0 auto;
+    width: 250px;
+    line-height: 40px;
+    background-color: rgba(163, 163, 163, 0.13);
+    border-radius: 20px;
+}
+
+.item .header {
+    letter-spacing: 2px;
+    line-height: 20px;
+    font-size: 15px;
+}
+
+input[type=text] {
+    border: none;
+    margin-left: 10px;
+    width: 145px;
+    height: 20px;
+    color: rgb(102, 102, 102);
+    font-family: "黑体", "Adobe Fan Heiti Std B";
+    background-color: transparent;
+    outline: none;
+    font-size: 16px;
+    line-height: 20px;
+}
+
+textarea {
+    font-family: "黑体", "Adobe Fan Heiti Std B";
+    font-size: 14px;
+    color: rgba(120, 120, 120, 0.65);
+    line-height: 20px;
+    height: 75px;
+    overflow: hidden;
+    width: 100%;
+    text-indent: 1.5em;
+    border: none;
+    outline: none;
+    resize: none;
+}
+
+warning {
+    z-index: 1000;
+    height: 120px;
+    width: 250px;
+    overflow: hidden;
+    animation: warning 0.2s;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 11px rgba(0, 0, 0, 0.2);
+    margin: auto;
+    padding-top: 40px;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
+warning .check {
+    width: 150px;
+    height: 30px;
+    line-height: 30px;
+    background-color: orangered;
+    color: white;
+    margin: 40px auto 0 auto;
+    border-radius: 20px;
+}
+
+#student_pic {
+    background-image: url('/img/apply/default_logo.png');
+    background-size: cover;
+    background-position: center;
+    margin: 35px auto 25px auto;
+    border-radius: 49px;
+    height: 96px;
+    width: 96px;
+}
+
+.sex_pick .sexPic {
+    position: relative;
+    margin: 30px 15px 10px 15px;
+    background-color: rgba(163, 163, 163, 0.13);
+    display: inline-block;
+    height: 50px;
+    width: 50px;
+    border-radius: 25px;
+}
+
+.sexPic img {
+    position: absolute;
+    margin: auto;
+    height: 30px;
+    width: 30px;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.student_info, .phone_number, .depart_pick {
+    margin-top: 40px;
+}
+
+.text_here img {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+}
+
+.alarm {
+    margin-top: 40px;
+}
+
+.alarm > div {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.alarm_content {
+    animation: slide-in 0.7s;
+    overflow: hidden;
+}
+
+.alarm_content p {
+    white-space: pre-wrap;
+    line-height: 16px;
+    font-size: 13px;
+    color: rgba(120, 120, 120, 0.65);
+}
+
+.submitAll {
+    border-radius: 20px;
+    line-height: 40px;
+    margin: 40px auto;
+    width: 200px;
+    height: 40px;
+    border: solid 2px rgb(102, 102, 102);
+}
+
+footer {
+    margin: 80px auto 25px auto;
+    font-size: 12px;
+}
+
+footer p:before {
+    content: "© ";
+    vertical-align: middle;
+    font-size: 20px;
+}
+
+.depart_list {
+    width: 250px;
+    margin: auto;
+    text-align: left;
+}
+
+.depart_list list1 {
+    display: inline-flex;
+    padding: 0 10px;
+    line-height: 40px;
+    border: solid 2px rgb(102, 102, 102);
+    border-radius: 25px;
+    margin: 10px 5px;
+}
+
+.depart_list list1.active {
+    color: white;
+    background-color: rgb(102, 102, 102);
+}
+
+.popup {
+    overflow: hidden;
+    z-index: 999;
+    animation: pop 0.5s;
+    background-color: white;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    border-radius: 10px;
+    box-shadow: 0 0 11px rgba(0, 0, 0, 0.2);
+    width: 250px;
+    height: 400px;
+    margin: auto;
+}
+
+.popup.invisible {
+    display: none;
+}
+
+.popup .close {
+    float: right;
+    width: 17px;
+    height: 17px;
+    margin: 10px;
+}
+
+.popup .pop_title {
+    width: 100%;
+    margin-top: 37px;
+    font-size: 30px;
+}
+
+.popup .pop_neck {
+    width: 100%;
+    font-size: 10px;
+    color: rgba(0, 0, 0, 0.6);
+    margin: 10px 0;
+}
+
+.popup .pop_list {
+    width: 100%;
+    height: 270px;
+    background-color: rgba(0, 0, 0, 0.1);
+    overflow: scroll;
+}
+
+.popup .pop_list list2 {
+    background-color: white;
+    width: 170px;
+    display: inline-block;
+    padding: 0 10px;
+    line-height: 30px;
+    border: solid 2px rgb(102, 102, 102);
+    border-radius: 25px;
+    margin: 10px 0;
+}
+
+.popup .pop_list list2.active {
+    background-color: rgb(26, 188, 156);
+    border: solid 2px rgb(26, 188, 156);
+    color: white;
+}
+
+@keyframes slide-in {
+    from {
+        opacity: 0;
+        height: 0;
+    }
+    to {
+        height: 129px;
+        opacity: 1;
+    }
+}
+
+@keyframes slide-out {
+    to {
+        opacity: 0;
+        height: 0;
+    }
+    from {
+        height: 129px;
+        opacity: 1;
+    }
+}
+
+@keyframes pop {
+    from {
+        opacity: 0;
+        height: 250px;
+    }
+    to {
+        opacity: 1;
+        height: 400px;
+    }
+}
+
+@keyframes push {
+    to {
+        opacity: 0;
+        height: 250px;
+    }
+    from {
+        opacity: 1;
+        height: 400px;
+    }
+}
+
+@keyframes warning {
+    to {
+        opacity: 1;
+        height: 120px;
+        width: 250px;
+    }
+    from {
+        opacity: 0;
+        height: 60px;
+        width: 80px;
+    }
+}
+
+@keyframes warning-out {
+    from {
+        opacity: 1;
+        height: 120px;
+        width: 250px;
+    }
+    to {
+        opacity: 0;
+        height: 60px;
+        width: 80px;
+    }
+}

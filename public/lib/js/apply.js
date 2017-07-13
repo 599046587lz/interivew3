@@ -25,11 +25,20 @@ function warning(str) {
         },300)
     })
 }
+function getSearchObject() {
+    var array = location.search.substring(1).split(/[\&\=]/);
+    var obj = {};
+    for (var i = 0; i < array.length/2; i ++) {
+        obj[ array[i * 2] ] = array[i * 2 + 1];
+    }
+    return obj;
+}
 
 
 
 
 $(function () {
+    //var clubID=getSearchObject().cid;
     //set data localstored
     //$.ajax({
     //  url:"",
@@ -42,37 +51,31 @@ $(function () {
     // });
     //var data=localStorage.getItem("listData")
     var data = {
-        homeId: 1,
-        name: "红色家园",
-        homelist: [
+        clubID: 1,
+        club: "红色家园",
+        department: [
             {
-                dId: 1,
-                depart: "公关部",
-                column: ["面基&技术", "你们都有毒"]
-            },
-            {
-                dId: 2,
-                depart: "技术部",
-                column: ["再见老笨蛋", "哈哈啥"]
-            },
-            {
-                dId: 3,
-                depart: "设计部",
+                departname: "公关部",
                 column: ["老子写代码", "就用php", "想怎样", "打我啊", "大", "打我啊a", "来打我啊"]
             },
             {
-                dId: 4,
-                depart: "活动运营部",
+                departname: "技术部",
+                column: ["再见老笨蛋", "哈哈啥"]
+            },
+            {
+                departname: "设计部",
+                column: ["老子写代码", "就用php", "想怎样", "打我啊", "大", "打我啊a", "来打我啊"]
+            },
+            {
+                departname: "活动运营部",
                 column: []
             },
             {
-                dId: 5,
-                depart: "体育联合部",
+                departname: "体育联合部",
                 column: []
             },
             {
-                dId: 6,
-                depart: "产品运营部",
+                departname: "产品运营部",
                 column: []
             }
         ]
@@ -90,8 +93,8 @@ $(function () {
     })
 
 
-    var depart = 0;
     //load list
+    var depart = 0;
     var $list = $(".depart_list");
     var list1 = "<list1 did='__did__'>__depart__</list1>";
     var list2 = "<list2 cid='__cid__'>__column__</list2>";
@@ -102,9 +105,9 @@ $(function () {
         '<div class="pop_list">__list__</div>' +
         '</div>'
 
-    for (var i in data.homelist) {
-        var list = data.homelist[i];
-        var temp = list1.replace("__depart__", list.depart).replace("__did__", list.dId);
+    for (var i in data.department) {
+        var list = data.department[i];
+        var temp = list1.replace("__depart__", list.departname).replace("__did__", i);
         $list.append(temp);
         if (list.column[0]) {
             ///initpopups
@@ -112,11 +115,10 @@ $(function () {
             for (var j in list.column) {
                 poplist = poplist + list2.replace("__column__", list.column[j]).replace("__cid__", j - (-1));
             }
-            var insert = popcontent.replace("__depart__", list.depart).replace("__did__", list.dId).replace("__list__", poplist);
+            var insert = popcontent.replace("__depart__", list.departname).replace("__did__", i).replace("__list__", poplist);
             $('body').append(insert);
         }
     }
-
 
     //depart
     $list.on('click', 'list1', function () {
@@ -240,18 +242,77 @@ $(function () {
         $this.next().find("img").attr("src", "./img/apply/male_off.png");
     })
     //submitAll
-    // $(".submitAll").on("click",function () {
-    //     var pic=$("#student_pic").css("background-image").split('"')[1];
-    //     var name=$("#sName").val();
-    //     var sid=$("#sId").val();
-    //     var sex=$(".sex_pick").attr("sex");
-    //     var academy=$("#academy").val();
-    //     var major=$("#major").val();
-    //     var info=$(".text_here").text();
-    //     var long=$("#long").val();
-    //     var short=$("#short").val();
-    //     var qq=$("#qq").val();
-    //     var checked=$("ins").parent().hasClass("checked");
-    // })
+    $(".submitAll").on("click",function () {
+        $.ajax({
+            url:"http://106.14.143.18:1337/Upload/uploadToken",
+            method:"get",
+            data:{
+                type:"image"
+            },
+            success:function(data){
+                console.log(data);
+                $("form").attr("action","http://upload.qiniu.com?token="+data.token);
+                $("form input[type=submit]").click();
+                setTimeout(function () {
+                    var iframe = $('#iframe_display')[0];//获取那个iframe
+                    var iframeWindow = iframe.contentWindow;//获取iframe里的window对象
+                    var pic = iframeWindow.document.lastChild.innerText;
+                    console.log(pic);
+                },200)
+            }
+        });
+        var clubID=localStorage.getItem("CLUBID"),
+            club=localStorage.getItem("CLUB"),
+            pic=$("#student_pic").css("background-image").split('"')[1],
+            name=$("#sName input").val(),
+            sid=$("#sId input").val(),
+            sex=$(".sex_pick").attr("sex"),
+            academy=$("#academy input").val(),
+            major=$("#major input").val(),
+            intro=$(".text_here").text(),
+            long=$("#long input").val(),
+            short=$("#short input").val(),
+            qq=$("#qq input").val(),
+            checked=$("ins").parent().hasClass("checked"),
+            department=[];
+
+            for(i=0;i<10;i++) {
+                var obj=new Object();
+                var $thisDepart=$(".depart_list list1[did=" + i + "].active");
+                obj.departname=$thisDepart.text();
+                if(!obj.departname)continue;
+                obj.column=[];
+                for(j=0;j<10;j++) {
+                    var column=$(".popup[did=" + i + "] .pop_list list2[cid=" + j + "].active").text();
+                    if(column)obj.column.push(column);
+                }
+                //console.log(obj);
+            }
+
+            if(checked){
+                $.ajax({
+                    url:"",
+                    method:"post",
+                    data:{
+                        clubID:clubID,
+                        club:club,
+                        pic_url:pic,
+                        name:name,
+                        studentID:sid,
+                        gender:sex,
+                        college:academy,
+                        major:major,
+                        intro:intro,
+                        tel:long,
+                        short_tel:short,
+                        qq:qq,
+                        department:department
+                    }
+                })
+            }
+            else{
+                warning("必须先确认注意事项哦~");
+            }
+    })
 
 })

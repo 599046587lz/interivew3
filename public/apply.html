@@ -21,7 +21,7 @@
 <body>
 <iframe id="iframe_display" name="iframe_display" style="display: none"></iframe>
 <!--上传头像-->
-<form action="./upload" method="post" enctype="multipart/form-data" target="iframe_display" name="image">
+<form action="" method="post" enctype="multipart/form-data" target="iframe_display" name="image">
     <input type="file" id="picfile">
     <input type="submit">
 </form>
@@ -100,17 +100,3 @@
 </footer>
 </body>
 </html>
-
-<script>
-    $(function () {
-        $("#student_pic").on("click",function () {
-            $("form input[type=submit]").click();
-            setTimeout(function () {
-                var iframe = $('#iframe_display')[0];//获取那个iframe
-                var iframeWindow = iframe.contentWindow;//获取iframe里的window对象
-                var pic = iframeWindow.document.lastChild.innerText;
-                console.log(pic);
-            },200)
-        })
-    })
-</script>

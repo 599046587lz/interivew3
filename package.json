@@ -7,7 +7,7 @@
   },
   "dependencies": {
     "body-parser": "~1.0.0",
-    "connect-mongo":"1.3.2",
+    "connect-mongo": "1.3.2",
     "cookie-parser": "~1.0.1",
     "debug": "~0.7.4",
     "ejs": "~0.8.5",
@@ -19,6 +19,7 @@
     "mongoose": "^4.10.4",
     "morgan": "~1.0.0",
     "multer": "^0.1.4",
+    "qiniu": "^7.0.5",
     "request": "^2.81.0",
     "socket.io": "^1.7.4",
     "static-favicon": "~1.0.0",

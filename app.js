@@ -11,6 +11,7 @@ var multer = require('multer');
 var club = require('./routes/club');
 var interview = require('./routes/interview');
 var room = require('./routes/room');
+let common = require('./routes/common');
 
 var app = express();
 var config = require('./config');
@@ -43,6 +44,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/club', club);
 app.use('/interview', interview);
 app.use('/room', room);
+app.use('/common', common);
 
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {

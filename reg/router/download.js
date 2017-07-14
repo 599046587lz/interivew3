@@ -1,10 +1,9 @@
-
 const express = require('express'),
     session = require('express-session'),
-    cookie= require('cookie-parser'),
+    cookie = require('cookie-parser'),
     path = require('path'),
     RedisStore = require('connect-redis')(session),
-    config = require('../config');
+    package = require('../config/package');
 
 var router = express.Router();
 
@@ -24,24 +23,29 @@ var router = express.Router();
 // }));
 
 
-router.get('/:code', function (req, res) {
+router.get('/:clubID', function (req, res) {
 
 //     if(!!req.session.user) {
-        let code = req.params.code;
-        let file,filename;
-       config.pack(code,function(err) {
-           if(err){
-               console.log(err);
-               res.sendStatus('403');
-           }
-           else{
-               file = path.resolve(__dirname, '../files/' + code + '.zip');
-               filename = code +'.zip';
-               res.download(file,filename,function(err){
-                   if(err)console.log(err);
-               });
-           }
-       });
+    let clubID = req.params.clubID;
+    let file, filename;
+    try {
+        package.packing(clubID, function (err) {
+            if (err) {
+                throw err;
+            }
+            else {
+                file = path.resolve(__dirname, '../files/' + clubID + '.zip');
+                filename = clubID + '.zip';
+                res.download(file, filename, function (err) {
+                    if (err) throw err;
+                });
+            }
+        });
+    } catch (err) {
+        cosole.log(err);
+        res.send('打包失败，请重试！');
+    }
+
 //}
 });
 

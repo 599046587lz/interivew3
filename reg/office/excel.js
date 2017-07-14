@@ -4,9 +4,9 @@ const express = require('express'),
     path = require('path');
 
 
-exports.writeExcel = function (dbdata, code) {
+exports.writeExcel = function (dbdata, clubID) {
 
-    let _headers = ['_id', 'club', 'code', 'name', 'studentID','image', 'gender', 'major', 'department', 'intro', 'tel', 'qq', 'short_tel'];
+    let _headers = ['_id', 'club', 'club', 'name', 'studentID','gender','major','department', 'intro', 'tel', 'qq', 'short_tel','undefaulted','undefaulted'];
 
     let _data = dbdata;
 
@@ -19,24 +19,25 @@ exports.writeExcel = function (dbdata, code) {
             v: v[k],
             position: String.fromCharCode(65 + j) + (i + 2)
         })))
-         .reduce((prev, next) => prev.concat(next))
-         .reduce((prev, next) => Object.assign({}, prev, {[next.position]: {v: next.v}}), {});
+        .reduce((prev, next) => prev.concat(next))
+        .reduce((prev, next) => Object.assign({}, prev, {[next.position]: {v: next.v}}), {});
 
-    let newheader = { A1: { v: 'id' },
-        B1: { v: '社团' },
-        C1: { v: '代码' },
-        D1: { v: '姓名' },
-        E1: { v: '学号' },
-        F1: { v: '图片' },
-        G1: { v: '性别' },
-        H1: { v: '专业' },
-        I1: { v: '部门' },
-        J1: { v: '简介' },
-        K1: { v: '手机号' },
-        L1: { v: 'qq' },
-        M1: { v: '短号' } };
+    let newheader = {
+        A1: {v: 'id'},
+        B1: {v: '社团'},
+        C1: {v: '社团代号'},
+        D1: {v: '姓名'},
+        E1: {v: '学号'},
+        F1: {v: '性别'},
+        G1: {v: '专业'},
+        H1: {v: '部门'},
+        I1: {v: '简介'},
+        J1: {v: '手机号'},
+        K1: {v: 'qq'},
+        L1: {v: '短号'}
+    };
 
-    let output = Object.assign({}, newheader,data);
+    let output = Object.assign({}, newheader, data);
 
     let outputPos = Object.keys(output);
 
@@ -48,5 +49,5 @@ exports.writeExcel = function (dbdata, code) {
             'Sheet1': Object.assign({}, output, {"!ref": ref})
         }
     };
-    xlsx.writeFile(wb, 'files/file/' + code + '/data.xlsx');
+    xlsx.writeFile(wb, 'files/file/' + clubID + '/data.xlsx');
 };

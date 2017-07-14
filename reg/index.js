@@ -13,7 +13,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use('/reg',reg);
 app.use('/login/download',download);
-app.use('/login',login);
-app.use('/upload',upload);
+//app.use('/login',login);
+//app.use('/upload',upload);
 
 app.listen(3000);

@@ -68,3 +68,15 @@ exports.update = function (cid, club, callback) {
         callback(err);
     });
 };
+
+// exports.getInfo = function(cid) {
+//     return new Promise(function(resolve, reject) {
+//         Club.findOne({
+//             cid: cid
+//         }).then(result => {
+//             resolve(result);
+//         }).catch(err => {
+//             reject(err);
+//         })
+//     })
+// };

@@ -1,7 +1,7 @@
 /**
  * Created by bangbang93 on 14-9-16.
  */
-
+let clubModel = require('../models').Club;
 var Club = require('../models/club');
 var Interviewee = require('../models/interviewee');
 var excel = require('xlsx');
@@ -235,4 +235,44 @@ exports.exportInterviewees = function (cid, did, cb){
         });
         cb(err ,newDocs);
     })
+};
+
+exports.getClubInfo = function(cid) {
+    // let info = Club.getInfo(cid);
+    // console.log(info);
+    // let result = [];
+    // info.departments.forEach(e => {
+    //     let department = {};
+    //     department.name = e.name;
+    // });
+    // return result;
+    return new Promise(function(resolve, reject) {
+        let info = [];
+        clubModel.findOne({
+            cid: cid
+        }).then(result => {
+            result.departments.forEach(e => {
+                info.push({
+                    name: e.name
+                });
+            });
+            resolve(info);
+        }).catch(err => {
+            reject(err);
+        })
+    })
+};
+
+exports.verifyInfo = function(info) {
+  return new Promise(function(resolve, reject) {
+      clubModel.findOne({
+          cid: info.cid
+      }).then(result => {
+          if(!(info.name == result.name)) reject("社团id错误");
+          result.password = null;
+          resolve(result);
+      }).catch(err => {
+          reject(err);
+      })
+  })
 };

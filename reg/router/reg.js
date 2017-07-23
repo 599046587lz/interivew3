@@ -11,13 +11,13 @@ router.use('/info', function (req, res, next) {
     var data = req.body;
     if (!data) res.sendStatus(403);
     else {
-        //传clubID和club传给tianqi验证
-        request.post('').form({club: data.club, clubID: data.clubID})
+        //传clubID和club传给面试系统后台验证信息正确性
+        request.post('http://~~~~~~~/verifyInfo').form({club: data.club, clubID: data.clubID})
             .on('error', function (err) {
                 console.log(err);
             })
             .on('response', function (response) {
-                if (response.headers['content-type'] ===''/*认证*/) next();
+                if (response.body.cid && response.body.name) next();
                 else res.status('403').send('认证失败！');
             });
     }

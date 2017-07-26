@@ -2642,7 +2642,7 @@ Request.prototype.create = function(){
     if ('POST' == this.method) {
       try {
         if (this.isBinary) {
-          xhr.setRequestHeader('Content-type', 'application/octet-stream');
+          xhr.setRequestHeader('Content-type', 'apply/octet-stream');
         } else {
           xhr.setRequestHeader('Content-type', 'text/plain;charset=UTF-8');
         }
@@ -2768,7 +2768,7 @@ Request.prototype.onLoad = function(){
     try {
       contentType = this.xhr.getResponseHeader('Content-Type');
     } catch (e) {}
-    if (contentType === 'application/octet-stream') {
+    if (contentType === 'apply/octet-stream') {
       data = this.xhr.response;
     } else {
       if (!this.supportsBinary) {

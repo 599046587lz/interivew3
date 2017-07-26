@@ -1,21 +1,29 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('static-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var session    = require('express-session');
-var MongoStore = require('connect-mongo')(session);
-var multer = require('multer');
 
-var club = require('./routes/club');
-var interview = require('./routes/interview');
-var room = require('./routes/room');
+const express = require('express'),
+      path = require('path'),
+      favicon = require('static-favicon'),
+      logger = require('morgan'),
+      cookieParser = require('cookie-parser'),
+      bodyParser = require('body-parser'),
+      session    = require('express-session'),
+      MongoStore = require('connect-mongo')(session),
+      multer = require('multer'),
+
+      club = require('./router/login/club'),
+      interview = require('./router/login/interview'),
+      room = require('./router/login/room'),
+      common = require('./router/login/common'),
+      reg = require('./router/reg'),
+      download = require('./router/login/download');
+
+      config = require('./config/config');
 
 var app = express();
-var config = require('./config');
 
 global.token = '57dbfcf39882410001b0c195';
+//报名系统注册入口
+app.use('/reg',reg);
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -23,8 +31,10 @@ app.set('view engine', 'ejs');
 
 app.use(favicon());
 app.use(logger('dev'));
+
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded());
+app.use(bodyParser.urlencoded({ extended: false }));
+
 app.use(multer({
     dest: '/tmp/interview'
 }));
@@ -43,7 +53,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/club', club);
 app.use('/interview', interview);
 app.use('/room', room);
-
+app.use('/common', common);
+app.use('/download',download);
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {
     var err = new Error('Not Found');

@@ -2,8 +2,9 @@
  * Created by bangbang93 on 14-9-15.
  */
 var mongoose = require('mongoose');
-var config = require('./config');
-mongoose.connect('mongodb://' + config.db.host + '/' + config.db.db);
+var config = require('../config/config');
+mongoose.Promise = global.Promise;
+mongoose.connect('mongodb://' + config.db.host + '/' + config.db.db,{useMongoClient:true});
 
 
 var Department = new mongoose.Schema({

@@ -5,9 +5,9 @@ var express = require('express');
 //var debug = require('debug')('interview');
 var router = express.Router();
 
-var Club = require('../modules/club');
-var Interviewee = require('../modules/interviewee');
-var r = require('./');
+var Club = require('../../modules/club');
+var Interviewee = require('../../modules/interviewee');
+var r = require('./index');
 
 /**
  * @params String user 登录用户名
@@ -193,4 +193,35 @@ router.get('/export', function (req, res){
         }
     })
 });
+
+router.get('/clubInfo', function (req, res) {
+    let cid = req.param('clubId');
+
+    (async() => {
+       try{
+           let result = await Club.getClubInfo(cid);
+           return res.json(result);
+       } catch (err) {
+           return res.send(403);
+       }
+    })()
+
+});
+
+router.post('/verifyInfo', function(req, res) {
+    let info = {};
+    info.cid = req.body.clubId;
+    info.name = req.body.name;
+
+    (async() => {
+        try {
+            let result = await Club.verifyInfo(info);
+            return res.json(result);
+        } catch (err) {
+            return res.send(403, err);
+        }
+    })()
+});
+
+
 module.exports = router;

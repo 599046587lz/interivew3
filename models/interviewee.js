@@ -1,4 +1,4 @@
-var Interviewee = require('../models').Interviewee;
+var Interviewee = require('../db/models').Interviewee;
 
 exports.getStuBySid = function (sid, cid, did, callback) {
     var data = {

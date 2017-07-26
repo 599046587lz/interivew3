@@ -3,9 +3,6 @@ const express = require('express'),
       officegen = require('officegen'),
       fs = require('fs'),
       path = require('path');
-     // gm = require('gm').subClass({imageMagick:true});
-
-
 
 exports.writeWord = function ( data ) {
 

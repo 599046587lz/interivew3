@@ -1,7 +1,8 @@
 const express = require('express'),
     student = require('../db/student'),
     qiniu_download = require('../modules/qiniu_download'),
-    request = require('request'),
+    club = require('../modules/club'),
+    //request = require('request'),
     gm = require('gm').subClass({imageMagick: true});
 
 var router = express.Router();
@@ -11,18 +12,15 @@ router.use('/info', function (req, res, next) {
     var data = req.body;
     if (!data) res.sendStatus(403);
     else {
-        //传clubID和club传给面试系统后台验证信息正确性
-        request.post('http://~~~~~~~/verifyInfo').form({club: data.club, clubID: data.clubID})
-            .on('error', function (err) {
-                console.log(err);
-            })
-            .on('response', function (response) {
-                if (response.body.cid && response.body.name) next();
-                else res.status('403').send('认证失败！');
-            });
+        try{
+            club.verifyInfo(data);
+            next();
+        }catch(err){
+            res.status('403').send('社团信息有误！');
+        }
+
     }
 });
-
 
 router.post('/info', function (req, res) {
 

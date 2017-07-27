@@ -1,6 +1,6 @@
 const express = require('express'),
-    createxcel = require('./office/excel'),
-    creatword = require('./office/word'),
+    createxcel = require('./excel'),
+    creatword = require('./word'),
     db = require('../db/student'),
     archiver = require('archiver'),
     fs = require('fs');

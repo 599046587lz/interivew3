@@ -1,5 +1,5 @@
 {
-  "name": "registration & interview",
+  "name": "registrationAndInterview",
   "version": "1.0.0",
   "private": true,
   "description": "wechat club's registration system and interview system",
@@ -15,7 +15,7 @@
     "mongoose": "~4.11.1",
     "iconv-lite": "^0.4.17",
     "morgan": "~1.0.0",
-    "multer": "~1.3.0",
+    "multer": "~0.1.4",
     "officegen": "~0.4.5",
     "archiver": "~2.0.0",
     "socket.io": "^1.7.4",

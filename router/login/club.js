@@ -72,7 +72,7 @@ router.get('/logout', r.checkLogin, function (req,res){
  * @params File archive excel文件
  * @return Object {status: 'success'|'failed', count:Number}
  */
-router.post('/upload/archive', function (req, res){
+router.post('/upload/archive',function (req, res){
     var file = req.files['archive'];
     if(!file || !req.session['cid']){
         return res.send(403);

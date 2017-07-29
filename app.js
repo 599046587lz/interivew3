@@ -19,6 +19,7 @@ const express = require('express'),
       config = require('./config/config');
 
 var app = express();
+// var upload = multer({dest: '/tmp/interview'});
 
 global.token = '57dbfcf39882410001b0c195';
 //报名系统注册入口

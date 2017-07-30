@@ -1,46 +1,30 @@
 /**
  * Created by bangbang93 on 14-9-15.
  */
-var express = require('express');
-//var debug = require('debug')('interview');
-var router = express.Router();
-
-var Club = require('../modules/club');
-var Interviewee = require('../modules/interviewee');
-var r = require('./');
+let wrap = fn => (...args) => fn(...args).catch(args[2]);
+let express = require('express');
+//let debug = require('debug')('interview');
+let router = express.Router();
+let Club = require('../modules/club');
+let Interviewee = require('../modules/interviewee');
+let r = require('../utils/middleware');
 
 /**
  * @params String user 登录用户名
  * @params String password 密码，单词md5
  * @return 204
  */
-router.post('/login', function (req, res) {
-    var user = req.param('user');
-    var password = req.param('password');
+router.post('/login', wrap(async function(req, res) {
+    let user = req.param('user');
+    let password = req.param('password');
     if (!user || !password){
-        return res.send(403);
+        throw new Error('信息不完整');
     }
-    Club.login(user, password, function (err, success){
-        if (err){
-            return res.json(500, err);
-        } else {
-            if (success){
-                req.session['user'] = user;
-                Club.getClubByName(user, function (err, clubInfo){
-                    if (err){
-                        return res.json(500, err);
-                    } else {
-                        req.session.club = clubInfo.name;
-                        req.session.cid = clubInfo.cid;
-                        return res.send(204);
-                    }
-                });
-            } else {
-                return res.send(403);
-            }
-        }
-    });
-});
+    let result = await Club.login(user, password);
+    req.session.club = result.name;
+    req.session.cid = result.cid;
+    res.send(204);
+}));
 
 /**
  * @params Number did 部门ID
@@ -48,7 +32,7 @@ router.post('/login', function (req, res) {
  * @return HTTP 204
  */
 router.post('/setIdentify', function (req, res){
-    var name = req.session['club'];
+    let name = req.session['club'];
     if(!name) {
         return res.send(403);
     }
@@ -58,9 +42,7 @@ router.post('/setIdentify', function (req, res){
 
 });
 
-/**
- *
- */
+
 router.get('/logout', r.checkLogin, function (req,res){
     req.session.destroy(function (){
         res.send(204);
@@ -73,11 +55,11 @@ router.get('/logout', r.checkLogin, function (req,res){
  * @return Object {status: 'success'|'failed', count:Number}
  */
 router.post('/upload/archive', function (req, res){
-    var file = req.files['archive'];
+    let file = req.files['archive'];
     if(!file || !req.session['cid']){
         return res.send(403);
     } else {
-        var xlsxReg = /\.xlsx$/i;
+        let xlsxReg = /\.xlsx$/i;
         if (!xlsxReg.test(file.originalname)){
             return res.send(406);
         }
@@ -103,60 +85,44 @@ router.post('/upload/archive', function (req, res){
  * 获取社团资料
  * @return Department
  */
-router.get('/profile', function (req, res){
-    var name = req.session['club'];
+/**
+ * 测试通过
+ */
+router.get('/profile', wrap(async function(req, res) {
+    let name = req.session['club'];
     if(!name) {
-        res.send(403);
+        throw new Error('参数不完整');
     }
-    Club.getClubByName(name, function (err, club){
-        if(err) {
-            res.json(err);
-        } else {
-            if(false == club) {
-                res.json(500);
-            } else {
-                res.json(club);
-            }
-        }
-    });
-});
 
+    let info = await Club.getClubByName(name);
+    res.json(info);
+}));
 /**
  * 更新社团资料
  * @params Department
  * @return Object {status: 'success'|'failed'}
+ * 测试成功
  */
-router.post('/profile', function (req, res){
-    var cid = req.session['cid'];
-    if(!cid) {
-        res.send(403);
-    }
-    var dep = req.param('departments'),
-        name = req.param('name'),
-        password = req.param('password'),
-        logo = req.param('logo'),
-        maxDep = req.param('maxDep');
+router.post('/profile', wrap(async function(req, res) {
+    let cid = req.session['cid'];
+    if(!cid) throw new Error('参数不完整');
+    let data = {};
+    data.departments = req.param('departments');
+    data.name = req.param('name');
+    data.password = req.param('password');
+    data.logo = req.param('logo');
+    data.maxDep = req.param('maxDep');
 
-    Club.update(cid, {
-        departments: dep,
-        name: name,
-        password: password,
-        logo: logo,
-        maxDep: maxDep
-    }, function (err, clearData){
-        if(err) {
-            res.json(500, err);
-        } else {
-            res.send(clearData?205:204);
-        }
-    });
-});
+    let result = await Club.update(cid, data);
+
+    res.send(204);
+}));
 
 /**
  *  @return array fields
  */
 router.get('/extra', function (req, res){
-    var cid = req.session['cid'];
+    let cid = req.session['cid'];
     if (!cid){
         res.send(403);
     }
@@ -167,9 +133,9 @@ router.get('/extra', function (req, res){
             if (!doc){
                 return res.send(404);
             }
-            var extra = doc.extra;
-            var fields = [];
-            for (var i in extra){
+            let extra = doc.extra;
+            let fields = [];
+            for (let i in extra){
                 if (extra.hasOwnProperty(i)){
                     fields.push(i);
                 }
@@ -178,21 +144,41 @@ router.get('/extra', function (req, res){
         }
     } )
 });
+/**
+ * ??未测试
+ */
 
-router.get('/export', function (req, res){
-    var cid = req.session['cid'],
-        did = req.param('did');
-    if (!cid || !did){
-        return res.send(403);
-    }
-    Club.exportInterviewees(cid ,did ,function (err, docs){
-        if (err){
-            res.json(500, err);
-        } else {
-            res.json(docs);
+router.get('/extra', wrap(async function(req, res) {
+    let cid = req.session['cid'];
+    if(!cid) throw new Error('参数不完整');
+
+    let result = await Interviewee.getIntervieweeBySid({$ne: null}, cid);
+    let fields = [];
+    for(let i in result.extra) {
+        if(result.extra.hasOwnProperty(i)) {
+            fields.push(i)
         }
-    })
-});
+    }
+
+    res.json(fields);
+}));
+
+
+/**
+ * 测试通过
+ */
+
+router.get('/export', wrap(async function(req, res) {
+    let cid = req.session['cid'],
+        did = req.param('did');
+
+    if(!cid || !did) {
+        throw new Error('参数不完整');
+    }
+
+    let result = await Club.exportInterviewees(cid, did);
+    res.json(result);
+}));
 
 router.get('/clubInfo', function (req, res) {
     let cid = req.param('clubId');

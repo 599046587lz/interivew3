@@ -1,7 +1,7 @@
-var Interviewee = require('../models').Interviewee;
+let Interviewee = require('../models').Interviewee;
 
 exports.getStuBySid = function (sid, cid, did, callback) {
-    var data = {
+    let data = {
         sid: sid,
         cid: cid
     };
@@ -42,32 +42,32 @@ exports.sign = function (sid, cid, callback) {
     });
 };
 
-exports.addInterviewee = function (data, cid, callback){
-    var IntervieweeEntity = new Interviewee();
-    var interviewee = {};
-    for(var i in data) {
-        if (data.hasOwnProperty(i)){
-            interviewee[i] = data[i];
-        }
-    }
-    var fields = ['sid', 'name', 'sex', 'major', 'phone', 'email', 'qq', 'volunteer', 'notion'];
-    fields.forEach(function (e){
-        IntervieweeEntity[e] = interviewee[e];
-        delete interviewee[e];
-    });
-    IntervieweeEntity.cid = cid;
-    if (!!interviewee.signTime){
-        IntervieweeEntity.signTime = interviewee.signTime;
-        delete interviewee.signTime;
-    }
-    IntervieweeEntity.extra = interviewee;
-    IntervieweeEntity.save(function (err){
-        callback(err);
-    });
+// exports.addInterviewee = function (data, cid, callback){
+//     let IntervieweeEntity = new Interviewee();
+//     let interviewee = {};
+//     for(let i in data) {
+//         if (data.hasOwnProperty(i)){
+//             interviewee[i] = data[i];
+//         }
+//     }
+//     let fields = ['sid', 'name', 'sex', 'major', 'phone', 'email', 'qq', 'volunteer', 'notion'];
+//     fields.forEach(function (e){
+//         IntervieweeEntity[e] = interviewee[e];
+//         delete interviewee[e];
+//     });
+//     IntervieweeEntity.cid = cid;
+//     if (!!interviewee.signTime){
+//         IntervieweeEntity.signTime = interviewee.signTime;
+//         delete interviewee.signTime;
+//     }
+//     IntervieweeEntity.extra = interviewee;
+//     IntervieweeEntity.save(function (err){
+//         callback(err);
+//     });
+//
+// };
 
-};
-
-//var getLock = false;
+//let getLock = false;
 exports.getNextInterviewee = function (cid, did, cb){
 //    if (!getLock){
 //        return process.nextTick((function (cid, did, cb){
@@ -82,8 +82,8 @@ exports.getNextInterviewee = function (cid, did, cb){
             volunteer: did,
             busy: false,
             signTime:{$ne:null}
-        }).$where(new Function('var volunteer = this.volunteer;' +
-                'var done = this.done;' +
+        }).$where(new Function('let volunteer = this.volunteer;' +
+                'let done = this.done;' +
                 'return (volunteer.length != done.length) && (done.indexOf(' + did + ') == -1);'
         )).sort({
             signTime: 'asc'

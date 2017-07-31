@@ -1,0 +1,41 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>登录</title>
+	<link rel="stylesheet" type="text/css" href="lib/css/reset.css">
+	<link rel="stylesheet" type="text/css" href="lib/css/common.css">
+	<link rel="stylesheet" type="text/css" href="lib/css/login.css">
+	<link rel="stylesheet" type="text/css" href="lib/css/notifIt.css" />
+	<script type="text/javascript" src="lib/js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="lib/js/login.js"></script>
+	<script type="text/javascript" src="lib/js/jquery.enplaceholder.js"></script>
+	<script type="text/javascript" src="lib/js/icheck.min.js"></script>
+	<script type="text/javascript" src="lib/js/notifIt.js"></script>
+	<script type="text/javascript" src="lib/js/jQuery.md5.js"></script>
+	<script type="text/javascript">
+	$(document).ready(function(){		
+		$('input').placeholder({isUseSpan:false});
+	});
+	</script>
+</head>
+<!--[if lt IE 9]>
+	<script src="http://www.redhome.cc/wp-content/themes/redhome/js/html5.js"></script>
+<![endif]-->
+<body>
+<div class="main">
+	<div class="left_content">
+		<div class="image_content">
+			<img src="./img/side_img.png" />
+		</div>
+	</div>
+	<div class="right_content">
+		<form name="login" action="" method="post" id="form">
+			<input type="text" name="account" class="account" required />
+			<input type="password" name="password" class="password" required />
+			<div class="button">登     录</div>
+		</form>
+	</form>
+</div>
+</div>
+</body>
+</html>

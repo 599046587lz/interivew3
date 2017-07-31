@@ -261,7 +261,7 @@ $(function () {
                 "</div>"
             $("body").append(loading);
             $.ajax({
-                url: "/common/uploadToken",
+                url: "http://localhost:3000/common/uploadToken",
                 method: "get",
                 data: {
                     type: "image"
@@ -290,7 +290,7 @@ $(function () {
                                 //console.log(obj);
                             }
                             $.ajax({
-                                url: "",
+                                url: "http://localhost:3000/reg",
                                 method: "post",
                                 data: {
                                     clubID: clubID,

@@ -8,7 +8,7 @@ const express = require('express'),
 let router = express.Router();
 
 
-router.use('/info', function (req, res, next) {
+router.use('/', function (req, res, next) {
     let data = req.body;
     if (!data) res.sendStatus(403);
     else {
@@ -22,7 +22,7 @@ router.use('/info', function (req, res, next) {
     }
 });
 
-router.post('/info', function (req, res) {
+router.post('/', function (req, res) {
 
     let data = req.body;
     let send;

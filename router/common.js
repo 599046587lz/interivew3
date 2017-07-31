@@ -1,5 +1,7 @@
 let express = require('express');
 let config = require('../config');
+let path = require('path');
+let package = require('../utils/package');
 let router = express.Router();
 
 router.get('/uploadToken', function (req, res) {
@@ -19,5 +21,27 @@ router.get('/uploadToken', function (req, res) {
     })
 });
 
+router.get('/download/:clubID', function (req, res) {
+
+    let clubID = req.params.clubID;
+    let file, filename;
+    try {
+        package.packing(clubID, function (err) {
+            if (err) {
+                throw err;
+            }
+            else {
+                file = path.resolve(__dirname, '../files/' + clubID + '.zip');
+                filename = clubID + '.zip';
+                res.download(file, filename, function (err) {
+                    if (err) throw err;
+                });
+            }
+        });
+    } catch (err) {
+        cosole.log(err);
+        res.send('打包失败，请重试！');
+    }
+});
 
 module.exports = router;

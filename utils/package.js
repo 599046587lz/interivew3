@@ -1,7 +1,7 @@
 const express = require('express'),
     createxcel = require('./excel'),
     creatword = require('./word'),
-    db = require('./student'),
+    db = require('../modules/student'),
     archiver = require('archiver'),
     fs = require('fs');
 

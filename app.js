@@ -10,8 +10,7 @@ const express = require('express'),
       room = require('./router/room'),
       common = require('./router/common'),
       reg = require('./router/reg'),
-      download = require('./router/download');
-      mid = require('./utils/middleware');
+      mid = require('./utils/middleware'),
       config = require('./config');
 
 let app = express();
@@ -38,7 +37,6 @@ app.use('/club', club);
 app.use('/interview', interview);
 app.use('/room', room);
 app.use('/common', common);
-app.use('/download',download);
 
 //catch 404 and forward to error handler
 app.use(function(req, res, next) {

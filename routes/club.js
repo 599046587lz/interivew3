@@ -3,7 +3,6 @@
  */
 let wrap = fn => (...args) => fn(...args).catch(args[2]);
 let express = require('express');
-//let debug = require('debug')('interview');
 let router = express.Router();
 let Club = require('../modules/club');
 let Interviewee = require('../modules/interviewee');
@@ -50,36 +49,23 @@ router.get('/logout', r.checkLogin, function (req,res){
 });
 
 /**
- * 上传应试者资料
+ * 上传应试者资料(未测试)
  * @params File archive excel文件
  * @return Object {status: 'success'|'failed', count:Number}
  */
-router.post('/upload/archive', function (req, res){
-    let file = req.files['archive'];
-    if(!file || !req.session['cid']){
-        return res.send(403);
-    } else {
-        let xlsxReg = /\.xlsx$/i;
-        if (!xlsxReg.test(file.originalname)){
-            return res.send(406);
-        }
-        Club.handleArchive(file, req.session['cid'], function (err, length){
-            if (err){
-                if (!!err.line){
-                    res.json(404, err);
-                } else {
-                    res.json(500, err);
-                }
-            } else {
-                res.json({
-                    status:'success',
-                    count: length
-                });
-            }
-        });
-    }
 
-});
+router.post('/upload/archive', wrap(async function(req, res) {
+    let file = req.files['archive'];
+    if(!file || !req.session['cid']) throw new Error('参数不完整');
+    let xlsxReg = /\.xlsx$/i;
+    if(!xlsxReg.test(file.originalname)) throw new Error('上传文件不合法');
+
+    let result = await Club.handleArchive(file, req.session['cid']);
+    res.json({
+        status: 'success',
+        count: result
+    });
+}));
 
 /**
  * 获取社团资料

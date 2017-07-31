@@ -1,4 +1,3 @@
-let Interviewee = require('../models/interviewee');
 let request = require('request');
 let iconv = require('iconv-lite');
 let unit = require('../static/lib/unit.json');

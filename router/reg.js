@@ -1,6 +1,6 @@
 const express = require('express'),
     student = require('../modules/student'),
-    qiniu_download = require('../modules/qiniu_download'),
+    qiniu_download = require('../utils/qiniu_download'),
     club = require('../modules/club'),
     //request = require('request'),
     gm = require('gm').subClass({imageMagick: true});

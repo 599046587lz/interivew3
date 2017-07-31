@@ -29,7 +29,7 @@ app.use(bodyParser());
 
 app.use(cookieParser());
 app.use(mid.session());
-app.use('/public',express.static(path.join(__dirname + '/public')));
+app.use(express.static(path.join(__dirname, 'public')));
 //报名系统注册入口
 app.use('/reg',reg);
 app.use('/club', club);

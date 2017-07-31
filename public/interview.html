@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>正在进行面试</title>
+    <!--<base href="http://interview.redhome.cc/"/>-->
+    <link rel="stylesheet" href="lib/css/reset.css"/>
+    <link rel="stylesheet" href="lib/css/common.css"/>
+    <link rel="stylesheet" href="lib/css/interview.css"/>
+    <link rel="stylesheet" href="lib/css/jquery.jscrollpane.css"/>
+    <link rel="stylesheet" href="lib/css/square/blue.css"/>
+    <link rel="stylesheet" href="lib/css/jquery.qtip.min.css"/>
+    <link rel="stylesheet" href="lib/css/notifIt.css"/>
+    <!--<script src="https://raw.githubusercontent.com/aui/artTemplate/master/dist/template.js"></script>-->
+    <!--<script src="http://backbonejs.org/backbone-min.js"></script>-->
+    <!--<script src="http://underscorejs.org/underscore-min.js"></script>-->
+    <script src="lib/js/jquery-1.11.1.min.js"></script>
+    <script src="lib/js/jquery.raty.js"></script>
+    <script src="lib/js/jquery.jscrollpane.min.js"></script>
+    <script src="lib/js/jquery.mousewheel.js"></script>
+    <script src="lib/js/icheck.min.js"></script>
+    <script src="lib/js/jquery.qtip.min.js"></script>
+    <script src="lib/js/notifIt.js"></script>
+    <script src="lib/js/interview.js"></script>
+
+</head>
+<body>
+<div class="topBar">
+    <a href="" class="back">
+        <img src="img/back.png" alt=""/>
+    </a>
+    <div class="right">
+        <span class="wait">等待人数：<span class="count">0</span></span>
+        <span class="done">已经完成：<span class="count">0</span></span>
+        <span class="time">当前已经面试： <span class="min">0</span> 分 <span class="sec">0</span> 秒</span>
+    </div>
+    <div class="title"></div>
+</div>
+
+<div class="main">
+    <div class="profile">
+        <span class="smallCircle"></span>
+        <span class="title">资料预览</span>
+        <div class="card">
+            <div class="scrollContainer">
+                <div class="basicInfo">
+                    <div class="infoName left floated">
+                        <div>学号</div>
+                        <div>姓名</div>
+                        <div>性别</div>
+                        <div>专业</div>
+                        <div>电话</div>
+                        <div>邮箱</div>
+                        <div>QQ</div>
+                        <div>个人想法</div>
+                    </div>
+                    <div class="infoDetail">
+                        <div>--</div>
+                        <div>--</div>
+                        <div>--</div>
+                        <div>--</div>
+                        <div>--</div>
+                        <div>--</div>
+                        <div>--</div>
+                        <div>--</div>
+                    </div>
+                </div>
+            </div>
+            <div class="action">
+                <div class="recommend left floated">推荐</div>
+                <div class="skip right floated">跳过</div>
+            </div>
+        </div>
+    </div>
+    <div class="rate right floated">
+        <span class="smallCircle"></span>
+        <span class="title">评价</span>
+        <div class="card">
+            <div class="rateInfo">
+                <div>
+                    <span>等级：</span>
+                    <div class="stars"></div>
+                    <input id="score" type="text" hidden/>
+                </div>
+                <div>
+                    <span>评语：</span>
+                    <textarea name="" class="comment" cols="32" rows="7"></textarea>
+                </div>
+                <div class="submit right floated">
+                    提交
+                </div>
+            </div>
+            <div class="action">
+                <div class="special left floated">插队</div>
+                <div class="next right floated">下一位</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="recommendContent hide">
+    <h3>请选择部门</h3>
+    <ul>
+        <li>
+            <input type="radio" name="depart" id="depart-1" value="1"/>
+            <label for="depart-1">人力资源中心</label>
+        </li>
+        <li>
+            <input type="radio" name="depart" id="depart-2" value="2"/>
+            <label for="depart-2">depart-2</label>
+        </li>
+        <li>
+            <input type="radio" name="depart" id="depart-3" value="3"/>
+            <label for="depart-3">depart-3</label>
+        </li>
+    </ul>
+    <div class="confirm">确定</div>
+</div>
+<div class="skipContent hide">
+    <h3>点击确定跳过此人</h3>
+    <div class="confirm">确定</div>
+</div>
+<div class="specialContent hide">
+    <h3>请输入学号</h3>
+    <div class="sid">
+        <input type="text" name="sid" id=""/>
+    </div>
+    <div class="confirm">确定</div>
+</div>
+</body>
+</html>

@@ -1,5 +1,5 @@
 let express = require('express');
-let config = require('../../config/config');
+let config = require('../config');
 let router = express.Router();
 
 router.get('/uploadToken', function (req, res) {

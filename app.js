@@ -9,14 +9,14 @@ const express = require('express'),
       MongoStore = require('connect-mongo')(session),
       multer = require('multer'),
 
-      club = require('./router/login/club'),
-      interview = require('./router/login/interview'),
-      room = require('./router/login/room'),
-      common = require('./router/login/common'),
+      club = require('./router/club'),
+      interview = require('./router/interview'),
+      room = require('./router/room'),
+      common = require('./router/common'),
       reg = require('./router/reg'),
-      download = require('./router/login/download');
+      download = require('./router/download');
 
-      config = require('./config/config');
+      config = require('./config');
 
 var app = express();
 // var upload = multer({dest: '/tmp/interview'});

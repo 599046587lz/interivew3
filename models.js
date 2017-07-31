@@ -2,7 +2,7 @@
  * Created by bangbang93 on 14-9-15.
  */
 var mongoose = require('mongoose');
-var config = require('../config/config');
+var config = require('./config');
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://' + config.db.host + '/' + config.db.db,{useMongoClient:true});
 
@@ -77,5 +77,72 @@ var Interviewee = new mongoose.Schema({
     } //是否正在和叫号大厅传输该学生信息*/
 });
 
+
+var studentSchema = new mongoose.Schema({
+    club: {
+        type: String,
+        required: true
+    },
+    clubID: {
+        type: String,
+        required: true
+    },
+    name: {
+        type: String,
+        required: true
+    },
+    studentID: {
+        type: String,
+        required: true,
+        regExp: /^1[0-9]{7}$/
+    },
+    gender: {
+        type: String,
+        required: true,
+        enum: ['男', '女']
+    },
+    college: {
+        type: String,
+        required: true
+    },
+    major: {
+        type: String,
+        required: true
+    },
+    department: {
+        type: String,
+        required: true
+    },
+    intro: {
+        type: String,
+        required: true
+    },
+    tel: {
+        type: String,
+        required: true,
+        regExp: /^(1[34578])[0-9]{9}$/
+    },
+    qq: {
+        type: String,
+        required: true,
+        regExp: /[1-9][0-9]{4,}/
+    },
+    short_tel: {
+        type: String,
+        regExp: /[0-9]{6}$/
+    },
+    pic_url: {
+        type: String,
+        required: true
+    },
+    image: {
+        type: String,
+        required:true
+    }
+
+});
+
+
 exports.Interviewee = mongoose.model('interviewee', Interviewee);
 exports.Club = mongoose.model('club', Club);
+exports.Student = mongoose.model('student', studentSchema);

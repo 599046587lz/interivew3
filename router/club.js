@@ -5,8 +5,8 @@ var express = require('express');
 //var debug = require('debug')('interview');
 var router = express.Router();
 
-var Club = require('../../modules/club');
-var Interviewee = require('../../modules/interviewee');
+var Club = require('../modules/club');
+var Interviewee = require('../modules/interviewee');
 var r = require('./index');
 
 /**

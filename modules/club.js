@@ -1,7 +1,7 @@
 /**
  * Created by bangbang93 on 14-9-16.
  */
-let clubModel = require('../db/models').Club;
+let clubModel = require('../models').Club;
 var Club = require('../models/club');
 var Interviewee = require('../models/interviewee');
 var excel = require('xlsx');

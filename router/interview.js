@@ -3,7 +3,7 @@
  */
 var express = require('express');
 var router = express.Router();
-var Interviewee = require('../../modules/interviewee');
+var Interviewee = require('../modules/interviewee');
 
 /**
  * @params sid

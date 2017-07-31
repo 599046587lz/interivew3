@@ -5,10 +5,6 @@ const express = require('express'),
       logger = require('morgan'),
       cookieParser = require('cookie-parser'),
       bodyParser = require('body-parser'),
-      session    = require('express-session'),
-      MongoStore = require('connect-mongo')(session),
-      multer = require('multer'),
-
       club = require('./router/club'),
       interview = require('./router/interview'),
       room = require('./router/room'),
@@ -19,11 +15,8 @@ const express = require('express'),
       config = require('./config');
 
 let app = express();
-// let upload = multer({dest: '/tmp/interview'});
 
 global.token = '57dbfcf39882410001b0c195';
-//报名系统注册入口
-app.use('/reg',reg);
 
 
 // view engine setup
@@ -33,16 +26,14 @@ app.set('view engine', 'ejs');
 app.use(favicon());
 app.use(logger('dev'));
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser());
 
-app.use(multer({
-    dest: '/tmp/interview'
-}));
 app.use(cookieParser());
 app.use(mid.session());
 app.use(express.static(path.join(__dirname, 'public')));
 
+//报名系统注册入口
+app.use('/reg',reg);
 app.use('/club', club);
 app.use('/interview', interview);
 app.use('/room', room);
@@ -56,19 +47,6 @@ app.use(function(req, res, next) {
     next(err);
 });
 
-// error handlers
-// development error handler
-// will print stacktrace
-
-if (app.get('env') === 'development') {
-    app.use(function(err, req, res) {
-        res.status(err.status || 500);
-        res.render('error', {
-            message: err.message,
-            error: err
-        });
-    });
-}
 
 // production error handler
 // no stacktraces leaked to user

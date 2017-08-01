@@ -36,49 +36,51 @@ function getSearchObject() {
 
 
 $(function () {
-    //var clubID=getSearchObject().cid;
+    var clubId=getSearchObject().clubId;
+    console.log(clubId);
     //set data localstored
-    //$.ajax({
-    //  url:"",
-    //  success:function(data){
-    //  localStorage.setItem("listData",data);
-    // }
-    //  error:function(){
-    //  alert("啊哦 数据走丢了");
-    // }
-    // });
-    //var data=localStorage.getItem("listData")
-    var data = {
-        clubID: 1,
-        club: "红色家园",
-        department: [
-            {
-                departname: "公关部",
-                column: ["老子写代码", "就用php", "想怎样", "打我啊", "大", "打我啊a", "来打我啊"]
-            },
-            {
-                departname: "技术部",
-                column: ["再见老笨蛋", "哈哈啥"]
-            },
-            {
-                departname: "设计部",
-                column: ["老子写代码", "就用php", "想怎样", "打我啊", "大", "打我啊a", "来打我啊"]
-            },
-            {
-                departname: "活动运营部",
-                column: []
-            },
-            {
-                departname: "体育联合部",
-                column: []
-            },
-            {
-                departname: "产品运营部",
-                column: []
-            }
-        ]
+    $.ajax({
+     url:"/club/clubInfo?clubId="+clubId,
+     success:function(data){
+     localStorage.setItem("listData",data);
+    },
+     error:function(){
+     alert("啊哦 数据走丢了");
     }
+    });
+    var data=localStorage.getItem("listData");
 
+    // var data = {
+    //     clubID: 1,
+    //     club: "红色家园",
+    //     department: [
+    //         {
+    //             departname: "公关部",
+    //             column: ["老子写代码", "就用php", "想怎样", "打我啊", "大", "打我啊a", "来打我啊"]
+    //         },
+    //         {
+    //             departname: "技术部",
+    //             column: ["再见老笨蛋", "哈哈啥"]
+    //         },
+    //         {
+    //             departname: "设计部",
+    //             column: ["老子写代码", "就用php", "想怎样", "打我啊", "大", "打我啊a", "来打我啊"]
+    //         },
+    //         {
+    //             departname: "活动运营部",
+    //             column: []
+    //         },
+    //         {
+    //             departname: "体育联合部",
+    //             column: []
+    //         },
+    //         {
+    //             departname: "产品运营部",
+    //             column: []
+    //         }
+    //     ]
+    // }
+    console.log(data);
     //pic preview
     var $pic = $("#student_pic"),
         $picfile = $("#picfile");

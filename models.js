@@ -6,11 +6,15 @@ let config = require('./config');
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://' + config.db.host + '/' + config.db.db,{useMongoClient:true});
 
+let Column = new mongoose.Schema({
+   columnName: String
+});
 
 let Department = new mongoose.Schema({
     did: Number,
     name: String,
-    location: String
+    location: String,
+    column: [Column]
 });
 
 let Club = new mongoose.Schema({

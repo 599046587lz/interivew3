@@ -203,8 +203,13 @@ exports.getClubInfo = function(cid) {
             cid: cid
         }).then(result => {
             result.departments.forEach(e => {
+                let column = [];
+                e.column.forEach(i => {
+                    column.push(i.columnName);
+                });
                 info.push({
-                    name: e.name
+                    name: e.name,
+                    column: column
                 });
             });
             resolve(info);
@@ -226,4 +231,16 @@ exports.verifyInfo = function(info) {
           reject(err);
       })
   })
+};
+
+
+exports.insertInfo = function(data) {
+    return new Promise(function(resolve, reject) {
+        let model = new clubModel(data);
+        model.save().then(result => {
+            resolve(result);
+        }).catch(err => {
+            reject(err);
+        })
+    })
 };

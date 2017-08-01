@@ -203,8 +203,13 @@ exports.getClubInfo = function(cid) {
             cid: cid
         }).then(result => {
             result.departments.forEach(e => {
+                let column = [];
+                e.column.forEach(i => {
+                    column.push(i.columnName);
+                });
                 info.push({
-                    name: e.name
+                    name: e.name,
+                    column: column
                 });
             });
             resolve(info);

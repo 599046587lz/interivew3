@@ -200,7 +200,7 @@ router.post('/insertInfo', wrap(async function (req, res) {
     data.cid = req.param('cid');
     data.name = req.param('name');
     data.logo = req.param('logo');
-    data.department = req.param('department');
+    data.departments = req.param('departments');
     data.interviewer = req.param('interviewer');
     data.password = req.param('password');
     data.maxDep = req.param('maxDep');

@@ -36,51 +36,36 @@ function getSearchObject() {
 
 
 $(function () {
-    var clubId=getSearchObject().clubId;
-    console.log(clubId);
-    //set data localstored
-    $.ajax({
-     url:"/club/clubInfo?clubId="+clubId,
-     success:function(data){
-     localStorage.setItem("listData",data);
-    },
-     error:function(){
-     alert("啊哦 数据走丢了");
-    }
-    });
-    var data=localStorage.getItem("listData");
-
-    // var data = {
-    //     clubID: 1,
-    //     club: "红色家园",
-    //     department: [
+    // var data =
+    //   [
     //         {
-    //             departname: "公关部",
+    //             name: "公关部",
     //             column: ["老子写代码", "就用php", "想怎样", "打我啊", "大", "打我啊a", "来打我啊"]
     //         },
     //         {
-    //             departname: "技术部",
+    //             name: "技术部",
     //             column: ["再见老笨蛋", "哈哈啥"]
     //         },
     //         {
-    //             departname: "设计部",
+    //             name: "设计部",
     //             column: ["老子写代码", "就用php", "想怎样", "打我啊", "大", "打我啊a", "来打我啊"]
     //         },
     //         {
-    //             departname: "活动运营部",
+    //             name: "活动运营部",
     //             column: []
     //         },
     //         {
-    //             departname: "体育联合部",
+    //             name: "体育联合部",
     //             column: []
     //         },
     //         {
-    //             departname: "产品运营部",
+    //             name: "产品运营部",
     //             column: []
     //         }
     //     ]
-    // }
-    console.log(data);
+
+    var clubId=getSearchObject().clubId;
+
     //pic preview
     var $pic = $("#student_pic"),
         $picfile = $("#picfile");
@@ -91,7 +76,6 @@ $(function () {
         var objUrl = getObjectURL(this.files[0]);
         if (objUrl) $pic.css("background-image", "url('" + objUrl + "')");
     })
-
 
     //load list
     var depart = 0;
@@ -105,104 +89,116 @@ $(function () {
         '<div class="pop_list">__list__</div>' +
         '</div>'
 
-    for (var i in data.department) {
-        var list = data.department[i];
-        var temp = list1.replace("__depart__", list.departname).replace("__did__", i);
-        $list.append(temp);
-        if (list.column[0]) {
-            ///initpopups
-            var poplist = '';
-            for (var j in list.column) {
-                poplist = poplist + list2.replace("__column__", list.column[j]).replace("__cid__", j - (-1));
-            }
-            var insert = popcontent.replace("__depart__", list.departname).replace("__did__", i).replace("__list__", poplist);
-            $('body').append(insert);
-        }
-    }
-
-    //depart
-    $list.on('click', 'list1', function () {
-        var did = $(this).attr('did');
-        var $popup = $(".popup[did=" + did + "]");
-        var exist = $popup.html();
-        //if has two levels
-        if (exist) {
-            var invisible = $popup.hasClass("invisible");
-            if (invisible) {
-                $(".popup").addClass("invisible");
-                $popup.removeClass("invisible");
-            } else {
-                $popup.addClass("invisible");
-            }
-        }
-        //if has only one
-        else {
-            var active = $(this).hasClass("active");
-            if (active) {
-                $(this).removeClass("active");
-                depart--;
-            } else {
-                if (depart < 3) {
-                    $(this).addClass("active");
-                    depart++;
+    //set data localstored
+    $.ajax({
+        url:"/club/clubInfo?clubId="+clubId,
+        success:function(data){
+            console.log(data);
+            for (var i in data) {
+                var list = data[i];
+                var temp = list1.replace("__depart__", list.name).replace("__did__", i);
+                $list.append(temp);
+                if (list.column[0]) {
+                    ///initpopups
+                    var poplist = '';
+                    for (var j in list.column) {
+                        poplist = poplist + list2.replace("__column__", list.column[j]).replace("__cid__", j - (-1));
+                    }
+                    var insert = popcontent.replace("__depart__", list.name).replace("__did__", i).replace("__list__", poplist);
+                    $('body').append(insert);
                 }
+            }
+
+            //depart
+            $list.on('click', 'list1', function () {
+                var did = $(this).attr('did');
+                var $popup = $(".popup[did=" + did + "]");
+                var exist = $popup.html();
+                //if has two levels
+                if (exist) {
+                    var invisible = $popup.hasClass("invisible");
+                    if (invisible) {
+                        $(".popup").addClass("invisible");
+                        $popup.removeClass("invisible");
+                    } else {
+                        $popup.addClass("invisible");
+                    }
+                }
+                //if has only one
                 else {
-                    warning("最多选择三个部门呦~")
+                    var active = $(this).hasClass("active");
+                    if (active) {
+                        $(this).removeClass("active");
+                        depart--;
+                    } else {
+                        if (depart < 3) {
+                            $(this).addClass("active");
+                            depart++;
+                        }
+                        else {
+                            warning("最多选择三个部门呦~")
+                        }
+                    }
                 }
-            }
+            });
+
+
+            //popup
+            var $popup = $(".popup"),
+                $close = $(".popup .close"),
+                $plist = $(".popup .pop_list"),
+                $body = $("body");
+            ///anime
+            $body.on("click", ".close", function () {
+                $popup.css("animation", "push 0.5s");
+                setTimeout(function () {
+                    $popup.addClass("invisible");
+                    $popup.css("animation", "pop 0.5s");
+                }, 500);
+            });
+            ///physical backward
+            window.addEventListener("popstate", function (e) {
+                $close.click();
+            });
+            ///click
+            $plist.on("click", "list2", function () {
+                var active = $(this).hasClass("active");
+                var did = $(this).parent().parent().attr("did");
+                var $list1 = $("list1[did=" + did + "]");
+                if (active) {
+                    $(this).removeClass("active");
+                    $list1.removeClass("active");
+                    depart--;
+                    //column sum should not leap 20!!
+                    for (var m = 0; m < 20; m++) {
+                        if ($(this).parent().find("list2[cid=" + m + "]").hasClass("active")) {
+                            $list1.addClass("active");
+                            depart++;
+                            break;
+                        }
+                    }
+                } else {
+                    if ($list1.hasClass("active")) {
+                        $(this).addClass("active");
+                    } else {
+                        if (depart < 3) {
+                            $(this).addClass("active");
+                            depart++;
+                            $list1.addClass("active");
+                        }
+                        else {
+                            warning("最多选择三个部门呦~");
+                        }
+                    }
+                }
+            });
+        },
+        error:function(){
+            warning("部门信息未导入");
         }
     });
 
 
-    //popup
-    var $popup = $(".popup"),
-        $close = $(".popup .close"),
-        $plist = $(".popup .pop_list"),
-        $body = $("body");
-    ///anime
-    $body.on("click", ".close", function () {
-        $popup.css("animation", "push 0.5s");
-        setTimeout(function () {
-            $popup.addClass("invisible");
-            $popup.css("animation", "pop 0.5s");
-        }, 500);
-    });
-    ///physical backward
-    window.addEventListener("popstate", function (e) {
-        $close.click();
-    });
-    ///click
-    $plist.on("click", "list2", function () {
-        var active = $(this).hasClass("active");
-        var did = $(this).parent().parent().attr("did");
-        var $list1 = $("list1[did=" + did + "]");
-        if (active) {
-            $(this).removeClass("active");
-            $list1.removeClass("active");
-            depart--;
-            //column sum should not leap 20!!
-            for (var m = 0; m < 20; m++) {
-                if ($(this).parent().find("list2[cid=" + m + "]").hasClass("active")) {
-                    $list1.addClass("active");
-                    depart++;
-                    break;
-                }
-            }
-        } else {
-            if ($list1.hasClass("active")) {
-                $(this).addClass("active");
-            } else {
-                if (depart < 3) {
-                    $(this).addClass("active");
-                    depart++;
-                    $list1.addClass("active");
-                }
-                else {
-                    warning("最多选择三个部门呦~");
-                }
-            }
-        }
-    });
 
 
     //alarm
@@ -244,18 +240,31 @@ $(function () {
     //submitAll
     $(".submitAll").on("click",function () {
         var checked=$("ins").parent().hasClass("checked");
-        var clubID=localStorage.getItem("CLUBID"),
-            club=localStorage.getItem("CLUB"),
+        var clubID=getSearchObject().clubId,
+            club="红色家园",
             name=$("#sName input").val(),
             sid=$("#sId input").val(),
             sex=$(".sex_pick").attr("sex"),
             academy=$("#academy input").val(),
             major=$("#major input").val(),
-            intro=$(".text_here").text(),
+            intro=$(".text_here textarea").val(),
             long=$("#long input").val(),
             short=$("#short input").val(),
             qq=$("#qq input").val(),
             department=[];
+        for (var i = 0; i < 10; i++) {
+            var obj = new Object();
+            var $thisDepart = $(".depart_list list1[did=" + i + "].active");
+            obj.departname = $thisDepart.text();
+            if (!obj.departname)continue;
+            obj.column = [];
+            for (var j = 0; j < 10; j++) {
+                var column = $(".popup[did=" + i + "] .pop_list list2[cid=" + j + "].active").text();
+                if (column) obj.column.push(column);
+            }
+            console.log(obj);
+            department.push(obj);
+        }
         if(checked) {
             var loading="<div class='popup' style='height:200px;animation: pop2 0.7s'>" +
                 "<img src='../../img/apply/loading.gif'>" +
@@ -269,7 +278,7 @@ $(function () {
                     type: "image"
                 },
                 success: function (data) {
-                    console.log(data);
+                    //console.log(data);
                     var form = new FormData(document.getElementById("formfile"));
                     $.ajax({
                         url: "http://up-z2.qiniu.com?token=" + data.token,
@@ -278,19 +287,20 @@ $(function () {
                         processData: false,
                         contentType: false,
                         success: function (data) {
+                            //console.log(data.url);
+                            console.log(clubID);
+                            console.log(club);
                             console.log(data.url);
-                            for (i = 0; i < 10; i++) {
-                                var obj = new Object();
-                                var $thisDepart = $(".depart_list list1[did=" + i + "].active");
-                                obj.departname = $thisDepart.text();
-                                if (!obj.departname)continue;
-                                obj.column = [];
-                                for (j = 0; j < 10; j++) {
-                                    var column = $(".popup[did=" + i + "] .pop_list list2[cid=" + j + "].active").text();
-                                    if (column) obj.column.push(column);
-                                }
-                                //console.log(obj);
-                            }
+                            console.log(name);
+                            console.log(sid);
+                            console.log(sex);
+                            console.log(academy);
+                            console.log(intro);
+                            console.log(long);
+                            console.log(short);
+                            console.log(qq);
+                            console.log(department);
+
                             $.ajax({
                                 url: "http://localhost:3000/reg",
                                 method: "post",
@@ -315,7 +325,7 @@ $(function () {
                                 },
                                 error:function (data) {
                                     $(".popup").remove();
-                                    warning("图片上传失败 请检查网络");
+                                    warning("数据上传失败");
                                 }
                             })
                         },

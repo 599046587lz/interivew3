@@ -227,3 +227,15 @@ exports.verifyInfo = function(info) {
       })
   })
 };
+
+
+exports.insertInfo = function(data) {
+    return new Promise(function(resolve, reject) {
+        let model = new clubModel(data);
+        model.save().then(result => {
+            resolve(result);
+        }).catch(err => {
+            reject(err);
+        })
+    })
+};

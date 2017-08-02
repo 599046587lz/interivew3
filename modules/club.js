@@ -212,7 +212,10 @@ exports.getClubInfo = function(cid) {
                     column: column
                 });
             });
-            resolve(info);
+            resolve({
+                clubName: result.name,
+                department: info
+            });
         }).catch(err => {
             reject(err);
         })

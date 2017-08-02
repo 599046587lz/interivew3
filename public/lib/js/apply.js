@@ -268,7 +268,7 @@ $(function () {
                 "</div>"
             $("body").append(loading);
             $.ajax({
-                url: "http://localhost:3000/common/uploadToken",
+                url: "/common/uploadToken",
                 method: "get",
                 data: {
                     type: "image"
@@ -297,7 +297,8 @@ $(function () {
                             // console.log(department);
 
                             $.ajax({
-                                url: "http://localhost:3000/reg",
+                                timeout:5000,
+                                url: "/reg",
                                 method: "post",
                                 data: {
                                     clubID: clubID,
@@ -314,17 +315,17 @@ $(function () {
                                     qq: qq,
                                     department: department
                                 },
-                                success:function (data) {
+                                success:function () {
                                     $(".popup").remove();
                                     warning("上传成功 感谢您的报名~");
                                 },
-                                error:function (data) {
+                                error:function () {
                                     $(".popup").remove();
-                                    warning("数据上传失败");
+                                    warning("请将信息填写完整");
                                 }
                             })
                         },
-                        error: function (data) {
+                        error: function () {
                             $(".popup").remove();
                             warning("图片上传失败 请检查网络");
                         }

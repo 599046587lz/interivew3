@@ -1,9 +1,7 @@
 const express = require('express'),
     student = require('../modules/student'),
-    qiniu_download = require('../utils/qiniu_download'),
-    club = require('../modules/club'),
-    //request = require('request'),
-    gm = require('gm').subClass({imageMagick: true});
+    image_save = require('../utils/image_save'),
+    club = require('../modules/club');
 
 let router = express.Router();
 
@@ -14,7 +12,10 @@ router.use('/', function (req, res, next) {
     else {
         (async () => {
             try {
-                await club.verifyInfo(data);
+                let info ={};
+                info.name = data.club;
+                info.cid = data.clubID;
+                await club.verifyInfo(info);
                 next();
             } catch (err) {
                 res.status('403').send('社团信息有误！');
@@ -30,26 +31,16 @@ router.post('/', function (req, res) {
     let send;
     (async () => {
         try {
-            //qiniu模块处理,把图片下载到image，返回filename,存在data.image里,存入数据库
-             console.log(data.pic_url);
-            data.image = await qiniu_download.qiniudownload(data.pic_url, function (err, res, filename) {
-                if (err)throw err;
-                else if (res) return filename;
-            });
-            //压缩图片,要安装GraphicsMagick或ImageMagick,再调用gm压缩
-            let newfilename = Data.now() + data.image;
-            await gm('../files/image/' + data.image).resize(240, 240, '!')
-                .write('../files/image/' + newfilename, function (err) {
-                    if (err) throw err;
-                });
+            let filename= Date.now()+'.jpg';
+            let newfilename = 'new' + filename;
+            image_save.image_save(data.pic_url,filename,newfilename);
             data.image = newfilename;
-
-            // 将信息存入数据库
             send = await student.addStudent(data);
 
             if (!!send) res.send('报名成功！');
 
         } catch (err) {
+            console.log(err);
             res.status(403).send('信息填写有误，请再次确认！');
         }
     })();

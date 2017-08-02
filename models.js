@@ -88,7 +88,7 @@ let studentSchema = new mongoose.Schema({
         required: true
     },
     clubID: {
-        type: String,
+        type: Number,
         required: true
     },
     name: {

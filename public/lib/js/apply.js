@@ -93,9 +93,10 @@ $(function () {
     $.ajax({
         url:"/club/clubInfo?clubId="+clubId,
         success:function(data){
-            console.log(data);
-            for (var i in data) {
-                var list = data[i];
+            var club=data.clubName;
+            localStorage.setItem("CLUB",club);
+            for (var i in data.department) {
+                var list = data.department[i];
                 var temp = list1.replace("__depart__", list.name).replace("__did__", i);
                 $list.append(temp);
                 if (list.column[0]) {
@@ -197,10 +198,6 @@ $(function () {
             warning("部门信息未导入");
         }
     });
-
-
-
-
     //alarm
     var $check = $("#alarm_agree");
     var $content = $(".alarm_content");
@@ -241,7 +238,7 @@ $(function () {
     $(".submitAll").on("click",function () {
         var checked=$("ins").parent().hasClass("checked");
         var clubID=getSearchObject().clubId,
-            club="红色家园",
+            club=localStorage.getItem("CLUB"),
             name=$("#sName input").val(),
             sid=$("#sId input").val(),
             sex=$(".sex_pick").attr("sex"),
@@ -262,7 +259,6 @@ $(function () {
                 var column = $(".popup[did=" + i + "] .pop_list list2[cid=" + j + "].active").text();
                 if (column) obj.column.push(column);
             }
-            console.log(obj);
             department.push(obj);
         }
         if(checked) {
@@ -287,19 +283,18 @@ $(function () {
                         processData: false,
                         contentType: false,
                         success: function (data) {
-                            //console.log(data.url);
-                            console.log(clubID);
-                            console.log(club);
-                            console.log(data.url);
-                            console.log(name);
-                            console.log(sid);
-                            console.log(sex);
-                            console.log(academy);
-                            console.log(intro);
-                            console.log(long);
-                            console.log(short);
-                            console.log(qq);
-                            console.log(department);
+                            // console.log(clubID);
+                            // console.log(club);
+                            // console.log(data.url);
+                            // console.log(name);
+                            // console.log(sid);
+                            // console.log(sex);
+                            // console.log(academy);
+                            // console.log(intro);
+                            // console.log(long);
+                            // console.log(short);
+                            // console.log(qq);
+                            // console.log(department);
 
                             $.ajax({
                                 url: "http://localhost:3000/reg",

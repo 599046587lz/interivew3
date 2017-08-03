@@ -25,7 +25,8 @@ app.set('view engine', 'ejs');
 app.use(favicon());
 app.use(logger('dev'));
 
-app.use(bodyParser());
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
 
 app.use(cookieParser());
 app.use(mid.session());

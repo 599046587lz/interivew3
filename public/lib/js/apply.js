@@ -18,22 +18,21 @@ function warning(str) {
         '</warning>';
     $("body").append(warning);
     $("warning .check").on("click", function () {
-        var $warn=$(this).parent();
-        $warn.css("animation","warning-out 0.3s");
+        var $warn = $(this).parent();
+        $warn.css("animation", "warning-out 0.3s");
         setTimeout(function () {
             $warn.remove();
-        },300)
+        }, 300)
     })
 }
 function getSearchObject() {
     var array = location.search.substring(1).split(/[\&\=]/);
     var obj = {};
-    for (var i = 0; i < array.length/2; i ++) {
-        obj[ array[i * 2] ] = array[i * 2 + 1];
+    for (var i = 0; i < array.length / 2; i++) {
+        obj[array[i * 2]] = array[i * 2 + 1];
     }
     return obj;
 }
-
 
 $(function () {
     // var data =
@@ -64,7 +63,7 @@ $(function () {
     //         }
     //     ]
 
-    var clubId=getSearchObject().clubId;
+    var clubID = getSearchObject().clubId;
 
     //pic preview
     var $pic = $("#student_pic"),
@@ -91,10 +90,10 @@ $(function () {
 
     //set data localstored
     $.ajax({
-        url:"/club/clubInfo?clubId="+clubId,
-        success:function(data){
-            var club=data.clubName;
-            localStorage.setItem("CLUB",club);
+        url: "/club/clubInfo?clubId=" + clubId,
+        success: function (data) {
+            var club = data.clubName;
+            localStorage.setItem("CLUB", club);
             for (var i in data.department) {
                 var list = data.department[i];
                 var temp = list1.replace("__depart__", list.name).replace("__did__", i);
@@ -194,7 +193,7 @@ $(function () {
                 }
             });
         },
-        error:function(){
+        error: function () {
             warning("部门信息未导入");
         }
     });
@@ -235,20 +234,20 @@ $(function () {
         $this.next().find("img").attr("src", "./img/apply/male_off.png");
     })
     //submitAll
-    $(".submitAll").on("click",function () {
-        var checked=$("ins").parent().hasClass("checked");
-        var clubID=getSearchObject().clubId,
-            club=localStorage.getItem("CLUB"),
-            name=$("#sName input").val(),
-            sid=$("#sId input").val(),
-            sex=$(".sex_pick").attr("sex"),
-            academy=$("#academy input").val(),
-            major=$("#major input").val(),
-            intro=$(".text_here textarea").val(),
-            long=$("#long input").val(),
-            short=$("#short input").val(),
-            qq=$("#qq input").val(),
-            department=[];
+    $(".submitAll").on("click", function () {
+        var checked = $("ins").parent().hasClass("checked");
+        var clubID = getSearchObject().clubId,
+            club = localStorage.getItem("CLUB"),
+            name = $("#sName input").val(),
+            sid = $("#sId input").val(),
+            sex = $(".sex_pick").attr("sex"),
+            academy = $("#academy input").val(),
+            major = $("#major input").val(),
+            intro = $(".text_here textarea").val(),
+            long = $("#long input").val(),
+            short = $("#short input").val(),
+            qq = $("#qq input").val(),
+            department = [];
         for (var i = 0; i < 10; i++) {
             var obj = new Object();
             var $thisDepart = $(".depart_list list1[did=" + i + "].active");
@@ -261,8 +260,8 @@ $(function () {
             }
             department.push(obj);
         }
-        if(checked) {
-            var loading="<div class='popup' style='height:200px;animation: pop2 0.7s'>" +
+        if (checked) {
+            var loading = "<div class='popup' style='height:200px;animation: pop2 0.7s'>" +
                 "<img src='../../img/apply/loading.gif'>" +
                 "<div>正在提交</div>" +
                 "</div>"
@@ -283,24 +282,26 @@ $(function () {
                         processData: false,
                         contentType: false,
                         success: function (data) {
-                            // console.log(clubID);
-                            // console.log(club);
-                            // console.log(data.url);
-                            // console.log(name);
-                            // console.log(sid);
-                            // console.log(sex);
-                            // console.log(academy);
-                            // console.log(intro);
-                            // console.log(long);
-                            // console.log(short);
-                            // console.log(qq);
-                            // console.log(department);
-
+                            window.test = {
+                                clubID: clubID,
+                                club: club,
+                                pic_url: data.url,
+                                name: name,
+                                studentID: sid,
+                                gender: sex,
+                                college: academy,
+                                major: major,
+                                intro: intro,
+                                tel: long,
+                                short_tel: short,
+                                qq: qq,
+                                department: department
+                            };
                             $.ajax({
-                                timeout:5000,
                                 url: "/reg",
+                                
                                 method: "post",
-                                data: {
+                                data: JSON.toString({
                                     clubID: clubID,
                                     club: club,
                                     pic_url: data.url,
@@ -314,14 +315,14 @@ $(function () {
                                     short_tel: short,
                                     qq: qq,
                                     department: department
-                                },
+                                }),
                                 success:function () {
                                     $(".popup").remove();
                                     warning("上传成功 感谢您的报名~");
                                 },
-                                error:function () {
+                                error: function (reg) {
                                     $(".popup").remove();
-                                    warning("请将信息填写完整");
+                                    warning(reg.responseText);
                                 }
                             })
                         },
@@ -333,8 +334,7 @@ $(function () {
                 }
             });
         }
-        else
-        {
+        else {
             warning("必须先确认注意事项哦~");
         }
     })

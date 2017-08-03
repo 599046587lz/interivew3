@@ -8,7 +8,7 @@ let router = express.Router();
 
 router.use('/', function (req, res, next) {
     let data = req.body;
-    if (!data) res.sendStatus(403);
+    if (!data || !!Object.keys(data).length == 0) res.status(403).send('数据丢包，请重新输入！');
     else {
         (async () => {
             try {

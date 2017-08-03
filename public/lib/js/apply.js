@@ -90,7 +90,7 @@ $(function () {
 
     //set data localstored
     $.ajax({
-        url: "/club/clubInfo?clubId=" + clubId,
+        url: "/club/clubInfo?clubId=" + clubID,
         success: function (data) {
             var club = data.clubName;
             localStorage.setItem("CLUB", club);

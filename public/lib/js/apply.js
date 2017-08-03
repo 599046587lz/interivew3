@@ -260,7 +260,10 @@ $(function () {
             }
             department.push(obj);
         }
-        if (checked) {
+        if (!checked) {
+                warning("必须先确认注意事项哦~");
+                return ;
+        }
             var loading = "<div class='popup' style='height:200px;animation: pop2 0.7s'>" +
                 "<img src='../../img/apply/loading.gif'>" +
                 "<div>正在提交</div>" +
@@ -333,10 +336,6 @@ $(function () {
                     });
                 }
             });
-        }
-        else {
-            warning("必须先确认注意事项哦~");
-        }
     })
 
 })

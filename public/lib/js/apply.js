@@ -299,9 +299,9 @@ $(function () {
                             };
                             $.ajax({
                                 url: "/reg",
-                                
+                                contentType: "application/json",
                                 method: "post",
-                                data: JSON.toString({
+                                data: JSON.stringify({
                                     clubID: clubID,
                                     club: club,
                                     pic_url: data.url,

@@ -233,9 +233,10 @@ footer p:before {
 
 .popup .pop_list {
     width: 100%;
-    height: 270px;
+    min-height: 270px;
     background-color: rgba(0, 0, 0, 0.1);
-    overflow: scroll;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 .popup .pop_list list2 {

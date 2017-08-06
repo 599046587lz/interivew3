@@ -15,8 +15,8 @@ const config = require('./config');
 
 let app = express();
 
-app.use(bodyParser());
-
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
 // app.use(favicon());
 app.use(logger('dev'));
 

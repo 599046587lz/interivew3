@@ -20,7 +20,6 @@ router.use('/', function (req, res, next) {
             } catch (err) {
                 res.status('403').send('社团信息有误！');
             }
-
         })();
     }
 });

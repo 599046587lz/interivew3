@@ -52,7 +52,7 @@ exports.writeWord = function ( data ) {
         });
 
         var pObj = docx.createP();
-        pObj.addText('性别：' + data.gender, {
+        pObj.addText('性别：' + data.gender>0?'男':'女' , {
             font_face: 'Arial',
             font_size: 16
 

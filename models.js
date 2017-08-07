@@ -105,11 +105,11 @@ let studentSchema = new mongoose.Schema({
             }
     },
     gender: {
-        type: String,
+        type: Number,
         required: true,
         enum:
             {
-                values: ['男', '女'],
+                values: [0,1],
                 message: "请选择性别"
             }
     },

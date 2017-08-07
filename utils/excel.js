@@ -29,7 +29,7 @@ exports.writeExcel = function (dbdata, clubID) {
             C1: {v: '社团'},
             D1: {v: '姓名'},
             E1: {v: '学号'},
-            F1: {v: '性别'},
+            F1: {v: '性别'+'[0=女'+','+'1=男]'},
             G1: {v: '专业'},
             H1: {v: '部门'},
             I1: {v: '简介'},

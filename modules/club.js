@@ -198,7 +198,8 @@ exports.verifyInfo = function (info) {
     return clubModel.findOne({
         cid: info.cid
     }).then(result => {
-        if (!(info.name == result.name)) reject("社团id错误");
+
+        if (!result || !(info.name == result.name)) throw new Error("社团id错误！");
         result.password = null;
         return result;
     });

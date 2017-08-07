@@ -5,39 +5,31 @@ const express = require('express'),
     archiver = require('archiver'),
     fs = require('fs');
 
+let wrap = fn => (...args) => fn(...args).catch(args[2]);
 
-exports.packing = function (clubID,cb) {
+exports.packing = wrap(async function (clubID) {
 
     let dbdata, excel, word;
+    dbdata = await db.queryByclubAll(clubID);
+    excel = await createxcel.writeExcel(dbdata, clubID);
+    for (let i of dbdata) {
+        await creatword.writeWord(i);
+    }
 
-    (async () => {
-        try {
-            dbdata = await db.queryByclubAll(clubID);
-            excel = await createxcel.CreateExcel(dbdata, clubID);
-            for (let i of dbdata) {
-                await creatword.CreateWord(i);
-            }
+    let output = fs.createWriteStream('../files/' + clubID + '.zip');
 
-            let output = fs.createWriteStream('files/' + clubID + '.zip');
+    let archive = archiver('zip');
 
-            let archive = archiver('zip');
+    output.on('close', function () {
+        console.log('zip文件大小：' + archive.pointer());
+        console.log('创建zip文件成功！');
+    });
 
-            output.on('close', function () {
-                console.log('zip文件大小：'+ archive.pointer());
-                console.log('创建zip文件成功！');
-            });
+    archive.on('error', function (Error) {
+        throw Error;
+    });
 
-            archive.on('error', function (err) {
-                throw err;
-            });
-
-            archive.pipe(output);
-            archive.directory('files/file/' + clubID + '/', false);
-            archive.finalize();
-        }catch(err)
-            {
-                cb(err);
-            }
-        }
-        )();
-};
+    archive.pipe(output);
+    archive.directory('../files/file/' + clubID + '/', false);
+    archive.finalize();
+});

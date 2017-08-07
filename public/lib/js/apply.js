@@ -305,7 +305,7 @@ $(function () {
                                 contentType: "application/json",
                                 method: "post",
                                 data: JSON.stringify({
-                                    clubID: clubID,
+                                    clubID:clubID,
                                     club: club,
                                     pic_url: data.url,
                                     name: name,

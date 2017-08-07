@@ -168,10 +168,10 @@ router.get('/export', wrap(async function (req, res) {
 
 router.get('/clubInfo', function (req, res) {
     let cid = req.param('clubId');
-
     (async() => {
         try {
             let result = await Club.getClubInfo(cid);
+
             return res.json(result);
         } catch (err) {
             return res.send(403);

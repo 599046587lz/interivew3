@@ -173,10 +173,10 @@ exports.exportInterviewees = function (cid, did) {
 };
 
 exports.getClubInfo = function (cid) {
-    let info = [];
-    clubModel.findOne({
+    return clubModel.findOne({
         cid: cid
     }).then(result => {
+        let info = [];
         result.departments.forEach(e => {
             let column = [];
             e.column.forEach(i => {

@@ -12,6 +12,7 @@ function getObjectURL(file) {
     }
     return url;
 }
+
 function warning(str) {
     var warning = '<warning>' + str +
         '<div class="check">我知道了</div>' +
@@ -25,6 +26,7 @@ function warning(str) {
         }, 300)
     })
 }
+
 function getSearchObject() {
     var array = location.search.substring(1).split(/[\&\=]/);
     var obj = {};
@@ -252,7 +254,7 @@ $(function () {
             var obj = new Object();
             var $thisDepart = $(".depart_list list1[did=" + i + "].active");
             obj.departname = $thisDepart.text();
-            if (!obj.departname)continue;
+            if (!obj.departname) continue;
             obj.column = [];
             for (var j = 0; j < 10; j++) {
                 var column = $(".popup[did=" + i + "] .pop_list list2[cid=" + j + "].active").text();
@@ -261,31 +263,50 @@ $(function () {
             department.push(obj);
         }
         if (!checked) {
-                warning("必须先确认注意事项哦~");
-                return ;
+            warning("必须先确认注意事项哦~");
+            return;
         }
-            var loading = "<div class='popup' style='height:200px;animation: pop2 0.7s'>" +
-                "<img src='../../img/apply/loading.gif'>" +
-                "<div>正在提交</div>" +
-                "</div>"
-            $("body").append(loading);
-            $.ajax({
-                url: "/common/uploadToken",
-                method: "get",
-                data: {
-                    type: "image"
-                },
-                success: function (data) {
-                    //console.log(data);
-                    var form = new FormData(document.getElementById("formfile"));
-                    $.ajax({
-                        url: "http://up-z2.qiniu.com?token=" + data.token,
-                        type: "post",
-                        data: form,
-                        processData: false,
-                        contentType: false,
-                        success: function (data) {
-                            window.test = {
+        var loading = "<div class='popup' style='height:200px;animation: pop2 0.7s'>" +
+            "<img src='../../img/apply/loading.gif'>" +
+            "<div>正在提交</div>" +
+            "</div>"
+        $("body").append(loading);
+        $.ajax({
+            url: "/common/uploadToken",
+            method: "get",
+            data: {
+                type: "image"
+            },
+            success: function (data) {
+                //console.log(data);
+                var form = new FormData(document.getElementById("formfile"));
+                $.ajax({
+                    url: "http://up-z2.qiniu.com?token=" + data.token,
+                    type: "post",
+                    data: form,
+                    processData: false,
+                    contentType: false,
+                    success: function (data) {
+                        window.test = {
+                            clubID: clubID,
+                            club: club,
+                            pic_url: data.url,
+                            name: name,
+                            studentID: sid,
+                            gender: sex,
+                            college: academy,
+                            major: major,
+                            intro: intro,
+                            tel: long,
+                            short_tel: short,
+                            qq: qq,
+                            department: department
+                        };
+                        $.ajax({
+                            url: "/reg",
+                            contentType: "application/json",
+                            method: "post",
+                            data: JSON.stringify({
                                 clubID: clubID,
                                 club: club,
                                 pic_url: data.url,
@@ -299,43 +320,24 @@ $(function () {
                                 short_tel: short,
                                 qq: qq,
                                 department: department
-                            };
-                            $.ajax({
-                                url: "/reg",
-                                contentType: "application/json",
-                                method: "post",
-                                data: JSON.stringify({
-                                    clubID:clubID,
-                                    club: club,
-                                    pic_url: data.url,
-                                    name: name,
-                                    studentID: sid,
-                                    gender: sex,
-                                    college: academy,
-                                    major: major,
-                                    intro: intro,
-                                    tel: long,
-                                    short_tel: short,
-                                    qq: qq,
-                                    department: department
-                                }),
-                                success:function () {
-                                    $(".popup").remove();
-                                    warning("上传成功 感谢您的报名~");
-                                },
-                                error: function (reg) {
-                                    $(".popup").remove();
-                                    warning(reg.responseText);
-                                }
-                            })
-                        },
-                        error: function () {
-                            $(".popup").remove();
-                            warning("图片上传失败 请检查网络");
-                        }
-                    });
-                }
-            });
+                            }),
+                            success: function () {
+                                $(".popup").remove();
+                                warning("上传成功 感谢您的报名~");
+                            },
+                            error: function (reg) {
+                                $(".popup").remove();
+                                warning(reg.responseText);
+                            }
+                        })
+                    },
+                    error: function () {
+                        $(".popup").remove();
+                        warning("图片上传失败 请检查网络");
+                    }
+                });
+            }
+        });
     })
 
 })

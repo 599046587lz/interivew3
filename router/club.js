@@ -6,14 +6,19 @@ let express = require('express');
 let router = express.Router();
 let Club = require('../modules/club');
 let Interviewee = require('../modules/interviewee');
-let r = require('../utils/middleware');
-
+let mid = require('../utils/middleware');
+let Joi = require('Joi');
 /**
  * @params String user 登录用户名
  * @params String password 密码，单词md5
  * @return 204
  */
-router.post('/login', wrap(async function (req, res) {
+router.post('/login', mid.checkFormat(function() {
+    return Joi.object().keys({
+        user: Joi.string(),
+        password: Joi.string()
+    })
+}), wrap(async function (req, res) {
     let user = req.param('user');
     let password = req.param('password');
     if (!user || !password) {
@@ -42,7 +47,7 @@ router.post('/setIdentify', function (req, res) {
 });
 
 
-router.get('/logout', r.checkLogin, function (req, res) {
+router.get('/logout', mid.checkLogin, function (req, res) {
     req.session.destroy(function () {
         res.send(204);
     });
@@ -166,7 +171,11 @@ router.get('/export', wrap(async function (req, res) {
     res.json(result);
 }));
 
-router.get('/clubInfo', function (req, res) {
+router.get('/clubInfo', mid.checkFormat(function() {
+    return Joi.object().keys({
+        clubId: Joi.number()
+    })
+}), function (req, res) {
     let cid = req.param('clubId');
     (async() => {
         try {

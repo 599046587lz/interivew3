@@ -94,7 +94,11 @@ router.get('/profile', wrap(async function (req, res) {
  */
 router.post('/profile', mid.checkFormat(function () {
     return Joi.object().keys({
-        departments: Joi.array(),
+        departments: Joi.array().items(Joi.object().keys({
+            did: Joi.number(),
+            name: Joi.string(),
+            location: Joi.string()
+        })),
         name: Joi.string(),
         password: Joi.string(),
         logo: Joi.string(),
@@ -140,13 +144,13 @@ router.get('/extra', wrap(async function (req, res) {
  * 测试通过
  */
 
-router.get('/export', function () {
+router.get('/export', mid.checkFormat(function () {
     return Joi.object().keys({
         did: Joi.number()
     })
-}, wrap(async function (req, res) {
-    let cid = req.session['cid'],
-        did = req.param('did');
+}), wrap(async function (req, res) {
+    let cid = req.session['cid'];
+    let did = req.param('did');
 
     if (!cid || !did) {
         throw new Error('参数不完整');
@@ -167,12 +171,12 @@ router.get('/clubInfo', mid.checkFormat(function () {
     return res.json(result);
 }));
 
-router.post('/verifyInfo', function() {
+router.post('/verifyInfo', mid.checkFormat(function() {
     return Joi.object().keys({
         clubId: Joi.number(),
-        name: Joi.number()
+        name: Joi.string()
     })
-}, wrap(async function (req, res) {
+}), wrap(async function (req, res) {
     let info = {};
     info.cid = req.body.clubId;
     info.name = req.body.name;

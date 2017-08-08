@@ -1,4 +1,4 @@
-let request = require('request');
+let rp = require('request-promise');
 let iconv = require('iconv-lite');
 let unit = require('../static/lib/unit.json');
 let IntervieweeModel = require('../models').Interviewee;
@@ -9,7 +9,7 @@ exports.sign = function (sid, cid) {
             sid: sid,
             cid: cid
         }).then(result => {
-            if (result.sighTime) resolve(204);
+            if (result.signTime) return '该学生已经签到';
             result.sighTime = new Date();
             result.save();
             return result;
@@ -108,7 +108,7 @@ exports.recommend = function (cid, sid, departmentId) {
             cid: cid,
             sid: sid
         }).then(result => {
-            if (result.volunteer.indexOf(departmentId) >= 0) reject(new Error('不能重复推荐部门'));
+            if (result.volunteer.indexOf(departmentId) >= 0) throw new Error('不能重复推荐部门');
             result.volunteer.push(departmentId);
             result.save();
             return '更新成功';
@@ -148,7 +148,7 @@ exports.skip = function (cid, sid, did) {
             cid: cid,
             volunteer: did
         };
-        IntervieweeModel.findOne(data).then(result => {
+        return IntervieweeModel.findOne(data).then(result => {
             result.signTime = new Date();
             result.busy = false;
             result.volunteer.splice(result.volunteer.indexOf(did), 1);
@@ -159,23 +159,31 @@ exports.skip = function (cid, sid, did) {
 
 
 exports.getStuByApi = function (sid) {
-    request.get('https://api.hdu.edu.cn/person/student/' + sid, {
-        encoding: null,
+    let options = {
+        uri: 'https://api.hdu.edu.cn/person/student/' + sid,
         headers: {
             'X-Access-Token': config.token
-        }
-    }).then(body => {
-        body = JSON.parse(body.toString());
-        if (!body.STAFFID) reject(new Error('不存在该学生'));
-        let result = {
-            sid: sid,
-            name: body.STAFFNAME,
-            major: body.MAJORCODE + "(" + unit[body.UNITCODE] + ")"
-        };
-        return result;
-    }).catch(err => {
-        return (new Error('API访问错误'));
+        },
+        encoding: null
+    };
+
+    return rp(options).then(result => {
+        console.log(result);
     });
+
+    //     .then(body => {
+    //     console.log(body);
+    //     body = JSON.parse(body.toString());
+    //     if (!body.STAFFID) reject(new Error('不存在该学生'));
+    //     let result = {
+    //         sid: sid,
+    //         name: body.STAFFNAME,
+    //         major: body.MAJORCODE + "(" + unit[body.UNITCODE] + ")"
+    //     };
+    //     return result;
+    // }).catch(err => {
+    //     return (new Error('API访问错误'));
+    // });
 };
 
 exports.addInterviewee = function (data, cid) {

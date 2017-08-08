@@ -20,6 +20,7 @@
     "officegen": "~0.4.5",
     "qiniu": "^7.0.5",
     "request": "~2.81.0",
+    "request-promise": "^4.2.1",
     "socket.io": "^1.7.4",
     "static-favicon": "~1.0.0",
     "xlsx": "~0.10.7"

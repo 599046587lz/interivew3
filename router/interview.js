@@ -18,9 +18,9 @@ router.post('/recommend', mid.checkFormat(function() {
         departmentId: Joi.number()
     })
 }), wrap(async function(req, res) {
-    let sid = req.param('sid');
-    let departmentId = req.param('departmentId');
-    let cid = req.session['cid'];
+    let sid = req.body.sid;
+    let departmentId = req.body.departmentId;
+    let cid = req.session.cid;
 
     let result = await Interviewee.recommend(cid, sid, departmentId);
     res.send(204);
@@ -34,15 +34,15 @@ router.post('/rate', mid.checkFormat(function() {
     return Joi.object().keys({
         sid: Joi.number(),
         score: Joi.number(),
-        comment: Joi.string(),
+        comment: Joi.string()
     })
 }), wrap(async function(req, res) {
-    let sid = req.param('sid');
-    let score = req.param('score');
-    let comment = req.param('comment');
-    let did = req.session['did'];
-    let interviewer = req.session['interviewer'];
-    let cid = req.session['cid'];
+    let sid = req.body.sid;
+    let score = req.body.score;
+    let comment = req.body.comment;
+    let did = req.session.did;
+    let interviewer = req.session.interviewer;
+    let cid = req.session.cid;
 
     let result = await Interviewee.rateInterviewee(cid, sid, score, comment, did, interviewer);
 
@@ -58,9 +58,9 @@ router.get('/call', mid.checkFormat(function() {
         sid: Joi.number()
     })
 }), wrap(async function(req, res) {
-    let department = req.session['did'];
+    let department = req.session.did;
     let sid = req.param('sid');
-    let cid = req.session['did'];
+    let cid = req.session.did;
 
     if(!sid) {
        let result = await Interviewee.getNextInterviewee(cid, department);
@@ -92,9 +92,8 @@ router.get('/call', mid.checkFormat(function() {
  */
 
 router.get('/queue', wrap(async function(req, res) {
-    let cid = req.session['cid'];
-    let did = req.session['did'];
-
+    let cid = req.session.cid;
+    let did = req.session.did;
 
     let result = await Interviewee.getDepartmentQueueLength(cid, did);
 
@@ -112,16 +111,16 @@ router.post('/skip', mid.checkFormat(function() {
         sid: Joi.number()
     })
 }), wrap(async function(req, res) {
-    let cid = req.session['cid'];
-    let sid = req.param('sid');
-    let did = req.session['did'];
+    let cid = req.session.cid;
+    let sid = req.body.sid;
+    let did = req.session.did;
 
     if(!cid || !sid) {
         throw new Error('参数不完整');
     }
     let result = await Interviewee.skip(cid, sid, did);
 
-    res.send(204);
+    res.send(200, result);
 }));
 
 module.exports = router;

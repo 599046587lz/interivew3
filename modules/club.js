@@ -146,7 +146,7 @@ exports.update = function (cid, data) {
             cid: cid
         }, data)
         }).then(result => {
-            console.log(123);
+            return result;
     })
 };
 

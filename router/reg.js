@@ -1,7 +1,7 @@
-const express = require('express'),
-    student = require('../modules/student'),
-    image_save = require('../utils/image_save'),
-    club = require('../modules/club');
+let express = require('express');
+let student = require('../modules/student');
+let image_save = require('../utils/image_save');
+let club = require('../modules/club');
 
 let router = express.Router();
 

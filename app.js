@@ -17,10 +17,10 @@ let app = express();
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
+app.use(cookieParser());
 // app.use(favicon());
 app.use(logger('dev'));
 
-// app.use(cookieParser());
 app.use(mid.session());
 app.use(express.static(path.join(__dirname, 'public')));
 //报名系统注册入口

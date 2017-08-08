@@ -142,11 +142,11 @@ exports.update = function (cid, data) {
     return IntervieweeModel.remove({
         cid: cid
     }).then(result => {
-        clubModel.findOneAndUpdate({
+        return clubModel.findOneAndUpdate({
             cid: cid
-        }, data).then(result => {
-            return result;
-        })
+        }, data)
+        }).then(result => {
+            console.log(123);
     })
 };
 

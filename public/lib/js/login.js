@@ -21,7 +21,7 @@ $(function(){
 $(".button").click(function(){
 	var account  = $("[name=account]").val();
 	var password = $("[name=password]").val();
-	
+
 	$.ajax({
 		url  : baseURL + "/club/login",
 		type : 'post',

@@ -4,8 +4,9 @@
 let wrap = fn => (...args) => fn(...args).catch(args[2]);
 let express = require('express');
 let router = express.Router();
-
 let Interviewee = require("../modules/interviewee");
+let Joi = require('Joi');
+let mid = require('../utils/middleware');
 /**
  * @params sid
  * @return Object {status: 'success'|'selectDep'}
@@ -14,12 +15,14 @@ let Interviewee = require("../modules/interviewee");
  * 测试通过
  */
 
-router.get('/sign', wrap(async function(req, res) {
-	let cid = req.param('cid'),
-		sid = req.param('sid');
-	if(!cid || !sid) {
-		throw new Error('参数不完整');
-	}
+router.get('/sign', mid.checkFormat(function() {
+	return Joi.object().keys({
+		cid: Joi.number(),
+		sid: Joi.number()
+	})
+}), wrap(async function(req, res) {
+	let cid = req.param('cid');
+	let sid = req.param('sid');
 
 	let result = await Interviewee.sign(sid, cid);
 
@@ -35,13 +38,17 @@ router.get('/sign', wrap(async function(req, res) {
  * 未测试(需学校内网)
  */
 
-router.post('/selectDep', wrap(async function(req, res) {
-    let sid = req.param('sid'),
-		did = req.param('did'),
-		cid = req.session['cid'];
-    if(!cid) {
-    	throw new Error('参数不完整');
-	}
+router.post('/selectDep', mid.checkFormat(function() {
+	return Joi.object().keys({
+		sid: Joi.number(),
+		did: Joi.number(),
+		cid: Joi.number()
+	})
+}), wrap(async function(req, res) {
+    let sid = req.param('sid');
+	let did = req.param('did');
+	let cid = req.param('cid');
+	// let cid = req.session['cid'];
 
 	let result = await Interviewee.selectDep(sid, cid, did);
     res.json(200, result);
@@ -51,7 +58,16 @@ router.post('/selectDep', wrap(async function(req, res) {
  * 测试成功
  */
 
-router.post('/addDep', wrap(async function(req, res) {
+router.post('/addDep', mid.checkFormat(function() {
+	return Joi.object().keys({
+		sid: Joi.number(),
+		did: Joi.number(),
+		sex: Joi.number(),
+		name: Joi.string(),
+		qq: Joi.number(),
+		phone: Joi.number()
+	})
+}), wrap(async function(req, res) {
 	let cid = req.session['cid'];
 	if(!cid) throw new Error('参数不完整');
 

@@ -13,17 +13,15 @@ let Joi = require('Joi');
  * @params String password 密码，单词md5
  * @return 204
  */
-router.post('/login', mid.checkFormat(function() {
+router.post('/login', mid.checkFormat(function () {
     return Joi.object().keys({
-        user: Joi.string(),
-        password: Joi.string()
+        user: Joi.string().required(),
+        password: Joi.string().required()
     })
 }), wrap(async function (req, res) {
     let user = req.param('user');
     let password = req.param('password');
-    if (!user || !password) {
-        throw new Error('信息不完整');
-    }
+
     let result = await Club.login(user, password);
     req.session.club = result.name;
     req.session.cid = result.cid;
@@ -36,7 +34,7 @@ router.post('/login', mid.checkFormat(function() {
  * @return HTTP 204
  */
 router.post('/setIdentify', function (req, res) {
-    let name = req.session['club'];
+    let name = req.session.club;
     if (!name) {
         return res.send(403);
     }
@@ -94,7 +92,15 @@ router.get('/profile', wrap(async function (req, res) {
  * @return Object {status: 'success'|'failed'}
  * 测试成功
  */
-router.post('/profile', wrap(async function (req, res) {
+router.post('/profile', mid.checkFormat(function () {
+    return Joi.object().keys({
+        departments: Joi.array(),
+        name: Joi.string(),
+        password: Joi.string(),
+        logo: Joi.string(),
+        maxDep: Joi.number()
+    })
+}), wrap(async function (req, res) {
     let cid = req.session['cid'];
     if (!cid) throw new Error('参数不完整');
     let data = {};
@@ -109,32 +115,7 @@ router.post('/profile', wrap(async function (req, res) {
     res.send(204);
 }));
 
-/**
- *  @return array fields
- */
-router.get('/extra', function (req, res) {
-    let cid = req.session['cid'];
-    if (!cid) {
-        res.send(403);
-    }
-    Interviewee.getIntervieweeBySid({$ne: null}, cid, function (err, doc) {
-        if (err) {
-            res.json(500, err);
-        } else {
-            if (!doc) {
-                return res.send(404);
-            }
-            let extra = doc.extra;
-            let fields = [];
-            for (let i in extra) {
-                if (extra.hasOwnProperty(i)) {
-                    fields.push(i);
-                }
-            }
-            res.json(fields);
-        }
-    })
-});
+
 /**
  * ??未测试
  */
@@ -159,7 +140,11 @@ router.get('/extra', wrap(async function (req, res) {
  * 测试通过
  */
 
-router.get('/export', wrap(async function (req, res) {
+router.get('/export', function () {
+    return Joi.object().keys({
+        did: Joi.number()
+    })
+}, wrap(async function (req, res) {
     let cid = req.session['cid'],
         did = req.param('did');
 
@@ -171,38 +156,33 @@ router.get('/export', wrap(async function (req, res) {
     res.json(result);
 }));
 
-router.get('/clubInfo', mid.checkFormat(function() {
+router.get('/clubInfo', mid.checkFormat(function () {
     return Joi.object().keys({
         clubId: Joi.number()
     })
-}), function (req, res) {
+}), wrap(async function (req, res) {
     let cid = req.param('clubId');
-    (async() => {
-        try {
-            let result = await Club.getClubInfo(cid);
+    let result = await Club.getClubInfo(cid);
 
-            return res.json(result);
-        } catch (err) {
-            return res.send(403);
-        }
-    })()
+    return res.json(result);
+}));
 
-});
-
-router.post('/verifyInfo', function (req, res) {
+router.post('/verifyInfo', function() {
+    return Joi.object().keys({
+        clubId: Joi.number(),
+        name: Joi.number()
+    })
+}, wrap(async function (req, res) {
     let info = {};
     info.cid = req.body.clubId;
     info.name = req.body.name;
 
-    (async() => {
-        try {
-            let result = await Club.verifyInfo(info);
-            return res.json(result);
-        } catch (err) {
-            return res.send(403, err);
-        }
-    })()
-});
+    let result = await Club.verifyInfo(info);
+    return res.json(result);
+}));
+/**
+ * 临时接口
+ */
 
 router.post('/insertInfo', wrap(async function (req, res) {
     let data = {};

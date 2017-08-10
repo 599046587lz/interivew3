@@ -3,11 +3,11 @@
  */
 let mongoose = require('mongoose');
 let config = require('./config');
-mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://' + config.db.host + '/' + config.db.db,{useMongoClient:true});
+// mongoose.Promise = global.Promise;
+mongoose.connect('mongodb://' + config.db.host + '/' + config.db.db, {useMongoClient: true});
 
 let Column = new mongoose.Schema({
-   columnName: String
+    columnName: String
 });
 
 let Department = new mongoose.Schema({
@@ -39,7 +39,7 @@ let Interviewee = new mongoose.Schema({
     sid: Number,
     cid: Number,
     name: {
-        type:String,
+        type: String,
         default: ''
     },
     sex: {
@@ -47,24 +47,24 @@ let Interviewee = new mongoose.Schema({
         default: 2   //0女1男2秀吉
     },
     major: {
-        type:String,
+        type: String,
         default: ''
     },
     phone: {
-        type:String,
+        type: String,
         default: ''
     },
     email: {
-        type:String,
+        type: String,
         default: ''
     },
     qq: {
-        type:String,
+        type: String,
         default: ''
     },
     volunteer: [Number],
     notion: {
-        type:String,
+        type: String,
         default: ''
     },
     signTime: Date,
@@ -75,10 +75,10 @@ let Interviewee = new mongoose.Schema({
         type: Boolean,
         default: false
     }   //是否正在面试
-/*    calling:{
-        type: Boolean,
-        default: false
-    } //是否正在和叫号大厅传输该学生信息*/
+    /*    calling:{
+            type: Boolean,
+            default: false
+        } //是否正在和叫号大厅传输该学生信息*/
 });
 
 
@@ -98,12 +98,20 @@ let studentSchema = new mongoose.Schema({
     studentID: {
         type: String,
         required: true,
-        regExp: /^1[0-9]{7}$/
+        validate:
+            {
+                validator: /^1[0-9]{7}$/,
+                message: "请填写正确的学号"
+            }
     },
     gender: {
-        type: String,
+        type: Number,
         required: true,
-        enum: ['男', '女']
+        enum:
+            {
+                values: [0,1],
+                message: "请选择性别"
+            }
     },
     college: {
         type: String,
@@ -124,16 +132,28 @@ let studentSchema = new mongoose.Schema({
     tel: {
         type: String,
         required: true,
-        regExp: /^(1[34578])[0-9]{9}$/
+        validate:
+            {
+                validator: /^(1[34578])[0-9]{9}$/,
+                message: '请填写正确的电话号码'
+            }
     },
     qq: {
         type: String,
         required: true,
-        regExp: /[1-9][0-9]{4,}/
+        validate:
+            {
+                validator: /[1-9][0-9]{4,}/,
+                message: '请填写正确的QQ号'
+            }
     },
     short_tel: {
         type: String,
-        regExp: /[0-9]{6}$/
+        validate:
+            {
+                validator: /[0-9]{6}$/,
+                message: '请填写正确的短号'
+            }
     },
     pic_url: {
         type: String,
@@ -141,7 +161,7 @@ let studentSchema = new mongoose.Schema({
     },
     image: {
         type: String,
-        required:true
+        required: true
     }
 
 });

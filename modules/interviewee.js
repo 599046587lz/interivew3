@@ -2,53 +2,40 @@ let request = require('request');
 let iconv = require('iconv-lite');
 let unit = require('../static/lib/unit.json');
 let IntervieweeModel = require('../models').Interviewee;
-
+let config = require('../config');
 
 exports.sign = function (sid, cid) {
-    return new Promise(function (resolve, reject) {
-        IntervieweeModel.findOne({
+    return IntervieweeModel.findOne({
             sid: sid,
             cid: cid
         }).then(result => {
             if (result.sighTime) resolve(204);
             result.sighTime = new Date();
             result.save();
-            resolve(result);
-        }).catch(err => {
-            reject(err);
+            return result;
         })
-    })
 };
 
 
 exports.selectDep = function (sid, cid, did) {
-    return new Promise(function(resolve, reject) {
-        exports.getStuByApi(sid).then(result => {
+       return exports.getStuByApi(sid).then(result => {
             result.volunteer = did;
             result.sighTime = new Date();
             exports.addInterviewee(result, cid);
-            resolve(result);
-        }).catch(err => {
-            reject(new Error('数据库操作错误'));
-        })
-    });
+            return result;
+        });
 };
 
 
 exports.addDep = function(cid, interviewee) {
-    return new Promise(function(resolve, reject) {
-        exports.addInterviewee(interviewee, cid).then(result => {
-            resolve();
-        }).catch(err => {
-            reject(new Error('数据库访问错误'));
+       return exports.addInterviewee(interviewee, cid).then(result => {
+            return true;
         })
-    })
 };
 
 
 exports.getNextInterviewee = function (cid, did) {
-    return new Promise(function (resolve, reject) {
-        IntervieweeModel.findOne({
+        return IntervieweeModel.findOne({
             cid: cid,
             volunteer: did,
             busy: false,
@@ -61,54 +48,42 @@ exports.getNextInterviewee = function (cid, did) {
         }).then(result => {
             result.busy = true;
             result.save();
-            resolve(result);
-        }).catch(err => {
-            reject(new Error('数据库访问错误'));
-        })
-    });
+            return result;
+        });
 };
 
 
 
 exports.recoverInterviewee = function (sid, cid, did) {
-    return new Promise(function (resolve, reject) {
         let data = {
             sid: sid,
             cid: cid,
             volunteer: did
         };
-        IntervieweeModel.findOne(data).then(result => {
+        return IntervieweeModel.findOne(data).then(result => {
             result.busy = false;
             result.save();
-            resolve();
-        }).catch(err => {
-            reject(new Error('数据库访问错误'));
+            return true;
         })
-    })
 };
 
 
 exports.getSpecifyInterviewee = function (sid, cid, did) {
-    return new Promise(function (resolve, reject) {
         let data = {
             sid: sid,
             cid: cid,
             volunteer: did
         };
-        IntervieweeModel.findOne(data).then(result => {
+        return IntervieweeModel.findOne(data).then(result => {
             if (result.done.indexOf(did * 1) != -1) reject(new Error('该同学已进行过面试'));
             result.busy = true;
             result.save();
-            resolve(result);
-        }).catch(err => {
-            reject(new Error('数据库访问错误'));
+            return result;
         })
-    })
 };
 
 exports.rateInterviewee = function (cid, sid, score, comment, did, interviewer) {
-    return new Promise(function (resolve, reject) {
-        IntervieweeModel.findOne({
+        return IntervieweeModel.findOne({
             cid: cid,
             sid: sid
         }).then(result => {
@@ -123,68 +98,51 @@ exports.rateInterviewee = function (cid, sid, score, comment, did, interviewer) 
             result.busy = false;
             result.signTime = new Date();
             result.save();
-            resolve('评论成功');
-        }).catch(err => {
-            reject(new Error('数据库访问错误'));
-        })
-    })
+            return '评论成功';
+        });
 };
 
 
 exports.recommend = function (cid, sid, departmentId) {
-    return new Promise(function (resolve, reject) {
-        IntervieweeModel.findOne({
+        return IntervieweeModel.findOne({
             cid: cid,
             sid: sid
         }).then(result => {
             if (result.volunteer.indexOf(departmentId) >= 0) reject(new Error('不能重复推荐部门'));
             result.volunteer.push(departmentId);
             result.save();
-
-            resolve('更新成功');
-        }).catch(err => {
-            reject(new Error('数据库访问错误'));
+            return '更新成功';
         })
-    })
 };
 
 
 
 exports.getDepartmentQueueLength = function (cid, did) {
-    return new Promise(function (resolve, reject) {
-        IntervieweeModel.find({
+        return IntervieweeModel.find({
             cid: cid,
             volunteer: did,
             busy: {$ne: true},
             signTime: {$ne: null},
             done: {$ne: did}
         }).then(result => {
-            resolve(result.length);
-        }).catch(err => {
-            reject(new Error('数据库访问错误'));
-        })
-    })
+            return result.length;
+        });
 };
 
 
 
 exports.getIntervieweeBySid = function (sid, cid) {
-    return new Promise(function(resolve, reject) {
         let data = {
             sid: sid,
             cid: cid,
         };
-        IntervieweeModel.findOne(data).then(result => {
-            resolve(result);
-        }).catch(err => {
-            reject(new Error('数据库访问错误'));
+        return IntervieweeModel.findOne(data).then(result => {
+            return result;
         })
-    })
 };
 
 
 exports.skip = function (cid, sid, did) {
-    return new Promise(function (resolve, reject) {
         let data = {
             sid: sid,
             cid: cid,
@@ -195,11 +153,8 @@ exports.skip = function (cid, sid, did) {
             result.busy = false;
             result.volunteer.splice(result.volunteer.indexOf(did), 1);
             result.save();
-            resolve('跳过成功');
-        }).catch(err => {
-            reject(new Error('数据库访问错误'));
+            return '跳过成功';
         })
-    })
 };
 
 
@@ -207,7 +162,7 @@ exports.getStuByApi = function (sid) {
     request.get('https://api.hdu.edu.cn/person/student/' + sid, {
         encoding: null,
         headers: {
-            'X-Access-Token': global.token
+            'X-Access-Token': config.token
         }
     }).then(body => {
         body = JSON.parse(body.toString());

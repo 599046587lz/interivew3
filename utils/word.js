@@ -6,7 +6,6 @@ const express = require('express'),
 
 exports.writeWord = function ( data ) {
 
-    try {
         let docx = officegen({
             'type': 'docx',
             'creator': 'Redhome Studio'
@@ -29,7 +28,7 @@ exports.writeWord = function ( data ) {
         });
 
         var pObj = docx.createP();
-        pObj.addImage(path.resolve('files/image/', data.image));
+        pObj.addImage(path.resolve('../files/image/', data.image));
 
         var pObj = docx.createP();
         pObj.addText('... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ...', {
@@ -53,7 +52,7 @@ exports.writeWord = function ( data ) {
         });
 
         var pObj = docx.createP();
-        pObj.addText('性别：' + data.gender, {
+        pObj.addText('性别：' + data.gender>0?'男':'女' , {
             font_face: 'Arial',
             font_size: 16
 
@@ -110,17 +109,14 @@ exports.writeWord = function ( data ) {
 
         let name = data.name + '-' + data._id;
 
-        let out = fs.createWriteStream('files/file/' + data.clubID + '/' + name + '.docx');
+        let out = fs.createWriteStream('../files/file/' + data.clubID + '/' + name + '.docx');
 
-        docx.generate(out, function (err) {
-            if(err) throw err;
+        docx.generate(out, function (Error) {
+            if(Error) throw Error;
 
         });
 
-        out.on('error', function (err) {
-            if(err) throw err;
+        out.on('error', function (Error) {
+            throw Error;
         });
-    }catch(err){
-        cosole.log(err);
-    }
 };

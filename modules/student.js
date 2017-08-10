@@ -1,18 +1,12 @@
 const studentModel = require('../models').Student;
 
 exports.queryByclubAll = function (clubID) {
-    return new Promise(function (resolve, reject) {
-        studentModel.find({'code': code}, function (err, res) {
-            if (err) {
-                reject(err);
-            }
-            else resolve(res);
-        });
-    })
+
+    return studentModel.find({'clubID': clubID}).then(result =>{return(result);});
+
 };
 
 exports.addStudent = function (data) {
-    return new Promise(function (resolve, reject) {
 
         let Student = new studentModel({
             club: data.club,
@@ -31,10 +25,7 @@ exports.addStudent = function (data) {
             image: data.image
         });
 
-        Student.save().then(result => {
-            resolve(result);
-        }).catch(err => {
-            reject(err);
-        })
-    })
+         Student.save().then(result => {
+            return("报名成功！");
+    });
 };

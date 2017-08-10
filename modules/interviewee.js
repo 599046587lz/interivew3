@@ -167,23 +167,19 @@ exports.getStuByApi = function (sid) {
         encoding: null
     };
 
-    return rp(options).then(result => {
-        console.log(result);
+    return rp(options).then(body => {
+        console.log(body);
+        body = JSON.parse(body.toString());
+        if (!body.STAFFID) reject(new Error('不存在该学生'));
+        let result = {
+            sid: sid,
+            name: body.STAFFNAME,
+            major: body.MAJORCODE + "(" + unit[body.UNITCODE] + ")"
+        };
+        return result;
+    }).catch(err => {
+        return (new Error('API访问错误'));
     });
-
-    //     .then(body => {
-    //     console.log(body);
-    //     body = JSON.parse(body.toString());
-    //     if (!body.STAFFID) reject(new Error('不存在该学生'));
-    //     let result = {
-    //         sid: sid,
-    //         name: body.STAFFNAME,
-    //         major: body.MAJORCODE + "(" + unit[body.UNITCODE] + ")"
-    //     };
-    //     return result;
-    // }).catch(err => {
-    //     return (new Error('API访问错误'));
-    // });
 };
 
 exports.addInterviewee = function (data, cid) {

@@ -2,29 +2,41 @@ let express = require('express');
 let student = require('../modules/student');
 let image_save = require('../utils/image_save');
 let club = require('../modules/club');
-
+let mid = require('../utils/middleware');
 let router = express.Router();
+let Joi = require('Joi');
+
 
 let wrap = fn => (...args) => fn(...args).catch(args[2]);
 
-router.post('/', wrap(async function (req, res, next) {
-        let data = req.body;
-        let result;
-        if (!data || !!Object.keys(data).length == 0) throw new Error('数据丢包，请重新输入！');
-        else {
-            let info = {};
+router.post('/', mid.checkFormat(function() {
+    return Joi.object().keys({
+        club: Joi.string().required(),
+        clubID: Joi.number().required(),
+        name: Joi.string().required(),
+        studentID: Joi.number().required(),
+        gender: Joi.number().required(),
+        college: Joi.string().required(),
+        major: Joi.string().required(),
+        department: Joi.string().required(),
+        intro: Joi.string().required(),
+        tel: Joi.number().required(),
+        qq: Joi.number().required(),
+        short_tel: Joi.number().required(),
+        pic_url: Joi.string().required(),
+    })
+}), wrap(async function(req, res) {
+    let data = req.body;
+    let info = {};
+    let fileName = Date.now() + '.jpg';
 
-            info.name = data.club;
-            info.cid = data.clubID;
-            result = await club.verifyInfo(info);
-            let filename = Date.now() + '.jpg';
-            let newfilename = 'new' + filename;
-            image_save.image_save(data.pic_url, filename, newfilename);
-            data.image = newfilename;
-            result = await student.addStudent(data);
+    info.club = data.club;
+    info.clubID = data.clubID;
+    await club.verifyInfo(info);
+    data.image = await image_save.image_save(data.pic_url, fileName);
 
-            res.send(result);
-        }
-    }
-));
+    let result = await student.addStudent(data);
+    res.send(200, result);
+
+}));
 module.exports = router;

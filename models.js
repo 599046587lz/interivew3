@@ -148,12 +148,7 @@ let studentSchema = new mongoose.Schema({
             }
     },
     short_tel: {
-        type: String,
-        validate:
-            {
-                validator: /[0-9]{6}$/,
-                message: '请填写正确的短号'
-            }
+        type: String
     },
     pic_url: {
         type: String,

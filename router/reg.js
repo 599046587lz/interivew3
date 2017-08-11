@@ -18,11 +18,14 @@ router.post('/', mid.checkFormat(function() {
         gender: Joi.number().required(),
         college: Joi.string().required(),
         major: Joi.string().required(),
-        department: Joi.string().required(),
+        department: Joi.array().items(Joi.object().keys({
+            column: Joi.array().items(Joi.string()),
+            departname: Joi.string()
+        })).required(),
         intro: Joi.string().required(),
         tel: Joi.number().required(),
         qq: Joi.number().required(),
-        short_tel: Joi.number().required(),
+        short_tel: Joi.number(),
         pic_url: Joi.string().required(),
     })
 }), wrap(async function(req, res) {

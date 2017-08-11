@@ -121,12 +121,13 @@ $(function () {
         }
     });
 
+    //弹窗的关闭按钮
     $container.on("click", ".close", function () {
         var did = $(this).parent().attr('did');
         $("list1[did=" + did + "]").click();
     });
 
-    ///click
+    //二级标签点击
     $container.on("click", "list2", function () {
         var active = $(this).hasClass("active");
         var did = $(this).parent().parent().attr("did");
@@ -135,7 +136,7 @@ $(function () {
             $(this).removeClass("active");
             $list1.removeClass("active");
             depart--;
-            //column sum should not leap 20!!
+            //二级标签不不能超过20
             for (var m = 0; m < 20; m++) {
                 if ($(this).parent().find("list2[cid=" + m + "]").hasClass("active")) {
                     $list1.addClass("active");
@@ -159,7 +160,7 @@ $(function () {
         }
     });
 
-    //pic preview
+    //图片预览
     $pic.on("click", function () {
         $picfile.click();
     });
@@ -169,7 +170,7 @@ $(function () {
             $pic.css("background-image", "url('" + objUrl + "')");
     })
 
-    //gender pick
+    //性别选择
     $female.on("click", function () {
         var $icon = $(this).find(".icon");
         $icon.css("background-image", "url('../../img/apply/female_on.png')");
@@ -180,7 +181,7 @@ $(function () {
         $icon.css("background-image", "url('../img/apply/male_on.png')");
         $female.find(".icon").css("background-image", "url('../../img/apply/female_off.png')");
     })
-    //alarm
+    //注意事项
     $check.iCheck({
         checkboxClass: 'icheckbox_flat-green',
         radioClass: 'iradio_flat-green'
@@ -221,6 +222,42 @@ $(function () {
         data.department = department;
     }
 
+    function sendFinalData(data){
+        delete data.check;
+        console.log(data);
+        $.ajax({
+            url: "/reg",
+            contentType: "application/json",
+            method: "post",
+            data: data,
+            success:function () {
+                $(".popup").addClass('hide');
+                warning("上传成功 感谢您的报名~");
+            },
+            error: function (reg) {
+                $(".popup").addClass('hide');
+                warning(reg.responseText);
+            }
+        })
+    }
+    function sendPicData(data,form,finalData){
+        $.ajax({
+            url: "http://up-z2.qiniu.com?token=" + data.token,
+            type: "post",
+            data: form,
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                finalData.pic_url=data.url;
+                sendFinalData(finalData);
+            },
+            error: function () {
+                $(".popup").remove();
+                warning("图片上传失败 请检查网络");
+            }
+        });
+    }
+    //上传所有数据
     $submit.on('click', function () {
         var finalData = $data.serializeObject();
         if (!finalData.check) {
@@ -243,35 +280,7 @@ $(function () {
             },
             success: function (data) {
                 var form = new FormData(document.getElementById("formfile"));
-                $.ajax({
-                    url: "http://up-z2.qiniu.com?token=" + data.token,
-                    type: "post",
-                    data: form,
-                    processData: false,
-                    contentType: false,
-                    success: function (data) {
-                        finalData.pic_url=data.url;
-                        console.log(finalData);
-                        $.ajax({
-                            url: "/reg",
-                            contentType: "application/json",
-                            method: "post",
-                            data: finalData,
-                            success:function () {
-                                $(".popup").remove();
-                                warning("上传成功 感谢您的报名~");
-                            },
-                            error: function (reg) {
-                                $(".popup").remove();
-                                warning(reg.responseText);
-                            }
-                        })
-                    },
-                    error: function () {
-                        $(".popup").remove();
-                        warning("图片上传失败 请检查网络");
-                    }
-                });
+                sendPicData(data,form,finalData);
             }
         });
     })

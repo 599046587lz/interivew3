@@ -231,7 +231,8 @@ $(function () {
 
     function sendFinalData(data){
         delete data.check;
-        console.log(data);
+        if(!data.short_tel)data.short_tel=undefined;
+        //console.log(data);
         $.ajax({
             url: "/reg",
             contentType: "application/json",

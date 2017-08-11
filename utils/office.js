@@ -16,15 +16,30 @@ exports.writeExcel = function (dbData, clubID) {
             _data[i] = data;
         });
 
-
         let data = _data
             .map((v, i) => _headers.map((k, j) => Object.assign({}, {
                 v: v[k],
                 position: String.fromCharCode(65 + j) + (i + 2)
             })))
-            .reduce((prev, next) => prev.concat(next))
-            .reduce((prev, next) => Object.assign({}, prev, {[next.position]: {v: next.v}}), {});
-
+            .reduce((prev, next) => prev.concat(next));
+        // .reduce((prev, next) => Object.assign({}, prev, {[next.position]: {v: next.v}}));
+        let result = {};
+        data.forEach((e, i)=> {
+            if(e.position.charAt(0) == 'F') {
+                let array = [];
+                e.v.forEach(j => {
+                    if(j.column.length > 0) {
+                        j.column.forEach(k => {
+                            array.push(j.departname + '-' + k);
+                        })
+                    } else {
+                        array.push(j.departname);
+                    }
+                });
+                e.v = array;
+            }
+            result[e.position] = {v: e.v};
+        });
         let newheader = {
             A1: {v: '社团'},
             B1: {v: '姓名'},
@@ -38,7 +53,7 @@ exports.writeExcel = function (dbData, clubID) {
             J1: {v: '短号'}
         };
 
-        let output = Object.assign({}, newheader, data);
+        let output = Object.assign({}, newheader, result);
 
         let outputPos = Object.keys(output);
 
@@ -61,6 +76,16 @@ exports.writeWord = function (data) {
         let docx = officegen({
             'type': 'docx',
             'creator': 'Redhome Studio'
+        });
+        let department = [];
+        data.department.forEach(e => {
+            if(e.column.length > 0) {
+                e.column.forEach(i => {
+                    department.push(e.departname + '-' + i);
+                })
+            } else {
+                department.push(e.departname);
+            }
         });
 
         let title = '《' + data.club + '报名表》';
@@ -124,7 +149,7 @@ exports.writeWord = function (data) {
         });
 
         var pObj = docx.createP();
-        pObj.addText('部门：' + data.department, {
+        pObj.addText('部门：' + department, {
             font_face: 'Arial',
             font_size: 16
 
@@ -144,7 +169,7 @@ exports.writeWord = function (data) {
         });
 
         var pObj = docx.createP();
-        pObj.addText('短号：' + data.short_tel, {
+        pObj.addText('短号：' + (data.short_tel || '无'), {
             font_face: 'Arial',
             font_size: 16
 

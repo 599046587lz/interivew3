@@ -190,13 +190,13 @@ router.post('/verifyInfo', mid.checkFormat(function() {
 
 router.post('/insertInfo', wrap(async function (req, res) {
     let data = {};
-    data.cid = req.param('cid');
-    data.name = req.param('name');
-    data.logo = req.param('logo');
-    data.departments = req.param('departments');
-    data.interviewer = req.param('interviewer');
-    data.password = req.param('password');
-    data.maxDep = req.param('maxDep');
+    data.cid = req.body.cid;
+    data.name = req.body.name;
+    data.logo = req.body.logo;
+    data.departments = req.body.departments;
+    data.interviewer = req.body.interviewer;
+    data.password = req.body.password;
+    data.maxDep = req.body.maxDep;
 
     let result = await Club.insertInfo(data);
 

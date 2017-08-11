@@ -122,7 +122,10 @@ let studentSchema = new mongoose.Schema({
         required: true
     },
     department: {
-        type: String,
+        type: [{
+            column: [String],
+            departname: String
+        }],
         required: true
     },
     intro: {

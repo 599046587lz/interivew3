@@ -182,6 +182,7 @@ $(function () {
         $female.find(".icon").css("background-image", "url('../../img/apply/female_off.png')");
     })
     //注意事项
+    if(clubID==1){
     $check.iCheck({
         checkboxClass: 'icheckbox_flat-green',
         radioClass: 'iradio_flat-green'
@@ -204,6 +205,12 @@ $(function () {
             })
         }
     });
+    }
+    else{
+        $(".alarm").remove();
+        $(".alarm-content").remove();
+    }
+
 
     function getDepartResult(data) {
         var department = [];
@@ -229,7 +236,7 @@ $(function () {
             url: "/reg",
             contentType: "application/json",
             method: "post",
-            data: data,
+            data: JSON.stringify(data),
             success:function () {
                 $(".popup").addClass('hide');
                 warning("上传成功 感谢您的报名~");
@@ -260,7 +267,7 @@ $(function () {
     //上传所有数据
     $submit.on('click', function () {
         var finalData = $data.serializeObject();
-        if (!finalData.check) {
+        if (clubID==1&&!finalData.check) {
             warning("必须先确认注意事项哦~");
             return;
         }

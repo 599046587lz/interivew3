@@ -4,98 +4,108 @@
     <meta charset="UTF-8">
     <title>线上报名表</title>
     <meta charset='UTF-8'>
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
     <link rel="stylesheet" href="./lib/css/apply.css">
+    <link rel="stylesheet" href="./lib/css/common.css">
     <link rel="stylesheet" href="http://www.bootcss.com/p/icheck/skins/all.css?v=0.8.0.3">
-    <script src='./lib/js/jquery-1.11.1.min.js'></script>
-    <script src='./lib/js/apply.js'></script>
+    <script src='lib/js/jquery-3.2.0.min.js'></script>
+    <script src="lib/js/jquery.serializeObject2.0.3.min.js"></script>
+    <script src='lib/js/apply.js'></script>
     <script src="http://www.bootcss.com/p/icheck/js/jquery.icheck.min.js?v=0.8.0.3"></script>
 </head>
-<style>
-    form{
-        display: none;
-    }
-</style>
-
-
 <body>
-<!--上传头像-->
-<form action="" method="post" enctype="multipart/form-data" target="_self" id="formfile">
-    <input type="file" id="picfile" name="file">
-    <input type="submit">
-</form>
-<div id="student_pic"></div>
-<!--填写姓名-->
-<div class="item" id="sName">
-    <span class="header">姓名</span>
-    <input type="text">
-</div>
-<!--填写学号-->
-<div class="item" id="sId">
-    <span class="header">学号</span>
-    <input type="text" maxlength="8" numberOnly="true">
-</div>
-<!--选择性别-->
-<div class="sex_pick" sex="女">
-    <div class="sexPic" id="female">
-        <img src="/img/apply/female_on.png" alt="">
+<div class="container">
+    <!--上传头像-->
+    <form action="" method="post" enctype="multipart/form-data" target="_self" id="formfile" class="hide">
+        <input type="file" id="picfile" name="file">
+        <input type="submit">
+    </form>
+    <div class="pic"></div>
+    <form id='upload_data'>
+        <!--填写姓名-->
+        <div class="item name">
+            <span class="header">姓名</span>
+            <input type="text" name="name">
+        </div>
+        <!--填写学号-->
+        <div class="item studentID">
+            <span class="header">学号</span>
+            <input type="text" maxlength="8" name="studentID">
+        </div>
+        <!--选择性别-->
+        <div class="gender">
+            <label class="genderbox female" for="female">
+                <span class="icon"></span>
+                <input class="hide" checked="checked" type="radio" value="0" name="gender" id="female">
+            </label>
+            <label class="genderbox male" for="male">
+                <span class="icon"></span>
+                <input class="hide" type="radio" value="1" name="gender" id="male">
+            </label>
+        </div>
+        <!--填写学院-->
+        <div class="item college">
+            <span class="header">学院</span>
+            <input type="text" name="college">
+        </div>
+        <!--填写专业-->
+        <div class="item major">
+            <span class="header">专业</span>
+            <input type="text" name="major">
+        </div>
+        <!--选择部门-->
+        <div class="section">理想部门（最多可选三个部门）</div>
+        <div class="depart_list">
+            <!--注入部门列表-->
+        </div>
+        <!--填写个人简介-->
+        <div class="section">个人简介（最多50字）</div>
+        <div class="section intro">
+            <img src="./img/apply/pen.png" alt="">
+            <textarea placeholder="请简单描述一下自己..." maxlength="50" name="intro"></textarea>
+        </div>
+        <!--填写联系方式-->
+        <div class="section">联系方式</div>
+        <div class="item tel">
+            <span class="header">长号</span>
+            <input type="text" maxlength="11" name="tel">
+        </div>
+        <div class="item short_tel">
+            <span class="header">短号</span>
+            <input type="text" maxlength="6" name="short_tel">
+        </div>
+        <div class="item qq">
+            <span class="header">Q Q</span>
+            <input type="text" maxlength="11" name="qq">
+        </div>
+        <!--注意事项-->
+        <div class="section alarm">
+            <input id="check" type="checkbox" name="check">
+            <div class="note">注意事项</div>
+        </div>
+        <div class="section alarm-content">
+        <p>1.绝对不意气用事</p>
+        <p>2.绝对不漏判任何一件坏事</p>
+        <p>3.绝对裁判的公正漂亮</p>
+        <p>4.裁判机器人蜻蜓队长前来觐见</p>
     </div>
-    <div class="sexPic" id="male">
-        <img src="/img/apply/male_off.png" alt="">
-    </div>
+    </form>
+    <div id="submit">提 交</div>
+    <footer>
+        <p>红色家园网络工作室</p>
+    </footer>
 </div>
-<!--填写学院-->
-<div class="item" id="academy">
-    <span class="header">学院</span>
-    <input type="text">
-</div>
-<!--填写专业-->
-<div class="item" id="major">
-    <span class="header">专业</span>
-    <input type="text">
-</div>
-<!--选择部门-->
-<div class="depart_pick section">理想部门（最多可选三个部门）</div>
-<div class="depart_list">
-    <!--注入部门列表-->
-</div>
-<!--填写个人简介-->
-<div class="student_info section">个人简介（最多50字）</div>
-<div class="text_here section">
-    <img src="/img/apply/pen.png" alt="">
-    <textarea placeholder="请简单描述一下自己..." maxlength="50"></textarea>
-</div>
-<!--填写联系方式-->
-<div class="phone_number section">联系方式</div>
-<div class="item" id="long">
-    <span class="header">长号</span>
-    <input type="text" maxlength="11" numberOnly="true">
-</div>
-<div class="item" id="short">
-    <span class="header">短号</span>
-    <input type="text" maxlength="6" numberOnly="true">
-</div>
-<div class="item" id="qq">
-    <span class="header">Q Q</span>
-    <input type="text" maxlength="11" numberOnly="true">
-</div>
-
-<!--注意事项-->
-<div class="alarm section">
-    <input type="checkbox" id="alarm_agree">
-    <div class="note">注意事项</div>
-</div>
-<div class="alarm_content section">
-    <p>1.绝对不意气用事</p>
-    <p>2.绝对不漏判任何一件坏事</p>
-    <p>3.绝对裁判的公正漂亮</p>
-    <p>4.裁判机器人蜻蜓队长前来觐见</p>
-</div>
-
-<!--全部提交-->
-<div class="submitAll">提 交</div>
-<footer>
-    <p>红色家园网络工作室</p>
-</footer>
 </body>
 </html>
+<script type="application/xml" id="pop">
+    <div class="popup hide" did="__did__">
+        <img class="close" src="./img/close.png" alt=""/>
+        <div class="pop_title">__depart__</div>
+        <div class="pop_neck">栏目列表</div>
+        <div class="pop_list">__list__</div>
+    </div>
+</script>

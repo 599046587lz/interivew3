@@ -93,10 +93,17 @@ warning .check {
     background-image: url('/img/apply/default_logo.png');
     background-size: cover;
     background-position: center;
-    margin: 35px auto 25px auto;
+    margin: 35px auto 15px auto;
     border-radius: 49px;
     height: 96px;
     width: 96px;
+}
+
+.pic+div{
+    color:rgba(0,0,0,0.5);
+    height:16px;
+    line-height:16px;
+    font-size: 14px;
 }
 
 .gender .genderbox {

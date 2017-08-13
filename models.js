@@ -54,7 +54,7 @@ let Interviewee = new mongoose.Schema({
         type: String,
         default: ''
     },
-    email: {
+    short_tel: {
         type: String,
         default: ''
     },
@@ -62,7 +62,7 @@ let Interviewee = new mongoose.Schema({
         type: String,
         default: ''
     },
-    volunteer: [Number],
+    volunteer: [Department],
     notion: {
         type: String,
         default: ''

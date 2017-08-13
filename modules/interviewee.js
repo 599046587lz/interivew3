@@ -190,7 +190,7 @@ exports.addInterviewee = function (data, cid) {
             interviewee[i] = data[i];
         }
     }
-    let fields = ['sid', 'name', 'sex', 'major', 'phone', 'email', 'qq', 'volunteer', 'notion'];
+    let fields = ['sid', 'name', 'sex', 'major', 'phone', 'short_tel', 'qq', 'volunteer', 'notion'];
     fields.forEach(function (e) {
         IntervieweeEntity[e] = interviewee[e];
         delete interviewee[e];

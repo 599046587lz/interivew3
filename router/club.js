@@ -8,6 +8,8 @@ let Club = require('../modules/club');
 let Interviewee = require('../modules/interviewee');
 let mid = require('../utils/middleware');
 let Joi = require('Joi');
+let multer = require('multer');
+let upload = multer({dest: '../files/upload'});
 /**
  * @params String user 登录用户名
  * @params String password 密码，单词md5
@@ -57,13 +59,14 @@ router.get('/logout', mid.checkLogin, function (req, res) {
  * @return Object {status: 'success'|'failed', count:Number}
  */
 
-router.post('/upload/archive', wrap(async function (req, res) {
-    let file = req.files['archive'];
-    if (!file || !req.session['cid']) throw new Error('参数不完整');
+router.post('/upload/archive', upload.single('archive'), wrap(async function (req, res) {
+    let file = req.file;
+    let cid = req.param('cid');
+    // if (!file || !req.session['cid']) throw new Error('参数不完整');
     let xlsxReg = /\.xlsx$/i;
     if (!xlsxReg.test(file.originalname)) throw new Error('上传文件不合法');
 
-    let result = await Club.handleArchive(file, req.session['cid']);
+    let result = await Club.handleArchive(file, cid);
     res.json({
         status: 'success',
         count: result

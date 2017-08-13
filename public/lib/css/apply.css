@@ -1,7 +1,6 @@
 body {
     border:0;
     text-align: center;
-    font-family: "黑体", "Adobe Fan Heiti Std B";
 }
 
 .section.intro,
@@ -40,7 +39,6 @@ input[type=text] {
     width: 145px;
     height: 20px;
     color: rgb(102, 102, 102);
-    font-family: "黑体", "Adobe Fan Heiti Std B";
     background-color: transparent;
     outline: none;
     font-size: 16px;
@@ -48,7 +46,6 @@ input[type=text] {
 }
 
 textarea {
-    font-family: "黑体", "Adobe Fan Heiti Std B";
     font-size: 15px;
     color: rgba(120, 120, 120, 0.65);
     line-height: 20px;
@@ -178,7 +175,7 @@ warning .check {
     float: right;
     width: 17px;
     height: 17px;
-    margin: 10px;
+    padding: 10px;
 }
 
 .popup .pop_title {

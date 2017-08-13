@@ -70,7 +70,6 @@ let Interviewee = new mongoose.Schema({
     signTime: Date,
     rate: [rate],//{did: Number,score: Number, comment: String, interviewer: String}
     done: [Number],
-    extra: Object,
     busy: {
         type: Boolean,
         default: false

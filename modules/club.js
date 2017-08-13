@@ -5,6 +5,7 @@ let IntervieweeModel = require('../models').Interviewee;
 let clubModel = require('../models').Club;
 let excel = require('xlsx');
 let debug = require('debug')('interview');
+let Interviewee = require('./interviewee');
 
 
 exports.login = function (user, password) {
@@ -36,10 +37,15 @@ exports.getClubByName = function (name) {
 };
 
 exports.handleArchive = function (file, cid) {
+    let department;
     return clubModel.findOne({
         cid: cid
-    }).then(result => {
-        let department = result.departments;
+    }).then(club => {
+        department = club.departments;
+        IntervieweeModel.remove({
+            cid: cid
+        })
+    }).then(() => {
         let interviewerInfo = [];
         let hearders = {};
         let workbook = excel.readFile(file.path);
@@ -47,8 +53,8 @@ exports.handleArchive = function (file, cid) {
         let keys = Object.keys(workSheet);
         let key = keys.filter(k => k[0] !== '!');
         key.forEach(k => {
-            let col = k.substring(0, 1);
-            let row = parseInt(k.substring(1));
+            let col = k.substring(0, 1); //A
+            let row = parseInt(k.substring(1)); //11
             let value = workSheet[k].v;
             if (row == 1) {
                 switch (value) {
@@ -90,20 +96,22 @@ exports.handleArchive = function (file, cid) {
                 let departmentArray = value.split(',');
                 departmentArray.forEach(e => {
                     let Dep = e.split('-');
-                    if(!mid[Dep[0]]) {mid[Dep[0]] = {}; mid[Dep[0]].column = [];}
+                    if(!mid[Dep[0]]) { mid[Dep[0]] = {}; mid[Dep[0]].column = [];}
                     mid[Dep[0]].column.push({columnName: Dep[1]});
                 });
                 for(let i in mid) {
-                    let oneDepart = department.filter(k => {return k.name = i});
+                    let oneDepart = department.filter(k => {return k.name == i});
                     oneDepart[0].column = mid[i].column;
-                    result.push(oneDepart);
+                    result.push(oneDepart[0]);
                 }
                 interviewerInfo[row][hearders[col]] = result;
             } else {
                 interviewerInfo[row][hearders[col]] = value;
             }
         }); //interviewerInfo的长度永远多2个
-        console.log(interviewerInfo[2].volunteer);
+        for(let interviewer of interviewerInfo) {
+            Interviewee.addInterviewee(interviewer, cid);
+        }
     });
     /**/
 };

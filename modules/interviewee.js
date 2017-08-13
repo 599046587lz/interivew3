@@ -200,7 +200,6 @@ exports.addInterviewee = function (data, cid) {
         IntervieweeEntity.signTime = interviewee.signTime;
         delete interviewee.signTime;
     }
-    IntervieweeEntity.extra = interviewee;
     return IntervieweeEntity.save();
 };
 

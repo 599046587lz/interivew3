@@ -236,6 +236,7 @@ $(function () {
             data: JSON.stringify(data),
             success:function () {
                 $(".popup").addClass('hide');
+                $container.html("");
                 warning("上传成功 感谢您的报名~");
             },
             error: function (reg) {

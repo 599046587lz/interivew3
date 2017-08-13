@@ -163,6 +163,7 @@ $(function () {
         $picfile.click();
     });
     $picfile.on("change", function () {
+        $(".pic+div").html('');
         var objUrl = getObjectURL(this.files[0]);
         if (objUrl)
             $pic.css("background-image", "url('" + objUrl + "')");
@@ -196,8 +197,8 @@ $(function () {
 
         }
         else {
-                $content.find("p").hide();
-                $content.addClass("checked");
+            $content.find("p").hide();
+            $content.addClass("checked");
         }
     });
     }
@@ -238,8 +239,9 @@ $(function () {
                 warning("上传成功 感谢您的报名~");
             },
             error: function (reg) {
-                $(".popup").addClass('hide');
-                warning("上传有误 请确认信息填写完整");
+                $(".popup").addClass('hide')
+                if(reg.responseText=="参数类型不合法"){warning("上传有误 请将数据填写完整");return;}
+                warning(reg.responseText.split(':')[2]);
             }
         })
     }

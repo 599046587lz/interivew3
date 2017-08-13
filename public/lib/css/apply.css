@@ -70,7 +70,6 @@ warning {
     height: 120px;
     width: 250px;
     overflow: hidden;
-    animation: warning 0.2s;
     background-color: white;
     border-radius: 10px;
     box-shadow: 0 0 11px rgba(0, 0, 0, 0.2);
@@ -157,7 +156,6 @@ warning .check {
 .popup {
     overflow: hidden;
     z-index: 999;
-    animation: pop 0.5s;
     background-color: white;
     position: fixed;
     left: 0;
@@ -198,7 +196,7 @@ warning .check {
 
 .popup .pop_list {
     width: 100%;
-    min-height: 270px;
+    height: 270px;
     background-color: rgba(0, 0, 0, 0.1);
     overflow-y: scroll;
     overflow-x: hidden;
@@ -261,86 +259,4 @@ footer p:before {
     content: "© ";
     vertical-align: middle;
     font-size: 16px;
-}
-
-
-@keyframes slide-in {
-    from {
-        opacity: 0;
-        height: 0;
-    }
-    to {
-        height: 129px;
-        opacity: 1;
-    }
-}
-
-@keyframes slide-out {
-    to {
-        opacity: 0;
-        height: 0;
-    }
-    from {
-        height: 129px;
-        opacity: 1;
-    }
-}
-
-@keyframes pop {
-    from {
-        opacity: 0;
-        height: 250px;
-    }
-    to {
-        opacity: 1;
-        height: 400px;
-    }
-}
-
-@keyframes pop2 {
-    from {
-        opacity: 0;
-        height: 150px;
-    }
-    to {
-        opacity: 1;
-        height: 200px;
-    }
-}
-
-@keyframes push {
-    to {
-        opacity: 0;
-        height: 250px;
-    }
-    from {
-        opacity: 1;
-        height: 400px;
-    }
-}
-
-@keyframes warning {
-    to {
-        opacity: 1;
-        height: 120px;
-        width: 250px;
-    }
-    from {
-        opacity: 0;
-        height: 60px;
-        width: 80px;
-    }
-}
-
-@keyframes warning-out {
-    from {
-        opacity: 1;
-        height: 120px;
-        width: 250px;
-    }
-    to {
-        opacity: 0;
-        height: 60px;
-        width: 80px;
-    }
 }

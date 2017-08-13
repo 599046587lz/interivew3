@@ -244,7 +244,7 @@ $(function () {
             },
             error: function (reg) {
                 $(".popup").addClass('hide');
-                warning(reg.responseText);
+                warning("上传有误 请确认信息填写完整");
             }
         })
     }

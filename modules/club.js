@@ -37,15 +37,14 @@ exports.getClubByName = function (name) {
 };
 
 exports.handleArchive = function (file, cid) {
-    let department;
-    return clubModel.findOne({
+    return IntervieweeModel.find({
         cid: cid
-    }).then(club => {
-        department = club.departments;
-        IntervieweeModel.remove({
+    }).remove().then(() => {
+        return clubModel.findOne({
             cid: cid
         })
-    }).then(() => {
+    }).then(result => {
+        let department = result.departments;
         let interviewerInfo = [];
         let hearders = {};
         let workbook = excel.readFile(file.path);
@@ -91,13 +90,13 @@ exports.handleArchive = function (file, cid) {
             if (!interviewerInfo[row]) interviewerInfo[row] = {};
             if (hearders[col] == undefined) return;
             if(hearders[col] == 'volunteer') {
-                let mid = {};
+                let mid = {}; //里面放的是每个部门
                 let result = [];
                 let departmentArray = value.split(',');
                 departmentArray.forEach(e => {
                     let Dep = e.split('-');
                     if(!mid[Dep[0]]) { mid[Dep[0]] = {}; mid[Dep[0]].column = [];}
-                    mid[Dep[0]].column.push({columnName: Dep[1]});
+                    if(Dep[1]) mid[Dep[0]].column.push({columnName: Dep[1]});
                 });
                 for(let i in mid) {
                     let oneDepart = department.filter(k => {return k.name == i});
@@ -109,6 +108,9 @@ exports.handleArchive = function (file, cid) {
                 interviewerInfo[row][hearders[col]] = value;
             }
         }); //interviewerInfo的长度永远多2个
+        interviewerInfo = interviewerInfo.filter(e => {
+            return e != undefined;
+        });
         for(let interviewer of interviewerInfo) {
             Interviewee.addInterviewee(interviewer, cid);
         }

@@ -7,6 +7,7 @@ let Student = require('../modules/student');
 let office = require('../utils/office');
 let Joi = require('joi');
 let wrap = fn => (...args) => fn(...args).catch(args[2]);
+let Base64 = require('js-base64').Base64;
 
 router.get('/uploadToken', function (req, res) {
     let qiniu = require('qiniu');
@@ -16,7 +17,7 @@ router.get('/uploadToken', function (req, res) {
         scope: bucket,
         returnBody: '{"url": "http://ot0i9omzm.bkt.clouddn.com/$(key)"}',
         saveKey: req.query.type + '/' + "$(sha1)",
-        persistentOps: 'imageView2/0/format/jpg/q/75|imageslim'
+        persistentOps: 'imageView2/0/format/jpg/q/75|saveas/' + Base64.encode( bucket + ':' + req.query.type + '/' + "$(sha1)")
     };
     let putpolicy = new qiniu.rs.PutPolicy(options);
     let uploadToken = putpolicy.uploadToken(mac);

@@ -1,4 +1,3 @@
-
 const express = require('express');
 const path = require('path');
 const favicon = require('static-favicon');
@@ -14,7 +13,6 @@ const mid = require('./utils/middleware');
 const config = require('./config');
 
 let app = express();
-
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(cookieParser());

@@ -54,7 +54,7 @@ let Interviewee = new mongoose.Schema({
         type: String,
         default: ''
     },
-    email: {
+    short_tel: {
         type: String,
         default: ''
     },
@@ -62,7 +62,7 @@ let Interviewee = new mongoose.Schema({
         type: String,
         default: ''
     },
-    volunteer: [Number],
+    volunteer: [Department],
     notion: {
         type: String,
         default: ''
@@ -70,7 +70,6 @@ let Interviewee = new mongoose.Schema({
     signTime: Date,
     rate: [rate],//{did: Number,score: Number, comment: String, interviewer: String}
     done: [Number],
-    extra: Object,
     busy: {
         type: Boolean,
         default: false
@@ -122,7 +121,10 @@ let studentSchema = new mongoose.Schema({
         required: true
     },
     department: {
-        type: String,
+        type: [{
+            column: [String],
+            departname: String
+        }],
         required: true
     },
     intro: {

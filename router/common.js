@@ -5,7 +5,7 @@ let router = express.Router();
 let mid = require('../utils/middleware');
 let Student = require('../modules/student');
 let office = require('../utils/office');
-let Joi = require('Joi');
+let Joi = require('joi');
 let wrap = fn => (...args) => fn(...args).catch(args[2]);
 
 router.get('/uploadToken', function (req, res) {

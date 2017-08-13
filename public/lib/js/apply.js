@@ -11,9 +11,7 @@ $(function () {
         $container.append($warning);
         $container.on('click', '.check', function () {
             var $warn = $(this).parent();
-            $warn.fadeOut(function () {
-                $warn.remove();
-            })
+            $warn.remove();
         })
     }
     var getSearchObject = function () {
@@ -194,15 +192,12 @@ $(function () {
         var checked = $(this).parent().hasClass("checked");
         if (!checked) {
             $content.find("p").show();
-            $content.fadeIn(function () {
-                $content.removeClass("checked");
-            })
+            $content.removeClass("checked");
+
         }
         else {
-            $content.fadeOut(function () {
                 $content.find("p").hide();
                 $content.addClass("checked");
-            })
         }
     });
     }
@@ -275,7 +270,7 @@ $(function () {
         finalData.clubID = clubID;
         finalData.club = localStorage.getItem("club");
         getDepartResult(finalData);
-        var loading = "<div class='popup' style='height:200px;animation: pop2 0.7s'>" +
+        var loading = "<div class='popup' style='height:200px'>" +
             "<img src='../../img/apply/loading.gif'>" +
             "<div>正在提交</div>" +
             "</div>"

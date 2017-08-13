@@ -7,7 +7,7 @@ let router = express.Router();
 let Club = require('../modules/club');
 let Interviewee = require('../modules/interviewee');
 let mid = require('../utils/middleware');
-let Joi = require('Joi');
+let Joi = require('joi');
 let multer = require('multer');
 let upload = multer({dest: '../files/upload'});
 /**

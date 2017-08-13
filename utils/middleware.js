@@ -1,7 +1,7 @@
 let session = require('express-session');
 let MongoStore = require('connect-mongo')(session);
 let config = require('../config');
-let Joi = require('Joi');
+let Joi = require('joi');
 
 exports.checkLogin = function (req, res, next){
     if (!!req.session['cid']){

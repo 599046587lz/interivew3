@@ -5,7 +5,7 @@ let wrap = fn => (...args) => fn(...args).catch(args[2]);
 let express = require('express');
 let router = express.Router();
 let Interviewee = require("../modules/interviewee");
-let Joi = require('Joi');
+let Joi = require('joi');
 let mid = require('../utils/middleware');
 /**
  * @params sid

@@ -4,7 +4,7 @@ let image_save = require('../utils/image_save');
 let club = require('../modules/club');
 let mid = require('../utils/middleware');
 let router = express.Router();
-let Joi = require('Joi');
+let Joi = require('joi');
 
 
 let wrap = fn => (...args) => fn(...args).catch(args[2]);

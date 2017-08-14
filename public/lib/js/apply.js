@@ -53,6 +53,7 @@ $(function () {
         list2 = "<list2 cid='__cid__'>__column__</list2>",
         pop = $("#pop").html();
 
+
     function getDepartInfo(clubID) {
         $.ajax({
             url: "/club/clubInfo?clubId=" + clubID,
@@ -227,6 +228,7 @@ $(function () {
 
     function sendFinalData(data){
         delete data.check;
+        if(!data.intro)warning("还没有填写自我介绍哦");
         if(!data.short_tel)data.short_tel=undefined;
         //console.log(data);
         $.ajax({
@@ -237,7 +239,8 @@ $(function () {
             success:function () {
                 $(".popup").addClass('hide');
                 $container.html("");
-                warning("上传成功 感谢您的报名~");
+                var done = $('#done').html();
+                $container.append(done);
             },
             error: function (reg) {
                 $(".popup").addClass('hide')

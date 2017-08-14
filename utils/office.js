@@ -105,7 +105,14 @@ exports.writeWord = function (data) {
         });
 
         var pObj = docx.createP();
-        pObj.addImage(path.resolve(data.image), {cx: 300, cy: 200});
+        try {
+            pObj.addImage(path.resolve(data.image), {cx: 300, cy: 200});
+        } catch (err) {
+            pObj.addText('图片无法加载', {
+                font_face: 'Arial',
+                font_size: 16
+            });
+        }
 
         var pObj = docx.createP();
         pObj.addText('... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ...', {
@@ -117,7 +124,6 @@ exports.writeWord = function (data) {
         pObj.addText('姓名：' + data.name, {
             font_face: 'Arial',
             font_size: 16
-
         });
 
         var pObj = docx.createP();

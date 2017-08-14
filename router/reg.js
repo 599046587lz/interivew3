@@ -1,6 +1,6 @@
 let express = require('express');
 let student = require('../modules/student');
-let image_save = require('../utils/image_save');
+let utils = require('../utils/utils');
 let club = require('../modules/club');
 let mid = require('../utils/middleware');
 let router = express.Router();
@@ -36,7 +36,7 @@ router.post('/', mid.checkFormat(function() {
     info.club = data.club;
     info.clubID = data.clubID;
     await club.verifyInfo(info);
-    data.image = await image_save.image_save(data.pic_url, fileName);
+    data.image = await utils.image_save(data.pic_url, fileName);
 
     let result = await student.addStudent(data);
     res.send(200, result);

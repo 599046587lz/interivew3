@@ -11,8 +11,10 @@ const common = require('./router/common');
 const reg = require('./router/reg');
 const mid = require('./utils/middleware');
 const config = require('./config');
+const utils = require('./utils/utils');
+const app = express();
 
-let app = express();
+utils.saveDb();
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(cookieParser());

@@ -13,10 +13,11 @@ router.get('/uploadToken', function (req, res) {
     let qiniu = require('qiniu');
     let mac = new qiniu.auth.digest.Mac(config.QINIU_ACCESSKEY, config.QINIU_SECRETKEY);
     let bucket = config.QINIU_BUCKET;
+    let data = new Date().getTime();
     let options = {
         scope: bucket,
         returnBody: '{"url": "http://ot0i9omzm.bkt.clouddn.com/$(key)"}',
-        saveKey: req.query.type + '/' + "$(sha1)",
+        saveKey: req.query.type + '/' + "$(sha1)" + data,
         persistentOps: 'imageView2/0/format/jpg/q/75|saveas/' + Base64.encode( bucket + ':' + req.query.type + '/' + "$(sha1)")
     };
     let putpolicy = new qiniu.rs.PutPolicy(options);

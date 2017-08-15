@@ -1,6 +1,6 @@
 let officegen = require('officegen');
 let fs = require('fs');
-let path = require('path');
+global.path = require('path');
 let xlsx = require('xlsx');
 let archiver = require('archiver');
 

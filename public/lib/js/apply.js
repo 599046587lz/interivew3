@@ -223,7 +223,8 @@ $(function () {
             success:function () {
                 $(".popup").addClass('hide');
                 $container.html("");
-                $container.addClass("background")
+                $container.addClass("background");
+                $(".container.background").lazyload();
                 var done = $('#done').html();
                 $container.append(done);
             },

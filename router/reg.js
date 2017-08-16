@@ -25,7 +25,7 @@ router.post('/', mid.checkFormat(function() {
         intro: Joi.string().required(),
         tel: Joi.number().required(),
         qq: Joi.number().required(),
-        short_tel: Joi.number(),
+        email: Joi.string().required(),
         pic_url: Joi.string().required(),
     })
 }), wrap(async function(req, res) {

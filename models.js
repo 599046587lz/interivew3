@@ -54,7 +54,7 @@ let Interviewee = new mongoose.Schema({
         type: String,
         default: ''
     },
-    short_tel: {
+    email: {
         type: String,
         default: ''
     },
@@ -149,7 +149,7 @@ let studentSchema = new mongoose.Schema({
                 message: '请填写正确的QQ号'
             }
     },
-    short_tel: {
+    email: {
         type: String
     },
     pic_url: {

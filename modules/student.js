@@ -22,7 +22,7 @@ exports.addStudent = function (data) {
         intro: data.intro,
         tel: data.tel,
         qq: data.qq,
-        short_tel: data.short_tel,
+        email: data.email,
         pic_url: data.pic_url,
         image: data.image
     });

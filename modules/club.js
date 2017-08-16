@@ -81,8 +81,8 @@ exports.handleArchive = function (file, cid) {
                     case 'qq':
                         hearders[col] = 'qq';
                         break;
-                    case '短号':
-                        hearders[col] = 'short_tel';
+                    case '邮箱':
+                        hearders[col] = 'email';
                         break;
                 }
                 return;

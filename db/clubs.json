@@ -444,7 +444,7 @@
     ]
 }
 { 
-    "_id" : ObjectId("5993b83d69c8ef334028d7fa"), 
+    "_id" : ObjectId("5993cc9a66a2cf1e7464f93b"), 
     "cid" : NumberInt(6), 
     "name" : "焦点摄影", 
     "password" : "202cb962ac59075b964b07152d234b70", 
@@ -455,55 +455,152 @@
     "departments" : [
         {
             "did" : NumberInt(0), 
-            "name" : "技术部", 
-            "_id" : ObjectId("5993b83d69c8ef334028d7fd"), 
+            "name" : "Ps", 
+            "_id" : ObjectId("5993cc9a66a2cf1e7464f94e"), 
             "column" : [
-                {
-                    "columnName" : "Ps", 
-                    "_id" : ObjectId("5993b83d69c8ef334028d805")
-                }, 
-                {
-                    "columnName" : "Lr", 
-                    "_id" : ObjectId("5993b83d69c8ef334028d804")
-                }, 
-                {
-                    "columnName" : "Ae", 
-                    "_id" : ObjectId("5993b83d69c8ef334028d803")
-                }, 
-                {
-                    "columnName" : "Pr", 
-                    "_id" : ObjectId("5993b83d69c8ef334028d802")
-                }, 
-                {
-                    "columnName" : "Ai", 
-                    "_id" : ObjectId("5993b83d69c8ef334028d801")
-                }, 
-                {
-                    "columnName" : "程序设计", 
-                    "_id" : ObjectId("5993b83d69c8ef334028d800")
-                }, 
-                {
-                    "columnName" : "UI", 
-                    "_id" : ObjectId("5993b83d69c8ef334028d7ff")
-                }, 
-                {
-                    "columnName" : "mmd", 
-                    "_id" : ObjectId("5993b83d69c8ef334028d7fe")
-                }
+
             ]
         }, 
         {
             "did" : NumberInt(1), 
-            "name" : "微信推送/运营", 
-            "_id" : ObjectId("5993b83d69c8ef334028d7fc"), 
+            "name" : "Lr", 
+            "_id" : ObjectId("5993cc9a66a2cf1e7464f94d"), 
             "column" : [
 
             ]
         }, 
         {
             "did" : NumberInt(2), 
+            "name" : "Ae", 
+            "_id" : ObjectId("5993cc9a66a2cf1e7464f94c"), 
+            "column" : [
+
+            ]
+        }, 
+        {
+            "did" : NumberInt(3), 
+            "name" : "Pr", 
+            "_id" : ObjectId("5993cc9a66a2cf1e7464f94b"), 
+            "column" : [
+
+            ]
+        }, 
+        {
+            "did" : NumberInt(4), 
+            "name" : "编程", 
+            "_id" : ObjectId("5993cc9a66a2cf1e7464f94a"), 
+            "column" : [
+
+            ]
+        }, 
+        {
+            "did" : NumberInt(5), 
+            "name" : "程序设计", 
+            "_id" : ObjectId("5993cc9a66a2cf1e7464f949"), 
+            "column" : [
+
+            ]
+        }, 
+        {
+            "did" : NumberInt(6), 
+            "name" : "UI", 
+            "_id" : ObjectId("5993cc9a66a2cf1e7464f948"), 
+            "column" : [
+
+            ]
+        }, 
+        {
+            "did" : NumberInt(7), 
+            "name" : "mmd", 
+            "_id" : ObjectId("5993cc9a66a2cf1e7464f947"), 
+            "column" : [
+
+            ]
+        }, 
+        {
+            "did" : NumberInt(8), 
+            "name" : "微信推送/运营", 
+            "_id" : ObjectId("5993cc9a66a2cf1e7464f946"), 
+            "column" : [
+
+            ]
+        }, 
+        {
+            "did" : NumberInt(9), 
+            "name" : "文字", 
+            "_id" : ObjectId("5993cc9a66a2cf1e7464f945"), 
+            "column" : [
+
+            ]
+        }, 
+        {
+            "did" : NumberInt(10), 
             "name" : "组织策划", 
-            "_id" : ObjectId("5993b83d69c8ef334028d7fb"), 
+            "_id" : ObjectId("5993cc9a66a2cf1e7464f944"), 
+            "column" : [
+
+            ]
+        }, 
+        {
+            "did" : NumberInt(11), 
+            "name" : "力气大，能吃苦", 
+            "_id" : ObjectId("5993cc9a66a2cf1e7464f943"), 
+            "column" : [
+
+            ]
+        }, 
+        {
+            "did" : NumberInt(12), 
+            "name" : "虚心学习", 
+            "_id" : ObjectId("5993cc9a66a2cf1e7464f942"), 
+            "column" : [
+
+            ]
+        }, 
+        {
+            "did" : NumberInt(13), 
+            "name" : "水群", 
+            "_id" : ObjectId("5993cc9a66a2cf1e7464f941"), 
+            "column" : [
+
+            ]
+        }, 
+        {
+            "did" : NumberInt(14), 
+            "name" : "擅长处理应急事件", 
+            "_id" : ObjectId("5993cc9a66a2cf1e7464f940"), 
+            "column" : [
+
+            ]
+        }, 
+        {
+            "did" : NumberInt(15), 
+            "name" : "会做旅行/美食攻略各种攻略", 
+            "_id" : ObjectId("5993cc9a66a2cf1e7464f93f"), 
+            "column" : [
+
+            ]
+        }, 
+        {
+            "did" : NumberInt(16), 
+            "name" : "会画画(sai/手绘)", 
+            "_id" : ObjectId("5993cc9a66a2cf1e7464f93e"), 
+            "column" : [
+
+            ]
+        }, 
+        {
+            "did" : NumberInt(17), 
+            "name" : "会写日记，手账", 
+            "_id" : ObjectId("5993cc9a66a2cf1e7464f93d"), 
+            "column" : [
+
+            ]
+        }, 
+        {
+            "did" : NumberInt(18), 
+            "name" : "热爱摄影/擅长摄影", 
+            "_id" : ObjectId("5993cc9a66a2cf1e7464f93c"), 
             "column" : [
 
             ]

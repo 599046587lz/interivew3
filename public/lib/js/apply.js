@@ -60,10 +60,6 @@ $(function () {
             success: function (data) {
                 loadList(data);
                 localStorage.setItem("club",data.clubName);
-                $container.html("");
-                $container.addClass("background")
-                var done = $('#done').html();
-                $container.append(done);
     },
             error: function () {
                 $container.html("");
@@ -227,6 +223,7 @@ $(function () {
             success:function () {
                 $(".popup").addClass('hide');
                 $container.html("");
+                $container.addClass("background")
                 var done = $('#done').html();
                 $container.append(done);
             },

@@ -41,7 +41,7 @@
         <div class="gender">
             <label class="genderbox female" for="female">
                 <span class="icon"></span>
-                <input class="hide" checked="checked" type="radio" value="0" name="gender" id="female">
+                <input class="hide" type="radio" value="0" name="gender" id="female">
             </label>
             <label class="genderbox male" for="male">
                 <span class="icon"></span>
@@ -75,9 +75,9 @@
             <span class="header">长号</span>
             <input type="text" maxlength="11" name="tel">
         </div>
-        <div class="item short_tel">
-            <span class="header">短号</span>
-            <input type="text" maxlength="6" name="short_tel" placeholder="选填" onkeyup="this.value=this.value.replace(/\D/g,'')">
+        <div class="item email">
+            <span class="header">邮箱</span>
+            <input type="text" name="email">
         </div>
         <div class="item qq">
             <span class="header">Q Q</span>
@@ -104,12 +104,15 @@
 </body>
 </html>
 <script type="application/xml" id="done">
+    <div>
     <div class="done">
         <div class="success">
             <img src="./img/apply/done.png"/>
             <div>报名成功！</div>
         </div>
         <div>请耐心等待<br/>我们的面试通知吧~</div>
+    </div>
+        <div class="footer">红色家园网络工作室</div>
     </div>
 </script>
 <script type="application/xml" id="pop">

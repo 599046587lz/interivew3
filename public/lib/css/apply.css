@@ -1,7 +1,9 @@
-body {
-    border:0;
+body,html{
+    height:100%;
+    margin:0;
     text-align: center;
 }
+
 
 .section.intro,
 .section.alarm-content{
@@ -128,7 +130,7 @@ warning .check {
 }
 
 .genderbox.female .icon{
-    background-image: url("../../img/apply/female_on.png");
+    background-image: url("../../img/apply/female_off.png");
     background-size: cover;
 }
 
@@ -259,10 +261,16 @@ footer {
     font-size: 12px;
 }
 
-footer p:before {
+footer p:before,.footer:before {
     content: "© ";
     vertical-align: middle;
     font-size: 16px;
+}
+
+.container.background{
+    height: 100%;
+    background-image: url('../../img/apply/success.png');
+    background-size: cover;
 }
 
 .done{
@@ -277,7 +285,7 @@ footer p:before {
 }
 
 .done .success img{
-    width:70px;
+    width:47px;
     display: inline-block;
     vertical-align: middle;
 }
@@ -290,7 +298,21 @@ footer p:before {
 }
 
 .done .success+div{
-    font-size:17px;
-    margin-top: 120px;
-    line-height: 35px;
+    font-size:18px;
+    margin-top: 80px;
+    line-height: 43px;
+}
+
+.footer{
+    vertical-align: middle;
+    position: absolute;
+    color: white;
+    background-color: rgba(0,0,0,0.3);
+    left: 0;
+    right: 0;
+    bottom: 33px;
+    margin: auto;
+    width: 175px;
+    height: 20px;
+    line-height: 20px;
 }

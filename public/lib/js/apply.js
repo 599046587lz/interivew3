@@ -60,7 +60,11 @@ $(function () {
             success: function (data) {
                 loadList(data);
                 localStorage.setItem("club",data.clubName);
-            },
+                $container.html("");
+                $container.addClass("background")
+                var done = $('#done').html();
+                $container.append(done);
+    },
             error: function () {
                 $container.html("");
                 warning("找不到服务器")
@@ -86,7 +90,7 @@ $(function () {
         }
     }
 
-    var depart = 0;
+
     //点击一级标签
     $list.on('click', 'list1', function () {
         var did = $(this).attr('did');
@@ -103,20 +107,12 @@ $(function () {
         }
         //不存在二级标签
         else {
-            console.log(2);
             var active = $(this).hasClass("active");
             if (active) {
                 $(this).removeClass("active");
-                depart--;
             } else {
-                if (depart < 3) {
                     $(this).addClass("active");
-                    depart++;
                 }
-                else {
-                    warning("最多选择三个部门呦~")
-                }
-            }
         }
     });
 
@@ -134,12 +130,10 @@ $(function () {
         if (active) {
             $(this).removeClass("active");
             $list1.removeClass("active");
-            depart--;
             //二级标签不不能超过20
             for (var m = 0; m < 20; m++) {
                 if ($(this).parent().find("list2[cid=" + m + "]").hasClass("active")) {
                     $list1.addClass("active");
-                    depart++;
                     break;
                 }
             }
@@ -147,14 +141,8 @@ $(function () {
             if ($list1.hasClass("active")) {
                 $(this).addClass("active");
             } else {
-                if (depart < 3) {
-                    $(this).addClass("active");
-                    depart++;
-                    $list1.addClass("active");
-                }
-                else {
-                    warning("最多选择三个部门呦~");
-                }
+                $(this).addClass("active");
+                $list1.addClass("active");
             }
         }
     });

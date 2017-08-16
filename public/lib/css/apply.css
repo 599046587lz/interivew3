@@ -288,6 +288,7 @@ footer p:before,.footer:before {
     width:47px;
     display: inline-block;
     vertical-align: middle;
+    margin-bottom: 20px;
 }
 
 .done .success div{

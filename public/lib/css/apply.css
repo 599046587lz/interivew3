@@ -269,11 +269,11 @@ footer p:before,.footer:before {
 
 .container.background{
     height: 100%;
-    background-image: url('../../img/apply/success.png');
     background-size: cover;
 }
 
 .done{
+    white-space: nowrap;
     width: 250px;
     height: 350px;
     margin: auto;
@@ -288,6 +288,7 @@ footer p:before,.footer:before {
     width:47px;
     display: inline-block;
     vertical-align: middle;
+    margin-bottom: 20px;
 }
 
 .done .success div{
@@ -304,6 +305,7 @@ footer p:before,.footer:before {
 }
 
 .footer{
+    white-space: nowrap;
     vertical-align: middle;
     position: absolute;
     color: white;

@@ -37,8 +37,8 @@ router.get('/download', mid.checkFormat(function () {
     let clubID = req.param('clubID');
     let file, filename, dbData;
     dbData = await Student.queryByClubAll(clubID);
-    for (let i of dbData) {
-        await office.writeWord(i);
+    for (let i in dbData) {
+        await office.writeWord(dbData[i], i);
     }
     await office.writeExcel(dbData, clubID);
     let result = await office.archiverZip(clubID);

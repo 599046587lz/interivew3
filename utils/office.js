@@ -73,7 +73,7 @@ exports.writeExcel = function (dbData, clubID) {
     });
 };
 
-exports.writeWord = function (data) {
+exports.writeWord = function (data, index) {
     return new Promise(function (resolve, reject) {
         let docx = officegen({
             'type': 'docx',
@@ -192,8 +192,10 @@ exports.writeWord = function (data) {
 
         let name = data.name + '-' + data._id;
         let path = __dirname + '/../files/file/' + data.clubID;
-        if (fs.existsSync(path)) utils.deleteFolder(path);
-        fs.mkdirSync(path);
+        if (fs.existsSync(path) && index == 0) {
+            utils.deleteFolder(path);
+            fs.mkdirSync(path);
+        }
         let out = fs.createWriteStream('../files/file/' + data.clubID + '/' + name + '.docx');
 
         docx.generate(out, function (Error) {

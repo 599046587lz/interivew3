@@ -239,7 +239,8 @@ $(function () {
     }
     function sendPicData(data,form,finalData){
         if(!hasPic){
-            finalData.pic_url=location.origin+"/img/apply/default_logo.png";
+            var url_origin=location.href.split("/apply")[0];
+            finalData.pic_url=url_origin+"/img/apply/default_logo.png";
             sendFinalData(finalData);
             return;
         }

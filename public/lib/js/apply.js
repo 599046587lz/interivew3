@@ -144,10 +144,12 @@ $(function () {
     });
 
     //图片预览
+    var hasPic=false;
     $pic.on("click", function () {
         $picfile.click();
     });
     $picfile.on("change", function () {
+        hasPic=true;
         $(".pic+div").html('');
         var objUrl = getObjectURL(this.files[0]);
         if (objUrl)
@@ -236,6 +238,11 @@ $(function () {
         })
     }
     function sendPicData(data,form,finalData){
+        if(!hasPic){
+            finalData.pic_url=location.origin+"/img/apply/default_logo.png";
+            sendFinalData(finalData);
+            return;
+        }
         $.ajax({
             url: "http://up-z2.qiniu.com?token=" + data.token,
             type: "post",

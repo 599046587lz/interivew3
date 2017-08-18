@@ -36,8 +36,8 @@ router.post('/', mid.checkFormat(function() {
     info.club = data.club;
     info.clubID = data.clubID;
     await club.verifyInfo(info);
+    await student.checkStudent(data.studentID);
     data.image = await utils.image_save(data.pic_url, fileName);
-
     let result = await student.addStudent(data);
     res.send(200, result);
 

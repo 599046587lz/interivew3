@@ -31,3 +31,16 @@ exports.addStudent = function (data) {
         return ("报名成功！");
     });
 };
+
+exports.checkStudent = function(studentID) {
+    return studentModel.findOne({
+        studentID: studentID
+    }).then(result => {
+        if(!!result) {
+            let err = new Error('该同学已注册');
+            err.status = 404;
+            throw err;
+        }
+        return true;
+    })
+};

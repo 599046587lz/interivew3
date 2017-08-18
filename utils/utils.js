@@ -41,3 +41,17 @@ exports.saveDb = function () {
         })
     })
 };
+
+exports.deleteFolder = function (path) {
+    if( fs.existsSync(path) ) {
+        fs.readdirSync(path).forEach(function(file) {
+            let curPath = path + "/" + file;
+            if(fs.statSync(curPath).isDirectory()) { // recurse
+                exports.deleteFolder(curPath);
+            } else { // delete file
+                fs.unlinkSync(curPath);
+            }
+        });
+        fs.rmdirSync(path);
+    }
+};

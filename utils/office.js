@@ -1,8 +1,10 @@
 let officegen = require('officegen');
 let fs = require('fs');
-global.path = require('path');
 let xlsx = require('xlsx');
 let archiver = require('archiver');
+let utils = require('./utils');
+global.path = require('path');
+
 
 exports.writeExcel = function (dbData, clubID) {
     return new Promise(function(resolve, reject) {
@@ -189,7 +191,9 @@ exports.writeWord = function (data) {
         });
 
         let name = data.name + '-' + data._id;
-        if (!fs.existsSync(__dirname + '/../files/file/' + data.clubID)) fs.mkdirSync(__dirname + '/../files/file/' + data.clubID);
+        let path = __dirname + '/../files/file/' + data.clubID;
+        if (fs.existsSync(path)) utils.deleteFolder(path);
+        fs.mkdirSync(path);
         let out = fs.createWriteStream('../files/file/' + data.clubID + '/' + name + '.docx');
 
         docx.generate(out, function (Error) {
@@ -206,8 +210,10 @@ exports.writeWord = function (data) {
 
 exports.archiverZip = function (clubID) {
     return new Promise(function(resolve, reject) {
-        if (!fs.existsSync(__dirname + '/../files/zip/' + clubID)) fs.mkdirSync(__dirname + '/../files/zip/' + clubID);
-        let output = fs.createWriteStream('../files/zip/' + clubID + '/' + clubID + '.zip');
+        let path = __dirname + '/../files/zip/' + clubID;
+        if (fs.existsSync(path)) utils.deleteFolder(path);
+        fs.mkdirSync(path);
+        let output = fs.createWriteStream(path + '/' + clubID + '.zip');
 
         let archive = archiver('zip');
 

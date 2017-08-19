@@ -195,7 +195,7 @@ exports.writeWord = function (data, index) {
         if (fs.existsSync(wordPath) && index == 0) {
             utils.deleteFolder(wordPath);
         }
-        fs.mkdirSync(wordPath);
+        if(!fs.existsSync(wordPath)) fs.mkdirSync(wordPath);
         let out = fs.createWriteStream('../files/file/' + data.clubID + '/' + name + '.docx');
 
         docx.generate(out, function (Error) {

@@ -38,7 +38,7 @@ exports.checkStudent = function(studentID) {
     }).then(result => {
         if(!!result) {
             let err = new Error('该同学已注册');
-            err.status = 404;
+            err.status = 403;
             throw err;
         }
         return true;

@@ -191,10 +191,10 @@ exports.writeWord = function (data, index) {
         });
 
         let name = data.name + '-' + data._id;
-        let path = __dirname + '/../files/file/' + data.clubID;
-        if (fs.existsSync(path) && index == 0) {
-            utils.deleteFolder(path);
-            fs.mkdirSync(path);
+        let wordPath = __dirname + '/../files/file/' + data.clubID;
+        if (fs.existsSync(wordPath) && index == 0) {
+            utils.deleteFolder(wordPath);
+            fs.mkdirSync(wordPath);
         }
         let out = fs.createWriteStream('../files/file/' + data.clubID + '/' + name + '.docx');
 

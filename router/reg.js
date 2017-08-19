@@ -31,7 +31,7 @@ router.post('/', mid.checkFormat(function() {
 }), wrap(async function(req, res) {
     let data = req.body;
     let info = {};
-    let fileName = data.name + data.studentID + '.jpg';
+    let fileName = data.clubID + '-' + data.name + '-' + data.studentID + '.jpg';
 
     info.club = data.club;
     info.clubID = data.clubID;

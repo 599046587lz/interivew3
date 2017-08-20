@@ -52,7 +52,7 @@ $(function () {
     var list1 = "<list1 did='__did__'>__depart__</list1>",
         list2 = "<list2 cid='__cid__'>__column__</list2>",
         pop = $("#pop").html();
-
+    $(".email input").emailpop();
 
     function getDepartInfo(clubID) {
         $.ajax({

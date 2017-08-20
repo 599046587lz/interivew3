@@ -238,7 +238,7 @@
     "cid" : NumberInt(5), 
     "name" : "杭电之声", 
     "password" : "202cb962ac59075b964b07152d234b70", 
-    "maxDep" : NumberInt(0),
+    "maxDep" : NumberInt(0), 
     "__v" : NumberInt(0), 
     "interviewer" : [
 
@@ -451,7 +451,7 @@
     "cid" : NumberInt(6), 
     "name" : "焦点摄影", 
     "password" : "202cb962ac59075b964b07152d234b70", 
-    "maxDep" : NumberInt(3), 
+    "maxDep" : NumberInt(0), 
     "interviewer" : [
 
     ], 

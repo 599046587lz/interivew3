@@ -81,8 +81,8 @@ exports.handleArchive = function (file, cid) {
                     case 'qq':
                         hearders[col] = 'qq';
                         break;
-                    case '邮箱':
-                        hearders[col] = 'email';
+                    case '短号':
+                        hearders[col] = 'short_tel';
                         break;
                 }
                 return;
@@ -231,7 +231,7 @@ exports.exportInterviewees = function (cid, did) {
     return IntervieweeModel.find({
         cid: cid,
         'rate.did': did
-    }, 'name sid rate notion phone qq email major sex').then(result => {
+    }, 'name sid rate notion phone qq short_tel major sex').then(result => {
         let newDocs = [];
         result.forEach(e => {
             e = e.toObject();

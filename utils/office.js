@@ -8,7 +8,7 @@ global.path = require('path');
 
 exports.writeExcel = function (dbData, clubID) {
     return new Promise(function(resolve, reject) {
-        let _headers = ['club', 'name', 'studentID', 'gender', 'major', 'department', 'intro', 'tel', 'qq', 'email'];
+        let _headers = ['club', 'name', 'studentID', 'gender', 'major', 'department', 'intro', 'tel', 'qq', 'short_tel'];
 
         let _data = dbData;
         _data.forEach((e, i) => {
@@ -52,7 +52,7 @@ exports.writeExcel = function (dbData, clubID) {
             G1: {v: '简介'},
             H1: {v: '手机号'},
             I1: {v: 'qq'},
-            J1: {v: '邮箱'}
+            J1: {v: '短号'}
         };
 
         let output = Object.assign({}, newheader, result);
@@ -177,7 +177,7 @@ exports.writeWord = function (data, index) {
         });
 
         var pObj = docx.createP();
-        pObj.addText('邮箱：' + data.email, {
+        pObj.addText('短号: ' + (data.short_tel || '无'), {
             font_face: 'Arial',
             font_size: 16
 

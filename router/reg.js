@@ -31,12 +31,12 @@ router.post('/', mid.checkFormat(function() {
 }), wrap(async function(req, res) {
     let data = req.body;
     let info = {};
-    let fileName = Date.now() + '.jpg';
+    let fileName = data.clubID + '-' + data.name + '-' + data.studentID + '.jpg';
 
     info.club = data.club;
     info.clubID = data.clubID;
     await club.verifyInfo(info);
-    await student.checkStudent(data.studentID);
+    await student.checkStudent(data.studentID, data.clubID);
     data.image = await utils.image_save(data.pic_url, fileName);
     let result = await student.addStudent(data);
     res.send(200, result);

@@ -32,13 +32,14 @@ exports.addStudent = function (data) {
     });
 };
 
-exports.checkStudent = function(studentID) {
+exports.checkStudent = function(studentID, clubID) {
     return studentModel.findOne({
-        studentID: studentID
+        studentID: studentID,
+        clubID: clubID
     }).then(result => {
         if(!!result) {
             let err = new Error('该同学已注册');
-            err.status = 404;
+            err.status = 403;
             throw err;
         }
         return true;

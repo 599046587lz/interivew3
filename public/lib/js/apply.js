@@ -235,7 +235,6 @@ $(function () {
                 $container.append(done);
             },
             error: function (reg) {
-                console.log(reg);
                 $(".popup").addClass('hide')
                 if(reg.responseText=="参数类型不合法"){warning("上传有误 请将数据填写完整");return;}
                 if(reg.responseText.split(':')[2]){warning(reg.responseText.split(':')[2]);return;}

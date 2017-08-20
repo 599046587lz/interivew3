@@ -70,7 +70,6 @@ $(function () {
 
     function loadList(data) {
         //动态注入部门标签
-        console.log(data);
         $(".max_depart span").html(data.maxDep);
         for (var i in data.department) {
             var list = data.department[i];

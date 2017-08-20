@@ -70,7 +70,10 @@ $(function () {
 
     function loadList(data) {
         //动态注入部门标签
-        $(".max_depart span").html(data.maxDep);
+        if(data.maxDep)
+            $(".max_depart span").html(data.maxDep);
+        else
+            $(".max_depart").html("申请选项");
         for (var i in data.department) {
             var list = data.department[i];
             var temp = list1.replace("__depart__", list.name).replace("__did__", i);

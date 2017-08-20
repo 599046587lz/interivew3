@@ -260,12 +260,13 @@ exports.getClubInfo = function (cid) {
             });
             info.push({
                 name: e.name,
-                column: column
+                column: column,
             });
         });
         return ({
             clubName: result.name,
-            department: info
+            department: info,
+            maxDep: result.maxDep
         });
     })
 };

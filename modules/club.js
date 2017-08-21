@@ -249,20 +249,9 @@ exports.getClubInfo = function (cid) {
     return clubModel.findOne({
         cid: cid
     }).then(result => {
-        let info = [];
-        result.departments.forEach(e => {
-            let column = [];
-            e.column.forEach(i => {
-                column.push(i.columnName);
-            });
-            info.push({
-                name: e.name,
-                column: column,
-            });
-        });
         return ({
             clubName: result.name,
-            department: info,
+            department: result.departments,
             maxDep: result.maxDep
         });
     })

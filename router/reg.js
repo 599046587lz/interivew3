@@ -22,7 +22,7 @@ router.post('/', mid.checkFormat(function() {
         intro: Joi.string().required(),
         tel: Joi.string().regex(/^(1[34578])[0-9]{9}$/).required(),
         qq: Joi.string().regex(/[1-9][0-9]{4,}/).required(),
-        short_tel: Joi.string(),
+        short_tel: Joi.string().regex(/[0-9]{6}$/),
         pic_url: Joi.string().required(),
         email:Joi.string()
     }), errInfo: {

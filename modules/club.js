@@ -84,27 +84,24 @@ exports.handleArchive = function (file, cid) {
                     case '短号':
                         hearders[col] = 'short_tel';
                         break;
+                    case '邮箱':
+                        hearders[col] = 'email';
+                        break;
                 }
                 return;
             }
             if (!interviewerInfo[row]) interviewerInfo[row] = {};
             if (hearders[col] == undefined) return;
             if(hearders[col] == 'volunteer') {
-                let mid = {}; //里面放的是每个部门
+                let departInfo = value.split(',');
                 let result = [];
-                let departmentArray = value.split(',');
-                departmentArray.forEach(e => {
-                    let Dep = e.split('-');
-                    if(!mid[Dep[0]]) { mid[Dep[0]] = {}; mid[Dep[0]].column = [];}
-                    if(Dep[1]) mid[Dep[0]].column.push({columnName: Dep[1]});
+                departInfo.forEach(e => {
+                   let oneDepart = department.filter(k => {return k.name == e})[0];
+                   result.push(oneDepart);
                 });
-                for(let i in mid) {
-                    let oneDepart = department.filter(k => {return k.name == i});
-                    oneDepart[0].column = mid[i].column;
-                    result.push(oneDepart[0]);
-                }
                 interviewerInfo[row][hearders[col]] = result;
-            } else {
+            }
+            else {
                 interviewerInfo[row][hearders[col]] = value;
             }
         }); //interviewerInfo的长度永远多2个

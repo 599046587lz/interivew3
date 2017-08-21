@@ -8,7 +8,7 @@ global.path = require('path');
 
 exports.writeExcel = function (dbData, clubID) {
     return new Promise(function(resolve, reject) {
-        let _headers = ['club', 'name', 'studentID', 'gender', 'major', 'department', 'intro', 'tel', 'qq', 'short_tel'];
+        let _headers = ['club', 'name', 'studentID', 'gender', 'major', 'department', 'intro', 'tel', 'qq', 'short_tel', 'email'];
 
         let _data = dbData;
         _data.forEach((e, i) => {
@@ -27,20 +27,7 @@ exports.writeExcel = function (dbData, clubID) {
         // .reduce((prev, next) => Object.assign({}, prev, {[next.position]: {v: next.v}}));
         let result = {};
         data.forEach((e, i)=> {
-            if(e.position.charAt(0) == 'F') {
-                let array = [];
-                e.v.forEach(j => {
-                    if(j.column.length > 0) {
-                        j.column.forEach(k => {
-                            array.push(j.departname + '-' + k);
-                        })
-                    } else {
-                        array.push(j.departname);
-                    }
-                });
-                e.v = array;
-            }
-            result[e.position] = {v: e.v};
+            result[e.position] = {v: (e.v || '无')};
         });
         let newheader = {
             A1: {v: '社团'},
@@ -52,7 +39,8 @@ exports.writeExcel = function (dbData, clubID) {
             G1: {v: '简介'},
             H1: {v: '手机号'},
             I1: {v: 'qq'},
-            J1: {v: '短号'}
+            J1: {v: '短号'},
+            K1: {v: '邮箱'}
         };
 
         let output = Object.assign({}, newheader, result);
@@ -79,16 +67,16 @@ exports.writeWord = function (data, index) {
             'type': 'docx',
             'creator': 'Redhome Studio'
         });
-        let department = [];
-        data.department.forEach(e => {
-            if(e.column.length > 0) {
-                e.column.forEach(i => {
-                    department.push(e.departname + '-' + i);
-                })
-            } else {
-                department.push(e.departname);
-            }
-        });
+        // let department = [];
+        // data.department.forEach(e => {
+        //     if(e.column.length > 0) {
+        //         e.column.forEach(i => {
+        //             department.push(e.departname + '-' + i);
+        //         })
+        //     } else {
+        //         department.push(e.departname);
+        //     }
+        // });
 
         let title = '《' + data.club + '报名表》';
         docx.setDocTitle(title);
@@ -157,7 +145,7 @@ exports.writeWord = function (data, index) {
         });
 
         var pObj = docx.createP();
-        pObj.addText('部门：' + department, {
+        pObj.addText('部门：' + data.department, {
             font_face: 'Arial',
             font_size: 16
 
@@ -185,6 +173,13 @@ exports.writeWord = function (data, index) {
 
         var pObj = docx.createP();
         pObj.addText('个人简介：' + data.intro, {
+            font_face: 'Arial',
+            font_size: 16
+
+        });
+
+        var pObj = docx.createP();
+        pObj.addText('邮箱：' + (data.email || '无'), {
             font_face: 'Arial',
             font_size: 16
 

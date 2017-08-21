@@ -6,15 +6,11 @@ let config = require('./config');
 // mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://' + config.db.host + '/' + config.db.db, {useMongoClient: true});
 
-let Column = new mongoose.Schema({
-    columnName: String
-});
 
 let Department = new mongoose.Schema({
     did: Number,
     name: String,
     location: String,
-    column: [Column]
 });
 
 let Club = new mongoose.Schema({
@@ -73,11 +69,15 @@ let Interviewee = new mongoose.Schema({
     busy: {
         type: Boolean,
         default: false
-    }   //是否正在面试
+    }, //是否正在面试
     /*    calling:{
             type: Boolean,
             default: false
         } //是否正在和叫号大厅传输该学生信息*/
+    email: {
+        type: String,
+        default: ''
+    }
 });
 
 
@@ -121,10 +121,7 @@ let studentSchema = new mongoose.Schema({
         required: true
     },
     department: {
-        type: [{
-            column: [String],
-            departname: String
-        }],
+        type: [String],
         required: true
     },
     intro: {
@@ -159,8 +156,10 @@ let studentSchema = new mongoose.Schema({
     image: {
         type: String,
         required: true
+    },
+    email: {
+        type: String
     }
-
 });
 
 

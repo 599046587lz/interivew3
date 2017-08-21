@@ -24,7 +24,8 @@ exports.addStudent = function (data) {
         qq: data.qq,
         short_tel: data.short_tel,
         pic_url: data.pic_url,
-        image: data.image
+        image: data.image,
+        email: data.email
     });
 
     return Student.save().then(result => {

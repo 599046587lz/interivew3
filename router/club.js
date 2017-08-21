@@ -54,7 +54,7 @@ router.get('/logout', mid.checkLogin, function (req, res) {
 });
 
 /**
- * 上传应试者资料(未测试)
+ * 上传应试者资料
  * @params File archive excel文件
  * @return Object {status: 'success'|'failed', count:Number}
  */

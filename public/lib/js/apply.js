@@ -58,9 +58,9 @@ $(function () {
         $.ajax({
             url: "/club/clubInfo?clubId=" + clubID,
             success: function (data) {
-                loadList(data);
-                localStorage.setItem("club",data.clubName);
-    },
+                loadList(departFormat(data.department));
+                localStorage.setItem("club", data.clubName);
+            },
             error: function () {
                 $container.html("");
                 warning("找不到服务器")
@@ -68,14 +68,36 @@ $(function () {
         })
     }
 
+    function departFormat(data) {
+        var prelist = [];
+        var prev = '';
+        var department = new Object();
+        department.column = new Object();
+        for (var i in data) {
+            var predepart = data[i].name.split("-")[0];
+            var precolumn = data[i].name.split("-")[1];
+
+            if (predepart == prev) {
+                department.column.push(precolumn);
+            }
+            else {
+                prelist.push(department);
+                department = [];
+                prev = predepart;
+                department.name = predepart;
+                department.column = [];
+                department.column.push(precolumn);
+            }
+        }
+        prelist.push(department);
+        delete prelist[0];
+        return prelist;
+    }
+
     function loadList(data) {
         //动态注入部门标签
-        if(data.maxDep)
-            $(".max_depart span").html(data.maxDep);
-        else
-            $(".max_depart").html("申请选项");
-        for (var i in data.department) {
-            var list = data.department[i];
+        for (var i in data) {
+            var list = data[i];
             var temp = list1.replace("__depart__", list.name).replace("__did__", i);
             $list.append(temp);
             //如果存在二级标签则建立弹窗
@@ -111,8 +133,8 @@ $(function () {
             if (active) {
                 $(this).removeClass("active");
             } else {
-                    $(this).addClass("active");
-                }
+                $(this).addClass("active");
+            }
         }
     });
 
@@ -148,12 +170,12 @@ $(function () {
     });
 
     //图片预览
-    var hasPic=false;
+    var hasPic = false;
     $pic.on("click", function () {
         $picfile.click();
     });
     $picfile.on("change", function () {
-        hasPic=true;
+        hasPic = true;
         $(".pic+div").html('');
         var objUrl = getObjectURL(this.files[0]);
         if (objUrl)
@@ -172,61 +194,84 @@ $(function () {
         $female.find(".icon").css("background-image", "url('../../img/apply/female_off.png')");
     })
     //注意事项
-    if(clubID==1){
-    $check.iCheck({
-        checkboxClass: 'icheckbox_flat-green',
-        radioClass: 'iradio_flat-green'
-    });
-    $(".alarm .note").on("click", function () {
-        $check.next("ins").click();
-    });
-    $check.next("ins").on('click', function () {
-        var checked = $(this).parent().hasClass("checked");
-        if (!checked) {
-            $content.find("p").show();
-            $content.removeClass("checked");
+    if (clubID == 1) {
+        $check.iCheck({
+            checkboxClass: 'icheckbox_flat-green',
+            radioClass: 'iradio_flat-green'
+        });
+        $(".alarm .note").on("click", function () {
+            $check.next("ins").click();
+        });
+        $check.next("ins").on('click', function () {
+            var checked = $(this).parent().hasClass("checked");
+            if (!checked) {
+                $content.find("p").show();
+                $content.removeClass("checked");
 
-        }
-        else {
-            $content.find("p").hide();
-            $content.addClass("checked");
-        }
-    });
+            }
+            else {
+                $content.find("p").hide();
+                $content.addClass("checked");
+            }
+        });
     }
-    else{
+    else {
         $(".alarm").remove();
         $(".alarm-content").remove();
     }
 
 
+    // function getDepartResult(data) {
+    //     var department = [];
+    //     for (var i = 0; i < 10; i++) {
+    //         var obj = new Object();
+    //         var $thisDepart = $(".depart_list list1[did=" + i + "].active");
+    //         obj.departname = $thisDepart.text();
+    //         if (!obj.departname)continue;
+    //         obj.column = [];
+    //         for (var j = 0; j < 10; j++) {
+    //             var column = $(".popup[did=" + i + "] .pop_list list2[cid=" + j + "].active").text();
+    //             if (column) obj.column.push(column);
+    //         }
+    //         department.push(obj);
+    //     }
+    //     data.department = department;
+    // }
+
+
     function getDepartResult(data) {
         var department = [];
-        for (var i = 0; i < 10; i++) {
-            var obj = new Object();
+        for (var i = 0; i < 30; i++) {
+            var obj = '';
+            var flag = 1;
             var $thisDepart = $(".depart_list list1[did=" + i + "].active");
-            obj.departname = $thisDepart.text();
-            if (!obj.departname)continue;
-            obj.column = [];
-            for (var j = 0; j < 10; j++) {
+            obj = $thisDepart.text();
+            if (!obj)continue;
+            for (var j = 0; j < 15; j++) {
+                var insert = '';
                 var column = $(".popup[did=" + i + "] .pop_list list2[cid=" + j + "].active").text();
-                if (column) obj.column.push(column);
+                if (column) {
+                    flag = 0;
+                    insert = obj + "-" + column;
+                    department.push(insert);
+                }
             }
-            department.push(obj);
+            if (flag) department.push(obj);
         }
         data.department = department;
     }
 
-    function sendFinalData(data){
+
+    function sendFinalData(data) {
         delete data.check;
-        if(!data.intro)warning("还没有填写自我介绍哦");
-        if(!data.short_tel)data.short_tel=undefined;
+        if (!data.short_tel) data.short_tel = undefined;
         //console.log(data);
         $.ajax({
             url: "/reg",
             contentType: "application/json",
             method: "post",
             data: JSON.stringify(data),
-            success:function () {
+            success: function () {
                 $(".popup").addClass('hide');
                 $container.html("");
                 $container.addClass("background");
@@ -236,17 +281,24 @@ $(function () {
             },
             error: function (reg) {
                 $(".popup").addClass('hide')
-                if(reg.responseText=="参数类型不合法"){warning("上传有误 请将数据填写完整");return;}
-                if(reg.responseText.split(':')[2]){warning(reg.responseText.split(':')[2]);return;}
+                if (reg.responseText == "参数类型不合法") {
+                    warning("上传有误 请将数据填写完整");
+                    return;
+                }
+                if (reg.responseText.split(':')[2]) {
+                    warning(reg.responseText.split(':')[2]);
+                    return;
+                }
                 warning(reg.responseText);
 
             }
         })
     }
-    function sendPicData(data,form,finalData){
-        if(!hasPic){
-            var url_origin=location.href.split("/apply")[0];
-            finalData.pic_url=url_origin+"/img/apply/default_logo.png";
+
+    function sendPicData(data, form, finalData) {
+        if (!hasPic) {
+            var url_origin = location.href.split("/apply")[0];
+            finalData.pic_url = url_origin + "/img/apply/default_logo.png";
             sendFinalData(finalData);
             return;
         }
@@ -257,7 +309,7 @@ $(function () {
             processData: false,
             contentType: false,
             success: function (data) {
-                finalData.pic_url=data.url;
+                finalData.pic_url = data.url;
                 sendFinalData(finalData);
             },
             error: function () {
@@ -266,10 +318,15 @@ $(function () {
             }
         });
     }
+
     //上传所有数据
     $submit.on('click', function () {
         var finalData = $data.serializeObject();
-        if (clubID==1&&!finalData.check) {
+        if (!finalData.intro) {
+            warning("还没有填写自我介绍哦");
+            return;
+        }
+        if (clubID == 1 && !finalData.check) {
             warning("必须先确认注意事项哦~");
             return;
         }
@@ -289,7 +346,7 @@ $(function () {
             },
             success: function (data) {
                 var form = new FormData(document.getElementById("formfile"));
-                sendPicData(data,form,finalData);
+                sendPicData(data, form, finalData);
             }
         });
     })

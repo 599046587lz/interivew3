@@ -96,12 +96,13 @@ let studentSchema = new mongoose.Schema({
     },
     studentID: {
         type: String,
-        required: true,
-        validate:
-            {
-                validator: /^1[0-9]{7}$/,
-                message: "请填写正确的学号"
-            }
+        required: true
+        // ,
+        // validate:
+        //     {
+        //         validator: /^1[0-9]{7}$/,
+        //         message: "请填写正确的学号"
+        //     }
     },
     gender: {
         type: Number,
@@ -130,21 +131,23 @@ let studentSchema = new mongoose.Schema({
     },
     tel: {
         type: String,
-        required: true,
-        validate:
-            {
-                validator: /^(1[34578])[0-9]{9}$/,
-                message: '请填写正确的电话号码'
-            }
+        required: true
+        // ,
+        // validate:
+        //     {
+        //         validator: /^(1[34578])[0-9]{9}$/,
+        //         message: '请填写正确的电话号码'
+        //     }
     },
     qq: {
         type: String,
-        required: true,
-        validate:
-            {
-                validator: /[1-9][0-9]{4,}/,
-                message: '请填写正确的QQ号'
-            }
+        required: true
+        // ,
+        // validate:
+        //     {
+        //         validator: /[1-9][0-9]{4,}/,
+        //         message: '请填写正确的QQ号'
+        //     }
     },
     short_tel: {
         type: Number

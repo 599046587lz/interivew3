@@ -27,15 +27,26 @@ exports.session = function() {
 exports.checkFormat = function(format, option) {
     return function(req, res, next) {
         let body;
-
+        let errInfo;
+        let JoiFormat = format();
+        if(format().hasOwnProperty('errInfo')) {
+            errInfo = JoiFormat.errInfo;
+            JoiFormat = JoiFormat.joi;
+        }
         if (req.method === 'GET' || req.method === 'DELETE') {
             body = Object.assign({}, req.query, req.params);
         } else {
             body = Object.assign({}, req.body, req.params);
         }
 
-        const result = Joi.validate(body, format(), option);
+        let result = Joi.validate(body, JoiFormat, option);
         if(result.error) {
+            console.log(result.error);
+            let re = /(\[")([A-Za-z0-9]+)(")/;
+            let error = re.exec(result.error)[2];
+            if(errInfo && errInfo.hasOwnProperty(error)) {
+                return res.send(400, errInfo[error] + '格式错误');
+            }
             return res.send(400, '参数类型不合法');
         }
         next();

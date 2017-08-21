@@ -228,7 +228,7 @@ exports.exportInterviewees = function (cid, did) {
     return IntervieweeModel.find({
         cid: cid,
         'rate.did': did
-    }, 'name sid rate notion phone qq short_tel major sex').then(result => {
+    }, 'name sid rate notion phone qq short_tel major sex email').then(result => {
         let newDocs = [];
         result.forEach(e => {
             e = e.toObject();

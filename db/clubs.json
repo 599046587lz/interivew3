@@ -1,10 +1,9 @@
 { 
-    "_id" : "598d399a6385803730946cd6", 
+    "_id" : ObjectId("599a3c47bbf4542638e77cf5"), 
     "cid" : NumberInt(1), 
     "name" : "红色家园", 
     "password" : "202cb962ac59075b964b07152d234b70", 
     "maxDep" : NumberInt(3), 
-    "__v" : NumberInt(0), 
     "interviewer" : [
 
     ], 
@@ -12,60 +11,42 @@
         {
             "did" : NumberInt(0), 
             "name" : "设计部", 
-            "_id" : "598d399a6385803730946cdc", 
-            "column" : [
-
-            ]
+            "_id" : ObjectId("599a3c47bbf4542638e77cfb")
         }, 
         {
             "did" : NumberInt(1), 
             "name" : "技术部", 
-            "_id" : "598d399a6385803730946cdb", 
-            "column" : [
-
-            ]
+            "_id" : ObjectId("599a3c47bbf4542638e77cfa")
         }, 
         {
             "did" : NumberInt(2), 
             "name" : "媒体运营部", 
-            "_id" : "598d399a6385803730946cda", 
-            "column" : [
-
-            ]
+            "_id" : ObjectId("599a3c47bbf4542638e77cf9")
         }, 
         {
             "did" : NumberInt(3), 
             "name" : "活动运营部", 
-            "_id" : "598d399a6385803730946cd9", 
-            "column" : [
-
-            ]
+            "_id" : ObjectId("599a3c47bbf4542638e77cf8")
         }, 
         {
             "did" : NumberInt(4), 
             "name" : "公关部", 
-            "_id" : "598d399a6385803730946cd8", 
-            "column" : [
-
-            ]
+            "_id" : ObjectId("599a3c47bbf4542638e77cf7")
         }, 
         {
             "did" : NumberInt(5), 
             "name" : "人力资源部", 
-            "_id" : "598d399a6385803730946cd7", 
-            "column" : [
-
-            ]
+            "_id" : ObjectId("599a3c47bbf4542638e77cf6")
         }
-    ]
+    ], 
+    "__v" : NumberInt(0)
 }
 { 
-    "_id" : "598d3ad76385803730946cdd", 
+    "_id" : ObjectId("599a3c57bbf4542638e77cfc"), 
     "cid" : NumberInt(2), 
     "name" : "社团联合协会", 
     "password" : "202cb962ac59075b964b07152d234b70", 
     "maxDep" : NumberInt(3), 
-    "__v" : NumberInt(0), 
     "interviewer" : [
 
     ], 
@@ -73,84 +54,57 @@
         {
             "did" : NumberInt(0), 
             "name" : "项目创新中心", 
-            "_id" : "598d3ad76385803730946ce6", 
-            "column" : [
-
-            ]
+            "_id" : ObjectId("599a3c57bbf4542638e77d05")
         }, 
         {
             "did" : NumberInt(1), 
             "name" : "办公室", 
-            "_id" : "598d3ad76385803730946ce5", 
-            "column" : [
-
-            ]
+            "_id" : ObjectId("599a3c57bbf4542638e77d04")
         }, 
         {
             "did" : NumberInt(2), 
             "name" : "公关部", 
-            "_id" : "598d3ad76385803730946ce4", 
-            "column" : [
-
-            ]
+            "_id" : ObjectId("599a3c57bbf4542638e77d03")
         }, 
         {
             "did" : NumberInt(3), 
             "name" : "文艺部", 
-            "_id" : "598d3ad76385803730946ce3", 
-            "column" : [
-
-            ]
+            "_id" : ObjectId("599a3c57bbf4542638e77d02")
         }, 
         {
             "did" : NumberInt(4), 
             "name" : "权益中心", 
-            "_id" : "598d3ad76385803730946ce2", 
-            "column" : [
-
-            ]
+            "_id" : ObjectId("599a3c57bbf4542638e77d01")
         }, 
         {
             "did" : NumberInt(5), 
             "name" : "新媒体中心", 
-            "_id" : "598d3ad76385803730946ce1", 
-            "column" : [
-
-            ]
+            "_id" : ObjectId("599a3c57bbf4542638e77d00")
         }, 
         {
             "did" : NumberInt(6), 
             "name" : "宣传部", 
-            "_id" : "598d3ad76385803730946ce0", 
-            "column" : [
-
-            ]
+            "_id" : ObjectId("599a3c57bbf4542638e77cff")
         }, 
         {
             "did" : NumberInt(7), 
             "name" : "人力资源部", 
-            "_id" : "598d3ad76385803730946cdf", 
-            "column" : [
-
-            ]
+            "_id" : ObjectId("599a3c57bbf4542638e77cfe")
         }, 
         {
             "did" : NumberInt(8), 
             "name" : "组织部", 
-            "_id" : "598d3ad76385803730946cde", 
-            "column" : [
-
-            ]
+            "_id" : ObjectId("599a3c57bbf4542638e77cfd")
         }
-    ]
+    ], 
+    "__v" : NumberInt(0)
 }
 { 
-    "_id" : "598d3bc36385803730946ce7", 
+    "_id" : ObjectId("599a3c7ebbf4542638e77d06"), 
     "cid" : NumberInt(3), 
     "name" : "校报", 
     "password" : "202cb962ac59075b964b07152d234b70", 
     "maxDep" : NumberInt(3), 
-    "__v" : NumberInt(0), 
     "interviewer" : [
 
     ], 
@@ -158,51 +112,37 @@
         {
             "did" : NumberInt(0), 
             "name" : "采编一部", 
-            "_id" : "598d3bc36385803730946ceb", 
-            "column" : [
-
-            ]
+            "_id" : ObjectId("599a3c7ebbf4542638e77d0b")
         }, 
         {
             "did" : NumberInt(1), 
             "name" : "采编二部", 
-            "_id" : "598d3bc36385803730946cea", 
-            "column" : [
-
-            ]
+            "_id" : ObjectId("599a3c7ebbf4542638e77d0a")
         }, 
         {
             "did" : NumberInt(2), 
-            "name" : "组织部", 
-            "_id" : "598d3bc36385803730946ce9", 
-            "column" : [
-
-            ]
+            "name" : "采编三部", 
+            "_id" : ObjectId("599a3c7ebbf4542638e77d09")
         }, 
         {
             "did" : NumberInt(3), 
-            "name" : "网络运营部", 
-            "_id" : "598d3bc36385803730946ce8", 
-            "column" : [
-
-            ]
+            "name" : "组织部", 
+            "_id" : ObjectId("599a3c7ebbf4542638e77d08")
         }, 
         {
             "did" : NumberInt(4), 
-            "name" : "采编三部", 
-            "column" : [
-
-            ]
+            "name" : "网络运营部", 
+            "_id" : ObjectId("599a3c7ebbf4542638e77d07")
         }
-    ]
+    ], 
+    "__v" : NumberInt(0)
 }
 { 
-    "_id" : "598d3c766385803730946cec", 
+    "_id" : ObjectId("599a3c8cbbf4542638e77d0c"), 
     "cid" : NumberInt(4), 
     "name" : "新媒体", 
     "password" : "202cb962ac59075b964b07152d234b70", 
     "maxDep" : NumberInt(3), 
-    "__v" : NumberInt(0), 
     "interviewer" : [
 
     ], 
@@ -210,244 +150,216 @@
         {
             "did" : NumberInt(0), 
             "name" : "美编部", 
-            "_id" : "598d3c766385803730946cef", 
-            "column" : [
-
-            ]
+            "_id" : ObjectId("599a3c8cbbf4542638e77d0f")
         }, 
         {
             "did" : NumberInt(1), 
             "name" : "文编部", 
-            "_id" : "598d3c766385803730946cee", 
-            "column" : [
-
-            ]
+            "_id" : ObjectId("599a3c8cbbf4542638e77d0e")
         }, 
         {
             "did" : NumberInt(2), 
             "name" : "技术部", 
-            "_id" : "598d3c766385803730946ced", 
-            "column" : [
-
-            ]
+            "_id" : ObjectId("599a3c8cbbf4542638e77d0d")
         }
-    ]
+    ], 
+    "__v" : NumberInt(0)
 }
 { 
-    "_id" : "598d4247fd6b322c94094e29", 
+    "_id" : ObjectId("599a3fffbbf4542638e77d10"), 
     "cid" : NumberInt(5), 
     "name" : "杭电之声", 
     "password" : "202cb962ac59075b964b07152d234b70", 
     "maxDep" : NumberInt(0), 
-    "__v" : NumberInt(0), 
     "interviewer" : [
 
     ], 
     "departments" : [
         {
             "did" : NumberInt(0), 
-            "name" : "节目部", 
-            "_id" : "598d4247fd6b322c94094e4c", 
-            "column" : [
-                {
-                    "columnName" : "娱乐热点", 
-                    "_id" : "598d4247fd6b322c94094e56"
-                }, 
-                {
-                    "columnName" : "时事新闻", 
-                    "_id" : "598d4247fd6b322c94094e55"
-                }, 
-                {
-                    "columnName" : "潮流音乐", 
-                    "_id" : "598d4247fd6b322c94094e54"
-                }, 
-                {
-                    "columnName" : "欧美影剧,英语口语", 
-                    "_id" : "598d4247fd6b322c94094e53"
-                }, 
-                {
-                    "columnName" : "生活资讯,校园动态", 
-                    "_id" : "598d4247fd6b322c94094e52"
-                }, 
-                {
-                    "columnName" : "体育赛事", 
-                    "_id" : "598d4247fd6b322c94094e51"
-                }, 
-                {
-                    "columnName" : "情感调频&治愈声线", 
-                    "_id" : "598d4247fd6b322c94094e50"
-                }, 
-                {
-                    "columnName" : "文字&书籍", 
-                    "_id" : "598d4247fd6b322c94094e4f"
-                }, 
-                {
-                    "columnName" : "旅行&心情&人生", 
-                    "_id" : "598d4247fd6b322c94094e4e"
-                }, 
-                {
-                    "columnName" : "广播剧", 
-                    "_id" : "598d4247fd6b322c94094e4d"
-                }
-            ]
+            "name" : "节目部-娱乐热点", 
+            "_id" : ObjectId("599a3fffbbf4542638e77d34")
         }, 
         {
             "did" : NumberInt(1), 
-            "name" : "编辑部", 
-            "_id" : "598d4247fd6b322c94094e43", 
-            "column" : [
-                {
-                    "columnName" : "歌曲&心情(乐评)", 
-                    "_id" : "598d4247fd6b322c94094e4b"
-                }, 
-                {
-                    "columnName" : "评书&微信", 
-                    "_id" : "598d4247fd6b322c94094e4a"
-                }, 
-                {
-                    "columnName" : "书籍&诗歌(书评)", 
-                    "_id" : "598d4247fd6b322c94094e49"
-                }, 
-                {
-                    "columnName" : "小说&故事(广播剧)", 
-                    "_id" : "598d4247fd6b322c94094e48"
-                }, 
-                {
-                    "columnName" : "人文&情怀", 
-                    "_id" : "598d4247fd6b322c94094e47"
-                }, 
-                {
-                    "columnName" : "电影&感悟(影评)", 
-                    "_id" : "598d4247fd6b322c94094e46"
-                }, 
-                {
-                    "columnName" : "旅行&文艺(游记)", 
-                    "_id" : "598d4247fd6b322c94094e45"
-                }
-            ]
+            "name" : "节目部-时事新闻", 
+            "_id" : ObjectId("599a3fffbbf4542638e77d33")
         }, 
         {
             "did" : NumberInt(2), 
-            "name" : "外联部", 
-            "_id" : "598d4247fd6b322c94094e40", 
-            "column" : [
-                {
-                    "columnName" : "赞助洽谈", 
-                    "_id" : "598d4247fd6b322c94094e42"
-                }, 
-                {
-                    "columnName" : "公关", 
-                    "_id" : "598d4247fd6b322c94094e41"
-                }
-            ]
+            "name" : "节目部-潮流音乐", 
+            "_id" : ObjectId("599a3fffbbf4542638e77d32")
         }, 
         {
             "did" : NumberInt(3), 
-            "name" : "办公室", 
-            "_id" : "598d4247fd6b322c94094e3b", 
-            "column" : [
-                {
-                    "columnName" : "工作企划", 
-                    "_id" : "598d4247fd6b322c94094e3f"
-                }, 
-                {
-                    "columnName" : "人员编排", 
-                    "_id" : "598d4247fd6b322c94094e3e"
-                }, 
-                {
-                    "columnName" : "档案规整", 
-                    "_id" : "598d4247fd6b322c94094e3d"
-                }, 
-                {
-                    "columnName" : "财务管理", 
-                    "_id" : "598d4247fd6b322c94094e3c"
-                }
-            ]
+            "name" : "节目部-欧美影剧,英语口语", 
+            "_id" : ObjectId("599a3fffbbf4542638e77d31")
         }, 
         {
             "did" : NumberInt(4), 
-            "name" : "主持队", 
-            "_id" : "598d4247fd6b322c94094e37", 
-            "column" : [
-                {
-                    "columnName" : "高端大气官方", 
-                    "_id" : "598d4247fd6b322c94094e3a"
-                }, 
-                {
-                    "columnName" : "诙谐幽默机智", 
-                    "_id" : "598d4247fd6b322c94094e39"
-                }, 
-                {
-                    "columnName" : "活泼亲和百搭", 
-                    "_id" : "598d4247fd6b322c94094e38"
-                }
-            ]
+            "name" : "节目部-生活资讯,校园动态", 
+            "_id" : ObjectId("599a3fffbbf4542638e77d30")
         }, 
         {
             "did" : NumberInt(5), 
-            "name" : "技术部", 
-            "_id" : "598d4247fd6b322c94094e32", 
-            "column" : [
-                {
-                    "columnName" : "节目导播", 
-                    "_id" : "598d4247fd6b322c94094e36"
-                }, 
-                {
-                    "columnName" : "舞台控制", 
-                    "_id" : "598d4247fd6b322c94094e35"
-                }, 
-                {
-                    "columnName" : "音频处理", 
-                    "_id" : "598d4247fd6b322c94094e34"
-                }, 
-                {
-                    "columnName" : "广播剧后期制作", 
-                    "_id" : "598d4247fd6b322c94094e33"
-                }
-            ]
+            "name" : "节目部-体育赛事", 
+            "_id" : ObjectId("599a3fffbbf4542638e77d2f")
         }, 
         {
             "did" : NumberInt(6), 
-            "name" : "宣传部", 
-            "_id" : "598d4247fd6b322c94094e2e", 
-            "column" : [
-                {
-                    "columnName" : "网宣", 
-                    "_id" : "598d4247fd6b322c94094e31"
-                }, 
-                {
-                    "columnName" : "美工", 
-                    "_id" : "598d4247fd6b322c94094e30"
-                }, 
-                {
-                    "columnName" : "摄影", 
-                    "_id" : "598d4247fd6b322c94094e2f"
-                }
-            ]
+            "name" : "节目部-情感调频&治愈声线", 
+            "_id" : ObjectId("599a3fffbbf4542638e77d2e")
         }, 
         {
             "did" : NumberInt(7), 
-            "name" : "视频制作部", 
-            "_id" : "598d4247fd6b322c94094e2a", 
-            "column" : [
-                {
-                    "columnName" : "策划&编剧", 
-                    "_id" : "598d4247fd6b322c94094e2d"
-                }, 
-                {
-                    "columnName" : "摄影摄像", 
-                    "_id" : "598d4247fd6b322c94094e2c"
-                }, 
-                {
-                    "columnName" : "后期剪辑", 
-                    "_id" : "598d4247fd6b322c94094e2b"
-                }
-            ]
+            "name" : "节目部-文字&书籍", 
+            "_id" : ObjectId("599a3fffbbf4542638e77d2d")
+        }, 
+        {
+            "did" : NumberInt(8), 
+            "name" : "节目部-旅行&心情&人生", 
+            "_id" : ObjectId("599a3fffbbf4542638e77d2c")
+        }, 
+        {
+            "did" : NumberInt(9), 
+            "name" : "节目部-广播剧", 
+            "_id" : ObjectId("599a3fffbbf4542638e77d2b")
+        }, 
+        {
+            "did" : NumberInt(10), 
+            "name" : "编辑部-歌曲&心情(乐评)", 
+            "_id" : ObjectId("599a3fffbbf4542638e77d2a")
+        }, 
+        {
+            "did" : NumberInt(11), 
+            "name" : "编辑部-评书&微信", 
+            "_id" : ObjectId("599a3fffbbf4542638e77d29")
+        }, 
+        {
+            "did" : NumberInt(12), 
+            "name" : "编辑部-书籍&诗歌(书评)", 
+            "_id" : ObjectId("599a3fffbbf4542638e77d28")
+        }, 
+        {
+            "did" : NumberInt(13), 
+            "name" : "编辑部-小说&故事(广播剧)", 
+            "_id" : ObjectId("599a3fffbbf4542638e77d27")
+        }, 
+        {
+            "did" : NumberInt(14), 
+            "name" : "编辑部-人文&情怀", 
+            "_id" : ObjectId("599a3fffbbf4542638e77d26")
+        }, 
+        {
+            "did" : NumberInt(15), 
+            "name" : "编辑部-电影&感悟(影评)", 
+            "_id" : ObjectId("599a3fffbbf4542638e77d25")
+        }, 
+        {
+            "did" : NumberInt(16), 
+            "name" : "编辑部-旅行&文艺(游记)", 
+            "_id" : ObjectId("599a3fffbbf4542638e77d24")
+        }, 
+        {
+            "did" : NumberInt(17), 
+            "name" : "外联部-赞助洽谈", 
+            "_id" : ObjectId("599a3fffbbf4542638e77d23")
+        }, 
+        {
+            "did" : NumberInt(18), 
+            "name" : "外联部-公关", 
+            "_id" : ObjectId("599a3fffbbf4542638e77d22")
+        }, 
+        {
+            "did" : NumberInt(19), 
+            "name" : "办公室-工作企划", 
+            "_id" : ObjectId("599a3fffbbf4542638e77d21")
+        }, 
+        {
+            "did" : NumberInt(20), 
+            "name" : "办公室-人员编排", 
+            "_id" : ObjectId("599a3fffbbf4542638e77d20")
+        }, 
+        {
+            "did" : NumberInt(21), 
+            "name" : "办公室-档案规", 
+            "_id" : ObjectId("599a3fffbbf4542638e77d1f")
+        }, 
+        {
+            "did" : NumberInt(22), 
+            "name" : "办公室-财务管理", 
+            "_id" : ObjectId("599a3fffbbf4542638e77d1e")
+        }, 
+        {
+            "did" : NumberInt(23), 
+            "name" : "主持队-高端大气官方", 
+            "_id" : ObjectId("599a3fffbbf4542638e77d1d")
+        }, 
+        {
+            "did" : NumberInt(24), 
+            "name" : "主持队-诙谐幽默机智", 
+            "_id" : ObjectId("599a3fffbbf4542638e77d1c")
+        }, 
+        {
+            "did" : NumberInt(25), 
+            "name" : "主持队-活泼亲和百搭", 
+            "_id" : ObjectId("599a3fffbbf4542638e77d1b")
+        }, 
+        {
+            "did" : NumberInt(26), 
+            "name" : "技术部-节目导播", 
+            "_id" : ObjectId("599a3fffbbf4542638e77d1a")
+        }, 
+        {
+            "did" : NumberInt(27), 
+            "name" : "技术部-舞台控制", 
+            "_id" : ObjectId("599a3fffbbf4542638e77d19")
+        }, 
+        {
+            "did" : NumberInt(28), 
+            "name" : "技术部-音频处理", 
+            "_id" : ObjectId("599a3fffbbf4542638e77d18")
+        }, 
+        {
+            "did" : NumberInt(29), 
+            "name" : "技术部-广播剧后期制作", 
+            "_id" : ObjectId("599a3fffbbf4542638e77d17")
+        }, 
+        {
+            "did" : NumberInt(30), 
+            "name" : "宣传部-网宣", 
+            "_id" : ObjectId("599a3fffbbf4542638e77d16")
+        }, 
+        {
+            "did" : NumberInt(31), 
+            "name" : "宣传部-美工", 
+            "_id" : ObjectId("599a3fffbbf4542638e77d15")
+        }, 
+        {
+            "did" : NumberInt(32), 
+            "name" : "宣传部-摄影", 
+            "_id" : ObjectId("599a3fffbbf4542638e77d14")
+        }, 
+        {
+            "did" : NumberInt(33), 
+            "name" : "视频制作部-策划&编剧", 
+            "_id" : ObjectId("599a3fffbbf4542638e77d13")
+        }, 
+        {
+            "did" : NumberInt(34), 
+            "name" : "视频制作部-摄影摄像", 
+            "_id" : ObjectId("599a3fffbbf4542638e77d12")
+        }, 
+        {
+            "did" : NumberInt(35), 
+            "name" : "视频制作部-后期剪辑", 
+            "_id" : ObjectId("599a3fffbbf4542638e77d11")
         }
-    ]
+    ], 
+    "__v" : NumberInt(0)
 }
 { 
-    "_id" : ObjectId("5993cc9a66a2cf1e7464f93b"), 
+    "_id" : ObjectId("599a4036bbf4542638e77d35"), 
     "cid" : NumberInt(6), 
     "name" : "焦点摄影", 
     "password" : "202cb962ac59075b964b07152d234b70", 
@@ -459,154 +371,97 @@
         {
             "did" : NumberInt(0), 
             "name" : "Ps", 
-            "_id" : ObjectId("5993cc9a66a2cf1e7464f94e"), 
-            "column" : [
-
-            ]
+            "_id" : ObjectId("599a4036bbf4542638e77d48")
         }, 
         {
             "did" : NumberInt(1), 
             "name" : "Lr", 
-            "_id" : ObjectId("5993cc9a66a2cf1e7464f94d"), 
-            "column" : [
-
-            ]
+            "_id" : ObjectId("599a4036bbf4542638e77d47")
         }, 
         {
             "did" : NumberInt(2), 
             "name" : "Ae", 
-            "_id" : ObjectId("5993cc9a66a2cf1e7464f94c"), 
-            "column" : [
-
-            ]
+            "_id" : ObjectId("599a4036bbf4542638e77d46")
         }, 
         {
             "did" : NumberInt(3), 
             "name" : "Pr", 
-            "_id" : ObjectId("5993cc9a66a2cf1e7464f94b"), 
-            "column" : [
-
-            ]
+            "_id" : ObjectId("599a4036bbf4542638e77d45")
         }, 
         {
             "did" : NumberInt(4), 
             "name" : "编程", 
-            "_id" : ObjectId("5993cc9a66a2cf1e7464f94a"), 
-            "column" : [
-
-            ]
+            "_id" : ObjectId("599a4036bbf4542638e77d44")
         }, 
         {
             "did" : NumberInt(5), 
             "name" : "程序设计", 
-            "_id" : ObjectId("5993cc9a66a2cf1e7464f949"), 
-            "column" : [
-
-            ]
+            "_id" : ObjectId("599a4036bbf4542638e77d43")
         }, 
         {
             "did" : NumberInt(6), 
             "name" : "UI", 
-            "_id" : ObjectId("5993cc9a66a2cf1e7464f948"), 
-            "column" : [
-
-            ]
+            "_id" : ObjectId("599a4036bbf4542638e77d42")
         }, 
         {
             "did" : NumberInt(7), 
             "name" : "mmd", 
-            "_id" : ObjectId("5993cc9a66a2cf1e7464f947"), 
-            "column" : [
-
-            ]
+            "_id" : ObjectId("599a4036bbf4542638e77d41")
         }, 
         {
             "did" : NumberInt(8), 
             "name" : "微信推送/运营", 
-            "_id" : ObjectId("5993cc9a66a2cf1e7464f946"), 
-            "column" : [
-
-            ]
+            "_id" : ObjectId("599a4036bbf4542638e77d40")
         }, 
         {
             "did" : NumberInt(9), 
             "name" : "文字", 
-            "_id" : ObjectId("5993cc9a66a2cf1e7464f945"), 
-            "column" : [
-
-            ]
+            "_id" : ObjectId("599a4036bbf4542638e77d3f")
         }, 
         {
             "did" : NumberInt(10), 
             "name" : "组织策划", 
-            "_id" : ObjectId("5993cc9a66a2cf1e7464f944"), 
-            "column" : [
-
-            ]
+            "_id" : ObjectId("599a4036bbf4542638e77d3e")
         }, 
         {
             "did" : NumberInt(11), 
             "name" : "力气大，能吃苦", 
-            "_id" : ObjectId("5993cc9a66a2cf1e7464f943"), 
-            "column" : [
-
-            ]
+            "_id" : ObjectId("599a4036bbf4542638e77d3d")
         }, 
         {
             "did" : NumberInt(12), 
             "name" : "虚心学习", 
-            "_id" : ObjectId("5993cc9a66a2cf1e7464f942"), 
-            "column" : [
-
-            ]
+            "_id" : ObjectId("599a4036bbf4542638e77d3c")
         }, 
         {
             "did" : NumberInt(13), 
             "name" : "水群", 
-            "_id" : ObjectId("5993cc9a66a2cf1e7464f941"), 
-            "column" : [
-
-            ]
+            "_id" : ObjectId("599a4036bbf4542638e77d3b")
         }, 
         {
             "did" : NumberInt(14), 
             "name" : "擅长处理应急事件", 
-            "_id" : ObjectId("5993cc9a66a2cf1e7464f940"), 
-            "column" : [
-
-            ]
+            "_id" : ObjectId("599a4036bbf4542638e77d3a")
         }, 
         {
             "did" : NumberInt(15), 
             "name" : "会做旅行/美食攻略各种攻略", 
-            "_id" : ObjectId("5993cc9a66a2cf1e7464f93f"), 
-            "column" : [
-
-            ]
+            "_id" : ObjectId("599a4036bbf4542638e77d39")
         }, 
         {
             "did" : NumberInt(16), 
             "name" : "会画画(sai/手绘)", 
-            "_id" : ObjectId("5993cc9a66a2cf1e7464f93e"), 
-            "column" : [
-
-            ]
+            "_id" : ObjectId("599a4036bbf4542638e77d38")
         }, 
         {
             "did" : NumberInt(17), 
             "name" : "会写日记，手账", 
-            "_id" : ObjectId("5993cc9a66a2cf1e7464f93d"), 
-            "column" : [
-
-            ]
+            "_id" : ObjectId("599a4036bbf4542638e77d37")
         }, 
         {
             "did" : NumberInt(18), 
             "name" : "热爱摄影/擅长摄影", 
-            "_id" : ObjectId("5993cc9a66a2cf1e7464f93c"), 
-            "column" : [
-
-            ]
+            "_id" : ObjectId("599a4036bbf4542638e77d36")
         }
     ], 
     "__v" : NumberInt(0)

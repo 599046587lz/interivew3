@@ -10,22 +10,24 @@ let Joi = require('joi');
 let wrap = fn => (...args) => fn(...args).catch(args[2]);
 
 router.post('/', mid.checkFormat(function() {
-    return {joi: Joi.object().keys({
-        club: Joi.string().required(),
-        clubID: Joi.number().required(),
-        name: Joi.string().required(),
-        studentID: Joi.string().regex(/^1[0-9]{7}$/).required(),
-        gender: Joi.number().required(),
-        college: Joi.string().required(),
-        major: Joi.string().required(),
-        department: Joi.array().items(Joi.string()).required(),
-        intro: Joi.string().required(),
-        tel: Joi.string().regex(/^(1[34578])[0-9]{9}$/).required(),
-        qq: Joi.string().regex(/[1-9][0-9]{4,}/).required(),
-        short_tel: Joi.string().regex(/[0-9]{6}$/),
-        pic_url: Joi.string().required(),
-        email:Joi.string()
-    }), errInfo: {
+    return {
+        joi: Joi.object().keys({
+            club: Joi.string().required(),
+            clubID: Joi.number().required(),
+            name: Joi.string().required(),
+            studentID: Joi.string().regex(/^1[0-9]{7}$/).required(),
+            gender: Joi.number().required(),
+            college: Joi.string().required(),
+            major: Joi.string().required(),
+            department: Joi.array().items(Joi.string()).required(),
+            intro: Joi.string().required(),
+            tel: Joi.string().regex(/^(1[34578])[0-9]{9}$/).required(),
+            qq: Joi.string().regex(/[1-9][0-9]{4,}/).required(),
+            short_tel: Joi.string().regex(/[0-9]{6}$/),
+            pic_url: Joi.string().required(),
+            email:Joi.string()
+        }),
+        errInfo: {
             studentID: '学号',
             tel: '电话',
             qq: 'qq',

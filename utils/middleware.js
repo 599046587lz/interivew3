@@ -25,21 +25,22 @@ exports.session = function() {
 
 
 exports.checkFormat = function(format, option) {
+    let errInfo;
+    let joiFormat = format();
+    if(joiFormat.errInfo) {
+        errInfo = joiFormat.errInfo;
+        joiFormat = joiFormat.joi;
+    }
+
     return function(req, res, next) {
         let body;
-        let errInfo;
-        let JoiFormat = format();
-        if(format().hasOwnProperty('errInfo')) {
-            errInfo = JoiFormat.errInfo;
-            JoiFormat = JoiFormat.joi;
-        }
         if (req.method === 'GET' || req.method === 'DELETE') {
             body = Object.assign({}, req.query, req.params);
         } else {
             body = Object.assign({}, req.body, req.params);
         }
 
-        let result = Joi.validate(body, JoiFormat, option);
+        let result = Joi.validate(body, joiFormat, option);
         if(result.error) {
             let re = /(\[")([\u4E00-\u9FA5A-Za-z0-9_]+)(")/;
             let error = re.exec(result.error)[2];

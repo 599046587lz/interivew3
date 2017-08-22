@@ -58,8 +58,10 @@ $(function () {
         $.ajax({
             url: "/club/clubInfo?clubId=" + clubID,
             success: function (data) {
-                loadList(departFormat(data.department));
                 localStorage.setItem("club", data.clubName);
+                localStorage.setItem("maxDep", data.maxDep);
+                loadList(departFormat(data.department));
+
             },
             error: function () {
                 $container.html("");
@@ -94,7 +96,11 @@ $(function () {
         return prelist;
     }
 
+    var max = 0, depart = 0;
+
     function loadList(data) {
+        max = localStorage.getItem("maxDep");
+        if(!(max-0))max=99;
         //动态注入部门标签
         for (var i in data) {
             var list = data[i];
@@ -132,8 +138,14 @@ $(function () {
             var active = $(this).hasClass("active");
             if (active) {
                 $(this).removeClass("active");
+                depart--;
             } else {
-                $(this).addClass("active");
+                if (depart < max) {
+                    $(this).addClass("active");
+                    depart++;
+                }
+                else
+                    warning("最多只能选择"+max+"项哦");
             }
         }
     });
@@ -152,19 +164,27 @@ $(function () {
         if (active) {
             $(this).removeClass("active");
             $list1.removeClass("active");
-            //二级标签不不能超过20
-            for (var m = 0; m < 20; m++) {
+            var flag=0;
+            //二级标签不不能超过15
+            for (var m = 0; m < 15; m++) {
                 if ($(this).parent().find("list2[cid=" + m + "]").hasClass("active")) {
                     $list1.addClass("active");
+                    flag=1;
                     break;
                 }
             }
+            if(!flag)depart--;
         } else {
             if ($list1.hasClass("active")) {
                 $(this).addClass("active");
             } else {
-                $(this).addClass("active");
-                $list1.addClass("active");
+                if (depart < max) {
+                    $(this).addClass("active");
+                    $list1.addClass("active");
+                    depart++;
+                }
+                else
+                    warning("最多只能选择"+max+"项哦");
             }
         }
     });
@@ -185,7 +205,7 @@ $(function () {
     //性别选择
     $female.on("click", function () {
         var $on = $(this).find(".icon.on");
-        var $off=$(this).find(".icon.off");
+        var $off = $(this).find(".icon.off");
         $on.removeClass("hide");
         $off.addClass("hide");
         $male.find(".icon.on").addClass("hide");
@@ -193,7 +213,7 @@ $(function () {
     })
     $male.on("click", function () {
         var $on = $(this).find(".icon.on");
-        var $off=$(this).find(".icon.off");
+        var $off = $(this).find(".icon.off");
         $on.removeClass("hide");
         $off.addClass("hide");
         $female.find(".icon.on").addClass("hide");

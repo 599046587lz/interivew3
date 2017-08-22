@@ -184,14 +184,20 @@ $(function () {
 
     //性别选择
     $female.on("click", function () {
-        var $icon = $(this).find(".icon");
-        $icon.css("background-image", "url('../../img/apply/female_on.png')");
-        $male.find(".icon").css("background-image", "url('../img/apply/male_off.png')");
+        var $on = $(this).find(".icon.on");
+        var $off=$(this).find(".icon.off");
+        $on.removeClass("hide");
+        $off.addClass("hide");
+        $male.find(".icon.on").addClass("hide");
+        $male.find(".icon.off").removeClass("hide");
     })
     $male.on("click", function () {
-        var $icon = $(this).find(".icon");
-        $icon.css("background-image", "url('../img/apply/male_on.png')");
-        $female.find(".icon").css("background-image", "url('../../img/apply/female_off.png')");
+        var $on = $(this).find(".icon.on");
+        var $off=$(this).find(".icon.off");
+        $on.removeClass("hide");
+        $off.addClass("hide");
+        $female.find(".icon.on").addClass("hide");
+        $female.find(".icon.off").removeClass("hide");
     })
     //注意事项
     if (clubID == 1) {
@@ -322,6 +328,7 @@ $(function () {
     //上传所有数据
     $submit.on('click', function () {
         var finalData = $data.serializeObject();
+        console.log(finalData);
         if (!finalData.intro) {
             warning("还没有填写自我介绍哦");
             return;

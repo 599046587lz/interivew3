@@ -129,13 +129,23 @@ warning .check {
     bottom: 0;
 }
 
-.genderbox.female .icon{
+.genderbox.female .icon.off{
     background-image: url("../../img/apply/female_off.png");
     background-size: cover;
 }
 
-.genderbox.male .icon{
+.genderbox.male .icon.off{
     background-image: url("../../img/apply/male_off.png");
+    background-size: cover;
+}
+
+.genderbox.female .icon.on{
+    background-image: url("../../img/apply/female_on.png");
+    background-size: cover;
+}
+
+.genderbox.male .icon.on{
+    background-image: url("../../img/apply/male_on.png");
     background-size: cover;
 }
 

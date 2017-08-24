@@ -54,6 +54,7 @@ textarea {
     height: 75px;
     overflow: hidden;
     width: 100%;
+    text-indent: 22px;
     border: none;
     outline: none;
     resize: none;
@@ -232,6 +233,14 @@ warning .check {
     background-color: rgb(26, 188, 156);
     border: solid 2px rgb(26, 188, 156);
     color: white;
+}
+
+.intro img {
+    position: absolute;
+    margin-top: 2px;
+    margin-left: 3px;
+    width: 15px;
+    height: 15px;
 }
 
 .alarm div{

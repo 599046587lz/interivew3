@@ -98,6 +98,8 @@ exports.handleArchive = function (file, cid) {
                 let result = [];
                 departInfo.forEach(e => {
                    let oneDepart = department.filter(k => {return k.name == e})[0];
+                   oneDepart = oneDepart.toObject();
+                   delete oneDepart.number;
                    result.push(oneDepart);
                 });
                 interviewerInfo[row][hearders[col]] = result;

@@ -1,4 +1,5 @@
 let studentModel = require('../models').Student;
+let clubModel = require('../models').Club;
 
 exports.queryByClubAll = function (clubID) {
 
@@ -29,7 +30,19 @@ exports.addStudent = function (data) {
     });
 
     return Student.save().then(result => {
-        return ("报名成功！");
+        clubModel.findOne({
+            cid: data.clubID
+        }).then(result => {
+            result.departments.forEach(e => {
+                data.department.forEach(j => {
+                    if(e.name == j) {
+                        e.number ++;
+                        return;
+                    }
+                })
+            });
+            result.save();
+        })
     });
 };
 

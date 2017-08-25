@@ -3,6 +3,7 @@
  */
 let IntervieweeModel = require('../models').Interviewee;
 let clubModel = require('../models').Club;
+let studentModel = require('../models').Student;
 let excel = require('xlsx');
 let debug = require('debug')('interview');
 let Interviewee = require('./interviewee');
@@ -273,4 +274,14 @@ exports.insertInfo = function (data) {
     model.save().then(result => {
         return result;
     });
+};
+
+exports.getRegNum = function (clubId) {
+    return studentModel.find({
+        clubID: clubId
+    }).then(result => {
+        return {
+            count: result.length
+        }
+    })
 };

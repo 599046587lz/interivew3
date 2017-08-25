@@ -1,5 +1,5 @@
 { 
-    "_id" : ObjectId("599a3c47bbf4542638e77cf5"), 
+    "_id" : ObjectId("599fb90606df1710947c3e95"), 
     "cid" : NumberInt(1), 
     "name" : "红色家园", 
     "password" : "202cb962ac59075b964b07152d234b70", 
@@ -11,38 +11,44 @@
         {
             "did" : NumberInt(0), 
             "name" : "设计部", 
-            "_id" : ObjectId("599a3c47bbf4542638e77cfb")
+            "_id" : ObjectId("599fb90606df1710947c3e9b"), 
+            "number" : NumberInt(0)
         }, 
         {
             "did" : NumberInt(1), 
             "name" : "技术部", 
-            "_id" : ObjectId("599a3c47bbf4542638e77cfa")
+            "_id" : ObjectId("599fb90606df1710947c3e9a"), 
+            "number" : NumberInt(0)
         }, 
         {
             "did" : NumberInt(2), 
             "name" : "媒体运营部", 
-            "_id" : ObjectId("599a3c47bbf4542638e77cf9")
+            "_id" : ObjectId("599fb90606df1710947c3e99"), 
+            "number" : NumberInt(0)
         }, 
         {
             "did" : NumberInt(3), 
             "name" : "活动运营部", 
-            "_id" : ObjectId("599a3c47bbf4542638e77cf8")
+            "_id" : ObjectId("599fb90606df1710947c3e98"), 
+            "number" : NumberInt(0)
         }, 
         {
             "did" : NumberInt(4), 
             "name" : "公关部", 
-            "_id" : ObjectId("599a3c47bbf4542638e77cf7")
+            "_id" : ObjectId("599fb90606df1710947c3e97"), 
+            "number" : NumberInt(0)
         }, 
         {
             "did" : NumberInt(5), 
             "name" : "人力资源部", 
-            "_id" : ObjectId("599a3c47bbf4542638e77cf6")
+            "_id" : ObjectId("599fb90606df1710947c3e96"), 
+            "number" : NumberInt(0)
         }
     ], 
     "__v" : NumberInt(0)
 }
 { 
-    "_id" : ObjectId("599a3c57bbf4542638e77cfc"), 
+    "_id" : ObjectId("599fb91f06df1710947c3e9c"), 
     "cid" : NumberInt(2), 
     "name" : "社团联合协会", 
     "password" : "202cb962ac59075b964b07152d234b70", 
@@ -54,53 +60,62 @@
         {
             "did" : NumberInt(0), 
             "name" : "项目创新中心", 
-            "_id" : ObjectId("599a3c57bbf4542638e77d05")
+            "_id" : ObjectId("599fb91f06df1710947c3ea5"), 
+            "number" : NumberInt(0)
         }, 
         {
             "did" : NumberInt(1), 
             "name" : "办公室", 
-            "_id" : ObjectId("599a3c57bbf4542638e77d04")
+            "_id" : ObjectId("599fb91f06df1710947c3ea4"), 
+            "number" : NumberInt(0)
         }, 
         {
             "did" : NumberInt(2), 
             "name" : "公关部", 
-            "_id" : ObjectId("599a3c57bbf4542638e77d03")
+            "_id" : ObjectId("599fb91f06df1710947c3ea3"), 
+            "number" : NumberInt(0)
         }, 
         {
             "did" : NumberInt(3), 
             "name" : "文艺部", 
-            "_id" : ObjectId("599a3c57bbf4542638e77d02")
+            "_id" : ObjectId("599fb91f06df1710947c3ea2"), 
+            "number" : NumberInt(0)
         }, 
         {
             "did" : NumberInt(4), 
             "name" : "权益中心", 
-            "_id" : ObjectId("599a3c57bbf4542638e77d01")
+            "_id" : ObjectId("599fb91f06df1710947c3ea1"), 
+            "number" : NumberInt(0)
         }, 
         {
             "did" : NumberInt(5), 
             "name" : "新媒体中心", 
-            "_id" : ObjectId("599a3c57bbf4542638e77d00")
+            "_id" : ObjectId("599fb91f06df1710947c3ea0"), 
+            "number" : NumberInt(0)
         }, 
         {
             "did" : NumberInt(6), 
             "name" : "宣传部", 
-            "_id" : ObjectId("599a3c57bbf4542638e77cff")
+            "_id" : ObjectId("599fb91f06df1710947c3e9f"), 
+            "number" : NumberInt(0)
         }, 
         {
             "did" : NumberInt(7), 
             "name" : "人力资源部", 
-            "_id" : ObjectId("599a3c57bbf4542638e77cfe")
+            "_id" : ObjectId("599fb91f06df1710947c3e9e"), 
+            "number" : NumberInt(0)
         }, 
         {
             "did" : NumberInt(8), 
             "name" : "组织部", 
-            "_id" : ObjectId("599a3c57bbf4542638e77cfd")
+            "_id" : ObjectId("599fb91f06df1710947c3e9d"), 
+            "number" : NumberInt(0)
         }
     ], 
     "__v" : NumberInt(0)
 }
 { 
-    "_id" : ObjectId("599a3c7ebbf4542638e77d06"), 
+    "_id" : ObjectId("599fb92406df1710947c3ea6"), 
     "cid" : NumberInt(3), 
     "name" : "校报", 
     "password" : "202cb962ac59075b964b07152d234b70", 
@@ -112,33 +127,38 @@
         {
             "did" : NumberInt(0), 
             "name" : "采编一部", 
-            "_id" : ObjectId("599a3c7ebbf4542638e77d0b")
+            "_id" : ObjectId("599fb92406df1710947c3eab"), 
+            "number" : NumberInt(0)
         }, 
         {
             "did" : NumberInt(1), 
             "name" : "采编二部", 
-            "_id" : ObjectId("599a3c7ebbf4542638e77d0a")
+            "_id" : ObjectId("599fb92406df1710947c3eaa"), 
+            "number" : NumberInt(0)
         }, 
         {
             "did" : NumberInt(2), 
             "name" : "采编三部", 
-            "_id" : ObjectId("599a3c7ebbf4542638e77d09")
+            "_id" : ObjectId("599fb92406df1710947c3ea9"), 
+            "number" : NumberInt(0)
         }, 
         {
             "did" : NumberInt(3), 
             "name" : "组织部", 
-            "_id" : ObjectId("599a3c7ebbf4542638e77d08")
+            "_id" : ObjectId("599fb92406df1710947c3ea8"), 
+            "number" : NumberInt(0)
         }, 
         {
             "did" : NumberInt(4), 
             "name" : "网络运营部", 
-            "_id" : ObjectId("599a3c7ebbf4542638e77d07")
+            "_id" : ObjectId("599fb92406df1710947c3ea7"), 
+            "number" : NumberInt(0)
         }
     ], 
     "__v" : NumberInt(0)
 }
 { 
-    "_id" : ObjectId("599a3c8cbbf4542638e77d0c"), 
+    "_id" : ObjectId("599fb92706df1710947c3eac"), 
     "cid" : NumberInt(4), 
     "name" : "新媒体", 
     "password" : "202cb962ac59075b964b07152d234b70", 
@@ -150,23 +170,26 @@
         {
             "did" : NumberInt(0), 
             "name" : "美编部", 
-            "_id" : ObjectId("599a3c8cbbf4542638e77d0f")
+            "_id" : ObjectId("599fb92706df1710947c3eaf"), 
+            "number" : NumberInt(0)
         }, 
         {
             "did" : NumberInt(1), 
             "name" : "文编部", 
-            "_id" : ObjectId("599a3c8cbbf4542638e77d0e")
+            "_id" : ObjectId("599fb92706df1710947c3eae"), 
+            "number" : NumberInt(0)
         }, 
         {
             "did" : NumberInt(2), 
             "name" : "技术部", 
-            "_id" : ObjectId("599a3c8cbbf4542638e77d0d")
+            "_id" : ObjectId("599fb92706df1710947c3ead"), 
+            "number" : NumberInt(0)
         }
     ], 
     "__v" : NumberInt(0)
 }
 { 
-    "_id" : ObjectId("599a3fffbbf4542638e77d10"), 
+    "_id" : ObjectId("599fb92d06df1710947c3eb0"), 
     "cid" : NumberInt(5), 
     "name" : "杭电之声", 
     "password" : "202cb962ac59075b964b07152d234b70", 
@@ -178,188 +201,224 @@
         {
             "did" : NumberInt(0), 
             "name" : "节目部-娱乐热点", 
-            "_id" : ObjectId("599a3fffbbf4542638e77d34")
+            "_id" : ObjectId("599fb92d06df1710947c3ed4"), 
+            "number" : NumberInt(0)
         }, 
         {
             "did" : NumberInt(1), 
             "name" : "节目部-时事新闻", 
-            "_id" : ObjectId("599a3fffbbf4542638e77d33")
+            "_id" : ObjectId("599fb92d06df1710947c3ed3"), 
+            "number" : NumberInt(0)
         }, 
         {
             "did" : NumberInt(2), 
             "name" : "节目部-潮流音乐", 
-            "_id" : ObjectId("599a3fffbbf4542638e77d32")
+            "_id" : ObjectId("599fb92d06df1710947c3ed2"), 
+            "number" : NumberInt(0)
         }, 
         {
             "did" : NumberInt(3), 
             "name" : "节目部-欧美影剧,英语口语", 
-            "_id" : ObjectId("599a3fffbbf4542638e77d31")
+            "_id" : ObjectId("599fb92d06df1710947c3ed1"), 
+            "number" : NumberInt(0)
         }, 
         {
             "did" : NumberInt(4), 
             "name" : "节目部-生活资讯,校园动态", 
-            "_id" : ObjectId("599a3fffbbf4542638e77d30")
+            "_id" : ObjectId("599fb92d06df1710947c3ed0"), 
+            "number" : NumberInt(0)
         }, 
         {
             "did" : NumberInt(5), 
             "name" : "节目部-体育赛事", 
-            "_id" : ObjectId("599a3fffbbf4542638e77d2f")
+            "_id" : ObjectId("599fb92d06df1710947c3ecf"), 
+            "number" : NumberInt(0)
         }, 
         {
             "did" : NumberInt(6), 
             "name" : "节目部-情感调频&治愈声线", 
-            "_id" : ObjectId("599a3fffbbf4542638e77d2e")
+            "_id" : ObjectId("599fb92d06df1710947c3ece"), 
+            "number" : NumberInt(0)
         }, 
         {
             "did" : NumberInt(7), 
             "name" : "节目部-文字&书籍", 
-            "_id" : ObjectId("599a3fffbbf4542638e77d2d")
+            "_id" : ObjectId("599fb92d06df1710947c3ecd"), 
+            "number" : NumberInt(0)
         }, 
         {
             "did" : NumberInt(8), 
             "name" : "节目部-旅行&心情&人生", 
-            "_id" : ObjectId("599a3fffbbf4542638e77d2c")
+            "_id" : ObjectId("599fb92d06df1710947c3ecc"), 
+            "number" : NumberInt(0)
         }, 
         {
             "did" : NumberInt(9), 
             "name" : "节目部-广播剧", 
-            "_id" : ObjectId("599a3fffbbf4542638e77d2b")
+            "_id" : ObjectId("599fb92d06df1710947c3ecb"), 
+            "number" : NumberInt(0)
         }, 
         {
             "did" : NumberInt(10), 
             "name" : "编辑部-歌曲&心情(乐评)", 
-            "_id" : ObjectId("599a3fffbbf4542638e77d2a")
+            "_id" : ObjectId("599fb92d06df1710947c3eca"), 
+            "number" : NumberInt(0)
         }, 
         {
             "did" : NumberInt(11), 
             "name" : "编辑部-评书&微信", 
-            "_id" : ObjectId("599a3fffbbf4542638e77d29")
+            "_id" : ObjectId("599fb92d06df1710947c3ec9"), 
+            "number" : NumberInt(0)
         }, 
         {
             "did" : NumberInt(12), 
             "name" : "编辑部-书籍&诗歌(书评)", 
-            "_id" : ObjectId("599a3fffbbf4542638e77d28")
+            "_id" : ObjectId("599fb92d06df1710947c3ec8"), 
+            "number" : NumberInt(0)
         }, 
         {
             "did" : NumberInt(13), 
             "name" : "编辑部-小说&故事(广播剧)", 
-            "_id" : ObjectId("599a3fffbbf4542638e77d27")
+            "_id" : ObjectId("599fb92d06df1710947c3ec7"), 
+            "number" : NumberInt(0)
         }, 
         {
             "did" : NumberInt(14), 
             "name" : "编辑部-人文&情怀", 
-            "_id" : ObjectId("599a3fffbbf4542638e77d26")
+            "_id" : ObjectId("599fb92d06df1710947c3ec6"), 
+            "number" : NumberInt(0)
         }, 
         {
             "did" : NumberInt(15), 
             "name" : "编辑部-电影&感悟(影评)", 
-            "_id" : ObjectId("599a3fffbbf4542638e77d25")
+            "_id" : ObjectId("599fb92d06df1710947c3ec5"), 
+            "number" : NumberInt(0)
         }, 
         {
             "did" : NumberInt(16), 
             "name" : "编辑部-旅行&文艺(游记)", 
-            "_id" : ObjectId("599a3fffbbf4542638e77d24")
+            "_id" : ObjectId("599fb92d06df1710947c3ec4"), 
+            "number" : NumberInt(0)
         }, 
         {
             "did" : NumberInt(17), 
             "name" : "外联部-赞助洽谈", 
-            "_id" : ObjectId("599a3fffbbf4542638e77d23")
+            "_id" : ObjectId("599fb92d06df1710947c3ec3"), 
+            "number" : NumberInt(0)
         }, 
         {
             "did" : NumberInt(18), 
             "name" : "外联部-公关", 
-            "_id" : ObjectId("599a3fffbbf4542638e77d22")
+            "_id" : ObjectId("599fb92d06df1710947c3ec2"), 
+            "number" : NumberInt(0)
         }, 
         {
             "did" : NumberInt(19), 
             "name" : "办公室-工作企划", 
-            "_id" : ObjectId("599a3fffbbf4542638e77d21")
+            "_id" : ObjectId("599fb92d06df1710947c3ec1"), 
+            "number" : NumberInt(0)
         }, 
         {
             "did" : NumberInt(20), 
             "name" : "办公室-人员编排", 
-            "_id" : ObjectId("599a3fffbbf4542638e77d20")
+            "_id" : ObjectId("599fb92d06df1710947c3ec0"), 
+            "number" : NumberInt(0)
         }, 
         {
             "did" : NumberInt(21), 
             "name" : "办公室-档案规", 
-            "_id" : ObjectId("599a3fffbbf4542638e77d1f")
+            "_id" : ObjectId("599fb92d06df1710947c3ebf"), 
+            "number" : NumberInt(0)
         }, 
         {
             "did" : NumberInt(22), 
             "name" : "办公室-财务管理", 
-            "_id" : ObjectId("599a3fffbbf4542638e77d1e")
+            "_id" : ObjectId("599fb92d06df1710947c3ebe"), 
+            "number" : NumberInt(0)
         }, 
         {
             "did" : NumberInt(23), 
             "name" : "主持队-高端大气官方", 
-            "_id" : ObjectId("599a3fffbbf4542638e77d1d")
+            "_id" : ObjectId("599fb92d06df1710947c3ebd"), 
+            "number" : NumberInt(0)
         }, 
         {
             "did" : NumberInt(24), 
             "name" : "主持队-诙谐幽默机智", 
-            "_id" : ObjectId("599a3fffbbf4542638e77d1c")
+            "_id" : ObjectId("599fb92d06df1710947c3ebc"), 
+            "number" : NumberInt(0)
         }, 
         {
             "did" : NumberInt(25), 
             "name" : "主持队-活泼亲和百搭", 
-            "_id" : ObjectId("599a3fffbbf4542638e77d1b")
+            "_id" : ObjectId("599fb92d06df1710947c3ebb"), 
+            "number" : NumberInt(0)
         }, 
         {
             "did" : NumberInt(26), 
             "name" : "技术部-节目导播", 
-            "_id" : ObjectId("599a3fffbbf4542638e77d1a")
+            "_id" : ObjectId("599fb92d06df1710947c3eba"), 
+            "number" : NumberInt(0)
         }, 
         {
             "did" : NumberInt(27), 
             "name" : "技术部-舞台控制", 
-            "_id" : ObjectId("599a3fffbbf4542638e77d19")
+            "_id" : ObjectId("599fb92d06df1710947c3eb9"), 
+            "number" : NumberInt(0)
         }, 
         {
             "did" : NumberInt(28), 
             "name" : "技术部-音频处理", 
-            "_id" : ObjectId("599a3fffbbf4542638e77d18")
+            "_id" : ObjectId("599fb92d06df1710947c3eb8"), 
+            "number" : NumberInt(0)
         }, 
         {
             "did" : NumberInt(29), 
             "name" : "技术部-广播剧后期制作", 
-            "_id" : ObjectId("599a3fffbbf4542638e77d17")
+            "_id" : ObjectId("599fb92d06df1710947c3eb7"), 
+            "number" : NumberInt(0)
         }, 
         {
             "did" : NumberInt(30), 
             "name" : "宣传部-网宣", 
-            "_id" : ObjectId("599a3fffbbf4542638e77d16")
+            "_id" : ObjectId("599fb92d06df1710947c3eb6"), 
+            "number" : NumberInt(0)
         }, 
         {
             "did" : NumberInt(31), 
             "name" : "宣传部-美工", 
-            "_id" : ObjectId("599a3fffbbf4542638e77d15")
+            "_id" : ObjectId("599fb92d06df1710947c3eb5"), 
+            "number" : NumberInt(0)
         }, 
         {
             "did" : NumberInt(32), 
             "name" : "宣传部-摄影", 
-            "_id" : ObjectId("599a3fffbbf4542638e77d14")
+            "_id" : ObjectId("599fb92d06df1710947c3eb4"), 
+            "number" : NumberInt(0)
         }, 
         {
             "did" : NumberInt(33), 
             "name" : "视频制作部-策划&编剧", 
-            "_id" : ObjectId("599a3fffbbf4542638e77d13")
+            "_id" : ObjectId("599fb92d06df1710947c3eb3"), 
+            "number" : NumberInt(0)
         }, 
         {
             "did" : NumberInt(34), 
             "name" : "视频制作部-摄影摄像", 
-            "_id" : ObjectId("599a3fffbbf4542638e77d12")
+            "_id" : ObjectId("599fb92d06df1710947c3eb2"), 
+            "number" : NumberInt(0)
         }, 
         {
             "did" : NumberInt(35), 
             "name" : "视频制作部-后期剪辑", 
-            "_id" : ObjectId("599a3fffbbf4542638e77d11")
+            "_id" : ObjectId("599fb92d06df1710947c3eb1"), 
+            "number" : NumberInt(0)
         }
     ], 
     "__v" : NumberInt(0)
 }
 { 
-    "_id" : ObjectId("599a4036bbf4542638e77d35"), 
+    "_id" : ObjectId("599fb93d06df1710947c3ed5"), 
     "cid" : NumberInt(6), 
     "name" : "焦点摄影", 
     "password" : "202cb962ac59075b964b07152d234b70", 
@@ -371,97 +430,116 @@
         {
             "did" : NumberInt(0), 
             "name" : "Ps", 
-            "_id" : ObjectId("599a4036bbf4542638e77d48")
+            "_id" : ObjectId("599fb93d06df1710947c3ee8"), 
+            "number" : NumberInt(0)
         }, 
         {
             "did" : NumberInt(1), 
             "name" : "Lr", 
-            "_id" : ObjectId("599a4036bbf4542638e77d47")
+            "_id" : ObjectId("599fb93d06df1710947c3ee7"), 
+            "number" : NumberInt(0)
         }, 
         {
             "did" : NumberInt(2), 
             "name" : "Ae", 
-            "_id" : ObjectId("599a4036bbf4542638e77d46")
+            "_id" : ObjectId("599fb93d06df1710947c3ee6"), 
+            "number" : NumberInt(0)
         }, 
         {
             "did" : NumberInt(3), 
             "name" : "Pr", 
-            "_id" : ObjectId("599a4036bbf4542638e77d45")
+            "_id" : ObjectId("599fb93d06df1710947c3ee5"), 
+            "number" : NumberInt(0)
         }, 
         {
             "did" : NumberInt(4), 
             "name" : "编程", 
-            "_id" : ObjectId("599a4036bbf4542638e77d44")
+            "_id" : ObjectId("599fb93d06df1710947c3ee4"), 
+            "number" : NumberInt(0)
         }, 
         {
             "did" : NumberInt(5), 
             "name" : "程序设计", 
-            "_id" : ObjectId("599a4036bbf4542638e77d43")
+            "_id" : ObjectId("599fb93d06df1710947c3ee3"), 
+            "number" : NumberInt(0)
         }, 
         {
             "did" : NumberInt(6), 
             "name" : "UI", 
-            "_id" : ObjectId("599a4036bbf4542638e77d42")
+            "_id" : ObjectId("599fb93d06df1710947c3ee2"), 
+            "number" : NumberInt(0)
         }, 
         {
             "did" : NumberInt(7), 
             "name" : "mmd", 
-            "_id" : ObjectId("599a4036bbf4542638e77d41")
+            "_id" : ObjectId("599fb93d06df1710947c3ee1"), 
+            "number" : NumberInt(0)
         }, 
         {
             "did" : NumberInt(8), 
             "name" : "微信推送/运营", 
-            "_id" : ObjectId("599a4036bbf4542638e77d40")
+            "_id" : ObjectId("599fb93d06df1710947c3ee0"), 
+            "number" : NumberInt(0)
         }, 
         {
             "did" : NumberInt(9), 
             "name" : "文字", 
-            "_id" : ObjectId("599a4036bbf4542638e77d3f")
+            "_id" : ObjectId("599fb93d06df1710947c3edf"), 
+            "number" : NumberInt(0)
         }, 
         {
             "did" : NumberInt(10), 
             "name" : "组织策划", 
-            "_id" : ObjectId("599a4036bbf4542638e77d3e")
+            "_id" : ObjectId("599fb93d06df1710947c3ede"), 
+            "number" : NumberInt(0)
         }, 
         {
             "did" : NumberInt(11), 
             "name" : "力气大，能吃苦", 
-            "_id" : ObjectId("599a4036bbf4542638e77d3d")
+            "_id" : ObjectId("599fb93d06df1710947c3edd"), 
+            "number" : NumberInt(0)
         }, 
         {
             "did" : NumberInt(12), 
             "name" : "虚心学习", 
-            "_id" : ObjectId("599a4036bbf4542638e77d3c")
+            "_id" : ObjectId("599fb93d06df1710947c3edc"), 
+            "number" : NumberInt(0)
         }, 
         {
             "did" : NumberInt(13), 
             "name" : "水群", 
-            "_id" : ObjectId("599a4036bbf4542638e77d3b")
+            "_id" : ObjectId("599fb93d06df1710947c3edb"), 
+            "number" : NumberInt(0)
         }, 
         {
             "did" : NumberInt(14), 
             "name" : "擅长处理应急事件", 
-            "_id" : ObjectId("599a4036bbf4542638e77d3a")
+            "_id" : ObjectId("599fb93d06df1710947c3eda"), 
+            "number" : NumberInt(0)
         }, 
         {
             "did" : NumberInt(15), 
             "name" : "会做旅行/美食攻略各种攻略", 
-            "_id" : ObjectId("599a4036bbf4542638e77d39")
+            "_id" : ObjectId("599fb93d06df1710947c3ed9"), 
+            "number" : NumberInt(0)
         }, 
         {
             "did" : NumberInt(16), 
             "name" : "会画画(sai/手绘)", 
-            "_id" : ObjectId("599a4036bbf4542638e77d38")
+            "_id" : ObjectId("599fb93d06df1710947c3ed8"), 
+            "number" : NumberInt(0)
         }, 
         {
             "did" : NumberInt(17), 
             "name" : "会写日记，手账", 
-            "_id" : ObjectId("599a4036bbf4542638e77d37")
+            "_id" : ObjectId("599fb93d06df1710947c3ed7"), 
+            "number" : NumberInt(0)
         }, 
         {
             "did" : NumberInt(18), 
             "name" : "热爱摄影/擅长摄影", 
-            "_id" : ObjectId("599a4036bbf4542638e77d36")
+            "_id" : ObjectId("599fb93d06df1710947c3ed6"), 
+            "number" : NumberInt(0)
         }
     ], 
     "__v" : NumberInt(0)

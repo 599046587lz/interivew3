@@ -9,9 +9,11 @@ $(function () {
             '<div class="check">我知道了</div>' +
             '</warning>';
         $container.append($warning);
+        $submit.addClass("noclick");
         $container.on('click', '.check', function () {
             var $warn = $(this).parent();
             $warn.remove();
+            $submit.removeClass("noclick");
         })
     }
     var getSearchObject = function () {
@@ -246,25 +248,6 @@ $(function () {
         $(".alarm-content").remove();
     }
 
-
-    // function getDepartResult(data) {
-    //     var department = [];
-    //     for (var i = 0; i < 10; i++) {
-    //         var obj = new Object();
-    //         var $thisDepart = $(".depart_list list1[did=" + i + "].active");
-    //         obj.departname = $thisDepart.text();
-    //         if (!obj.departname)continue;
-    //         obj.column = [];
-    //         for (var j = 0; j < 10; j++) {
-    //             var column = $(".popup[did=" + i + "] .pop_list list2[cid=" + j + "].active").text();
-    //             if (column) obj.column.push(column);
-    //         }
-    //         department.push(obj);
-    //     }
-    //     data.department = department;
-    // }
-
-
     function getDepartResult(data) {
         var department = [];
         for (var i = 0; i < 30; i++) {
@@ -286,7 +269,6 @@ $(function () {
         }
         data.department = department;
     }
-
 
     function sendFinalData(data) {
         delete data.check;
@@ -347,8 +329,9 @@ $(function () {
 
     //上传所有数据
     $submit.on('click', function () {
+        $(this).addClass("noclick");
         var finalData = $data.serializeObject();
-        console.log(finalData);
+        //console.log(finalData);
         if (!finalData.intro) {
             warning("还没有填写自我介绍哦");
             return;

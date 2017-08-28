@@ -27,7 +27,6 @@
 			var $t = $(this).on({
 				focus: function() {
 					$bind = $t.trigger("keydown");
-					console.log(1)
 					resize();
 					$(window).on("resize", resize);
 				},

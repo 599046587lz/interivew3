@@ -206,5 +206,15 @@ router.post('/insertInfo', wrap(async function (req, res) {
     res.json(200, result);
 }));
 
+router.get('/regNum', mid.checkFormat(function() {
+    return Joi.object().keys({
+        clubId: Joi.number()
+    })
+}), wrap(async function (req, res) {
+    let clubId = req.param('clubId');
+    let result = await Club.getRegNum(clubId);
+    res.send(200, result);
+}));
+
 
 module.exports = router;

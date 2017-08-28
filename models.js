@@ -11,6 +11,7 @@ let Department = new mongoose.Schema({
     did: Number,
     name: String,
     location: String,
+    number: Number
 });
 
 let Club = new mongoose.Schema({

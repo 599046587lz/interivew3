@@ -96,9 +96,7 @@ exports.handleArchive = function (file, cid) {
                     let oneDepart = department.filter(k => {
                         return k.name == e
                     })[0];
-                    oneDepart = oneDepart.toObject();
-                    delete oneDepart.number;
-                    result.push(oneDepart);
+                    result.push(oneDepart.did);
                 });
                 interviewerInfo[row][hearders[col]] = result;
             }
@@ -117,7 +115,7 @@ exports.handleArchive = function (file, cid) {
                 if (!!result) {
                     result.volunteer.forEach(e => {
                         interviewer.volunteer.forEach((i, j) => {
-                            if (e.did == i.did) {
+                            if (e == i) {
                                 interviewer.volunteer[j] = null;
                             }
                         })

@@ -12,7 +12,6 @@ exports.sign = function (sid, cid) {
             if (result.signTime) return '该学生已经签到';
             result.signTime = new Date();
             result.save();
-            console.log(result);
             return result;
         })
 };
@@ -38,7 +37,7 @@ exports.addDep = function(cid, interviewee) {
 exports.getNextInterviewee = function (cid, did) {
         return IntervieweeModel.findOne({
             cid: cid,
-            'volunteer.did': did,
+            volunteer: did,
             busy: false,
             signTime: {$ne: null}
         }).$where(new Function('let volunteer = this.volunteer;' +
@@ -59,7 +58,7 @@ exports.recoverInterviewee = function (sid, cid, did) {
         let data = {
             sid: sid,
             cid: cid,
-            'volunteer.did': did
+            volunteer: did
         };
         return IntervieweeModel.findOne(data).then(result => {
             result.busy = false;

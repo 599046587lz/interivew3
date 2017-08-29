@@ -59,7 +59,7 @@ let Interviewee = new mongoose.Schema({
         type: String,
         default: ''
     },
-    volunteer: [Department],
+    volunteer: [Number],
     notion: {
         type: String,
         default: ''

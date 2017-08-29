@@ -33,18 +33,16 @@ router.get('/download', mid.checkFormat(function () {
         clubID: Joi.number()
     })
 }), wrap(async function (req, res) {
-
     let clubID = req.param('clubID');
-    let file, filename, dbData;
-    dbData = await Student.queryByClubAll(clubID);
+    let dbData = await Student.queryByClubAll(clubID);
     for (let i in dbData) {
         await office.writeWord(dbData[i], i);
     }
     await office.writeExcel(dbData, clubID);
     let result = await office.archiverZip(clubID);
 
-    file = path.resolve(__dirname, '../files/zip/' + clubID + '/' + clubID + '.zip');
-    filename = clubID + '.zip';
+    let file = path.resolve(__dirname, '../files/zip/' + clubID + '/' + clubID + '.zip');
+    let filename = clubID + '.zip';
     res.download(file, filename);
 }));
 

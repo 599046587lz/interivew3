@@ -38,12 +38,8 @@ exports.getClubByName = function (name) {
 };
 
 exports.handleArchive = function (file, cid) {
-    return IntervieweeModel.find({
+    return clubModel.findOne({
         cid: cid
-    }).remove().then(() => {
-        return clubModel.findOne({
-            cid: cid
-        })
     }).then(result => {
         let department = result.departments;
         let interviewerInfo = [];
@@ -93,14 +89,16 @@ exports.handleArchive = function (file, cid) {
             }
             if (!interviewerInfo[row]) interviewerInfo[row] = {};
             if (hearders[col] == undefined) return;
-            if(hearders[col] == 'volunteer') {
+            if (hearders[col] == 'volunteer') {
                 let departInfo = value.split(',');
                 let result = [];
                 departInfo.forEach(e => {
-                   let oneDepart = department.filter(k => {return k.name == e})[0];
-                   oneDepart = oneDepart.toObject();
-                   delete oneDepart.number;
-                   result.push(oneDepart);
+                    let oneDepart = department.filter(k => {
+                        return k.name == e
+                    })[0];
+                    oneDepart = oneDepart.toObject();
+                    delete oneDepart.number;
+                    result.push(oneDepart);
                 });
                 interviewerInfo[row][hearders[col]] = result;
             }
@@ -111,108 +109,31 @@ exports.handleArchive = function (file, cid) {
         interviewerInfo = interviewerInfo.filter(e => {
             return e != undefined;
         });
-        for(let interviewer of interviewerInfo) {
-            Interviewee.addInterviewee(interviewer, cid);
+        for (let interviewer of interviewerInfo) {
+            IntervieweeModel.findOne({
+                sid: interviewer.sid,
+                cid: cid
+            }).then(result => {
+                if (!!result) {
+                    result.volunteer.forEach(e => {
+                        interviewer.volunteer.forEach((i, j) => {
+                            if (e.did == i.did) {
+                                interviewer.volunteer[j] = null;
+                            }
+                        })
+                    });
+                    interviewer.volunteer = interviewer.volunteer.filter(e => {
+                        return e != null;
+                    });
+                    result.volunteer = result.volunteer.concat(interviewer.volunteer);
+                    result.save();
+                    return;
+                }
+                Interviewee.addInterviewee(interviewer, cid);
+            })
         }
-    });
-    /**/
+    })
 };
-
-// exports.handleArchive = function (file, cid) {
-//     let deps = {};
-//     return clubModel.findOne({
-//         cid: cid
-//     }).then(result => {
-//         let departments = result.departments;
-//         departments.forEach(e => {
-//             deps[e.name] = e.did;
-//         });
-//         process.nextTick(function () {
-//             IntervieweeModel.remove({
-//                 cid: cid
-//             })
-//         })
-//     }).then(result => {
-//         let workbook = excel.readFile(file.path);
-//         let worksheet = workbook.Sheets[workbook.SheetNames[0]];
-//         let refReg = /([A-Z])(\d+)(:)([A-Z])(\d+)/;
-//         let refInfo = refReg.exec(worksheet['!ref']);
-//         let rows = refInfo[4];
-//         let letterSeq = [];
-//         for (let i = refInfo[0].charCodeAt(0) - 55; (i - 1).toString(36).toUpperCase() != rows; i++) {   //生成Excel列的字母序列
-//             letterSeq.push(i.toString(36).toUpperCase());
-//         }
-//         let startCol = parseInt(refInfo[2]);
-//         let endCol = parseInt(refInfo[5]);
-//         let title = [];
-//         for (let key in worksheet) {
-//             if (new RegExp("[A-Z]" + refInfo[2] + "$").test(key)) {    //判断是否为首行
-//                 let cell = worksheet[key].v;
-//                 switch (cell.toLowerCase()) {
-//                     case '学号':
-//                         title.push('sid');
-//                         break;
-//                     case '姓名':
-//                         title.push('name');
-//                         break;
-//                     case '性别[0=女,1=男]':
-//                         title.push('sex');
-//                         break;
-//                     case '专业':
-//                         title.push('major');
-//                         break;
-//                     case '手机号':
-//                         title.push('phone');
-//                         break;
-//                     case '短号':
-//                         title.push('short_tel');
-//                         break;
-//                     case 'qq':
-//                         title.push('qq');
-//                         break;
-//                     case '简介':
-//                         title.push('notion');
-//                         break;
-//                     case '部门':
-//                         title.push('volunteer')
-//                         break;
-//                 }
-//             }
-//         }
-//         let interviewee;
-//         for (let colNum = startCol + 1; colNum <= endCol; colNum++) {
-//             interviewee = {};
-//             for (let rowNum = 0; rowNum < letterSeq.length; rowNum++) {
-//                 let cellName = letterSeq[rowNum] + colNum;
-//                 if (cellName in worksheet) {  //空白单元格不会出现在worksheet中，因此需要事先检测
-//                     if (title[rowNum] != 'volunteer') {
-//                         interviewee[title[rowNum]] = worksheet[cellName].v;
-//                     }
-//                     else {
-//                         let d = deps[worksheet[cellName].v];
-//                         if (!isNaN(d * 1)) {
-//                             if (!interviewee['volunteer']) {
-//                                 interviewee['volunteer'] = [];
-//                             }
-//                             if (interviewee['volunteer'].indexOf(d) == -1) {
-//                                 interviewee['volunteer'].push(d);
-//                             }
-//                             else {
-//                                 throw new Error('出错了');
-//                             }
-//                         }
-//                     }
-//                 }
-//             }
-//             if (isNaN((interviewee['sid'] + interviewee['sex'] + interviewee['phone'] + (interviewee['qq'] || 1) * 1))) { //判断这四项是否都是数字
-//                 throw new Error('出错了');
-//             }
-//             Interviewee.addInterviewee(interviewee, cid);
-//         }
-//         return colNum;
-//     })
-// };
-
 
 exports.update = function (cid, data) {
     return IntervieweeModel.remove({

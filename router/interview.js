@@ -60,18 +60,19 @@ router.get('/call', mid.checkFormat(function() {
 }), wrap(async function(req, res) {
     let department = req.session.did;
     let sid = req.param('sid');
-    let cid = req.session.did;
+    let cid = req.session.cid;
 
     if(!sid) {
        let result = await Interviewee.getNextInterviewee(cid, department);
        result = result.toObject();
        result.did = department;
-       let timer = setTimeout(function () {
-           Interviewee.recoverInterviewee(sid, cid, department);
-       }, 2000);
-
+       // let timer = setTimeout(function () {
+       //     Interviewee.recoverInterviewee(sid, cid, department);
+       // }, 2000);
+        console.log(result);
        let room = global.io.to(cid);
        room.emit('call', result);
+       console.log('------------==================')
        for(let socketId in room.connected){
            let socket = room.connected[socketId];
            socket.on('success', function () {

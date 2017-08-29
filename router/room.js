@@ -17,11 +17,10 @@ let mid = require('../utils/middleware');
 
 router.get('/sign', mid.checkFormat(function() {
 	return Joi.object().keys({
-		cid: Joi.number(),
 		sid: Joi.number()
 	})
 }), wrap(async function(req, res) {
-	let cid = req.param('cid');
+	let cid = req.session.cid;
 	let sid = req.param('sid');
 
 	let result = await Interviewee.sign(sid, cid);

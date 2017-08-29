@@ -10,8 +10,9 @@ exports.sign = function (sid, cid) {
             cid: cid
         }).then(result => {
             if (result.signTime) return '该学生已经签到';
-            result.sighTime = new Date();
+            result.signTime = new Date();
             result.save();
+            console.log(result);
             return result;
         })
 };
@@ -37,7 +38,7 @@ exports.addDep = function(cid, interviewee) {
 exports.getNextInterviewee = function (cid, did) {
         return IntervieweeModel.findOne({
             cid: cid,
-            volunteer: did,
+            'volunteer.did': did,
             busy: false,
             signTime: {$ne: null}
         }).$where(new Function('let volunteer = this.volunteer;' +
@@ -58,7 +59,7 @@ exports.recoverInterviewee = function (sid, cid, did) {
         let data = {
             sid: sid,
             cid: cid,
-            volunteer: did
+            'volunteer.did': did
         };
         return IntervieweeModel.findOne(data).then(result => {
             result.busy = false;
@@ -120,7 +121,7 @@ exports.recommend = function (cid, sid, departmentId) {
 exports.getDepartmentQueueLength = function (cid, did) {
         return IntervieweeModel.find({
             cid: cid,
-            volunteer: did,
+            'volunteer.did': did,
             busy: {$ne: true},
             signTime: {$ne: null},
             done: {$ne: did}

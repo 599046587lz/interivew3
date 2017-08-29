@@ -12,13 +12,13 @@
             "did" : NumberInt(0), 
             "name" : "设计部", 
             "_id" : ObjectId("599fb90606df1710947c3e9b"), 
-            "number" : NumberInt(0)
+            "number" : NumberInt(2)
         }, 
         {
             "did" : NumberInt(1), 
             "name" : "技术部", 
             "_id" : ObjectId("599fb90606df1710947c3e9a"), 
-            "number" : NumberInt(0)
+            "number" : NumberInt(5)
         }, 
         {
             "did" : NumberInt(2), 
@@ -30,13 +30,13 @@
             "did" : NumberInt(3), 
             "name" : "活动运营部", 
             "_id" : ObjectId("599fb90606df1710947c3e98"), 
-            "number" : NumberInt(0)
+            "number" : NumberInt(2)
         }, 
         {
             "did" : NumberInt(4), 
             "name" : "公关部", 
             "_id" : ObjectId("599fb90606df1710947c3e97"), 
-            "number" : NumberInt(0)
+            "number" : NumberInt(1)
         }, 
         {
             "did" : NumberInt(5), 
@@ -202,13 +202,13 @@
             "did" : NumberInt(0), 
             "name" : "节目部-娱乐热点", 
             "_id" : ObjectId("599fb92d06df1710947c3ed4"), 
-            "number" : NumberInt(0)
+            "number" : NumberInt(2)
         }, 
         {
             "did" : NumberInt(1), 
             "name" : "节目部-时事新闻", 
             "_id" : ObjectId("599fb92d06df1710947c3ed3"), 
-            "number" : NumberInt(0)
+            "number" : NumberInt(1)
         }, 
         {
             "did" : NumberInt(2), 
@@ -218,15 +218,15 @@
         }, 
         {
             "did" : NumberInt(3), 
-            "name" : "节目部-欧美影剧,英语口语", 
+            "name" : "节目部-欧美影剧&英语口语", 
             "_id" : ObjectId("599fb92d06df1710947c3ed1"), 
-            "number" : NumberInt(0)
+            "number" : NumberInt(1)
         }, 
         {
             "did" : NumberInt(4), 
-            "name" : "节目部-生活资讯,校园动态", 
+            "name" : "节目部-生活资讯&校园动态", 
             "_id" : ObjectId("599fb92d06df1710947c3ed0"), 
-            "number" : NumberInt(0)
+            "number" : NumberInt(2)
         }, 
         {
             "did" : NumberInt(5), 
@@ -244,7 +244,7 @@
             "did" : NumberInt(7), 
             "name" : "节目部-文字&书籍", 
             "_id" : ObjectId("599fb92d06df1710947c3ecd"), 
-            "number" : NumberInt(0)
+            "number" : NumberInt(1)
         }, 
         {
             "did" : NumberInt(8), 
@@ -262,7 +262,7 @@
             "did" : NumberInt(10), 
             "name" : "编辑部-歌曲&心情(乐评)", 
             "_id" : ObjectId("599fb92d06df1710947c3eca"), 
-            "number" : NumberInt(0)
+            "number" : NumberInt(1)
         }, 
         {
             "did" : NumberInt(11), 
@@ -304,13 +304,13 @@
             "did" : NumberInt(17), 
             "name" : "外联部-赞助洽谈", 
             "_id" : ObjectId("599fb92d06df1710947c3ec3"), 
-            "number" : NumberInt(0)
+            "number" : NumberInt(2)
         }, 
         {
             "did" : NumberInt(18), 
             "name" : "外联部-公关", 
             "_id" : ObjectId("599fb92d06df1710947c3ec2"), 
-            "number" : NumberInt(0)
+            "number" : NumberInt(1)
         }, 
         {
             "did" : NumberInt(19), 
@@ -340,7 +340,7 @@
             "did" : NumberInt(23), 
             "name" : "主持队-高端大气官方", 
             "_id" : ObjectId("599fb92d06df1710947c3ebd"), 
-            "number" : NumberInt(0)
+            "number" : NumberInt(1)
         }, 
         {
             "did" : NumberInt(24), 
@@ -352,7 +352,7 @@
             "did" : NumberInt(25), 
             "name" : "主持队-活泼亲和百搭", 
             "_id" : ObjectId("599fb92d06df1710947c3ebb"), 
-            "number" : NumberInt(0)
+            "number" : NumberInt(2)
         }, 
         {
             "did" : NumberInt(26), 
@@ -364,7 +364,7 @@
             "did" : NumberInt(27), 
             "name" : "技术部-舞台控制", 
             "_id" : ObjectId("599fb92d06df1710947c3eb9"), 
-            "number" : NumberInt(0)
+            "number" : NumberInt(1)
         }, 
         {
             "did" : NumberInt(28), 
@@ -382,7 +382,7 @@
             "did" : NumberInt(30), 
             "name" : "宣传部-网宣", 
             "_id" : ObjectId("599fb92d06df1710947c3eb6"), 
-            "number" : NumberInt(0)
+            "number" : NumberInt(1)
         }, 
         {
             "did" : NumberInt(31), 
@@ -400,7 +400,7 @@
             "did" : NumberInt(33), 
             "name" : "视频制作部-策划&编剧", 
             "_id" : ObjectId("599fb92d06df1710947c3eb3"), 
-            "number" : NumberInt(0)
+            "number" : NumberInt(1)
         }, 
         {
             "did" : NumberInt(34), 
@@ -412,7 +412,7 @@
             "did" : NumberInt(35), 
             "name" : "视频制作部-后期剪辑", 
             "_id" : ObjectId("599fb92d06df1710947c3eb1"), 
-            "number" : NumberInt(0)
+            "number" : NumberInt(1)
         }
     ], 
     "__v" : NumberInt(0)
@@ -443,7 +443,7 @@
             "did" : NumberInt(2), 
             "name" : "Ae", 
             "_id" : ObjectId("599fb93d06df1710947c3ee6"), 
-            "number" : NumberInt(0)
+            "number" : NumberInt(1)
         }, 
         {
             "did" : NumberInt(3), 
@@ -495,9 +495,9 @@
         }, 
         {
             "did" : NumberInt(11), 
-            "name" : "力气大，能吃苦", 
+            "name" : "力气大/能吃苦", 
             "_id" : ObjectId("599fb93d06df1710947c3edd"), 
-            "number" : NumberInt(0)
+            "number" : NumberInt(1)
         }, 
         {
             "did" : NumberInt(12), 
@@ -531,7 +531,7 @@
         }, 
         {
             "did" : NumberInt(17), 
-            "name" : "会写日记，手账", 
+            "name" : "会写日记/手账", 
             "_id" : ObjectId("599fb93d06df1710947c3ed7"), 
             "number" : NumberInt(0)
         }, 

@@ -33,16 +33,16 @@ router.post('/recommend', mid.checkFormat(function() {
 router.post('/rate', mid.checkFormat(function() {
     return Joi.object().keys({
         sid: Joi.number(),
-        score: Joi.number(),
+        score: Joi.number().valid([0, 1, 2]),
         comment: Joi.string()
     })
-}), wrap(async function(req, res) {
+}, {allowUnknown: true}), wrap(async function(req, res) {
     let sid = req.body.sid;
     let score = req.body.score;
     let comment = req.body.comment;
-    let did = req.session.did;
-    let interviewer = req.session.interviewer;
-    let cid = req.session.cid;
+    let did = req.body.did;
+    let interviewer = req.body.interviewer;
+    let cid = req.body.cid;
 
     let result = await Interviewee.rateInterviewee(cid, sid, score, comment, did, interviewer);
 

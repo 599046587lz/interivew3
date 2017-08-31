@@ -1,5 +1,5 @@
 let express = require('express');
-let student = require('../modules/student');
+let interviewee = require('../modules/interviewee');
 let utils = require('../utils/utils');
 let club = require('../modules/club');
 let mid = require('../utils/middleware');
@@ -12,38 +12,35 @@ let wrap = fn => (...args) => fn(...args).catch(args[2]);
 router.post('/', mid.checkFormat(function() {
     return {
         joi: Joi.object().keys({
-            club: Joi.string().required(),
-            clubID: Joi.number().required(),
+            clubName: Joi.string(),
+            cid: Joi.number().required(),
             name: Joi.string().required(),
-            studentID: Joi.string().regex(/^1[0-9]{7}$/).required(),
-            gender: Joi.number().required(),
+            sid: Joi.string().regex(/^1[0-9]{7}$/).required(),
+            sex: Joi.number().required(),
             college: Joi.string().required(),
             major: Joi.string().required(),
-            department: Joi.array().items(Joi.string()).required(),
-            intro: Joi.string().required(),
-            tel: Joi.string().regex(/^(1[34578])[0-9]{9}$/).required(),
+            volunteer: Joi.array().items(Joi.number()).required(),
+            notion: Joi.string().required(),
+            phone: Joi.string().regex(/^(1[34578])[0-9]{9}$/).required(),
             qq: Joi.string().regex(/[1-9][0-9]{4,}/).required(),
             short_tel: Joi.string().regex(/[0-9]{6}$/),
             pic_url: Joi.string().required(),
             email:Joi.string()
         }),
         errInfo: {
-            studentID: '学号',
-            tel: '电话',
+            sid: '学号',
+            phone: '电话',
             qq: 'qq',
             short_tel: '短号',
         }
 }}), wrap(async function(req, res) {
     let data = req.body;
-    let info = {};
-    let fileName = data.clubID + '-' + data.name + '-' + data.studentID + '.jpg';
+    let fileName = data.cid + '-' + data.name + '-' + data.sid + '.jpg';
 
-    info.club = data.club;
-    info.clubID = data.clubID;
-    await club.verifyInfo(info);
-    await student.checkStudent(data.studentID, data.clubID);
+    await club.verifyInfo(data);
+    await interviewee.checkStudent(data.sid, data.cid);
     data.image = await utils.image_save(data.pic_url, fileName);
-    let result = await student.addStudent(data);
+    let result = await interviewee.addStudent(data);
     res.send(200, result);
 
 }));

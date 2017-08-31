@@ -59,13 +59,22 @@ router.get('/logout', mid.checkLogin, function (req, res) {
  * @return Object {status: 'success'|'failed', count:Number}
  */
 
-router.post('/upload/archive', upload.single('archive'), wrap(async function (req, res) {
+router.post('/upload/archive', upload.single('archive'), mid.checkFormat(function() {
+    return Joi.object().keys({
+        cid: Joi.number(),
+        roomLocation: Joi.string(),
+        did: Joi.number()
+    })
+}), wrap(async function (req, res) {
     let file = req.file;
-    let cid = req.param('cid');
+    let cid = req.body.cid;
+    let roomLocation = req.body.roomLocation;
+    let did = req.body.did;
     // if (!file || !req.session['cid']) throw new Error('参数不完整');
     let xlsxReg = /\.xlsx$/i;
     if (!xlsxReg.test(file.originalname)) throw new Error('上传文件不合法');
 
+    await Club.setRoomLocation(cid, did, roomLocation);
     let result = await Club.handleArchive(file, cid);
     res.json({
         status: 'success',
@@ -215,6 +224,8 @@ router.get('/regNum', mid.checkFormat(function() {
     let result = await Club.getRegNum(clubId);
     res.send(200, result);
 }));
+
+router.getInterview
 
 
 module.exports = router;

@@ -3,7 +3,8 @@ let config = require('../config');
 let path = require('path');
 let router = express.Router();
 let mid = require('../utils/middleware');
-let Student = require('../modules/student');
+let Interview = require('../modules/interviewee');
+let Club = require('../modules/club');
 let office = require('../utils/office');
 let Joi = require('joi');
 let wrap = fn => (...args) => fn(...args).catch(args[2]);
@@ -30,19 +31,27 @@ router.get('/uploadToken', function (req, res) {
 
 router.get('/download', mid.checkFormat(function () {
     return Joi.object().keys({
-        clubID: Joi.number()
+        cid: Joi.number()
     })
 }), wrap(async function (req, res) {
-    let clubID = req.param('clubID');
-    let dbData = await Student.queryByClubAll(clubID);
+    let cid = req.param('cid');
+    let dbData = await Interview.queryByClubAll(cid);
+    let departments = (await Club.getClubInfo(cid)).departments;
+    let departName = {};
+    departments.forEach(e => {
+       departName[e.did] = e.name;
+    });
     for (let i in dbData) {
+       dbData[i].volunteer.forEach((e, j) => {
+          dbData[i].volunteer[j] = departName[e];
+       });
         await office.writeWord(dbData[i], i);
     }
-    await office.writeExcel(dbData, clubID);
-    let result = await office.archiverZip(clubID);
+    await office.writeExcel(dbData, cid);
+    let result = await office.archiverZip(cid);
 
-    let file = path.resolve(__dirname, '../files/zip/' + clubID + '/' + clubID + '.zip');
-    let filename = clubID + '.zip';
+    let file = path.resolve(__dirname, '../files/zip/' + cid + '/' + cid + '.zip');
+    let filename = cid + '.zip';
     res.download(file, filename);
 }));
 

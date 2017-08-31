@@ -38,10 +38,11 @@ exports.getClubByName = function (name) {
 };
 
 exports.handleArchive = function (file, cid) {
+    let count = 0;
     return clubModel.findOne({
         cid: cid
-    }).then(result => {
-        let department = result.departments;
+    }).then(clubInfo => {
+        let department = clubInfo.departments;
         let interviewerInfo = [];
         let hearders = {};
         let workbook = excel.readFile(file.path);
@@ -108,6 +109,7 @@ exports.handleArchive = function (file, cid) {
             return e != undefined;
         });
         for (let interviewer of interviewerInfo) {
+            count++;
             IntervieweeModel.findOne({
                 sid: interviewer.sid,
                 cid: cid
@@ -125,11 +127,20 @@ exports.handleArchive = function (file, cid) {
                     });
                     result.volunteer = result.volunteer.concat(interviewer.volunteer);
                     result.save();
-                    return;
+                } else {
+                    Interviewee.addInterviewee(interviewer, cid);
                 }
-                Interviewee.addInterviewee(interviewer, cid);
-            })
+                interviewer.volunteer.forEach(e => {
+                    clubInfo.departments.forEach(i => {
+                        if(i.did == e)  {
+                            i.number++;
+                        }
+                    })
+                });
+                clubInfo.save();
+            });
         }
+        return count;
     })
 };
 
@@ -173,18 +184,19 @@ exports.getClubInfo = function (cid) {
     }).then(result => {
         return ({
             clubName: result.name,
-            department: result.departments,
+            departments: result.departments,
             maxDep: result.maxDep
         });
     })
 };
 
-exports.verifyInfo = function (info) {
+exports.verifyInfo = function (data) {
     return clubModel.findOne({
-        cid: info.clubID
+        cid: data.cid
     }).then(result => {
-        if (!result || !(info.club == result.name)) throw new Error("社团id错误！");
-        result.password = null;
+        if (!result || !(data.clubName == result.name)) throw new Error("社团id错误！");
+        result = result.toObject();
+        delete result.password;
         return result;
     });
 };
@@ -204,5 +216,18 @@ exports.getRegNum = function (clubId) {
         return {
             count: result.length
         }
+    })
+};
+
+exports.setRoomLocation = function (cid, departmentId, roomLocation) {
+    return clubModel.findOne({
+        cid: cid
+    }).then(result => {
+        result.departments.forEach(e => {
+            if(e.did == departmentId) {
+                e.location = roomLocation;
+            }
+        });
+        result.save();
     })
 };

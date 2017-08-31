@@ -27,12 +27,20 @@ let Club = new mongoose.Schema({
 
 let rate = new mongoose.Schema({
     did: Number,
-    score: Number,
+    score:  {
+        type: Number,
+        enum:
+            {
+                values: [0, 1, 2], //0: 待录用  1:录用 2:不录用
+                message: "请输入正确的分数"
+            }
+    },
     comment: String,
     interviewer: String
 });
 
 let Interviewee = new mongoose.Schema({
+    clubName: String,
     sid: Number,
     cid: Number,
     name: {
@@ -45,19 +53,15 @@ let Interviewee = new mongoose.Schema({
     },
     major: {
         type: String,
-        default: ''
     },
     phone: {
         type: String,
-        default: ''
     },
     short_tel: {
         type: String,
-        default: ''
     },
     qq: {
         type: String,
-        default: ''
     },
     volunteer: [Number],
     notion: {
@@ -78,95 +82,21 @@ let Interviewee = new mongoose.Schema({
     email: {
         type: String,
         default: ''
-    }
-});
-
-
-let studentSchema = new mongoose.Schema({
-    club: {
-        type: String,
-        required: true
-    },
-    clubID: {
-        type: Number,
-        required: true
-    },
-    name: {
-        type: String,
-        required: true
-    },
-    studentID: {
-        type: String,
-        required: true
-        // ,
-        // validate:
-        //     {
-        //         validator: /^1[0-9]{7}$/,
-        //         message: "请填写正确的学号"
-        //     }
-    },
-    gender: {
-        type: Number,
-        required: true,
-        enum:
-            {
-                values: [0,1],
-                message: "请选择性别"
-            }
-    },
-    college: {
-        type: String,
-        required: true
-    },
-    major: {
-        type: String,
-        required: true
-    },
-    department: {
-        type: [String],
-        required: true
-    },
-    intro: {
-        type: String,
-        required: true
-    },
-    tel: {
-        type: String,
-        required: true
-        // ,
-        // validate:
-        //     {
-        //         validator: /^(1[34578])[0-9]{9}$/,
-        //         message: '请填写正确的电话号码'
-        //     }
-    },
-    qq: {
-        type: String,
-        required: true
-        // ,
-        // validate:
-        //     {
-        //         validator: /[1-9][0-9]{4,}/,
-        //         message: '请填写正确的QQ号'
-        //     }
-    },
-    short_tel: {
-        type: Number
     },
     pic_url: {
         type: String,
-        required: true
     },
     image: {
         type: String,
-        required: true
     },
-    email: {
+    college: {
         type: String
     }
 });
 
 
+
+
+
 exports.Interviewee = mongoose.model('interviewee', Interviewee);
 exports.Club = mongoose.model('club', Club);
-exports.Student = mongoose.model('student', studentSchema);

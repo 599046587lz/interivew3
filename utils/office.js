@@ -7,24 +7,22 @@ let Club = require('../modules/club');
 global.path = require('path');
 
 
-exports.writeExcel = function (dbData, clubID) {
+exports.writeExcel = function (dbData, cid) {
     return new Promise(function(resolve, reject) {
-        Club.getClubInfo(clubID).then(clubInfo => {
-            let departmentInfo = clubInfo.department;
+        Club.getClubInfo(cid).then(clubInfo => {
+            let departmentInfo = clubInfo.departments;
             let departmentName = {};
             departmentInfo.forEach(e => {
                 departmentName[e.name.split('-')[0]] = [];
             });
-
-            let _headers = ['club', 'name', 'studentID', 'gender', 'major', 'department', 'intro', 'tel', 'qq', 'short_tel', 'email'];
-
+            let _headers = ['clubName', 'name', 'sid', 'sex', 'major', 'volunteer', 'notion', 'phone', 'qq', 'short_tel', 'email'];
             dbData.forEach((e, i) => {
                 let data = e.toObject();
-                delete data.clubID;
+                delete data.cid;
                 delete data._id;
                 dbData[i] = data;
                 let mid = {};
-                dbData[i].department.forEach(j => {
+                dbData[i].volunteer.forEach(j => {
                     let mainDep = j.split('-')[0];
                     mid[mainDep] = mid[mainDep] || [];
                     mid[mainDep].push(j);
@@ -35,7 +33,7 @@ exports.writeExcel = function (dbData, clubID) {
                 });
                 for(let j in mid) {
                     let studentInfo = Object.assign({}, dbData[i]);
-                    studentInfo.department = mid[j];
+                    studentInfo.volunteer = mid[j];
                     departmentName[j].push(studentInfo);
                 }
             });
@@ -78,8 +76,8 @@ exports.writeExcel = function (dbData, clubID) {
                         'Sheet1': Object.assign({}, output, {"!ref": ref})
                     }
                 };
-                if (!fs.existsSync(__dirname + '/../files/file/' + clubID)) fs.mkdirSync(__dirname + '/../files/file/' + clubID);
-                xlsx.writeFile(wb, '../files/file/' + clubID + '/' + _data + '.xlsx');
+                if (!fs.existsSync(__dirname + '/../files/file/' + cid)) fs.mkdirSync(__dirname + '/../files/file/' + cid);
+                xlsx.writeFile(wb, '../files/file/' + cid + '/' + _data + '.xlsx');
             }
             resolve('导入成功');
         });
@@ -92,18 +90,8 @@ exports.writeWord = function (data, index) {
             'type': 'docx',
             'creator': 'Redhome Studio'
         });
-        // let department = [];
-        // data.department.forEach(e => {
-        //     if(e.column.length > 0) {
-        //         e.column.forEach(i => {
-        //             department.push(e.departname + '-' + i);
-        //         })
-        //     } else {
-        //         department.push(e.departname);
-        //     }
-        // });
 
-        let title = '《' + data.club + '报名表》';
+        let title = '《' + data.clubName + '报名表》';
         docx.setDocTitle(title);
 
         docx.on('error', function (err) {
@@ -142,14 +130,14 @@ exports.writeWord = function (data, index) {
         });
 
         var pObj = docx.createP();
-        pObj.addText('学号：' + data.studentID, {
+        pObj.addText('学号：' + data.sid, {
             font_face: 'Arial',
             font_size: 16
 
         });
 
         var pObj = docx.createP();
-        pObj.addText('性别：' + (data.gender > 0 ? '男' : '女'), {
+        pObj.addText('性别：' + (data.sex > 0 ? '男' : '女'), {
             font_face: 'Arial',
             font_size: 16
 
@@ -170,14 +158,14 @@ exports.writeWord = function (data, index) {
         });
 
         var pObj = docx.createP();
-        pObj.addText('部门：' + data.department, {
+        pObj.addText('部门：' + data.volunteer, {
             font_face: 'Arial',
             font_size: 16
 
         });
 
         var pObj = docx.createP();
-        pObj.addText('联系方式：' + data.tel, {
+        pObj.addText('联系方式：' + data.phone, {
             font_face: 'Arial',
             font_size: 16
 
@@ -197,7 +185,7 @@ exports.writeWord = function (data, index) {
         });
 
         var pObj = docx.createP();
-        pObj.addText('个人简介：' + data.intro, {
+        pObj.addText('个人简介：' + data.notion, {
             font_face: 'Arial',
             font_size: 16
 
@@ -211,12 +199,12 @@ exports.writeWord = function (data, index) {
         });
 
         let name = data.name + '-' + data._id;
-        let wordPath = __dirname + '/../files/file/' + data.clubID;
+        let wordPath = __dirname + '/../files/file/' + data.cid;
         if (fs.existsSync(wordPath) && index == 0) {
             utils.deleteFolder(wordPath);
         }
         if(!fs.existsSync(wordPath)) fs.mkdirSync(wordPath);
-        let out = fs.createWriteStream('../files/file/' + data.clubID + '/' + name + '.docx');
+        let out = fs.createWriteStream('../files/file/' + data.cid + '/' + name + '.docx');
 
         docx.generate(out, function (Error) {
             if (Error) throw Error;
@@ -230,12 +218,12 @@ exports.writeWord = function (data, index) {
     });
 };
 
-exports.archiverZip = function (clubID) {
+exports.archiverZip = function (cid) {
     return new Promise(function(resolve, reject) {
-        let path = __dirname + '/../files/zip/' + clubID;
+        let path = __dirname + '/../files/zip/' + cid;
         if (fs.existsSync(path)) utils.deleteFolder(path);
         fs.mkdirSync(path);
-        let output = fs.createWriteStream(path + '/' + clubID + '.zip');
+        let output = fs.createWriteStream(path + '/' + cid + '.zip');
 
         let archive = archiver('zip');
 
@@ -248,7 +236,7 @@ exports.archiverZip = function (clubID) {
         });
 
         archive.pipe(output);
-        archive.directory('../files/file/' + clubID + '/', false);
+        archive.directory('../files/file/' + cid + '/', false);
         archive.finalize();
     });
 };

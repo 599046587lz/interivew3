@@ -42,7 +42,7 @@ exports.checkFormat = function(format, option) {
 
         let result = Joi.validate(body, joiFormat, option);
         if(result.error) {
-            let re = /(\[")([\u4E00-\u9FA5A-Za-z0-9_]+)(")/;
+            let re = /(")([\u4E00-\u9FA5A-Za-z0-9_]+)(")/;
             let error = re.exec(result.error)[2];
             if(errInfo && errInfo[error]) {
                 return res.send(400, errInfo[error] + '格式错误');

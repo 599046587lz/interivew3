@@ -2,6 +2,7 @@ let rp = require('request-promise');
 let iconv = require('iconv-lite');
 let unit = require('../static/lib/unit.json');
 let IntervieweeModel = require('../models').Interviewee;
+let clubModel = require('../models').Club;
 let config = require('../config');
 
 exports.sign = function (sid, cid) {
@@ -201,5 +202,64 @@ exports.addInterviewee = function (data, cid) {
         delete interviewee.signTime;
     }
     return IntervieweeEntity.save();
+};
+
+exports.checkStudent = function (sid, cid) {
+    return IntervieweeModel.findOne({
+        sid: sid,
+        cid: cid
+    }).then(result => {
+        if(!!result) {
+            let error = new Error('该学生已注册');
+            error.status = 403;
+            throw error;
+        }
+        return;
+    })
+};
+
+exports.addStudent = function (data) {
+    let Interviewee = new IntervieweeModel({
+        clubName: data.clubName,
+        cid: data.cid,
+        name: data.name,
+        sid: data.sid,
+        sex: data.sex,
+        college: data.college,
+        major: data.major,
+        volunteer: data.volunteer,
+        notion: data.notion,
+        phone: data.phone,
+        qq: data.qq,
+        short_tel: data.short_tel,
+        pic_url: data.pic_url,
+        image: data.image,
+        email: data.email
+    });
+
+    return Interviewee.save().then(result => {
+        clubModel.findOne({
+            cid: data.clubID
+        }).then(result => {
+            result.departments.forEach(e => {
+                data.department.forEach(j => {
+                    if(e.name == j) {
+                        e.number ++;
+                        return;
+                    }
+                })
+            });
+            result.save();
+        })
+    });
+};
+
+exports.queryByClubAll = function (cid) {
+    return IntervieweeModel.find({
+        cid: cid
+    }).then(result => {
+        if(!result) throw new Error('该社团没有人报名');
+        return result;
+    })
 };
 

@@ -10,5 +10,9 @@ module.exports = {
     QINIU_ACCESSKEY: 'S8N6tLzEXQFuuspklyKlTf04IoTns2JqsG63vf_R',
     QINIU_SECRETKEY: 'hZnqp7jcCmLQCkUuJ5roHrh6Mn39VuytDZBULF58',
     QINIU_BUCKET: 'interviewer',
-    token: '57dbfcf39882410001b0c195'
+    token: '57dbfcf39882410001b0c195',
+    accessKeyId: 'LTAI4OVjhBCnov4G',
+    secretAccessKey: 'p4RyBSDDcOpAjaP0OHvWj5ICjwOjgd',
+    mailUser: '1322023401@qq.com',
+    mailPassword: 'tyucyclwplkkidef'
 };

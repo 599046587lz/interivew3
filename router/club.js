@@ -10,6 +10,8 @@ let mid = require('../utils/middleware');
 let Joi = require('joi');
 let multer = require('multer');
 let upload = multer({dest: '../files/upload'});
+let utils = require('../utils/utils');
+
 /**
  * @params String user 登录用户名
  * @params String password 密码，单词md5
@@ -225,7 +227,17 @@ router.get('/regNum', mid.checkFormat(function() {
     res.send(200, result);
 }));
 
-router.getInterview
+router.post('/sendMessage', wrap(async function(req, res) {
+    let data = req.body;
 
+    let result = await utils.sendMessage(data);
+    res.send(200, '发送成功');
+}));
+
+router.post('/sendEmail', wrap(async function(req, res) {
+    let data = req.body;
+    let result = await utils.sendMail(data);
+    res.send(200, '发送成功');
+}));
 
 module.exports = router;

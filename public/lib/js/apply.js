@@ -304,7 +304,7 @@ $(function () {
             return;
         }
         $.ajax({
-            url: "http://up-z2.qiniu.com?token=" + data.token,
+            url: "https://up-z2.qbox.me?token=" + data.token,
             type: "post",
             data: form,
             processData: false,

@@ -47,8 +47,6 @@ $(function () {
         $picfile = $("#picfile"),
         $female = $(".genderbox.female"),
         $male = $(".genderbox.male"),
-        $check = $("#check"),
-        $content = $(".alarm-content"),
         $list = $(".depart_list");
 
     var list1 = "<list1 did='__did__'>__depart__</list1>",
@@ -222,28 +220,23 @@ $(function () {
         $female.find(".icon.off").removeClass("hide");
     })
     //注意事项
-    if (clubID == 1) {
-        $check.iCheck({
-            checkboxClass: 'icheckbox_flat-green',
-            radioClass: 'iradio_flat-green'
-        });
-        $(".alarm .note").on("click", function () {
-            $check.next("ins").click();
-        });
-        $check.next("ins").on('click', function () {
-            var checked = $(this).parent().hasClass("checked");
-            if (!checked) {
-                $content.find("p").show();
-                $content.removeClass("checked");
-
-            }
-            else {
-                $content.find("p").hide();
-                $content.addClass("checked");
-            }
-        });
-    }
-    else {
+    var $content = $(".alarm-content");
+    $(".alarm .note").on("click", function () {
+        $(".alarm .checkbox").click();
+    });
+    $(".alarm .checkbox").on('click', function () {
+        $(".alarm .hidebox").click();
+        var checked = $(this).hasClass("checked");
+        if (checked) {
+            $content.find("p").show();
+            $(this).removeClass("checked");
+        }
+        else {
+            $content.find("p").hide();
+            $(this).addClass("checked");
+        }
+    });
+    if (clubID-1){
         $(".alarm").remove();
         $(".alarm-content").remove();
     }

@@ -1,0 +1,21 @@
+
+.checkbox{
+    width:20px;
+    height:20px;
+    background-color:rgba(163,163,163,0.2);
+    border-radius:4px;
+}
+.checkbox.checked{background-color:mediumseagreen;}
+.checkbox.checked::after{
+    position:absolute;
+    width:20px;
+    line-height:20px;
+    content:'7';
+    text-align:center;
+    margin:auto;
+    transform:rotate(240deg) rotateY(180deg) translateY(2px);
+    font-weight:bolder;
+    color:white;
+}
+
+

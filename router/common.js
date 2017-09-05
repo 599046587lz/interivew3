@@ -34,7 +34,7 @@ router.get('/download', mid.checkFormat(function () {
         cid: Joi.number()
     })
 }), wrap(async function (req, res) {
-    let cid = req.query.cid;
+    let cid = req.param('cid');
     let dbData = await Interview.queryByClubAll(cid);
     let departments = (await Club.getClubInfo(cid)).departments;
     let departName = {};

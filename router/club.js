@@ -23,8 +23,8 @@ router.post('/login', mid.checkFormat(function () {
         password: Joi.string().required()
     })
 }), wrap(async function (req, res) {
-    let user = req.body.user;
-    let password = req.body.password;
+    let user = req.param('user');
+    let password = req.param('password');
 
     let result = await Club.login(user, password);
     req.session.club = result.name;
@@ -42,8 +42,8 @@ router.post('/setIdentify', function (req, res) {
     if (!name) {
         return res.send(403);
     }
-    req.session['did'] = req.body.did;
-    req.session['interviewer'] = req.body.interviewerName;
+    req.session['did'] = req.param('did');
+    req.session['interviewer'] = req.param('interviewerName');
     res.send(204);
 
 });
@@ -122,11 +122,11 @@ router.post('/profile', mid.checkFormat(function () {
     let cid = req.session['cid'];
     if (!cid) throw new Error('参数不完整');
     let data = {};
-    data.departments = req.body.departments;
-    data.name = req.body.name;
-    data.password = req.body.password;
-    data.logo = req.body.logo;
-    data.maxDep = req.body.maxDep;
+    data.departments = req.param('departments');
+    data.name = req.param('name');
+    data.password = req.param('password');
+    data.logo = req.param('logo');
+    data.maxDep = req.param('maxDep');
 
     let result = await Club.update(cid, data);
 
@@ -164,7 +164,7 @@ router.get('/export', mid.checkFormat(function () {
     })
 }), wrap(async function (req, res) {
     let cid = req.session['cid'];
-    let did = req.body.did;
+    let did = req.param('did');
 
     if (!cid || !did) {
         throw new Error('参数不完整');
@@ -179,7 +179,7 @@ router.get('/clubInfo', mid.checkFormat(function () {
         clubId: Joi.number()
     })
 }), wrap(async function (req, res) {
-    let cid = req.body.clubId;
+    let cid = req.param('clubId');
     let result = await Club.getClubInfo(cid);
 
     return res.json(result);
@@ -222,7 +222,7 @@ router.get('/regNum', mid.checkFormat(function() {
         clubId: Joi.number()
     })
 }), wrap(async function (req, res) {
-    let clubId = req.body.clubId;
+    let clubId = req.param('clubId');
     let result = await Club.getRegNum(clubId);
     res.send(200, result);
 }));

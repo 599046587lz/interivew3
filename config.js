@@ -11,8 +11,7 @@ module.exports = {
     QINIU_SECRETKEY: 'hZnqp7jcCmLQCkUuJ5roHrh6Mn39VuytDZBULF58',
     QINIU_BUCKET: 'interviewer',
     token: '57dbfcf39882410001b0c195',
-    accessKeyId: 'LTAI4OVjhBCnov4G',
-    secretAccessKey: 'p4RyBSDDcOpAjaP0OHvWj5ICjwOjgd',
     mailUser: '1322023401@qq.com',
-    mailPassword: 'tyucyclwplkkidef'
+    mailPassword: 'tyucyclwplkkidef',
+    apiKey: '7e9b92e1d01a94a7e304813856a99d25'
 };

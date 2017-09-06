@@ -5,9 +5,10 @@ let schedule = require('node-schedule');
 let clubModel = require('../models').Club;
 let interviewModel = require('../models').Interviewee;
 let studentModel = require('../models').Student;
-let SMSClient = require('@alicloud/sms-sdk');
 let config = require('../config');
 let nodemailer = require('nodemailer');
+let rp = require('request-promise');
+let urlencode = require('urlencode');
 
 exports.image_save = function (url, filename) {
     return new Promise(function (resolve, reject) {
@@ -60,20 +61,26 @@ exports.deleteFolder = function (path) {
 };
 
 exports.sendMessage = function (data) {
-    let accessKeyId = config.accessKeyId;
-    let secretAccessKey = config.secretAccessKey;
-    let smsClient = new SMSClient({accessKeyId, secretAccessKey});
 
-    return smsClient.sendSMS({
-        PhoneNumbers: data.phoneNumber,
-        SignName: data.signName,
-        TemplateCode: data.templateCode,
-        TemplateParam: data.templateParam
-    }).then(res => {
-        let {Code} = res;
-        if(Code == 'OK') {
-            return res;
-        }
+    let options = {
+        method: 'POST',
+        uri: 'https://sms.yunpian.com/v2/sms/tpl_single_send.json',
+        form: {
+            apikey: config.apiKey,
+            mobile: data.mobile,
+            tpl_id: data.tpl_id,
+            tpl_value: urlencode("#time#") + "=" + urlencode(data.time) + "&" + urlencode("#location#") + "=" + urlencode(data.location)
+        },
+        headers: {
+            'accept': 'application/json',
+            'charset': 'utf-8',
+            'content-type': 'application/x-www-form-urlencoded',
+        },
+        json: true
+    };
+
+    return rp(options).then(parseBody => {
+        console.log(parseBody);
     })
 } ;
 

@@ -21,7 +21,7 @@ router.get('/sign', mid.checkFormat(function() {
 	})
 }), wrap(async function(req, res) {
 	let cid = req.session.cid;
-	let sid = req.param('sid');
+	let sid = req.query.sid;
 
 	let result = await Interviewee.sign(sid, cid);
 	res.json(result);

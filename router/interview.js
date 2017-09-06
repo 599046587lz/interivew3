@@ -59,7 +59,7 @@ router.get('/call', mid.checkFormat(function() {
     })
 }), wrap(async function(req, res) {
     let department = req.session.did;
-    let sid = req.param('sid');
+    let sid = req.query.sid;
     let cid = req.session.cid;
 
     if(!sid) {

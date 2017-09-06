@@ -11,6 +11,7 @@ let Joi = require('joi');
 let multer = require('multer');
 let upload = multer({dest: '../files/upload'});
 let utils = require('../utils/utils');
+let crypto = require('crypto'); //加密
 
 /**
  * @params String user 登录用户名
@@ -23,10 +24,12 @@ router.post('/login', mid.checkFormat(function () {
         password: Joi.string().required()
     })
 }), wrap(async function (req, res) {
+    let hash = crypto.createHash('md5');
     let user = req.body.user;
     let password = req.body.password;
+    hash.update(password);
 
-    let result = await Club.login(user, password);
+    let result = await Club.login(user, hash.digest('hex'));
     req.session.club = result.name;
     req.session.cid = result.cid;
     res.send(204);

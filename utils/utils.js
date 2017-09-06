@@ -9,6 +9,8 @@ let config = require('../config');
 let nodemailer = require('nodemailer');
 let rp = require('request-promise');
 let urlencode = require('urlencode');
+let crypto = require('crypto'); //加密
+
 
 exports.image_save = function (url, filename) {
     return new Promise(function (resolve, reject) {
@@ -114,4 +116,10 @@ exports.sendMail = function (data) {
         });
     });
 
+};
+
+exports.encryption = function (data) {
+    let hash = crypto.createHash('md5');
+    hash.update(data);
+    return hash.digest('hex');
 };

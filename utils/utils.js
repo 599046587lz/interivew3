@@ -118,7 +118,7 @@ exports.sendMail = function (data) {
 
 };
 
-exports.encryption = function (data) {
+exports.md5 = function (data) {
     let hash = crypto.createHash('md5');
     hash.update(data);
     return hash.digest('hex');

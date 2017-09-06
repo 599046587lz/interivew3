@@ -26,10 +26,10 @@ router.post('/login', mid.checkFormat(function () {
     let user = req.body.user;
     let password = req.body.password;
 
-    let result = await Club.login(user, utils.encryption(password));
+    let result = await Club.login(user, utils.md5(password));
     req.session.club = result.name;
     req.session.cid = result.cid;
-    res.send(204);
+    res.send(result);
 }));
 
 /**

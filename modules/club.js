@@ -13,7 +13,7 @@ exports.login = function (user, password) {
     return clubModel.findOne({
         name: user
     }).then(result => {
-        if (password == result.password) {
+        if (result && password == result.password) {
             result = result.toObject();
             delete result.password;
             return result;

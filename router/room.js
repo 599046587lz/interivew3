@@ -36,7 +36,7 @@ router.get('/sign', mid.checkFormat(function() {
     }
 	res.json({
 		status: 200,
-		message: info
+		data: info
 	});
 }));
 

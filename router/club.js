@@ -85,56 +85,6 @@ router.post('/upload/archive', upload.single('archive'), mid.checkFormat(functio
 }));
 
 /**
- * 获取社团资料
- * @return Department
- */
-/**
- * 测试通过
- */
-router.get('/profile', wrap(async function (req, res) {
-    let name = req.session['club'];
-    if (!name) {
-        throw new Error('参数不完整');
-    }
-
-    let info = await Club.getClubByName(name);
-    res.json(info);
-}));
-/**
- * 更新社团资料
- * @params Department
- * @return Object {status: 'success'|'failed'}
- * 测试成功
- */
-router.post('/profile', mid.checkFormat(function () {
-    return Joi.object().keys({
-        departments: Joi.array().items(Joi.object().keys({
-            did: Joi.number(),
-            name: Joi.string(),
-            location: Joi.string()
-        })),
-        name: Joi.string(),
-        password: Joi.string(),
-        logo: Joi.string(),
-        maxDep: Joi.number()
-    })
-}), wrap(async function (req, res) {
-    let cid = req.session['cid'];
-    if (!cid) throw new Error('参数不完整');
-    let data = {};
-    data.departments = req.body.departments;
-    data.name = req.body.name;
-    data.password = req.body.password;
-    data.logo = req.body.logo;
-    data.maxDep = req.body.maxDep;
-
-    let result = await Club.update(cid, data);
-
-    res.send(204);
-}));
-
-
-/**
  * ??未测试
  */
 

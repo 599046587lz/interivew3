@@ -5,16 +5,11 @@ let IntervieweeModel = require('../models').Interviewee;
 let clubModel = require('../models').Club;
 let config = require('../config');
 
-exports.sign = function (sid, cid) {
+exports.getInterviewerInfo = function (sid, cid) {
     return IntervieweeModel.findOne({
             sid: sid,
             cid: cid
-        }).then(result => {
-            if (result.signTime) return '该学生已经签到';
-            result.signTime = new Date();
-            result.save();
-            return result;
-        })
+        });
 };
 
 

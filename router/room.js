@@ -17,38 +17,50 @@ let mid = require('../utils/middleware');
 
 router.get('/sign', mid.checkFormat(function() {
 	return Joi.object().keys({
+		cid: Joi.number(),
 		sid: Joi.number()
 	})
 }), wrap(async function(req, res) {
-	let cid = req.session.cid;
+	let cid = req.query.cid;
 	let sid = req.query.sid;
 
-	let result = await Interviewee.sign(sid, cid);
-	res.json(result);
+	let info = await Interviewee.getInterviewerInfo(sid, cid);
+	if (!info) {
+		let err = new Error('该学生未报名');
+		err.status = 403;
+		throw err;
+	}
+	if(info.signTime) {
+		info = null;
+	} else {
+        info.signTime = new Date();
+        info.save();
+    }
+	res.json(info);
 }));
 
-/**
- * @params sid
- * @params did[]
- * @return Object {status: 'success'}
- */
-/**
- * 未测试(需学校内网)
- */
-
-router.post('/selectDep', mid.checkFormat(function() {
-	return Joi.object().keys({
-		sid: Joi.number(),
-		did: Joi.number(),
-	})
-}), wrap(async function(req, res) {
-    let sid = req.body.sid;
-	let did = req.body.did;
-	let cid = req.session.cid;
-
-	let result = await Interviewee.selectDep(sid, cid, did);
-    res.json(200, result);
-}));
+// /**
+//  * @params sid
+//  * @params did[]
+//  * @return Object {status: 'success'}
+//  */
+// /**
+//  * 未测试(需学校内网)
+//  */
+//
+// router.post('/selectDep', mid.checkFormat(function() {
+// 	return Joi.object().keys({
+// 		sid: Joi.number(),
+// 		did: Joi.number(),
+// 	})
+// }), wrap(async function(req, res) {
+//     let sid = req.body.sid;
+// 	let did = req.body.did;
+// 	let cid = req.session.cid;
+//
+// 	let result = await Interviewee.selectDep(sid, cid, did);
+//     res.json(200, result);
+// }));
 
 /**
  * 测试成功

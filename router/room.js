@@ -7,6 +7,7 @@ let router = express.Router();
 let Interviewee = require("../modules/interviewee");
 let Joi = require('joi');
 let mid = require('../utils/middleware');
+let JSONError = require('../utils/JSONError');
 /**
  * @params sid
  * @return Object {status: 'success'|'selectDep'}
@@ -25,9 +26,7 @@ router.get('/sign', mid.checkFormat(function() {
 
 	let info = await Interviewee.getInterviewerInfo(sid, cid);
 	if (!info) {
-		let err = new Error('该学生未报名');
-		err.status = 403;
-		throw err;
+		throw new JSONError('该学生未报名', 403);
 	}
 	if(info.signTime) {
 		info = null;

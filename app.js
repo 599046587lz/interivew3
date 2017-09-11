@@ -43,10 +43,7 @@ app.use(function(req, res, next) {
 
 app.use(function(err, req, res, next) {
     res.status(err.status || 500);
-    res.send({
-        status: err.status || 500,
-        message: err.message
-    });
+    res.send(err);
 });
 
 

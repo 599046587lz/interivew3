@@ -17,11 +17,10 @@ let mid = require('../utils/middleware');
 
 router.get('/sign', mid.checkFormat(function() {
 	return Joi.object().keys({
-		cid: Joi.number(),
 		sid: Joi.number()
 	})
 }), wrap(async function(req, res) {
-	let cid = req.query.cid;
+	let cid = req.session.cid;
 	let sid = req.query.sid;
 
 	let info = await Interviewee.getInterviewerInfo(sid, cid);
@@ -36,36 +35,15 @@ router.get('/sign', mid.checkFormat(function() {
         info.signTime = new Date();
         info.save();
     }
-	res.json(info);
+	res.json({
+		status: 200,
+		message: info
+	});
 }));
-
-// /**
-//  * @params sid
-//  * @params did[]
-//  * @return Object {status: 'success'}
-//  */
-// /**
-//  * 未测试(需学校内网)
-//  */
-//
-// router.post('/selectDep', mid.checkFormat(function() {
-// 	return Joi.object().keys({
-// 		sid: Joi.number(),
-// 		did: Joi.number(),
-// 	})
-// }), wrap(async function(req, res) {
-//     let sid = req.body.sid;
-// 	let did = req.body.did;
-// 	let cid = req.session.cid;
-//
-// 	let result = await Interviewee.selectDep(sid, cid, did);
-//     res.json(200, result);
-// }));
 
 /**
  * 测试成功
  */
-
 router.post('/addDep', mid.checkFormat(function() {
 	return Joi.object().keys({
 		sid: Joi.number(),

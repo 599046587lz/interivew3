@@ -53,9 +53,6 @@ router.post('/addDep', mid.checkFormat(function() {
 		phone: Joi.number()
 	})
 }), wrap(async function(req, res) {
-	let cid = req.body.cid;
-	if(!cid) throw new Error('参数不完整');
-
     let info = {
 			sid: req.body.sid,
 			volunteer: req.body.did,
@@ -66,8 +63,11 @@ router.post('/addDep', mid.checkFormat(function() {
 			signTime: new Date()
 		};
 
-    let result = await Interviewee.addDep(cid, info);
-    res.json(200, result);
+    let result = await Interviewee.addInterviewee(info, cid);
+    res.json({
+    	status: 200,
+		message: result
+	});
 
 }));
 

@@ -7,6 +7,7 @@ let router = express.Router();
 let Interviewee = require('../modules/interviewee');
 let Joi = require('joi');
 let mid = require('../utils/middleware');
+let JSONError = require('../utils/JSONError');
 
 /**
  * 测试成功
@@ -21,9 +22,12 @@ router.post('/recommend', mid.checkFormat(function() {
     let sid = req.body.sid;
     let departmentId = req.body.departmentId;
     let cid = req.session.cid;
+    let interviewerInfo = await Interviewee.getInterviewerInfo(sid, cid);
+    if (interviewerInfo.volunteer.indexOf(departmentId) >= 0) throw new JSONError('不能重复推荐部门', 403);
+    interviewerInfo.volunteer.push(departmentId);
+    interviewerInfo.save();
 
-    let result = await Interviewee.recommend(cid, sid, departmentId);
-    res.send(204);
+    return res.send(204);
 }));
 
 /**
@@ -36,15 +40,15 @@ router.post('/rate', mid.checkFormat(function() {
         score: Joi.number().valid([0, 1, 2]),
         comment: Joi.string()
     })
-}, {allowUnknown: true}), wrap(async function(req, res) {
+}), wrap(async function(req, res) {
     let sid = req.body.sid;
     let score = req.body.score;
     let comment = req.body.comment;
-    let did = req.body.did;
-    let interviewer = req.body.interviewer;
-    let cid = req.body.cid;
+    let did = req.session.did;
+    let interviewer = req.session.interviewer;
+    let cid = req.session.cid;
 
-    let result = await Interviewee.rateInterviewee(cid, sid, score, comment, did, interviewer);
+    await Interviewee.rateInterviewee(cid, sid, score, comment, did, interviewer);
 
     res.send(204);
 }));
@@ -66,13 +70,9 @@ router.get('/call', mid.checkFormat(function() {
        let result = await Interviewee.getNextInterviewee(cid, department);
        result = result.toObject();
        result.did = department;
-       // let timer = setTimeout(function () {
-       //     Interviewee.recoverInterviewee(sid, cid, department);
-       // }, 2000);
         console.log(result);
        let room = global.io.to(cid);
        room.emit('call', result);
-       console.log('------------==================')
        for(let socketId in room.connected){
            let socket = room.connected[socketId];
            socket.on('success', function () {
@@ -99,6 +99,7 @@ router.get('/queue', wrap(async function(req, res) {
     let result = await Interviewee.getDepartmentQueueLength(cid, did);
 
     res.json({
+        status: 200,
         count: result
     })
 }));
@@ -116,12 +117,12 @@ router.post('/skip', mid.checkFormat(function() {
     let sid = req.body.sid;
     let did = req.session.did;
 
-    if(!cid || !sid) {
-        throw new Error('参数不完整');
-    }
     let result = await Interviewee.skip(cid, sid, did);
 
-    res.send(200, result);
+    res.json({
+        status: 200,
+        message: result
+    });
 }));
 
 module.exports = router;

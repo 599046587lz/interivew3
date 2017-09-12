@@ -5,6 +5,7 @@ let club = require('../modules/club');
 let mid = require('../utils/middleware');
 let router = express.Router();
 let Joi = require('joi');
+let JSONError = require('../utils/JSONError');
 
 
 let wrap = fn => (...args) => fn(...args).catch(args[2]);
@@ -36,12 +37,17 @@ router.post('/', mid.checkFormat(function() {
 }}), wrap(async function(req, res) {
     let data = req.body;
     let fileName = data.cid + '-' + data.name + '-' + data.sid + '.jpg';
+    let departInfo = await club.getClubInfo(cid);
+    if(!departInfo || !(data.clubName == departInfo.name)) throw new JSONError('社团id错误');
 
-    await club.verifyInfo(data);
-    await interviewee.checkStudent(data.sid, data.cid);
+    let studentInfo = await interviewee.getInterviewerInfo(data.sid, data.cid);
+    if(!!studentInfo) throw new JSONError('该学生已注册', 403);
     data.image = await utils.image_save(data.pic_url, fileName);
     let result = await interviewee.addStudent(data);
-    res.send(200, result);
+    res.send({
+        status: 200,
+        message: result
+    });
 
 }));
 module.exports = router;

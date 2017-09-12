@@ -7,9 +7,9 @@ let config = require('../config');
 
 exports.getInterviewerInfo = function (sid, cid) {
     return IntervieweeModel.findOne({
-            sid: sid,
-            cid: cid
-        });
+        sid: sid,
+        cid: cid
+    });
 };
 
 
@@ -23,11 +23,6 @@ exports.selectDep = function (sid, cid, did) {
 };
 
 
-exports.addDep = function(cid, interviewee) {
-       return exports.addInterviewee(interviewee, cid).then(result => {
-            return true;
-        })
-};
 
 
 exports.getNextInterviewee = function (cid, did) {
@@ -94,23 +89,9 @@ exports.rateInterviewee = function (cid, sid, score, comment, did, interviewer) 
             result.busy = false;
             result.signTime = new Date();
             result.save();
-            return '评论成功';
+            return;
         });
 };
-
-
-exports.recommend = function (cid, sid, departmentId) {
-        return IntervieweeModel.findOne({
-            cid: cid,
-            sid: sid
-        }).then(result => {
-            if (result.volunteer.indexOf(departmentId) >= 0) throw new Error('不能重复推荐部门');
-            result.volunteer.push(departmentId);
-            result.save();
-            return '更新成功';
-        })
-};
-
 
 
 exports.getDepartmentQueueLength = function (cid, did) {
@@ -197,20 +178,6 @@ exports.addInterviewee = function (data, cid) {
         delete interviewee.signTime;
     }
     return IntervieweeEntity.save();
-};
-
-exports.checkStudent = function (sid, cid) {
-    return IntervieweeModel.findOne({
-        sid: sid,
-        cid: cid
-    }).then(result => {
-        if(!!result) {
-            let error = new Error('该学生已注册');
-            error.status = 403;
-            throw error;
-        }
-        return;
-    })
 };
 
 exports.addStudent = function (data) {

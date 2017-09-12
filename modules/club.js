@@ -30,11 +30,7 @@ exports.login = function (user, password) {
 exports.getClubByName = function (name) {
     return clubModel.findOne({
         name: name
-    }).then(result => {
-        result = result.toObject();
-        delete result.password;
-        return result;
-    })
+    });
 };
 
 exports.handleArchive = function (file, cid) {
@@ -181,13 +177,7 @@ exports.exportInterviewees = function (cid, did) {
 exports.getClubInfo = function (cid) {
     return clubModel.findOne({
         cid: cid
-    }).then(result => {
-        return ({
-            clubName: result.name,
-            departments: result.departments,
-            maxDep: result.maxDep
-        });
-    })
+    });
 };
 
 exports.verifyInfo = function (data) {

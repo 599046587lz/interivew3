@@ -15,7 +15,7 @@ router.post('/', mid.checkFormat(function() {
             club: Joi.string().required(),
             clubID: Joi.number().required(),
             name: Joi.string().required(),
-            studentID: Joi.string().regex(/^1[0-9]{7}$/).required(),
+            studentID: Joi.string().required(),
             gender: Joi.number().required(),
             college: Joi.string().required(),
             major: Joi.string().required(),

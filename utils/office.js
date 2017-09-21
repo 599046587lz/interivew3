@@ -27,7 +27,7 @@ exports.writeExcel = function (dbData, clubID) {
         // .reduce((prev, next) => Object.assign({}, prev, {[next.position]: {v: next.v}}));
         let result = {};
         data.forEach((e, i)=> {
-            result[e.position] = {v: (e.v == null? e.v : '无')};
+            result[e.position] = {v: (e.v == null? '无' : e.v)};
         });
         let newheader = {
             A1: {v: '社团'},

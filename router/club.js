@@ -193,10 +193,16 @@ router.get('/regNum', mid.checkFormat(function() {
     res.send(200, result);
 }));
 
-router.post('/sendMessage', wrap(async function(req, res) {
-    let data = req.body;
+router.post('/sendMessage', upload.single('archive'), wrap(async function(req, res) {
+    let reqData = {};
+    reqData.tpl_id = req.body.tpl_id;
+    reqData.time = req.body.time;
 
-    let result = await utils.sendMessage(data);
+    let file = req.file;
+    let data = utils.getExcelInfo(file);
+    for(let i of data) {
+        let result = await utils.sendMessage(i, reqData);
+    }
     res.send(200, '发送成功');
 }));
 

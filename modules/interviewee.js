@@ -85,11 +85,12 @@ exports.rateInterviewee = function (cid, sid, score, comment, did, interviewer) 
                 comment: comment,
                 interviewer: interviewer
             });
-            result.done.push(did);
+            let done = [].concat(result.done);
+            done.push(did);
+            result.done = done;
             result.busy = false;
             result.signTime = new Date();
-            result.save();
-            return;
+            return result.save();
         });
 };
 

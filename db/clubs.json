@@ -2,7 +2,7 @@
     "_id" : ObjectId("599fb90606df1710947c3e95"), 
     "cid" : NumberInt(1), 
     "name" : "红色家园", 
-    "password" : "202cb962ac59075b964b07152d234b70", 
+    "password" : "d9b1d7db4cd6e70935368a1efb10e377",
     "maxDep" : NumberInt(3), 
     "interviewer" : [
 

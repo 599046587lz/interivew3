@@ -212,4 +212,33 @@ router.post('/sendEmail', wrap(async function(req, res) {
     res.send(200, '发送成功');
 }));
 
+router.post('/profile', mid.checkFormat(function () {
+    return Joi.object().keys({
+        cid: Joi.number(),
+        departments: Joi.array().items(Joi.object().keys({
+            did: Joi.number(),
+            name: Joi.string(),
+            location: Joi.string()
+        })),
+        name: Joi.string(),
+        password: Joi.string(),
+        logo: Joi.string(),
+        maxDep: Joi.number()
+    })
+}), wrap(async function (req, res) {
+    let cid = req.body.cid;
+    if (!cid) throw new Error('参数不完整');
+    let data = {};
+    data.cid = req.body.cid;
+    data.departments = req.body.departments;
+    data.name = req.body.name;
+    data.password = utils.md5(req.body.password);
+    data.logo = req.body.logo;
+    data.maxDep = req.body.maxDep;
+
+    let result = await Club.createClub(data);
+
+    res.send(204);
+}));
+
 module.exports = router;

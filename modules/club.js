@@ -140,16 +140,8 @@ exports.handleArchive = function (file, cid) {
     })
 };
 
-exports.update = function (cid, data) {
-    return IntervieweeModel.remove({
-        cid: cid
-    }).then(result => {
-        return clubModel.findOneAndUpdate({
-            cid: cid
-        }, data)
-    }).then(result => {
-        return result;
-    })
+exports.createClub = function (data) {
+    return clubModel.create(data);
 };
 
 

@@ -56,14 +56,15 @@ $(function () {
         pop = $("#pop").html();
     $(".email input").emailpop();
 
+    var derpatmentNameMap = {};
+
     function getDepartInfo(clubID) {
         $.ajax({
             url: "/club/clubInfo?clubId=" + clubID,
             success: function (data) {
-                localStorage.setItem("club", data.clubName);
-                localStorage.setItem("maxDep", data.maxDep);
-                loadList(departFormat(data.department));
-
+                localStorage.setItem("club", data.message.clubName);
+                localStorage.setItem("maxDep", data.message.maxDep);
+                loadList(departFormat(data.message.departments));
             },
             error: function () {
                 $container.html("");
@@ -78,6 +79,7 @@ $(function () {
         var department = new Object();
         department.column = new Object();
         for (var i in data) {
+            derpatmentNameMap[data[i].name] = data[i].did;
             var predepart = data[i].name.split("-")[0];
             var precolumn = data[i].name.split("-")[1];
 
@@ -262,12 +264,12 @@ $(function () {
                 if (column) {
                     flag = 0;
                     insert = obj + "-" + column;
-                    department.push(insert);
+                    department.push(derpatmentNameMap[insert]);
                 }
             }
-            if (flag) department.push(obj);
+            if (flag) department.push(derpatmentNameMap[obj]);
         }
-        data.department = department;
+        data.volunteer = department;
     }
 
     function sendFinalData(data) {
@@ -331,8 +333,7 @@ $(function () {
     $submit.on('click', function () {
         $(this).addClass("noclick");
         var finalData = $data.serializeObject();
-        //console.log(finalData);
-        if (!finalData.intro) {
+        if (!finalData.notion) {
             warning("还没有填写自我介绍哦");
             return;
         }
@@ -340,8 +341,8 @@ $(function () {
             warning("必须先确认注意事项哦~");
             return;
         }
-        finalData.clubID = clubID;
-        finalData.club = localStorage.getItem("club");
+        finalData.cid = clubID;
+        finalData.clubName = localStorage.getItem("club");
         getDepartResult(finalData);
         var loading = "<div class='popup' style='height:200px'>" +
             "<img src='../../img/apply/loading.gif'>" +

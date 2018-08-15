@@ -137,7 +137,7 @@ router.get('/clubInfo', mid.checkFormat(function () {
         clubId: Joi.number()
     })
 }), wrap(async function (req, res) {
-    let cid = req.body.clubId;
+    let cid = req.query.clubId;
     let result = await Club.getClubInfo(cid);
     let info = {
         clubName: result.name,

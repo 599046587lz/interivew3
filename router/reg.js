@@ -37,7 +37,7 @@ router.post('/', mid.checkFormat(function() {
 }}), wrap(async function(req, res) {
     let data = req.body;
     let fileName = data.cid + '-' + data.name + '-' + data.sid + '.jpg';
-    let departInfo = await club.getClubInfo(cid);
+    let departInfo = await club.getClubInfo(data.cid);
     if(!departInfo || !(data.clubName == departInfo.name)) throw new JSONError('社团id错误');
 
     let studentInfo = await interviewee.getInterviewerInfo(data.sid, data.cid);

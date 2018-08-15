@@ -225,6 +225,7 @@ $(function () {
     })
     //注意事项
     if (clubID == 1) {
+        $('title').html('家园线上报名表');
         $check.iCheck({
             checkboxClass: 'icheckbox_flat-green',
             radioClass: 'iradio_flat-green'

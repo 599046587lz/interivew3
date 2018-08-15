@@ -142,7 +142,8 @@ router.get('/clubInfo', mid.checkFormat(function () {
     let info = {
         clubName: result.name,
         departments: result.departments,
-        maxDep: result.maxDep
+        maxDep: result.maxDep,
+        attention: result.attention
     };
 
     return res.json({

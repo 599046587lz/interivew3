@@ -257,9 +257,11 @@ warning .check {
 .section.alarm-content p {
     width: 220px;
     white-space: normal;!important;
-    line-height: 16px;
+    line-height: 20px;
     font-size: 15px;
     color: rgba(120, 120, 120, 0.75);
+    text-align:justify!important;
+
 }
 
 #submit {

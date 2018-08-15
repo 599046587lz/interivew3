@@ -38,7 +38,9 @@ $(function () {
     }
 
     var clubID = getSearchObject().clubId;
-    getDepartInfo(clubID);
+    getDepartInfo(clubID).then(function() {
+        renderAttenction();
+    });
 
     var $container = $(".container"),
         $submit = $("#submit"),
@@ -57,20 +59,27 @@ $(function () {
     $(".email input").emailpop();
 
     var derpatmentNameMap = {};
+    var attention = '';
 
     function getDepartInfo(clubID) {
-        $.ajax({
-            url: "/club/clubInfo?clubId=" + clubID,
-            success: function (data) {
-                localStorage.setItem("club", data.message.clubName);
-                localStorage.setItem("maxDep", data.message.maxDep);
-                loadList(departFormat(data.message.departments));
-            },
-            error: function () {
-                $container.html("");
-                warning("找不到服务器")
-            }
+        return new Promise(function(resolve, reject) {
+            $.ajax({
+                url: "/club/clubInfo?clubId=" + clubID,
+                success: function (data) {
+                    localStorage.setItem("club", data.message.clubName);
+                    localStorage.setItem("maxDep", data.message.maxDep);
+                    attention = data.message.attention;
+                    loadList(departFormat(data.message.departments));
+                    return resolve();
+                },
+                error: function () {
+                    $container.html("");
+                    warning("找不到服务器");
+                    return reject();
+                }
+            })
         })
+
     }
 
     function departFormat(data) {
@@ -224,31 +233,36 @@ $(function () {
         $female.find(".icon.off").removeClass("hide");
     })
     //注意事项
-    if (clubID == 1) {
-        $('title').html('家园线上报名表');
-        $check.iCheck({
-            checkboxClass: 'icheckbox_flat-green',
-            radioClass: 'iradio_flat-green'
-        });
-        $(".alarm .note").on("click", function () {
-            $check.next("ins").click();
-        });
-        $check.next("ins").on('click', function () {
-            var checked = $(this).parent().hasClass("checked");
-            if (!checked) {
-                $content.find("p").show();
-                $content.removeClass("checked");
 
-            }
-            else {
-                $content.find("p").hide();
-                $content.addClass("checked");
-            }
-        });
-    }
-    else {
-        $(".alarm").remove();
-        $(".alarm-content").remove();
+    function renderAttenction() {
+        if (!!attention) {
+            $('title').html('家园线上报名表');
+            console.log(attention)
+            $('.alarm-content').append(attention)
+            $check.iCheck({
+                checkboxClass: 'icheckbox_flat-green',
+                radioClass: 'iradio_flat-green'
+            });
+            $(".alarm .note").on("click", function () {
+                $check.next("ins").click();
+            });
+            $check.next("ins").on('click', function () {
+                var checked = $(this).parent().hasClass("checked");
+                if (!checked) {
+                    $content.find("p").show();
+                    $content.removeClass("checked");
+
+                }
+                else {
+                    $content.find("p").hide();
+                    $content.addClass("checked");
+                }
+            });
+        }
+        else {
+            $(".alarm").remove();
+            $(".alarm-content").remove();
+        }
     }
 
     function getDepartResult(data) {

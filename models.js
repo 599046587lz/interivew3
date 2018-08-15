@@ -24,7 +24,8 @@ let Club = new mongoose.Schema({
     departments: [Department],  //Department
     interviewer: [String],
     password: String,
-    maxDep: Number //应试者最多可以选择的部门
+    maxDep: Number, //应试者最多可以选择的部门,
+    attention: String
 });
 
 

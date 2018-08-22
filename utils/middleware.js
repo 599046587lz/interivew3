@@ -15,7 +15,7 @@ exports.session = function() {
     return session({
         secret: config.cookie_secret,
         store: new MongoStore({
-            url: `mongodb://${ config.db.host }/${ config.db.db }`,
+            url: `mongodb://${config.db.user}:${config.db.password}@${config.db.host}/${config.db.db}`,
             auto_reconnect:true
         }),
         resave: true,

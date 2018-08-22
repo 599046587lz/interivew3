@@ -178,6 +178,7 @@ router.post('/insertInfo', wrap(async function (req, res) {
     data.interviewer = req.body.interviewer;
     data.password = req.body.password;
     data.maxDep = req.body.maxDep;
+    data.attention = req.body.attention;
 
     let result = await Club.insertInfo(data);
 

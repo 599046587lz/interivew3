@@ -1,6 +1,8 @@
 /**
  * Created by Shinelon on 2017/8/8.
  */
+let port = 3001;
+let assetsPath = '127.0.0.1' + port;
 
 $(function () {
 
@@ -64,7 +66,7 @@ $(function () {
     function getDepartInfo(clubID) {
         return new Promise(function(resolve, reject) {
             $.ajax({
-                url: "/club/clubInfo?clubId=" + clubID,
+                url: assetsPath + "/club/clubInfo?clubId=" + clubID,
                 success: function (data) {
                     localStorage.setItem("club", data.message.clubName);
                     localStorage.setItem("maxDep", data.message.maxDep);
@@ -292,7 +294,7 @@ $(function () {
         if (!data.short_tel) data.short_tel = undefined;
         //console.log(data);
         $.ajax({
-            url: "/reg",
+            url: assetsPath + "/reg",
             contentType: "application/json",
             method: "post",
             data: JSON.stringify(data),
@@ -365,7 +367,7 @@ $(function () {
             "</div>"
         $container.append(loading);
         $.ajax({
-            url: "/common/uploadToken",
+            url: assetsPath + "/common/uploadToken",
             method: "get",
             data: {
                 type: "image"

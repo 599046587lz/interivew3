@@ -2,7 +2,7 @@
  * Created by Shinelon on 2017/8/8.
  */
 let port = 3001;
-let assetsPath = '127.0.0.1' + port;
+let assetsPath = 'http://106.14.143.18:' + port;
 
 $(function () {
 

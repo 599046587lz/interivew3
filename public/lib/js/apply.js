@@ -237,7 +237,6 @@ $(function () {
     function renderAttenction() {
         if (!!attention) {
             $('title').html('家园线上报名表');
-            console.log(attention)
             $('.alarm-content').append(attention)
             $check.iCheck({
                 checkboxClass: 'icheckbox_flat-green',
@@ -320,7 +319,7 @@ $(function () {
         })
     }
 
-    function sendPicData(data, form, finalData) {
+    function sendPicData(form, finalData) {
         if (!hasPic) {
             var url_origin = location.href.split("/apply")[0];
             finalData.pic_url = url_origin + "/img/apply/default_logo.png";
@@ -328,7 +327,7 @@ $(function () {
             return;
         }
         $.ajax({
-            url: "https://up-z2.qiniu.com?token=" + data.token,
+            url: "/common/uploadFile",
             type: "post",
             data: form,
             processData: false,
@@ -337,8 +336,9 @@ $(function () {
                 finalData.pic_url = data.url;
                 sendFinalData(finalData);
             },
-            error: function () {
+            error: function (err) {
                 $(".popup").remove();
+                $(".errorHandle").text(JSON.stringify(err))
                 warning("图片上传失败 请检查网络");
             }
         });
@@ -364,16 +364,7 @@ $(function () {
             "<div>正在提交</div>" +
             "</div>"
         $container.append(loading);
-        $.ajax({
-            url: "/common/uploadToken",
-            method: "get",
-            data: {
-                type: "image"
-            },
-            success: function (data) {
-                var form = new FormData(document.getElementById("formfile"));
-                sendPicData(data, form, finalData);
-            }
-        });
+        var form = new FormData(document.getElementById("formfile"));
+        sendPicData(form, finalData);
     })
 })

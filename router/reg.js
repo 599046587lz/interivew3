@@ -22,7 +22,7 @@ router.post('/', mid.checkFormat(function() {
             major: Joi.string().required(),
             volunteer: Joi.array().items(Joi.number()).required(),
             notion: Joi.string().required(),
-            phone: Joi.string().regex(/^(1[34578])[0-9]{9}$/).required(),
+            phone: Joi.string().regex(/^(1)[0-9]{10}$/).required(),
             qq: Joi.string().regex(/[1-9][0-9]{4,}/).required(),
             short_tel: Joi.string().regex(/[0-9]{6}$/),
             pic_url: Joi.string().required(),

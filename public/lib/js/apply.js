@@ -237,7 +237,6 @@ $(function () {
     function renderAttenction() {
         if (!!attention) {
             $('title').html('家园线上报名表');
-            console.log(attention)
             $('.alarm-content').append(attention)
             $check.iCheck({
                 checkboxClass: 'icheckbox_flat-green',

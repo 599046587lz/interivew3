@@ -310,8 +310,8 @@ $(function () {
                     warning("上传有误 请将数据填写完整");
                     return;
                 }
-                if (reg.responseText.split(':')[2]) {
-                    warning(reg.responseText.split(':')[2]);
+                if (JSON.parse(reg.responseText).message) {
+                    warning(JSON.parse(reg.responseText).message);
                     return;
                 }
                 warning(reg.responseText);

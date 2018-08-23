@@ -213,3 +213,13 @@ exports.setRoomLocation = function (cid, departmentId, roomLocation) {
         result.save();
     })
 };
+
+exports.initClub = function (cid) {
+    return clubModel.findOne({cid: cid}).then(club => {
+        let departments = club.departments;
+        for(let department of departments) {
+            department.number = 0
+        }
+        return club.save();
+    })
+}

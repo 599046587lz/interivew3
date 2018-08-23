@@ -243,4 +243,11 @@ router.post('/profile', mid.checkFormat(function () {
     res.send(204);
 }));
 
+router.post('/init', wrap(async function (req, res) {
+    let cid = req.body.cid;
+
+    await Club.initClub(cid);
+    res.send(204);
+}))
+
 module.exports = router;

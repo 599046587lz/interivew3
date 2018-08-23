@@ -1,5 +1,6 @@
 let express = require('express');
-let config = require('../config');
+let upload = require('multer')({dest: '../files/upload'});
+let qiniu = require('../utils/qiniu');
 let path = require('path');
 let router = express.Router();
 let mid = require('../utils/middleware');
@@ -8,26 +9,16 @@ let Club = require('../modules/club');
 let office = require('../utils/office');
 let Joi = require('joi');
 let wrap = fn => (...args) => fn(...args).catch(args[2]);
-let Base64 = require('js-base64').Base64;
 
-router.get('/uploadToken', function (req, res) {
-    let qiniu = require('qiniu');
-    let mac = new qiniu.auth.digest.Mac(config.QINIU_ACCESSKEY, config.QINIU_SECRETKEY);
-    let bucket = config.QINIU_BUCKET;
-    let data = new Date().getTime();
-    let options = {
-        scope: bucket,
-        returnBody: '{"url": "http://ot0i9omzm.bkt.clouddn.com/$(key)"}',
-        saveKey: req.query.type + '/' + "$(sha1)" + data,
-        persistentOps: 'imageView2/0/format/jpg/q/75|saveas/' + Base64.encode( bucket + ':' + req.query.type + '/' + "$(sha1)")
-    };
-    let putpolicy = new qiniu.rs.PutPolicy(options);
-    let uploadToken = putpolicy.uploadToken(mac);
+router.post('/uploadFile', upload.single('file'), wrap(async function (req, res) {
 
-    res.json({
-        'token': uploadToken
-    })
-});
+    let file = req.file;
+    let fileName = file.originalname;
+
+    let result = await qiniu.qiniuUpload(file.path, fileName)
+
+    res.send(200, result);
+}));
 
 router.get('/download', mid.checkFormat(function () {
     return Joi.object().keys({

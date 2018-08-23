@@ -319,7 +319,7 @@ $(function () {
         })
     }
 
-    function sendPicData(data, form, finalData) {
+    function sendPicData(form, finalData) {
         if (!hasPic) {
             var url_origin = location.href.split("/apply")[0];
             finalData.pic_url = url_origin + "/img/apply/default_logo.png";
@@ -327,7 +327,7 @@ $(function () {
             return;
         }
         $.ajax({
-            url: "https://up-z2.qiniu.com?token=" + data.token,
+            url: "/common/uploadFile",
             type: "post",
             data: form,
             processData: false,
@@ -364,16 +364,7 @@ $(function () {
             "<div>正在提交</div>" +
             "</div>"
         $container.append(loading);
-        $.ajax({
-            url: "/common/uploadToken",
-            method: "get",
-            data: {
-                type: "image"
-            },
-            success: function (data) {
-                var form = new FormData(document.getElementById("formfile"));
-                sendPicData(data, form, finalData);
-            }
-        });
+        var form = new FormData(document.getElementById("formfile"));
+        sendPicData(form, finalData);
     })
 })

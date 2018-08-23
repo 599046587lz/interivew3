@@ -336,8 +336,9 @@ $(function () {
                 finalData.pic_url = data.url;
                 sendFinalData(finalData);
             },
-            error: function () {
+            error: function (err) {
                 $(".popup").remove();
+                $(".errorHandle").text(err)
                 warning("图片上传失败 请检查网络");
             }
         });

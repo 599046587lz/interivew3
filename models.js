@@ -4,7 +4,8 @@
 let mongoose = require('mongoose');
 let config = require('./config');
 // mongoose.Promise = global.Promise;
-mongoose.connect(`mongodb://${config.db.user}:${config.db.password}@${config.db.host}/${config.db.db}`);
+let mongoUserInfo = (!config.db.user || !config.db.password)? '' : config.db.user + ':' + config.db.password + '@';
+mongoose.connect(`mongodb://${mongoUserInfo}${config.db.host}/${config.db.db}`);
 
 
 let Department = new mongoose.Schema({

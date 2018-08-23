@@ -50,12 +50,6 @@ input[type=text] {
     line-height: 20px;
 }
 
-input[type=text] :focus {
-    outline: none!important;
-}
-
-
-
 textarea {
     font-size: 15px;
     color: rgba(120, 120, 120, 0.65);
@@ -169,9 +163,6 @@ warning .check {
     text-align: left;
 }
 
-.depart_list:focus {
-    outline: none!important;
-}
 
 .depart_list list1 {
     display: inline-flex;

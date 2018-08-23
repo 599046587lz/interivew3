@@ -5,7 +5,7 @@ module.exports = {
     db:{
         user: process.env.MONGO_USER || 'interview',
         password: process.env.MONGO_PASSWORD || '',
-        host: '106.14.143.18:27017',
+        host: process.env.MONGO_HOST || '127.0.0.1:27017',
         db: 'interview'
     },
     cookie_secret: 'redhome2014interview',

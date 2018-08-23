@@ -202,11 +202,11 @@ exports.addStudent = function (data) {
 
     return Interviewee.save().then(result => {
         clubModel.findOne({
-            cid: data.clubID
+            cid: data.cid
         }).then(result => {
             result.departments.forEach(e => {
-                data.department.forEach(j => {
-                    if(e.name == j) {
+                data.volunteer.forEach(j => {
+                    if(e.did === j) {
                         e.number ++;
                         return;
                     }

@@ -4,6 +4,9 @@ body,html{
     text-align: center;
 }
 
+a, button, input, textarea, div {
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
 
 .section.intro,
 .section.alarm-content{
@@ -46,6 +49,12 @@ input[type=text] {
     font-size: 16px;
     line-height: 20px;
 }
+
+input[type=text] :focus {
+    outline: none!important;
+}
+
+
 
 textarea {
     font-size: 15px;
@@ -158,6 +167,10 @@ warning .check {
     width: 250px;
     margin: auto;
     text-align: left;
+}
+
+.depart_list:focus {
+    outline: none!important;
 }
 
 .depart_list list1 {

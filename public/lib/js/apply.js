@@ -338,7 +338,7 @@ $(function () {
             },
             error: function (err) {
                 $(".popup").remove();
-                $(".errorHandle").text(err)
+                $(".errorHandle").text(err.toString())
                 warning("图片上传失败 请检查网络");
             }
         });

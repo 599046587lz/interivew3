@@ -77,7 +77,7 @@ exports.writeExcel = function (dbData, cid) {
                     }
                 };
                 if (!fs.existsSync(__dirname + '/../files/file/' + cid)) fs.mkdirSync(__dirname + '/../files/file/' + cid);
-                xlsx.writeFile(wb, '../files/file/' + cid + '/' + _data + '.xlsx');
+                xlsx.writeFile(wb, '../files/file/' + cid + '/' + _data.replace(/\//, '|') + '.xlsx');
             }
             resolve('导入成功');
         });

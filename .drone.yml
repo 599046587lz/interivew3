@@ -1,0 +1,15 @@
+kind: pipeline
+name: default
+
+steps:
+- name: publish
+  image: plugins/docker
+  settings:
+    repo: index.hduin.club/ihdulogin
+    registry: index.hduin.club
+    username: drone
+    password: dronelogin
+    mirror: https://registry.docker-cn.com
+    tags:
+      - ${DRONE_COMMIT_BRANCH}
+      - ${DRONE_COMMIT_SHA:0:8}

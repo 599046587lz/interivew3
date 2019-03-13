@@ -14,7 +14,7 @@ let getUploadToken = function(filePath) {
     if(type.ext === "gif" || type.ext === "png" || type.ext === "jpg") isImg = '?imageView2/0/format/jpg/q/75|imageslim'
     let options = {
         scope: bucket,
-        returnBody: `{"url": "http://ot0i9omzm.bkt.clouddn.com/$(key)${isImg}", "key": "$(key)"}`
+        returnBody: `{"url": "http://ygfouiospkbiue.hduin.club/$(key)${isImg}", "key": "$(key)"}`
     };
     let putpolicy = new qiniu.rs.PutPolicy(options);
     let uploadToken = putpolicy.uploadToken(mac);

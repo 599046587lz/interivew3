@@ -25,7 +25,7 @@ $(".button").click(function(){
 	$.ajax({
 		url  : baseURL + "/club/login",
 		type : 'post',
-		data : {user: account, password: $.md5(password)},
+		data : {user: account, password: password},
 		dataType : 'json',
 		beforeSend : function(){
 			$(".button").addClass('loading');
@@ -38,11 +38,11 @@ $(".button").click(function(){
 				err("帐号或密码错误！");
 				$("[name=account]").focus();
 			},
-			204 : function(){
+			200 : function(){
 				success('登陆成功!');
 				setTimeout(function () {
 						window.location.href = "select.html";
-					}, 500)
+					}, 500);
 			},
 			500 : function(){
 				err('服务器错误,请重试!');

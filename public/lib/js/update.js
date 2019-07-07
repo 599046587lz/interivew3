@@ -1,74 +1,121 @@
+baseURL = 'http://szq.jouta.xyz/';
+clubId = 1;
+
 $(function () {
     $(".back").click(function () {
         window.history.back();
     });
 
-    //get club info
+    //获取clubinfo
     $.ajax({
-        url: "/club/profile", type: "get", success: function (data, status, xhr) {
-            $(".clubName").html(data.name);
+        url:  baseURL+"club/clubInfo",
+        type: "get",
+        data: {
+            clubId: clubId
+        },
+        success: function (data, status, xhr) {
+            $(".clubName").html(data.message.name);
             var $container = $(".container");
             var $department = $(".department");
             var $classroom = $(".classroom");
-            $container.css('height', $container.height() + 35 * data.departments.length + 'px');
-            for (var i in data.departments) {
-                $department.append("<input value='" + data.departments[i]["name"] + "' readonly/>");
-                $classroom.append("<input class='room' depart='" + data.departments[i]["name"] + "' value='" + data.departments[i]["location"] + "' />");
+            $container.css('height', $container.height() + 35 * data.message.departments.length + 'px');
+            for (var i in data.message.departments) {
+                $department.append("<input value='" + data.message.departments[i]["name"] + "' readonly/>");
+                $classroom.append("<input class='room' depart='" + data.message.departments[i]["did"] + "' value='" + data.message.departments[i]["location"] + "' />");
             }
         }
     });
+
 
     $("#submit").click(function () {
         var self = $(this);
         self.addClass('loading');
         //提交修改表单
-        var data = {};
         var dep = [];
         $("input.room").each(function () {
             var depart = $(this).attr("depart");
+            var dId = Number(depart);
             var room = $(this).val();
-            if (depart && room) dep.push({name: depart, location: room});
+            if (depart && room) dep.push({departmentId: dId, roomLocation: room});
         });
-        data.departments = dep;
         $.ajax({
-            url: "/club/profile", type: "post", data: data, dataType: "json", statusCode: {
+            url: baseURL + "club/upload/location",
+            type: "post",
+            data: {
+                cid: clubId,
+                info: dep
+            },
+            processData: false,
+            traditional: true,
+            dataType: "json",
+            //contentType: 'application/json; charset=utf-8',
+            statusCode: {
                 200: function () {
-                    alert("修改成功");
+                    alert("修改成功!");
                 },
                 204: function () {
-                    alert("修改成功");
+                    alert("修改成功!");
                 },
                 205: function () {
-                    alert("修改成功")
-                }
+                    alert("修改成功!");
+                },
             }, complete: function () {
-                self.removeClass("loading")
+                self.removeClass('loading');
             }
         });
-    });
-    //提交excel
-    $("#select").on("click", function () {
-        var self = $(this);
-        if (confirm("上传文件会导致之前资料被清空，是否继续？")) {
-            $.upload({
-                url: "/club/upload/archive",
-                fileName: "archive",
-                params: {},
-                dataType: "json",
-                onSendStart: function () {
-                    self.addClass("loading");
-                },
-                onComplate: function (data) {
-                    self.removeClass("loading");
-                    if ("success" == data.status) {
-                        alert("上传成功");
-                    } else if (404 == data.code) {
-                        alert("第" + data.line + "行学号为" + data.interviewee.sid +"的信息在 学号，性别，qq，电话中有格式错误");
-                    } else {
-                        alert("上传失败");
-                    }
+
+        //上传文件(有文件时上传文件)
+        var excelName = $('#file').val();
+        var fileTArr = excelName.split(".");
+            //切割出后缀文件名
+        var filetype = fileTArr[fileTArr.length - 1];
+        if (filetype != null && filetype != "") {
+            $(function (){
+                let files= $('#file').prop('files');
+                var data = new FormData();
+                data.append('archive', files[0]);
+                data.append('cid',clubId);
+
+                if (filetype == "xls" || filetype == "xlsx") {
+                    $.ajax({
+                        url: baseURL + "club/upload/archive",
+                        type: 'post',
+                        data: data,
+                        //async: false,
+                        cache: false,
+                        processData: false,
+                        contentType: false,
+                        success: function (data) {
+
+                            alert("上传文件成功！已成功上传 " + data.count + " 人的信息。");
+                        },
+                        error: function () {
+                            alert("与服务器通讯失败，请稍后再试！");
+                        }
+                    });
+                } else {
+                    alert("请上传正确的Excel文件，只能上传后缀为'xls'的Excel文件！");
                 }
             });
         }
+    });
+
+
+
+    $("#file").on("click", function (event) {
+        var select = $('#select');
+        select.addClass('loading');
+        if (confirm("上传文件会导致之前资料被清空，是否继续？")) {
+            setTimeout(function(){
+                select.removeClass('loading');
+            },1500);
+        } else {
+            //取消上传文件关闭inputfile窗口
+            event.preventDefault();
+            setTimeout(function(){
+                select.removeClass('loading');
+            },100);
+        }
+        //confirm是同步的 confirm时不能渲染页面
     });
 });

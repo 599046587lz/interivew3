@@ -8,7 +8,6 @@
 	<link rel="stylesheet" href="lib/css/common.css"/>
 	<script type="text/javascript" src="lib/js/jquery-1.9.1.min.js"></script>
 	<script type="text/javascript" src="lib/js/update.js"></script>
-	<script type="text/javascript" src="lib/js/jquery.upload.js"></script>
 </head>
 <body>
 <div class="topBar">
@@ -29,9 +28,15 @@
 			<span class="title">教室</span>
 		</div>
 	</div>
-
-	<div id="select" class="underline">选择文件</div>
-	<div id="submit" class="underline">提交</div>
+	<div>
+		<span id="select" class="select">
+			<span >选择文件</span>
+			<form enctype="multipart/form-data">
+				<input type="file" name="archive" id="file" accept="application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"/>
+			</form>
+		</span>
+	</div>
+	<div id="submit">提交</div>
 </div>
 
 </body>

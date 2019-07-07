@@ -3,7 +3,10 @@ baseURL = '';
 var set_club = function(){
 	club = {};
 	$.ajax({
-		url : baseURL + '/club/profile',
+		url : baseURL + '/club/clubInfo',
+		data:{
+			clubId:1
+		},
 		type : 'get',
 		statusCode : {
 			404 : function(){
@@ -14,7 +17,8 @@ var set_club = function(){
 				relogin();	
 			},
 			200 : function(data){
-				club = data;
+				console.log(data);
+				club = data.message;
 				set_department();
 			},
 			500 : function(){

@@ -102,11 +102,14 @@ var set_club = function(){
 //    window.club = { departments: [{did:1,name:'人力资源中心'},{did:5,name:'技术'},{did:4,name:'设计'},{did:3,name:'运营部'},{did:2,name:'外联部'}]};
 //    return;
     $.ajax({
-        url:urlRoot+'club/profile',
+        url:urlRoot+'club/clubInfo',
+        data:{
+            clubId:1
+        },
         type:'get',
         async:false,
         success:function(data){
-            window.club = data;
+            window.club = data.message;
         }
     });
 };

@@ -1,5 +1,4 @@
 baseURL = '/';
-clubId = 1;
 
 $(function () {
     $(".back").click(function () {
@@ -10,9 +9,6 @@ $(function () {
     $.ajax({
         url:  baseURL+"club/clubInfo",
         type: "get",
-        data: {
-            clubId: clubId
-        },
         success: function (data, status, xhr) {
             $(".clubName").html(data.message.name);
             var $container = $(".container");

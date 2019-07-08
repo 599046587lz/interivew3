@@ -1,4 +1,4 @@
-baseURL = 'http://szq.jouta.xyz/';
+baseURL = '/';
 clubId = 1;
 
 $(function () {
@@ -41,14 +41,14 @@ $(function () {
         $.ajax({
             url: baseURL + "club/upload/location",
             type: "post",
-            data: {
+            data: JSON.stringify({
                 cid: clubId,
                 info: dep
-            },
-            processData: false,
-            traditional: true,
-            dataType: "json",
-            //contentType: 'application/json; charset=utf-8',
+            }),
+            // processData: false,
+            // traditional: true,
+            // dataType: "json",
+            contentType: 'application/json; charset=utf-8',
             statusCode: {
                 200: function () {
                     alert("修改成功!");
@@ -105,7 +105,7 @@ $(function () {
     $("#file").on("click", function (event) {
         var select = $('#select');
         select.addClass('loading');
-        if (confirm("上传文件会导致之前资料被清空，是否继续？")) {
+        if (confirm("上传文件,是否继续？")) {
             setTimeout(function(){
                 select.removeClass('loading');
             },1500);

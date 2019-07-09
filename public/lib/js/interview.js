@@ -6,7 +6,10 @@ var urlRoot = '/';
 
 window.onbeforeunload = function(e) {
     if(window.interviewee){
-        return '如果现在刷新页面,当前面试者资料将丢失,请慎重!';
+        var interviewee = window.interviewee;
+        var str = JSON.stringify(interviewee)
+        localStorage.setItem('object',str);
+       return '如果现在刷新页面,当前面试者资料将丢失,请慎重!';
     }
 };
 
@@ -27,7 +30,7 @@ var HTTPCode = {
         }
     },
     500:{
-        text:'服务器错误',
+        text:'服务器错误,可能是叫号大厅没人了',
         action:function(){
             err(HTTPCode[500].text);
         }
@@ -175,9 +178,11 @@ var del_profile = function(){
     $('.infoDetail div').text('--');
 };
 
-var add_profile = function(){
+var add_profile = function(object){
     var items =  $('.infoDetail div');
     var interviewee = window.interviewee;
+    if((localStorage.getItem('object')))
+        interviewee = object;
     items[0].innerText = interviewee.sid;
     items[1].innerText = interviewee.name;
     items[2].innerText = interviewee.sex*1 !=2 ? (interviewee.sex? '男':'女') : '--';
@@ -227,6 +232,8 @@ var finish = function(){
     stop_clock();
     clear_clock();
     window.interviewee = null;
+    if((localStorage.getItem('object')))
+        localStorage.clear();
     update_queue();
 };
 var start = function(){
@@ -236,7 +243,7 @@ var start = function(){
 };
 //action(routes)
 var next = function(){
-     if(window.interviewee){
+    if((window.interviewee) || (localStorage.getItem('object'))){
         err('请先评定,推荐,或者跳过当前面试者');
         return;
     }
@@ -256,7 +263,7 @@ var next = function(){
 //    };
 //    start();
 //    return;
-    $('.next').addClass('loading');
+   $('.next').addClass('loading');
     $.ajax({
         url:urlRoot + 'interview/call',
 //        async:false,
@@ -264,6 +271,7 @@ var next = function(){
         success:function(data){
             window.interviewee = data;
             start();
+            //console.log(window.interviewee);
         },
         complete: function () {
             $('.next').removeClass('loading');
@@ -274,7 +282,7 @@ var next = function(){
 };
 
 var specialCall = function(){
-    if(window.interviewee){
+    if((window.interviewee) || (localStorage.getItem('object'))){
         err('请先评定,推荐,或者跳过当前面试者');
         return;
     };
@@ -312,7 +320,7 @@ var specialCall = function(){
 };
 
 var submit = function(){
-    if(!window.interviewee){
+    if(!(window.interviewee) && !(localStorage.getItem('object'))){
         err('尚未有面试者');
         return;
     }
@@ -330,6 +338,8 @@ var submit = function(){
 //    };
     var $this = $(this);
     $this.addClass('loading');
+    if(localStorage.getItem('object'))
+        window.interviewee = JSON.parse(localStorage.getItem('object'))
     $.ajax({
         url:urlRoot + 'interview/rate',
         type:'post',
@@ -349,13 +359,15 @@ var submit = function(){
 
 var skip = function(){
     console.dir(window.interviewee);
-    if(!window.interviewee){
+    if(!window.interviewee && !(localStorage.getItem('object'))){
         err('尚未有面试者');
         return;
     };
 //    finish();
 //    return;
     var $this = $(this);
+    if(localStorage.getItem('object'))
+        window.interviewee = JSON.parse(localStorage.getItem('object'))
     $this.addClass('loading');
     $.ajax({
         url:urlRoot + 'interview/skip',
@@ -371,7 +383,7 @@ var skip = function(){
 };
 
 var recommend = function(){
-    if(!window.interviewee){
+    if(!window.interviewee && !(localStorage.getItem('object'))){
         err('尚未有面试者');
         return;
     }
@@ -387,17 +399,24 @@ var recommend = function(){
 //    finish();
 //    return;
     var $this = $(this);
+    if(localStorage.getItem('object'))
+        window.interviewee = JSON.parse(localStorage.getItem('object'))
     $this.addClass('loading');
+    console.log($('.recommendContent').find('.checked input').val());
     $.ajax({
         url:urlRoot + 'interview/recommend',
         type:'post',
-        data:{
+        data:JSON.stringify({
             sid:window.interviewee.sid,
-            department:$('.recommendContent').find('.checked input').val()
-        },
+            departmentId: $('.recommendContent').find('.checked input').val() * 1
+        }),
+        //dataType:'json',
+        contentType: 'application/json',
+
         success:function(){
             $('.qtip').hide();
             success('操作成功');
+            finish();
         },
         complete: function () {
             $this.removeClass('loading');
@@ -410,7 +429,18 @@ $(document).ready(function(){
     set_depName();
     set_depList();
     // set_property();
-    update_queue(localStorage.getItem('doneNumber'));
+    if(!(localStorage.getItem( 'doneNumber')))
+    {
+        var doneNumber = 0;
+        localStorage.setItem('doneNumber', doneNumber);
+    }
+    else{
+        update_queue(localStorage.getItem('doneNumber'));
+    }
+    if ((localStorage.getItem('object')))
+    {
+       add_profile(JSON.parse(localStorage.getItem('object')));
+    }
 
     //back button
     $('.back').click(function () {
@@ -433,7 +463,7 @@ $(document).ready(function(){
     rate.find('.stars').raty({
         starOff : 'img/star-off.png',
         starOn  : 'img/star-on.png',
-        hints : ['不能要','慎重考虑','表现一般','值得考虑','一定要'],
+        hints : ['1','2','3','4','5'],
         target : "#score",
         targetType : 'score',
         targetKeep : true
@@ -475,4 +505,5 @@ $(document).ready(function(){
 
     // appointSid
     $('.specialContent .confirm').click(specialCall);
+
 });

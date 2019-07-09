@@ -18,6 +18,15 @@ table thead {
   font-weight: bold;
   font-size: 15px;
 }
+/*td超出部分隐藏*/
+.overHide{
+  table-layout: fixed;
+}
+.tdOverHide{
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
 .room {
   width: 800px;
   margin: 60px auto;
@@ -35,6 +44,13 @@ table thead {
   background: #ffffff;
   max-height: 315px;
   height: 315px;
+}
+.room .waitingListHead {
+  margin-top: 10px;
+  width: 100%;
+  background: #ffffff;
+  max-height: 315px;
+  height: 50px;
 }
 .room .selectDepContainer {
   text-align: center;

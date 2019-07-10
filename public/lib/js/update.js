@@ -38,7 +38,6 @@ $(function () {
             url: baseURL + "club/upload/location",
             type: "post",
             data: JSON.stringify({
-                cid: clubId,
                 info: dep
             }),
             // processData: false,
@@ -70,7 +69,6 @@ $(function () {
                 let files= $('#file').prop('files');
                 var data = new FormData();
                 data.append('archive', files[0]);
-                data.append('cid',clubId);
 
                 if (filetype == "xls" || filetype == "xlsx") {
                     $.ajax({

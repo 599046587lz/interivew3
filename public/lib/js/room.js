@@ -3,12 +3,7 @@ var baseURL = '';
 var storage = window.localStorage;
 
 //测试数据
-// var freeDepartment = [
-//                     // {sid:123, name: "asd", did:"技术" ,room:"1教"},
-//                     // {sid:123, name: "asd", did:"技术" ,room:"1教"},
-//                     // {sid:123, name: "asd", did:"技术" ,room:"1教"},
-//
-//                         ];
+
 // var stuLine = [
 //
 //                 {sid:12214, name: "asd", did:"技术dSVsvSDBvBSDBdvSDbWBSDvSbesd" ,room:"1教"},
@@ -61,15 +56,9 @@ var waitingTemplate = function(no, sid, name, did, room){
 // 呼叫模板
 var callTemplate = function(name, room, did){
 
-    var random;
-    if(did.length > 1){                                                         //多个部门随机挑选面试部门
-        random = (Math.floor(Math.random() * did.length));
-    }
-    var didr = did[random];
-    var roomr = room[random];
     var template = `<div class = \"template\">
                         <span class='smallCircle'></span>
-                        <span class='calling'>请${name}同学到${roomr}教室参加${didr}面试</span>
+                        <span class='calling'>请${name}同学到${room}教室参加${did}面试</span>
                     </div>`;
     return template;
 }
@@ -82,15 +71,16 @@ var changeCallRow = function(){
     $(".current ._default").remove();
     $(".current .template").remove();
     for(var i = 0; i < calling.length; i ++){
-        var room = [];
-        var did = [];
+        var room ;
+        var did ;
         for(var j = 0; j < departmentInfo[0].departments.length; j ++){
-            for (var k = 0; k <calling[i].volunteer.length; k ++){
-                if(calling[i].volunteer[k] == departmentInfo[0].departments[j].did){
-                    did[k] = departmentInfo[0].departments[j].name;
-                    room[k] = departmentInfo[0].departments[j].location;
-                }
+
+            // console.log(parseInt(calling[i].calldid));
+            if(parseInt(calling[i].calldid) == departmentInfo[0].departments[j].did){
+                did = departmentInfo[0].departments[j].name;
+                room = departmentInfo[0].departments[j].location;
             }
+
             // console.log(did);
         }
         var a = callTemplate(calling[i].name, room, did);
@@ -128,7 +118,6 @@ var changeWaitRow = function(){
     }
     if(waiting.length > 7)
         $(".waitingList").jScrollPane();
-
 
     // 测试
     // for(var i = 0; i < stuLine.length; i ++){
@@ -171,9 +160,9 @@ var getDepartmentInfo = function(){
                 err('服务器错误,请重试!');
             },
             200 : function(data){
-                console.log("部门");
-                console.log(data) ;
-                storage.setItem("departmentInfo", JSON.stringify(data.message))
+                // console.log("部门");
+                // console.log(data) ;
+                // storage.setItem("departmentInfo", JSON.stringify(data.message))
             }
         }
     });
@@ -186,11 +175,12 @@ var getFinishNumber = function(){
         dataType : 'json',
 
         statusCode : {
-            404 : function(){
-                err("Page not found!");
-            },
             500 : function(){
                 err('服务器错误,请重试!');
+            },
+            204 : function(){
+                // err('没人');
+                console.log("暂时没人完成面试")
             },
             200 : function(data){
                 // console.log(data.data) ;
@@ -216,9 +206,9 @@ var getCalling = function(){
                 err('服务器错误,请重试!');
             },
             200 : function(data){
-                console.log("呼叫");
-                console.log(data.data) ;
-                storage.setItem("calling", JSON.stringify(data.data))
+                // console.log("呼叫");
+                // console.log(data.data) ;
+                // storage.setItem("calling", JSON.stringify(data.data))
 
             }
         }
@@ -241,9 +231,9 @@ var getWaiting = function(){
                 err('服务器错误,请重试!');
             },
             200 : function(data){
-                console.log("排队");
-                console.log(data.data) ;
-                storage.setItem("waiting", JSON.stringify(data.data));
+                // console.log("排队");
+                // console.log(data.data) ;
+                // storage.setItem("waiting", JSON.stringify(data.data));
 
             }
         }
@@ -253,8 +243,9 @@ var getWaiting = function(){
 
 // 签 到
 var signin = function(){
-    var input = $("input[ nam = sid]");
+    var input = $("input[ name = sid ]");
     var stuID = input.val();
+    console.log(stuID);
     if(!stuID){
         err("请输入学号");
         input.focus();
@@ -299,11 +290,11 @@ var signin = function(){
 // 展示页面(呼叫,排队,面试状态)
 var toShow = function(){
 
-                                        //拿数据
+                                        //更新数据
     getFinishNumber();
     getWaiting();
     getCalling();
-    getDepartmentInfo();
+
 
     changeWaitRow();                    //改变排队
     interviewStatus();                  //面试人数,排队人数
@@ -313,8 +304,12 @@ var toShow = function(){
 
 $(function(){
 
+    getDepartmentInfo();
+
+    toShow();
+
 	$(".signin .submit").click(signin);                     //签到
 
     var interval = setInterval(toShow, 3000);               //刷新展示页面/3s
-    // toShow();
+
 });

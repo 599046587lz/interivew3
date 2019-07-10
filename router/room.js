@@ -8,6 +8,7 @@ let Interviewee = require("../modules/interviewee");
 let Joi = require('joi');
 let mid = require('../utils/middleware');
 let JSONError = require('../utils/JSONError');
+let club = require('../modules/club');
 /**
  * @params sid
  * @return Object {status: 'success'|'selectDep'}
@@ -23,7 +24,6 @@ router.get('/sign', mid.checkFormat(function() {
 }), wrap(async function(req, res) {
 	let cid = req.session.cid;
 	let sid = req.query.sid;
-
 	let info = await Interviewee.getInterviewerInfo(sid, cid);
 	if (!info) {
 		throw new JSONError('该学生未报名', 403);
@@ -40,6 +40,44 @@ router.get('/sign', mid.checkFormat(function() {
 	});
 }));
 
+router.get('/finish',   async function (req, res) {
+	let info = await  Interviewee.getFinishInfo()
+	if(!info){
+        throw new JSONError('NoInfo', 204);
+	}
+    res.json({
+        status: 200,
+        data: info
+    });
+});
+
+router.get('/sighed', async function (req, res) {
+	let info = await  Interviewee.getSignedInterviewee()
+    // await Interviewee.getClubInfo(info)
+    if(!info){
+        res.json({
+            status: 204
+        })
+    }
+    else res.json({
+        status: 200,
+        data: info
+    })
+})
+
+router.get('/calling', async function (req, res) {
+	let info = await  Interviewee.callNextInterviewee()
+    if(!info){
+        res.json({
+            status: 204
+        })
+    }
+	else res.json({
+        status: 200,
+        data: info
+	 })
+
+});
 /**
  * 测试成功
  */
@@ -71,4 +109,14 @@ router.post('/addDep', mid.checkFormat(function() {
 
 }));
 
+router.get('/getDepartmentInfo' ,wrap(async function (req, res) {
+	let cid = req.session.cid
+	console.log(cid)
+	let result = await club.getDepartmentInfo(cid)
+    res.json({
+        status: 200,
+        message: result
+    });
+
+}))
 module.exports = router;

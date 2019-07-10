@@ -5,13 +5,31 @@ let IntervieweeModel = require('../models').Interviewee;
 let clubModel = require('../models').Club;
 let config = require('../config');
 
-exports.getInterviewerInfo = function (sid, cid) {
-    return IntervieweeModel.findOne({
+exports.getInterviewerInfo = function (sid, cid ) {
+    return IntervieweeModel.findOneAndUpdate({
         sid: sid,
         cid: cid
-    });
+    },{
+        ifsign : 0
+    })
 };
 
+exports.delVolunteer = function (sid, did) {
+    return IntervieweeModel.findOneAndUpdate({
+        sid:sid
+    },{
+        '$pull': {volunteer: did}
+    })
+
+}
+//result.volunteer.splice(result.volunteer.indexOf(did), 1);
+exports.getFinishInfo = function () {
+    return IntervieweeModel.find({
+        ifsign : 0,
+        busy : true
+    }).then(result => result.length)
+
+}
 
 exports.selectDep = function (sid, cid, did) {
        return exports.getStuByApi(sid).then(result => {
@@ -38,12 +56,52 @@ exports.getNextInterviewee = function (cid, did) {
             signTime: 'asc'
         }).then(result => {
             result.busy = true;
-            result.save();
+            result.ifcall = true;
+            result.calldid = did;
+            console.log(result)
+            result.save(function (err) {
+                console.log(err)
+            });
             return result;
         });
 };
 
 
+exports.callNextInterviewee = function () {
+    return  IntervieweeModel.find({
+        ifcall: true,
+        signTime: {$ne: null},
+        volunteer: {$elemMatch:{$ne:null}}
+    }).sort({
+        signTime: 'asc'
+    })
+
+};
+//result.done.indexOf(did * 1) != -1
+exports.getSignedInterviewee = function () {
+   return IntervieweeModel.find({
+       signTime: {$ne: null},
+       busy : false,
+       volunteer: {$elemMatch:{$ne:null}}
+   })
+    };
+
+
+exports.getClubInfo = function (info) {
+    let result = {}
+    let i = 4;
+    info.forEach(e => {
+        e.volunteer.forEach(a =>
+            result[i] = a,
+            i++
+        )
+    });
+    console.log(result)
+    // return clubModel.find({
+    //     departments
+    // })
+
+}
 
 exports.recoverInterviewee = function (sid, cid, did) {
         let data = {
@@ -61,12 +119,14 @@ exports.recoverInterviewee = function (sid, cid, did) {
 
 exports.getSpecifyInterviewee = function (sid, cid, did) {
         let data = {
-            sid: sid,
-            cid: cid,
-            volunteer: did
+                sid: sid,
+                cid: cid,
+                volunteer: did
         };
         return IntervieweeModel.findOne(data).then(result => {
             if (result.done.indexOf(did * 1) != -1) reject(new Error('该同学已进行过面试'));
+            result.calldid = did;
+            result.ifcall = true;
             result.busy = true;
             result.save();
             return result;

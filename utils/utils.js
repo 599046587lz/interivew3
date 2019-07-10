@@ -117,7 +117,7 @@ exports.sendMessage = function (data, reqData) {
         headers: {
             'accept': 'application/json',
             'charset': 'utf-8',
-            'content-type': 'application/x-www-form-urlencoded',
+            'content-type': 'application/x-www.js-form-urlencoded',
         },
         json: true
     };

@@ -235,6 +235,7 @@ var finish = function(){
     if((localStorage.getItem('object')))
         localStorage.clear();
     update_queue();
+    next();
 };
 var start = function(){
     start_clock();
@@ -391,6 +392,13 @@ var recommend = function(){
         err('请选择部门');
         return;
     }
+    if(!check_stars()){
+        err('请评定星级');
+        return;
+    }
+    if (!confirm('确认提交？'))  {
+        return;
+    }
 //    var data = {
 //        sid:window.interviewee.sid,
 //        department:$('#selectDep').find('.checked input').val()
@@ -408,7 +416,9 @@ var recommend = function(){
         type:'post',
         data:JSON.stringify({
             sid:window.interviewee.sid,
-            departmentId: $('.recommendContent').find('.checked input').val() * 1
+            departmentId: $('.recommendContent').find('.checked input').val() * 1,
+            score:$('.rate .stars').raty('score'),
+            comment:$('.rate .comment').val()
         }),
         //dataType:'json',
         contentType: 'application/json',
@@ -440,6 +450,10 @@ $(document).ready(function(){
     if ((localStorage.getItem('object')))
     {
        add_profile(JSON.parse(localStorage.getItem('object')));
+    }
+    if(!(localStorage.getItem('object')))
+    {
+        next();
     }
 
     //back button

@@ -2,14 +2,28 @@
  * Created by karboom on 14-9-28.
  */
 var urlRoot = '/';
+//每次页面刷新 记录下 已面试时间
+function time_change(){
+    var root = $(".topBar").find(".time");
+    var sec = root.find(".sec");
+    var min = root.find(".min");
+    localStorage.setItem('sec',JSON.stringify(sec.text()));
+    localStorage.setItem('min',JSON.stringify(min.text()));
 
+    var lscore = $('.rate .stars').raty('score');
+    var lcomment = $('.rate .comment').val();
+
+
+        localStorage.setItem('score',lscore); //本地存储星星数
+        localStorage.setItem('comment',lcomment); //本地存储comment
+
+}
 
 window.onbeforeunload = function(e) {
     if(window.interviewee){
         var interviewee = window.interviewee;
         var str = JSON.stringify(interviewee)
         localStorage.setItem('object',str);
-       return '如果现在刷新页面,当前面试者资料将丢失,请慎重!';
     }
 };
 
@@ -439,6 +453,17 @@ $(document).ready(function(){
     set_depName();
     set_depList();
     // set_property();
+    var rate = $('.main .rate');
+    rate.find('.stars').raty({
+        number:5,
+        starOff : 'img/star-off.png',
+        starOn  : 'img/star-on.png',
+        hints : ['1','2','3','4','5'],
+        target : "#score",
+        targetType : 'score',
+        targetKeep : true
+    });
+
     if(!(localStorage.getItem( 'doneNumber')))
     {
         var doneNumber = 0;
@@ -450,6 +475,22 @@ $(document).ready(function(){
     if ((localStorage.getItem('object')))
     {
        add_profile(JSON.parse(localStorage.getItem('object')));
+        var root = $(".topBar").find(".time");
+        var sec = root.find(".sec");
+        var min = root.find(".min");
+        if(localStorage.getItem('sec')&&localStorage.getItem('min'))
+        {
+            sec.text(JSON.parse(localStorage.getItem('sec')));
+            min.text(JSON.parse(localStorage.getItem('min')));
+        }
+        if(localStorage.getItem('score')&&localStorage.getItem('comment'))
+        {
+            var source = $('.rate');
+            source.find('.comment').val((localStorage.getItem('comment')));
+            var num_score = JSON.parse(localStorage.getItem('score'))*1;
+            source.find('.stars').raty('score',num_score)
+        }
+       start_clock();//时间要变化 到59s 才会改变颜色
     }
     if(!(localStorage.getItem('object')))
     {
@@ -473,15 +514,7 @@ $(document).ready(function(){
     profile.jScrollPane();
 
     //rate module
-    var rate = $('.main .rate');
-    rate.find('.stars').raty({
-        starOff : 'img/star-off.png',
-        starOn  : 'img/star-on.png',
-        hints : ['1','2','3','4','5'],
-        target : "#score",
-        targetType : 'score',
-        targetKeep : true
-    });
+
     rate.find(".submit").click(submit);
 
     // action

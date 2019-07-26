@@ -162,7 +162,7 @@ var getDepartmentInfo = function(){
             200 : function(data){
                 // console.log("部门");
                 // console.log(data) ;
-                // storage.setItem("departmentInfo", JSON.stringify(data.message))
+                storage.setItem("departmentInfo", JSON.stringify(data.message))
             }
         }
     });
@@ -208,7 +208,7 @@ var getCalling = function(){
             200 : function(data){
                 // console.log("呼叫");
                 // console.log(data.data) ;
-                // storage.setItem("calling", JSON.stringify(data.data))
+                storage.setItem("calling", JSON.stringify(data.data))
 
             }
         }
@@ -233,7 +233,7 @@ var getWaiting = function(){
             200 : function(data){
                 // console.log("排队");
                 // console.log(data.data) ;
-                // storage.setItem("waiting", JSON.stringify(data.data));
+                storage.setItem("waiting", JSON.stringify(data.data));
 
             }
         }
@@ -268,7 +268,7 @@ var signin = function(){
             },
             403 : function(){
                 err("该学生未报名（待测试）!");                    //待测试
-                relogin();
+                // relogin();
             },
             204 : function () {
                 success("该学生已经签到过了!");

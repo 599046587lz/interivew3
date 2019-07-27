@@ -2,11 +2,28 @@
  * Created by karboom on 14-9-28.
  */
 var urlRoot = '/';
+//每次页面刷新 记录下 已面试时间
+function time_change(){
+    var root = $(".topBar").find(".time");
+    var sec = root.find(".sec");
+    var min = root.find(".min");
+    localStorage.setItem('sec',JSON.stringify(sec.text()));
+    localStorage.setItem('min',JSON.stringify(min.text()));
 
+    var lscore = $('.rate .stars').raty('score');
+    var lcomment = $('.rate .comment').val();
+
+
+        localStorage.setItem('score',lscore); //本地存储星星数
+        localStorage.setItem('comment',lcomment); //本地存储comment
+
+}
 
 window.onbeforeunload = function(e) {
     if(window.interviewee){
-        return '如果现在刷新页面,当前面试者资料将丢失,请慎重!';
+        var interviewee = window.interviewee;
+        var str = JSON.stringify(interviewee)
+        localStorage.setItem('object',str);
     }
 };
 
@@ -27,7 +44,7 @@ var HTTPCode = {
         }
     },
     500:{
-        text:'服务器错误',
+        text:'服务器错误,可能是叫号大厅没人了',
         action:function(){
             err(HTTPCode[500].text);
         }
@@ -102,11 +119,14 @@ var set_club = function(){
 //    window.club = { departments: [{did:1,name:'人力资源中心'},{did:5,name:'技术'},{did:4,name:'设计'},{did:3,name:'运营部'},{did:2,name:'外联部'}]};
 //    return;
     $.ajax({
-        url:urlRoot+'club/profile',
+        url:urlRoot+'club/clubInfo',
+        data:{
+            clubId:1
+        },
         type:'get',
         async:false,
         success:function(data){
-            window.club = data;
+            window.club = data.message;
         }
     });
 };
@@ -172,9 +192,11 @@ var del_profile = function(){
     $('.infoDetail div').text('--');
 };
 
-var add_profile = function(){
+var add_profile = function(object){
     var items =  $('.infoDetail div');
     var interviewee = window.interviewee;
+    if((localStorage.getItem('object')))
+        interviewee = object;
     items[0].innerText = interviewee.sid;
     items[1].innerText = interviewee.name;
     items[2].innerText = interviewee.sex*1 !=2 ? (interviewee.sex? '男':'女') : '--';
@@ -224,7 +246,10 @@ var finish = function(){
     stop_clock();
     clear_clock();
     window.interviewee = null;
+    if((localStorage.getItem('object')))
+        localStorage.clear();
     update_queue();
+    next();
 };
 var start = function(){
     start_clock();
@@ -233,7 +258,7 @@ var start = function(){
 };
 //action(routes)
 var next = function(){
-     if(window.interviewee){
+    if((window.interviewee) || (localStorage.getItem('object'))){
         err('请先评定,推荐,或者跳过当前面试者');
         return;
     }
@@ -253,7 +278,7 @@ var next = function(){
 //    };
 //    start();
 //    return;
-    $('.next').addClass('loading');
+   $('.next').addClass('loading');
     $.ajax({
         url:urlRoot + 'interview/call',
 //        async:false,
@@ -261,6 +286,7 @@ var next = function(){
         success:function(data){
             window.interviewee = data;
             start();
+            //console.log(window.interviewee);
         },
         complete: function () {
             $('.next').removeClass('loading');
@@ -271,7 +297,7 @@ var next = function(){
 };
 
 var specialCall = function(){
-    if(window.interviewee){
+    if((window.interviewee) || (localStorage.getItem('object'))){
         err('请先评定,推荐,或者跳过当前面试者');
         return;
     };
@@ -309,7 +335,7 @@ var specialCall = function(){
 };
 
 var submit = function(){
-    if(!window.interviewee){
+    if(!(window.interviewee) && !(localStorage.getItem('object'))){
         err('尚未有面试者');
         return;
     }
@@ -327,6 +353,8 @@ var submit = function(){
 //    };
     var $this = $(this);
     $this.addClass('loading');
+    if(localStorage.getItem('object'))
+        window.interviewee = JSON.parse(localStorage.getItem('object'))
     $.ajax({
         url:urlRoot + 'interview/rate',
         type:'post',
@@ -346,13 +374,15 @@ var submit = function(){
 
 var skip = function(){
     console.dir(window.interviewee);
-    if(!window.interviewee){
+    if(!window.interviewee && !(localStorage.getItem('object'))){
         err('尚未有面试者');
         return;
     };
 //    finish();
 //    return;
     var $this = $(this);
+    if(localStorage.getItem('object'))
+        window.interviewee = JSON.parse(localStorage.getItem('object'))
     $this.addClass('loading');
     $.ajax({
         url:urlRoot + 'interview/skip',
@@ -368,12 +398,19 @@ var skip = function(){
 };
 
 var recommend = function(){
-    if(!window.interviewee){
+    if(!window.interviewee && !(localStorage.getItem('object'))){
         err('尚未有面试者');
         return;
     }
     if($('.recommendContent .checked').length == 0){
         err('请选择部门');
+        return;
+    }
+    if(!check_stars()){
+        err('请评定星级');
+        return;
+    }
+    if (!confirm('确认提交？'))  {
         return;
     }
 //    var data = {
@@ -384,17 +421,26 @@ var recommend = function(){
 //    finish();
 //    return;
     var $this = $(this);
+    if(localStorage.getItem('object'))
+        window.interviewee = JSON.parse(localStorage.getItem('object'))
     $this.addClass('loading');
+    console.log($('.recommendContent').find('.checked input').val());
     $.ajax({
         url:urlRoot + 'interview/recommend',
         type:'post',
-        data:{
+        data:JSON.stringify({
             sid:window.interviewee.sid,
-            department:$('.recommendContent').find('.checked input').val()
-        },
+            departmentId: $('.recommendContent').find('.checked input').val() * 1,
+            score:$('.rate .stars').raty('score'),
+            comment:$('.rate .comment').val()
+        }),
+        //dataType:'json',
+        contentType: 'application/json',
+
         success:function(){
             $('.qtip').hide();
             success('操作成功');
+            finish();
         },
         complete: function () {
             $this.removeClass('loading');
@@ -407,7 +453,49 @@ $(document).ready(function(){
     set_depName();
     set_depList();
     // set_property();
-    update_queue(localStorage.getItem('doneNumber'));
+    var rate = $('.main .rate');
+    rate.find('.stars').raty({
+        number:5,
+        starOff : 'img/star-off.png',
+        starOn  : 'img/star-on.png',
+        hints : ['1','2','3','4','5'],
+        target : "#score",
+        targetType : 'score',
+        targetKeep : true
+    });
+
+    if(!(localStorage.getItem( 'doneNumber')))
+    {
+        var doneNumber = 0;
+        localStorage.setItem('doneNumber', doneNumber);
+    }
+    else{
+        update_queue(localStorage.getItem('doneNumber'));
+    }
+    if ((localStorage.getItem('object')))
+    {
+       add_profile(JSON.parse(localStorage.getItem('object')));
+        var root = $(".topBar").find(".time");
+        var sec = root.find(".sec");
+        var min = root.find(".min");
+        if(localStorage.getItem('sec')&&localStorage.getItem('min'))
+        {
+            sec.text(JSON.parse(localStorage.getItem('sec')));
+            min.text(JSON.parse(localStorage.getItem('min')));
+        }
+        if(localStorage.getItem('score')&&localStorage.getItem('comment'))
+        {
+            var source = $('.rate');
+            source.find('.comment').val((localStorage.getItem('comment')));
+            var num_score = JSON.parse(localStorage.getItem('score'))*1;
+            source.find('.stars').raty('score',num_score)
+        }
+       start_clock();//时间要变化 到59s 才会改变颜色
+    }
+    if(!(localStorage.getItem('object')))
+    {
+        next();
+    }
 
     //back button
     $('.back').click(function () {
@@ -426,15 +514,7 @@ $(document).ready(function(){
     profile.jScrollPane();
 
     //rate module
-    var rate = $('.main .rate');
-    rate.find('.stars').raty({
-        starOff : 'img/star-off.png',
-        starOn  : 'img/star-on.png',
-        hints : ['不能要','慎重考虑','表现一般','值得考虑','一定要'],
-        target : "#score",
-        targetType : 'score',
-        targetKeep : true
-    });
+
     rate.find(".submit").click(submit);
 
     // action
@@ -472,4 +552,5 @@ $(document).ready(function(){
 
     // appointSid
     $('.specialContent .confirm').click(specialCall);
+
 });

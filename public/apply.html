@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>线上报名表</title>
+    <meta charset='UTF-8'>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" href="./lib/css/apply.css">
+    <link rel="stylesheet" href="./lib/css/common.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/skins/all.css">
+    <link rel="stylesheet" href="./lib/css/emailpop.css">
+    <script src='lib/js/jquery-1.9.1.min.js'></script>
+    <script src="./lib/js/jquery.serializeObject2.0.3.min.js"></script>
+    <script src="./lib/js/jquery.lazyload.js"></script>
+    <script src='./lib/js/apply.js'></script>
+    <script src="./lib/js/emailpop.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/icheck.min.js"></script>
+</head>
+<body>
+<div class="container" data-original="./img/apply/success.png">
+    <!--上传头像-->
+    <form action="" method="post" enctype="multipart/form-data" target="_self" id="formfile" class="hide">
+        <input type="file" id="picfile" name="file">
+        <input type="submit">
+    </form>
+    <div class="pic"></div>
+    <div>点击上传头像</div>
+    <form id='upload_data'>
+        <!--填写姓名-->
+        <div class="item name">
+            <span class="header">姓名</span>
+            <input type="text" name="name">
+        </div>
+        <!--填写学号-->
+        <div class="item studentID">
+            <span class="header">学号</span>
+            <input type="text" maxlength="8" name="sid">
+        </div>
+        <!--选择性别-->
+        <div class="gender">
+            <label class="genderbox female" for="female">
+                <span class="icon on hide"></span>
+                <span class="icon off"></span>
+                <input class="hide" type="radio" value="0" name="sex" id="female">
+            </label>
+            <label class="genderbox male" for="male">
+                <span class="icon on hide"></span>
+                <span class="icon off"></span>
+                <input class="hide" type="radio" value="1" name="sex" id="male">
+            </label>
+        </div>
+        <!--填写学院-->
+        <div class="item college">
+            <span class="header">学院</span>
+            <input type="text" name="college">
+        </div>
+        <!--填写专业-->
+        <div class="item major">
+            <span class="header">专业</span>
+            <input type="text" name="major">
+        </div>
+        <!--选择部门-->
+        <div class="section">请选择理想部门||你的特长||</br>你感兴趣的方向</div>
+        <div class="depart_list">
+            <!--注入部门列表-->
+        </div>
+        <!--填写个人简介-->
+        <div class="section">个人简介</div>
+        <div class="section intro">
+            <img src="./img/apply/pen.png" alt="">
+            <textarea placeholder="请简单描述一下自己..." name="notion"></textarea>
+        </div>
+        <!--填写联系方式-->
+        <div class="section">联系方式</div>
+        <div class="item tel">
+            <span class="header">长号</span>
+            <input type="text" maxlength="11" name="phone">
+        </div>
+        <div class="item short_tel">
+            <span class="header">短号</span>
+            <input type="text" maxlength="6" name="short_tel" placeholder="选填">
+        </div>
+        <div class="item email">
+            <span class="header">邮箱</span>
+            <input type="text" name="email">
+        </div>
+        <div class="item qq">
+            <span class="header">Q Q</span>
+            <input type="text" maxlength="11" name="qq">
+        </div>
+        <!--注意事项-->
+        <div class="section alarm">
+            <input id="check" type="checkbox" name="check">
+            <div class="note">注意事项</div>
+        </div>
+        <div class="section alarm-content"></div>
+        <div class="errorHandle"></div>
+    </form>
+    <div id="submit">提 交</div>
+    <footer>
+        <p>红色家园网络工作室</p>
+    </footer>
+</div>
+</body>
+</html>
+<script type="application/xml" id="done">
+    <div>
+        <div class="done">
+            <div class="success">
+                <img src="./img/apply/done.png"/>
+                <div>报名成功！</div>
+            </div>
+            <div>请耐心等待<br/>我们的面试通知吧~
+            </div>
+        </div>
+        <div class="footer">红色家园网络工作室</div>
+    </div>
+</script>
+<script type="application/xml" id="pop">
+    <div class="popup hide" did="__did__">
+        <img class="close" src="./img/close.png" alt=""/>
+        <div class="pop_title">__depart__</div>
+        <div class="pop_neck">栏目列表</div>
+        <div class="pop_list">__list__</div>
+    </div>
+</script>

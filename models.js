@@ -1,40 +1,55 @@
 /**
  * Created by bangbang93 on 14-9-15.
  */
-var mongoose = require('mongoose');
-var config = require('./config');
-mongoose.connect('mongodb://' + config.db.host + '/' + config.db.db);
+let mongoose = require('mongoose');
+let config = require('./config');
+// mongoose.Promise = global.Promise;
+let mongoUserInfo = (!config.db.user || !config.db.password)? '' : config.db.user + ':' + config.db.password + '@';
+mongoose.connect(`mongodb://${mongoUserInfo}${config.db.host}/${config.db.db}`);
 
 
-var Department = new mongoose.Schema({
+let Department = new mongoose.Schema({
     did: Number,
     name: String,
-    location: String
+    location: String,
+    number: {
+        type: Number,
+        default: 0
+    }
 });
 
-var Club = new mongoose.Schema({
+let Club = new mongoose.Schema({
     cid: Number,
     name: String,
     logo: String,
     departments: [Department],  //Department
     interviewer: [String],
     password: String,
-    maxDep: Number //应试者最多可以选择的部门
+    maxDep: Number, //应试者最多可以选择的部门,
+    attention: String
 });
 
 
-var rate = new mongoose.Schema({
+let rate = new mongoose.Schema({
     did: Number,
-    score: Number,
+    score:  {
+        type: Number,
+        enum:
+            {
+                values: [0, 1, 2], //0: 待录用  1:录用 2:不录用
+                message: "请输入正确的分数"
+            }
+    },
     comment: String,
     interviewer: String
 });
 
-var Interviewee = new mongoose.Schema({
+let Interviewee = new mongoose.Schema({
+    clubName: String,
     sid: Number,
     cid: Number,
     name: {
-        type:String,
+        type: String,
         default: ''
     },
     sex: {
@@ -42,39 +57,51 @@ var Interviewee = new mongoose.Schema({
         default: 2   //0女1男2秀吉
     },
     major: {
-        type:String,
-        default: ''
+        type: String,
     },
     phone: {
-        type:String,
-        default: ''
+        type: String,
     },
-    email: {
-        type:String,
-        default: ''
+    short_tel: {
+        type: String,
     },
     qq: {
-        type:String,
-        default: ''
+        type: String,
     },
     volunteer: [Number],
     notion: {
-        type:String,
+        type: String,
         default: ''
     },
     signTime: Date,
     rate: [rate],//{did: Number,score: Number, comment: String, interviewer: String}
     done: [Number],
-    extra: Object,
     busy: {
         type: Boolean,
         default: false
-    }   //是否正在面试
-/*    calling:{
-        type: Boolean,
-        default: false
-    } //是否正在和叫号大厅传输该学生信息*/
+    }, //是否正在面试
+    /*    calling:{
+            type: Boolean,
+            default: false
+        } //是否正在和叫号大厅传输该学生信息*/
+    email: {
+        type: String,
+        default: ''
+    },
+    pic_url: {
+        type: String,
+    },
+    image: {
+        type: String,
+    },
+    college: {
+        type: String
+    }
 });
+
+
+
+
 
 exports.Interviewee = mongoose.model('interviewee', Interviewee);
 exports.Club = mongoose.model('club', Club);

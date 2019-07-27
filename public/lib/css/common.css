@@ -29,6 +29,9 @@
 .hide {
     display: none;
 }
+.noclick{
+    pointer-events: none;
+}
 .smallCircle {
     width: 15px;
     height: 15px;

@@ -1,0 +1,4 @@
+.autopop{padding:0;position: absolute;background: #fff;border: 1px #ddd solid;border-radius: 3px;color: #999;z-index: 19;display: none;}
+.autopop li{font-size:12px;height: 24px;line-height: 24px;cursor: pointer;overflow: hidden;}
+.autopop li.notpop{cursor: default;}
+.autopop li.pop{background: #dee;color:#333;}

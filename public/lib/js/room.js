@@ -1,38 +1,24 @@
-ttsAPI  = "http://tts.baidu.com/text2audio?idx=1&tex=_WORDS_&cuid=baidu_speech_demo&cod=2&lan=zh&ctp=1&pdt=1&spd=3&per=0&vol=5&pit=5";
-//baseURL = 'http://interview.redhome.cc';
-baseURL = '';
-//ioURL   = 'http://interview.redhome.cc/';
-ioURL   = '/';
-interviewee_queue = [];
-interviewee_data_queue = [];
-reconnect_times = 0;
-club = {};
-// -set club
-var set_club = function(){
-	$.ajax({
-		url : baseURL + '/club/profile',
-		type : 'get',
-		statusCode : {
-			404 : function(){
-				err("Page not found!");
-			},
-			403 : function(){
-				err("未登录或登录超时!");
-				relogin();	
-			},
-			200 : function(data){
-				club = data;
-				set_department();
-				//socket.io works;
-				socket.emit('init',{cid: club.cid});
-			},
-			500 : function(){
-				err('服务器错误,请刷新页面再试!');
-			}
-		}
-	});
-};
-// -err
+var baseURL = '';
+
+var storage = window.localStorage;
+
+//测试数据
+
+// var stuLine = [
+//
+//                 {sid:12214, name: "asd", did:"技术dSVsvSDBvBSDBdvSDbWBSDvSbesd" ,room:"1教"},
+//                 {sid:123, name: "asd", did:"技术" ,room:"1教"},
+//                 {sid:123, name: "asd", did:"技术" ,room:"1教"},
+//                 {sid:123, name: "asd", did:"技术" ,room:"1教"},
+//                 {sid:123, name: "asd", did:"技术" ,room:"1教"},
+//                 {sid:123, name: "asd", did:"技术" ,room:"1教"},
+//                 {sid:123, name: "asd", did:"技术" ,room:"1教"},
+//                 {sid:123, name: "asd", did:"技术" ,room:"1教"},
+//                 {sid:123, name: "asd", did:"技术" ,room:"1教"},
+//                 {sid:123, name: "asd", did:"技术" ,room:"1教"},
+//                 {sid:123, name: "asd", did:"技术" ,room:"1教"},
+// ];
+
 var err = function(text){
     notif({
         msg:text,
@@ -40,7 +26,7 @@ var err = function(text){
         type:'error'
     });
 };
-// -success
+
 var success = function(text){
     notif({
         msg:text,
@@ -48,340 +34,282 @@ var success = function(text){
         type:'success'
     });
 };
-// -relogin
 var relogin = function(){
 	window.location.href = 'login.html';
 };
 
-var reconnect = function(){
-	++reconnect_times;
-	socket = io.connect(ioURL);
-	socket.emit('init', {cid: club.cid});
-};
-var refit = function(){
-	$(".waitingList").jScrollPane();
+// 排队表格模板
+var waitingTemplate = function(no, sid, name, did, room){
+    var dids = did.join(',') ;
+    var rooms = room.join(',');
+    // console.log(dids);
+    var template = `<tr class = \"template\">
+                        <td>${no}</td>
+                        <td>${sid}</td>
+                        <td>${name}</td>
+                        <td class=\"depart tdOverHide\" >${dids}</td>
+                        <td class=\"tdOverHide\" >${rooms}</td>
+                    </tr>`;
+    return template;
 }
-// ajax helper
-var ajaxHandler = function(func){
-	return function(data, status, xhr){
-		console.log(xhr.status);
-		console.log(xhr);
-		switch (xhr.status){
-			case 404:err('File not found!');break;
-			case 500:err('服务器错误');break;
-			case 403:relogin();break;
-			case 200:
-				if(data.status && data.status == 'failed'){
-					err('网络出错,请稍候重试');
-				}else{
-					func(data);
-				}
-				break;
-		};
-	};
-};
-// -CLASS storage
-// -param  obj - String
-function storage(obj,val){
-	if (!val)
-		val = 0;
-	if(typeof(Storage) !== "undefined") {
-		if (typeof localStorage[obj] !== 'undefined') {
-			this.val = localStorage[obj];
-		} else {
-			localStorage[obj] = val;
-			this.val = localStorage[obj];
-		}
-	} else {
-	  this.val = val;
-	}
-	this.name = obj;
-	//return this.obj;
-};
-storage.prototype = {
-	add: function(){
-		this.val = Number(this.val) + 1;
-		this.setStorage();
-		return this.val;
-	},
-	cut: function(){
-		this.val = Number(this.val) - 1;
-		this.setStorage();
-		return this.val;
-	},		
-	get: function(){
-		return this.val;
-	},
-	set: function(val){
-		this.val = val;
-		this.setStorage();
-		return this.val;
-	},
-	setStorage: function(){
-		if(typeof(Storage) !== "undefined"){
-			localStorage.setItem(this.name, this.val)
-		}
-	},
-	display:function(_selector){
-		$(_selector).html(this.val);
-	}
-};
 
-// Interviewee Queue
-var check_queue = function(){
-	var message = interviewee_queue.pop();
-	if (!message)
-		return ;
-	var data = interviewee_data_queue.pop();
-	var html = "<div><span class='smallCircle'></span><span class='calling'>" + message + "</span></div>";
-	var _target = $(".current");
-	var len = _target.find("div").length;
-	if (len < 3){
-		_target.prepend(html);	
-	} else {
-		_target.find("div:last").remove();
-		_target.prepend(html).show(1000);
-	}
-	_target.find("._default").remove();
-	if ($(".stu-" + data.sid).length){
-		console.log($(".stu-" + data.sid));
-		$(".stu-" + data.sid).remove();
-		waiting.cut();
-		waiting.display('.waitingNumber');
-		refit();
-	}
-	var iframe = $("iframe").eq(0);
-	var src = ttsAPI.replace(/_WORDS_/ig, encodeURIComponent(message));
-	iframe.attr("src", src);
+// 呼叫模板
+var callTemplate = function(name, room, did){
 
-	interviewed.add();
-	interviewed.display('.interviewedNumber');
-	waiting_html.set($(".waitingList tbody").html());
-	current_html.set(_target.html());
-};
-
-var set_interval = function(){
-	interval = setInterval(check_queue, 10000);
-};
-
-//init Departments
-var set_department = function(){
-	var listContainer = $('.selectDep .content .list');
-	var output      = ""; 
-	var template    = "<div class='item'><label><input type=\"checkbox\" name=\"department\" data-id=\"ROOM\" value=\"DID\">NAME</label></div>";
-	var dep = club.departments;
-	for( var i in dep){
-		if (dep[i]){
-			var out = template;
-			out = out.replace(/DID/g, dep[i].did);
-			out = out.replace(/NAME/g, dep[i].name);
-			out = out.replace(/ROOM/g, dep[i].location)
-			output += out;
-		}
-	}
-	listContainer.html(output);
-  	listContainer.find('input').iCheck({checkboxClass: 'icheckbox_square-blue',
-      radioClass: 'iradio_square-blue'});
-	listContainer.find('label,ins').on('click', function(){
-		var _count = $("[name=department]:checked").length;
-		if (_count > club.maxDep){
-			$(this).parent().find('input').iCheck('uncheck');
-			err('至多选择' + club.maxDep + '个部门!');
-		}
-	});
+    var template = `<div class = \"template\">
+                        <span class='smallCircle'></span>
+                        <span class='calling'>请${name}同学到${room}教室参加${did}面试</span>
+                    </div>`;
+    return template;
 }
-// -signin
+
+//改变呼叫
+var changeCallRow = function(){
+    var calling = JSON.parse(storage.getItem("calling"));
+    var departmentInfo = JSON.parse(storage.getItem("departmentInfo"));
+    // console.log(calling);
+    $(".current ._default").remove();
+    $(".current .template").remove();
+    for(var i = 0; i < calling.length; i ++){
+        var room ;
+        var did ;
+        for(var j = 0; j < departmentInfo[0].departments.length; j ++){
+
+            // console.log(parseInt(calling[i].calldid));
+            if(parseInt(calling[i].calldid) == departmentInfo[0].departments[j].did){
+                did = departmentInfo[0].departments[j].name;
+                room = departmentInfo[0].departments[j].location;
+            }
+
+            // console.log(did);
+        }
+        var a = callTemplate(calling[i].name, room, did);
+        // console.log(a);
+        $(".current").append(a);
+    }
+}
+// 改变排队
+var changeWaitRow = function(){
+    var waiting = JSON.parse(storage.getItem("waiting"));
+    var departmentInfo = JSON.parse(storage.getItem("departmentInfo"));
+    // console.log(departmentInfo);
+    // console.log(waiting);
+    var waitingContainer = $('.waitingList tbody');
+    $(".waitingList ._default").remove();
+    $(".waitingList .template").remove();
+
+    for(var i = 0; i < waiting.length; i ++){
+        var did = [];
+        var room = [];
+        for(var j = 0; j < departmentInfo[0].departments.length; j ++){
+            // console.log(waiting[i].volunteer.length);
+            for(var k = 0; k < waiting[i].volunteer.length; k ++){
+                if(waiting[i].volunteer[k] ==  departmentInfo[0].departments[j].did){
+                    did[k] = departmentInfo[0].departments[j].name;
+                    room[k] = departmentInfo[0].departments[j].location;
+                }
+            }
+            // console.log(did);
+        }
+
+        var a = waitingTemplate(i + 1, waiting[i].sid, waiting[i].name, did, room);
+        // console.log(a);
+        waitingContainer.append(a);
+    }
+    if(waiting.length > 7)
+        $(".waitingList").jScrollPane();
+
+    // 测试
+    // for(var i = 0; i < stuLine.length; i ++){
+    //     var a = waitingTemplate(i + 1, stuLine[i].sid, stuLine[i].name, [0,1], ["7jiao","6jiaoDF VZSVFSDFDS fSDFsdC"]);
+    //     // console.log(a);
+    //     waitingContainer.append(a);
+    // }
+    // if(stuLine.length > 7)
+    //     $(".waitingList").jScrollPane();
+
+    //设置单元格宽度
+    var tdHeader = $(".tHead").find("td");                  //获取表头对象
+    var tds = $('.template').find("td");                    //获取表格对象
+    for (var i = 0; i < tdHeader.length; i ++){
+        $(tds.eq(i)).width(tdHeader.eq(i).width());
+    }
+
+}
+
+// 面试人数
+var interviewStatus = function(){
+    $(".interviewedNumber").html(storage.getItem("interviewed")) ;
+    var waiting = JSON.parse(storage.getItem("waiting"));
+    // console.log(waiting.length);
+    $(".waitingNumber").html(waiting.length);
+}
+
+
+var getDepartmentInfo = function(){
+    $.ajax({
+        url : baseURL + 'room/getDepartmentInfo',
+        type : 'get',
+        dataType : 'json',
+
+        statusCode : {
+            404 : function(){
+                err("Page not found!");
+            },
+            500 : function(){
+                err('服务器错误,请重试!');
+            },
+            200 : function(data){
+                // console.log("部门");
+                // console.log(data) ;
+                storage.setItem("departmentInfo", JSON.stringify(data.message))
+            }
+        }
+    });
+}
+
+var getFinishNumber = function(){
+    $.ajax({
+        url : baseURL + '/room/finish',
+        type : 'get',
+        dataType : 'json',
+
+        statusCode : {
+            500 : function(){
+                err('服务器错误,请重试!');
+            },
+            204 : function(){
+                // err('没人');
+                console.log("暂时没人完成面试")
+            },
+            200 : function(data){
+                // console.log(data.data) ;
+                storage.setItem("interviewed", data.data)
+
+            }
+        }
+    });
+}
+
+var getCalling = function(){
+
+    $.ajax({
+        url : baseURL + '/room/calling',
+        type : 'get',
+        dataType : 'json',
+
+        statusCode : {
+            404 : function(){
+                err("Page not found!");
+            },
+            500 : function(){
+                err('服务器错误,请重试!');
+            },
+            200 : function(data){
+                // console.log("呼叫");
+                // console.log(data.data) ;
+                storage.setItem("calling", JSON.stringify(data.data))
+
+            }
+        }
+    });
+
+}
+
+var getWaiting = function(){
+
+    $.ajax({
+        url : baseURL + '/room/sighed',
+        type : 'get',
+        dataType : 'json',
+
+        statusCode : {
+            404 : function(){
+                err("Page not found!");
+            },
+            500 : function(){
+                err('服务器错误,请重试!');
+            },
+            200 : function(data){
+                // console.log("排队");
+                // console.log(data.data) ;
+                storage.setItem("waiting", JSON.stringify(data.data));
+
+            }
+        }
+    });
+
+}
+
+// 签 到
 var signin = function(){
-	var input = $("input[name=sid]");
-	var stuID = input.val();
-	if(!stuID){
-		err("请输入学号");
-		input.focus();
-		return false;
-	}
-	$.ajax({
-		url : baseURL + '/room/sign',
-		type : 'get',
-		data : {sid: stuID},
-		dataType : 'json',
-		beforeSend : function() {
+    var input = $("input[ name = sid ]");
+    var stuID = input.val();
+    console.log(stuID);
+    if(!stuID){
+        err("请输入学号");
+        input.focus();
+        return false;
+    }
+    $.ajax({
+        url : baseURL + '/room/sign',
+        type : 'get',
+        data : {
+            sid: stuID
+        },
+        dataType : 'json',
+        success : function(data){
+            console.log("签到");
+            console.log(data);
+        },
+        statusCode : {
+            404 : function(){
+                err("Page not found!");
+            },
+            403 : function(){
+                err("该学生未报名（待测试）!");                    //待测试
+                // relogin();
+            },
+            204 : function () {
+                success("该学生已经签到过了!");
+            },
+            // 待开发的部门选择
+            // 205 : function(){
+            //     selectDepDiv();
+            // },
+            500 : function(){
+                    err('服务器错误,请重试!');
+            },
+            200 : function(data){
+                success("签到成功!");
+            }
+        }
+    });
+};
 
-		},
-		success : function(data){
-			//console.log(data);
-		},
-		statusCode : {
-			404 : function(){
-				err("Page not found!");
-			},
-			403 : function(){
-				err("未登录或登录超时!");
-				relogin();	
-			},
-			204 : function () {
-				success("该学生已经签到过了!");
-			},
-			205 : function(){
-				selectDepDiv();
-			},
-			500 : function(){
-				err('服务器错误,请重试!');
-			},
-			200 : function(data){
-				success("签到成功!");
-				console.log(data);
-				waitline(data);
-			}
-		}
-	});
-};
-// -select departments div fadein
-var selectDepDiv = function(){
-	var selectDep = $('.selectDepContainer');
-	selectDep.find('input').iCheck('uncheck');
-	selectDep.fadeIn();
-};
-var selectDepart = function(){
-	var pass = true;
-	var form = $('.selectDep .form');
-	var data = {};
-	var did = [];
-	var stuID = $("input[name=sid]").val();
-	var department = $("[name=department]:checked");
-	form.each(function () {
-		var item = $(this).find('input, select');
-		var val = item.val();
-		if (!val) pass = false;
-		data[item.attr('name')] = val;
-	});
-	if (!pass) {
-		return err("请将信息填写完整");
-	}
-	if (!department.length){
-		err("请至少勾选一个部门！");
-		return false;
-	}
-	department.each(function(){
-		did.push($(this).val());
-	});
-	data.sid = stuID;
-	data.did = did;
-	$.ajax({
-		url : baseURL + '/room/addDep',
-		type : 'post',
-		data : data,
-		dataType: 'json',
-		statusCode : {
-			404 : function(){
-				err("学号不存在，请重试!");
-			},
-			403 : function(){
-				err("未登录或登录超时!");
-				relogin();	
-			},
-			500 : function(){
-				err('服务器错误,请重试!');
-			},
-			200 : function(data){
-				success("签到成功!");
-				waitline(data);
-				$('.selectDep .form input').val('');
-				$('.selectDepContainer').fadeOut();
-			}
-		}
-	});
-};
-var waitline = function(data){
-	console.log(data);
-	var waitingContainer = $('.waitingList tbody');
-	var template = "<tr class=\"stu-%SID%\">" +
-		"<td>%NUMBER%</td>" +
-		"<td>%SID%</td>" +
-		"<td>%NAME%</td>" +
-		"<td class=\"depart\" title=\"%DEPARTMENTS%\">%DEPARTMENT%</td>" +
-		"<td>%ROOM%</td>" +
-		"</tr>";
-	var output = template.replace(/%NUMBER%/ig, wait_num.add());
-	var depart = data.volunteer;
-	var did = $("[name=department][value=" + depart[0] + "]");
-	var room = did.attr("data-id");
-	var departs =  did.parents('label').text();
-	var departments = departs;
-	for (i = 1; i < depart.length ; ++i){
-		departments += ', ' + $("[name=department][value=" + depart[i] + "]").parents('label').text();
-	}
-	departs = departs + ((depart.length != 1) ? "等" + depart.length + "个部门" : "");
-	output = output.replace(/%SID%/ig, data.sid);
-	output = output.replace(/%NAME%/ig, data.name);
-	output = output.replace(/%DEPARTMENT%/ig, departs);
-	output = output.replace(/%DEPARTMENTS%/ig, departments);
-	output = output.replace(/%ROOM%/ig, room);
-	waitingContainer.append(output);
-	$(".waitingList ._default").remove();
-	waiting.add();
-	waiting.display('.waitingNumber');
-	waiting_html.set(waitingContainer.html());
-	refit();
-};
+// 展示页面(呼叫,排队,面试状态)
+var toShow = function(){
+
+                                        //更新数据
+    getFinishNumber();
+    getWaiting();
+    getCalling();
+
+
+    changeWaitRow();                    //改变排队
+    interviewStatus();                  //面试人数,排队人数
+    changeCallRow();                    //叫号
+}
+
 
 $(function(){
-	$('.back').click(function () {
-		window.history.back();
-	});
-	set_club();
-	set_interval();
-	//已面试人数
-	interviewed = new storage("interviewed");
-	//等待人数
-	waiting     = new storage("waiting");
-	waiting_html= new storage("waiting_html");
-	//等待者的最大号码
-	wait_num    = new storage("wait_num");
-	current_html= new storage("current_html");
-	interviewed.display('.interviewedNumber');
-	waiting.display('.waitingNumber');
-	if ( waiting_html.val != '0')
-		waiting_html.display('.waitingList tbody');
-	if ( current_html.val != '0')
-		current_html.display('.current');
 
-	refit();
-	//bind events
-	//signin button function
-	$(".signin .submit").click(signin);
-	//select department submit button
-	$(".selectDep .submit").click(selectDepart);
-	//select dep hide event
-	$('.selectDepContainer').click(function () {
-		$(this).fadeOut();
-	});
-	$('.selectDep').click(function (e) {
-		e.stopPropagation();
-	});
+    getDepartmentInfo();
 
-	socket = io.connect(ioURL);
-	socket.on('call', function(data){
-		socket.emit('success');
-		console.log(data);
-		var did = $("[name=department][value=" + data.did + "]");
-		var room = did.attr("data-id").split("").join(" ");
-		var department = did.parents("label").text();
-		var message = "请" + data.name + "同学到"
-								+ room + "教室参加" + department + "面试" ;
-		interviewee_queue.push(message);
-		interviewee_data_queue.push(data);
-/*		if ( interviewee_queue.length === 1 ){
-			check_queue();
-			clearInterval(interval);
-			set_interval();
-		};*/
-	});
-	socket.on('disconnect', function(){
-		if ( reconnect_times < 4 ){
-			console.log(reconnect_times);
-			setTimeout(reconnect, 2000);
-		}
-		else
-			err('网络超时,请刷新页面再试！!');
-	});
+    toShow();
+
+	$(".signin .submit").click(signin);                     //签到
+
+    var interval = setInterval(toShow, 3000);               //刷新展示页面/3s
+
 });

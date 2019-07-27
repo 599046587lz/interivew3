@@ -1,44 +1,569 @@
 { 
-    "_id" : ObjectId("57af0661cd6d47643561fe50"), 
-    "cid" : NumberInt(1), 
-    "name" : "jerry", 
-    "logo" : "", 
-    "password" : "202cb962ac59075b964b07152d234b70", 
-    "maxDep" : NumberInt(3), 
+    "_id" : "599fb90606df1710947c3e95", 
     "interviewer" : [
-        "asd"
+
     ], 
+    "cid" : NumberInt(1), 
+    "name" : "红色家园", 
+    "password" : "d9b1d7db4cd6e70935368a1efb10e377", 
+    "maxDep" : NumberInt(3), 
     "departments" : [
         {
+            "number" : NumberInt(6), 
             "did" : NumberInt(0), 
-            "name" : "技术部", 
-            "location" : "8"
-        }, 
-        {
-            "did" : NumberInt(1), 
             "name" : "设计部", 
-            "location" : "8"
+            "_id" : "599fb90606df1710947c3e9b"
         }, 
         {
+            "number" : NumberInt(12), 
+            "did" : NumberInt(1), 
+            "name" : "技术部", 
+            "_id" : "599fb90606df1710947c3e9a"
+        }, 
+        {
+            "number" : NumberInt(1), 
             "did" : NumberInt(2), 
-            "name" : "公关部", 
-            "location" : "8"
+            "name" : "推广部", 
+            "_id" : "599fb90606df1710947c3e99"
         }, 
         {
+            "number" : NumberInt(2), 
             "did" : NumberInt(3), 
-            "name" : "人力资源部", 
-            "location" : "8"
+            "name" : "媒体运营部", 
+            "_id" : "599fb90606df1710947c3e98"
         }, 
         {
+            "number" : NumberInt(1), 
             "did" : NumberInt(4), 
-            "name" : "活动运营部", 
-            "location" : "8"
-        }, 
-        {
-            "did" : NumberInt(5), 
-            "name" : "产品运营部", 
-            "location" : "8"
+            "name" : "人力资源部", 
+            "_id" : "599fb90606df1710947c3e96"
         }
     ], 
+    "attention" : "<p>1.准确日期请关注家园微信服务号「在杭电」</p><p>2.获取后续面试资讯，可以加入家园新生交流QQ群：822399513</p><p>3.家园工作室地址：学生活动中心南201</p><p>4.请如实填写以上信息</p>", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : "599fb91f06df1710947c3e9c", 
+    "interviewer" : [
+
+    ], 
+    "cid" : NumberInt(99999995), 
+    "name" : "社团联合协会", 
+    "password" : "202cb962ac59075b964b07152d234b70", 
+    "maxDep" : NumberInt(3), 
+    "departments" : [
+        {
+            "number" : NumberInt(0), 
+            "did" : NumberInt(0), 
+            "name" : "项目创新中心", 
+            "_id" : "599fb91f06df1710947c3ea5"
+        }, 
+        {
+            "number" : NumberInt(0), 
+            "did" : NumberInt(1), 
+            "name" : "办公室", 
+            "_id" : "599fb91f06df1710947c3ea4"
+        }, 
+        {
+            "number" : NumberInt(0), 
+            "did" : NumberInt(2), 
+            "name" : "公关部", 
+            "_id" : "599fb91f06df1710947c3ea3"
+        }, 
+        {
+            "number" : NumberInt(0), 
+            "did" : NumberInt(3), 
+            "name" : "文艺部", 
+            "_id" : "599fb91f06df1710947c3ea2"
+        }, 
+        {
+            "number" : NumberInt(0), 
+            "did" : NumberInt(4), 
+            "name" : "权益中心", 
+            "_id" : "599fb91f06df1710947c3ea1"
+        }, 
+        {
+            "number" : NumberInt(0), 
+            "did" : NumberInt(5), 
+            "name" : "新媒体中心", 
+            "_id" : "599fb91f06df1710947c3ea0"
+        }, 
+        {
+            "number" : NumberInt(0), 
+            "did" : NumberInt(6), 
+            "name" : "宣传部", 
+            "_id" : "599fb91f06df1710947c3e9f"
+        }, 
+        {
+            "number" : NumberInt(0), 
+            "did" : NumberInt(7), 
+            "name" : "人力资源部", 
+            "_id" : "599fb91f06df1710947c3e9e"
+        }, 
+        {
+            "number" : NumberInt(0), 
+            "did" : NumberInt(8), 
+            "name" : "组织部", 
+            "_id" : "599fb91f06df1710947c3e9d"
+        }
+    ], 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : "599fb92d06df1710947c3eb0", 
+    "interviewer" : [
+
+    ], 
+    "cid" : NumberInt(5), 
+    "name" : "杭电之声", 
+    "password" : "202cb962ac59075b964b07152d234b70", 
+    "maxDep" : NumberInt(0), 
+    "attention" : "<p>1.纸质报名表与电子报名均暂定截止至9月22日20：00</p><p>2.准确日期请关注杭电之声微信公众号：hduradio（杭电之声广播台）</p><p>3.获取后续面试资讯，可以加入杭电之声新生交流QQ群：707337941</p><p>4.杭电之声工作室地址：学生活动中心南203</p><p>5.请如实填写以上信息</p>", 
+    "departments" : [
+        {
+            "number" : NumberInt(7), 
+            "did" : NumberInt(0), 
+            "name" : "节目部-娱乐热点", 
+            "_id" : "599fb92d06df1710947c3ed4"
+        }, 
+        {
+            "number" : NumberInt(6), 
+            "did" : NumberInt(1), 
+            "name" : "节目部-时事新闻", 
+            "_id" : "599fb92d06df1710947c3ed3"
+        }, 
+        {
+            "number" : NumberInt(12), 
+            "did" : NumberInt(2), 
+            "name" : "节目部-潮流音乐", 
+            "_id" : "599fb92d06df1710947c3ed2"
+        }, 
+        {
+            "number" : NumberInt(11), 
+            "did" : NumberInt(3), 
+            "name" : "节目部-欧美影剧&英语口语", 
+            "_id" : "599fb92d06df1710947c3ed1"
+        }, 
+        {
+            "number" : NumberInt(15), 
+            "did" : NumberInt(4), 
+            "name" : "节目部-生活资讯&校园动态", 
+            "_id" : "599fb92d06df1710947c3ed0"
+        }, 
+        {
+            "number" : NumberInt(1), 
+            "did" : NumberInt(5), 
+            "name" : "节目部-体育赛事", 
+            "_id" : "599fb92d06df1710947c3ecf"
+        }, 
+        {
+            "number" : NumberInt(18), 
+            "did" : NumberInt(6), 
+            "name" : "节目部-情感调频&治愈声线", 
+            "_id" : "599fb92d06df1710947c3ece"
+        }, 
+        {
+            "number" : NumberInt(19), 
+            "did" : NumberInt(7), 
+            "name" : "节目部-文字&书籍", 
+            "_id" : "599fb92d06df1710947c3ecd"
+        }, 
+        {
+            "number" : NumberInt(17), 
+            "did" : NumberInt(8), 
+            "name" : "节目部-旅行&心情&人生", 
+            "_id" : "599fb92d06df1710947c3ecc"
+        }, 
+        {
+            "number" : NumberInt(10), 
+            "did" : NumberInt(9), 
+            "name" : "节目部-广播剧", 
+            "_id" : "599fb92d06df1710947c3ecb"
+        }, 
+        {
+            "number" : NumberInt(3), 
+            "did" : NumberInt(10), 
+            "name" : "编辑部-歌曲&心情(乐评)", 
+            "_id" : "599fb92d06df1710947c3eca"
+        }, 
+        {
+            "number" : NumberInt(1), 
+            "did" : NumberInt(11), 
+            "name" : "编辑部-评书&微信", 
+            "_id" : "599fb92d06df1710947c3ec9"
+        }, 
+        {
+            "number" : NumberInt(3), 
+            "did" : NumberInt(12), 
+            "name" : "编辑部-书籍&诗歌(书评)", 
+            "_id" : "599fb92d06df1710947c3ec8"
+        }, 
+        {
+            "number" : NumberInt(1), 
+            "did" : NumberInt(13), 
+            "name" : "编辑部-小说&故事(广播剧)", 
+            "_id" : "599fb92d06df1710947c3ec7"
+        }, 
+        {
+            "number" : NumberInt(3), 
+            "did" : NumberInt(14), 
+            "name" : "编辑部-人文&情怀", 
+            "_id" : "599fb92d06df1710947c3ec6"
+        }, 
+        {
+            "number" : NumberInt(2), 
+            "did" : NumberInt(15), 
+            "name" : "编辑部-电影&感悟(影评)", 
+            "_id" : "599fb92d06df1710947c3ec5"
+        }, 
+        {
+            "number" : NumberInt(0), 
+            "did" : NumberInt(16), 
+            "name" : "编辑部-旅行&文艺(游记)", 
+            "_id" : "599fb92d06df1710947c3ec4"
+        }, 
+        {
+            "number" : NumberInt(1), 
+            "did" : NumberInt(17), 
+            "name" : "外联部-赞助洽谈", 
+            "_id" : "599fb92d06df1710947c3ec3"
+        }, 
+        {
+            "number" : NumberInt(1), 
+            "did" : NumberInt(18), 
+            "name" : "外联部-公关", 
+            "_id" : "599fb92d06df1710947c3ec2"
+        }, 
+        {
+            "number" : NumberInt(6), 
+            "did" : NumberInt(19), 
+            "name" : "办公室-工作企划", 
+            "_id" : "599fb92d06df1710947c3ec1"
+        }, 
+        {
+            "number" : NumberInt(8), 
+            "did" : NumberInt(20), 
+            "name" : "办公室-人员编排", 
+            "_id" : "599fb92d06df1710947c3ec0"
+        }, 
+        {
+            "number" : NumberInt(4), 
+            "did" : NumberInt(21), 
+            "name" : "办公室-档案规", 
+            "_id" : "599fb92d06df1710947c3ebf"
+        }, 
+        {
+            "number" : NumberInt(3), 
+            "did" : NumberInt(22), 
+            "name" : "办公室-财务管理", 
+            "_id" : "599fb92d06df1710947c3ebe"
+        }, 
+        {
+            "number" : NumberInt(14), 
+            "did" : NumberInt(23), 
+            "name" : "主持队-高端大气官方", 
+            "_id" : "599fb92d06df1710947c3ebd"
+        }, 
+        {
+            "number" : NumberInt(9), 
+            "did" : NumberInt(24), 
+            "name" : "主持队-诙谐幽默机智", 
+            "_id" : "599fb92d06df1710947c3ebc"
+        }, 
+        {
+            "number" : NumberInt(23), 
+            "did" : NumberInt(25), 
+            "name" : "主持队-活泼亲和百搭", 
+            "_id" : "599fb92d06df1710947c3ebb"
+        }, 
+        {
+            "number" : NumberInt(3), 
+            "did" : NumberInt(26), 
+            "name" : "技术部-节目导播", 
+            "_id" : "599fb92d06df1710947c3eba"
+        }, 
+        {
+            "number" : NumberInt(4), 
+            "did" : NumberInt(27), 
+            "name" : "技术部-舞台控制", 
+            "_id" : "599fb92d06df1710947c3eb9"
+        }, 
+        {
+            "number" : NumberInt(4), 
+            "did" : NumberInt(28), 
+            "name" : "技术部-音频处理", 
+            "_id" : "599fb92d06df1710947c3eb8"
+        }, 
+        {
+            "number" : NumberInt(4), 
+            "did" : NumberInt(29), 
+            "name" : "技术部-广播剧后期制作", 
+            "_id" : "599fb92d06df1710947c3eb7"
+        }, 
+        {
+            "number" : NumberInt(2), 
+            "did" : NumberInt(30), 
+            "name" : "宣传部-网宣", 
+            "_id" : "599fb92d06df1710947c3eb6"
+        }, 
+        {
+            "number" : NumberInt(3), 
+            "did" : NumberInt(31), 
+            "name" : "宣传部-美工", 
+            "_id" : "599fb92d06df1710947c3eb5"
+        }, 
+        {
+            "number" : NumberInt(5), 
+            "did" : NumberInt(32), 
+            "name" : "宣传部-摄影", 
+            "_id" : "599fb92d06df1710947c3eb4"
+        }, 
+        {
+            "number" : NumberInt(6), 
+            "did" : NumberInt(33), 
+            "name" : "视频制作部-策划&编剧", 
+            "_id" : "599fb92d06df1710947c3eb3"
+        }, 
+        {
+            "number" : NumberInt(8), 
+            "did" : NumberInt(34), 
+            "name" : "视频制作部-摄影摄像", 
+            "_id" : "599fb92d06df1710947c3eb2"
+        }, 
+        {
+            "number" : NumberInt(11), 
+            "did" : NumberInt(35), 
+            "name" : "视频制作部-后期剪辑", 
+            "_id" : "599fb92d06df1710947c3eb1"
+        }
+    ], 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : "5b73e75332bc2b0d300fd635", 
+    "interviewer" : [
+
+    ], 
+    "cid" : NumberInt(7), 
+    "departments" : [
+        {
+            "number" : NumberInt(0), 
+            "_id" : "5b73e75332bc2b0d300fd638", 
+            "did" : NumberInt(0), 
+            "name" : "组织部"
+        }, 
+        {
+            "number" : NumberInt(0), 
+            "_id" : "5b73e75332bc2b0d300fd637", 
+            "did" : NumberInt(1), 
+            "name" : "宣传部"
+        }, 
+        {
+            "number" : NumberInt(0), 
+            "_id" : "5b73e75332bc2b0d300fd636", 
+            "did" : NumberInt(2), 
+            "name" : "外联部"
+        }
+    ], 
+    "name" : "计算机学院学生社团联合会", 
+    "password" : "202cb962ac59075b964b07152d234b70", 
+    "maxDep" : NumberInt(3), 
+    "__v" : NumberInt(0), 
+    "attention" : "<p>1.部门选择可以多项选择，面试时可以进行最终确定。</p><p>2.想要进一步了解计算机社联及计算机社团，欢迎加入18计算机社联招新答疑群，群号码:798294110</p><p>3.欢迎关注计算机学院学生社团联合会官方微信号「计小联」</p>\r\n"
+}
+{ 
+    "_id" : "5b7d597001473f22f49b4bfd", 
+    "interviewer" : [
+
+    ], 
+    "cid" : NumberInt(6), 
+    "name" : "焦点摄影", 
+    "departments" : [
+        {
+            "number" : NumberInt(19), 
+            "_id" : "5b7d597001473f22f49b4c11", 
+            "did" : NumberInt(0), 
+            "name" : "Ps"
+        }, 
+        {
+            "number" : NumberInt(8), 
+            "_id" : "5b7d597001473f22f49b4c10", 
+            "did" : NumberInt(1), 
+            "name" : "Lr"
+        }, 
+        {
+            "number" : NumberInt(2), 
+            "_id" : "5b7d597001473f22f49b4c0f", 
+            "did" : NumberInt(2), 
+            "name" : "Ae"
+        }, 
+        {
+            "number" : NumberInt(8), 
+            "_id" : "5b7d597001473f22f49b4c0e", 
+            "did" : NumberInt(3), 
+            "name" : "Pr"
+        }, 
+        {
+            "number" : NumberInt(13), 
+            "_id" : "5b7d597001473f22f49b4c0d", 
+            "did" : NumberInt(4), 
+            "name" : "视频制作"
+        }, 
+        {
+            "number" : NumberInt(1), 
+            "_id" : "5b7d597001473f22f49b4c0c", 
+            "did" : NumberInt(5), 
+            "name" : "程序设计"
+        }, 
+        {
+            "number" : NumberInt(8), 
+            "_id" : "5b7d597001473f22f49b4c0b", 
+            "did" : NumberInt(6), 
+            "name" : "对微信推送感兴趣"
+        }, 
+        {
+            "number" : NumberInt(3), 
+            "_id" : "5b7d597001473f22f49b4c0a", 
+            "did" : NumberInt(7), 
+            "name" : "文笔好"
+        }, 
+        {
+            "number" : NumberInt(12), 
+            "_id" : "5b7d597001473f22f49b4c07", 
+            "did" : NumberInt(8), 
+            "name" : "组织策划"
+        }, 
+        {
+            "number" : NumberInt(10), 
+            "_id" : "5b7d597001473f22f49b4c06", 
+            "did" : NumberInt(9), 
+            "name" : "力气大/能吃苦"
+        }, 
+        {
+            "number" : NumberInt(22), 
+            "_id" : "5b7d597001473f22f49b4c05", 
+            "did" : NumberInt(10), 
+            "name" : "虚心学习"
+        }, 
+        {
+            "number" : NumberInt(8), 
+            "_id" : "5b7d597001473f22f49b4c04", 
+            "did" : NumberInt(11), 
+            "name" : "水群"
+        }, 
+        {
+            "number" : NumberInt(7), 
+            "_id" : "5b7d597001473f22f49b4c03", 
+            "did" : NumberInt(12), 
+            "name" : "擅长处理应急事件"
+        }, 
+        {
+            "number" : NumberInt(12), 
+            "_id" : "5b7d597001473f22f49b4c02", 
+            "did" : NumberInt(13), 
+            "name" : "会做旅行/美食攻略各种攻略"
+        }, 
+        {
+            "number" : NumberInt(3), 
+            "_id" : "5b7d597001473f22f49b4c01", 
+            "did" : NumberInt(14), 
+            "name" : "会画画(sai/手绘)"
+        }, 
+        {
+            "number" : NumberInt(6), 
+            "_id" : "5b7d597001473f22f49b4c00", 
+            "did" : NumberInt(15), 
+            "name" : "会写日记/手账"
+        }, 
+        {
+            "number" : NumberInt(26), 
+            "_id" : "5b7d597001473f22f49b4bff", 
+            "did" : NumberInt(16), 
+            "name" : "热爱摄影/擅长摄影"
+        }, 
+        {
+            "number" : NumberInt(16), 
+            "_id" : "5b7d597001473f22f49b4bfe", 
+            "did" : NumberInt(17), 
+            "name" : "关心学校活动"
+        }
+    ], 
+    "password" : "123", 
+    "maxDep" : NumberInt(99), 
+    "attention" : "<p>1.焦点摄影工作室地址:学生活动中心南楼205</p><p>2.焦点摄影新生交流QQ群:827181405</p>", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : "5b88d70374bc767628c6a2c2", 
+    "interviewer" : [
+
+    ], 
+    "cid" : NumberInt(4), 
+    "departments" : [
+        {
+            "number" : NumberInt(0), 
+            "_id" : "5b88d70374bc767628c6a2c6", 
+            "did" : NumberInt(0), 
+            "name" : "美编部"
+        }, 
+        {
+            "number" : NumberInt(0), 
+            "_id" : "5b88d70374bc767628c6a2c5", 
+            "did" : NumberInt(1), 
+            "name" : "文编部"
+        }, 
+        {
+            "number" : NumberInt(0), 
+            "_id" : "5b88d70374bc767628c6a2c4", 
+            "did" : NumberInt(2), 
+            "name" : "技术部"
+        }, 
+        {
+            "number" : NumberInt(0), 
+            "_id" : "5b88d70374bc767628c6a2c3", 
+            "did" : NumberInt(3), 
+            "name" : "组织部"
+        }
+    ], 
+    "name" : "新媒体", 
+    "password" : "202cb962ac59075b964b07152d234b70", 
+    "maxDep" : NumberInt(4), 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5bb23557805fac45a62ba5a3"), 
+    "interviewer" : [
+
+    ], 
+    "cid" : NumberInt(3), 
+    "departments" : [
+        {
+            "number" : NumberInt(0), 
+            "_id" : ObjectId("5bb23557805fac45a62ba5a7"), 
+            "did" : NumberInt(0), 
+            "name" : "校园新闻"
+        }, 
+        {
+            "number" : NumberInt(0), 
+            "_id" : ObjectId("5bb23557805fac45a62ba5a6"), 
+            "did" : NumberInt(1), 
+            "name" : "热点事件"
+        }, 
+        {
+            "number" : NumberInt(0), 
+            "_id" : ObjectId("5bb23557805fac45a62ba5a5"), 
+            "did" : NumberInt(2), 
+            "name" : "优秀人物"
+        }, 
+        {
+            "number" : NumberInt(0), 
+            "_id" : ObjectId("5bb23557805fac45a62ba5a4"), 
+            "did" : NumberInt(3), 
+            "name" : "其他"
+        }
+    ], 
+    "name" : "校报", 
+    "password" : "202cb962ac59075b964b07152d234b70", 
+    "maxDep" : NumberInt(4), 
     "__v" : NumberInt(0)
 }

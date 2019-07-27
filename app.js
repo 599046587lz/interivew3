@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const proxy = require('http-proxy-middleware');
 const favicon = require('static-favicon');
 const logger = require('morgan'); //
 const cookieParser = require('cookie-parser');
@@ -15,6 +16,10 @@ const utils = require('./utils/utils');
 const app = express();
 
 utils.saveDb();
+app.use(express.static(path.join(__dirname, 'public')));
+if (process.env.ENABLE_PROXY) {
+    app.use(proxy({ target: config.proxy, changeOrigin: true }))
+}
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(cookieParser());
@@ -22,7 +27,6 @@ app.use(cookieParser());
 app.use(logger('dev'));
 
 app.use(mid.session());
-app.use(express.static(path.join(__dirname, 'public')));
 //报名系统注册入口
 app.use('/reg',reg);
 app.use('/club', club);

@@ -15,5 +15,6 @@ module.exports = {
     token: '57dbfcf39882410001b0c195',
     mailUser: '1322023401@qq.com',
     mailPassword: 'tyucyclwplkkidef',
-    apiKey: '7e9b92e1d01a94a7e304813856a99d25'
+    apiKey: '7e9b92e1d01a94a7e304813856a99d25',
+    proxy: 'http://szq.jouta.xyz/'
 };

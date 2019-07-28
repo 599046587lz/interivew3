@@ -47,8 +47,9 @@ router.post('/login', mid.checkFormat(function () {
  */
 router.post('/setIdentify', function (req, res) {
     let name = req.session.club;
+    console.log(req.session.club)
     if (!name) {
-        return res.send(403);
+        return res.sendStatus(403);
     }
     req.session['did'] = req.body.did;
     req.session['interviewer'] = req.body.interviewerName;
@@ -69,25 +70,35 @@ router.get('/logout', mid.checkLogin, function (req, res) {
  * @return Object {status: 'success'|'failed', count:Number}
  */
 
+router.post('/upload/location',mid.checkFormat(function () {
+        return Joi.object().keys({
+            cid: Joi.number(),
+            info: Joi.array(),
+        })
+    }), wrap(async function (req, res) {
+        let info = {};
+        let cid = req.session.cid;
+         info = req.body.info;
+
+        await Club.setRoomLocation(cid, info);
+        res.json({
+            status: 'success',
+        });
+    })
+    );
+
 router.post('/upload/archive', upload.single('archive'), mid.checkFormat(function() {
     return Joi.object().keys({
         cid: Joi.number(),
-        roomLocation: Joi.string(),
-        did: Joi.number()
     })
 }), wrap(async function (req, res) {
     let file = req.file;
-    let cid = req.body.cid;
-    let roomLocation = req.body.roomLocation;
-    let did = req.body.did;
-    // if (!file || !req.session['cid']) throw new Error('参数不完整');
+    let cid = req.session.cid;
     let xlsxReg = /\.xlsx$/i;
     if (!xlsxReg.test(file.originalname)) throw new Error('上传文件不合法');
-
-    await Club.setRoomLocation(cid, did, roomLocation);
     let result = await Club.handleArchive(file, cid);
     res.json({
-        status: 'success',
+        status: 200,
         count: result
     });
 }));
@@ -137,7 +148,7 @@ router.get('/clubInfo', mid.checkFormat(function () {
         clubId: Joi.number()
     })
 }), wrap(async function (req, res) {
-    let cid = req.query.clubId;
+    let cid = req.session.cid;
     let result = await Club.getClubInfo(cid);
     let info = {
         clubName: result.name,
@@ -161,7 +172,6 @@ router.post('/verifyInfo', mid.checkFormat(function() {
     let info = {};
     info.cid = req.body.clubId;
     info.name = req.body.name;
-
     let result = await Club.verifyInfo(info);
     return res.json(result);
 }));

@@ -1,0 +1,49 @@
+kind: pipeline
+name: default
+workspace:
+  base: /app
+  path: .
+
+steps:
+- name: publish
+  image: plugins/docker
+  environment:
+    INDEX_USER:
+      from_secret: INDEX_USER
+    INDEX_PASS:
+      from_secret: INDEX_PASS  
+  settings:
+    repo: index.hduin.club/interview
+    registry: index.hduin.club
+    username: ${INDEX_USER}
+    password: ${INDEX_PASS}
+    mirror: https://fhvwls99.mirror.aliyuncs.com
+    tags:
+      - ${DRONE_COMMIT_BRANCH}
+      - ${DRONE_COMMIT_SHA:0:8}
+  when:
+    branch:
+    - master
+      
+# - name: update-service
+#   image: redhome/docker-cli
+#   environment:
+#     INDEX_USER:
+#       from_secret: INDEX_USER
+#     INDEX_PASS:
+#       from_secret: INDEX_PASS  
+#   volumes:
+#   - name: docker
+#     path: /var/run/docker.sock
+#   commands:
+#   - docker login index.hduin.club --username ${INDEX_USER} --password ${INDEX_PASS}
+#   - docker pull index.hduin.club/interview:${DRONE_COMMIT_BRANCH}
+#   - docker service update --image index.hduin.club/interview:${DRONE_COMMIT_BRANCH} --with-registry-auth redhome-interview
+#   when:
+#     branch:
+#     - master
+
+volumes:
+- name: docker
+  host:
+    path: /var/run/docker.sock

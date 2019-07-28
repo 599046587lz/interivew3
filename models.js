@@ -84,6 +84,14 @@ let Interviewee = new mongoose.Schema({
             type: Boolean,
             default: false
         } //是否正在和叫号大厅传输该学生信息*/
+    ifsign:{
+        type: String,
+        default: 1
+    },
+    ifcall:{
+        type: Boolean,
+        default: false
+    },
     email: {
         type: String,
         default: ''
@@ -95,6 +103,9 @@ let Interviewee = new mongoose.Schema({
         type: String,
     },
     college: {
+        type: String
+    },
+    calldid: {
         type: String
     }
 });

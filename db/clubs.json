@@ -2,10 +2,10 @@
     "_id" : "599fb90606df1710947c3e95", 
     "interviewer" : [
 
-    ], 
+    ],
     "cid" : NumberInt(1), 
     "name" : "红色家园", 
-    "password" : "d9b1d7db4cd6e70935368a1efb10e377", 
+    "password" : "202cb962ac59075b964b07152d234b70",
     "maxDep" : NumberInt(3), 
     "departments" : [
         {

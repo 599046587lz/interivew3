@@ -16,17 +16,24 @@ let JSONError = require('../utils/JSONError');
 router.post('/recommend', mid.checkFormat(function() {
     return Joi.object().keys({
         sid: Joi.number(),
-        departmentId: Joi.number()
+        departmentId: Joi.number(),
+        score: Joi.number().valid([1, 2, 3, 4, 5]),
+        comment: Joi.string()
     })
 }), wrap(async function(req, res) {
     let sid = req.body.sid;
     let departmentId = req.body.departmentId;
     let cid = req.session.cid;
+    let score = req.body.score;
+    let comment = req.body.comment;
+    let interviewer = req.session.interviewer;
+    await Interviewee.rateInterviewee(cid, sid, score, comment, departmentId, interviewer);
     let interviewerInfo = await Interviewee.getInterviewerInfo(sid, cid);
     if (interviewerInfo.volunteer.indexOf(departmentId) >= 0) throw new JSONError('不能重复推荐部门', 403);
     interviewerInfo.volunteer.push(departmentId);
+    interviewerInfo.busy = false;
     interviewerInfo.save();
-
+    await Interviewee.delVolunteer(sid, departmentId)
     return res.send(204);
 }));
 
@@ -37,7 +44,7 @@ router.post('/recommend', mid.checkFormat(function() {
 router.post('/rate', mid.checkFormat(function() {
     return Joi.object().keys({
         sid: Joi.number(),
-        score: Joi.number().valid([0, 1, 2]),
+        score: Joi.number().valid([1, 2, 3, 4, 5]),
         comment: Joi.string()
     })
 }), wrap(async function(req, res) {
@@ -65,21 +72,20 @@ router.get('/call', mid.checkFormat(function() {
     let department = req.session.did;
     let sid = req.query.sid;
     let cid = req.session.cid;
-
     if(!sid) {
        let result = await Interviewee.getNextInterviewee(cid, department);
        result = result.toObject();
        result.did = department;
-        console.log(result);
-       let room = global.io.to(cid);
-       room.emit('call', result);
-       for(let socketId in room.connected){
-           let socket = room.connected[socketId];
-           socket.on('success', function () {
-               clearTimeout(timer);
-               res.json(result);
-           });
-       }
+       //let room = global.io.to(cid);
+       // room.emit('call', result);
+       // for(let socketId in room.connected){
+       //     let socket = room.connected[socketId];
+       //     socket.on('success', function () {
+       //         clearTimeout(timer);
+       //         res.json(result);
+       //     });
+       // }
+        res.json(result);
     } else {
         let result = await Interviewee.getSpecifyInterviewee(sid, cid, department);
         result = result.toObject();

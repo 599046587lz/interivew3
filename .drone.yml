@@ -25,25 +25,29 @@ steps:
     branch:
     - master
       
-# - name: update-service
-#   image: redhome/docker-cli
-#   environment:
-#     INDEX_USER:
-#       from_secret: INDEX_USER
-#     INDEX_PASS:
-#       from_secret: INDEX_PASS  
-#   volumes:
-#   - name: docker
-#     path: /var/run/docker.sock
-#   commands:
-#   - docker login index.hduin.club --username ${INDEX_USER} --password ${INDEX_PASS}
-#   - docker pull index.hduin.club/interview:${DRONE_COMMIT_BRANCH}
-#   - docker service update --image index.hduin.club/interview:${DRONE_COMMIT_BRANCH} --with-registry-auth redhome-interview
-#   when:
-#     branch:
-#     - master
+- name: update-service
+  image: redhome/docker-cli
+  environment:
+    INDEX_USER:
+      from_secret: INDEX_USER
+    INDEX_PASS:
+      from_secret: INDEX_PASS  
+  volumes:
+  - name: docker
+    path: /var/run/docker.sock
+  commands:
+  - docker login index.hduin.club --username ${INDEX_USER} --password ${INDEX_PASS}
+  - docker pull index.hduin.club/interview:${DRONE_COMMIT_BRANCH}
+  - docker service update --image index.hduin.club/interview:${DRONE_COMMIT_BRANCH} --with-registry-auth redhome-interview
+  when:
+    branch:
+    - master
 
 volumes:
 - name: docker
   host:
     path: /var/run/docker.sock
+
+trigger:
+  branch: 
+  - master 

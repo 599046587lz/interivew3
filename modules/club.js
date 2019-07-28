@@ -29,8 +29,8 @@ exports.login = function (user, password) {
  */
 exports.getClubByName = function (name) {
     return clubModel.findOne({
-        name: name
-    });
+        name: name    });
+
 };
 
 exports.handleArchive = function (file, cid) {
@@ -136,6 +136,7 @@ exports.handleArchive = function (file, cid) {
                 clubInfo.save();
             });
         }
+
         return count;
     })
 };
@@ -170,6 +171,7 @@ exports.getClubInfo = function (cid) {
     return clubModel.findOne({
         cid: cid
     });
+
 };
 
 exports.verifyInfo = function (data) {
@@ -201,16 +203,20 @@ exports.getRegNum = function (clubId) {
     })
 };
 
-exports.setRoomLocation = function (cid, departmentId, roomLocation) {
-    return clubModel.findOne({
+exports.setRoomLocation = function (cid, info) {
+    clubModel.findOne({
         cid: cid
     }).then(result => {
         result.departments.forEach(e => {
-            if(e.did == departmentId) {
-                e.location = roomLocation;
-            }
+            info.forEach(i =>{
+                if(i.departmentId == e.did) {
+                e.location = i.roomLocation;
+            }} );
+
         });
-        result.save();
+        result.save(function (err) {
+            console.log(err)
+        });
     })
 };
 
@@ -223,3 +229,12 @@ exports.initClub = function (cid) {
         return club.save();
     })
 }
+
+exports.getDepartmentInfo = function (cid) {
+    return clubModel.find({
+        cid : cid
+    },{
+        departments : 1
+    })
+
+};

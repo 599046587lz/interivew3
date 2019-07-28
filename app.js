@@ -23,8 +23,20 @@ if (process.env.ENABLE_PROXY) {
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(cookieParser());
-// app.use(favicon());
+app.use(favicon());
 app.use(logger('dev'));
+
+// app.all('*', function(req, res, next) {//允许全部跨域
+//
+//     res.header("Access-Control-Allow-Headers", "Content-Type,Content-Length, Authorization,'Origin',Accept,X-Requested-With");
+//     res.header("Access-Control-Allow-Origin", "*");
+//     res.header("Access-Control-Allow-Credentials", true);
+//     res.header("Content-Type", "application/json;charset=utf-8");
+//     //console.log('------')
+//     next();
+// });
+
+
 
 app.use(mid.session());
 //报名系统注册入口

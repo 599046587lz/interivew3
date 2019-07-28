@@ -6,7 +6,7 @@ WORKDIR /app
 
 COPY package.json package-lock.json ./
 RUN npm config set registry 'https://registry.npm.taobao.org' && \
-    npm install --production 
+    npm install
 
 COPY . ./
 

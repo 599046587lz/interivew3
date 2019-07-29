@@ -25,7 +25,8 @@ $(".button").click(function(){
 	$.ajax({
 		url  : baseURL + "club/login",
 		type : 'post',
-		data : {user: account, password: password},
+		data : JSON.stringify({user: account, password: password}),
+		contentType: "application/json; charset=utf-8",
 		dataType : 'json',
 		beforeSend : function(){
 			$(".button").addClass('loading');

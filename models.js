@@ -3,10 +3,9 @@
  */
 let mongoose = require('mongoose');
 let config = require('./config');
-// mongoose.Promise = global.Promise;
 let mongoUserInfo = (!config.db.user || !config.db.password)? '' : config.db.user + ':' + config.db.password + '@';
-mongoose.connect(`mongodb://${mongoUserInfo}${config.db.host}/${config.db.db}`);
-
+let mongoUrl = `mongodb://${mongoUserInfo}${config.db.host}/${config.db.db}`;
+mongoose.connect(mongoUrl)
 
 let Department = new mongoose.Schema({
     did: Number,
@@ -110,9 +109,8 @@ let Interviewee = new mongoose.Schema({
     }
 });
 
-
-
-
-
 exports.Interviewee = mongoose.model('interviewee', Interviewee);
-exports.Club = mongoose.model('club', Club);
+exports.Club = mongoose.model('club', Club); // 添加表时mongoose自动为表名添加s
+exports.mongoUrl = mongoUrl;
+
+

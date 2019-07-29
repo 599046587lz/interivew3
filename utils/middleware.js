@@ -2,7 +2,7 @@ let session = require('express-session');
 let MongoStore = require('connect-mongo')(session);
 let config = require('../config');
 let Joi = require('joi');
-let mongoUserInfo = (!config.db.user || !config.db.password)? '' : config.db.user + ':' + config.db.password + '@';
+let mongoUrl = require('../models').mongoUrl
 
 exports.checkLogin = function (req, res, next){
     if (!!req.session['cid']){
@@ -16,7 +16,7 @@ exports.session = function() {
     return session({
         secret: config.cookie_secret,
         store: new MongoStore({
-            url: `mongodb://${mongoUserInfo}${config.db.host}/${config.db.db}`,
+            url: mongoUrl,
             auto_reconnect:true
         }),
         resave: true,

@@ -120,9 +120,7 @@ var set_club = function(){
 //    return;
     $.ajax({
         url:urlRoot+'club/clubInfo',
-        data:{
-            clubId:1
-        },
+        data:{clubId:1},
         type:'get',
         async:false,
         success:function(data){
@@ -358,11 +356,12 @@ var submit = function(){
     $.ajax({
         url:urlRoot + 'interview/rate',
         type:'post',
-        data:{
+        contentType: 'application/json',
+        data:JSON.stringify({
             sid:window.interviewee.sid,
             score:$('.rate .stars').raty('score'),
             comment:$('.rate .comment').val()
-        },
+        }),
         success:function(){
             finish();
         },
@@ -387,7 +386,8 @@ var skip = function(){
     $.ajax({
         url:urlRoot + 'interview/skip',
         type:'post',
-        data:{sid:window.interviewee.sid},
+        contentType: 'application/json',
+        data:JSON.stringify({sid:window.interviewee.sid}),
         success:function(){
             finish();
         },
@@ -436,7 +436,6 @@ var recommend = function(){
         }),
         //dataType:'json',
         contentType: 'application/json',
-
         success:function(){
             $('.qtip').hide();
             success('操作成功');

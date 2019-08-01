@@ -4,6 +4,7 @@
   "private": true,
   "description": "wechat club's registration system and interview system",
   "scripts": {
+    "start": "node ./bin/www"
   },
   "dependencies": {
     "archiver": "~2.0.0",

@@ -11,7 +11,6 @@ let Joi = require('joi');
 let multer = require('multer');
 let upload = multer({dest: '../files/upload'});
 let utils = require('../utils/utils');
-let JSONError = require('../utils/JSONError');
 
 /**
  * @params Number did 部门ID

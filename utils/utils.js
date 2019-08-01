@@ -57,7 +57,7 @@ exports.image_save = function (url, filename) {
             fs.mkdirSync(__dirname + '/../files/image', { recursive: true });
         }
         response.pipe(fs.createWriteStream(__dirname + '/../files/image/' + filename));
-        return __dirname + '/../files' + filename;
+        return '../files/image/' + filename;
     })
 };
 

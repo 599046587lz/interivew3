@@ -23,10 +23,10 @@ $(".button").click(function(){
 	var password = $("[name=password]").val();
 
 	$.ajax({
-		url  : baseURL + "club/login",
+		url  : baseURL + "common/login",
 		type : 'post',
 		data : JSON.stringify({user: account, password: password}),
-		contentType: "application/json; charset=utf-8",
+		contentType: "application/json",
 		dataType : 'json',
 		beforeSend : function(){
 			$(".button").addClass('loading');

@@ -12,33 +12,6 @@ let multer = require('multer');
 let upload = multer({dest: '../files/upload'});
 let utils = require('../utils/utils');
 let JSONError = require('../utils/JSONError');
-/**
- * @params String user 登录用户名
- * @params String password 密码，单词md5
- * @return 204
- */
-router.post('/login', mid.checkFormat(function () {
-    return Joi.object().keys({
-        user: Joi.string().required(),
-        password: Joi.string().required()
-    })
-}), wrap(async function (req, res) {
-    let user = req.body.user;
-    let password = utils.md5(req.body.password);
-    let clubInfo = await Club.getClubByName(user);
-    if (clubInfo && password == clubInfo.password && user == clubInfo.name) {
-        clubInfo = clubInfo.toObject();
-        delete clubInfo.password;
-        req.session.club = clubInfo.name;
-        req.session.cid = clubInfo.cid;
-        return res.json({
-            status: 200,
-            message: clubInfo
-        });
-    } else {
-        throw new JSONError('用户名或密码错误', 403);
-    }
-}));
 
 /**
  * @params Number did 部门ID

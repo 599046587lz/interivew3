@@ -64,7 +64,7 @@ $(function () {
     function getDepartInfo(clubID) {
         return new Promise(function(resolve, reject) {
             $.ajax({
-                url: "/club/clubInfo?clubId=" + clubID,
+                url: "/common/clubInfo?clubId=" + clubID,
                 success: function (data) {
                     localStorage.setItem("club", data.message.clubName);
                     localStorage.setItem("maxDep", data.message.maxDep);

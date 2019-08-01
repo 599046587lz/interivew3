@@ -43,7 +43,7 @@ $(function () {
             // processData: false,
             // traditional: true,
             // dataType: "json",
-            contentType: 'application/json; charset=utf-8',
+            contentType: 'application/json',
             statusCode: {
                 200: function () {
                     alert("修改成功!");

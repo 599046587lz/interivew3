@@ -75,7 +75,7 @@ var setInterviewer = function(){
 	$.ajax({
 		url  : baseURL + "/club/setIdentify",
 		type : 'post',
-		contentType: 'application/json; charset=utf-8',
+		contentType: 'application/json',
 		data : JSON.stringify({did: did, interviewerName: interviewer}),
 		dataType : 'json',
 		statusCode : {

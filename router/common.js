@@ -8,6 +8,7 @@ let Interview = require('../modules/interviewee');
 let Club = require('../modules/club');
 let office = require('../utils/office');
 let utils = require('../utils/utils');
+let JSONError = require('../utils/JSONError');
 let Joi = require('joi');
 let wrap = fn => (...args) => fn(...args).catch(args[2]);
 

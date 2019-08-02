@@ -79,7 +79,7 @@ exports.writeExcel = function (dbData, cid) {
                 if (!fs.existsSync(__dirname + '/../files/file/' + cid)) {
                     fs.mkdirSync(__dirname + '/../files/file/' + cid, { recursive: true });
                 }
-                xlsx.writeFile(wb, '../files/file/' + cid + '/' + _data.replace(/\//, '|') + '.xlsx');
+                xlsx.writeFile(wb, __dirname + '/../files/file/' + cid + '/' + _data.replace(/\//, '|') + '.xlsx');
             }
             resolve('导入成功');
         });
@@ -208,7 +208,7 @@ exports.writeWord = function (data, index) {
         if(!fs.existsSync(wordPath)) {
             fs.mkdirSync(wordPath, { recursive: true });
         }
-        let out = fs.createWriteStream('../files/file/' + data.cid + '/' + name + '.docx');
+        let out = fs.createWriteStream(__dirname + '/../files/file/' + data.cid + '/' + name + '.docx');
 
         docx.generate(out, function (Error) {
             if (Error) throw Error;
@@ -240,7 +240,7 @@ exports.archiverZip = function (cid) {
         });
 
         archive.pipe(output);
-        archive.directory('../files/file/' + cid + '/', false);
+        archive.directory(__dirname + '/../files/file/' + cid + '/', false);
         archive.finalize();
     });
 };

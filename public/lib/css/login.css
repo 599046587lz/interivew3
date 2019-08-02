@@ -1,15 +1,14 @@
-*
-{
+* {
     margin: 0;
     padding: 0;
 }
-html
-{
+
+html {
     width: 100%;
     height: 100%;
 }
-body
-{
+
+body {
     width: 100%;
     height: 100%;
     overflow: hidden;
@@ -18,6 +17,7 @@ body
     background-position-y: 100%;
     background-position-x: 50%;
 }
+
 .main {
     position: absolute;
     margin: auto;
@@ -28,6 +28,7 @@ body
     width: 800px;
     height: 300px;
 }
+
 .left_content {
     width: 49%;
     border-right: 1px solid #d8dae1;
@@ -40,6 +41,7 @@ body
 .left_content img {
     width: 100%;
 }
+
 .right_content {
     width: 50%;
     float: right;
@@ -51,12 +53,12 @@ body
     width: 80%;
     display: inline-block;
 }
-.right_content input,.right_content .button{
+.right_content input, .right_content .button {
     width: 100%;
     color: #ffffff;
     font-size: 22px;
     border: none;
-    background-color: rgba(19,30,47,0.6);
+    background-color: rgba(19, 30, 47, 0.6);
     line-height: 45px;
     background-repeat: no-repeat;
     background-size: 20px;
@@ -64,14 +66,20 @@ body
     background-position-y: 10px;
     padding-left: 43px;
 }
-input.account{
+
+input {
+    outline: none;
+}
+
+input.account {
     background-image: url("../../img/user.png");
 }
-input.password{
+input.password {
     margin-top: 22px;
     background-image: url("../../img/lock.png");
 }
-.right_content .button{
+
+.right_content .button {
     padding: 0;
     margin-top: 50px;
     cursor: pointer;

@@ -83,9 +83,8 @@ exports.getSignedInterviewee = function () {
        signTime: {$ne: null},
        busy : false,
        volunteer: {$elemMatch:{$ne:null}}
-   })
-    };
-
+   }).$where('this.volunteer.length != this.done.length')
+};
 
 exports.getClubInfo = function (info) {
     let result = {}

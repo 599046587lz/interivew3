@@ -4,9 +4,6 @@ var set_club = function(){
 	club = {};
 	$.ajax({
 		url : baseURL + '/club/clubInfo',
-		data:{
-			clubId:1
-		},
 		type : 'get',
 		statusCode : {
 			404 : function(){

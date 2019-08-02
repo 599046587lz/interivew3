@@ -21,7 +21,6 @@ var success = function (text) {
 $(function () {
 
     $('#password').keydown(function (event) {
-        console.log(event)
         if (event.keyCode == "13") {
             $(".button").click()
         }

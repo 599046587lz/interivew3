@@ -112,6 +112,11 @@ $(function(){
 	$(".close").click(function () {
 		$(".dimmer").fadeOut();
 	});
+	$("#interviewer").bind("keydown",function (event) {
+		if(event.keyCode == "13"){
+			$("._interview").click()
+		}
+	})
 	$("._interview").click(function(){
 		setInterviewer();
 	});

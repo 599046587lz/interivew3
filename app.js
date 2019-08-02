@@ -39,12 +39,14 @@ app.use(logger('dev'));
 
 
 app.use(mid.session());
-//报名系统注册入口
+//报名系统公共入口（不需登录）
+app.use('/common', common);
 app.use('/reg',reg);
+//进行是否登录的鉴定
+app.use(mid.checkLogin)
 app.use('/club', club);
 app.use('/interview', interview);
 app.use('/room', room);
-app.use('/common', common);
 
 //catch 404 and forward to error handler
 app.use(function(req, res, next) {

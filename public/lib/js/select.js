@@ -4,9 +4,6 @@ var set_club = function(){
 	club = {};
 	$.ajax({
 		url : baseURL + '/club/clubInfo',
-		data:{
-			clubId:1
-		},
 		type : 'get',
 		statusCode : {
 			404 : function(){
@@ -75,7 +72,7 @@ var setInterviewer = function(){
 	$.ajax({
 		url  : baseURL + "/club/setIdentify",
 		type : 'post',
-		contentType: 'application/json; charset=utf-8',
+		contentType: 'application/json',
 		data : JSON.stringify({did: did, interviewerName: interviewer}),
 		dataType : 'json',
 		statusCode : {
@@ -115,6 +112,11 @@ $(function(){
 	$(".close").click(function () {
 		$(".dimmer").fadeOut();
 	});
+	$("#interviewer").bind("keydown",function (event) {
+		if(event.keyCode == "13"){
+			$("._interview").click()
+		}
+	})
 	$("._interview").click(function(){
 		setInterviewer();
 	});

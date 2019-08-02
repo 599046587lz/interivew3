@@ -64,7 +64,7 @@ $(function () {
     function getDepartInfo(clubID) {
         return new Promise(function(resolve, reject) {
             $.ajax({
-                url: "/club/clubInfo?clubId=" + clubID,
+                url: "/common/clubInfo?clubId=" + clubID,
                 success: function (data) {
                     localStorage.setItem("club", data.message.clubName);
                     localStorage.setItem("maxDep", data.message.maxDep);
@@ -208,12 +208,25 @@ $(function () {
         $picfile.click();
     });
     $picfile.on("change", function () {
-        hasPic = true;
-        $(".pic+div").html('');
-        var objUrl = getObjectURL(this.files[0]);
-        if (objUrl)
-            $pic.css("background-image", "url('" + objUrl + "')");
-    })
+        //上传图片验证
+        var picName = $("#picfile").val();
+        var fileTArr = picName.split(".");
+        //切割出后缀文件名
+        var fileType = fileTArr[fileTArr.length - 1];
+        if(fileType != null && fileType !=""){
+            if(fileType == "gif" || fileType == "jpg" || fileType == "jpeg" || fileType == "png"){
+                hasPic = true;
+                $(".pic+div").html('');
+                var objUrl = getObjectURL(this.files[0]);
+                if (objUrl)
+                    $pic.css("background-image", "url('" + objUrl + "')");
+            }else{
+                warning("请上传正确的图片文件（jpg、jpeg、png或gif）！");
+                return;
+            }
+        }
+
+    });
 
     //性别选择
     $female.on("click", function () {
@@ -319,6 +332,8 @@ $(function () {
         })
     }
 
+
+    //上传图片
     function sendPicData(form, finalData) {
         if (!hasPic) {
             var url_origin = location.href.split("/apply")[0];
@@ -338,7 +353,7 @@ $(function () {
             },
             error: function (err) {
                 $(".popup").remove();
-                $(".errorHandle").text(JSON.stringify(err))
+                $(".errorHandle").text(JSON.stringify(err));
                 warning("图片上传失败 请检查网络");
             }
         });
@@ -348,23 +363,89 @@ $(function () {
     $submit.on('click', function () {
         $(this).addClass("noclick");
         var finalData = $data.serializeObject();
-        if (!finalData.notion) {
-            warning("还没有填写自我介绍哦");
+        finalData.cid = clubID;
+        finalData.clubName = localStorage.getItem("club");
+        getDepartResult(finalData);
+        if (!finalData.name) {
+            warning("还没有填写姓名哦~");
             return;
         }
+
+        var regSid = /^1[0-9]{7}$/;
+        if(!finalData.sid){
+            warning("还没有填写学号哦~");
+            return;
+        }else if(finalData.sid.search(regSid) == -1){
+            warning("请输入正确格式的学号哦~");
+            return;
+        }
+
+        if(!finalData.sex){
+            warning("还没有填写性别哦~");
+            return;
+        }
+        if(!finalData.college){
+            warning("还没有填写学院哦~");
+            return;
+        }
+        if(!finalData.major){
+            warning("还没有填写专业哦~");
+            return;
+        }
+        if(finalData.volunteer.length == 0){
+            warning("还没有选择理想部门||你的特长||你感兴趣的方向哦~");
+            return;
+        }
+        if (!finalData.notion) {
+            warning("还没有填写个人简介哦~");
+            return;
+        }
+
+        var regPhone = /^(1)[0-9]{10}$/;
+        if(!finalData.phone){
+            warning("还没有填写长号哦~");
+            return;
+        }else if(finalData.phone.search(regPhone) == -1){
+            warning("请输入正确格式的长号（11位号码）哦~");
+            return;
+        }
+
+        var regShort_tel = /[0-9]{6}$/;
+        if(finalData.short_tel){
+            if(finalData.short_tel.search(regShort_tel) == -1){
+                warning("请输入正确格式的短号（6位号码）哦~");
+                return;
+            }
+        }
+
+        var regEmail = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+        if(!finalData.email){
+            warning("还没有填写邮箱哦~");
+            return;
+        }else if(finalData.email.search(regEmail) == -1) {
+            warning("请输入正确格式的邮箱哦~");
+            return;
+        }
+
+        var regQQ = /[1-9][0-9]{4,}/;
+        if(!finalData.qq){
+            warning("还没有填写qq哦~");
+            return;
+        }else if(finalData.qq.search(regQQ) == -1){
+            warning("请输入正确格式的QQ哦~");
+            return;
+        }
+
         if (clubID == 1 && !finalData.check) {
             warning("必须先确认注意事项哦~");
             return;
         }
-        finalData.cid = clubID;
-        finalData.clubName = localStorage.getItem("club");
-        getDepartResult(finalData);
         var loading = "<div class='popup' style='height:200px'>" +
             "<img src='../../img/apply/loading.gif'>" +
             "<div>正在提交</div>" +
-            "</div>"
-        $container.append(loading);
+            "</div>";
         var form = new FormData(document.getElementById("formfile"));
+        $container.append(loading);
         sendPicData(form, finalData);
     })
 })

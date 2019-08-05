@@ -340,6 +340,11 @@ var submit = function(){
         err('请评定星级');
         return;
     }
+    if(!($('.rate .comment').val()))
+    {
+        err('请填写评语');
+        return;
+    }
     if (!confirm('确认提交？'))  {
         return;
     }

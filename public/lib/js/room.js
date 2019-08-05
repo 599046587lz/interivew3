@@ -91,6 +91,10 @@ var changeCallRow = function(){
             // console.log(a);
             $(".current").append(a);
         }
+        if(calling.length > 10){
+            $(".callScroll").css({"height":"305px"});
+            $(".callScroll").jScrollPane();
+        }
     }
 
 }
@@ -157,7 +161,9 @@ var getDepartmentInfo = function(){
         url : baseURL + 'room/getDepartmentInfo',
         type : 'get',
         dataType : 'json',
-
+        success: function(data){
+            storage.setItem("departmentInfo", JSON.stringify(data.message));
+        },
         statusCode : {
             404 : function(){
                 err("Page not found!");
@@ -168,7 +174,7 @@ var getDepartmentInfo = function(){
             200 : function(data){
                 // console.log("部门");
                 // console.log(data) ;
-                storage.setItem("departmentInfo", JSON.stringify(data.message))
+                // storage.setItem("departmentInfo", JSON.stringify(data.message));
             }
         }
     });
@@ -179,7 +185,10 @@ var getFinishNumber = function(){
         url : baseURL + '/room/finish',
         type : 'get',
         dataType : 'json',
-
+        success: function(data){
+            storage.setItem("interviewed", data.data);
+            interviewStatus();
+        },
         statusCode : {
             500 : function(){
                 err('服务器错误,请重试!');
@@ -187,11 +196,6 @@ var getFinishNumber = function(){
             204 : function(){
                 // err('没人');
                 console.log("暂时没人完成面试")
-            },
-            200 : function(data){
-                // console.log(data.data) ;
-                storage.setItem("interviewed", data.data)
-
             }
         }
     });
@@ -203,19 +207,17 @@ var getCalling = function(){
         url : baseURL + '/room/calling',
         type : 'get',
         dataType : 'json',
-
+        success:function(data){
+            // console.log(data);
+            storage.setItem("calling", JSON.stringify(data.data));
+            changeCallRow();
+        },
         statusCode : {
             404 : function(){
                 err("Page not found!");
             },
             500 : function(){
                 err('服务器错误,请重试!');
-            },
-            200 : function(data){
-                // console.log("呼叫");
-                // console.log(data.data) ;
-                storage.setItem("calling", JSON.stringify(data.data))
-
             }
         }
     });
@@ -228,19 +230,16 @@ var getWaiting = function(){
         url : baseURL + '/room/sighed',
         type : 'get',
         dataType : 'json',
-
+        success:function(data){
+            storage.setItem("waiting", JSON.stringify(data.data));
+            changeWaitRow();
+        },
         statusCode : {
             404 : function(){
                 err("Page not found!");
             },
             500 : function(){
                 err('服务器错误,请重试!');
-            },
-            200 : function(data){
-                // console.log("排队");
-                // console.log(data.data) ;
-                storage.setItem("waiting", JSON.stringify(data.data));
-
             }
         }
     });
@@ -300,11 +299,6 @@ var toShow = function(){
     getFinishNumber();
     getWaiting();
     getCalling();
-
-
-    changeWaitRow();                    //改变排队
-    interviewStatus();                  //面试人数,排队人数
-    changeCallRow();                    //叫号
 }
 
 
@@ -313,18 +307,6 @@ $(function(){
         window.history.back();
     });
     getDepartmentInfo();
-    if(!storage.getItem("waiting")){
-        var waiting =[];
-        storage.setItem("waiting", JSON.stringify(waiting));
-    }
-    if(!storage.getItem("calling")){
-        var calling =[];
-        storage.setItem("calling", JSON.stringify(calling));
-    }
-    if(!storage.getItem("interviewed")){
-        var interviewed = 0;
-        storage.setItem("interviewed", interviewed);
-    }
     toShow();
 
 	$(".signin .submit").click(signin);                     //签到

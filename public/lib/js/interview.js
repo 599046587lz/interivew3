@@ -247,7 +247,6 @@ var finish = function(){
     if((localStorage.getItem('object')))
         localStorage.clear();
     update_queue();
-    next();
 };
 var start = function(){
     start_clock();
@@ -495,10 +494,6 @@ $(document).ready(function(){
             source.find('.stars').raty('score',num_score)
         }
        start_clock();//时间要变化 到59s 才会改变颜色
-    }
-    if(!(localStorage.getItem('object')))
-    {
-        next();
     }
 
     //back button

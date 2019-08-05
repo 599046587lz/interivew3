@@ -65,28 +65,34 @@ var callTemplate = function(name, room, did){
 
 //改变呼叫
 var changeCallRow = function(){
-    var calling = JSON.parse(storage.getItem("calling"));
-    var departmentInfo = JSON.parse(storage.getItem("departmentInfo"));
-    // console.log(calling);
     $(".current ._default").remove();
     $(".current .template").remove();
-    for(var i = 0; i < calling.length; i ++){
-        var room ;
-        var did ;
-        for(var j = 0; j < departmentInfo[0].departments.length; j ++){
-
-            // console.log(parseInt(calling[i].calldid));
-            if(parseInt(calling[i].calldid) == departmentInfo[0].departments[j].did){
-                did = departmentInfo[0].departments[j].name;
-                room = departmentInfo[0].departments[j].location;
-            }
-
-            // console.log(did);
-        }
-        var a = callTemplate(calling[i].name, room, did);
-        // console.log(a);
+    var calling = JSON.parse(storage.getItem("calling"));
+    if(calling.length == 0){
+        var a = "<div class=\"_default\"><span class=\"smallCircle\"></span><span class=\"calling\">暂无呼叫</span></div>";
         $(".current").append(a);
     }
+    else{
+        var departmentInfo = JSON.parse(storage.getItem("departmentInfo"));
+        for(var i = 0; i < calling.length; i ++){
+            var room ;
+            var did ;
+            for(var j = 0; j < departmentInfo[0].departments.length; j ++){
+
+                // console.log(parseInt(calling[i].calldid));
+                if(parseInt(calling[i].calldid) == departmentInfo[0].departments[j].did){
+                    did = departmentInfo[0].departments[j].name;
+                    room = departmentInfo[0].departments[j].location;
+                }
+
+                // console.log(did);
+            }
+            var a = callTemplate(calling[i].name, room, did);
+            // console.log(a);
+            $(".current").append(a);
+        }
+    }
+
 }
 // 改变排队
 var changeWaitRow = function(){
@@ -245,7 +251,7 @@ var getWaiting = function(){
 var signin = function(){
     var input = $("input[ name = sid ]");
     var stuID = input.val();
-    console.log(stuID);
+    // console.log(stuID);
     if(!stuID){
         err("请输入学号");
         input.focus();
@@ -267,7 +273,7 @@ var signin = function(){
                 err("Page not found!");
             },
             403 : function(){
-                err("该学生未报名（待测试）!");                    //待测试
+                err("该学生未报名!");
                 // relogin();
             },
             204 : function () {
@@ -307,7 +313,18 @@ $(function(){
         window.history.back();
     });
     getDepartmentInfo();
-
+    if(!storage.getItem("waiting")){
+        var waiting =[];
+        storage.setItem("waiting", JSON.stringify(waiting));
+    }
+    if(!storage.getItem("calling")){
+        var calling =[];
+        storage.setItem("calling", JSON.stringify(calling));
+    }
+    if(!storage.getItem("interviewed")){
+        var interviewed = 0;
+        storage.setItem("interviewed", interviewed);
+    }
     toShow();
 
 	$(".signin .submit").click(signin);                     //签到

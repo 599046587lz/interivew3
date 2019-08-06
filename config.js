@@ -16,5 +16,6 @@ module.exports = {
     mailUser: '1322023401@qq.com',
     mailPassword: 'tyucyclwplkkidef',
     apiKey: '7e9b92e1d01a94a7e304813856a99d25',
-    proxy: 'http://szq.jouta.xyz/'
+    proxy: 'http://szq.jouta.xyz/',
+    environment: process.env.ENVIRONMENT || 'product'
 };

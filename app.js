@@ -24,7 +24,9 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(favicon());
-app.use(logger('dev'));
+if(process.env.ENVIRONMENT === 'product'){
+    app.use(logger('dev'));
+}
 
 // app.all('*', function(req, res, next) {//允许全部跨域
 //

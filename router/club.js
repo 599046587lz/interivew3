@@ -192,7 +192,7 @@ router.post('/sendMessage', upload.single('archive'), wrap(async function(req, r
 
 router.post('/sendEmail', wrap(async function(req, res) {
     let data = req.body;
-    let result = await utils.sendMail(data);
+    await utils.sendMail(data);
     res.send(200, '发送成功');
 }));
 
@@ -220,7 +220,7 @@ router.post('/profile', mid.checkFormat(function () {
     data.logo = req.body.logo;
     data.maxDep = req.body.maxDep;
 
-    let result = await Club.createClub(data);
+    await Club.createClub(data);
 
     res.send(204);
 }));

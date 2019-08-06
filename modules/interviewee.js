@@ -14,8 +14,9 @@ exports.getInterviewerInfo = function (sid, cid ) {
     })
 };
 
-exports.delVolunteer = function (sid, did) {
+exports.delVolunteer = function (cid,sid, did) {
     return IntervieweeModel.findOneAndUpdate({
+        cid:cid,
         sid:sid
     },{
         '$pull': {volunteer: did}
@@ -23,12 +24,13 @@ exports.delVolunteer = function (sid, did) {
 
 }
 //result.volunteer.splice(result.volunteer.indexOf(did), 1);
-exports.getFinishInfo = function () {
+exports.getFinishInfo = function (cid) {
     return IntervieweeModel.find({
+        cid:cid,
         ifsign : 0,
-        busy : true
+        ifcall : true,
+        busy:false
     }).then(result => result.length)
-
 }
 
 exports.selectDep = function (sid, cid, did) {
@@ -55,6 +57,9 @@ exports.getNextInterviewee = function (cid, did) {
         )).sort({
             signTime: 'asc'
         }).then(result => {
+            if(result === null) {
+                return result
+            }
             result.busy = true;
             result.ifcall = true;
             result.calldid = did;
@@ -67,8 +72,9 @@ exports.getNextInterviewee = function (cid, did) {
 };
 
 
-exports.callNextInterviewee = function () {
+exports.callNextInterviewee = function (cid) {
     return  IntervieweeModel.find({
+        cid:cid,
         ifcall: true,
         signTime: {$ne: null},
         volunteer: {$elemMatch:{$ne:null}}
@@ -78,8 +84,9 @@ exports.callNextInterviewee = function () {
 
 };
 //result.done.indexOf(did * 1) != -1
-exports.getSignedInterviewee = function () {
+exports.getSignedInterviewee = function (cid) {
    return IntervieweeModel.find({
+       cid:cid,
        signTime: {$ne: null},
        busy : false,
        volunteer: {$elemMatch:{$ne:null}}

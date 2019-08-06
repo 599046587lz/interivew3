@@ -17,34 +17,32 @@ let club = require('../modules/club');
  * 测试通过
  */
 
-router.get('/sign', mid.checkFormat(function() {
-	return Joi.object().keys({
-		sid: Joi.number()
-	})
-}), wrap(async function(req, res) {
-	let cid = req.session.cid;
-	let sid = req.query.sid;
-	let info = await Interviewee.getInterviewerInfo(sid, cid);
-	if (!info) {
-		throw new JSONError('该学生未报名', 403);
-	}
-	if(info.signTime) {
-		info = null;
-	} else {
+router.get('/sign', mid.checkFormat(function () {
+    return Joi.object().keys({
+        sid: Joi.number()
+    })
+}), wrap(async function (req, res) {
+    let cid = req.session.cid;
+    let sid = req.query.sid;
+    let info = await Interviewee.getInterviewerInfo(sid, cid);
+    if (!info) {
+        throw new JSONError('该学生未报名', 403);
+    }
+    if (info.signTime) {
+        info = null;
+    } else {
         info.signTime = new Date();
         info.save();
     }
-	res.json({
-		status: 200,
-		data: info
-	});
+    res.json({
+        status: 200,
+        data: info
+    });
 }));
 
-router.get('/finish',   async function (req, res) {
-	let info = await  Interviewee.getFinishInfo()
-	if(!info){
-        throw new JSONError('NoInfo', 204);
-	}
+router.get('/finish', async function (req, res) {
+    let cid = req.session.cid
+    let info = await Interviewee.getFinishInfo(cid)
     res.json({
         status: 200,
         data: info
@@ -52,67 +50,57 @@ router.get('/finish',   async function (req, res) {
 });
 
 router.get('/sighed', async function (req, res) {
-	let info = await  Interviewee.getSignedInterviewee()
-    // await Interviewee.getClubInfo(info)
-    if(!info){
-        res.json({
-            status: 204
-        })
-    }
-    else res.json({
+    let cid = req.session.cid
+    let info = await Interviewee.getSignedInterviewee(cid)
+    res.json({
         status: 200,
         data: info
     })
 })
 
 router.get('/calling', async function (req, res) {
-	let info = await  Interviewee.callNextInterviewee()
-    if(!info){
-        res.json({
-            status: 204
-        })
-    }
-	else res.json({
+    let cid = req.session.cid
+    let info = await Interviewee.callNextInterviewee(cid)
+    res.json({
         status: 200,
         data: info
-	 })
+    })
 
 });
 /**
  * 测试成功
  */
-router.post('/addDep', mid.checkFormat(function() {
-	return Joi.object().keys({
-		sid: Joi.number(),
-		did: Joi.number(),
-		sex: Joi.number(),
-		name: Joi.string(),
-		qq: Joi.number(),
-		phone: Joi.number()
-	})
-}), wrap(async function(req, res) {
+router.post('/addDep', mid.checkFormat(function () {
+    return Joi.object().keys({
+        sid: Joi.number(),
+        did: Joi.number(),
+        sex: Joi.number(),
+        name: Joi.string(),
+        qq: Joi.number(),
+        phone: Joi.number()
+    })
+}), wrap(async function (req, res) {
     let info = {
-			sid: req.body.sid,
-			volunteer: req.body.did,
-			sex: req.body.sex,
-			name: req.body.name,
-			qq: req.body.qq,
-			phone: req.body.phone,
-			signTime: new Date()
-		};
+        sid: req.body.sid,
+        volunteer: req.body.did,
+        sex: req.body.sex,
+        name: req.body.name,
+        qq: req.body.qq,
+        phone: req.body.phone,
+        signTime: new Date()
+    };
 
     let result = await Interviewee.addInterviewee(info, cid);
     res.json({
-    	status: 200,
-		message: result
-	});
+        status: 200,
+        message: result
+    });
 
 }));
 
-router.get('/getDepartmentInfo' ,wrap(async function (req, res) {
-	let cid = req.session.cid
-	console.log(cid)
-	let result = await club.getDepartmentInfo(cid)
+router.get('/getDepartmentInfo', wrap(async function (req, res) {
+    let cid = req.session.cid
+    let result = await club.getDepartmentInfo(cid)
     res.json({
         status: 200,
         message: result

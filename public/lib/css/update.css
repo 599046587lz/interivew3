@@ -7,7 +7,7 @@ body {
 	position: absolute;
 	width: 460px;
 	padding: 0 50px;
-	height: 265px;
+	max-height: 500px;
 	margin: auto;
 	top: 0;
 	left: 0;
@@ -24,7 +24,8 @@ body {
 	font-weight: bold;
 }
 .container .writeInfo {
-	overflow: auto;
+	overflow: scroll;
+	max-height: 280px;
 }
 .container .department , .container .classroom{
 	display: inline-block;

@@ -13,14 +13,14 @@ let JSONError = require('../utils/JSONError');
  * 测试成功
  */
 
-router.post('/recommend', mid.checkFormat(function() {
+router.post('/recommend', mid.checkFormat(function () {
     return Joi.object().keys({
         sid: Joi.number(),
         departmentId: Joi.number(),
         score: Joi.number().valid([1, 2, 3, 4, 5]),
         comment: Joi.string()
     })
-}), wrap(async function(req, res) {
+}), wrap(async function (req, res) {
     let sid = req.body.sid;
     let departmentId = req.body.departmentId;
     let cid = req.session.cid;
@@ -33,7 +33,7 @@ router.post('/recommend', mid.checkFormat(function() {
     interviewerInfo.volunteer.push(departmentId);
     interviewerInfo.busy = false;
     interviewerInfo.save();
-    await Interviewee.delVolunteer(sid, departmentId)
+    await Interviewee.delVolunteer(cid,sid, departmentId)
     return res.send(204);
 }));
 
@@ -41,13 +41,13 @@ router.post('/recommend', mid.checkFormat(function() {
  * 测试成功
  */
 
-router.post('/rate', mid.checkFormat(function() {
+router.post('/rate', mid.checkFormat(function () {
     return Joi.object().keys({
         sid: Joi.number(),
         score: Joi.number().valid([1, 2, 3, 4, 5]),
         comment: Joi.string()
     })
-}), wrap(async function(req, res) {
+}), wrap(async function (req, res) {
     let sid = req.body.sid;
     let score = req.body.score;
     let comment = req.body.comment;
@@ -64,27 +64,20 @@ router.post('/rate', mid.checkFormat(function() {
  * 测试通过(需要socket)(需测试)
  */
 
-router.get('/call', mid.checkFormat(function() {
+router.get('/call', mid.checkFormat(function () {
     return Joi.object().keys({
         sid: Joi.number()
     })
-}), wrap(async function(req, res) {
+}), wrap(async function (req, res) {
     let department = req.session.did;
     let sid = req.query.sid;
     let cid = req.session.cid;
-    if(!sid) {
-       let result = await Interviewee.getNextInterviewee(cid, department);
-       result = result.toObject();
-       result.did = department;
-       //let room = global.io.to(cid);
-       // room.emit('call', result);
-       // for(let socketId in room.connected){
-       //     let socket = room.connected[socketId];
-       //     socket.on('success', function () {
-       //         clearTimeout(timer);
-       //         res.json(result);
-       //     });
-       // }
+    if (!sid) {
+        let result = await Interviewee.getNextInterviewee(cid, department);
+        if(result !== null){
+            result = result.toObject();
+            result.did = department;
+        }
         res.json(result);
     } else {
         let result = await Interviewee.getSpecifyInterviewee(sid, cid, department);
@@ -98,7 +91,7 @@ router.get('/call', mid.checkFormat(function() {
  * 测试成功
  */
 
-router.get('/queue', wrap(async function(req, res) {
+router.get('/queue', wrap(async function (req, res) {
     let cid = req.session.cid;
     let did = req.session.did;
 
@@ -114,11 +107,11 @@ router.get('/queue', wrap(async function(req, res) {
  * 测试成功
  */
 
-router.post('/skip', mid.checkFormat(function() {
+router.post('/skip', mid.checkFormat(function () {
     return Joi.object().keys({
         sid: Joi.number()
     })
-}), wrap(async function(req, res) {
+}), wrap(async function (req, res) {
     let cid = req.session.cid;
     let sid = req.body.sid;
     let did = req.session.did;

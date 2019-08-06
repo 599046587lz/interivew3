@@ -42,7 +42,6 @@ var relogin = function(){
 var waitingTemplate = function(no, sid, name, did, room){
     var dids = did.join(',') ;
     var rooms = room.join(',');
-    // console.log(dids);
     var template = `<tr class = \"template\">
                         <td>${no}</td>
                         <td>${sid}</td>
@@ -78,17 +77,12 @@ var changeCallRow = function(){
             var room ;
             var did ;
             for(var j = 0; j < departmentInfo[0].departments.length; j ++){
-
-                // console.log(parseInt(calling[i].calldid));
                 if(parseInt(calling[i].calldid) == departmentInfo[0].departments[j].did){
                     did = departmentInfo[0].departments[j].name;
                     room = departmentInfo[0].departments[j].location;
                 }
-
-                // console.log(did);
             }
             var a = callTemplate(calling[i].name, room, did);
-            // console.log(a);
             $(".current").append(a);
         }
         if(calling.length > 10){
@@ -102,8 +96,6 @@ var changeCallRow = function(){
 var changeWaitRow = function(){
     var waiting = JSON.parse(storage.getItem("waiting"));
     var departmentInfo = JSON.parse(storage.getItem("departmentInfo"));
-    // console.log(departmentInfo);
-    // console.log(waiting);
     var waitingContainer = $('.waitingList tbody');
     $(".waitingList ._default").remove();
     $(".waitingList .template").remove();
@@ -112,18 +104,15 @@ var changeWaitRow = function(){
         var did = [];
         var room = [];
         for(var j = 0; j < departmentInfo[0].departments.length; j ++){
-            // console.log(waiting[i].volunteer.length);
             for(var k = 0; k < waiting[i].volunteer.length; k ++){
                 if(waiting[i].volunteer[k] ==  departmentInfo[0].departments[j].did){
                     did[k] = departmentInfo[0].departments[j].name;
                     room[k] = departmentInfo[0].departments[j].location;
                 }
             }
-            // console.log(did);
         }
 
         var a = waitingTemplate(i + 1, waiting[i].sid, waiting[i].name, did, room);
-        // console.log(a);
         waitingContainer.append(a);
     }
     if(waiting.length > 7)
@@ -149,9 +138,8 @@ var changeWaitRow = function(){
 
 // 面试人数
 var interviewStatus = function(){
-    $(".interviewedNumber").html(storage.getItem("interviewed")) ;
+    $(".interviewedNumber").html(storage.getItem("interviewed"))
     var waiting = JSON.parse(storage.getItem("waiting"));
-    // console.log(waiting.length);
     $(".waitingNumber").html(waiting.length);
 }
 
@@ -170,11 +158,6 @@ var getDepartmentInfo = function(){
             },
             500 : function(){
                 err('服务器错误,请重试!');
-            },
-            200 : function(data){
-                // console.log("部门");
-                // console.log(data) ;
-                // storage.setItem("departmentInfo", JSON.stringify(data.message));
             }
         }
     });
@@ -192,23 +175,17 @@ var getFinishNumber = function(){
         statusCode : {
             500 : function(){
                 err('服务器错误,请重试!');
-            },
-            204 : function(){
-                // err('没人');
-                console.log("暂时没人完成面试")
             }
         }
     });
 }
 
 var getCalling = function(){
-
     $.ajax({
         url : baseURL + '/room/calling',
         type : 'get',
         dataType : 'json',
         success:function(data){
-            // console.log(data);
             storage.setItem("calling", JSON.stringify(data.data));
             changeCallRow();
         },
@@ -250,7 +227,6 @@ var getWaiting = function(){
 var signin = function(){
     var input = $("input[ name = sid ]");
     var stuID = input.val();
-    // console.log(stuID);
     if(!stuID){
         err("请输入学号");
         input.focus();
@@ -294,7 +270,6 @@ var signin = function(){
 
 // 展示页面(呼叫,排队,面试状态)
 var toShow = function(){
-
                                         //更新数据
     getFinishNumber();
     getWaiting();
@@ -311,6 +286,6 @@ $(function(){
 
 	$(".signin .submit").click(signin);                     //签到
 
-    var interval = setInterval(toShow, 3000);               //刷新展示页面/3s
+    setInterval(toShow, 3000);               //刷新展示页面/3s
 
 });

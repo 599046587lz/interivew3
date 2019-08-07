@@ -249,7 +249,7 @@ $(function () {
 
     function renderAttenction() {
         if (!!attention) {
-            $('title').html('家园线上报名表');
+            $('title').html(`${localStorage.getItem("club")}线上报名表`);
             $('.alarm-content').append(attention)
             $check.iCheck({
                 checkboxClass: 'icheckbox_flat-green',

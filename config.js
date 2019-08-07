@@ -17,5 +17,5 @@ module.exports = {
     mailPassword: 'tyucyclwplkkidef',
     apiKey: '7e9b92e1d01a94a7e304813856a99d25',
     proxy: 'http://szq.jouta.xyz/',
-    environment: process.env.ENVIRONMENT || 'product'
+    environment: process.env.ENVIRONMENT || 'debug'
 };

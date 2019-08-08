@@ -41,8 +41,8 @@ router.get('/sign', mid.checkFormat(function () {
 }));
 
 router.get('/finish', async function (req, res) {
-    let cid = req.session.cid;
-    let info = await Interviewee.getFinishInfo(cid);
+    let cid = req.session.cid
+    let info = await Interviewee.getFinishInfo(cid)
     res.json({
         status: 200,
         data: info
@@ -50,17 +50,17 @@ router.get('/finish', async function (req, res) {
 });
 
 router.get('/sighed', async function (req, res) {
-    let cid = req.session.cid;
-    let info = await Interviewee.getSignedInterviewee(cid);
+    let cid = req.session.cid
+    let info = await Interviewee.getSignedInterviewee(cid)
     res.json({
         status: 200,
         data: info
     })
-});
+})
 
 router.get('/calling', async function (req, res) {
-    let cid = req.session.cid;
-    let info = await Interviewee.callNextInterviewee(cid);
+    let cid = req.session.cid
+    let info = await Interviewee.callNextInterviewee(cid)
     res.json({
         status: 200,
         data: info
@@ -99,12 +99,12 @@ router.post('/addDep', mid.checkFormat(function () {
 }));
 
 router.get('/getDepartmentInfo', wrap(async function (req, res) {
-    let cid = req.session.cid;
-    let result = await club.getDepartmentInfo(cid);
+    let cid = req.session.cid
+    let result = await club.getDepartmentInfo(cid)
     res.json({
         status: 200,
         message: result
     });
 
-}));
+}))
 module.exports = router;

@@ -15,15 +15,15 @@ $(function () {
             $warn.remove();
             $submit.removeClass("noclick");
         })
-    };
+    }
     var getSearchObject = function () {
-        var array = location.search.substring(1).split(/[&=]/);
+        var array = location.search.substring(1).split(/[\&\=]/);
         var obj = {};
         for (var i = 0; i < array.length / 2; i++) {
             obj[array[i * 2]] = array[i * 2 + 1];
         }
         return obj;
-    };
+    }
 
     var getObjectURL = function (file) {
         var url = null;
@@ -35,7 +35,7 @@ $(function () {
             url = window.webkitURL.createObjectURL(file);
         }
         return url;
-    };
+    }
 
     var clubID = getSearchObject().clubId;
     getDepartInfo(clubID).then(function() {
@@ -85,16 +85,17 @@ $(function () {
     function departFormat(data) {
         var prelist = [];
         var prev = '';
-        var department = {};
-        department.column = {};
-        data.forEach(function (element) {
-            derpatmentNameMap[element.name] = element.did;
-            var predepart = element.name.split("-")[0];
-            var precolumn = element.name.split("-")[1];
+        var department = new Object();
+        department.column = new Object();
+        for (var i in data) {
+            derpatmentNameMap[data[i].name] = data[i].did;
+            var predepart = data[i].name.split("-")[0];
+            var precolumn = data[i].name.split("-")[1];
 
-            if (predepart === prev) {
+            if (predepart == prev) {
                 department.column.push(precolumn);
-            } else {
+            }
+            else {
                 prelist.push(department);
                 department = [];
                 prev = predepart;
@@ -102,7 +103,7 @@ $(function () {
                 department.column = [];
                 department.column.push(precolumn);
             }
-        });
+        }
         prelist.push(department);
         delete prelist[0];
         return prelist;
@@ -114,7 +115,8 @@ $(function () {
         max = localStorage.getItem("maxDep");
         if(!(max-0))max=99;
         //动态注入部门标签
-        data.forEach(function (list) {
+        for (var i in data) {
+            var list = data[i];
             var temp = list1.replace("__depart__", list.name).replace("__did__", i);
             $list.append(temp);
             //如果存在二级标签则建立弹窗
@@ -126,7 +128,7 @@ $(function () {
                 var insert = pop.replace("__depart__", list.name).replace("__did__", i).replace("__list__", poplist);
                 $container.append(insert);
             }
-        })
+        }
     }
 
 
@@ -211,8 +213,8 @@ $(function () {
         var fileTArr = picName.split(".");
         //切割出后缀文件名
         var fileType = fileTArr[fileTArr.length - 1];
-        if (fileType !== null && fileType !== "") {
-            if (fileType === "gif" || fileType === "jpg" || fileType === "jpeg" || fileType === "png") {
+        if(fileType != null && fileType !=""){
+            if(fileType == "gif" || fileType == "jpg" || fileType == "jpeg" || fileType == "png"){
                 hasPic = true;
                 $(".pic+div").html('');
                 var objUrl = getObjectURL(this.files[0]);
@@ -220,7 +222,7 @@ $(function () {
                     $pic.css("background-image", "url('" + objUrl + "')");
             }else{
                 warning("请上传正确的图片文件（jpg、jpeg、png或gif）！");
-
+                return;
             }
         }
 
@@ -234,7 +236,7 @@ $(function () {
         $off.addClass("hide");
         $male.find(".icon.on").addClass("hide");
         $male.find(".icon.off").removeClass("hide");
-    });
+    })
     $male.on("click", function () {
         var $on = $(this).find(".icon.on");
         var $off = $(this).find(".icon.off");
@@ -242,13 +244,13 @@ $(function () {
         $off.addClass("hide");
         $female.find(".icon.on").addClass("hide");
         $female.find(".icon.off").removeClass("hide");
-    });
+    })
     //注意事项
 
     function renderAttenction() {
         if (!!attention) {
             $('title').html(`${localStorage.getItem("club")}线上报名表`);
-            $content.append(attention);
+            $('.alarm-content').append(attention)
             $check.iCheck({
                 checkboxClass: 'icheckbox_flat-green',
                 radioClass: 'iradio_flat-green'
@@ -271,7 +273,7 @@ $(function () {
         }
         else {
             $(".alarm").remove();
-            $content.remove();
+            $(".alarm-content").remove();
         }
     }
 
@@ -315,8 +317,8 @@ $(function () {
                 $container.append(done);
             },
             error: function (reg) {
-                $(".popup").addClass('hide');
-                if (reg.responseText === "参数类型不合法") {
+                $(".popup").addClass('hide')
+                if (reg.responseText == "参数类型不合法") {
                     warning("上传有误 请将数据填写完整");
                     return;
                 }
@@ -373,7 +375,7 @@ $(function () {
         if(!finalData.sid){
             warning("还没有填写学号哦~");
             return;
-        } else if (finalData.sid.search(regSid) === -1) {
+        }else if(finalData.sid.search(regSid) == -1){
             warning("请输入正确格式的学号哦~");
             return;
         }
@@ -390,7 +392,7 @@ $(function () {
             warning("还没有填写专业哦~");
             return;
         }
-        if (finalData.volunteer.length === 0) {
+        if(finalData.volunteer.length == 0){
             warning("还没有选择理想部门||你的特长||你感兴趣的方向哦~");
             return;
         }
@@ -403,14 +405,14 @@ $(function () {
         if(!finalData.phone){
             warning("还没有填写长号哦~");
             return;
-        } else if (finalData.phone.search(regPhone) === -1) {
+        }else if(finalData.phone.search(regPhone) == -1){
             warning("请输入正确格式的长号（11位号码）哦~");
             return;
         }
 
         var regShort_tel = /[0-9]{6}$/;
         if(finalData.short_tel){
-            if (finalData.short_tel.search(regShort_tel) === -1) {
+            if(finalData.short_tel.search(regShort_tel) == -1){
                 warning("请输入正确格式的短号（6位号码）哦~");
                 return;
             }
@@ -420,7 +422,7 @@ $(function () {
         if(!finalData.email){
             warning("还没有填写邮箱哦~");
             return;
-        } else if (finalData.email.search(regEmail) === -1) {
+        }else if(finalData.email.search(regEmail) == -1) {
             warning("请输入正确格式的邮箱哦~");
             return;
         }
@@ -429,21 +431,21 @@ $(function () {
         if(!finalData.qq){
             warning("还没有填写qq哦~");
             return;
-        } else if (finalData.qq.search(regQQ) === -1) {
+        }else if(finalData.qq.search(regQQ) == -1){
             warning("请输入正确格式的QQ哦~");
             return;
         }
 
-        if (clubID === 1 && !finalData.check) {
+        if (clubID == 1 && !finalData.check) {
             warning("必须先确认注意事项哦~");
             return;
         }
         var loading = "<div class='popup' style='height:200px'>" +
-            "<img src='../../img/apply/loading.gif' alt='正在提交'>" +
+            "<img src='../../img/apply/loading.gif'>" +
             "<div>正在提交</div>" +
             "</div>";
         var form = new FormData(document.getElementById("formfile"));
         $container.append(loading);
         sendPicData(form, finalData);
     })
-});
+})

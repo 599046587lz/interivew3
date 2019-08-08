@@ -19,10 +19,10 @@ function time_change(){
 
 }
 
-window.onbeforeunload = function (ignore) {
+window.onbeforeunload = function(e) {
     if(window.interviewee){
         var interviewee = window.interviewee;
-        var str = JSON.stringify(interviewee);
+        var str = JSON.stringify(interviewee)
         localStorage.setItem('object',str);
     }
 };
@@ -134,7 +134,7 @@ var add_clock=function(){
     var root = $(".topBar").find(".time");
     var sec = root.find(".sec");
     var min = root.find(".min");
-    if ("59" === sec.text()) {
+    if ("59" == sec.text()) {
         sec.text("0");
         min.text(1 + 1*min.text());
         //chekc time and give tip
@@ -146,7 +146,9 @@ var add_clock=function(){
         }
     } else {
         sec.text(1 + 1*sec.text());
-    }
+    };
+
+
 };
 
 var start_clock=function(){
@@ -176,9 +178,9 @@ var set_property = function(){
         async:false,
         success:function(data){
             var html ='';
-            data.forEach(function (element) {
-                html += '<tr><td class="prop">' + element + '</td><td class="val">--</td></tr>';
-            });
+            for(var i in data){
+                html += '<tr><td class="prop">'+ data[i] +'</td><td class="val">--</td></tr>';
+            }
             $('#main .profile table').append(html);
         }
     });
@@ -195,7 +197,7 @@ var add_profile = function(object){
         interviewee = object;
     items[0].innerText = interviewee.sid;
     items[1].innerText = interviewee.name;
-    items[2].innerText = interviewee.sex * 1 !== 2 ? (interviewee.sex ? '男' : '女') : '--';
+    items[2].innerText = interviewee.sex*1 !=2 ? (interviewee.sex? '男':'女') : '--';
 
     items[3].innerText = interviewee.major || '--';
     items[4].innerText = interviewee.phone || '--';
@@ -213,9 +215,9 @@ var set_depList = function(){
     var selectDep = $('.recommendContent');
     var departs = window.club.departments;
     var html = '';
-    departs.forEach(function (element) {
-        html += "<li><input type=\"radio\" name=\"depart\" id=\"depart-" + element['did'] + "\" value=\"" + element['did'] + "\"/><label for=\"depart-" + element['did'] + "\">" + element['name'] + "</label></li>";
-    });
+    for (var i in departs){
+        html += "<li><input type=\"radio\" name=\"depart\" id=\"depart-"+ departs[i]['did']+"\" value=\""+departs[i]['did'] +"\"/><label for=\"depart-"+departs[i]['did']+"\">"+departs[i]['name']+"</label></li>";
+    };
     selectDep.find('ul').html(html);
 
     selectDep.find('input').iCheck({checkboxClass: 'icheckbox_square-blue',
@@ -282,7 +284,7 @@ var specialCall = function(){
     if((window.interviewee) || (localStorage.getItem('object'))){
         err('请先评定,推荐,或者跳过当前面试者');
         return;
-    }
+    };
 //    window.interviewee = {
 //        sid: 11111111,
 //        name: '赵健',
@@ -317,7 +319,6 @@ var specialCall = function(){
 };
 
 var submit = function(){
-    var $rate_comment = $('.rate .comment');
     if(!(window.interviewee) && !(localStorage.getItem('object'))){
         err('尚未有面试者');
         return;
@@ -326,7 +327,7 @@ var submit = function(){
         err('请评定星级');
         return;
     }
-    if (!($rate_comment.val()))
+    if(!($('.rate .comment').val()))
     {
         err('请填写评语');
         return;
@@ -342,7 +343,7 @@ var submit = function(){
     var $this = $(this);
     $this.addClass('loading');
     if(localStorage.getItem('object'))
-        window.interviewee = JSON.parse(localStorage.getItem('object'));
+        window.interviewee = JSON.parse(localStorage.getItem('object'))
     $.ajax({
         url:urlRoot + 'interview/rate',
         type:'post',
@@ -350,7 +351,7 @@ var submit = function(){
         data:JSON.stringify({
             sid:window.interviewee.sid,
             score:$('.rate .stars').raty('score'),
-            comment: $rate_comment.val()
+            comment:$('.rate .comment').val()
         }),
         success:function(){
             finish();
@@ -366,12 +367,12 @@ var skip = function(){
     if(!window.interviewee && !(localStorage.getItem('object'))){
         err('尚未有面试者');
         return;
-    }
+    };
 //    finish();
 //    return;
     var $this = $(this);
     if(localStorage.getItem('object'))
-        window.interviewee = JSON.parse(localStorage.getItem('object'));
+        window.interviewee = JSON.parse(localStorage.getItem('object'))
     $this.addClass('loading');
     $.ajax({
         url:urlRoot + 'interview/skip',
@@ -388,13 +389,11 @@ var skip = function(){
 };
 
 var recommend = function(){
-    var $rate_comment = $('.rate .comment');
-    var $recommendContent = $('.recommendContent');
     if(!window.interviewee && !(localStorage.getItem('object'))){
         err('尚未有面试者');
         return;
     }
-    if ($('.recommendContent .checked').length === 0) {
+    if($('.recommendContent .checked').length == 0){
         err('请选择部门');
         return;
     }
@@ -402,7 +401,7 @@ var recommend = function(){
         err('请评定星级');
         return;
     }
-    if (!($rate_comment.val()))
+    if(!($('.rate .comment').val()))
     {
         err('请填写评语');
         return;
@@ -419,17 +418,17 @@ var recommend = function(){
 //    return;
     var $this = $(this);
     if(localStorage.getItem('object'))
-        window.interviewee = JSON.parse(localStorage.getItem('object'));
+        window.interviewee = JSON.parse(localStorage.getItem('object'))
     $this.addClass('loading');
-    console.log($recommendContent.find('.checked input').val());
+    console.log($('.recommendContent').find('.checked input').val());
     $.ajax({
         url:urlRoot + 'interview/recommend',
         type:'post',
         data:JSON.stringify({
             sid:window.interviewee.sid,
-            departmentId: $recommendContent.find('.checked input').val() * 1,
+            departmentId: $('.recommendContent').find('.checked input').val() * 1,
             score:$('.rate .stars').raty('score'),
-            comment: $rate_comment.val()
+            comment:$('.rate .comment').val()
         }),
         //dataType:'json',
         contentType: 'application/json',

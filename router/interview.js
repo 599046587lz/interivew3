@@ -33,7 +33,7 @@ router.post('/recommend', mid.checkFormat(function () {
     interviewerInfo.volunteer.push(departmentId);
     interviewerInfo.busy = false;
     interviewerInfo.save();
-    await Interviewee.delVolunteer(cid, sid, departmentId);
+    await Interviewee.delVolunteer(cid,sid, departmentId)
     return res.send(204);
 }));
 

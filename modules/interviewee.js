@@ -1,4 +1,5 @@
 let rp = require('request-promise');
+let iconv = require('iconv-lite');
 let unit = require('../static/lib/unit.json');
 let IntervieweeModel = require('../models').Interviewee;
 let clubModel = require('../models').Club;
@@ -21,7 +22,7 @@ exports.delVolunteer = function (cid,sid, did) {
         '$pull': {volunteer: did}
     })
 
-};
+}
 //result.volunteer.splice(result.volunteer.indexOf(did), 1);
 exports.getFinishInfo = function (cid) {
     return IntervieweeModel.find({
@@ -30,7 +31,7 @@ exports.getFinishInfo = function (cid) {
         ifcall : true,
         busy:false
     }).then(result => result.length)
-};
+}
 
 exports.selectDep = function (sid, cid, did) {
        return exports.getStuByApi(sid).then(result => {
@@ -62,7 +63,7 @@ exports.getNextInterviewee = function (cid, did) {
             result.busy = true;
             result.ifcall = true;
             result.calldid = did;
-            console.log(result);
+            console.log(result)
             result.save(function (err) {
                 console.log(err)
             });
@@ -93,7 +94,7 @@ exports.getSignedInterviewee = function (cid) {
 };
 
 exports.getClubInfo = function (info) {
-    let result = {};
+    let result = {}
     let i = 4;
     info.forEach(e => {
         e.volunteer.forEach(a =>
@@ -106,7 +107,7 @@ exports.getClubInfo = function (info) {
     //     departments
     // })
 
-};
+}
 
 exports.recoverInterviewee = function (sid, cid, did) {
         let data = {
@@ -129,7 +130,7 @@ exports.getSpecifyInterviewee = function (sid, cid, did) {
                 volunteer: did
         };
         return IntervieweeModel.findOne(data).then(result => {
-            if (result.done.indexOf(did * 1) !== -1) reject(new Error('该同学已进行过面试'));
+            if (result.done.indexOf(did * 1) != -1) reject(new Error('该同学已进行过面试'));
             result.calldid = did;
             result.ifcall = true;
             result.busy = true;
@@ -214,12 +215,13 @@ exports.getStuByApi = function (sid) {
         console.log(body);
         body = JSON.parse(body.toString());
         if (!body.STAFFID) reject(new Error('不存在该学生'));
-        return {
+        let result = {
             sid: sid,
             name: body.STAFFNAME,
             major: body.MAJORCODE + "(" + unit[body.UNITCODE] + ")"
         };
-    }).catch(ignore => {
+        return result;
+    }).catch(err => {
         return (new Error('API访问错误'));
     });
 };
@@ -264,7 +266,7 @@ exports.addStudent = function (data) {
         email: data.email
     });
 
-    return Interviewee.save().then(ignore => {
+    return Interviewee.save().then(result => {
         clubModel.findOne({
             cid: data.cid
         }).then(result => {
@@ -272,7 +274,7 @@ exports.addStudent = function (data) {
                 data.volunteer.forEach(j => {
                     if(e.did === j) {
                         e.number ++;
-
+                        return;
                     }
                 })
             });

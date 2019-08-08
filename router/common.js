@@ -17,7 +17,7 @@ router.post('/uploadFile', upload.single('file'), wrap(async function (req, res)
     let file = req.file;
     let fileName = file.originalname;
 
-    let result = await qiniu.qiniuUpload(file.path, fileName);
+    let result = await qiniu.qiniuUpload(file.path, fileName)
 
     res.send(200, result);
 }));
@@ -35,15 +35,14 @@ router.get('/download', mid.checkFormat(function () {
        departName[e.did] = e.name;
     });
     for (let i in dbData) {
-        if (dbData.hasOwnProperty(i)) {
-            dbData[i].volunteer.forEach((e, j) => {
-                dbData[i].volunteer[j] = departName[e];
-            });
-            await office.writeWord(dbData[i], i);
-        }
+       dbData[i].volunteer.forEach((e, j) => {
+          dbData[i].volunteer[j] = departName[e];
+       });
+        await office.writeWord(dbData[i], i);
     }
     await office.writeExcel(dbData, cid);
-    await office.archiverZip(cid);
+    let result = await office.archiverZip(cid);
+
     let file = path.resolve(__dirname, '/files/zip/' + cid + '/' + cid + '.zip');
     let filename = cid + '.zip';
     res.download(file, filename);
@@ -89,7 +88,7 @@ router.post('/login', mid.checkFormat(function () {
     let user = req.body.user;
     let password = utils.md5(req.body.password);
     let clubInfo = await Club.getClubByName(user);
-    if (clubInfo && password === clubInfo.password && user === clubInfo.name) {
+    if (clubInfo && password == clubInfo.password && user == clubInfo.name) {
         clubInfo = clubInfo.toObject();
         delete clubInfo.password;
         req.session.club = clubInfo.name;

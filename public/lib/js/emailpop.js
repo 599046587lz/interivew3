@@ -24,7 +24,6 @@
 	});
 	$.fn.emailpop = function() {
 		return $(this).attr("autocomplete", "off").each(function() {
-			var $p = $pop.find(".pop").removeClass("pop");
 			var $t = $(this).on({
 				focus: function() {
 					$bind = $t.trigger("keydown");
@@ -38,14 +37,17 @@
 							break;
 						case 32:
 							return false;
+							break;
 						case 13:
 							$t.val($pop.hide().find(".pop").text());
 							break;
 						case 38:
+							var $p = $pop.find(".pop").removeClass("pop");
 							if ($p.index() > 1) $p.prev().addClass("pop");
 							else $pop.find("li").last().addClass("pop");
 							return false;
 						case 40:
+							var $p = $pop.find(".pop").removeClass("pop");
 							if ($p.index() < l - 1) $p.next().addClass("pop");
 							else $pop.find("li").eq(1).addClass("pop");
 							return false;
@@ -66,7 +68,7 @@
 									l = list.length;
 									for (; i < l; i++) {
 										if (r.length > 0) {
-											if (list[i].indexOf(r) > -1 && r !== list[i]) html += "<li>" + u + "@" + list[i] + "</li>";
+											if (list[i].indexOf(r) > -1 && r != list[i]) html += "<li>" + u + "@" + list[i] + "</li>";
 										} else html += "<li>" + u + "@" + list[i] + "</li>"
 									}
 									l = $pop.html(html).show().find("li").length;
@@ -81,4 +83,4 @@
 			})
 		})
 	}
-})();
+})()

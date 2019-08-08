@@ -11,13 +11,15 @@ let getUploadToken = function(filePath) {
     let buffer = readChunk.sync(filePath, 0, 4100);
     let isImg = '';
     let type = filetype(buffer);
-    if (type.ext === "gif" || type.ext === "png" || type.ext === "jpg") isImg = '?imageView2/0/format/jpg/q/75|imageslim';
+    if(type.ext === "gif" || type.ext === "png" || type.ext === "jpg") isImg = '?imageView2/0/format/jpg/q/75|imageslim'
     let options = {
         scope: bucket,
         returnBody: `{"url": "http://ygfouiospkbiue.hduin.club/$(key)${isImg}", "key": "$(key)"}`
     };
     let putpolicy = new qiniu.rs.PutPolicy(options);
-    return putpolicy.uploadToken(mac);
+    let uploadToken = putpolicy.uploadToken(mac);
+
+    return uploadToken;
 };
 
 
@@ -26,7 +28,7 @@ module.exports = {
         let formUploader = new qiniu.form_up.FormUploader(new qiniu.conf.Config());
         let extra = new qiniu.form_up.PutExtra();
         let uploadToken = getUploadToken(filePath);
-        return new Promise(function (resolve, ignore) {
+        return new Promise(function(resolve, reject) {
             formUploader.putFile(uploadToken, fileName, filePath, extra, function(err, ret) {
                 if(err) throw err;
                 resolve(ret);

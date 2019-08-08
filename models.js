@@ -5,7 +5,7 @@ let mongoose = require('mongoose');
 let config = require('./config');
 let mongoUserInfo = (!config.db.user || !config.db.password)? '' : config.db.user + ':' + config.db.password + '@';
 let mongoUrl = `mongodb://${mongoUserInfo}${config.db.host}/${config.db.db}`;
-mongoose.connect(mongoUrl)
+mongoose.connect(mongoUrl, { useNewUrlParser: true })
 
 let Department = new mongoose.Schema({
     did: Number,

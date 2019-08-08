@@ -8,7 +8,7 @@ exports.checkLogin = function (req, res, next){
     if (!!req.session['cid']){
         next();
     } else {
-        res.send(403, 'Require Login');
+        res.status(403).send('Require Login');
     }
 };
 
@@ -47,7 +47,7 @@ exports.checkFormat = function(format, option) {
             let re = /(")([\u4E00-\u9FA5A-Za-z0-9_]+)(")/;
             let error = re.exec(result.error)[2];
             if(errInfo && errInfo[error]) {
-                return res.send(400, errInfo[error] + '格式错误');
+                return res.status(400).send(errInfo[error] + '格式错误');
             }
             return res.status(400).send('参数类型不合法');
         }

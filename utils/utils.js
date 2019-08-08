@@ -4,7 +4,6 @@ let request = require('request');
 let schedule = require('node-schedule');
 let clubModel = require('../models').Club;
 let interviewModel = require('../models').Interviewee;
-let studentModel = require('../models').Student;
 let config = require('../config');
 let nodemailer = require('nodemailer');
 let rp = require('request-promise');
@@ -53,18 +52,18 @@ exports.image_save = function (url, filename) {
             resolve(response);
         });
     }).then(response => {
-        if (!fs.existsSync(__dirname + '/../files/image')) {
-            fs.mkdirSync(__dirname + '/../files/image', { recursive: true });
+        if (!fs.existsSync(__dirname + '/files/image')) {
+            fs.mkdirSync(__dirname + '/files/image', { recursive: true });
         }
-        response.pipe(fs.createWriteStream(__dirname + '/../files/image/' + filename));
-        return '../files/image/' + filename;
+        response.pipe(fs.createWriteStream(__dirname + '/files/image/' + filename));
+        return __dirname + '/files/image/' + filename;
     })
 };
 
 exports.saveDb = function () {
     schedule.scheduleJob('0 0 0 * * *', function () {
         let date = new Date();
-        let dir = __dirname + '/../files/db/' + date.toLocaleDateString();
+        let dir = __dirname + '/files/db/' + date.toLocaleDateString();
         let path;
         if(!fs.existsSync(dir)) {
             fs.mkdirSync(dir, { recursive: true });
@@ -75,10 +74,6 @@ exports.saveDb = function () {
             return interviewModel.find();
         }).then(result => {
             path = dir + '/interviewees.json';
-            fs.writeFileSync(path, JSON.stringify(result));
-            return studentModel.find()
-        }).then(result => {
-            path = dir + '/students.json';
             fs.writeFileSync(path, JSON.stringify(result));
         }).catch(err => {
             throw err;

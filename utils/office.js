@@ -76,10 +76,10 @@ exports.writeExcel = function (dbData, cid) {
                         'Sheet1': Object.assign({}, output, {"!ref": ref})
                     }
                 };
-                if (!fs.existsSync(__dirname + '/../files/file/' + cid)) {
-                    fs.mkdirSync(__dirname + '/../files/file/' + cid, { recursive: true });
+                if (!fs.existsSync(__dirname + '/files/file/' + cid)) {
+                    fs.mkdirSync(__dirname + '/files/file/' + cid, { recursive: true });
                 }
-                xlsx.writeFile(wb, __dirname + '/../files/file/' + cid + '/' + _data.replace(/\//, '|') + '.xlsx');
+                xlsx.writeFile(wb, __dirname + '/files/file/' + cid + '/' + _data.replace(/\//, '|') + '.xlsx');
             }
             resolve('导入成功');
         });
@@ -201,14 +201,14 @@ exports.writeWord = function (data, index) {
         });
 
         let name = data.name + '-' + data._id;
-        let wordPath = __dirname + '/../files/file/' + data.cid;
+        let wordPath = __dirname + '/files/file/' + data.cid;
         if (fs.existsSync(wordPath) && index == 0) {
             utils.deleteFolder(wordPath);
         }
         if(!fs.existsSync(wordPath)) {
             fs.mkdirSync(wordPath, { recursive: true });
         }
-        let out = fs.createWriteStream(__dirname + '/../files/file/' + data.cid + '/' + name + '.docx');
+        let out = fs.createWriteStream(__dirname + '/files/file/' + data.cid + '/' + name + '.docx');
 
         docx.generate(out, function (Error) {
             if (Error) throw Error;
@@ -224,7 +224,7 @@ exports.writeWord = function (data, index) {
 
 exports.archiverZip = function (cid) {
     return new Promise(function(resolve, reject) {
-        let path = __dirname + '/../files/zip/' + cid;
+        let path = __dirname + '/files/zip/' + cid;
         if (fs.existsSync(path)) utils.deleteFolder(path);
         fs.mkdirSync(path, { recursive: true });
         let output = fs.createWriteStream(path + '/' + cid + '.zip');
@@ -240,7 +240,7 @@ exports.archiverZip = function (cid) {
         });
 
         archive.pipe(output);
-        archive.directory(__dirname + '/../files/file/' + cid + '/', false);
+        archive.directory(__dirname + '/files/file/' + cid + '/', false);
         archive.finalize();
     });
 };

@@ -43,7 +43,7 @@ router.get('/download', mid.checkFormat(function () {
     await office.writeExcel(dbData, cid);
     let result = await office.archiverZip(cid);
 
-    let file = path.resolve(__dirname, '../files/zip/' + cid + '/' + cid + '.zip');
+    let file = path.resolve(__dirname, '/files/zip/' + cid + '/' + cid + '.zip');
     let filename = cid + '.zip';
     res.download(file, filename);
 }));

@@ -21,10 +21,10 @@ var success = function (text) {
 $(function () {
 
     $('#password').keydown(function (event) {
-        if (event.keyCode == "13") {
+        if (event.code === "13") {
             $(".button").click()
         }
-    })
+    });
 
     $(".button").click(function () {
         var account = $("[name=account]").val();

@@ -2,7 +2,7 @@ let session = require('express-session');
 let MongoStore = require('connect-mongo')(session);
 let config = require('../config');
 let Joi = require('joi');
-let mongoUrl = require('../models').mongoUrl;
+let mongoUrl = require('../models').mongoUrl
 
 exports.checkLogin = function (req, res, next){
     if (!!req.session['cid']){
@@ -43,7 +43,7 @@ exports.checkFormat = function(format, option) {
 
         let result = Joi.validate(body, joiFormat, option);
         if(result.error) {
-            console.log(result.error);
+            console.log(result.error)
             let re = /(")([\u4E00-\u9FA5A-Za-z0-9_]+)(")/;
             let error = re.exec(result.error)[2];
             if(errInfo && errInfo[error]) {

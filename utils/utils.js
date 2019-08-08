@@ -4,7 +4,6 @@ let request = require('request');
 let schedule = require('node-schedule');
 let clubModel = require('../models').Club;
 let interviewModel = require('../models').Interviewee;
-let studentModel = require('../models').Student;
 let config = require('../config');
 let nodemailer = require('nodemailer');
 let rp = require('request-promise');
@@ -75,10 +74,6 @@ exports.saveDb = function () {
             return interviewModel.find();
         }).then(result => {
             path = dir + '/interviewees.json';
-            fs.writeFileSync(path, JSON.stringify(result));
-            return studentModel.find()
-        }).then(result => {
-            path = dir + '/students.json';
             fs.writeFileSync(path, JSON.stringify(result));
         }).catch(err => {
             throw err;

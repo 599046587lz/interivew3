@@ -57,7 +57,7 @@ router.post('/rate', mid.checkFormat(function () {
 
     await Interviewee.rateInterviewee(cid, sid, score, comment, did, interviewer);
 
-    res.send(204);
+    res.sendStatus(204);
 }));
 
 /**

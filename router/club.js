@@ -19,7 +19,7 @@ let utils = require('../utils/utils');
  */
 router.post('/setIdentify', function (req, res) {
     let name = req.session.club;
-    console.log(req.session.club)
+    console.log(req.session.club);
     if (!name) {
         return res.sendStatus(403);
     }
@@ -48,7 +48,6 @@ router.post('/upload/location',mid.checkFormat(function () {
             info: Joi.array(),
         })
     }), wrap(async function (req, res) {
-        let info = {};
         let cid = req.session.cid;
          info = req.body.info;
 
@@ -185,7 +184,7 @@ router.post('/sendMessage', upload.single('archive'), wrap(async function(req, r
     let file = req.file;
     let data = utils.getExcelInfo(file);
     for(let i of data) {
-        let result = await utils.sendMessage(i, reqData);
+        await utils.sendMessage(i, reqData);
     }
     res.send(200, '发送成功');
 }));
@@ -230,6 +229,6 @@ router.post('/init', wrap(async function (req, res) {
 
     await Club.initClub(cid);
     res.send(204);
-}))
+}));
 
 module.exports = router;

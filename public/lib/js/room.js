@@ -42,34 +42,33 @@ var relogin = function(){
 var waitingTemplate = function(no, sid, name, did, room){
     var dids = did.join(',') ;
     var rooms = room.join(',');
-    var template = `<tr class = \"template\">
+    return `<tr class = \"template\">
                         <td>${no}</td>
                         <td>${sid}</td>
                         <td>${name}</td>
                         <td class=\"depart tdOverHide\" >${dids}</td>
                         <td class=\"tdOverHide\" >${rooms}</td>
                     </tr>`;
-    return template;
-}
+};
 
 // 呼叫模板
 var callTemplate = function(name, room, did){
 
-    var template = `<div class = \"template\">
+    return `<div class = \"template\">
                         <span class='smallCircle'></span>
                         <span class='calling'>请${name}同学到${room}教室参加${did}面试</span>
                     </div>`;
-    return template;
-}
+};
 
 //改变呼叫
 var changeCallRow = function(){
     $(".current ._default").remove();
     $(".current .template").remove();
     var calling = JSON.parse(storage.getItem("calling"));
-    if(calling.length == 0){
-        var a = "<div class=\"_default\"><span class=\"smallCircle\"></span><span class=\"calling\">暂无呼叫</span></div>";
-        $(".current").append(a);
+    if (calling.length === 0) {
+        $(".current").append(
+            "<div class=\"_default\"><span class=\"smallCircle\"></span><span class=\"calling\">暂无呼叫</span></div>"
+        );
     }
     else{
         var departmentInfo = JSON.parse(storage.getItem("departmentInfo"));
@@ -77,21 +76,23 @@ var changeCallRow = function(){
             var room ;
             var did ;
             for(var j = 0; j < departmentInfo[0].departments.length; j ++){
-                if(parseInt(calling[i].calldid) == departmentInfo[0].departments[j].did){
+                if (parseInt(calling[i].calldid) === departmentInfo[0].departments[j].did) {
                     did = departmentInfo[0].departments[j].name;
                     room = departmentInfo[0].departments[j].location;
                 }
             }
-            var a = callTemplate(calling[i].name, room, did);
-            $(".current").append(a);
+            $(".current").append(
+                callTemplate(calling[i].name, room, did)
+            );
         }
         if(calling.length > 10){
-            $(".callScroll").css({"height":"305px"});
-            $(".callScroll").jScrollPane();
+            var callScroll = $(".callScroll");
+            callScroll.css({"height": "305px"});
+            callScroll.jScrollPane();
         }
     }
 
-}
+};
 // 改变排队
 var changeWaitRow = function(){
     var waiting = JSON.parse(storage.getItem("waiting"));
@@ -105,7 +106,7 @@ var changeWaitRow = function(){
         var room = [];
         for(var j = 0; j < departmentInfo[0].departments.length; j ++){
             for(var k = 0; k < waiting[i].volunteer.length; k ++){
-                if(waiting[i].volunteer[k] ==  departmentInfo[0].departments[j].did){
+                if (waiting[i].volunteer[k] === departmentInfo[0].departments[j].did) {
                     did[k] = departmentInfo[0].departments[j].name;
                     room[k] = departmentInfo[0].departments[j].location;
                 }
@@ -130,18 +131,18 @@ var changeWaitRow = function(){
     //设置单元格宽度
     var tdHeader = $(".tHead").find("td");                  //获取表头对象
     var tds = $('.template').find("td");                    //获取表格对象
-    for (var i = 0; i < tdHeader.length; i ++){
-        $(tds.eq(i)).width(tdHeader.eq(i).width());
+    for (var z = 0; z < tdHeader.length; z++) {
+        $(tds.eq(z)).width(tdHeader.eq(z).width());
     }
 
-}
+};
 
 // 面试人数
 var interviewStatus = function(){
-    $(".interviewedNumber").html(storage.getItem("interviewed"))
+    $(".interviewedNumber").html(storage.getItem("interviewed"));
     var waiting = JSON.parse(storage.getItem("waiting"));
     $(".waitingNumber").html(waiting.length);
-}
+};
 
 
 var getDepartmentInfo = function(){
@@ -161,7 +162,7 @@ var getDepartmentInfo = function(){
             }
         }
     });
-}
+};
 
 var getFinishNumber = function(){
     $.ajax({
@@ -178,7 +179,7 @@ var getFinishNumber = function(){
             }
         }
     });
-}
+};
 
 var getCalling = function(){
     $.ajax({
@@ -199,7 +200,7 @@ var getCalling = function(){
         }
     });
 
-}
+};
 
 var getWaiting = function(){
 
@@ -221,7 +222,7 @@ var getWaiting = function(){
         }
     });
 
-}
+};
 
 // 签 到
 var signin = function(){
@@ -261,7 +262,7 @@ var signin = function(){
             500 : function(){
                     err('服务器错误,请重试!');
             },
-            200 : function(data){
+            200: function () {
                 success("签到成功!");
             }
         }
@@ -274,7 +275,7 @@ var toShow = function(){
     getFinishNumber();
     getWaiting();
     getCalling();
-}
+};
 
 
 $(function(){

@@ -45,7 +45,7 @@ app.use(mid.session());
 app.use('/common', common);
 app.use('/reg',reg);
 //进行是否登录的鉴定
-app.use(mid.checkLogin)
+app.use(mid.checkLogin);
 app.use('/club', club);
 app.use('/interview', interview);
 app.use('/room', room);
@@ -61,7 +61,7 @@ app.use(function(req, res, next) {
 // production error handler
 // no stacktraces leaked to user
 
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, ignore) {
     console.log(err);
     res.status(err.status || 500);
     res.send(err);

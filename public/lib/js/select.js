@@ -45,14 +45,14 @@ var set_department = function (){
 	var output      = ""; 
 	var template    = "<option value='DID'>NAME</option>\n";
 	var dep = club.departments;
-	for( var i in dep){
-		if (dep[i]){
-			var out = template;
-			out = out.replace(/DID/g, dep[i].did);
-			out = out.replace(/NAME/g, dep[i].name);
-			output += out;
-		}
-	}
+    dep.forEach(function (element) {
+        if (element) {
+            var out = template;
+            out = out.replace(/DID/g, element.did);
+            out = out.replace(/NAME/g, element.name);
+            output += out;
+        }
+    });
 	$("#_select").html(output);
 };
 
@@ -60,7 +60,7 @@ var relogin = function (){
 	setTimeout(function(){
 		window.location.href = "login.html";
 	}, 500);
-}
+};
 
 var setInterviewer = function(){
 	var did = $("#_select").val();
@@ -113,10 +113,10 @@ $(function(){
 		$(".dimmer").fadeOut();
 	});
 	$("#interviewer").bind("keydown",function (event) {
-		if(event.keyCode == "13"){
+        if (event.code === "13") {
 			$("._interview").click()
 		}
-	})
+    });
 	$("._interview").click(function(){
 		setInterviewer();
 	});

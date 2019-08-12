@@ -24,7 +24,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(favicon());
-if(process.env.ENVIRONMENT === 'debug'){
+if(config.environment === 'debug'){
     app.use(logger('dev'));
 }
 

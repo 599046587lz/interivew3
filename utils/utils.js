@@ -10,6 +10,7 @@ let rp = require('request-promise');
 let urlencode = require('urlencode');
 let crypto = require('crypto'); //加密
 let excel = require('xlsx');
+const path = require('path');
 global.departInfo = [ {
     name: '节目部',
     location: '6教中307',
@@ -44,6 +45,14 @@ global.departInfo = [ {
     phone: '18758079040'
 }
 ];
+const storeFilesPathBase = config.storeFilesPath || process.cwd();
+exports.storeFilesPath = {
+    db: path.join(storeFilesPathBase, 'db'),
+    file: path.join(storeFilesPathBase, 'file'),
+    image: path.join(storeFilesPathBase, 'image'),
+    upload: path.join(storeFilesPathBase, 'upload'),
+    zip: path.join(storeFilesPathBase, 'zip'),
+};
 
 exports.image_save = function (url, filename) {
     return new Promise(function (resolve, reject) {
@@ -52,28 +61,28 @@ exports.image_save = function (url, filename) {
             resolve(response);
         });
     }).then(response => {
-        if (!fs.existsSync(__dirname + '/../files/image')) {
-            fs.mkdirSync(__dirname + '/../files/image', { recursive: true });
+        if (!fs.existsSync(utils.storeFilesPath.image)) {
+            fs.mkdirSync(utils.storeFilesPath.image, { recursive: true });
         }
-        response.pipe(fs.createWriteStream(__dirname + '/../files/image/' + filename));
-        return __dirname + '/../files/image/' + filename;
+        const filePath = path.join(utils.storeFilesPath.image, filename);
+        response.pipe(fs.createWriteStream(filePath));
+        return filePath;
     })
 };
 
 exports.saveDb = function () {
     schedule.scheduleJob('0 0 0 * * *', function () {
         let date = new Date();
-        let dir = __dirname + '/files/db/' + date.toLocaleDateString();
-        let path;
-        if(!fs.existsSync(dir)) {
-            fs.mkdirSync(dir, { recursive: true });
+        const dbDirPath = path.join(utils.storeFilesPath.db, date.toLocaleDateString());
+        if(!fs.existsSync(dbDirPath)) {
+            fs.mkdirSync(dbDirPath, { recursive: true });
         }
         clubModel.find().then(result => {
-            path = dir + '/clubs.json';
+            let path = dbDirPath + '/clubs.json';
             fs.writeFileSync(path, JSON.stringify(result));
             return interviewModel.find();
         }).then(result => {
-            path = dir + '/interviewees.json';
+            let path = dbDirPath + '/interviewees.json';
             fs.writeFileSync(path, JSON.stringify(result));
         }).catch(err => {
             throw err;
@@ -98,7 +107,7 @@ exports.deleteFolder = function (path) {
 exports.sendMessage = function (data, reqData) {
     let oneDepart = {};
     global.departInfo.forEach(e => {
-        if(e.name == data.volunteer) {
+        if(e.name === data.volunteer) {
             oneDepart = e;
         }
     });
@@ -221,7 +230,7 @@ exports.getExcelInfo = function (file) {
 exports.isExist = function (array, info) {
     let status = true;
     array.forEach(e => {
-        if(e == info) status = false;
+        if(e === info) status = false;
     });
 
     if(status) {

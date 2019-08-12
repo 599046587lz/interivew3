@@ -103,17 +103,22 @@ router.get('/export', mid.checkFormat(function () {
     return Joi.object().keys({
         did: Joi.number()
     })
-}), wrap(async function (req, res) {
+}),wrap(async function (req, res) {
     let cid = req.session['cid'];
-    let did = req.body.did;
+    let did = req.query.did;
 
-    if (!cid || !did) {
+    if (!cid) {
         throw new Error('参数不完整');
     }
-
-    let result = await Club.exportInterviewees(cid, did);
+    let result = []
+    if(did === undefined){
+        result = await Club.exportAllInterviewees(cid);
+    } else {
+        result = await Club.exportInterviewees(cid,did)
+    }
     res.json(result);
 }));
+
 
 router.get('/clubInfo', mid.checkFormat(function () {
     return Joi.object().keys({

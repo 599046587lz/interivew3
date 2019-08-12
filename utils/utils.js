@@ -45,8 +45,8 @@ global.departInfo = [ {
     phone: '18758079040'
 }
 ];
-const storeFilesPathBase = config.storeFilesPath || process.cwd();
-exports.storeFilesPath = {
+const storeFilesPathBase = config.storeFilesPath || path.join(process.cwd(), 'files');
+export const storeFilesPath = {
     db: path.join(storeFilesPathBase, 'db'),
     file: path.join(storeFilesPathBase, 'file'),
     image: path.join(storeFilesPathBase, 'image'),
@@ -61,10 +61,10 @@ exports.image_save = function (url, filename) {
             resolve(response);
         });
     }).then(response => {
-        if (!fs.existsSync(utils.storeFilesPath.image)) {
-            fs.mkdirSync(utils.storeFilesPath.image, { recursive: true });
+        if (!fs.existsSync(storeFilesPath.image)) {
+            fs.mkdirSync(storeFilesPath.image, { recursive: true });
         }
-        const filePath = path.join(utils.storeFilesPath.image, filename);
+        const filePath = path.join(storeFilesPath.image, filename);
         response.pipe(fs.createWriteStream(filePath));
         return filePath;
     })
@@ -73,16 +73,16 @@ exports.image_save = function (url, filename) {
 exports.saveDb = function () {
     schedule.scheduleJob('0 0 0 * * *', function () {
         let date = new Date();
-        const dbDirPath = path.join(utils.storeFilesPath.db, date.toLocaleDateString());
+        const dbDirPath = path.join(storeFilesPath.db, date.toLocaleDateString());
         if(!fs.existsSync(dbDirPath)) {
             fs.mkdirSync(dbDirPath, { recursive: true });
         }
         clubModel.find().then(result => {
-            let path = dbDirPath + '/clubs.json';
+            let path = path.join(dbDirPath, 'clubs.json');
             fs.writeFileSync(path, JSON.stringify(result));
             return interviewModel.find();
         }).then(result => {
-            let path = dbDirPath + '/interviewees.json';
+            let path = path.join(dbDirPath, 'interviewees.json');
             fs.writeFileSync(path, JSON.stringify(result));
         }).catch(err => {
             throw err;

@@ -1,13 +1,13 @@
 let express = require('express');
-let upload = require('multer')({dest: '../files/upload'});
 let qiniu = require('../utils/qiniu');
-let path = require('path');
+const path = require('path');
 let router = express.Router();
 let mid = require('../utils/middleware');
 let Interview = require('../modules/interviewee');
 let Club = require('../modules/club');
 let office = require('../utils/office');
 let utils = require('../utils/utils');
+let upload = require('multer')({dest: utils.storeFilesPath.upload});
 let JSONError = require('../utils/JSONError');
 let Joi = require('joi');
 let wrap = fn => (...args) => fn(...args).catch(args[2]);
@@ -43,8 +43,15 @@ router.get('/download', mid.checkFormat(function () {
     await office.writeExcel(dbData, cid);
     let result = await office.archiverZip(cid);
 
-    let file = path.resolve(__dirname, '/files/zip/' + cid + '/' + cid + '.zip');
-    let filename = cid + '.zip';
+    const file = path.format({
+        dir: path.join(utils.storeFilesPath.zip, cid),
+        name: cid,
+        ext: '.zip'
+    });
+    const filename = path.format({
+        name: cid,
+        ext: '.zip'
+    });
     res.download(file, filename);
 }));
 

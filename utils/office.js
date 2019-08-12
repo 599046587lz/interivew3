@@ -1,10 +1,10 @@
 let officegen = require('officegen');
 let fs = require('fs');
+const path = require('path');
 let xlsx = require('xlsx');
 let archiver = require('archiver');
 let utils = require('./utils');
 let Club = require('../modules/club');
-global.path = require('path');
 
 
 exports.writeExcel = function (dbData, cid) {
@@ -39,7 +39,7 @@ exports.writeExcel = function (dbData, cid) {
             });
             departmentName['总计'] = dbData;
             for(let _data in departmentName) {
-                if(departmentName[_data].length == 0) continue;
+                if(departmentName[_data].length === 0) continue;
                 let data = departmentName[_data]
                     .map((v, i) => _headers.map((k, j) => Object.assign({}, {
                         v: v[k],
@@ -48,7 +48,7 @@ exports.writeExcel = function (dbData, cid) {
                     .reduce((prev, next) => prev.concat(next));
                 let result = {};
                 data.forEach((e, i) => {
-                    result[e.position] = {v: (e.v == undefined? '无' : e.v)};
+                    result[e.position] = {v: (e.v === undefined? '无' : e.v)};
                 });
                 let newheader = {
                     A1: {v: '社团'},
@@ -76,10 +76,15 @@ exports.writeExcel = function (dbData, cid) {
                         'Sheet1': Object.assign({}, output, {"!ref": ref})
                     }
                 };
-                if (!fs.existsSync(__dirname + '/files/file/' + cid)) {
-                    fs.mkdirSync(__dirname + '/files/file/' + cid, { recursive: true });
+                const cidDirPath = path.join(utils.storeFilesPath.file, cid);
+                if (!fs.existsSync(cidDirPath)) {
+                    fs.mkdirSync(cidDirPath, { recursive: true });
                 }
-                xlsx.writeFile(wb, __dirname + '/files/file/' + cid + '/' + _data.replace(/\//, '|') + '.xlsx');
+                xlsx.writeFile(wb, path.format({
+                    dir: cidDirPath,
+                    name: _data.replace(/\//, '|'),
+                    ext: '.xlsx'
+                }));
             }
             resolve('导入成功');
         });
@@ -201,14 +206,20 @@ exports.writeWord = function (data, index) {
         });
 
         let name = data.name + '-' + data._id;
-        let wordPath = __dirname + '/files/file/' + data.cid;
-        if (fs.existsSync(wordPath) && index == 0) {
-            utils.deleteFolder(wordPath);
+        const dirPath = path.join(utils.storeFilesPath.file, data.cid);
+        if (fs.existsSync(dirPath) && index === 0) {
+            utils.deleteFolder(dirPath);
         }
-        if(!fs.existsSync(wordPath)) {
-            fs.mkdirSync(wordPath, { recursive: true });
+        if(!fs.existsSync(dirPath)) {
+            fs.mkdirSync(dirPath, { recursive: true });
         }
-        let out = fs.createWriteStream(__dirname + '/files/file/' + data.cid + '/' + name + '.docx');
+        let out = fs.createWriteStream(
+            path.format({
+                dir: dirPath,
+                name: name,
+                ext: '.docx'
+            })
+        );
 
         docx.generate(out, function (Error) {
             if (Error) throw Error;
@@ -224,12 +235,16 @@ exports.writeWord = function (data, index) {
 
 exports.archiverZip = function (cid) {
     return new Promise(function(resolve, reject) {
-        let path = __dirname + '/files/zip/' + cid;
-        if (fs.existsSync(path)) utils.deleteFolder(path);
-        fs.mkdirSync(path, { recursive: true });
-        let output = fs.createWriteStream(path + '/' + cid + '.zip');
-
-        let archive = archiver('zip');
+        const dirPath = path.join(utils.storeFilesPath.zip, cid);
+        if (fs.existsSync(dirPath)) utils.deleteFolder(dirPath);
+        fs.mkdirSync(dirPath, { recursive: true });
+        let output = fs.createWriteStream(
+            path.format({
+                dir: dirPath,
+                name: cid,
+                ext: '.zip'
+            }));
+        let archive = archiver('zip', {});
 
         output.on('close', function () {
             resolve('打包成功');
@@ -240,7 +255,7 @@ exports.archiverZip = function (cid) {
         });
 
         archive.pipe(output);
-        archive.directory(__dirname + '/files/file/' + cid + '/', false);
+        archive.directory(path.join(utils.storeFilesPath.file, cid), false);
         archive.finalize();
     });
 };

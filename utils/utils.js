@@ -46,13 +46,14 @@ global.departInfo = [ {
 }
 ];
 const storeFilesPathBase = config.storeFilesPath || path.join(process.cwd(), 'files');
-export const storeFilesPath = {
+const storeFilesPath = {
     db: path.join(storeFilesPathBase, 'db'),
     file: path.join(storeFilesPathBase, 'file'),
     image: path.join(storeFilesPathBase, 'image'),
     upload: path.join(storeFilesPathBase, 'upload'),
     zip: path.join(storeFilesPathBase, 'zip'),
 };
+exports.storeFilesPath = storeFilesPath;
 
 exports.image_save = function (url, filename) {
     return new Promise(function (resolve, reject) {

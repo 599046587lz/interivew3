@@ -213,8 +213,8 @@ $(function () {
         var fileTArr = picName.split(".");
         //切割出后缀文件名
         var fileType = fileTArr[fileTArr.length - 1];
-        if(fileType != null && fileType !=""){
-            if(fileType == "gif" || fileType == "jpg" || fileType == "jpeg" || fileType == "png"){
+        if(fileType != null && fileType !==""){
+            if(fileType === "gif" || fileType === "jpg" || fileType === "jpeg" || fileType === "png"){
                 hasPic = true;
                 $(".pic+div").html('');
                 var objUrl = getObjectURL(this.files[0]);

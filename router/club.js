@@ -8,9 +8,9 @@ let Club = require('../modules/club');
 let Interviewee = require('../modules/interviewee');
 let mid = require('../utils/middleware');
 let Joi = require('joi');
-let multer = require('multer');
-let upload = multer({dest: '../files/upload'});
 let utils = require('../utils/utils');
+let multer = require('multer');
+let upload = multer({dest: utils.storeFilesPath.upload});
 
 /**
  * @params Number did 部门ID

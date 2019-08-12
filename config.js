@@ -1,3 +1,5 @@
+const path = require('path');
+
 /**
  * Created by bangbang93 on 14-9-15.
  */
@@ -18,5 +20,5 @@ module.exports = {
     apiKey: '7e9b92e1d01a94a7e304813856a99d25',
     proxy: 'http://szq.jouta.xyz/',
     environment: process.env.ENVIRONMENT || 'debug',
-    storeFilesPath: process.env.STORE_FILES_PATH || process.cwd() || './'
+    storeFilesPath: process.env.STORE_FILES_PATH || path.join(process.cwd(), 'files')
 };

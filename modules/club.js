@@ -30,7 +30,6 @@ exports.login = function (user, password) {
 exports.getClubByName = function (name) {
     return clubModel.findOne({
         name: name    });
-
 };
 
 exports.handleArchive = function (file, cid) {
@@ -145,12 +144,28 @@ exports.createClub = function (data) {
     return clubModel.create(data);
 };
 
+exports.exportAllInterviewees = function(cid) {
+    return IntervieweeModel.find({
+        cid: cid,
+    }, 'name sid rate volunteer notion phone qq short_tel major sex email').then(result => {
+        let newDocs = [];
+        result.forEach(e => {
+            e = e.toObject();
+            for (let i in e.rate) {
+                    e.rate = e.rate[i];
+            }
+            newDocs.push(e);
+        });
+
+        return result;
+    })
+}
 
 exports.exportInterviewees = function (cid, did) {
     return IntervieweeModel.find({
         cid: cid,
-        'rate.did': did
-    }, 'name sid rate notion phone qq short_tel major sex email').then(result => {
+        volunteer : did
+    }, 'name sid rate volunteer notion phone qq short_tel major sex email').then(result => {
         let newDocs = [];
         result.forEach(e => {
             e = e.toObject();
@@ -162,7 +177,6 @@ exports.exportInterviewees = function (cid, did) {
             }
             newDocs.push(e);
         });
-
         return result;
     })
 };

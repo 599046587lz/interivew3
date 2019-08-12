@@ -12,6 +12,12 @@ input, select{
   border: 1px solid #131e2f;
   width: 140px;
 }
+.applyInfo {
+  float: right;
+  margin: 12px;
+  font-size: 18px;
+  color: #fff;
+}
 .container {
   width: 60%;
   min-width: 600px;

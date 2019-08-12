@@ -1,89 +1,68 @@
 $(function () {
+
     var departments = []
+    var table = $("#export tbody");
     var getDepartmentInfo = function () {
         var departmentsHtml = ""
         $.ajax({
             url: '/club/clubinfo',
             type: 'get',
-            statusCode: {
-                200: function (data) {
-                    var departmentsInfo = data.message.departments
-                    if (departmentsInfo) {
-                        departmentsHtml += "<a class='item department'>所有部门</a>"
-                        departmentsInfo.forEach(item => {
-                            departments[item.did] = item.name
-                            departmentsHtml += "<a class='item department'>" + item.name + "</a>"
-                        })
-                    }
-                    $("#departments").append(departmentsHtml)
-                    changeDepart()
-                    exportAll()
+            success: function (data) {
+                var departmentsInfo = data.message.departments
+                if (departmentsInfo) {
+                    departmentsHtml += "<a class='item department'>所有部门</a>"
+                    departmentsInfo.forEach(item => {
+                        departments[item.did] = item.name
+                        departmentsHtml += "<a class='item department'>" + item.name + "</a>"
+                    })
                 }
+                $("#departments").append(departmentsHtml)
+                getDepartmentData()
             }
         })
     }
 
-    var exchange = function (array) {
-        var departmentInfo = []
-        array.forEach(function (item,index) {
-            departmentInfo[index] = departments[item]
-        })
-        return departmentInfo
-    }
-
-    var changeDepart = function () {
-        $(".department.item").click(function (data) {
-            var did = departments.indexOf(data.target.innerHTML)
-            if(did === -1){
-                exportAll()
-            } else {
-                exportSingle(did)
-            }
-        })
-    }
-
-    var exportAll = function () {
-        $.ajax({
+    var getDepartmentData = function (did) {
+        var obj = {
             url: '/club/export',
             type: 'get',
-            statusCode: {
-                200: function (data) {
-                    appendData(data)
-                }
-            }
-        });
-    };
-
-    var exportSingle = function (did) {
-        $.ajax({
-            url: '/club/export',
-            data: {did: did},
-            type: 'get',
-            dataType: 'json',
-            statusCode: {
-                200: function (data) {
-                    appendData(data)
-                }
-            }
-        });
-    }
-    
-    var appendData = function (data) {
-        var output = "";
-        $("#export tbody").html("");
-        for (var i in data) {
-            if (data[i]) {
-                if (data[i].rate != []) {
-                    var out = "<tr>\n <td> " + data[i].sid + " </td> <td> " + data[i].name + " </td> <td> "
-                        + data[i].major + " </td> <td> " + data[i].email + " </td> <td> " + data[i].phone + " </td> <td> " + data[i].qq + " </td> <td> " + exchange(data[i].volunteer) + " </td> <td> " + data[i].rate.score + " </td> <td>" + data[i].rate.comment + " </td> <td>" + data[i].rate.interviewer + " </td>";
-                    output += out;
-                }
-            }
+            success: renderTable
         }
-        $("#export tbody").append(output);
+        if(!isNaN(+did)) {
+            obj.data = {did: did}
+        }
+        $.ajax(obj);
     }
-    getDepartmentInfo()
-    $('.back').click(function () {
+
+    var renderTable = function (data) {
+        table.html("")
+        data = data.map(item => `<tr>
+                       <td> ${item.sid} </td> 
+                       <td>${item.name}</td> 
+                       <td>${item.major}</td>
+                       <td>${item.email} </td> 
+                       <td> ${item.phone}</td> 
+                       <td> ${item.qq} </td> 
+                       <td>${item.volunteer.map(item => departments[item])}</td>
+                       <td>${item.rate.score}</td>
+                       <td>${item.rate.comment}</td> 
+                       <td>${item.rate.interviewer}</td>
+                       </tr>`)
+        table.append(data.join(''));
+    }
+
+    $("#departments").on('click','a',function (ev) {
+        var did = departments.indexOf(ev.target.innerHTML)
+        if(did === -1){
+            getDepartmentData()
+        } else {
+            getDepartmentData(did)
+        }
+    })
+    $('.back').on('click',(function () {
         window.history.back();
-    });
+    }));
+
+    getDepartmentInfo()
+
 });

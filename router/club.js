@@ -101,19 +101,17 @@ router.get('/extra', wrap(async function (req, res) {
 
 router.get('/export', mid.checkFormat(function () {
     return Joi.object().keys({
-        cid: Joi.number(),
         did: Joi.number()
     })
 }),wrap(async function (req, res) {
     let cid = req.session['cid'];
     let did = req.query.did;
 
-
     if (!cid) {
         throw new Error('参数不完整');
     }
     let result = []
-    if(!did){
+    if(did === undefined){
         result = await Club.exportAllInterviewees(cid);
     } else {
         result = await Club.exportInterviewees(cid,did)

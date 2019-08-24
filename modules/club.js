@@ -151,13 +151,10 @@ exports.exportAllInterviewees = function(cid) {
         let newDocs = [];
         result.forEach(e => {
             e = e.toObject();
-            for (let i in e.rate) {
-                    e.rate = e.rate[i];
-            }
             newDocs.push(e);
         });
 
-        return result;
+        return newDocs;
     })
 }
 
@@ -171,13 +168,15 @@ exports.exportInterviewees = function (cid, did) {
             e = e.toObject();
             for (let i in e.rate) {
                 if (e.rate[i].did == did) {
-                    e.rate = e.rate[i];
+                    const rate = e.rate[i];
+                    e.rate = [];
+                    e.rate[0] = rate;
                     break;
                 }
             }
             newDocs.push(e);
         });
-        return result;
+        return newDocs;
     })
 };
 

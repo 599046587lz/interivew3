@@ -166,8 +166,7 @@ exports.exportInterviewees = function (cid, did) {
         let newDocs = [];
         result.forEach(e => {
             e = e.toObject();
-            let index = e.rate.find(ele => did === ele.did)
-            e.rate = [e.rate[index]]
+            e.rate = e.rate.filter(ele => did === ele.did)
             newDocs.push(e);
         });
         return newDocs;

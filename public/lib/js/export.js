@@ -4,6 +4,7 @@ $(function () {
     var intervieweesData = []
     var renderData = []
     var searchValue = ""
+    var thead = ""
     var isBasic = true
     var exportTable = $("#export");
 
@@ -61,7 +62,11 @@ $(function () {
             url: '/club/export',
             type: 'get',
             success: function (data) {
-                intervieweesData = addSearch(data)
+                intervieweesData = data
+                intervieweesData.forEach(ele => {
+                    var intervieweeInform = [ele.name, ele.sid, ele.major, ele.email, ele.phone, ele.qq, ele.notion, addRate(ele.rate)]
+                    ele["information"] = intervieweeInform.join("#")
+                })
                 renderData = intervieweesData
                 renderTable()
                 getDepartmentInter()
@@ -69,15 +74,6 @@ $(function () {
         }
 
         $.ajax(obj);
-    }
-
-    var addSearch = function (data) {
-        for (let i in data) {
-            let ele = data[i]
-            let intervieweeInform = [ele.name, String(ele.sid), ele.major, ele.email, ele.phone, ele.qq, ele.notion, addRate(ele.rate)]
-            data[i]["information"] = intervieweeInform.join("#")
-        }
-        return data
     }
 
     var addRate = function (data) {
@@ -100,7 +96,6 @@ $(function () {
     var renderTable = function () {
         exportTable.html("")
         var data = renderData
-        var thead = ""
         if (searchValue !== "") {
             data = renderData.filter(function (ele) {
                 if (ele.information.indexOf(searchValue) !== -1) {
@@ -171,9 +166,9 @@ $(function () {
         if (departmentsName[did] !== undefined) {
             renderData = JSON.parse(JSON.stringify(intervieweesData.filter(ele => ele.volunteer.includes(did))))
             renderData = renderData.map(ele => {
-                if(ele.rate && ele.rate.length > 0 ){
+                if (ele.rate && ele.rate.length > 0) {
                     var rate = ele.rate.find(item => item.did === did)
-                    if(rate){
+                    if (rate) {
                         ele.rate = [rate]
                     } else {
                         ele.rate = []
@@ -188,7 +183,7 @@ $(function () {
     })
 
     $("#exchange").on('click', function () {
-        if (exportTable.hasClass('hidden')) {
+        if (isBasic) {
             this.innerHTML = "基本信息"
         } else {
             this.innerHTML = "面试信息"

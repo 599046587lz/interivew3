@@ -166,14 +166,8 @@ exports.exportInterviewees = function (cid, did) {
         let newDocs = [];
         result.forEach(e => {
             e = e.toObject();
-            for (let i in e.rate) {
-                if (e.rate[i].did == did) {
-                    const rate = e.rate[i];
-                    e.rate = [];
-                    e.rate[0] = rate;
-                    break;
-                }
-            }
+            let index = e.rate.find(ele => did === ele.did)
+            e.rate = [e.rate[index]]
             newDocs.push(e);
         });
         return newDocs;

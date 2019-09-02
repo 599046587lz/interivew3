@@ -1,0 +1,12 @@
+.hidden{
+    display: none;
+}
+
+#departments {
+    position: sticky;
+    top: 0;
+}
+
+.container {
+    padding: 10px;
+}

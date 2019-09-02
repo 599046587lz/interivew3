@@ -148,9 +148,7 @@ exports.exportAllInterviewees = function (cid) {
     return IntervieweeModel.find({
         cid: cid,
     }, 'name sid rate volunteer notion phone qq short_tel major sex email').then(result => {
-        result = result.map(e => {
-            e = e.toObject()
-        })
+        result = result.map(e => e.toObject())
 
         return result;
     })
@@ -164,6 +162,7 @@ exports.exportInterviewees = function (cid, did) {
         result = result.map(e => {
             e = e.toObject()
             e.rate = e.rate.filter(ele => did === ele.did)
+            return e
         })
         return result
     })

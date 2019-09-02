@@ -41,7 +41,7 @@ router.get('/download', mid.checkFormat(function () {
         await office.writeWord(dbData[i], i);
     }
     await office.writeExcel(dbData, cid);
-    let result = await office.archiverZip(cid);
+    await office.archiverZip(cid);
 
     const file = path.format({
         dir: path.join(utils.storeFilesPath.zip, cid),

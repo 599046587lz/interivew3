@@ -4,42 +4,38 @@
     <meta charset="UTF-8">
     <title>报名详情</title>
     <link rel="stylesheet" href="lib/css/common.css"/>
-    <link rel="stylesheet"  type="text/css" href="lib/css/reset.css"/>
-    <script type="text/javascript" src="lib/js/jquery-1.9.1.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="lib/css/semantic.min.css">
-    <script src="lib/js/semantic.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="lib/css/reset.css"/>
+    <link rel="stylesheet" href="lib/css/export.css">
+    <link href="https://cdn.bootcss.com/semantic-ui/2.4.1/semantic.min.css" rel="stylesheet">
 </head>
 <body>
 <div class="topBar">
-    <a  class="back">
+    <a class="back">
         <img src="img/back.png" alt=""/>
     </a>
     <div class="right">
     </div>
     <div class="title"></div>
 </div>
-<div class="ui stackable menu" id="departments">
-</div>
-    <div id="deps"></div>
-    <table id="export" class="ui striped table">
-        <thead>
-            <tr>
-                <th class="stuID">学号</th>
-                <th class="name">姓名</th>
-                <th class="major">专业</th>
-                <th class="email">邮箱</th>
-                <th class="phone">电话号码</th>
-                <th class="phone">qq</th>
-                <th>面试部门</th>
-                <th class="score">评分</th>
-                <th class="comment">评论</th>
-                <th>面试者</th>
-            </tr>
-        </thead>
-        <tbody>
-        </tbody>
+<div class="container">
+    <div class="ui stackable menu" id="departments">
+        <div class="right menu">
+            <div class="item">
+                <div class="ui icon input">
+                    <input type="text" placeholder="Search..." id="search">
+                    <i class="search link icon"></i>
+                </div>
+            </div>
+            <a class="ui item" id="exchange">
+                基本信息
+            </a>
+        </div>
+    </div>
+    <table id="export" class="ui celled padded table structured">
     </table>
-    <div id="body"></div>
+</div>
 </body>
+<script type="text/javascript" src="lib/js/jquery-1.9.1.min.js"></script>
+<script src="https://cdn.bootcss.com/semantic-ui/2.4.1/semantic.min.js"></script>
 <script type="text/javascript" src="lib/js/export.js"></script>
 </html>

@@ -206,7 +206,7 @@ exports.writeWord = function (data, index) {
         });
 
         let name = data.name + '-' + data._id;
-        const dirPath = path.join(utils.storeFilesPath.file, data.cid);
+        const dirPath = path.join(utils.storeFilesPath.file, String(data.cid));
         if (fs.existsSync(dirPath) && index === 0) {
             utils.deleteFolder(dirPath);
         }

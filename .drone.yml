@@ -8,8 +8,8 @@ steps:
 - name: publish
   image: plugins/docker
   settings:
-    repo: index.hduin.club/interview
-    registry: index.hduin.club
+    repo: redreg:5005/interview
+    registry: redreg:5005
     username: drone
     password: dronelogin
     mirror: https://fhvwls99.mirror.aliyuncs.com
@@ -26,9 +26,9 @@ steps:
   - name: docker
     path: /var/run/docker.sock
   commands:
-  - docker login index.hduin.club --username drone --password dronelogin
-  - docker pull index.hduin.club/interview:${DRONE_COMMIT_BRANCH}
-  - docker service update --image index.hduin.club/interview:${DRONE_COMMIT_BRANCH} --with-registry-auth redhome-interview
+  - docker login redreg:5005 --username drone --password dronelogin
+  - docker pull redreg:5005/interview:${DRONE_COMMIT_BRANCH}
+  - docker service update --image redreg:5005/interview:${DRONE_COMMIT_BRANCH} --with-registry-auth redhome-interview
   when:
     branch:
     - master

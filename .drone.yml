@@ -13,6 +13,9 @@ steps:
     username: drone
     password: dronelogin
     mirror: https://fhvwls99.mirror.aliyuncs.com
+    environment:
+      - DOCKER_LAUNCH_DEBUG=true
+    debug: true
     tags:
       - ${DRONE_COMMIT_BRANCH}
       - ${DRONE_COMMIT_SHA:0:8}

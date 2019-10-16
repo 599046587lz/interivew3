@@ -285,23 +285,6 @@ var specialCall = function(){
         err('请先评定,推荐,或者跳过当前面试者');
         return;
     };
-//    window.interviewee = {
-//        sid: 11111111,
-//        name: '赵健',
-//        sex: 1,
-//        major: '计算机',
-//        phone: 186065206363,
-//        email: 'mail@karboom.me',
-//        qq: 823448759,
-//        notion: '活着真好',
-//        extra: {
-//            '籍贯' : '东北',
-//            '政治面貌' : '党员'
-//        }
-//    };
-//    start();
-//    return;
-//    var data = {sid:$('#appointSid input').val()};
     var $this = $(this);
     $this.addClass('loading');
     $.ajax({
@@ -368,8 +351,6 @@ var skip = function(){
         err('尚未有面试者');
         return;
     };
-//    finish();
-//    return;
     var $this = $(this);
     if(localStorage.getItem('object'))
         window.interviewee = JSON.parse(localStorage.getItem('object'))

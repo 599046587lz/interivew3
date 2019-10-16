@@ -101,21 +101,21 @@ router.get('/extra', wrap(async function (req, res) {
 
 router.get('/export', mid.checkFormat(function () {
     return Joi.object().keys({
-        did: Joi.number()
+        did: Joi.number(),
+        search: Joi.string() || '',
+        page: Joi.number(),
+        pageSize: Joi.number()
     })
 }),wrap(async function (req, res) {
-    let cid = req.session['cid'];
+    const cid = req.session['cid'];
     let did = req.query.did;
+    const search = req.query.search;
 
-    if (!cid) {
-        throw new Error('参数不完整');
+    if(did){
+        did = parseInt(did)
     }
-    let result = []
-    if(did === undefined){
-        result = await Club.exportAllInterviewees(cid);
-    } else {
-        result = await Club.exportInterviewees(cid,did)
-    }
+
+    let result = await Club.exportInterviewees(cid, did, search)
     res.json(result);
 }));
 
@@ -128,6 +128,7 @@ router.get('/clubInfo', mid.checkFormat(function () {
     let cid = req.session.cid;
     let result = await Club.getClubInfo(cid);
     let info = {
+        cid:result.cid,
         clubName: result.name,
         departments: result.departments,
         maxDep: result.maxDep,

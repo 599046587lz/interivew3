@@ -10,7 +10,7 @@ exports.getInterviewerInfo = function (sid, cid ) {
         sid: sid,
         cid: cid
     },{
-        ifsign : 0
+        ifsign : true
     })
 };
 
@@ -27,7 +27,7 @@ exports.delVolunteer = function (cid,sid, did) {
 exports.getFinishInfo = function (cid) {
     return IntervieweeModel.find({
         cid:cid,
-        ifsign : 0,
+        ifsign : true,
         ifcall : true,
         busy:false
     }).then(result => result.length)

@@ -68,6 +68,7 @@ router.get('/clubInfo', mid.checkFormat(function () {
     let cid = req.query.clubId;
     let result = await Club.getClubInfo(cid);
     let info = {
+        cid:result.cid,
         clubName: result.name,
         departments: result.departments,
         maxDep: result.maxDep,

@@ -84,8 +84,8 @@ let Interviewee = new mongoose.Schema({
             default: false
         } //是否正在和叫号大厅传输该学生信息*/
     ifsign:{
-        type: String,
-        default: 1
+        type: Boolean,
+        default: false
     },
     ifcall:{
         type: Boolean,

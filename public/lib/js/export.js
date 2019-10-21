@@ -25,19 +25,24 @@ $(function () {
         $.ajax({
             url: '/club/clubinfo',
             type: 'get',
-            success: function (data) {
-                var departmentsInfo = data.message.departments
-                if (departmentsInfo) {
-                    departmentsHtml += "<a class='item department active'>所有部门</a>"
-                    departmentsInfo.forEach(item => {
-                        departmentsName[item.did] = item.name
-                        departmentsHtml += `<a class='item department'>${item.name}</a>`
-                    })
-                }
-                $("#departments").prepend(departmentsHtml)
-                getDepartmentData()
+            statusCode : {
+                200 : function (data) {
+                    var departmentsInfo = data.message.departments
+                    if (departmentsInfo) {
+                        departmentsHtml += "<a class='item department active'>所有部门</a>"
+                        departmentsInfo.forEach(item => {
+                            departmentsName[item.did] = item.name
+                            departmentsHtml += `<a class='item department'>${item.name}</a>`
+                        })
+                    }
+                    $("#departments").prepend(departmentsHtml)
+                    getDepartmentData()
 
-                $("#download").attr('href',`./common/download?cid=${data.message.cid}`)
+                    $("#download").attr('href',`./common/download?cid=${data.message.cid}`)
+                },
+                403 : function () {
+                    relogin()
+                }
             }
         })
     }

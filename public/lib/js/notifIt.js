@@ -18,7 +18,7 @@ function notif(config) {
         timeout: 5000
     };
     $.extend(defaults, config);
-    
+
     position = defaults.position;
 
     if (defaults.width > 0) {
@@ -67,9 +67,9 @@ function notif(config) {
     }
 
     $("#ui_notifIt").css("background-color", defaults.bgcolor);
-    
+
     $("#ui_notifIt").css("color", defaults.color);
-    
+
     switch (defaults.position) {
         case "left":
             $("#ui_notifIt").css("left", parseInt(0 - (defaults.width + 10)));
@@ -94,7 +94,7 @@ function notif(config) {
             $("#ui_notifIt").animate({right: 10});
             break;
     }
-    
+
     $("#ui_notifIt").click(function() {
         notifit_dismiss(to, defaults);
     });
@@ -105,7 +105,7 @@ function notif(config) {
                     $("#ui_notifIt").click();
                 }, defaults.timeout);
             }
-        
+
     }
 }
 
@@ -152,4 +152,27 @@ function notifit_dismiss(to, config) {
             $("#ui_notifIt").remove();
         });
     }
+}
+
+var err = function(text){
+    notif({
+        msg:text,
+        position:'center',
+        type:'error'
+    });
+};
+// -success
+var success = function(text){
+    notif({
+        msg:text,
+        position:'center',
+        type:'success'
+    })
+};
+
+var relogin = function (){
+    err("未登录或登录超时")
+    setTimeout(function(){
+        window.location.href = "login.html";
+    }, 500);
 }

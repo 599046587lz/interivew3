@@ -7,17 +7,22 @@ $(function () {
 
     //获取clubinfo
     $.ajax({
-        url:  baseURL+"club/clubInfo",
+        url: baseURL + "club/clubInfo",
         type: "get",
-        success: function (data, status, xhr) {
-            $(".clubName").html(data.message.name);
-            var $container = $(".container");
-            var $department = $(".department");
-            var $classroom = $(".classroom");
-            $container.css('height', $container.height() + 35 * data.message.departments.length + 'px');
-            for (var i in data.message.departments) {
-                $department.append("<input value='" + data.message.departments[i]["name"] + "' readonly/>");
-                $classroom.append("<input class='room' depart='" + data.message.departments[i]["did"] + "' value='" + data.message.departments[i]["location"] + "' />");
+        statusCode: {
+            200 : function (data) {
+                $(".clubName").html(data.message.name);
+                var $container = $(".container");
+                var $department = $(".department");
+                var $classroom = $(".classroom");
+                $container.css('height', $container.height() + 35 * data.message.departments.length + 'px');
+                for (var i in data.message.departments) {
+                    $department.append("<input value='" + data.message.departments[i]["name"] + "' readonly/>");
+                    $classroom.append("<input class='room' depart='" + data.message.departments[i]["did"] + "' value='" + data.message.departments[i]["location"] + "' />");
+                }
+            },
+            403 : function () {
+                relogin()
             }
         }
     });
@@ -40,9 +45,6 @@ $(function () {
             data: JSON.stringify({
                 info: dep
             }),
-            // processData: false,
-            // traditional: true,
-            // dataType: "json",
             contentType: 'application/json',
             statusCode: {
                 200: function () {
@@ -53,7 +55,7 @@ $(function () {
                 },
                 205: function () {
                     alert("修改成功!");
-                },
+                }
             }, complete: function () {
                 self.removeClass('loading');
             }
@@ -62,11 +64,11 @@ $(function () {
         //上传文件(有文件时上传文件)
         var excelName = $('#file').val();
         var fileTArr = excelName.split(".");
-            //切割出后缀文件名
+        //切割出后缀文件名
         var filetype = fileTArr[fileTArr.length - 1];
         if (filetype != null && filetype != "") {
-            $(function (){
-                let files= $('#file').prop('files');
+            $(function () {
+                let files = $('#file').prop('files');
                 var data = new FormData();
                 data.append('archive', files[0]);
 
@@ -95,20 +97,19 @@ $(function () {
     });
 
 
-
     $("#file").on("click", function (event) {
         var select = $('#select');
         select.addClass('loading');
         if (confirm("上传文件,是否继续？")) {
-            setTimeout(function(){
+            setTimeout(function () {
                 select.removeClass('loading');
-            },1500);
+            }, 1500);
         } else {
             //取消上传文件关闭inputfile窗口
             event.preventDefault();
-            setTimeout(function(){
+            setTimeout(function () {
                 select.removeClass('loading');
-            },100);
+            }, 100);
         }
         //confirm是同步的 confirm时不能渲染页面
     });

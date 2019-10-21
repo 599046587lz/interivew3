@@ -28,9 +28,9 @@ window.onbeforeunload = function(e) {
 };
 
 // functions
-var relogin = function(){
-    window.location = '/';
-};
+// var relogin = function(){
+//     window.location = '/';
+// };
 
 var set_depName = function(){
     $('.topBar .title').text(decodeURIComponent(window.location.hash.replace('#','')));
@@ -54,7 +54,7 @@ var HTTPCode = {
         action:function(){
 //            console.log(HTTPCode);
             err(HTTPCode[403].text);
-//            err('error');
+            relogin()
         }
     },
     404:{
@@ -66,21 +66,21 @@ var HTTPCode = {
 };
 
 // -err
-var err = function(text){
-    notif({
-        msg:text,
-        position:'center',
-        type:'error'
-    });
-};
-// -success
-var success = function(text){
-    notif({
-        msg:text,
-        position:'center',
-        type:'success'
-    })
-};
+// var err = function(text){
+//     notif({
+//         msg:text,
+//         position:'center',
+//         type:'error'
+//     });
+// };
+// // -success
+// var success = function(text){
+//     notif({
+//         msg:text,
+//         position:'center',
+//         type:'success'
+//     })
+// };
 
 $.ajaxSetup({
     statusCode:(function(){

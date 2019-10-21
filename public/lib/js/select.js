@@ -6,17 +6,16 @@ var set_club = function(){
 		url : baseURL + '/club/clubInfo',
 		type : 'get',
 		statusCode : {
-			404 : function(){
-				err("Page not found!");
-			},
-			403 : function(){
-				err("未登录或登录超时!");
-				relogin();	
-			},
 			200 : function(data){
 				console.log(data);
 				club = data.message;
 				set_department();
+			},
+			403 : function(){
+				relogin();
+			},
+			404 : function(){
+				err("Page not found!");
 			},
 			500 : function(){
 				err('服务器错误,请刷新页面再试!');
@@ -25,24 +24,8 @@ var set_club = function(){
 	});
 };
 
-var err = function(text){
-    notif({
-        msg:text,
-        position:'center',
-        type:'error'
-    });
-};
-// -success
-var success = function(text){
-    notif({
-        msg:text,
-        position:'center',
-        type:'success'
-    })
-};
-
 var set_department = function (){
-	var output      = ""; 
+	var output      = "";
 	var template    = "<option value='DID'>NAME</option>\n";
 	var dep = club.departments;
 	for( var i in dep){
@@ -56,11 +39,6 @@ var set_department = function (){
 	$("#_select").html(output);
 };
 
-var relogin = function (){
-	setTimeout(function(){
-		window.location.href = "login.html";
-	}, 500);
-}
 
 var setInterviewer = function(){
 	var did = $("#_select").val();
@@ -81,7 +59,7 @@ var setInterviewer = function(){
 			},
 			403 : function(){
 				err("未登录或登录超时!");
-				relogin();	
+				relogin();
 			},
 			204 : function(){
 				success('设置成功,即将跳转!');
@@ -89,7 +67,7 @@ var setInterviewer = function(){
 					var _did = $("#_select").val();
 					var name = $("#_select [value=" + _did + "]").text();
 					window.location.href = "interview.html#" + encodeURIComponent(name) + '-' + encodeURIComponent(interviewer);
-				}, 500);				
+				}, 500);
 			},
 			500 : function(){
 				err('服务器错误,请重试!');

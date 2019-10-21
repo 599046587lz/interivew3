@@ -2,22 +2,6 @@
 //baseURL = 'http://interview.redhome.cc';
 baseURL = '/';
 
-var err = function (text) {
-    notif({
-        msg: text,
-        position: 'center',
-        type: 'error'
-    });
-};
-// -success
-var success = function (text) {
-    notif({
-        msg: text,
-        position: 'center',
-        type: 'success'
-    })
-};
-
 $(function () {
 
     $('#password').keydown(function (event) {

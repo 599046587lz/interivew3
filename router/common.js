@@ -103,7 +103,7 @@ router.post('/login', mid.checkFormat(function () {
         req.session.cid = clubInfo.cid;
         return res.json({
             status: 200,
-            message: clubInfo
+            // message: clubInfo
         });
     } else {
         throw new JSONError('用户名或密码错误', 403);

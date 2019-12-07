@@ -5,7 +5,11 @@ let mongoose = require('mongoose');
 let config = require('./config');
 let mongoUserInfo = (!config.db.user || !config.db.password)? '' : config.db.user + ':' + config.db.password + '@';
 let mongoUrl = `mongodb://${mongoUserInfo}${config.db.host}/${config.db.db}`;
+
 mongoose.connect(mongoUrl, { useNewUrlParser: true })
+
+const db = mongoose.connection
+db.on('error', console.error.bind(console, 'MongoDB 连接错误'));
 
 let Department = new mongoose.Schema({
     did: Number,

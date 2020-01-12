@@ -4,18 +4,23 @@ baseURL = '/';
 
 $(function () {
 
-    var pass_field = mdc.textField.MDCTextField.attachTo($("#pass_field")[0])
     var pass_input = $("#password")[0]
     var icon = $("#visibility")[0]
 
     $(".visibility").click(function () {
-        pass_field.foundation_.activateFocus()
         if(pass_input.type === 'password'){
             pass_input.type = 'text';
             icon.style.color = '#3275E0'
         } else {
             pass_input.type = 'password';
             icon.style.color = '#919191'
+        }
+        pass_input.focus()
+    })
+
+    $("input").keyup(function (e) {
+        if(e.keyCode === 13){
+            $("#login").click()
         }
     })
 

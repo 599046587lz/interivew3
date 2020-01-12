@@ -101,11 +101,24 @@
 /*}*/
 
 :root {
-    --mdc-theme-primary: #3275E0;
-    --mdc-theme-secondary: red;
+    --platform-color-yellow:#F3BD42;
+    --platform-color-red:#D95040;
+    --platform-color-green:#58A55D;
+    --platform-color-blue:#3275E0;
+    --mdc-theme-primary: var(--platform-color-blue);
+    /*--mdc-theme-secondary: red;*/
 }
 .redhome {
     background:linear-gradient(150deg,rgba(255,170,133,1) 0%, rgba(179,49,95,1) 100%);
     -webkit-background-clip:text;
     -webkit-text-fill-color:transparent;
 }
+
+.copyright::after{
+    display: block;
+    content: "Powered by Redhome Studio";
+    text-align: center;
+    color: #606368;
+    margin-bottom: 24px;
+}
+

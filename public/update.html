@@ -1,43 +1,140 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<title>录入信息</title>
-	<link rel="stylesheet" href="lib/css/reset.css"/>
-	<link rel="stylesheet" href="css/update.css"/>
-	<link rel="stylesheet" href="css/common.css"/>
-	<link rel="stylesheet" type="text/css" href="lib/css/notifIt.css" />
+    <meta charset="UTF-8">
+    <title>录入信息</title>
+    <link rel="stylesheet" href="lib/css/reset.css"/>
+    <link rel="stylesheet" href="lib/css/update.css"/>
+    <link rel="stylesheet" type="text/css" href="lib/css/notifIt.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="lib/css/common.css"/>
 </head>
 <body>
-<div class="topBar">
-	<a class="back">
-		<img src="./img/back.png" alt=""/>
-	</a>
-	<div class="title">录入面试者信息</div>
-</div>
+<header class="header">
+	<span class="title">
+		<span class="redhome">redhome</span>
+		<span>interview</span>
+	</span>
+    <span class="user">
+		<span>UserName</span>
+		<div class="avatar">R</div>
+	</span>
+</header>
 <div class="container">
-	<div class="clubName"></div>
-	<div class="writeInfo">
-		<div class="department">
-			<span class="smallCircle"></span>
-			<span class="title">部门</span>
-		</div>
-		<div class="classroom">
-			<span class="smallCircle"></span>
-			<span class="title">教室</span>
-		</div>
-	</div>
-	<div>
-		<span id="select" class="select">
-			<span >选择文件</span>
-			<form enctype="multipart/form-data">
-				<input type="file" name="archive" id="file" accept="application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"/>
-			</form>
-		</span>
-	</div>
-	<div id="submit">提交</div>
+    <div class="tab_list">
+        <div class="mdc-tab-bar" role="tablist">
+            <div class="mdc-tab-scroller">
+                <div class="mdc-tab-scroller__scroll-area">
+                    <div class="mdc-tab-scroller__scroll-content">
+                        <button class="mdc-tab" role="tab" aria-selected="true" tabindex="0">
+                     <span class="mdc-tab__content">
+                          <span class="mdc-tab__text-label">Statistics</span>
+                     </span>
+                            <span class="mdc-tab-indicator">
+                        <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                    </span>
+                            <span class="mdc-tab__ripple"></span>
+                        </button>
+                        <button class="mdc-tab" role="tab" aria-selected="false" tabindex="-1">
+                     <span class="mdc-tab__content">
+                          <span class="mdc-tab__text-label">apply</span>
+                     </span>
+                            <span class="mdc-tab-indicator">
+                        <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                    </span>
+                            <span class="mdc-tab__ripple"></span>
+                        </button>
+                        <button class="mdc-tab" role="tab" aria-selected="false" tabindex="-1">
+                     <span class="mdc-tab__content">
+                          <span class="mdc-tab__text-label">Interview</span>
+                     </span>
+                            <span class="mdc-tab-indicator">
+                        <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                    </span>
+                            <span class="mdc-tab__ripple"></span>
+                        </button>
+                        <button class="mdc-tab" role="tab" aria-selected="false" tabindex="-1">
+                     <span class="mdc-tab__content">
+                          <span class="mdc-tab__text-label">Settings</span>
+                     </span>
+                            <span class="mdc-tab-indicator">
+                        <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                    </span>
+                            <span class="mdc-tab__ripple"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="tab_container">
+        <div class="mdc-menu-surface mdc-menu" id="departments">
+<!--            <div class="right menu">-->
+<!--                <div class="item">-->
+<!--                    <div class="ui icon input">-->
+<!--                        <input type="text" placeholder="Search..." id="search">-->
+<!--                        <i class="search link icon"></i>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+        </div>
+        <div class="mdc-chip-set mdc-chip-set--filter" role="grid">
+            <div class="mdc-chip" role="row">
+                <div class="mdc-chip__ripple"></div>
+                <i class="material-icons mdc-chip__icon mdc-chip__icon--leading">face</i>
+                <span class="mdc-chip__checkmark" >
+      <svg class="mdc-chip__checkmark-svg" viewBox="-2 -3 30 30">
+        <path class="mdc-chip__checkmark-path" fill="none" stroke="black"
+              d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+      </svg>
+    </span>
+                <span role="gridcell">
+      <span role="checkbox" tabindex="0" aria-checked="false" class="mdc-chip__text">Filterable content</span>
+    </span>
+            </div>
+            ...
+        </div>
+        <div class="mdc-data-table">
+
+            <table id="export" class="mdc-data-table__table" aria-label="Dessert calories">
+            </table>
+        </div>
+    </div>
+
 </div>
+
+<!--<div class="topBar">-->
+<!--	<a class="back">-->
+<!--		<img src="./img/back.png" alt=""/>-->
+<!--	</a>-->
+<!--	<div class="title">录入面试者信息</div>-->
+<!--</div>-->
+<!--<div class="container">-->
+<!--	<div class="clubName"></div>-->
+<!--	<div class="writeInfo">-->
+<!--		<div class="department">-->
+<!--			<span class="smallCircle"></span>-->
+<!--			<span class="title">部门</span>-->
+<!--		</div>-->
+<!--		<div class="classroom">-->
+<!--			<span class="smallCircle"></span>-->
+<!--			<span class="title">教室</span>-->
+<!--		</div>-->
+<!--	</div>-->
+<!--	<div>-->
+<!--		<span id="select" class="select">-->
+<!--			<span >选择文件</span>-->
+<!--			<form enctype="multipart/form-data">-->
+<!--				<input type="file" name="archive" id="file" accept="application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"/>-->
+<!--			</form>-->
+<!--		</span>-->
+<!--	</div>-->
+<!--	<div id="submit">提交</div>-->
+<!--</div>-->
+
 </body>
+<script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
 <script type="text/javascript" src="lib/js/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="js/update.js"></script>
 <script type="text/javascript" src="lib/js/notifIt.js"></script>

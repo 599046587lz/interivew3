@@ -118,53 +118,86 @@
 <!--    </div>-->
 <!--    <div class="confirm">确定</div>-->
 <!--</div>-->
+<header class="header">
+	<span class="title">
+		<span class="redhome">redhome</span>
+		<span>interview</span>
+	</span>
+    <span class="user">
+		<span>UserName</span>
+		<div class="avatar">R</div>
+	</span>
+</header>
 <div class="main">
-    <div class="login card">
-        <div class="title">interview</div>
-        <div class="mdc-select mdc-select--outlined">
-            <div class="mdc-select__anchor input">
-                <i class="mdc-select__dropdown-icon"></i>
-                <div id="demo-selected-text" class="mdc-select__selected-text" role="button" aria-haspopup="listbox" aria-labelledby="demo-label demo-selected-text"></div>
-                <div class="mdc-notched-outline">
-                    <div class="mdc-notched-outline__leading"></div>
-                    <div class="mdc-notched-outline__notch">
-                        <label class="mdc-floating-label">Department</label>
+    <section class="container">
+        <div id="one_card">
+            <figure class="login card front">
+                <div class="interview_title">interview</div>
+                <div class="mdc-select mdc-select--outlined">
+                    <div class="mdc-select__anchor input">
+                        <i class="mdc-select__dropdown-icon"></i>
+                        <div id="demo-selected-text" class="mdc-select__selected-text" role="button" aria-haspopup="listbox" aria-labelledby="demo-label demo-selected-text"></div>
+                        <div class="mdc-notched-outline">
+                            <div class="mdc-notched-outline__leading"></div>
+                            <div class="mdc-notched-outline__notch">
+                                <label class="mdc-floating-label">Department</label>
+                            </div>
+                            <div class="mdc-notched-outline__trailing"></div>
+                        </div>
                     </div>
-                    <div class="mdc-notched-outline__trailing"></div>
-                </div>
-            </div>
 
-            <div class="mdc-select__menu mdc-menu mdc-menu-surface" role="listbox">
-                <ul class="mdc-list">
-                    <li class="mdc-list-item mdc-list-item--selected" data-value="" aria-selected="true"></li>
-                    <li class="mdc-list-item" data-value="grains">
-                        媒体运营部
-                    </li>
-                    <li class="mdc-list-item" data-value="vegetables">
-                        Vegetables
-                    </li>
-                    <li class="mdc-list-item" data-value="fruit">
-                        Fruit
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="mdc-text-field mdc-text-field--outlined input">
-            <input class="mdc-text-field__input" id="text-field-hero-input">
-            <div class="mdc-notched-outline">
-                <div class="mdc-notched-outline__leading"></div>
-                <div class="mdc-notched-outline__notch">
-                    <label for="text-field-hero-input" class="mdc-floating-label">Interviewer</label>
+                    <div class="mdc-select__menu mdc-menu mdc-menu-surface" role="listbox">
+                        <ul class="mdc-list">
+                            <li class="mdc-list-item" data-value="grains">
+                                媒体运营部
+                            </li>
+                            <li class="mdc-list-item" data-value="vegetables">
+                                技术部
+                            </li>
+                            <li class="mdc-list-item" data-value="fruit">
+                                人力资源部
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="mdc-notched-outline__trailing"></div>
-            </div>
+                <div class="mdc-text-field mdc-text-field--outlined input">
+                    <input class="mdc-text-field__input" id="text-field-hero-input">
+                    <div class="mdc-notched-outline">
+                        <div class="mdc-notched-outline__leading"></div>
+                        <div class="mdc-notched-outline__notch">
+                            <label for="text-field-hero-input" class="mdc-floating-label">Interviewer</label>
+                        </div>
+                        <div class="mdc-notched-outline__trailing"></div>
+                    </div>
+                </div>
+
+                <button class="mdc-button mdc-button--raised submit" id="next">
+                    <span class="mdc-button__ripple"></span>next
+                </button>
+            </figure>
+            <figure class="call card back">
+                <div class="wait">队伍人数
+                    <span class="wait_num">8</span> 人
+                </div>
+                <div class="operation">
+                    <div class="call">
+                        <button class="mdc-button mdc-button--raised">
+                            <span class="mdc-button__ripple"></span> Call
+                        </button>
+                    </div>
+                    <div class="or">
+                        <div>or</div>
+                    </div>
+                    <div class="cut_in">call by staff id</div>
+                </div>
+
+            </figure>
         </div>
 
-        <button class="mdc-button mdc-button--raised submit">
-            <span class="mdc-button__ripple"></span>next
-        </button>
-    </div>
+    </section>
+
 </div>
+<footer class="copyright"></footer>
 </body>
 <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
 <script>

@@ -126,7 +126,7 @@ html,body {
 }
 
 .main {
-  height: 100%;
+  height: calc(100vh - 75px - 45px - 88px);
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -140,7 +140,7 @@ html,body {
   padding: 20px;
 }
 
-.title {
+.interview_title {
   color: var(--mdc-theme-primary);
   font-size: 26px;
   margin-bottom: 20px;
@@ -160,5 +160,77 @@ html,body {
 }
 
 .mdc-select--outlined .mdc-select__anchor .mdc-notched-outline--upgraded .mdc-floating-label--float-above {
+  color: var(--mdc-theme-primary);
+}
+
+.container {
+  width: 320px;
+  height: 340px;
+  position: relative;
+  perspective: 800px;
+}
+
+.container #one_card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  transform-style: preserve-3d;
+  transition: transform 1s;
+}
+
+#one_card figure {
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+
+#one_card .back {
+  transform: rotateY(180deg);
+  text-align: center;
+  background: white;
+}
+
+#one_card .back .wait {
+  font-size: 26px;
+  margin: 60px 0;
+}
+
+#one_card .back .wait .wait_num {
+  color: var(--mdc-theme-primary);
+  font-size: 46px;
+}
+
+#one_card.flipped {
+  transform: rotateY(180deg);
+}
+
+#one_card .or {
+  position: relative;
+  margin: 10px 0;
+  font-size: 20px;
+}
+
+.or div:after, .or div:before {
+  background: #000000;
+  content: "";
+  height: 1px;
+  position: absolute;
+  top: 50%;
+  width: 20%;
+}
+
+.or div:after {
+  left: 80px;
+}
+
+.or div:before {
+  right: 80px;
+}
+
+#one_card .back .cut_in {
   color: var(--mdc-theme-primary);
 }

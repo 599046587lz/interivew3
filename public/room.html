@@ -1,107 +1,129 @@
 <html>
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" >
     <title>叫号大厅</title>
     <link rel="stylesheet" type="text/css" href="lib/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="room3.css">
     <link rel="stylesheet" type="text/css" href="lib/css/common.css">
     <link rel="stylesheet" type="text/css" href="lib/css/room.css">
     <link rel="stylesheet" type="text/css" href="lib/css/square/blue.css"/>
     <link rel="stylesheet" type="text/css" href="lib/css/jquery.jscrollpane.css"/>
     <link rel="stylesheet" type="text/css" href="lib/css/notifIt.css"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
+    <link rel="stylesheet" type="text/css" href="lib/css/select.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Round">
 </head>
 
 <body>
-<div class="topBar">
-
-    <a class="back">
-        <img src="./img/back.png" alt=""/>
-    </a>
-    <div class="title">叫号大厅</div>
-</div>
-<div class="room" >
-    <div class ="callScroll">
-        <div class="current" >
-            <div class="_default">
-                <span class="smallCircle"></span><span class="calling">暂无呼叫</span>
+    <div class="topBar">
+        <header class="header">
+            <span class="title">
+                <span class="redhome">redhome</span>
+                <span>interview</span>
+            </span>
+            <span class="user">
+                <span>UserName</span>
+                <div class="avatar">R</div>
+            </span>
+        </header>
+    </div>
+    <div class="room_main" >
+        <div class="bull_wai" id="wait">
+            <div class="bull">
+                <div class="room_border" onclick="mohu(this)"  id="clear1" >
+                    <div class="cirle_number"><span class="span_circle">1</span></div>
+                    <span class="span1">Jerry</span>
+                    <div class="department">技术部</div>
+                </div>
+            </div>
+            <div class="bull">
+                <div class="room_border" id="clear2" onclick="mohu(this)" >
+                    <div class="cirle_number"><span class="span_circle">2</span></div>
+                    <span class="span1">Jerry</span>
+                    <div class="department">设计部</div>
+                </div>
+            </div>
+            <div class="bull">
+                <div class="room_border"  onclick="mohu(this)"id="clear3">
+                    <div class="cirle_number"><span class="span_circle">3</span></div>
+                    <span class="span1">Jerry</span>
+                    <div class="department">技术部</div>
+                </div>
+            </div>
+            <div class="bull">
+                <div class="room_border" onclick="mohu(this)"  id="clear1" >
+                    <div class="cirle_number"><span class="span_circle">1</span></div>
+                    <span class="span1">Jerry</span>
+                    <div class="department">技术部</div>
+                </div>
+            </div>
+            <div class="bull">
+                <div class="room_border" onclick="mohu(this)" >
+                    <div class="cirle_number"><span class="span_circle">1</span></div>
+                    <span class="span1">Jerry</span>
+                    <div class="department">技术部</div>
+                </div>
             </div>
         </div>
     </div>
-    <div class="waitingListHead">
-    <table >
-        <thead>
-        <tr class = "tHead">
-            <td>号码</td>
-            <td>学号</td>
-            <td>姓名</td>
-            <td>意向部门</td>
-            <td>面试教室</td>
-        </tr>
-        </thead>
-        </table>
+    <div class="direction">
+        <div class="next2"><img src="img/left.png" class="right1" onclick="step_left()"></div> 
+        <div class="next"><img src="img/right.png" class="right1" onclick="step_right()"></div> 
+
     </div>
-    <div class="waitingList" >
-        <table class = "overHide">
-            <tbody >
-            <tr class="_default">
-                <td>--</td>
-                <td>--</td>
-                <td>--</td>
-                <td>--</td>
-                <td>--</td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-    <div class="info">
-        <span>已面试 <span class="interviewedNumber">0</span> 人，还有 <span class="waitingNumber">0</span> 人等待</span>
-        <div class="signin right floated" >
-            <span class = "newVolunteer">请输入签到者学号：</span>
-            <input type="text" name="sid">
-            <div class="submit">签到</div>
+    <div class="outer_container">
+        <div id="dier">
+            <div class="room_main2" >
+                <div class="room_border2">
+                    <div class="cirle_number"><span class="span_circle">1</span></div>
+                    <div class="interviewee">
+                        <span class="span1">Jerry</span>
+                        <span class="span2">18111</span>
+                    </div>
+                    <div class="department1" >
+                        技术部
+                    </div>
+                    <div class="department2">
+                        设计部
+                    </div>
+                    <button class="mdc-button mdc-button--raised submit button btn1" onclick="up($(this))">
+                        面试
+                    </button>
+                </div>
+            </div>
+            <div class="room_main2">
+                <div class="room_border2">
+                    <div class="cirle_number"><span class="span_circle">2</span></div>
+                    <div class="interviewee">
+                        <span class="span1">Jerry</span>
+                        <span class="span2">18111</span>
+                    </div>
+                    <div class="department1">
+                        技术部
+                    </div>
+                    <div class="department2">
+                        设计部
+                    </div>
+                    <button class="mdc-button mdc-button--raised submit button btn1" onclick="up($(this))">
+                        面试
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
+    <div id="room_circle" onclick="add()"><img src="img/jiaren.png" class="member"></div>
+    <div id="room_circle2" >
+        <img src="img/jiaren.png" class="member2">
+        <input type="text" class="room_input" name="username" placeholder="input staff id" id="staffid">
+        <img src="img/check.png" onclick="add_return()" style="cursor: pointer;margin-bottom: -5px;"> 
+    </div>
 
-    <!--待开发的信息录入-->
-
-    <!--<div class="selectDepContainer hide">-->
-        <!--<div class="selectDep">-->
-            <!--<div class="header">录入基本信息</div>-->
-            <!--<div class="content">-->
-                <!--<div class="form info">-->
-                    <!--<label for="">姓名：</label>-->
-                    <!--<input name="name" type="text">-->
-                <!--</div>-->
-                <!--<div class="form info">-->
-                    <!--<label>性别：</label>-->
-                    <!--<select name="sex" id="">-->
-                        <!--<option value="1">男</option>-->
-                        <!--<option value="0">女</option>-->
-                        <!--&lt;!&ndash;<option value="2">秀吉</option>&ndash;&gt;-->
-                    <!--</select>-->
-                <!--</div>-->
-                <!--<div class="form info">-->
-                    <!--<label for="">Q Q：</label>-->
-                    <!--<input name="qq" type="number">-->
-                <!--</div>-->
-                <!--<div class="form info">-->
-                    <!--<label for="">电话：</label>-->
-                    <!--<input name="phone" type="number">-->
-                <!--</div>-->
-                <!--<div class="form info">-->
-                    <!--<label for="">邮箱：</label>-->
-                    <!--<input name="email" type="text">-->
-                <!--</div>-->
-                <!--<div class="info">-->
-                    <!--<label for="">部门：</label>-->
-                    <!--<div class="list"></div>-->
-                <!--</div>-->
-                <!--<div class="submit">提交</div>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</div>-->
-</div>
-<!--<iframe src="" id="frameboard" class = "hide" frameborder="0"></iframe>-->
+    <div id = "tianjia"></div>
+    <footer class="copyright"></footer>
 </body>
+<script type="text/javascript" src="room3.js"></script>
 <script type="text/javascript" src="lib/js/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="lib/js/room.js"></script>
 <script type="text/javascript" src="lib/js/socket.io.js"></script>
@@ -115,7 +137,4 @@
         $('input').placeholder({isUseSpan: false});
     });
 </script>
-<!--[if lt IE 9]>
-<script src="http://www.redhome.cc/wp-content/themes/redhome/js/html5.js"></script>
-<![endif]-->
 </html>

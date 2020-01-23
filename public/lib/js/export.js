@@ -8,22 +8,41 @@ $(function () {
     var isBasic = true
     var exportTable = $("#export");
 
+    function debounce(fun, delay) {
+        var id = null
+        return function () {
+            var that = this
+            var args = Array.prototype.slice.call(arguments)
+            clearTimeout(id)
+            id = setTimeout(function () {
+                fun.apply(that, args)
+            }, delay)
+        }
+    }
+
     var getDepartmentInfo = function () {
         var departmentsHtml = ""
         $.ajax({
             url: '/club/clubinfo',
             type: 'get',
-            success: function (data) {
-                var departmentsInfo = data.message.departments
-                if (departmentsInfo) {
-                    departmentsHtml += "<a class='item department active'>所有部门</a>"
-                    departmentsInfo.forEach(item => {
-                        departmentsName[item.did] = item.name
-                        departmentsHtml += `<a class='item department'>${item.name}</a>`
-                    })
+            statusCode : {
+                200 : function (data) {
+                    var departmentsInfo = data.message.departments
+                    if (departmentsInfo) {
+                        departmentsHtml += "<a class='item department active'>所有部门</a>"
+                        departmentsInfo.forEach(item => {
+                            departmentsName[item.did] = item.name
+                            departmentsHtml += `<a class='item department'>${item.name}</a>`
+                        })
+                    }
+                    $("#departments").prepend(departmentsHtml)
+                    getDepartmentData()
+
+                    $("#download").attr('href',`./common/download?cid=${data.message.cid}`)
+                },
+                403 : function () {
+                    relogin()
                 }
-                $("#departments").prepend(departmentsHtml)
-                getDepartmentData()
             }
         })
     }
@@ -40,7 +59,7 @@ $(function () {
         return undefined
     }
 
-    var getDepartmentInter = function () {
+    var getDepartmentInterNumber = function () {
         var department = $(".department")
         for (let i = 0; i <= departmentsName.length; i++) {
             let depart = department[i]
@@ -57,31 +76,32 @@ $(function () {
         }
     }
 
-    var getDepartmentData = function () {
+    var getDepartmentData = function (did) {
         var obj = {
             url: '/club/export',
             type: 'get',
             success: function (data) {
                 intervieweesData = data
-                intervieweesData.forEach(ele => {
-                    var intervieweeInform = [ele.name, ele.sid, ele.major, ele.email, ele.phone, ele.qq, ele.notion, addRate(ele.rate)]
-                    ele["information"] = intervieweeInform.join("#")
-                })
                 renderData = intervieweesData
                 renderTable()
-                getDepartmentInter()
             }
         }
-
-        $.ajax(obj);
-    }
-
-    var addRate = function (data) {
-        if (!data) {
-            return ""
+        obj.data = {}
+        if(did!==undefined && did !== -1){
+            obj.data.did = did
         }
-        return data.map(item => `#${departmentsName[item.did]}#${item.score}#${item.comment}#${item.interviewer}`).join('#')
-
+        if(searchValue !== ""){
+            obj.data.search = searchValue
+        }
+        if(did === undefined && searchValue === ""){
+            obj.success = function (data) {
+                intervieweesData = data
+                renderData = intervieweesData
+                renderTable()
+                getDepartmentInterNumber()
+            }
+        }
+        $.ajax(obj);
     }
 
     var renderInterviewers = function (data) {
@@ -112,6 +132,7 @@ $(function () {
                       <th>邮箱</th>
                       <th>电话号码</th>
                       <th>qq</th>
+                      <th>状态</th>
                       <th>报名部门</th>
                       <th>个人简介</th>
                       </tr>
@@ -123,6 +144,7 @@ $(function () {
                        <td>${item.email} </td> 
                        <td>${item.phone}</td> 
                        <td>${item.qq} </td> 
+                       <td>${item.state}</td>
                        <td>${item.volunteer.map(item => departmentsName[item])}</td>
                        <td>${item.notion}</td>
                        </tr>`)
@@ -163,23 +185,7 @@ $(function () {
         }
         $(".department.item.active").removeClass('active')
         $(this).addClass('active')
-        if (departmentsName[did] !== undefined) {
-            renderData = JSON.parse(JSON.stringify(intervieweesData.filter(ele => ele.volunteer.includes(did))))
-            renderData = renderData.map(ele => {
-                if (ele.rate && ele.rate.length > 0) {
-                    var rate = ele.rate.find(item => item.did === did)
-                    if (rate) {
-                        ele.rate = [rate]
-                    } else {
-                        ele.rate = []
-                    }
-                }
-                return ele
-            })
-        } else {
-            renderData = intervieweesData
-        }
-        renderTable()
+        getDepartmentData(did)
     })
 
     $("#exchange").on('click', function () {
@@ -192,9 +198,14 @@ $(function () {
         renderTable()
     })
 
+    var searchAjax = debounce(function () {
+        var did = judgeDepart($(".department.active").html())
+        getDepartmentData(did)
+    }, 1000)
+
     $("#search").on('input', function () {
         searchValue = this.value
-        renderTable()
+        searchAjax(searchValue)
     })
 
     $('.back').on('click', (function () {
@@ -202,5 +213,6 @@ $(function () {
     }));
 
     getDepartmentInfo()
+    getDepartmentInterNumber()
 
 });

@@ -68,6 +68,7 @@ router.get('/clubInfo', mid.checkFormat(function () {
     let cid = req.query.clubId;
     let result = await Club.getClubInfo(cid);
     let info = {
+        cid:result.cid,
         clubName: result.name,
         departments: result.departments,
         maxDep: result.maxDep,
@@ -102,7 +103,7 @@ router.post('/login', mid.checkFormat(function () {
         req.session.cid = clubInfo.cid;
         return res.json({
             status: 200,
-            message: clubInfo
+            // message: clubInfo
         });
     } else {
         throw new JSONError('用户名或密码错误', 403);

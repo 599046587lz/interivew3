@@ -2,61 +2,52 @@
 <html>
 <head>
 	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" >
 	<title>功能选择</title>
 	<link rel="stylesheet" type="text/css" href="lib/css/reset.css">
 	<link rel="stylesheet" type="text/css" href="lib/css/common.css">
 	<link rel="stylesheet" type="text/css" href="lib/css/select.css">
 	<link rel="stylesheet" type="text/css" href="lib/css/notifIt.css" />
-	<script type="text/javascript" src="lib/js/jquery-1.9.1.min.js"></script>
-	<script type="text/javascript" src="lib/js/select.js"></script>
-	<script type="text/javascript" src="lib/js/jquery.enplaceholder.js"></script>
-	<script type="text/javascript" src="lib/js/notifIt.js"></script>
-	<script type="text/javascript">
-	$(document).ready(function(){		
-		$('input').placeholder({isUseSpan:false});
-	});
-	</script>
-</head>
-<!--[if lt IE 9]>
-	<script src="http://www.redhome.cc/wp-content/themes/redhome/js/html5.js"></script>
-<![endif]-->
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Round">
 <body>
-<header class="select">
-	<img src="./img/title_small.png" alt="社团招新面试系统"/>
-	<a href="./export.html" class="applyInfo">报名详情</a>
+<header class="header">
+	<span class="title">
+		<span class="redhome">redhome</span>
+		<span>interview</span>
+	</span>
+	<span class="user">
+		<span>UserName</span>
+		<div class="avatar">R</div>
+	</span>
+
 </header>
 <div class="container">
-	<a class="uploadInfo" href="./update.html">
-		<img src="./img/select_uploadInfo.png" alt=""/>
-		<div>录入信息</div>
+	<a class="manage card" href="./update.html">
+		<i class="material-icons-round icon">tune</i>
+		<div class="text">manage</div>
 	</a>
-	<a class="interview">
-		<img src="./img/select_interview.png" alt="">
-		<div>进行面试</div>
+	<a class="interview card" href="./interview.html">
+		<i class="material-icons-round icon">question_answer</i>
+		<div class="text">interview</div>
 	</a>
-	<a class="room" href="./room.html">
-		<img src="./img/select_room.png" alt="">
-		<div>叫号大厅</div>
+	<a class="room card" href="./room.html">
+		<i class="material-icons-round icon">view_list</i>
+		<div class="text">room</div>
 	</a>
 </div>
-<div class="dimmer">
-	<div class="card">
-		<img class="close" src="./img/close.png" alt="">
-		<div class="content">
-			<div>
-				<label>请选择部门：</label>
-				<select id="_select">
-					<option disabled>正在加载中...</option>
-				</select>
-			</div>
-			<div>
-				<label>请输入姓名：</label>
-				<input type="text" name="interviewer" id="interviewer" placeholder=""/>
-			</div>
-
-			<div class="_interview underline">开始面试</div>
-		</div>
-	</div>
-</div>
+<footer class="copyright"></footer>
 </body>
+<script type="text/javascript" src="lib/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="lib/js/select.js"></script>
+<script type="text/javascript" src="lib/js/jquery.enplaceholder.js"></script>
+<script type="text/javascript" src="lib/js/notifIt.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('input').placeholder({isUseSpan:false});
+	});
+</script>
+</head>
+<!--[if lt IE 9]>
+<script src="http://www.redhome.cc/wp-content/themes/redhome/js/html5.js"></script>
+<![endif]-->
 </html>

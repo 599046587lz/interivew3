@@ -531,4 +531,13 @@ $(function () {
     $("#next").click(function () {
         $("#one_card").addClass('flipped')
     })
+
+    $("#call").click(function () {
+        $("#front_container").addClass('transparent')
+        $("#back_container").removeClass('transparent')
+    })
+
+    $("#start").click(function () {
+        $("#comment").removeClass('transparent')
+    })
 })

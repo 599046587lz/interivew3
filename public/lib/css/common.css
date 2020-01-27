@@ -106,12 +106,7 @@
     --platform-color-green:#58A55D;
     --platform-color-blue:#3275E0;
     --mdc-theme-primary: var(--platform-color-blue);
-    /*--mdc-theme-secondary: red;*/
-}
-.redhome {
-    background:linear-gradient(150deg,rgba(255,170,133,1) 0%, rgba(179,49,95,1) 100%);
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
+
 }
 
 .copyright::after{
@@ -126,11 +121,16 @@
     padding: 24px 70px;
     font-size: 18px;
 }
-.user{
-    color: #3275E0;
+.header .redhome {
+    background:linear-gradient(150deg,rgba(255,170,133,1) 0%, rgba(179,49,95,1) 100%);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+.header .user{
+    color:  var(--mdc-theme-primary);
     float: right;
 }
-.avatar{
+.header .avatar{
     background: var(--platform-color-red);
     height: 30px;
     width: 30px;

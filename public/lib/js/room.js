@@ -1,4 +1,9 @@
     var number = 2;
+    document.getElementById("leftt").onclick = function() {step_left();}
+    document.getElementById("rightt").onclick = function() {step_right();}
+    document.getElementById("room_circle").onclick = function() {add();}
+    document.getElementById("member2").onclick = function() {back();}
+    document.getElementById("check2").onclick = function() {add_return();}
     function add()
     {
         var room_circle = document.getElementById('room_circle');
@@ -64,8 +69,8 @@
             up($(this));
         } 
          // cover.appendChild(butn);
-    }
-    function mohu(obj){
+     }
+     function mohu(obj){
         var room_border_mohu = document.createElement("div");
         room_border_mohu.className = "room_border_mohu";
         room_border_mohu.style.display = "block";

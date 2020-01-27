@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="lib/css/square/blue.css"/>
     <link rel="stylesheet" href="lib/css/jquery.qtip.min.css"/>
     <link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined">
     <link rel="stylesheet" href="lib/css/common.css"/>
     <link rel="stylesheet" href="lib/css/interview.css"/>
 </head>
@@ -129,14 +130,15 @@
 	</span>
 </header>
 <div class="main">
-    <section class="container">
+    <section class="container" id="front_container">
         <div id="one_card">
             <figure class="login card front">
                 <div class="interview_title">interview</div>
                 <div class="mdc-select mdc-select--outlined">
                     <div class="mdc-select__anchor input">
                         <i class="mdc-select__dropdown-icon"></i>
-                        <div id="demo-selected-text" class="mdc-select__selected-text" role="button" aria-haspopup="listbox" aria-labelledby="demo-label demo-selected-text"></div>
+                        <div id="demo-selected-text" class="mdc-select__selected-text" role="button"
+                             aria-haspopup="listbox" aria-labelledby="demo-label demo-selected-text"></div>
                         <div class="mdc-notched-outline">
                             <div class="mdc-notched-outline__leading"></div>
                             <div class="mdc-notched-outline__notch">
@@ -145,7 +147,6 @@
                             <div class="mdc-notched-outline__trailing"></div>
                         </div>
                     </div>
-
                     <div class="mdc-select__menu mdc-menu mdc-menu-surface" role="listbox">
                         <ul class="mdc-list">
                             <li class="mdc-list-item" data-value="grains">
@@ -176,12 +177,24 @@
                 </button>
             </figure>
             <figure class="call card back">
+                <div class="blurry">
+                    <div class="skeleton">
+                        <div class="avatar"></div>
+                        <div class="line"></div>
+                    </div>
+                    <div class="skeleton">
+                        <div class="line"></div>
+                    </div>
+                    <div class="skeleton">
+                        <div class="line"></div>
+                    </div>
+                </div>
                 <div class="wait">队伍人数
                     <span class="wait_num">8</span> 人
                 </div>
                 <div class="operation">
                     <div class="call">
-                        <button class="mdc-button mdc-button--raised">
+                        <button class="mdc-button mdc-button--raised" id="call">
                             <span class="mdc-button__ripple"></span> Call
                         </button>
                     </div>
@@ -190,12 +203,76 @@
                     </div>
                     <div class="cut_in">call by staff id</div>
                 </div>
-
             </figure>
         </div>
-
     </section>
-
+    <div class="comment_container transparent" id="back_container">
+        <div class="transparent card"></div>
+        <div class="information card">
+            <div class="base">
+                <div class="left"></div>
+                <div class="right">
+                    <div>
+                        <span class="name">Jerry</span>
+                        <span class="number">18051101</span>
+                    </div>
+                    <div class="specialty">计算机科学与技术</div>
+                </div>
+            </div>
+            <div class="more">
+                <div class="mdc-chip" role="row">
+                    <div class="mdc-chip__ripple"></div>
+                    <i class="material-icons mdc-chip__icon mdc-chip__icon--leading">local_phone</i>
+                    <span role="gridcell">
+                    <span role="button" tabindex="0" class="mdc-chip__text">16666666666</span>
+                </span>
+                </div>
+                <div class="mdc-chip" role="row">
+                    <div class="mdc-chip__ripple"></div>
+                    <i class="material-icons mdc-chip__icon mdc-chip__icon--leading">email</i>
+                    <span role="gridcell">
+                    <span role="button" tabindex="0" class="mdc-chip__text">xxx@mail.com</span>
+                </span>
+                </div>
+            </div>
+            <div class="introduction">我真的很不错，我真的很不错，我是真的真的真的真的真的很不错！
+                我真的很不错，我真的很不错，我是真的真的真的真的真的很不错！
+                我真的很不错，我真的很不错，我是真的真的真的真的真的很不错！
+                我真的很不错，我真的很不错，我是真的真的真的真的真的很不错！
+                我真的很不错，我真的很不错，我是真的真的真的真的真的很不错！
+                我真的很不错，我真的很不错，我是真的真的真的真的真的很不错！
+                我真的很不错，我真的很不错，我是真的真的真的真的真的很不错！
+            </div>
+            <div class="operation">
+                <button class="mdc-button skip">  <span class="mdc-button__ripple"></span> skip</button>
+                <button class="mdc-button mdc-button--raised start" id="start">  <span class="mdc-button__ripple"></span> start</button>
+            </div>
+        </div>
+        <div class="comment card transparent" id="comment">
+            <div class="evaluation">Evaluation</div>
+            <div class="score">
+                <span class="text">score</span>
+                <div class="mdc-slider mdc-slider--discrete" tabindex="0" role="slider"
+                     aria-valuemin="0" aria-valuemax="5" aria-valuenow="0"
+                     aria-label="Select Value">
+                    <div class="mdc-slider__track-container">
+                        <div class="mdc-slider__track"></div>
+                    </div>
+                    <div class="mdc-slider__thumb-container">
+                        <div class="mdc-slider__pin">
+                            <span class="mdc-slider__pin-value-marker"></span>
+                        </div>
+                        <svg class="mdc-slider__thumb" width="21" height="21">
+                            <circle cx="10.5" cy="10.5" r="7.875"></circle>
+                        </svg>
+                        <div class="mdc-slider__focus-ring"></div>
+                    </div>
+                </div>
+            </div>
+            <textarea class="note"></textarea>
+            <button class="mdc-button mdc-button--raised submit">  <span class="mdc-button__ripple"></span> submit</button>
+        </div>
+    </div>
 </div>
 <footer class="copyright"></footer>
 </body>
@@ -207,6 +284,9 @@
     });
 
     mdc.textField.MDCTextField.attachTo(document.querySelector('.mdc-text-field'))
+
+    const slider = mdc.slider.MDCSlider.attachTo(document.querySelector('.mdc-slider'));
+    slider.listen('MDCSlider:change', () => console.log(`Value changed to ${slider.value}`));
 </script>
 <script type="text/javascript" src="lib/js/notifIt.js"></script>
 <!--<script src="https://raw.githubusercontent.com/aui/artTemplate/master/dist/template.js"></script>-->

@@ -2,7 +2,11 @@
 const debug = require('debug')('interview'),
       app = require('../app');
 
-app.set('port', process.env.PORT || 3001);
+
+const port = normalizePort(process.env.PORT || '3001');
+//app.set('port', process.env.PORT || 3001);
+app.set(port);
+
 
 let server = app.listen(app.get('port'), function() {
   debug('Redhome interview server listening on port ' + server.address().port);

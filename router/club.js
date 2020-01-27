@@ -2,8 +2,10 @@
  * Created by bangbang93 on 14-9-15.
  */
 let wrap = fn => (...args) => fn(...args).catch(args[2]);
-let express = require('express');
-let router = express.Router();
+//let express = require('express');
+let koa = require('koa');
+//let router = express.Router();
+let router = require('koa-router')();
 let Club = require('../modules/club');
 let Interviewee = require('../modules/interviewee');
 let mid = require('../utils/middleware');

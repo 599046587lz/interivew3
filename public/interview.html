@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="lib/css/square/blue.css"/>
     <link rel="stylesheet" href="lib/css/jquery.qtip.min.css"/>
     <link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="lib/css/common.css"/>
     <link rel="stylesheet" href="lib/css/interview.css"/>
 </head>
@@ -278,15 +278,9 @@
 </body>
 <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
 <script>
-    const select = mdc.select.MDCSelect.attachTo(document.querySelector('.mdc-select'));
-    select.listen('MDCSelect:change', () => {
-        alert(`Selected option at index ${select.selectedIndex} with value "${select.value}"`);
-    });
-
+    mdc.select.MDCSelect.attachTo(document.querySelector('.mdc-select'));
     mdc.textField.MDCTextField.attachTo(document.querySelector('.mdc-text-field'))
-
-    const slider = mdc.slider.MDCSlider.attachTo(document.querySelector('.mdc-slider'));
-    slider.listen('MDCSlider:change', () => console.log(`Value changed to ${slider.value}`));
+    mdc.slider.MDCSlider.attachTo(document.querySelector('.mdc-slider'));
 </script>
 <script type="text/javascript" src="lib/js/notifIt.js"></script>
 <!--<script src="https://raw.githubusercontent.com/aui/artTemplate/master/dist/template.js"></script>-->

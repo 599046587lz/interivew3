@@ -179,7 +179,7 @@ html,body {
   margin: auto;
   transition: 1s;
   padding: 20px;
-  display: none;
+  /*display: none;*/
 }
 
 .container #one_card {
@@ -368,8 +368,8 @@ html,body {
 }
 
 .transparent {
-  /*opacity: 0;*/
-  /*pointer-events: none;*/
+  opacity: 0;
+  pointer-events: none;
 }
 
 .mdc-slider {

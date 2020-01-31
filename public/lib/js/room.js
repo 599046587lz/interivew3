@@ -55,8 +55,8 @@
         rightDepartment.className = "rightDepartment";
         rightDepartment.innerHTML = "媒体运营部";
         cover.appendChild(rightDepartment);
-        var dier = document.getElementById("dier");
-        dier.appendChild(roomContainer);
+        var container = document.getElementById("container");
+        container.appendChild(roomContainer);
         var butn = document.createElement("button");
         butn.className = "mdc-button mdc-button--raised submit button btn1";
         butn.innerHTML = "面试";

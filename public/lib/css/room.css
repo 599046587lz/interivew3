@@ -1,16 +1,39 @@
+/*topBar*/
 .topBar{
   margin:0 0 50px 0;
 }
-.title{
+.topBar .title{
   font-size: 20px;
 }
-.user{
+.topBar .user{
   font-size: 20px;
 }
-.avatar{
+.topBar .avatar{
   font-size: 20px;
 }
-.roomBorder{
+
+
+/*roomMain*/
+.roomMain{
+  width: 720px;
+  height: 170px;
+  margin: 0 auto 50px;
+  overflow:hidden;
+}
+.roomMain .outerBull{
+  height: 190px;  
+  white-space: nowrap;
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+.outerBull .bull{
+  margin: 7px;
+  height: 150px;
+  width: 220px;
+  display: inline-block;
+  white-space: normal;
+}
+.bull .roomBorder{
   border-radius: 5px;
   border: 1px solid;
   width: 220px;
@@ -19,7 +42,13 @@
   cursor: pointer;
   position: relative;
 }
-.roomVague{
+.roomBorder .cirleNumber{
+   margin: 13px 0 0 18px; 
+}
+.roomBorder .department{
+  margin: 17px 0 0 50px;
+}
+.roomBorder .roomVague{
   width: 220px;
   color: var(--platform-color-blue);
   height: 150px;
@@ -29,14 +58,14 @@
   left: 0;
   top: 0;
 }
-.skip{
+.roomVague .skip{
   color: red;
   display: inline-block;
   margin: 10px 0 0 30px; 
   font-size: 15px;
   cursor: pointer;
 }
-.ok{
+.roomVague .ok{
   color: white;
   background-color: #3275E0;
   display: inline-block;
@@ -48,18 +77,45 @@
   margin: 0 0 0 70px; 
   cursor: pointer;
 }
-.tip{
+.roomVague .tip{
   color: white;
   margin: 20px 0 0 0; 
   text-align: center; 
   font-size: 15px;
 }
-.classRoom{
+.roomVague .classRoom{
   color: green;
   font-size: 25px;
   text-align: center;
 }
-.whiteCircle{
+
+
+/*direction*/
+.direction{
+  width: 720px;
+  left: 50%;
+  height: 0.5px;
+  z-index: 999;
+  position: absolute;
+  margin: -170px 0 0 -360px; 
+}
+.direction .turnRight{
+  position: absolute;
+  right: -7px;
+  top: 3px;
+  display: inline-block;
+  z-index: 999;
+}
+.direction .turnLeft{
+  top: 3px;
+  left: -19px;
+  position: absolute;
+  z-index: 999;
+}
+#left{
+  display: none;
+}
+.direction .whiteCircle{
   width: 50px;
   height: 50px;
   border-radius: 1000px;
@@ -69,30 +125,31 @@
   box-shadow: 0 0 5px black;
   cursor: pointer;
 }
-.roomMain{
-  width: 720px;
-  height: 170px;
-  margin: 0 auto 50px;
-  overflow:hidden;
+.direction .whiteCircle .beacon{
+  cursor: pointer;
+  margin: 15px 0 0 15px; 
+  width: 20px;
 }
-.outerBull{
-  height: 190px;  
-  white-space: nowrap;
-  overflow-x: scroll;
-  overflow-y: hidden;
+
+
+/*outerContainer*/
+.outerContainer{
+  height: 500px;
+  width: 800px;
+  overflow: hidden;
+  margin: -55px auto 0;
 }
-.bull{
-  margin: 7px;
-  height: 150px;
-  width: 220px;
-  display: inline-block;
-  white-space: normal;
+.outerContainer #container{
+  width: 820px;
+  overflow-x: hidden;
+  overflow-y: auto; 
+  height: 100%;
 }
-.roomContainer{
+#container .roomContainer{
   width: 750px;
   margin:20 auto 0;
 }
-.cover{
+.roomContainer .cover{
   width: 700px;
   height: 80px;
   border-radius: 5px;
@@ -103,53 +160,11 @@
   margin: 0 0 0 12px; 
   position: relative;
 }
-.turnRight{
+.cover .cirleNumber{
   position: absolute;
-  right: -7px;
-  top: 3px;
-  display: inline-block;
-  z-index: 999;
+  left: 21px;
+  top: 13px;
 }
-.direction{
-  width: 720px;
-  left: 50%;
-  height: 0.5px;
-  z-index: 999;
-  position: absolute;
-  margin: -170px 0 0 -360px; 
-}
-.turnLeft{
-  top: 3px;
-  left: -19px;
-  position: absolute;
-  z-index: 999;
-}
-#left{
-  display: none;
-}
-.beacon{
-  cursor: pointer;
-  margin: 15px 0 0 15px; 
-  width: 20px;
-}
-.copyright{
-  margin: 50px 0 0 0; 
-}
-#dier{
-  width: 820px;
-  overflow-x: hidden;
-  overflow-y: auto; 
-  height: 100%;
-}
-.outerContainer{
-  height: 500px;
-  width: 800px;
-  overflow: hidden;
-  margin: -55px auto 0;
-}
-/*.btn1{
-  margin: 0 0 10px 50px; 
-}*/
 .cirleNumber{
   width: 54px;
   height: 54px;
@@ -161,15 +176,7 @@
   line-height: 54px;
   text-align: center;
 }
-.roomBorder .cirleNumber{
-   margin: 13px 0 0 18px; 
-}
-.cover .cirleNumber{
-  position: absolute;
-  left: 21px;
-  top: 13px;
-}
-.interviewee{
+.roomContainer .interviewee{
   display: inline-block;
   position: absolute;
   left: 80px;
@@ -180,7 +187,7 @@
   color: var(--platform-color-blue);
   margin: 0 0 0 12px; 
 }
-.stdNumber{
+.interviewee .stdNumber{
   font-size: 15px;
   color: #4A4A4A;
   margin: 0 0 0 14px; 
@@ -196,15 +203,6 @@
   line-height: 40px;
   border-radius: 40px;
   /*border: 1px solid black;*/
-  
-}
-.roomBorder .department{
-  margin: 17px 0 0 50px;
-/*  position: absolute;
-  top: 70%;
-  left: 50%;
-  transform: translate(-50%, -50%);*/
-
 }
 .leftDepartment{
   right: 158px;
@@ -217,6 +215,9 @@
   top: 20px;
   position: absolute;
 }
+
+
+/*addCircle*/
 #addCircle{
   background-color: var(--platform-color-blue);
   width:50px;
@@ -239,9 +240,6 @@
   z-index: 999;
   right: 30px;
   bottom: 50px;
-}
-.false{
-  float: right;
 }
 .member{
   width: 25px;
@@ -279,4 +277,10 @@ input::-moz-input-placeholder{
 }
 input::-ms-input-placeholder{ 
   color: white;
+}
+
+
+/*footer*/
+.copyright{
+  margin: 50px 0 0 0; 
 }

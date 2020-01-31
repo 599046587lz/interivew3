@@ -1,8 +1,5 @@
-body{
-  background-color: white;
-}
 .topBar{
-  margin-bottom: 50px;
+  margin:0 0 50px 0;
 }
 .title{
   font-size: 20px;
@@ -13,38 +10,29 @@ body{
 .avatar{
   font-size: 20px;
 }
-.room_title{
-  font-size: 20px;
-  margin-left: 40px;
-  margin-top: 10px;
-}
 .roomBorder{
   border-radius: 5px;
   border: 1px solid;
   width: 220px;
-  max-width: none;
   border-color: var(--platform-color-blue);
-  color: var(--platform-color-blue);
   height: 150px;
   cursor: pointer;
+  position: relative;
 }
 .roomVague{
-  border-radius: 5px;
-  border: 1px solid;
   width: 220px;
   color: var(--platform-color-blue);
   height: 150px;
   background-color: grey;
   opacity: 0.9;
-  display: none;
-  margin-top: -152px;
-
+  position: absolute;
+  left: 0;
+  top: 0;
 }
 .skip{
   color: red;
   display: inline-block;
-  margin-top: 10px;
-  margin-left: 30px;
+  margin: 10px 0 0 30px; 
   font-size: 15px;
   cursor: pointer;
 }
@@ -57,27 +45,19 @@ body{
   line-height: 25px;
   text-align: center;
   border-radius: 5px;
-  margin-left: 70px;
+  margin: 0 0 0 70px; 
   cursor: pointer;
 }
-.p1{
+.tip{
   color: white;
-  margin-top:20px;
+  margin: 20px 0 0 0; 
   text-align: center; 
   font-size: 15px;
 }
-.p2{
+.classRoom{
   color: green;
   font-size: 25px;
   text-align: center;
-}
-.roomBorder .icon{
-  font-size: 100px;
-  margin: 0 0 10 0;
-}
-.roomBorder .text {
-  width: 106px;
-  font-size: 24px;
 }
 .whiteCircle{
   width: 50px;
@@ -90,13 +70,10 @@ body{
   cursor: pointer;
 }
 .roomMain{
-  z-index: 2;
   width: 720px;
   height: 170px;
-  margin: 0 auto;
+  margin: 0 auto 50px;
   overflow:hidden;
-  margin-bottom: 50px;
-  /*border: 1px solid black;*/  
 }
 .outerBull{
   height: 190px;  
@@ -113,10 +90,7 @@ body{
 }
 .roomContainer{
   width: 750px;
-  /*height: 80px;*/
-  margin:0 auto;
-  margin-top: 20px;
-  /*border: 1px solid black;*/
+  margin:20 auto 0;
 }
 .cover{
   width: 700px;
@@ -126,9 +100,7 @@ body{
   border-color: var(--platform-color-blue);
   color: var(--platform-color-blue);
   display: inline-block;
-  margin-left: 12px;
-  /*border: 1px solid black;*/
-  /*position: absolute;*/
+  margin: 0 0 0 12px; 
   position: relative;
 }
 .turnRight{
@@ -139,14 +111,12 @@ body{
   z-index: 999;
 }
 .direction{
-  /*border:1px solid black;*/
   width: 720px;
   left: 50%;
   height: 0.5px;
-  margin-top: -170px;
   z-index: 999;
   position: absolute;
-  margin-left: -360px;
+  margin: -170px 0 0 -360px; 
 }
 .turnLeft{
   top: 3px;
@@ -159,12 +129,11 @@ body{
 }
 .beacon{
   cursor: pointer;
-  margin-top: 15px;
-  margin-left: 15px;
+  margin: 15px 0 0 15px; 
   width: 20px;
 }
 .copyright{
-  margin-top: 50px;
+  margin: 50px 0 0 0; 
 }
 #dier{
   width: 820px;
@@ -176,168 +145,115 @@ body{
   height: 500px;
   width: 800px;
   overflow: hidden;
-  /*border: 1px solid black;*/
-  margin: 0 auto;
-  margin-top: -55px;
+  margin: -55px auto 0;
 }
-.btn1{
-  margin-left: 50px;
-  margin-bottom: 10px;
-}
+/*.btn1{
+  margin: 0 0 10px 50px; 
+}*/
 .cirleNumber{
-
   width: 54px;
   height: 54px;
   background-color: var(--platform-color-blue);
   border-radius: 1000px;
   display: inline-block;
-  margin-left: 18px;
-  margin-top: 13px;
+  color: white;
+  font-size: 33px;
+  line-height: 54px;
+  text-align: center;
 }
-.circleContainer{
-  width: 54px;
-  height: 54px;
-  background-color: var(--platform-color-blue);
-  border-radius: 1000px;
-  display: inline-block;
-/*  margin-left: 21px;
-  margin-top: 13px;*/
+.roomBorder .cirleNumber{
+   margin: 13px 0 0 18px; 
+}
+.cover .cirleNumber{
   position: absolute;
   left: 21px;
   top: 13px;
-  /*margin-top: -100px;*/
-  /*border: 1px solid black;*/
-}
-.spanCircle{
-  color: white;
-  font-size: 33px;
-  margin-left: 17px;
-  line-height: 54px;
-  /*margin-top: 100px;*/
-  /*margin-right: 10px;*/
-}
-.spanTen{
-  color: white;
-  font-size: 33px;
-  margin-left: 7px;
-  line-height: 54px;
-  /*margin-right: 10px;*/
 }
 .interviewee{
   display: inline-block;
   position: absolute;
   left: 80px;
   top: 5px;
-  /*top: 8px;*/
 }
 .stdName{
   font-size: 42px;
   color: var(--platform-color-blue);
-  margin-left: 12px;
+  margin: 0 0 0 12px; 
 }
 .stdNumber{
   font-size: 15px;
   color: #4A4A4A;
-  margin-left: 14px;
+  margin: 0 0 0 14px; 
 }
-.topDepartment{
+.department,.leftDepartment,.rightDepartment{
   background-color: #DDDDDD;
   color: #4A4A4A;
   font-size: 17px;
   display: inline-block;
-  /*width: 120px;*/
   padding-left: 20px;
   padding-right: 20px;
-  /*height: 40px;*/
   text-align: center; 
   line-height: 40px;
   border-radius: 40px;
-  margin-left: 50px;
-  margin-top: 17px;
-  /*position: absolute;*/
+  /*border: 1px solid black;*/
+  
+}
+.roomBorder .department{
+  margin: 17px 0 0 50px;
+/*  position: absolute;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%);*/
+
 }
 .leftDepartment{
-  background-color: #DDDDDD;
-  color: #4A4A4A;
-  font-size: 17px;
-  display: inline-block;
-/*  width: 90px;
-  height: 40px;*/
-  text-align: center; 
-  line-height: 40px;
-  border-radius: 40px;
-  padding-left: 20px;
-  padding-right: 20px;
-/*  margin-left: 180px;
-  margin-top: -20px;*/
   right: 158px;
   top: 20px;
   position: absolute;
-  /*margin-left: 30%;*/
 }
 .rightDepartment{
-  background-color: #DDDDDD;
-  color: #4A4A4A;
-  font-size: 17px;
-  display: inline-block;
-  /*width: 120px;
-  height: 40px;*/
-  padding-left: 20px;
-  padding-right: 20px;
-  text-align: center;
-  line-height: 40px;
-  border-radius: 40px;
-  margin-left: 10px;
+  margin: 0 0 0 10px; 
   right: 20px;
   top: 20px;
   position: absolute;
-  /*margin-left: 30%;*/
 }
 #addCircle{
   background-color: var(--platform-color-blue);
   width:50px;
   height: 50px;
   border-radius: 1000px;
-  margin-top: 30px;
-  /*margin-left: 90%;*/
+  margin: 30px 0 0 0; 
   cursor: pointer;
   z-index: 999;
   position: fixed;
   right: 30px;
   bottom: 50px;
-  /*//color: var(--platform-color-blue);*/
 }
 #submitCircle{
   background-color: var(--platform-color-blue);
   width:200px;
   height: 50px;
   border-radius: 1000px;
-  /*margin-left: 86%;*/
-  /*margin-top: -50px;*/
   display: none;
   position: fixed;
   z-index: 999;
   right: 30px;
   bottom: 50px;
-  /*border: 1px solid black;*/
 }
 .false{
-  /*border:1px solid black;*/
   float: right;
 }
 .member{
   width: 25px;
-  margin-left: 12px;
-  margin-top: 9px;
+  margin: 9px 0 0 12px; 
 }
-#check2{
+#checkAdd{
   cursor: pointer;
-  margin-bottom: -5px;
+  margin: 0 0 -5px 0; 
 }
-#member2{
+#returnMember{
   width: 25px;
-  margin-left: 15px;
-  margin-top: 9px;
+  margin: 9px 0 0 15px; 
   cursor: pointer;
 }
 .roomInput{
@@ -347,20 +263,20 @@ body{
   border-right:0px;  
   background-color: transparent;
   width: 100px;
-  margin-left: 10px;"
+  margin: -10px 0 0 10px; 
 }
 input{
   font-size: 17px;
   color: white;
-  margin-bottom: 10px;
+  margin: 0 0 10px 0; 
   outline: none;
 }
-input::-webkit-input-placeholder{ /*WebKit browsers*/
+input::-webkit-input-placeholder{ 
   color: white;
 }
-input::-moz-input-placeholder{ /*Mozilla Firefox*/
+input::-moz-input-placeholder{ 
   color: white;
 }
-input::-ms-input-placeholder{ /*Internet Explorer*/ 
+input::-ms-input-placeholder{ 
   color: white;
 }

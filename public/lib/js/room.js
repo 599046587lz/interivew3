@@ -2,8 +2,8 @@
     document.getElementById("left").onclick = function() {stepLeft();}
     document.getElementById("right").onclick = function() {stepRight();}
     document.getElementById("addCircle").onclick = function() {add();}
-    document.getElementById("member2").onclick = function() {back();}
-    document.getElementById("check2").onclick = function() {addReturn();}
+    document.getElementById("returnMember").onclick = function() {back();}
+    document.getElementById("checkAdd").onclick = function() {addReturn();}
     function add()
     {
         var addCircle = document.getElementById('addCircle');
@@ -33,14 +33,9 @@
         roomContainer.appendChild(cover);
         var cirleNumber = document.createElement("div");
         cirleNumber.className = "cirleNumber";
+        cirleNumber.innerHTML = number;
         cover.appendChild(cirleNumber);
-        var spanNumber = document.createElement("span");
-        spanNumber.innerHTML = number;
-        if (number<10)
-            spanNumber.className = "spanCircle";
-        else spanNumber.className = "spanTen";
         number++;
-        cirleNumber.appendChild(spanNumber);
         var interviewee = document.createElement("div");
         interviewee.className = "interviewee";
         var stdName = document.createElement("span");
@@ -70,18 +65,19 @@
         } 
          // cover.appendChild(butn);
      }
-     function mohu(obj){
+     function vague(obj){
         var roomVague = document.createElement("div");
         roomVague.className = "roomVague";
         roomVague.style.display = "block";
-        var p1 = document.createElement("p");
-        p1.className = "p1";
-        p1.innerHTML = "you need go to";
-        roomVague.appendChild(p1);
-        var p2 = document.createElement("p");
-        p2.className = "p2";
-        p2.innerHTML = "210 room";
-        roomVague.appendChild(p2);
+        // roomVague.style.z-index = "90";
+        var tip = document.createElement("p");
+        tip.className = "tip";
+        tip.innerHTML = "you need go to";
+        roomVague.appendChild(tip);
+        var classRoom = document.createElement("p");
+        classRoom.className = "classRoom";
+        classRoom.innerHTML = "210 room";
+        roomVague.appendChild(classRoom);
         var skip = document.createElement("div");
         skip.className = "skip";
         skip.innerHTML = "skip";
@@ -100,11 +96,12 @@
                 objFather.remove();
         }
         roomVague.appendChild(ok);
+        obj.appendChild(roomVague);
         roomVague.onclick = function(){
-            roomVague.remove();
+            roomVague.remove();        
         }
-        var objFather = obj.parentNode;
-        objFather.appendChild(roomVague);
+         var objFather = obj.parentNode;
+        // objFather.appendChild(roomVague);
     }
     // function up(obj)
     // {
@@ -202,7 +199,6 @@
     function stepLeft()
     {
         var scrollLeft = document.getElementById("wait").scrollLeft;
-        // alert(scrollLeft);
         document.getElementById("wait").scrollLeft = scrollLeft - 732;
         scrollLeft -= 732;
         if (scrollLeft <= 0) {

@@ -46,11 +46,11 @@
         var stdName = document.createElement("span");
         stdName.innerHTML = "Jerry";
         stdName.className = "stdName";
-        var span2 = document.createElement("span");
-        span2.innerHTML = staffid;
-        span2.className = "span2";
+        var stdNumber = document.createElement("span");
+        stdNumber.innerHTML = staffid;
+        stdNumber.className = "stdNumber";
         interviewee.appendChild(stdName);
-        interviewee.appendChild(span2);
+        interviewee.appendChild(stdNumber);
         cover.appendChild(interviewee);
         var department1 = document.createElement("div");
         department1.className = "department1";
@@ -89,7 +89,7 @@
         skip.onclick = function(){
             var k = confirm("确定取消此人吗");
             if (k == true)
-                obj_father.remove();
+                objFather.remove();
         }
         var ok = document.createElement("div");
         ok.className = "ok";
@@ -97,14 +97,14 @@
         ok.onclick = function(){
             var k = confirm("确定让此人吗");
             if (k == true)
-                obj_father.remove();
+                objFather.remove();
         }
         roomVague.appendChild(ok);
         roomVague.onclick = function(){
             roomVague.remove();
         }
-        var obj_father = obj.parentNode;
-        obj_father.appendChild(roomVague);
+        var objFather = obj.parentNode;
+        objFather.appendChild(roomVague);
     }
     // function up(obj)
     // {

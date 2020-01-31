@@ -35,21 +35,25 @@
 }
 .bull .roomBorder{
   border-radius: 5px;
-  border: 1px solid;
+  border: 1px solid var(--platform-color-blue);
   width: 220px;
-  border-color: var(--platform-color-blue);
   height: 150px;
   cursor: pointer;
   position: relative;
 }
 .roomBorder .cirleNumber{
-   margin: 13px 0 0 18px; 
+   margin: 13px 0 0 -15px; 
+}
+.roomBorder .clearNews{
+  /*border: 1px solid black;*/
+  text-align: center;
 }
 .roomBorder .department{
-  margin: 17px 0 0 50px;
+  margin: 17px 0 0 0;
 }
 .roomBorder .roomVague{
   width: 220px;
+  /*display: none;*/
   color: var(--platform-color-blue);
   height: 150px;
   background-color: grey;
@@ -153,8 +157,7 @@
   width: 700px;
   height: 80px;
   border-radius: 5px;
-  border: 1px solid;
-  border-color: var(--platform-color-blue);
+  border: 1px solid var(--platform-color-blue); 
   color: var(--platform-color-blue);
   display: inline-block;
   margin: 0 0 0 12px; 

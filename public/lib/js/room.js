@@ -66,9 +66,9 @@
          // cover.appendChild(butn);
      }
      function vague(obj){
+        var objFather = obj.parentNode;
         var roomVague = document.createElement("div");
         roomVague.className = "roomVague";
-        roomVague.style.display = "block";
         // roomVague.style.z-index = "90";
         var tip = document.createElement("p");
         tip.className = "tip";
@@ -93,14 +93,17 @@
         ok.onclick = function(){
             var k = confirm("确定让此人吗");
             if (k == true)
-                objFather.remove();
+                 objFather.remove();
         }
         roomVague.appendChild(ok);
         obj.appendChild(roomVague);
         roomVague.onclick = function(){
-            roomVague.remove();        
+            alert(obj);
+            // roomVague = null;;
+            roomVague.parentNode.removeChild(roomVague);
+            // roomVague.style.display = "none";
+            // obj.removeChild(roomVague);       
         }
-         var objFather = obj.parentNode;
         // objFather.appendChild(roomVague);
     }
     // function up(obj)

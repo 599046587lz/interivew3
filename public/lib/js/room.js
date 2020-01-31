@@ -26,21 +26,21 @@
         var staffid = document.getElementById("staffid").value;
         room_circle.style.display = "block";
         room_add.style.display = "none";
-        var room_main2 = document.createElement("div");
-        room_main2.className = "room_main2";
+        var roomContainer = document.createElement("div");
+        roomContainer.className = "roomContainer";
         var cover= document.createElement("div");
         cover.className = "cover";
-        room_main2.appendChild(cover);
-        var cirle_number = document.createElement("div");
-        cirle_number.className = "cirle_number";
-        cover.appendChild(cirle_number);
+        roomContainer.appendChild(cover);
+        var cirleNumber = document.createElement("div");
+        cirleNumber.className = "cirleNumber";
+        cover.appendChild(cirleNumber);
         var span_number = document.createElement("span");
         span_number.innerHTML = number;
         if (number<10)
-            span_number.className = "span_circle";
+            span_number.className = "spanCircle";
         else span_number.className = "span_circle2";
         number++;
-        cirle_number.appendChild(span_number);
+        cirleNumber.appendChild(span_number);
         var interviewee = document.createElement("div");
         interviewee.className = "interviewee";
         var span1 = document.createElement("span");
@@ -61,7 +61,7 @@
         department2.innerHTML = "媒体运营部";
         cover.appendChild(department2);
         var dier = document.getElementById("dier");
-        dier.appendChild(room_main2);
+        dier.appendChild(roomContainer);
         var butn = document.createElement("button");
         butn.className = "mdc-button mdc-button--raised submit button btn1";
         butn.innerHTML = "面试";

@@ -144,7 +144,7 @@ html,body {
   /*margin: 20px;*/
 }
 
-.interview_title {
+.interviewTitle {
   color: var(--mdc-theme-primary);
   font-size: 26px;
   margin-bottom: 20px;
@@ -182,7 +182,7 @@ html,body {
   /*display: none;*/
 }
 
-.container #one_card {
+.container #oneCard {
   position: absolute;
   top: 0;
   left: 0;
@@ -192,34 +192,34 @@ html,body {
   transition: transform 1s;
 }
 
-#one_card figure {
+#oneCard figure {
   display: block;
   position: absolute;
   backface-visibility: hidden;
 }
 
-#one_card .back {
+#oneCard .back {
   transform: rotateY(180deg);
   text-align: center;
   background: white;
   position: relative;
 }
 
-#one_card .back .wait {
+#oneCard .back .wait {
   font-size: 26px;
   margin: 60px 0;
 }
 
-#one_card .back .wait .wait_num {
+#oneCard .back .wait .wait_num {
   color: var(--mdc-theme-primary);
   font-size: 46px;
 }
 
-#one_card.flipped {
+#oneCard.flipped {
   transform: rotateY(180deg);
 }
 
-#one_card .or {
+#oneCard .or {
   position: relative;
   margin: 10px 0;
   font-size: 20px;
@@ -242,7 +242,7 @@ html,body {
   right: 80px;
 }
 
-#one_card .back .cut_in {
+#oneCard .back .cutIn {
   color: var(--mdc-theme-primary);
 }
 
@@ -279,6 +279,10 @@ html,body {
 }
 .skeleton .line::after {
   width: 60%;
+}
+
+.information {
+  transition: 1s;
 }
 
 .information .base {
@@ -324,10 +328,14 @@ html,body {
   color: var(--platform-color-red);
 }
 
-.comment_container {
+.card.center {
+  transform: translate(61%, 0);
+}
+
+.commentContainer {
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
   flex-wrap: wrap;
   position: absolute;
   left: 0;
@@ -338,28 +346,40 @@ html,body {
   transition: 1s;
 }
 
-.comment_container .comment {
+.commentContainer .comment {
   transition: 1s;
+  margin:40px;
+  /*display: none;*/
+  /*opacity: 0;*/
+  /*transform: scale();*/
 }
 
-.comment_container .comment .evaluation {
+
+.commentContainer .comment.none {
+  width: 0;
+  margin: 0;
+  padding: 0;
+  height: 0;
+}
+
+.commentContainer .comment .evaluation {
   color: var(--mdc-theme-primary);
   font-size: 30px;
 }
 
-.comment_container .comment .score .text {
+.commentContainer .comment .score .text {
   float: left;
   line-height: 48px;
   color: var(--mdc-theme-primary);
   font-size: 20px;
 }
 
-.comment_container .comment .score .mdc-slider.mdc-slider--discrete {
+.commentContainer .comment .score .mdc-slider.mdc-slider--discrete {
   margin-left: 80px;
   width: 240px;
 }
 
-.comment_container .comment .note {
+.commentContainer .comment .note {
   border: 1px solid #DADCE0;
   height: 160px;
   width: 318px;

@@ -529,15 +529,19 @@
 
 $(function () {
     $("#next").click(function () {
-        $("#one_card").addClass('flipped')
+        $("#oneCard").addClass('flipped')
     })
 
     $("#call").click(function () {
-        $("#front_container").addClass('transparent')
-        $("#back_container").removeClass('transparent')
+        $("#frontContainer").addClass('transparent')
+        $("#backContainer").removeClass('transparent')
     })
 
     $("#start").click(function () {
-        $("#comment").removeClass('transparent')
+        $("#information").removeClass("center")
+        $("#comment").removeClass("center")
+        $("#comment").removeClass("transparent")
+
+        // setTimeout(function (){$("#comment").removeClass("transparent")},1000);
     })
 })

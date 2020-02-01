@@ -4,7 +4,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" >
     <title>叫号大厅</title>
     <link rel="stylesheet" type="text/css" href="lib/css/reset.css">
-    <link rel="stylesheet" type="text/css" href="room3.css">
     <link rel="stylesheet" type="text/css" href="lib/css/common.css">
     <link rel="stylesheet" type="text/css" href="lib/css/room.css">
     <link rel="stylesheet" type="text/css" href="lib/css/square/blue.css"/>
@@ -29,77 +28,43 @@
         </header>
     </div>
     <div class="roomMain" >
-        <div class="outerBull" id="wait">
-            <div class="bull">
-                <div class="roomBorder" onclick="vague(this)">
-                    <div class="clearNews">
-                        <div class="cirleNumber">1</div>
-                        <span class="stdName">Jerry</span>
-                        <div class="department">技术部</div>
-                    </div>
-<!--                     <div class="roomVague">
-                        <p class="tip">you need to go</p>
-                        <p class="classRoom">210 room</p>
-                        <div class="skip">skip</div>
-                        <div class="ok">ok</div>
-                    </div> -->
-                </div>
+        <div class="bull" id="wait">
+            <div class="roomBorder" onclick="vague(this)">
+                <div class="cirleNumber">1</div>
+                <span class="stdName">Jerry</span>
+                <div class="department">技术部</div>
             </div>
-            <div class="bull">
-                <div class="roomBorder" onclick="vague(this)">
-                    <div class="clearNews">
-                        <div class="cirleNumber">2</div>
-                        <span class="stdName">Jerry</span>
-                        <div class="department">媒体运营部</div>
-                    </div>
-                </div>
+            <div class="roomBorder" onclick="vague(this)">
+                <div class="cirleNumber">2</div>
+                <span class="stdName">Jerry</span>
+                <div class="department">媒体运营部</div>
             </div>
-            <div class="bull">
-                <div class="roomBorder" onclick="vague(this)">
-                    <div class="clearNews">
-                        <div class="cirleNumber">3</div>
-                        <span class="stdName">Jerry</span>
-                        <div class="department">媒体运营部</div>
-                    </div>
-                </div>
+            <div class="roomBorder" onclick="vague(this)">
+                <div class="cirleNumber">3</div>
+                <span class="stdName">Jerry</span>
+                <div class="department">媒体运营部</div>
             </div>
-            <div class="bull">
-                <div class="roomBorder" onclick="vague(this)">
-                    <div class="clearNews">
-                        <div class="cirleNumber">4</div>
-                        <span class="stdName">Jerry</span>
-                        <div class="department">媒体运营部</div>
-                    </div>
-                </div>
+            <div class="roomBorder" onclick="vague(this)">
+                <div class="cirleNumber">4</div>
+                <span class="stdName">Jerry</span>
+                <div class="department">媒体运营部</div>
             </div>
-            <div class="bull">
-                <div class="roomBorder" onclick="vague(this)">
-                    <div class="clearNews">
-                        <div class="cirleNumber">5</div>
-                        <span class="stdName">Jerry</span>
-                        <div class="department">媒体运营部</div>
-                    </div>
-                </div>
+            <div class="roomBorder" onclick="vague(this)">
+                <div class="cirleNumber">5</div>
+                <span class="stdName">Jerry</span>
+                <div class="department">媒体运营部</div>
             </div>
-            <div class="bull">
-                <div class="roomBorder" onclick="vague(this)">
-                    <div class="clearNews">
-                        <div class="cirleNumber">6</div>
-                        <span class="stdName">Jerry</span>
-                        <div class="department">媒体运营部</div>
-                    </div>
-                </div>
+            <div class="roomBorder" onclick="vague(this)">
+                <div class="cirleNumber">6</div>
+                <span class="stdName">Jerry</span>
+                <div class="department">媒体运营部</div>
             </div>
-            <div class="bull">
-                <div class="roomBorder" onclick="vague(this)">
-                    <div class="clearNews">
-                        <div class="cirleNumber">7</div>
-                        <span class="stdName">Jerry</span>
-                        <div class="department">媒体运营部</div>
-                    </div>
-                </div>
+            <div class="roomBorder" onclick="vague(this)">
+                <div class="cirleNumber">7</div>
+                <span class="stdName">Jerry</span>
+                <div class="department">媒体运营部</div>
             </div>
-        </div>
+        </div> 
     </div>
     <div class="direction">
         <div class="turnLeft">
@@ -113,25 +78,28 @@
             </div>
         </div> 
     </div>
-    <div class="outerContainer">
+    <div class="roomContainer">
         <div id="container">
-            <div class="roomContainer">
-                <div class="cover">
-                    <div class="cirleNumber">1</div>
-                    <div class="interviewee">
-                        <span class="stdName">Jerry</span>
-                        <span class="stdNumber">19051716</span>
-                    </div>
-                    <div class="leftDepartment">
-                        技术部
-                    </div>
-                    <div class="rightDepartment">
-                        媒体运营部
-                    </div>
-                    <!-- <button class="mdc-button mdc-button--raised submit button btn1" onclick="up($(this))">
-                        面试
-                    </button>    --> 
+            <div class="cover">
+                <div class="cirleNumber">1</div>
+                <div class="interviewee">
+                    <span class="stdName">Jerry</span>
+                    <span class="stdNumber">19051716</span>
                 </div>
+                <!-- <div class="leftDepartment">技术部</div> -->
+                <div class="mdc-chip-set" role="grid">
+                    <div class="mdc-chip" role="row">
+                        <span  tabindex="0" class="mdc-chip__text">技术部</span>
+                    </div>
+                    <div class="mdc-chip" role="row">
+                        <span role="button" tabindex="-1" class="mdc-chip__text">媒体运营部</span>
+                    </div>
+                    <div class="mdc-chip" role="row">
+                        <span role="button" tabindex="-1" class="mdc-chip__text">媒体运营部</span>
+                    </div>
+                </div>
+                <!--  <div class="rightDepartment">媒体运营部</div> -->
+                <!-- <button class="mdc-button mdc-button--raised submit button btn1"onclick="up($(this))">面试</button>    --> 
             </div>
         </div>
     </div>      
@@ -143,7 +111,6 @@
     </div>
     <footer class="copyright"></footer>
 </body>
-<script type="text/javascript" src="room3.js"></script>
 <script type="text/javascript" src="lib/js/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="lib/js/room.js"></script>
 <script type="text/javascript" src="lib/js/socket.io.js"></script>

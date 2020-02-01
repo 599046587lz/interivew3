@@ -26,11 +26,11 @@
         var staffid = document.getElementById("staffid").value;
         addCircle.style.display = "block";
         submitCircle.style.display = "none";
-        var roomContainer = document.createElement("div");
-        roomContainer.className = "roomContainer";
+        // var roomContainer = document.createElement("div");
+        // roomContainer.className = "roomContainer";
         var cover= document.createElement("div");
         cover.className = "cover";
-        roomContainer.appendChild(cover);
+        // roomContainer.appendChild(cover);
         var cirleNumber = document.createElement("div");
         cirleNumber.className = "cirleNumber";
         cirleNumber.innerHTML = number;
@@ -56,7 +56,8 @@
         rightDepartment.innerHTML = "媒体运营部";
         cover.appendChild(rightDepartment);
         var container = document.getElementById("container");
-        container.appendChild(roomContainer);
+        // container.appendChild(roomContainer);
+        container.appendChild(cover);
         var butn = document.createElement("button");
         butn.className = "mdc-button mdc-button--raised submit button btn1";
         butn.innerHTML = "面试";
@@ -66,7 +67,7 @@
          // cover.appendChild(butn);
      }
      function vague(obj){
-        var objFather = obj.parentNode;
+        // var objFather = obj.parentNode;
         var roomVague = document.createElement("div");
         roomVague.className = "roomVague";
         // roomVague.style.z-index = "90";
@@ -85,7 +86,8 @@
         skip.onclick = function(){
             var k = confirm("确定取消此人吗");
             if (k == true)
-                objFather.remove();
+                obj.remove();
+                // objFather.remove();
         }
         var ok = document.createElement("div");
         ok.className = "ok";
@@ -93,18 +95,15 @@
         ok.onclick = function(){
             var k = confirm("确定让此人吗");
             if (k == true)
-                 objFather.remove();
+                obj.remove()
+                 // objFather.remove();
         }
         roomVague.appendChild(ok);
         obj.appendChild(roomVague);
         roomVague.onclick = function(){
-            alert(obj);
-            // roomVague = null;;
-            roomVague.parentNode.removeChild(roomVague);
-            // roomVague.style.display = "none";
-            // obj.removeChild(roomVague);       
+            event.stopPropagation();
+            roomVague.remove();
         }
-        // objFather.appendChild(roomVague);
     }
     // function up(obj)
     // {

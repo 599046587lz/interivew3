@@ -131,8 +131,8 @@
 	</span>
 </header>
 <div class="main">
-    <section class="container" id="frontContainer">
-        <div id="oneCard">
+    <section class="container transparent" id="frontContainer">
+        <div id="oneCard" class="flipped">
             <figure class="login card front">
                 <div class="interviewTitle">interview</div>
                 <div class="mdc-select mdc-select--outlined">
@@ -193,7 +193,7 @@
                 <div class="wait">队伍人数
                     <span class="wait_num">8</span> 人
                 </div>
-                <div class="operation">
+                <div class="operation" id="operation">
                     <div class="call">
                         <button class="mdc-button mdc-button--raised" id="call">
                             <span class="mdc-button__ripple"></span> Call
@@ -204,12 +204,26 @@
                     </div>
                     <div class="cutIn">call by staff id</div>
                 </div>
+                <div class="waitRoom" id="waitRoom">
+                    <div class="roomConfirm">waiting room confirm</div>
+                    <div role="progressbar" class="mdc-linear-progress mdc-linear-progress--indeterminate">
+                        <div class="mdc-linear-progress__buffering-dots"></div>
+                        <div class="mdc-linear-progress__buffer"></div>
+                        <div class="mdc-linear-progress__bar mdc-linear-progress__primary-bar">
+                            <span class="mdc-linear-progress__bar-inner"></span>
+                        </div>
+                        <div class="mdc-linear-progress__bar mdc-linear-progress__secondary-bar">
+                            <span class="mdc-linear-progress__bar-inner"></span>
+                        </div>
+                    </div>
+                </div>
             </figure>
         </div>
     </section>
-    <div class="commentContainer transparent" id="backContainer">
+<!--    <div class="commentContainer transparent" id="backContainer">-->
 <!--        <div class="transparent card"></div>-->
-        <div class="information card center" id="information">
+    <div class="commentContainer" id="backContainer">
+    <div class="information card center" id="information">
             <div class="base">
                 <div class="left"></div>
                 <div class="right">
@@ -271,7 +285,17 @@
                 </div>
             </div>
             <textarea class="note"></textarea>
-            <button class="mdc-button mdc-button--raised submit">  <span class="mdc-button__ripple"></span> submit</button>
+            <div>
+                <div class="clock">
+                    <i class="material-icons clockIcon">
+                        timer
+                    </i>
+                    <span id="timer">
+                         <span class="min">0</span> 分 <span class="sec">0</span> 秒</span>
+                    </span>
+                </div>
+                <button class="mdc-button mdc-button--raised submit">  <span class="mdc-button__ripple"></span> submit</button>
+            </div>
         </div>
     </div>
 </div>
@@ -280,8 +304,9 @@
 <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
 <script>
     mdc.select.MDCSelect.attachTo(document.querySelector('.mdc-select'));
-    mdc.textField.MDCTextField.attachTo(document.querySelector('.mdc-text-field'))
+    mdc.textField.MDCTextField.attachTo(document.querySelector('.mdc-text-field'));
     mdc.slider.MDCSlider.attachTo(document.querySelector('.mdc-slider'));
+    mdc.linearProgress.MDCLinearProgress.attachTo(document.querySelector('.mdc-linear-progress'));
 </script>
 <script type="text/javascript" src="lib/js/notifIt.js"></script>
 <!--<script src="https://raw.githubusercontent.com/aui/artTemplate/master/dist/template.js"></script>-->

@@ -528,20 +528,46 @@
 // });
 
 $(function () {
+
+    var add_clock= function() {
+        var timer = $("#timer");
+        var clock = $(".clock")
+        var sec = timer.find(".sec");
+        var min = timer.find(".min");
+        if ("59" == sec.text()) {
+            sec.text("0");
+            min.text(1 + 1 * min.text());
+            //chekc time and give tip
+            if (min.text() > 6) {
+                clock.css({color: 'darkorange'});
+            }
+            if (min.text() > 15) {
+                clock.css({color: 'red'});
+            }
+        } else {
+            sec.text(1 + 1 * sec.text());
+        }
+    }
+
     $("#next").click(function () {
         $("#oneCard").addClass('flipped')
     })
 
     $("#call").click(function () {
+        $("#operation").remove();
+        $("#waitRoom")[0].style.display = 'inline';
+    })
+
+    var change = function (){
         $("#frontContainer").addClass('transparent')
         $("#backContainer").removeClass('transparent')
-    })
+    }
 
     $("#start").click(function () {
         $("#information").removeClass("center")
         $("#comment").removeClass("center")
         $("#comment").removeClass("transparent")
-
+        window.clocking = setInterval(add_clock, 1000);
         // setTimeout(function (){$("#comment").removeClass("transparent")},1000);
     })
 })

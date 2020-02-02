@@ -47,14 +47,35 @@
         interviewee.appendChild(stdName);
         interviewee.appendChild(stdNumber);
         cover.appendChild(interviewee);
+                //         <div class="mdc-chip-set" role="grid">
+                //     <div class="mdc-chip" role="row">
+                //         <span  tabindex="0" class="mdc-chip__text">技术部</span>
+                //     </div>
+                //     <div class="mdc-chip" role="row">
+                //         <span role="button" tabindex="-1" class="mdc-chip__text">媒体运营部</span>
+                //     </div>
+                //     <div class="mdc-chip" role="row">
+                //         <span role="button" tabindex="-1" class="mdc-chip__text">媒体运营部</span>
+                //     </div>
+                // </div>
+        var mdcset = document.createElement("div");
+        mdcset.className = "mdc-chip-set";
+        cover.appendChild(mdcset);
+
         var leftDepartment = document.createElement("div");
-        leftDepartment.className = "leftDepartment";
-        leftDepartment.innerHTML = "设计部";
-        cover.appendChild(leftDepartment);
+        leftDepartment.className = "mdc-chip";
+        var spanDepartment = document.createElement("span");
+        spanDepartment.className = "mdc-chip__text";
+        spanDepartment.innerHTML = "技术部";
+        leftDepartment.appendChild(spanDepartment);
+        mdcset.appendChild(leftDepartment);
         var rightDepartment = document.createElement("div");
-        rightDepartment.className = "rightDepartment";
-        rightDepartment.innerHTML = "媒体运营部";
-        cover.appendChild(rightDepartment);
+        rightDepartment.className = "mdc-chip";
+        var spanDepartment2 = document.createElement("span");
+        spanDepartment2.className = "mdc-chip__text";
+        spanDepartment2.innerHTML = "媒体运营部";
+        rightDepartment.appendChild(spanDepartment2);
+        mdcset.appendChild(rightDepartment);
         var container = document.getElementById("container");
         // container.appendChild(roomContainer);
         container.appendChild(cover);

@@ -3,32 +3,32 @@
     --platform-color-red:#D95040;
     --platform-color-green:#58A55D;
     --platform-color-blue:#3275E0;
+    --platform-border-color: #DBDCE0;
     --mdc-theme-primary: var(--platform-color-blue);
-
+    --mdc-theme-secondary: var(--platform-color-green);
+    --mdc-theme-error: var(--platform-color-red);
 }
 
-.copyright::after{
-    display: block;
-    content: "Powered by Redhome Studio";
-    text-align: center;
-    color: #606368;
-    margin-bottom: 24px;
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
 }
 
-.header{
+.topbar{
     padding: 24px 70px;
     font-size: 18px;
 }
-.header .redhome {
+.topbar .redhome {
     background:linear-gradient(150deg,rgba(255,170,133,1) 0%, rgba(179,49,95,1) 100%);
     -webkit-background-clip:text;
     -webkit-text-fill-color:transparent;
 }
-.header .user{
+.topbar .user{
     color:  var(--mdc-theme-primary);
     float: right;
 }
-.header .avatar{
+.topbar .avatar{
     background: var(--platform-color-red);
     height: 30px;
     width: 30px;
@@ -40,3 +40,10 @@
     font-size: 14px;
 }
 
+.copyright::after{
+    display: block;
+    content: "Powered by Redhome Studio";
+    text-align: center;
+    color: var(--mdc-theme-text-hint-on-background);
+    margin-bottom: 24px;
+}

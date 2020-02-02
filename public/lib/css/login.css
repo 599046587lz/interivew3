@@ -22,7 +22,7 @@ body {
     max-width: 300px;
     opacity: 0.8;
     text-align: center;
-    border:1px solid rgba(219,220,224,1);
+    border:1px solid var(--platform-border-color);
     border-radius:5px;
     padding: 40px;
     margin:0 30px;

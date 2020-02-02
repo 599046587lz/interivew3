@@ -16,11 +16,13 @@
 
 /*roomMain*/
 .roomMain{
-  width: 720px;
+  max-width: 720px;
+  /*width: 720px;*/
   height: 170px;
   margin: 0 auto 50px;
   overflow:hidden;
   /*border: 1px solid black;*/
+  position: relative;
 
 /*roomContainer   
  height: 500px;
@@ -39,15 +41,17 @@
   white-space: normal;
   border-radius: 5px;
   border: 1px solid var(--platform-color-blue);
-  width: 220px;
-  height: 150px;
+  /*width: 220px;*/
+  /*height: 150px;*/
   cursor: pointer;
   position: relative;
   display: inline-block;
   text-align: center;
+  padding: 18px;
+  padding-top: 2px;
 }
 .roomBorder .cirleNumber{
-   margin: 14px 0 0 -16px; 
+   /*margin: 14px 0 0 15px; */
 }
 .roomBorder .department{
   /*margin: 16px 0 0 0;*/
@@ -57,10 +61,12 @@
   /*align-items: center;*/
 }
 .roomBorder .roomVague{
-  width: 220px;
+  /*width: 220px;*/
   /*display: none;*/
   color: var(--platform-color-blue);
-  height: 150px;
+  /*height: 150px;*/
+  height: 100%;
+  width: 100%;
   background-color: grey;
   opacity: 0.9;
   position: absolute;
@@ -103,26 +109,27 @@
 
 /*direction*/
 .direction{
-  width: 720px;
-  left: 50%;
-  /*top: 30px;*/
-  /*top: 3px;*/
-  height: 0.5px;
+  /*width: 720px;*/
+  max-width: 720px;
+  width: 100%;
+  /*height: 0.5px;*/
   z-index: 999;
   position: absolute;
-  margin: -170px 0 0 -360px; 
+  top: 50%;
+  /*margin: -170px 0 0 -360px; */
   /*border: 1px solid black;*/
 }
 .direction .turnRight{
   position: absolute;
-  right: -12px;
-  top: 4px;
+  right: 2px;
+  top: -20px;
   display: inline-block;
   z-index: 999;
 }
 .direction .turnLeft{
-  top: 4px;
-  left: -16px;
+  top: -20px;
+  /*top: 50%;*/
+  left: 2px;
   position: absolute;
   z-index: 999;
 }
@@ -149,13 +156,16 @@
 /*roomContainer*/
 .roomContainer{
   height: 500px;
-  width: 720px;
+  /*width: 720px;*/
+  max-width: 720px;
   overflow: hidden;
   margin: -54px auto 0;
   /*border: 1px solid black;*/
 }
 .roomContainer #container{
-  width: 740px;
+  /*max-width: 740px;*/
+  width: calc(100% + 20px);
+  /*width: 740px;*/
   overflow-y: auto; 
   height: 100%;
   /*border: 1px solid black;*/
@@ -163,19 +173,34 @@
 }
 #container .cover{
   /*margin-left: 400px;*/
-  width: 700px;
-  height: 80px;
+  /*width: 700px;*/
+  /*height: 80px;*/
+  max-width: 700px;
   border-radius: 5px;
   border: 1px solid var(--platform-color-blue); 
   /*color: var(--platform-color-blue);*/
-  display: inline-block;
-  margin: 20px 0 0 8px; 
+
+  margin: 20px 28px 0 8px; 
   position: relative;
+  display: flex;
+  flex-flow:row wrap;
+  align-items:center;
+  justify-content: center;
+
+/* !当主轴沿水平方向时!justify-content,决定item在主轴上的对齐方式，可能的值有flex-start（默认），flex-end，center，space-between，space-around */
+/*justify-content:center;*/
+/* !主轴水平时!决定了item在交叉轴上的对齐方式，可能的值有flex-start|flex-end|center|baseline|stretch */
+align-items:center;
+  /*display: inline-block;*/
+  /*display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;*/
 }
 .cover .cirleNumber{
-  position: absolute;
+  /*position: absolute;*/
   left: 22px;
   top: 12px;
+  margin: 12px 0 12px 22px;
 }
 .cirleNumber{
   width: 54px;
@@ -190,9 +215,9 @@
 }
 .cover .interviewee{
   display: inline-block;
-  position: absolute;
-  left: 80px;
-  top: 4px;
+  /*position: absolute;*/
+  /*left: 80px;
+  top: 4px;*/
 }
 .stdName{
   font-size: 42px;
@@ -311,7 +336,9 @@ input::-ms-input-placeholder{
   color: #4A4A4A;
 }
 .roomContainer .mdc-chip-set{
-  position: absolute;
-  right: 20px;
-  top: 16px;
+  /*display: inline-block;*/
+  /*border: 1px solid black;*/
+  /*margin-left: 50px;*/
+  /*position: absolute;*/
+  /*right: 5px;*/
 }

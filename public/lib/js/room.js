@@ -26,11 +26,8 @@
         var staffid = document.getElementById("staffid").value;
         addCircle.style.display = "block";
         submitCircle.style.display = "none";
-        // var roomContainer = document.createElement("div");
-        // roomContainer.className = "roomContainer";
         var cover= document.createElement("div");
         cover.className = "cover";
-        // roomContainer.appendChild(cover);
         var cirleNumber = document.createElement("div");
         cirleNumber.className = "cirleNumber";
         cirleNumber.innerHTML = number;
@@ -47,21 +44,9 @@
         interviewee.appendChild(stdName);
         interviewee.appendChild(stdNumber);
         cover.appendChild(interviewee);
-                //         <div class="mdc-chip-set" role="grid">
-                //     <div class="mdc-chip" role="row">
-                //         <span  tabindex="0" class="mdc-chip__text">技术部</span>
-                //     </div>
-                //     <div class="mdc-chip" role="row">
-                //         <span role="button" tabindex="-1" class="mdc-chip__text">媒体运营部</span>
-                //     </div>
-                //     <div class="mdc-chip" role="row">
-                //         <span role="button" tabindex="-1" class="mdc-chip__text">媒体运营部</span>
-                //     </div>
-                // </div>
         var mdcset = document.createElement("div");
         mdcset.className = "mdc-chip-set";
         cover.appendChild(mdcset);
-
         var leftDepartment = document.createElement("div");
         leftDepartment.className = "mdc-chip";
         var spanDepartment = document.createElement("span");
@@ -71,10 +56,10 @@
         mdcset.appendChild(leftDepartment);
         var rightDepartment = document.createElement("div");
         rightDepartment.className = "mdc-chip";
-        var spanDepartment2 = document.createElement("span");
-        spanDepartment2.className = "mdc-chip__text";
-        spanDepartment2.innerHTML = "媒体运营部";
-        rightDepartment.appendChild(spanDepartment2);
+        var spanDepartmentD = document.createElement("span");
+        spanDepartmentD.className = "mdc-chip__text";
+        spanDepartmentD.innerHTML = "媒体运营部";
+        rightDepartment.appendChild(spanDepartmentD);
         mdcset.appendChild(rightDepartment);
         var container = document.getElementById("container");
         // container.appendChild(roomContainer);
@@ -85,13 +70,10 @@
         butn.onclick = function(){
             up($(this));
         } 
-         // cover.appendChild(butn);
      }
-     function vague(obj){
-        // var objFather = obj.parentNode;
+     function vague(obj){ 
         var roomVague = document.createElement("div");
         roomVague.className = "roomVague";
-        // roomVague.style.z-index = "90";
         var tip = document.createElement("p");
         tip.className = "tip";
         tip.innerHTML = "you need go to";
@@ -108,7 +90,6 @@
             var k = confirm("确定取消此人吗");
             if (k == true)
                 obj.remove();
-                // objFather.remove();
         }
         var ok = document.createElement("div");
         ok.className = "ok";
@@ -117,7 +98,6 @@
             var k = confirm("确定让此人吗");
             if (k == true)
                 obj.remove()
-                 // objFather.remove();
         }
         roomVague.appendChild(ok);
         obj.appendChild(roomVague);
@@ -198,8 +178,8 @@
     {
         var scrollLeft = document.getElementById("wait").scrollLeft;    
         // alert(scrollLeft);
-        document.getElementById("wait").scrollLeft = scrollLeft + 732;
-        scrollLeft += 732;
+        document.getElementById("wait").scrollLeft = scrollLeft + 680;
+        scrollLeft += 680;
         if (scrollLeft <= 0) {
             var a = document.getElementById("left");
             a.style.display  = "none";
@@ -222,8 +202,8 @@
     function stepLeft()
     {
         var scrollLeft = document.getElementById("wait").scrollLeft;
-        document.getElementById("wait").scrollLeft = scrollLeft - 732;
-        scrollLeft -= 732;
+        document.getElementById("wait").scrollLeft = scrollLeft - 680;
+        scrollLeft -= 680;
         if (scrollLeft <= 0) {
             var a = document.getElementById("left");
             a.style.display  = "none";

@@ -1,6 +1,5 @@
 /*topBar*/
 .topBar{
-  /*margin:0 0 50px 0;*/
   margin-bottom: 50px;
 }
 
@@ -8,32 +7,25 @@
 /*main*/
 .main{
   max-width: 720px;
-  /*border: 1px solid black;*/
   margin: 0 auto 0;
 }
 /*roomMain*/
 .roomMain{
-  max-width: 720px;
-  height: 150px;
   margin: 0 auto 40px;
-  overflow:hidden;
   position: relative;
-  /*border: 1px solid black;*/
-
 }
+.bull::-webkit-scrollbar { width: 0 !important }
 .roomMain .bull{
-  height: 180px;  
   white-space: nowrap;
-  overflow-x: scroll;
+  overflow: auto;
 }
 .roomBorder{
-  margin: 8px;
+  margin: 10.5px;
   border-radius: 5px;
   border: 1px solid var(--platform-color-blue);
-  position: relative;
   display: inline-block;
-  text-align: center;
-  padding: 18px;
+  position: relative;
+  padding: 16px;
 }
 .roomBorder .department{
   margin-top: 16px;
@@ -82,21 +74,20 @@
 
 /*direction*/
 .direction{
-  max-width: 720px;
-  width: 100%;
+  left: 0;
+  right: 0;
   z-index: 999;
   position: absolute;
   top: 30%;
-  /*border: 1px solid black;*/
 }
 .direction .turnRight{
   position: absolute;
-  right: 2px;
+  right: -12px;
   display: inline-block;
   z-index: 999;
 }
 .direction .turnLeft{
-  left: 2px;
+  left: -12px;
   position: absolute;
   z-index: 999;
 }
@@ -121,32 +112,23 @@
 
 
 /*roomContainer*/
-.roomContainer{
+#roomContainer{
   height: 500px;
-  max-width: 720px;
-  overflow: hidden;
+  max-width: 760px;
+  overflow-y: scroll;
   margin: -54px auto 0;
-  /*border: 1px solid black;*/
 }
-.roomContainer #container{
-  width: calc(100% + 20px);
-  overflow-y: auto; 
-  height: 100%;
-}
-#container .cover{
-  max-width: 680px;
+#roomContainer::-webkit-scrollbar { width: 0 !important }
+ .cover{
+  max-width: 740px;
   border-radius: 5px;
   border: 1px solid var(--platform-color-blue); 
-  margin: 20px 28px 0 8px; 
-  position: relative;
+  margin: 20px 8px 0; 
   display: flex;
   flex-wrap: wrap;
   align-items:center;
-}
-.cover .circleNumber{
-  left: 22px;
-  top: 12px;
-  margin: 12px 0 12px 22px;
+  justify-content: start;
+  padding: 12px 0 12px 22px;
 }
 .circleNumber{
   width: 40px;
@@ -164,32 +146,9 @@
   color: var(--platform-color-blue);
   margin-left: 12px;
 }
-.information .stdNumber{
-  font-size: 16px;
+.stdNumber{
   color: #4A4A4A;
   margin-left: 14px;
-}
-.department,.leftDepartment,.rightDepartment{
-  background-color: #DDDDDD;
-  color: #4A4A4A;
-  font-size: 18px;
-  display: inline-block;
-  padding-left: 20px;
-  padding-right: 20px;
-  text-align: center; 
-  line-height: 40px;
-  border-radius: 40px;
-}
-.leftDepartment{
-  right: 158px;
-  top: 20px;
-  position: absolute;
-}
-.rightDepartment{
-  margin-left: 10px;
-  right: 20px;
-  top: 20px;
-  position: absolute;
 }
 
 
@@ -266,21 +225,19 @@ input::-ms-input-placeholder{
 /*框架使用*/
 .roomBorder .mdc-chip-set{
   margin-top: 10px;
-  font-size: 18px;
-  display: inline-block;
-  text-align: center; 
-  line-height: 40px;
-  margin-bottom: 0px;
-  /*padding-bottom: 0px;*/
+  justify-content: center;
+}
+.cover .mdc-chip-set{
+  margin-left: auto;
 }
 
 
 .roomBorder .mdc-chip__text{
-  font-size: 18px;
+  font-size: 16px;
   color: #4A4A4A;
   cursor: default;
 }
-.roomContainer .mdc-chip__text{
+#roomContainer .mdc-chip__text{
   font-size: 18px;
   color: #4A4A4A;
   cursor: default;

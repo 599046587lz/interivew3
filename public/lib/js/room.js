@@ -1,4 +1,9 @@
     var number = 2;
+    // var allWidth = document.body.clientWidth;
+    // if (allWidth < 700)
+    // {
+    //     var direction = ge
+    // }
     document.getElementById("left").onclick = function() {stepLeft();}
     document.getElementById("right").onclick = function() {stepRight();}
     document.getElementById("addCircle").onclick = function() {add();}
@@ -34,7 +39,7 @@
         number++;
         var information = document.createElement("span");
         information.appendChild(circleNumber);
-        information.className = "information";
+        // information.className = "information";
         var stdName = document.createElement("span");
         stdName.innerHTML = "Jerry";
         stdName.className = "stdName";
@@ -61,9 +66,9 @@
         spanDepartmentD.innerHTML = "媒体运营部";
         rightDepartment.appendChild(spanDepartmentD);
         mdcset.appendChild(rightDepartment);
-        var container = document.getElementById("container");
+        var roomContainer = document.getElementById("roomContainer");
         // container.appendChild(roomContainer);
-        container.appendChild(cover);
+        roomContainer.appendChild(cover);
         var butn = document.createElement("button");
         butn.className = "mdc-button mdc-button--raised submit button btn1";
         butn.innerHTML = "面试";

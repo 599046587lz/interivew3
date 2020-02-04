@@ -1,9 +1,4 @@
     var number = 2;
-    // var allWidth = document.body.clientWidth;
-    // if (allWidth < 700)
-    // {
-    //     var direction = ge
-    // }
     document.getElementById("left").onclick = function() {stepLeft();}
     document.getElementById("right").onclick = function() {stepRight();}
     document.getElementById("addCircle").onclick = function() {add();}
@@ -31,85 +26,59 @@
         var staffid = document.getElementById("staffid").value;
         addCircle.style.display = "block";
         submitCircle.style.display = "none";
-        var cover= document.createElement("div");
-        cover.className = "cover";
-        var circleNumber = document.createElement("div");
-        circleNumber.className = "circleNumber";
-        circleNumber.innerHTML = number;
-        number++;
-        var information = document.createElement("span");
-        information.appendChild(circleNumber);
-        // information.className = "information";
-        var stdName = document.createElement("span");
-        stdName.innerHTML = "Jerry";
-        stdName.className = "stdName";
-        var stdNumber = document.createElement("span");
-        stdNumber.innerHTML = staffid;
-        stdNumber.className = "stdNumber";
-        information.appendChild(stdName);
-        information.appendChild(stdNumber);
-        cover.appendChild(information);
-        var mdcset = document.createElement("div");
-        mdcset.className = "mdc-chip-set";
-        cover.appendChild(mdcset);
-        var leftDepartment = document.createElement("div");
-        leftDepartment.className = "mdc-chip";
-        var spanDepartment = document.createElement("span");
-        spanDepartment.className = "mdc-chip__text";
-        spanDepartment.innerHTML = "技术部";
-        leftDepartment.appendChild(spanDepartment);
-        mdcset.appendChild(leftDepartment);
-        var rightDepartment = document.createElement("div");
-        rightDepartment.className = "mdc-chip";
-        var spanDepartmentD = document.createElement("span");
-        spanDepartmentD.className = "mdc-chip__text";
-        spanDepartmentD.innerHTML = "媒体运营部";
-        rightDepartment.appendChild(spanDepartmentD);
-        mdcset.appendChild(rightDepartment);
-        var roomContainer = document.getElementById("roomContainer");
-        // container.appendChild(roomContainer);
-        roomContainer.appendChild(cover);
-        var butn = document.createElement("button");
-        butn.className = "mdc-button mdc-button--raised submit button btn1";
-        butn.innerHTML = "面试";
-        butn.onclick = function(){
-            up($(this));
-        } 
-     }
-     function vague(obj){ 
-        var roomVague = document.createElement("div");
-        roomVague.className = "roomVague";
-        var tip = document.createElement("p");
-        tip.className = "tip";
-        tip.innerHTML = "you need go to";
-        roomVague.appendChild(tip);
-        var classRoom = document.createElement("p");
-        classRoom.className = "classRoom";
-        classRoom.innerHTML = "210 room";
-        roomVague.appendChild(classRoom);
-        var skip = document.createElement("div");
-        skip.className = "skip";
-        skip.innerHTML = "skip";
-        roomVague.appendChild(skip);
-        skip.onclick = function(){
-            var k = confirm("确定取消此人吗");
-            if (k == true)
-                obj.remove();
-        }
-        var ok = document.createElement("div");
-        ok.className = "ok";
-        ok.innerHTML = "ok";
-        ok.onclick = function(){
-            var k = confirm("确定让此人吗");
-            if (k == true)
-                obj.remove()
-        }
-        roomVague.appendChild(ok);
-        obj.appendChild(roomVague);
-        roomVague.onclick = function(){
-            event.stopPropagation();
-            roomVague.remove();
-        }
+        var part = `<div class="cover">
+        <span>
+        <div class="circleNumber">1</div>
+        <span class="stdName">Jerry</span>
+        <span class="stdNumber">1231</span>
+        </span>
+        <div class="mdc-chip-set">
+        <div class="mdc-chip">
+        <span class="mdc-chip__text">技术部</span>
+        </div>
+        <div class="mdc-chip" >
+        <span class="mdc-chip__text">媒体运营部</span>
+        </div>
+        <div class="mdc-chip">
+        <span class="mdc-chip__text">媒体运营部</span>
+        </div>
+        </div>
+        </div>`;
+        $("#roomContainer").append(part);
+        // var butn = document.createElement("button");
+        // butn.className = "mdc-button mdc-button--raised submit button btn1";
+        // butn.innerHTML = "面试";
+        // butn.onclick = function(){
+        //     up($(this));
+        // } 
+    }
+    function vague(obj){ 
+        var room = `<div class="roomVague">
+        <p class="tip">you need to go</p>
+        <p class="classRoom">210 room</p>
+        <div class="skip" onclick>skip</div>
+        <div class="ok">ok</div>
+        </div>`;
+        $(obj).append(room);
+         // skip.onclick = function(){
+         //     var k = confirm("确定取消此人吗");
+         //     if (k == true)
+         //        obj.remove();
+         // }
+        // var ok = document.createElement("div");
+        // ok.className = "ok";
+        // ok.innerHTML = "ok";
+        // ok.onclick = function(){
+        //     var k = confirm("确定让此人吗");
+        //     if (k == true)
+        //         obj.remove()
+        // }
+        // roomVague.appendChild(ok);
+        // obj.appendChild(roomVague);
+        // roomVague.onclick = function(){
+        //     event.stopPropagation();
+        //     roomVague.remove();
+        // }
     }
     // function up(obj)
     // {
@@ -166,19 +135,6 @@
     //      // </div>
     //  }
     // }
-    function ok(obj)
-    {
-        var k = confirm("确定让此人面试吗");
-        if (k == true)
-            obj.parents(".bull").remove();
-    }
-    function skip(obj)
-    {
-        var k = confirm("确定取消此人吗");
-        if (k == true){
-            obj.parents(".bull").remove();
-        }
-    }
     function stepRight()
     {
         var scrollLeft = document.getElementById("wait").scrollLeft;    

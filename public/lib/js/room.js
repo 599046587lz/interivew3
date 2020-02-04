@@ -30,7 +30,7 @@
         <span>
         <div class="circleNumber">1</div>
         <span class="stdName">Jerry</span>
-        <span class="stdNumber">1231</span>
+        <span class="stdNumber">`+staffid+`</span>
         </span>
         <div class="mdc-chip-set">
         <div class="mdc-chip">
@@ -60,6 +60,28 @@
         <div class="ok">ok</div>
         </div>`;
         $(obj).append(room);
+        $(".roomVague").on("click",function(){
+            event.stopPropagation();
+            $(".roomVague").remove();
+            // obj.removeChild(obj.querySelector('.roomVague'));
+            // obj.removeChild($('roomVague'));
+        });
+        $(".ok").on("click",function(){
+            event.stopPropagation();
+            var k = confirm("确定让此人面试吗");
+            if (k == true)
+                obj.remove();
+        });
+        $(".skip").on("click",function(){
+            event.stopPropagation();
+            var k = confirm("确定取消此人吗");
+            if (k == true)
+                obj.remove();
+        });
+        // room.click(function(){
+        //     alert(23);
+        // });
+
          // skip.onclick = function(){
          //     var k = confirm("确定取消此人吗");
          //     if (k == true)

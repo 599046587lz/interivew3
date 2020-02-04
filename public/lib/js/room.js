@@ -50,58 +50,37 @@
         // butn.innerHTML = "面试";
         // butn.onclick = function(){
         //     up($(this));
-        // } 
+        // }
     }
-    function vague(obj){ 
+    $(".roomBorder").click(function () {
         var room = `<div class="roomVague">
         <p class="tip">you need to go</p>
         <p class="classRoom">210 room</p>
         <div class="skip" onclick>skip</div>
         <div class="ok">ok</div>
         </div>`;
-        $(obj).append(room);
-        $(".roomVague").on("click",function(){
+        $(this).append(room);
+        $(".roomVague").on("click",function(event){
             event.stopPropagation();
-            $(".roomVague").remove();
-            // obj.removeChild(obj.querySelector('.roomVague'));
-            // obj.removeChild($('roomVague'));
+            this.remove();
         });
-        $(".ok").on("click",function(){
-            event.stopPropagation();
-            var k = confirm("确定让此人面试吗");
-            if (k == true)
-                obj.remove();
-        });
-        $(".skip").on("click",function(){
-            event.stopPropagation();
-            var k = confirm("确定取消此人吗");
-            if (k == true)
-                obj.remove();
-        });
-        // room.click(function(){
-        //     alert(23);
-        // });
+    })
 
-         // skip.onclick = function(){
-         //     var k = confirm("确定取消此人吗");
-         //     if (k == true)
-         //        obj.remove();
-         // }
-        // var ok = document.createElement("div");
-        // ok.className = "ok";
-        // ok.innerHTML = "ok";
-        // ok.onclick = function(){
-        //     var k = confirm("确定让此人吗");
-        //     if (k == true)
-        //         obj.remove()
-        // }
-        // roomVague.appendChild(ok);
-        // obj.appendChild(roomVague);
-        // roomVague.onclick = function(){
-        //     event.stopPropagation();
-        //     roomVague.remove();
-        // }
-    }
+    // function vague(obj){
+    //
+    //     // $(".ok").on("click",function(event){
+    //     //     event.stopPropagation();
+    //     //     var k = confirm("确定让此人面试吗");
+    //     //     if (k == true)
+    //     //         obj.remove();
+    //     // });
+    //     // $(".skip").on("click",function(event){
+    //     //     event.stopPropagation();
+    //     //     var k = confirm("确定取消此人吗");
+    //     //     if (k == true)
+    //     //         obj.remove();
+    //     // });
+    // }
     // function up(obj)
     // {
     //  var k = confirm("确定让此人面试吗");
@@ -148,8 +127,8 @@
     //      // <div class="department">技术部</div>
     //      // </div>
     //      // <div class="room_border_mohu"  id="mohu1" onclick="yikai1()">
-    //      // <p class="p1">you need go to </p> 
-    //      // <p class="p2">210 room</p> 
+    //      // <p class="p1">you need go to </p>
+    //      // <p class="p2">210 room</p>
     //      // <div class="skip" onclick="skip($(this))">skip</div>
     //      // <div class="ok" onclick="ok($(this))">ok</div>
     //      // </div>
@@ -159,7 +138,7 @@
     // }
     function stepRight()
     {
-        var scrollLeft = document.getElementById("wait").scrollLeft;    
+        var scrollLeft = document.getElementById("wait").scrollLeft;
         // alert(scrollLeft);
         document.getElementById("wait").scrollLeft = scrollLeft + 680;
         scrollLeft += 680;

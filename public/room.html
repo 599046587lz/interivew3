@@ -40,6 +40,12 @@
                             <span class="mdc-chip__text">技术部</span>
                         </div>
                     </div>
+<!--                     <div class="roomVague">
+                        <p class="tip">you need to go</p>
+                        <p class="classRoom">210 room</p>
+                        <div class="skip">skip</div>
+                        <div class="ok">ok</div>
+                    </div> -->
                 </div>
                 <div class="roomBorder" onclick="vague(this)">
                     <div>
@@ -143,13 +149,20 @@
             </div>
         </div>    
     </div>  
-    <div id="addCircle"><img src="img/jiaren.png" class="member"></div>
+    <div class="mdc-touch-target-wrapper" id="addCircle">
+        <button class="mdc-fab mdc-fab--mini mdc-fab--touch">
+            <div class="mdc-fab__ripple"></div>
+            <span class="material-icons mdc-fab__icon">add</span>
+        </button>
+    </div>
+    <!-- <div id="addCircle"><img src="img/jiaren.png" class="member"></div> -->
     <div id="submitCircle" >
         <img src="img/jiaren.png" id="returnMember">
         <input type="text" class="roomInput" name="username" placeholder="input staff id" id="staffid">
         <img src="img/check.png"  id="checkAdd">   
     </div>
     <footer class="copyright"></footer>
+</div>
 </body>
 <script type="text/javascript" src="lib/js/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="lib/js/room.js"></script>

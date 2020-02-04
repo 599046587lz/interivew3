@@ -1,26 +1,23 @@
-/*topBar*/
-.topBar{
-  margin-bottom: 50px;
-}
-
-
 /*main*/
 .main{
   max-width: 720px;
-  margin: 0 auto 0;
+  margin: 30px auto 30px;
+  padding: 8px;
 }
 /*roomMain*/
 .roomMain{
-  margin: 0 auto 40px;
+  margin: 0 auto;
   position: relative;
+  /*border: 1px solid black;*/
 }
 .bull::-webkit-scrollbar { width: 0 !important }
 .roomMain .bull{
   white-space: nowrap;
   overflow: auto;
+  padding: 10px 0;
 }
 .roomBorder{
-  margin: 10.5px;
+  margin-right: 16px;
   border-radius: 5px;
   border: 1px solid var(--platform-color-blue);
   display: inline-block;
@@ -31,14 +28,15 @@
   margin-top: 16px;
 }
 .roomBorder .roomVague{
-  color: var(--platform-color-blue);
-  height: 100%;
-  width: 100%;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  top: 0;
   background-color: grey;
   opacity: 0.9;
   position: absolute;
-  left: 0;
-  top: 0;
+  padding: 10px;
+  text-align: center;
 }
 .roomVague .skip{
   color: red;
@@ -61,14 +59,11 @@
 }
 .roomVague .tip{
   color: white;
-  margin-top: 10px;
-  text-align: center; 
   font-size: 16px;
 }
 .roomVague .classRoom{
-  color: green;
+  color: var(--platform-color-green);
   font-size: 26px;
-  text-align: center;
 }
 
 
@@ -83,7 +78,6 @@
 .direction .turnRight{
   position: absolute;
   right: -12px;
-  display: inline-block;
   z-index: 999;
 }
 .direction .turnLeft{
@@ -114,21 +108,21 @@
 /*roomContainer*/
 #roomContainer{
   height: 500px;
-  max-width: 760px;
   overflow-y: scroll;
-  margin: -54px auto 0;
+  margin: 0 auto;
+  /*padding: 0 8px;*/
+  /*border: 1px solid black;*/
 }
 #roomContainer::-webkit-scrollbar { width: 0 !important }
  .cover{
-  max-width: 740px;
   border-radius: 5px;
   border: 1px solid var(--platform-color-blue); 
-  margin: 20px 8px 0; 
+  margin: 20px 0; 
   display: flex;
   flex-wrap: wrap;
   align-items:center;
   justify-content: start;
-  padding: 12px 0 12px 22px;
+  padding: 12px;
 }
 .circleNumber{
   width: 40px;
@@ -154,9 +148,9 @@
 
 /*addCircle*/
 #addCircle{
-  background-color: var(--platform-color-blue);
-  width:50px;
-  height: 50px;
+  /*background-color: var(--platform-color-blue);*/
+  /*width:50px;*/
+  /*height: 50px;*/
   border-radius: 1000px;
   margin-top: 30px;
   cursor: pointer;
@@ -167,8 +161,8 @@
 }
 #submitCircle{
   background-color: var(--platform-color-blue);
-  width:200px;
-  height: 50px;
+  width:180px;
+  height: 40px;
   border-radius: 1000px;
   display: none;
   position: fixed;
@@ -178,15 +172,15 @@
 }
 .member{
   width: 26px;
-  margin: 10px 0 0 12px; 
+  margin: 10px 0 0 10px; 
 }
 #checkAdd{
   cursor: pointer;
-  margin-bottom: -6px;
+  margin-bottom: -4px;
 }
 #returnMember{
   width: 26px;
-  margin: 10px 0 0 16px; 
+  margin: 6px 0 0 8px; 
   cursor: pointer;
 }
 .roomInput{
@@ -196,7 +190,7 @@
   border-right:0px;  
   background-color: transparent;
   width: 100px;
-  margin: -10px 0 0 10px; 
+  margin: -14px 0 0 4px; 
 }
 input{
   font-size: 18px;
@@ -214,12 +208,6 @@ input::-ms-input-placeholder{
   color: white;
 }
 
-
-/*footer*/
-.copyright{
-  margin: 50px 0 0 0; 
-  margin-top: 50px;
-}
 
 
 /*框架使用*/
@@ -244,4 +232,10 @@ input::-ms-input-placeholder{
 }
 .mdc-chip-set .mdc-chip{
   cursor: default;
+}
+/*.mdc-fab .mdc-fab--mini .mdc-fab--touch{
+  background-color: var(--platform-color-blue);
+}*/
+.mdc-touch-target-wrapper .mdc-fab{
+  background-color: var(--platform-color-blue);
 }

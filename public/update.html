@@ -22,7 +22,8 @@
 	</span>
 </header>
 <div class="container">
-    <div class="tab_list">
+    <!--tabList-->
+    <div class="tabList">
         <div class="mdc-tab-bar" role="tablist">
             <div class="mdc-tab-scroller">
                 <div class="mdc-tab-scroller__scroll-area">
@@ -68,35 +69,31 @@
             </div>
         </div>
     </div>
-    <div class="tab_container">
-        <div class="mdc-menu-surface mdc-menu" id="departments">
-<!--            <div class="right menu">-->
-<!--                <div class="item">-->
-<!--                    <div class="ui icon input">-->
-<!--                        <input type="text" placeholder="Search..." id="search">-->
-<!--                        <i class="search link icon"></i>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-        </div>
-        <div class="mdc-chip-set mdc-chip-set--filter" role="grid">
-            <div class="mdc-chip" role="row">
-                <div class="mdc-chip__ripple"></div>
-                <i class="material-icons mdc-chip__icon mdc-chip__icon--leading">face</i>
-                <span class="mdc-chip__checkmark" >
-      <svg class="mdc-chip__checkmark-svg" viewBox="-2 -3 30 30">
-        <path class="mdc-chip__checkmark-path" fill="none" stroke="black"
-              d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
-      </svg>
-    </span>
-                <span role="gridcell">
-      <span role="checkbox" tabindex="0" aria-checked="false" class="mdc-chip__text">Filterable content</span>
-    </span>
+    <!--tabContainer-->
+    <div class="tabContainer">
+        <!--        filter-->
+        <div class="filter">
+            <i class="material-icons middle">filter_list</i>
+            <div class="conditions middle">
+                <div class="mdc-chip-set" role="grid">
+                    <div class="mdc-chip" role="row">
+                        <div class="mdc-chip__ripple"></div>
+                        <span role="gridcell">
+                            <span role="button" tabindex="0" class="mdc-chip__text">Jane Smith</span>
+                        </span>
+                        <span role="gridcell">
+                            <i class="material-icons mdc-chip__icon mdc-chip__icon--trailing" tabindex="-1" role="button">cancel</i>
+                        </span>
+                    </div>
+                </div>
             </div>
-            ...
+            <button class="mdc-fab mdc-fab--mini middle" aria-label="Favorite">
+                <div class="mdc-fab__ripple"></div>
+                <span class="mdc-fab__icon material-icons">add</span>
+            </button>
         </div>
-        <div class="mdc-data-table">
 
+        <div class="mdc-data-table">
             <table id="export" class="mdc-data-table__table" aria-label="Dessert calories">
             </table>
         </div>

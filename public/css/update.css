@@ -92,7 +92,23 @@
 
 .container {
 	margin: 40px;
-	text-align: center;
+	/*text-align: center;*/
+}
+
+.filter {
+	padding: 0 40px;
+}
+
+.filter .conditions {
+	display: inline-block;
+}
+
+.filter .middle {
+	vertical-align: middle;
+}
+
+.filter .mdc-fab {
+	background: var(--mdc-theme-primary);
 }
 
 /*#export {*/

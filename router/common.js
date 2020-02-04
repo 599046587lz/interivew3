@@ -11,9 +11,12 @@ let upload = require('multer')({dest: utils.storeFilesPath.upload});
 let JSONError = require('../utils/JSONError');
 let Joi = require('joi');
 
+
 let router = new Router({
-    prefix: '/common'
+   prefix: '/common'
 });
+
+
 
 // let wrap = fn => (...args) => fn(...args).catch(args[2]);
 //
@@ -85,7 +88,11 @@ let router = new Router({
 //     });
 // }));
 
-router.get('/clubInfo', async function (ctx,next) {
+router.get('/clubInfo',  mid.checkFormat(function () {
+        return Joi.object().keys({
+            clubId: Joi.number()
+        })
+}), async function (ctx,next) {
     let cid = ctx.request.query.clubId;
     let result = await Club.getClubInfo(cid);
     let info = {
@@ -129,9 +136,14 @@ router.get('/clubInfo', async function (ctx,next) {
 //         throw new JSONError('用户名或密码错误', 403);
 //     }
 // }));
-router.post('/login',  async function (ctx) {
-    let {user,password} = ctx.request.body;
-    password = utils.md5(password);
+router.post('/login',mid.checkFormat(function () {
+    return Joi.object().keys({
+        user: Joi.string().required(),
+        password: Joi.string().required()
+    })
+}),  async function (ctx) {
+    let {user, password} = ctx.request.body;
+    password = utils.md5(String(password));
     let clubInfo = await Club.getClubByName(user);
     if (clubInfo && password == clubInfo.password && user == clubInfo.name) {
         clubInfo = clubInfo.toObject();
@@ -141,7 +153,11 @@ router.post('/login',  async function (ctx) {
         ctx.response.status = 200;
         ctx.response.body = clubInfo;
     } else {
-        throw new JSONError('用户名或密码错误', 403);
+        // throw new JSONError('用户名或密码错误', 403);
+        const err = new Error("用户名或密码错误");
+        err.status = 403;
+        err.expose = true;
+        throw err;
     }
 });
 

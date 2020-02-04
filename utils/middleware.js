@@ -25,6 +25,36 @@ exports.session = function() {
 };
 
 
+// exports.checkFormat = function(format, option) {
+//     let errInfo;
+//     let joiFormat = format();
+//     if(joiFormat.errInfo) {
+//         errInfo = joiFormat.errInfo;
+//         joiFormat = joiFormat.joi;
+//     }
+//
+//     return function(req, res, next) {
+//         let body;
+//         if (req.method === 'GET' || req.method === 'DELETE') {
+//             body = Object.assign({}, req.query, req.params);
+//         } else {
+//             body = Object.assign({}, req.body, req.params);
+//         }
+//
+//         let result = Joi.validate(body, joiFormat, option);
+//         if(result.error) {
+//             console.log(result.error)
+//             let re = /(")([\u4E00-\u9FA5A-Za-z0-9_]+)(")/;
+//             let error = re.exec(result.error)[2];
+//             if(errInfo && errInfo[error]) {
+//                 return res.status(400).send(errInfo[error] + '格式错误');
+//             }
+//             return res.status(400).send('参数类型不合法');
+//         }
+//         next();
+//     }
+// };
+
 exports.checkFormat = function(format, option) {
     let errInfo;
     let joiFormat = format();
@@ -33,12 +63,12 @@ exports.checkFormat = function(format, option) {
         joiFormat = joiFormat.joi;
     }
 
-    return function(req, res, next) {
+    return function(ctx, next) {
         let body;
-        if (req.method === 'GET' || req.method === 'DELETE') {
-            body = Object.assign({}, req.query, req.params);
+        if (ctx.req.method === 'GET' || ctx.req.method === 'DELETE') {
+            body = Object.assign({}, ctx.req.query, ctx.req.params);
         } else {
-            body = Object.assign({}, req.body, req.params);
+            body = Object.assign({}, ctx.req.body, ctx.req.params);
         }
 
         let result = Joi.validate(body, joiFormat, option);
@@ -47,10 +77,47 @@ exports.checkFormat = function(format, option) {
             let re = /(")([\u4E00-\u9FA5A-Za-z0-9_]+)(")/;
             let error = re.exec(result.error)[2];
             if(errInfo && errInfo[error]) {
-                return res.status(400).send(errInfo[error] + '格式错误');
+                ctx.res.status = 400;
+                ctx.res.send(errInfo[error] + '格式错误');
             }
-            return res.status(400).send('参数类型不合法');
+            ctx.res.status = 400 ;
+            ctx.res.body = '参数类型不合法';
         }
-        next();
+        //next();
     }
 };
+
+
+// exports.checkFormat = function(format, option) {
+//     let errInfo;
+//     let joiFormat = format();
+//     if(joiFormat.errInfo) {
+//         errInfo = joiFormat.errInfo;
+//         joiFormat = joiFormat.joi;
+//     }
+//
+//     return function(ctx, next) {
+//         let body;
+//         if (ctx.req.method === 'GET' || ctx.req.method === 'DELETE') {
+//             body = Object.assign({}, ctx.req.query, ctx.req.params);
+//         } else {
+//             body = Object.assign({}, ctx.req.body, ctx.req.params);
+//         }
+//
+//         let result = Joi.validate(body, joiFormat, option);
+//         if(result.error) {
+//             console.log(result.error)
+//             let re = /(")([\u4E00-\u9FA5A-Za-z0-9_]+)(")/;
+//             let error = re.exec(result.error)[2];
+//             if(errInfo && errInfo[error]) {
+//                 ctx.res.status = 400;
+//                 ctx.res.send(errInfo[error] + '格式错误');
+//             }
+//             ctx.res.status = 400;
+//            // ctx.res.send('参数类型不合法');
+//             ctx.res.body = '参数类型不合法';
+//         }
+//         //next();
+//     }
+// };
+//

@@ -10,6 +10,7 @@ const json = require('koa-json');
 const koaStatic = require('koa-static');
 const session = require('koa-session');
 
+
 const club = require('./router/club');
 const interview = require('./router/interview');
 const room = require('./router/room');
@@ -47,6 +48,15 @@ app.use(json());
 app.use(logger());
 
 app.use(common.routes());
+app.use(club.routes());
+app.use(interview.routes());
+app.use(reg.routes());
+app.use(room.routes());
+
+app.use(async function(ctx, next) {
+    try { await next()
+    } catch (err) { console.log(err) }
+});
 
 module.exports = app;
 // app.use(cookieParser());
@@ -85,7 +95,7 @@ module.exports = app;
 //
 //
 // //进行是否登录的鉴定
-app.use(mid.checkLogin)
+//app.use(mid.checkLogin)
 // //app.use('/club', club);
 // router.get('/club',async(ctx,next)=>{
 //     ctx.response.body = club;

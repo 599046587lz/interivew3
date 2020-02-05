@@ -116,28 +116,6 @@ baseURL = '/';
 // });
 
 $(function () {
-    const tabBar = mdc.tabBar.MDCTabBar.attachTo(document.querySelector('.mdc-tab-bar'));
-    const tabs = document.querySelectorAll('.mdc-tab');
-    var tab_index = 0;
-
-    tabBar.listen('MDCTabBar:activated', function(event) {
-        tab_index = event.detail.index;
-        change_index()
-    });
-
-    const chipSetEl = document.querySelector('.mdc-chip-set');
-    const chipSet = new MDCChipSet(chipSetEl);
-    input.addEventListener('keydown', function(event) {
-        if (event.key === 'Enter' || event.keyCode === 13) {
-            const chipEl = document.createElement('div');
-            // ... perform operations to properly populate/decorate chip element ...
-            chipSetEl.appendChild(chipEl);
-            chipSet.addChip(chipEl);
-        }
-    });
-    chipSet.listen('MDCChip:removal', function(event) {
-        chipSetEl.removeChild(event.detail.root);
-    });
 
     var departmentsName = []
     var intervieweesData = []
@@ -157,6 +135,7 @@ $(function () {
             }, delay)
         }
     }
+
 
     var getDepartmentInfo = function () {
         var departmentsHtml = ""
@@ -184,35 +163,6 @@ $(function () {
             }
         })
     }
-
-    var judgeDepart = function (data) {
-        for (let i in departmentsName) {
-            if (data.indexOf(departmentsName[i]) !== -1) {
-                return Number(i)
-            }
-        }
-        if (data.indexOf("所有部门") !== -1) {
-            return -1
-        }
-        return undefined
-    }
-    //
-    // var getDepartmentInterNumber = function () {
-    //     var department = $(".department")
-    //     for (let i = 0; i <= departmentsName.length; i++) {
-    //         let depart = department[i]
-    //         let did = judgeDepart(depart.innerHTML)
-    //         if (did === -1) {
-    //             depart.innerHTML = `所有部门(${intervieweesData.length})`
-    //         } else if (did !== undefined) {
-    //             let eles = intervieweesData.filter(function (ele) {
-    //                 if (ele.volunteer.indexOf(did) !== -1) return ele
-    //             })
-    //             depart.innerHTML = `${departmentsName[did]}(${eles.length})`
-    //         }
-    //
-    //     }
-    // }
 
     var getDepartmentData = function (did) {
         var obj = {
@@ -313,6 +263,77 @@ $(function () {
         exportTable.append(`${thead}<tbody class="mdc-data-table__content">${data.join('')}</tbody>`);
     }
 
+    var change_index = function () {
+        switch (tab_index) {
+            case 1 :
+                isBasic = true;
+                renderTable()
+                console.log("APPLY")
+                break;
+            case 2 :
+                isBasic = false;
+                renderTable()
+                console.log("INTERVIEW")
+                break;
+        }
+    }
+
+    const tabBar = mdc.tabBar.MDCTabBar.attachTo(document.querySelector('.mdc-tab-bar'));
+    const tabs = document.querySelectorAll('.mdc-tab');
+    var tab_index = 0;
+
+    tabBar.listen('MDCTabBar:activated', function(event) {
+        tab_index = event.detail.index;
+        change_index()
+    });
+
+    // const chipSetEl = document.querySelector('.mdc-chip-set');
+    // const chipSet = new MDCChipSet(chipSetEl);
+    // input.addEventListener('keydown', function(event) {
+    //     if (event.key === 'Enter' || event.keyCode === 13) {
+    //         const chipEl = document.createElement('div');
+    //         // ... perform operations to properly populate/decorate chip element ...
+    //         chipSetEl.appendChild(chipEl);
+    //         chipSet.addChip(chipEl);
+    //     }
+    // });
+    // chipSet.listen('MDCChip:removal', function(event) {
+    //     chipSetEl.removeChild(event.detail.root);
+    // });
+
+    var judgeDepart = function (data) {
+        for (let i in departmentsName) {
+            if (data.indexOf(departmentsName[i]) !== -1) {
+                return Number(i)
+            }
+        }
+        if (data.indexOf("所有部门") !== -1) {
+            return -1
+        }
+        return undefined
+    }
+
+    // var getDepartmentInterNumber = function () {
+    //     var department = $(".department")
+    //     for (let i = 0; i <= departmentsName.length; i++) {
+    //         let depart = department[i]
+    //         let did = judgeDepart(depart.innerHTML)
+    //         if (did === -1) {
+    //             depart.innerHTML = `所有部门(${intervieweesData.length})`
+    //         } else if (did !== undefined) {
+    //             let eles = intervieweesData.filter(function (ele) {
+    //                 if (ele.volunteer.indexOf(did) !== -1) return ele
+    //             })
+    //             depart.innerHTML = `${departmentsName[did]}(${eles.length})`
+    //         }
+    //
+    //     }
+    // }
+
+
+
+
+
     $("#departments").on('click', 'a', function () {
         var did = judgeDepart(this.innerHTML)
         if (!$(this).hasClass('department')) {
@@ -349,21 +370,7 @@ $(function () {
 
 
     getDepartmentInfo()
-    // getDepartmentInterNumber()
 
-    var change_index = function () {
-        switch (tab_index) {
-            case 1 :
-                isBasic = true;
-                renderTable()
-                console.log("APPLY")
-                break;
-            case 2 :
-                isBasic = false;
-                renderTable()
-                console.log("INTERVIEW")
-                break;
-        }
-    }
+
 
 });

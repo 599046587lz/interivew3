@@ -111,6 +111,11 @@
 	background: var(--mdc-theme-primary);
 }
 
+.tabContainer {
+	display: flex;
+	flex-direction: column;
+}
+
 /*#export {*/
 /*	display: none;*/
 /*}*/

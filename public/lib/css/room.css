@@ -1,14 +1,12 @@
 /*main*/
 .main{
   max-width: 720px;
-  margin: 30px auto 30px;
-  padding: 8px;
+  margin: 30px auto;
+  padding: 20px;
 }
 /*roomMain*/
 .roomMain{
-  margin: 0 auto;
   position: relative;
-  /*border: 1px solid black;*/
 }
 .bull::-webkit-scrollbar { width: 0 !important }
 .roomMain .bull{
@@ -24,7 +22,7 @@
   position: relative;
   padding: 16px;
 }
-.roomBorder .department{
+.roomBorroomVagueder .department{
   margin-top: 16px;
 }
 .roomBorder .roomVague{
@@ -77,11 +75,11 @@
 }
 .direction .turnRight{
   position: absolute;
-  right: -12px;
+  right: -25px;
   z-index: 999;
 }
 .direction .turnLeft{
-  left: -12px;
+  left: -25px;
   position: absolute;
   z-index: 999;
 }
@@ -109,9 +107,6 @@
 #roomContainer{
   height: 500px;
   overflow-y: scroll;
-  margin: 0 auto;
-  /*padding: 0 8px;*/
-  /*border: 1px solid black;*/
 }
 #roomContainer::-webkit-scrollbar { width: 0 !important }
  .cover{

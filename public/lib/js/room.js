@@ -109,11 +109,11 @@ var interviewStatus = function () {
 
 var getDepartmentInfo = function () {
     $.ajax({
-        url: baseURL + 'room/getDepartmentInfo',
-        type: 'get',
-        dataType: 'json',
-        success: function (data) {
-            storage.setItem("departmentInfo", JSON.stringify(data.message));
+        url : baseURL + 'room/getDepartmentInfo',
+        type : 'get',
+        dataType : 'json',
+        success: function(data){
+            storage.setItem("departmentInfo", JSON.stringify(data));
         },
         statusCode: {
             403: function () {
@@ -148,11 +148,11 @@ var getFinishNumber = function () {
 
 var getCalling = function () {
     $.ajax({
-        url: baseURL + '/room/calling',
-        type: 'get',
-        dataType: 'json',
-        success: function (data) {
-            storage.setItem("calling", JSON.stringify(data.data));
+        url : baseURL + '/room/calling',
+        type : 'get',
+        dataType : 'json',
+        success:function(data){
+            storage.setItem("calling", JSON.stringify(data.data()));
             changeCallRow();
         },
         statusCode: {
@@ -183,7 +183,11 @@ var getWaiting = function () {
             },
             500: function () {
                 err('服务器错误,请重试!');
-            }
+            },
+            // 200 : function(data){
+            //         storage.setItem("waiting", JSON.stringify(data));
+            //         changeWaitRow();
+            //     },
         }
     });
 

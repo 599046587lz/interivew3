@@ -12,6 +12,7 @@ let utils = require('../utils/utils');
 let multer = require('multer');
 let upload = multer({dest: utils.storeFilesPath.upload});
 
+
 let router = new Router({
     prefix: '/club'
 });
@@ -21,15 +22,16 @@ let router = new Router({
  * @params String interviewerName 面试官姓名
  * @return HTTP 204
  */
+//success
 router.post('/setIdentify', function (ctx,next) {
-    let name = ctx.request.session.club;
-    console.log(ctx.request.session.club)
+    let name = ctx.session.club;
+    console.log(ctx.session.club)
     if (!name) {
-        return ctx.response.sendStatus(403);
+        return ctx.response.status = 403;
     }
-    ctx.request.session['did'] = ctx.request.body.did;
-    ctx.request.session['interviewer'] = ctx.request.body.interviewerName;
-    ctx.response.send(204);
+    ctx.session['did'] = ctx.request.body.did;
+    ctx.session['interviewer'] = ctx.request.body.interviewerName;
+    ctx.response.status = 204;
 
 });
 
@@ -40,9 +42,10 @@ router.post('/setIdentify', function (ctx,next) {
 //     });
 // });
 
-router.get('/logout', function (ctx,next) {
-    ctx.request.session.destroy(function () {
-        ctx.response.send(204);
+//找不到地方测
+router.get('/logout',  mid.checkLogin,function (ctx,next) {
+    ctx.session.destroy(function () {
+        ctx.response.status = 204;
     });
 });
 
@@ -69,15 +72,14 @@ router.get('/logout', function (ctx,next) {
 //     })
 //     );
 
-router.post('/upload/location', async function (ctx,next) {
+//success
+router.post('/upload/location',async function (ctx,next) {
         let info = {};
-        let cid = ctx.request.session.cid;
+        let cid = ctx.session.cid;
         info = ctx.request.body.info;
 
         await Club.setRoomLocation(cid, info);
-        ctx.response.json({
-            status: 'success',
-        });
+        ctx.response.status = 'success';
     });
 // router.post('/upload/archive', upload.single('archive'), mid.checkFormat(function() {
 //     return Joi.object().keys({
@@ -95,16 +97,19 @@ router.post('/upload/location', async function (ctx,next) {
 //     });
 // }));
 
-router.post('/upload/archive', async function (ctx,next) {
-    let file = ctx.request.file;
-    let cid = ctx.request.session.cid;
+router.post('/upload/archive', mid.checkFormat(function() {
+    return Joi.object().keys({
+        cid: Joi.number(),
+    })
+}), async function (ctx) {
+    let file = ctx.request.files;
+    let cid = ctx.session.cid;
     let xlsxReg = /\.xlsx$/i;
-    if (!xlsxReg.test(file.originalname)) throw new Error('上传文件不合法');
+    if (!xlsxReg.test(file.archive.name)) throw new Error('上传文件不合法');
     let result = await Club.handleArchive(file, cid);
-    ctx.response.json({
-        status: 200,
-        count: result
-    });
+    ctx.response.status = 200;
+    ctx.response.body = result;
+
 });
 
 /**
@@ -126,8 +131,9 @@ router.post('/upload/archive', async function (ctx,next) {
 //     res.json(fields);
 // }));
 
+//没看懂在干嘛但是跑成功了 result.extra指什么？
 router.get('/extra',async function (ctx,next) {
-    let cid = ctx.request.session['cid'];
+    let cid = ctx.session['cid'];
     if (!cid) throw new Error('参数不完整');
 
     let result = await Interviewee.getIntervieweeBySid({$ne: null}, cid);
@@ -138,13 +144,14 @@ router.get('/extra',async function (ctx,next) {
         }
     }
 
-    ctx.response.json(fields);
+    ctx.response.body = fields;
 });
 
 
 /**
  * 测试通过
  */
+
 
 
 router.get('/export', mid.checkFormat(function () {
@@ -204,26 +211,14 @@ router.get('/export', mid.checkFormat(function () {
 //     return res.json(result);
 // }));
 
-// router.get('/clubInfo',async function (ctx,next) {
-//     let cid = ctx.request.session.cid;
-//     let result = await Club.getClubInfo(cid);
-//     let info = {
-//         clubName: result.name,
-//         departments: result.departments,
-//         maxDep: result.maxDep,
-//         attention: result.attention
-//     };
-//
-//     ctx.response.status = 200;
-//     ctx.response.body = info;
-// });
-
+//success
 router.get('/clubInfo',  mid.checkFormat(function () {
     return Joi.object().keys({
         clubId: Joi.number()
     })
 }), async function (ctx,next) {
-    let cid = ctx.request.query.clubId;
+    //let cid = ctx.request.query.clubId;
+    let cid = ctx.session.cid;
     let result = await Club.getClubInfo(cid);
     let info = {
         cid:result.cid,
@@ -237,13 +232,13 @@ router.get('/clubInfo',  mid.checkFormat(function () {
     ctx.response.body = info;
 });
 
+//success
 router.post('/verifyInfo', async function (ctx,next) {
     let info = {};
-    info.cid = ctx.req.body.clubId;
-    info.name = ctx.req.body.name;
+    info.cid = ctx.request.body.cid;
+    info.clubName = ctx.request.body.name;
     let result = await Club.verifyInfo(info);
-    //return res.json(result);
-    ctx.response = result;
+    ctx.response.body = result;
 });
 /**
  * 临时接口
@@ -265,20 +260,22 @@ router.post('/verifyInfo', async function (ctx,next) {
 //     res.json(200, result);
 // }));
 
+//success 返回204
 router.post('/insertInfo', async function (ctx,next) {
     let data = {};
-    data.cid = ctx.req.body.cid;
-    data.name = ctx.req.body.name;
-    data.logo = ctx.req.body.logo;
-    data.departments = ctx.req.body.departments;
-    data.interviewer = ctx.req.body.interviewer;
-    data.password = ctx.req.body.password;
-    data.maxDep = ctx.req.body.maxDep;
-    data.attention = ctx.req.body.attention;
+    data.cid = ctx.request.body.cid;
+    data.name = ctx.request.body.name;
+    data.logo = ctx.request.body.logo;
+    data.departments = ctx.request.body.departments;
+    data.interviewer = ctx.request.body.interviewer;
+    data.password = ctx.request.body.password;
+    data.maxDep = ctx.request.body.maxDep;
+    data.attention = ctx.request.body.attention;
 
     let result = await Club.insertInfo(data);
 
-    ctx.res.json(200, result);
+    ctx.response.status = 200;
+    ctx.response.body = result;
 });
 
 // router.get('/regNum', mid.checkFormat(function() {
@@ -291,10 +288,16 @@ router.post('/insertInfo', async function (ctx,next) {
 //     res.send(200, result);
 // }));
 
-router.get('/regNum', async function (ctx,next) {
-    let clubId = ctx.req.body.clubId;
-    let result = await Club.getRegNum(clubId);
-    ctx.res.send(200, result);
+//success
+router.get('/regNum',mid.checkFormat(function() {
+    return Joi.object().keys({
+        cid: Joi.number()
+    })
+}),  async function (ctx,next) {
+    let cid = ctx.request.query.cid;
+    let result = await Club.getRegNum(cid);
+    ctx.response.status = 200;
+    ctx.response.body = result;
 });
 
 // router.post('/sendMessage', upload.single('archive'), wrap(async function(req, res) {
@@ -312,15 +315,15 @@ router.get('/regNum', async function (ctx,next) {
 
 router.post('/sendMessage', async function(ctx,next) {
     let reqData = {};
-    reqData.tpl_id = ctx.req.body.tpl_id;
-    reqData.time = ctx.req.body.time;
+    reqData.tpl_id = ctx.request.body.tpl_id;
+    reqData.time = ctx.request.body.time;
 
-    let file = ctx.req.file;
+    let file = ctx.request.files;
     let data = utils.getExcelInfo(file);
     for(let i of data) {
         let result = await utils.sendMessage(i, reqData);
     }
-    ctx.res.send(200, '发送成功');
+    ctx.response.send(200, '发送成功');
 });
 
 // router.post('/sendEmail', wrap(async function(req, res) {
@@ -330,9 +333,10 @@ router.post('/sendMessage', async function(ctx,next) {
 // }));
 
 router.post('/sendEmail',async function(ctx,next) {
-    let data = ctx.req.body;
+    let data = ctx.request.body;
     await utils.sendMail(data);
-    ctx.res.send(200, '发送成功');
+    ctx.response.status = 200;
+    ctx.response.body = '发送成功';
 });
 
 // router.post('/profile', mid.checkFormat(function () {
@@ -364,20 +368,34 @@ router.post('/sendEmail',async function(ctx,next) {
 //     res.send(204);
 // }));
 
-router.post('/profile',async function (ctx,next) {
-    let cid = ctx.req.body.cid;
+//success
+router.post('/profile',mid.checkFormat(function () {
+    return Joi.object().keys({
+        cid: Joi.number(),
+        departments: Joi.array().items(Joi.object().keys({
+            did: Joi.number(),
+            name: Joi.string(),
+            location: Joi.string()
+        })),
+        name: Joi.string(),
+        password: Joi.string(),
+        logo: Joi.string(),
+        maxDep: Joi.number()
+    })
+}), async function (ctx,next) {
+    let cid = ctx.request.body.cid;
     if (!cid) throw new Error('参数不完整');
     let data = {};
-    data.cid = ctx.req.body.cid;
-    data.departments = ctx.req.body.departments;
-    data.name = ctx.req.body.name;
-    data.password = utils.md5(ctx.req.body.password);
-    data.logo = ctx.req.body.logo;
-    data.maxDep = ctx.req.body.maxDep;
+    data.cid = ctx.request.body.cid;
+    data.departments = ctx.request.body.departments;
+    data.name = ctx.request.body.name;
+    data.password = utils.md5(ctx.request.body.password);
+    data.logo = ctx.request.body.logo;
+    data.maxDep = ctx.request.body.maxDep;
 
     await Club.createClub(data);
 
-    ctx.res.send(204);
+    ctx.response.status = 204;
 });
 
 // router.post('/init', wrap(async function (req, res) {
@@ -387,11 +405,12 @@ router.post('/profile',async function (ctx,next) {
 //     res.send(204);
 // }))
 
+//success
 router.post('/init', async function (ctx,next) {
-    let cid = ctx.req.body.cid;
+    let cid = ctx.request.body.cid;
 
     await Club.initClub(cid);
-    ctx.res.send(204);
+    ctx.response.status = 204;
 });
 
 module.exports = router;

@@ -45,9 +45,13 @@ let router = new Router({
 //     });
 // }));
 
-router.get('/sign', async function (ctx,next) {
-    let cid = ctx.req.session.cid;
-    let sid = ctx.req.query.sid;
+router.get('/sign', mid.checkFormat(function () {
+    return Joi.object().keys({
+        sid: Joi.number()
+    })
+}), async function (ctx,next) {
+    let cid = ctx.session.cid;
+    let sid = ctx.request.query.sid;
     let info = await Interviewee.getInterviewerInfo(sid, cid);
     if (!info) {
         throw new JSONError('该学生未报名', 403);
@@ -58,8 +62,8 @@ router.get('/sign', async function (ctx,next) {
         info.signTime = new Date();
         info.save();
     }
-    ctx.res.status = 200;
-    ctx.res.data = info;
+    ctx.response.status = 200;
+    ctx.response.data = info;
 });
 
 // router.get('/finish', async function (req, res) {
@@ -71,11 +75,12 @@ router.get('/sign', async function (ctx,next) {
 //     });
 // });
 
+//返回ok
 router.get('/finish', async function (ctx,next) {
-    let cid = ctx.req.session.cid
-    let info = await Interviewee.getFinishInfo(cid)
-    ctx.res.status = 200;
-    ctx.res.data = info;
+    let cid = ctx.session.cid;
+    let info = await Interviewee.getFinishInfo(cid);
+    ctx.response.status = 200;
+    ctx.response.data = info;
 });
 
 // router.get('/sighed', async function (req, res) {
@@ -87,11 +92,12 @@ router.get('/finish', async function (ctx,next) {
 //     })
 // })
 
+//返回ok
 router.get('/sighed', async function (ctx,next) {
-    let cid = ctx.req.session.cid
-    let info = await Interviewee.getSignedInterviewee(cid)
-    ctx.res.status = 200;
-    ctx.res.data = info;
+    let cid = ctx.session.cid;
+    let info = await Interviewee.getSignedInterviewee(cid);
+    ctx.response.status = 200;
+    ctx.response.data = info;
 });
 
 // router.get('/calling', async function (req, res) {
@@ -104,11 +110,12 @@ router.get('/sighed', async function (ctx,next) {
 //
 // });
 
+//返回ok
 router.get('/calling', async function (ctx,next) {
-    let cid = ctx.req.session.cid
-    let info = await Interviewee.callNextInterviewee(cid)
-    ctx.res.status = 200;
-    ctx.res.data = info;
+    let cid = ctx.session.cid;
+    let info = await Interviewee.callNextInterviewee(cid);
+    ctx.response.status = 200;
+    ctx.response.data = info;
 });
 
 /**
@@ -142,20 +149,30 @@ router.get('/calling', async function (ctx,next) {
 //
 // }));
 
-router.post('/addDep', async function (ctx,next) {
+//成功
+router.post('/addDep', mid.checkFormat(function () {
+    return Joi.object().keys({
+        sid: Joi.number(),
+        did: Joi.number(),
+        sex: Joi.number(),
+        name: Joi.string(),
+        qq: Joi.number(),
+        phone: Joi.number()
+    })
+}),async function (ctx,next) {
     let info = {
-        sid: ctx.req.body.sid,
-        volunteer: ctx.req.body.did,
-        sex: ctx.req.body.sex,
-        name: ctx.req.body.name,
-        qq: ctx.req.body.qq,
-        phone: ctx.req.body.phone,
+        sid: ctx.request.body.sid,
+        volunteer: ctx.request.body.did,
+        sex: ctx.request.body.sex,
+        name: ctx.request.body.name,
+        qq: ctx.request.body.qq,
+        phone: ctx.request.body.phone,
         signTime: new Date()
     };
 
     let result = await Interviewee.addInterviewee(info, cid);
-    ctx.res.status = 200;
-    ctx.res.body = result;
+    ctx.response.status = 200;
+    ctx.response.body = result;
 });
 
 // router.get('/getDepartmentInfo', wrap(async function (req, res) {
@@ -168,11 +185,12 @@ router.post('/addDep', async function (ctx,next) {
 //
 // }))
 
+//成功
 router.get('/getDepartmentInfo', async function (ctx,next) {
-    let cid = ctx.req.session.cid
-    let result = await club.getDepartmentInfo(cid)
-    ctx.res.status = 200;
-    ctx.res.body = result;
+    let cid = ctx.session.cid;
+    let result = await club.getDepartmentInfo(cid);
+    ctx.response.status = 200;
+    ctx.response.body = result;
 });
 
 module.exports = router;

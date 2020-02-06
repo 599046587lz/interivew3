@@ -41,13 +41,21 @@ let router = new Router({
 //     return res.send(204);
 // }));
 
-router.post('/recommend',async function (ctx,next) {
-    let sid = ctx.req.body.sid;
-    let departmentId = ctx.req.body.departmentId;
-    let cid = ctx.req.session.cid;
-    let score = ctx.req.body.score;
-    let comment = ctx.req.body.comment;
-    let interviewer = ctx.req.session.interviewer;
+//ValidationError: rate.0.score: `1` is not a valid enum value for path `score`.
+router.post('/recommend',mid.checkFormat(function () {
+    return Joi.object().keys({
+        sid: Joi.number(),
+        departmentId: Joi.number(),
+        score: Joi.number().valid([1, 2, 3, 4, 5]),
+        comment: Joi.string()
+    })
+}), async function (ctx,next) {
+    let sid = ctx.request.body.sid;
+    let departmentId = ctx.request.body.departmentId;
+    let cid = ct.req.session.cid;
+    let score = ctx.request.body.score;
+    let comment = ctx.request.body.comment;
+    let interviewer = ctx.session.interviewer;
     await Interviewee.rateInterviewee(cid, sid, score, comment, departmentId, interviewer);
     let interviewerInfo = await Interviewee.getInterviewerInfo(sid, cid);
     if (interviewerInfo.volunteer.indexOf(departmentId) >= 0) throw new JSONError('不能重复推荐部门', 403);
@@ -55,7 +63,7 @@ router.post('/recommend',async function (ctx,next) {
     interviewerInfo.busy = false;
     interviewerInfo.save();
     await Interviewee.delVolunteer(cid,sid, departmentId)
-    ctx.res.send(204);
+    ctx.response.status = 204;
 });
 
 /**
@@ -81,17 +89,27 @@ router.post('/recommend',async function (ctx,next) {
 //     res.sendStatus(204);
 // }));
 
-router.post('/rate', async function (ctx,next) {
-    let sid = ctx.req.body.sid;
-    let score = ctx.req.body.score;
-    let comment = ctx.req.body.comment;
-    let did = ctx.req.session.did;
-    let interviewer = ctx.req.session.interviewer;
-    let cid = ctx.req.session.cid;
+//ValidationError: rate.0.score: `1` is not a valid enum value for path `score`.
+router.post('/rate', mid.checkFormat(function () {
+    return Joi.object().keys({
+        sid: Joi.number(),
+        score: Joi.number().valid([1, 2, 3, 4, 5]),
+        comment: Joi.string()
+    })
+}),async function (ctx,next) {
+    let sid = ctx.request.body.sid;
+    let score = ctx.request.body.score;
+    let comment = ctx.request.body.comment;
+    let did = 0;
+    let interviewer = 11;
+    let cid = 1;
+    //let did = ctx.session.did;
+    // let interviewer = ctx.session.interviewer;
+    // let cid = ctx.session.cid;
 
     await Interviewee.rateInterviewee(cid, sid, score, comment, did, interviewer);
 
-    ctx.res.sendStatus(204);
+    ctx.response.status = 204;
 });
 
 /**
@@ -121,24 +139,30 @@ router.post('/rate', async function (ctx,next) {
 //     }
 // }));
 
-router.get('/call', async function (ctx,next) {
-    let department = ctx.req.session.did;
-    let sid = ctx.req.query.sid;
-    let cid = ctx.req.session.cid;
+//成功
+router.get('/call', mid.checkFormat(function () {
+    return Joi.object().keys({
+        sid: Joi.number()
+    })
+}), async function (ctx,next) {
+    let department = ctx.session.did;
+    let sid = ctx.request.query.sid;
+    let cid = ctx.session.cid;
     if (!sid) {
         let result = await Interviewee.getNextInterviewee(cid, department);
         if(result !== null){
             result = result.toObject();
             result.did = department;
         }
-        ctx.res.json(result);
+        ctx.response.body = result;
     } else {
         let result = await Interviewee.getSpecifyInterviewee(sid, cid, department);
         result = result.toObject();
         result.did = department;
-        ctx.res.json(result);
+        ctx.response.body = result;
     }
 });
+
 
 /**
  * 测试成功
@@ -156,14 +180,15 @@ router.get('/call', async function (ctx,next) {
 //     })
 // }));
 
+//返回ok
 router.get('/queue', async function (ctx,next) {
-    let cid = ctx.req.session.cid;
-    let did = ctx.req.session.did;
+    let cid = ctx.session.cid;
+    let did = ctx.session.did;
 
     let result = await Interviewee.getDepartmentQueueLength(cid, did);
 
-    ctx.res.status = 200;
-    ctx.res.count = result;
+    ctx.response.status = 200;
+    ctx.response.count = result;
 });
 
 /**
@@ -187,15 +212,20 @@ router.get('/queue', async function (ctx,next) {
 //     });
 // }));
 
-router.post('/skip', async function (ctx,next) {
-    let cid = ctx.req.session.cid;
-    let sid = ctx.req.body.sid;
-    let did = ctx.req.session.did;
+//跳过  测试成功
+router.post('/skip',mid.checkFormat(function () {
+    return Joi.object().keys({
+        sid: Joi.number()
+    })
+}),  async function (ctx,next) {
+    let cid = ctx.session.cid;
+    let sid = ctx.request.body.sid;
+    let did = ctx.session.did;
 
     let result = await Interviewee.skip(cid, sid, did);
 
-    ctx.res.status = 200;
-    ctx.res.body = result;
+    ctx.response.status = 200;
+    ctx.response.body = result;
 
 });
 

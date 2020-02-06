@@ -63,6 +63,52 @@ let router = new Router({
 //     res.download(file, filename);
 // }));
 
+//成功
+router.post('/uploadFile',  async function (ctx,next) {
+
+    let file = ctx.request.files;
+    let fileName = file.file.name;
+
+    let result = await qiniu.qiniuUpload(file.file.path, fileName)
+
+    ctx.response.status = 200;
+    ctx.response.body = result;
+});
+
+
+router.get('/download', mid.checkFormat(function () {
+    return Joi.object().keys({
+        cid: Joi.number()
+    })
+}),async function (ctx,next) {
+    let cid = ctx.request.query.cid;
+    let dbData = await Interview.queryByClubAll(cid);
+    let departments = (await Club.getClubInfo(cid)).departments;
+    let departName = {};
+    departments.forEach(e => {
+       departName[e.did] = e.name;
+    });
+    for (let i in dbData) {
+       dbData[i].volunteer.forEach((e, j) => {
+          dbData[i].volunteer[j] = departName[e];
+       });
+        await office.writeWord(dbData[i], i);
+    }
+    await office.writeExcel(dbData, cid);
+    await office.archiverZip(cid);
+
+    const file = path.format({
+        dir: path.join(utils.storeFilesPath.zip, cid),
+        name: cid,
+        ext: '.zip'
+    });
+    const filename = path.format({
+        name: cid,
+        ext: '.zip'
+    });
+    ctx.response.download(file, filename);
+});
+
 /**
  * @params Number clubId 社团Id
  * @return 204
@@ -88,11 +134,11 @@ let router = new Router({
 //     });
 // }));
 
-router.get('/clubInfo',  mid.checkFormat(function () {
+router.get('/clubInfo',mid.checkFormat(function () {
         return Joi.object().keys({
             clubId: Joi.number()
         })
-}), async function (ctx,next) {
+}),async function (ctx,next) {
     let cid = ctx.request.query.clubId;
     let result = await Club.getClubInfo(cid);
     let info = {
@@ -136,12 +182,7 @@ router.get('/clubInfo',  mid.checkFormat(function () {
 //         throw new JSONError('用户名或密码错误', 403);
 //     }
 // }));
-router.post('/login',mid.checkFormat(function () {
-    return Joi.object().keys({
-        user: Joi.string().required(),
-        password: Joi.string().required()
-    })
-}),  async function (ctx) {
+router.post('/login',async function (ctx) {
     let {user, password} = ctx.request.body;
     password = utils.md5(String(password));
     let clubInfo = await Club.getClubByName(user);

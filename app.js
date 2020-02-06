@@ -9,6 +9,8 @@ const bodyParser = require('koa-bodyparser');
 const json = require('koa-json');
 const koaStatic = require('koa-static');
 const session = require('koa-session');
+const koaBody = require('koa-body');
+
 
 
 const club = require('./router/club');
@@ -31,6 +33,15 @@ utils.saveDb();
 app.keys = [config.koaKeys];
 app.use(session(app));
 
+app.use(koaBody({"multipart": true}));
+// app.use(koaBody({
+//     multipart: true,
+//     formidable: {
+//         maxFileSize: 200 * 1024 * 1024    // 设置上传文件大小最大限制，默认2M
+//     }
+// }));
+
+
 app.use(koaStatic(__dirname + '/public'));
 // if (process.env.ENABLE_PROXY) {
 //     app.use(proxy({ target: config.proxy, changeOrigin: true }))
@@ -46,6 +57,7 @@ app.use(bodyParser({
 //app.use(bodyParser.json());
 app.use(json());
 app.use(logger());
+
 
 app.use(common.routes());
 app.use(club.routes());

@@ -124,7 +124,8 @@ var set_club = function(){
         type:'get',
         async:false,
         success:function(data){
-            window.club = data.message;
+            //window.club = data.message;
+            window.club = data;
         }
     });
 };

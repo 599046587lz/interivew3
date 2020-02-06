@@ -1,5 +1,5 @@
 baseURL = '';
-
+var club;
 var set_club = function(){
 	club = {};
 	$.ajax({
@@ -8,7 +8,7 @@ var set_club = function(){
 		statusCode : {
 			200 : function(data){
 				console.log(data);
-				club = data.message;
+				club = data;
 				set_department();
 			},
 			403 : function(){

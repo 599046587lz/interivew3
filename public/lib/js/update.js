@@ -83,7 +83,7 @@ $(function () {
                         contentType: false,
                         success: function (data) {
 
-                            alert("上传文件成功！已成功上传 " + data.count + " 人的信息。");
+                            alert("上传文件成功！已成功上传 " + data + " 人的信息。");
                         },
                         error: function () {
                             alert("与服务器通讯失败，请稍后再试！");

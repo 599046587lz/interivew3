@@ -187,18 +187,13 @@
             </div>
         </div>
     </div>
-    <div class="mdc-touch-target-wrapper" id="addCircle">
-        <button class="mdc-fab mdc-fab--mini mdc-fab--touch">
-            <div class="mdc-fab__ripple"></div>
-            <span class="material-icons mdc-fab__icon">add</span>
-        </button>
-    </div>
-    <!-- <div id="addCircle"><img src="img/jiaren.png" class="member"></div> -->
-    <div id="submitCircle" >
-        <img src="img/jiaren.png" id="returnMember">
-        <input type="text" class="roomInput" name="username" placeholder="input staff id" id="staffid">
-        <img src="img/check.png"  id="checkAdd">
-    </div>
+     <div id="addCircle">
+        <div class="addContainer">
+            <i class="material-icons">person_add</i>
+            <input id="staffId" class="extra" type="text" value="input staff id">
+            <i class="material-icons extra" id="done">done</i>
+        </div>
+    </div> 
     <footer class="copyright"></footer>
 </body>
 <script type="text/javascript" src="lib/js/jquery-1.9.1.min.js"></script>

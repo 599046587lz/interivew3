@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
     <link rel="stylesheet" type="text/css" href="lib/css/select.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Round">
 </head>
 <body>
     <div class="topBar">
@@ -186,12 +187,17 @@
             </div>
         </div>
     </div>
-    <div id="addCircle">
-        <div class="addContainer">
-            <i class="material-icons">person_add</i>
-            <input id="staffId" class="extra" type="text" value="input staff id">
-            <i class="material-icons extra" id="done">done</i>
-        </div>
+    <div class="mdc-touch-target-wrapper" id="addCircle">
+        <button class="mdc-fab mdc-fab--mini mdc-fab--touch">
+            <div class="mdc-fab__ripple"></div>
+            <span class="material-icons mdc-fab__icon">add</span>
+        </button>
+    </div>
+    <!-- <div id="addCircle"><img src="img/jiaren.png" class="member"></div> -->
+    <div id="submitCircle" >
+        <img src="img/jiaren.png" id="returnMember">
+        <input type="text" class="roomInput" name="username" placeholder="input staff id" id="staffid">
+        <img src="img/check.png"  id="checkAdd">
     </div>
     <footer class="copyright"></footer>
 </body>

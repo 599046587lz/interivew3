@@ -18,7 +18,18 @@
             $staffId.val("")
         }
     })
+    $("#wait").on('scroll',function(e){
+        if ($(this).scrollLeft() === 0) {
+            alert('到起点了');
+            left.css("opacity","0");
+        }
+        alert($(this).width());
+        if ($(this).scrollLeft() > $('.roomBorder').width()*11) {
+            alert('到最右侧了');
+            right.css("opacity","0");
 
+        }
+    })
     $("#done").on('click',function () {
         addCircle.removeClass('active');
         var part = `<div class="cover">
@@ -33,6 +44,9 @@
                                  <div class="mdc-chip"><span class="mdc-chip__text">媒体运营部</span></div>
                             </div>
                     </div>`;
+    left.click(function(){stepLeft();});
+    right.click(function(){stepRight();});
+
         number++;
         $("#roomContainer").append(part);
         $staffId.val("input staff id");
@@ -67,26 +81,11 @@
         var scrollLeft = $("#wait").scrollLeft();
         $("#wait").scrollLeft(scrollLeft + 680);
         scrollLeft += 680;
-        if (scrollLeft <= 0)
-            left.css('display','none');
-        else
-            left.css('display','block');
-        if (scrollLeft > $("#wait").scrollLeft())
-            right.css('display','none');
-        else
-            right.css('display','block');
+        left.css("opacity","1");
     }
     function stepLeft()
     {
         var scrollLeft = $("#wait").scrollLeft();
         $("#wait").scrollLeft(scrollLeft - 680);
-        scrollLeft -= 680;
-        if (scrollLeft <= 0)
-            left.css('display','none');
-        else
-            left.css('display','block');
-        if (scrollLeft < $("#wait").scrollLeft() && scrollLeft >= 0)
-            right.css('display','none');
-        else
-            right.css('display','block');
+        right.css("opacity","1");    
     }

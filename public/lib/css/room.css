@@ -7,20 +7,26 @@
 /*roomMain*/
 .roomMain{
   position: relative;
+  /*border: 1px solid black;*/
 }
 .bull::-webkit-scrollbar { width: 0 !important }
 .roomMain .bull{
   white-space: nowrap;
   overflow: auto;
   padding: 10px 0;
+  /*border: 1px solid black;*/
+  margin: 0 -4px;
+  scroll-behavior: smooth;
 }
 .roomBorder{
-  margin-right: 16px;
+  /*margin-right: 16px;*/
+  margin: 0 4px;
   border-radius: 5px;
   border: 1px solid var(--platform-color-blue);
   display: inline-block;
   position: relative;
-  padding: 16px;
+  padding: 16px 16px 16px 16px;
+  width: 136.5px;
 }
 .roomBorroomVagueder .department{
   margin-top: 16px;
@@ -83,28 +89,36 @@
   position: absolute;
   z-index: 999;
 }
-#left{
-  display: none;
-}
+
 .direction .whiteCircle{
   width: 50px;
   height: 50px;
   border-radius: 1000px;
   background-color: white;
-  -webkit-box-shadow: 0 0 5px black;
-  -moz-box-shadow: 0 0 5px black;
-  box-shadow: 0 0 5px black;
+  -webkit-box-shadow: 0 0 3px black;
+  -moz-box-shadow: 0 0 3px black;
+  box-shadow: 0 0 3px black;
   cursor: pointer;
+  /*border: 1px solid black;*/
+/*  display: flex;
+  justify-content: center;
+  align-items: center;*/
+  
+}
+.direction #left{
+  /*display: none;*/
+  opacity: 0;
 }
 .direction .whiteCircle .beacon{
   cursor: pointer;
-  margin: 14px 0 0 14px;
   width: 20px;
+  margin: 14px 0 0 14px;
 }
 
 
 /*roomContainer*/
 #roomContainer{
+  /*border: 1px solid black;*/
   height: 500px;
   overflow-y: scroll;
 }
@@ -126,18 +140,19 @@
   border-radius: 1000px;
   display: inline-block;
   color: white;
-  font-size: 24px;
+  font-size: 20px;
   line-height: 40px;
   text-align: center;
 }
 .stdName{
-  font-size: 28px;
+  font-size: 24px;
   color: var(--platform-color-blue);
   margin-left: 12px;
 }
 .stdNumber{
   color: #4A4A4A;
   margin-left: 14px;
+  font-size: 12px;
 }
 
 
@@ -204,9 +219,9 @@
   cursor: default;
 }
 #roomContainer .mdc-chip__text{
-  font-size: 18px;
-  color: #4A4A4A;
-  cursor: default;
+  /*font-size: 18px;*/
+  /*color: #4A4A4A;*/
+  /*cursor: default;*/
 }
 .mdc-chip-set .mdc-chip{
   cursor: default;

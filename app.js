@@ -24,45 +24,35 @@ const config = require('./config');
 const utils = require('./utils/utils');
 
 const app = new koa();
-//const router = require('koa-router')();
-
-//const serve = require('koa-static');
-//const render = require('koa-ejs');
 
 utils.saveDb();
 app.keys = [config.koaKeys];
 app.use(session(app));
 
 app.use(koaBody({"multipart": true}));
-// app.use(koaBody({
-//     multipart: true,
-//     formidable: {
-//         maxFileSize: 200 * 1024 * 1024    // 设置上传文件大小最大限制，默认2M
-//     }
-// }));
 
 
 app.use(koaStatic(__dirname + '/public'));
-// if (process.env.ENABLE_PROXY) {
-//     app.use(proxy({ target: config.proxy, changeOrigin: true }))
-// }
+
 if (process.env.ENABLE_PROXY) {
     app.use(proxy({ target: config.proxy, changeOrigin: true }))
 }
 
-//app.use(bodyParser.urlencoded({extended: false}));
+
 app.use(bodyParser({
     enableTypes:['json', 'form', 'text']
 }))
-//app.use(bodyParser.json());
+
 app.use(json());
 app.use(logger());
 
-
+//报名系统公共入口（不需登录）
 app.use(common.routes());
+app.use(reg.routes());
+
 app.use(club.routes());
 app.use(interview.routes());
-app.use(reg.routes());
+
 app.use(room.routes());
 
 app.use(async function(ctx, next) {
@@ -106,8 +96,8 @@ module.exports = app;
 // })
 //
 //
-// //进行是否登录的鉴定
-//app.use(mid.checkLogin)
+//进行是否登录的鉴定
+app.use(mid.checkLogin)
 // //app.use('/club', club);
 // router.get('/club',async(ctx,next)=>{
 //     ctx.response.body = club;

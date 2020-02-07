@@ -1,14 +1,16 @@
-let session = require('express-session');
-let MongoStore = require('connect-mongo')(session);
+let session = require('koa-session');
+let MongoStore = require('koa-session-mongo');
 let config = require('../config');
 let Joi = require('joi');
 let mongoUrl = require('../models').mongoUrl
 
-exports.checkLogin = function (req, res, next){
-    if (!!req.session['cid']){
+exports.checkLogin = function (ctx, next){
+    if (!!ctx.session.cid){
         next();
     } else {
-        res.status(403).send('Require Login');
+        ctx.response.status = 403;
+        ctx.response.body = 'Require Login';
+
     }
 };
 

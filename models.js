@@ -6,7 +6,6 @@ let config = require('./config');
 let mongoUserInfo = (!config.db.user || !config.db.password)? '' : config.db.user + ':' + config.db.password + '@';
 let mongoUrl = `mongodb://${mongoUserInfo}${config.db.host}/${config.db.db}`;
 mongoose.connect(mongoUrl, { useNewUrlParser: true });
-// mongoose.connect('mongodb://127.0.0.1:27017/interview', {useNewUrlParser:true,useCreateIndex: true});
 
 mongoose.set('useFindAndModify', false);
 
@@ -40,10 +39,11 @@ let Club = new mongoose.Schema({
 let rate = new mongoose.Schema({
     did: Number,
     score:  {
-        type: Number,
+        type: String,
         enum:
             {
-                values: [0, 1, 2], //0: 待录用  1:录用 2:不录用
+                //values: [0,1,2], //0: 待录用  1:录用 2:不录用
+                values: ["1","2","3","4","5"],
                 message: "请输入正确的分数"
             }
     },

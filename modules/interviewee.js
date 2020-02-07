@@ -169,7 +169,7 @@ exports.rateInterviewee =  function (cid, sid, score, comment, did, interviewer)
             if (!result.rate)  result.rate = [];
             result.rate.push({
                 did: did,
-                score: score,
+                score: String(score),
                 comment: comment,
                 interviewer: interviewer
             });

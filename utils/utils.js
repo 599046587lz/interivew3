@@ -178,7 +178,7 @@ exports.getExcelInfo = function (file) {
     let header = {};
     let interviewerInfo = [];
     let result = [];
-    let workbook = excel.readFile(file.path);
+    let workbook = excel.readFile(file.files.path);
     let workSheet = workbook.Sheets[workbook.SheetNames[0]];
     let keys = Object.keys(workSheet);
     let key = keys.filter(k => k[0] !== '!');

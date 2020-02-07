@@ -221,7 +221,8 @@ exports.insertInfo = function (data) {
 };
 
 exports.getRegNum = function (cid) {
-    return studentModel.find({
+    return IntervieweeModel.find({
+    //return studentModel.find({
         cid: cid
     }).then(result => {
         return {

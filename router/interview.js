@@ -1,8 +1,6 @@
 /**
  * Created by bangbang93 on 14-9-15.
  */
-//let wrap = fn => (...args) => fn(...args).catch(args[2]);
-let koa = require('koa');
 let Router = require('koa-router')
 let Interviewee = require('../modules/interviewee');
 let Joi = require('joi');
@@ -17,31 +15,6 @@ let router = new Router({
  * 测试成功
  */
 
-// router.post('/recommend', mid.checkFormat(function () {
-//     return Joi.object().keys({
-//         sid: Joi.number(),
-//         departmentId: Joi.number(),
-//         score: Joi.number().valid([1, 2, 3, 4, 5]),
-//         comment: Joi.string()
-//     })
-// }), wrap(async function (req, res) {
-//     let sid = req.body.sid;
-//     let departmentId = req.body.departmentId;
-//     let cid = req.session.cid;
-//     let score = req.body.score;
-//     let comment = req.body.comment;
-//     let interviewer = req.session.interviewer;
-//     await Interviewee.rateInterviewee(cid, sid, score, comment, departmentId, interviewer);
-//     let interviewerInfo = await Interviewee.getInterviewerInfo(sid, cid);
-//     if (interviewerInfo.volunteer.indexOf(departmentId) >= 0) throw new JSONError('不能重复推荐部门', 403);
-//     interviewerInfo.volunteer.push(departmentId);
-//     interviewerInfo.busy = false;
-//     interviewerInfo.save();
-//     await Interviewee.delVolunteer(cid,sid, departmentId)
-//     return res.send(204);
-// }));
-
-//ValidationError: rate.0.score: `1` is not a valid enum value for path `score`.
 router.post('/recommend',mid.checkFormat(function () {
     return Joi.object().keys({
         sid: Joi.number(),
@@ -49,10 +22,10 @@ router.post('/recommend',mid.checkFormat(function () {
         score: Joi.number().valid([1, 2, 3, 4, 5]),
         comment: Joi.string()
     })
-}), async function (ctx,next) {
+}), async function (ctx) {
     let sid = ctx.request.body.sid;
     let departmentId = ctx.request.body.departmentId;
-    let cid = ct.req.session.cid;
+    let cid = ctx.session.cid;
     let score = ctx.request.body.score;
     let comment = ctx.request.body.comment;
     let interviewer = ctx.session.interviewer;
@@ -70,42 +43,20 @@ router.post('/recommend',mid.checkFormat(function () {
  * 测试成功
  */
 
-// router.post('/rate', mid.checkFormat(function () {
-//     return Joi.object().keys({
-//         sid: Joi.number(),
-//         score: Joi.number().valid([1, 2, 3, 4, 5]),
-//         comment: Joi.string()
-//     })
-// }), wrap(async function (req, res) {
-//     let sid = req.body.sid;
-//     let score = req.body.score;
-//     let comment = req.body.comment;
-//     let did = req.session.did;
-//     let interviewer = req.session.interviewer;
-//     let cid = req.session.cid;
-//
-//     await Interviewee.rateInterviewee(cid, sid, score, comment, did, interviewer);
-//
-//     res.sendStatus(204);
-// }));
 
-//ValidationError: rate.0.score: `1` is not a valid enum value for path `score`.
 router.post('/rate', mid.checkFormat(function () {
     return Joi.object().keys({
         sid: Joi.number(),
         score: Joi.number().valid([1, 2, 3, 4, 5]),
         comment: Joi.string()
     })
-}),async function (ctx,next) {
+}),async function (ctx) {
     let sid = ctx.request.body.sid;
     let score = ctx.request.body.score;
     let comment = ctx.request.body.comment;
-    let did = 0;
-    let interviewer = 11;
-    let cid = 1;
-    //let did = ctx.session.did;
-    // let interviewer = ctx.session.interviewer;
-    // let cid = ctx.session.cid;
+    let did = ctx.session.did;
+    let interviewer = ctx.session.interviewer;
+    let cid = ctx.session.cid;
 
     await Interviewee.rateInterviewee(cid, sid, score, comment, did, interviewer);
 
@@ -116,35 +67,12 @@ router.post('/rate', mid.checkFormat(function () {
  * 测试通过(需要socket)(需测试)
  */
 
-// router.get('/call', mid.checkFormat(function () {
-//     return Joi.object().keys({
-//         sid: Joi.number()
-//     })
-// }), wrap(async function (req, res) {
-//     let department = req.session.did;
-//     let sid = req.query.sid;
-//     let cid = req.session.cid;
-//     if (!sid) {
-//         let result = await Interviewee.getNextInterviewee(cid, department);
-//         if(result !== null){
-//             result = result.toObject();
-//             result.did = department;
-//         }
-//         res.json(result);
-//     } else {
-//         let result = await Interviewee.getSpecifyInterviewee(sid, cid, department);
-//         result = result.toObject();
-//         result.did = department;
-//         res.json(result);
-//     }
-// }));
 
-//成功
 router.get('/call', mid.checkFormat(function () {
     return Joi.object().keys({
         sid: Joi.number()
     })
-}), async function (ctx,next) {
+}), async function (ctx) {
     let department = ctx.session.did;
     let sid = ctx.request.query.sid;
     let cid = ctx.session.cid;
@@ -168,20 +96,9 @@ router.get('/call', mid.checkFormat(function () {
  * 测试成功
  */
 
-// router.get('/queue', wrap(async function (req, res) {
-//     let cid = req.session.cid;
-//     let did = req.session.did;
-//
-//     let result = await Interviewee.getDepartmentQueueLength(cid, did);
-//
-//     res.json({
-//         status: 200,
-//         count: result
-//     })
-// }));
 
 //返回ok
-router.get('/queue', async function (ctx,next) {
+router.get('/queue', async function (ctx) {
     let cid = ctx.session.cid;
     let did = ctx.session.did;
 
@@ -195,29 +112,13 @@ router.get('/queue', async function (ctx,next) {
  * 测试成功
  */
 
-// router.post('/skip', mid.checkFormat(function () {
-//     return Joi.object().keys({
-//         sid: Joi.number()
-//     })
-// }), wrap(async function (req, res) {
-//     let cid = req.session.cid;
-//     let sid = req.body.sid;
-//     let did = req.session.did;
-//
-//     let result = await Interviewee.skip(cid, sid, did);
-//
-//     res.json({
-//         status: 200,
-//         message: result
-//     });
-// }));
 
 //跳过  测试成功
 router.post('/skip',mid.checkFormat(function () {
     return Joi.object().keys({
         sid: Joi.number()
     })
-}),  async function (ctx,next) {
+}),  async function (ctx) {
     let cid = ctx.session.cid;
     let sid = ctx.request.body.sid;
     let did = ctx.session.did;

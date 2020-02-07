@@ -7,25 +7,22 @@
 /*roomMain*/
 .roomMain{
   position: relative;
-  /*border: 1px solid black;*/
 }
 .bull::-webkit-scrollbar { width: 0 !important }
 .roomMain .bull{
   white-space: nowrap;
   overflow: auto;
   padding: 10px 0;
-  /*border: 1px solid black;*/
   margin: 0 -4px;
   scroll-behavior: smooth;
 }
 .roomBorder{
-  /*margin-right: 16px;*/
   margin: 0 4px;
   border-radius: 5px;
   border: 1px solid var(--platform-color-blue);
   display: inline-block;
   position: relative;
-  padding: 16px 16px 16px 16px;
+  padding: 16px;
   width: 136.5px;
 }
 .roomBorroomVagueder .department{
@@ -99,26 +96,18 @@
   -moz-box-shadow: 0 0 3px black;
   box-shadow: 0 0 3px black;
   cursor: pointer;
-  /*border: 1px solid black;*/
-/*  display: flex;
+  display: flex;
   justify-content: center;
-  align-items: center;*/
+  align-items: center;
   
 }
 .direction #left{
-  /*display: none;*/
   opacity: 0;
-}
-.direction .whiteCircle .beacon{
-  cursor: pointer;
-  width: 20px;
-  margin: 14px 0 0 14px;
 }
 
 
 /*roomContainer*/
 #roomContainer{
-  /*border: 1px solid black;*/
   height: 500px;
   overflow-y: scroll;
 }
@@ -158,64 +147,49 @@
 
 /*addCircle*/
 #addCircle{
-  /*background-color: var(--platform-color-blue);*/
-  /*width:50px;*/
-  /*height: 50px;*/
-  border-radius: 1000px;
-  margin-top: 30px;
-  cursor: pointer;
-  z-index: 999;
-  position: fixed;
-  right: 30px;
-  bottom: 50px;
-}
-#submitCircle{
   background-color: var(--platform-color-blue);
-  width:180px;
+  width:40px;
   height: 40px;
   border-radius: 1000px;
-  display: none;
   position: fixed;
-  z-index: 999;
   right: 30px;
   bottom: 50px;
-}
-.member{
-  width: 26px;
-  margin: 10px 0 0 10px; 
-}
-#checkAdd{
-  cursor: pointer;
-  margin-bottom: -4px;
-}
-#returnMember{
-  width: 26px;
-  margin: 6px 0 0 8px; 
-  cursor: pointer;
-}
-.roomInput{
-  border-bottom: 1px solid #dbdbdb;  
-  border-top:0px;  
-  border-left:0px;  
-  border-right:0px;  
-  background-color: transparent;
-  width: 100px;
-  margin: -14px 0 0 4px; 
-}
-input{
-  font-size: 18px;
   color: white;
-  margin-bottom: 10px;
+  transition: 1s;
+  text-align: center;
+}
+
+#addCircle .addContainer {
+  width: 164px;
+  line-height: 40px;
+}
+
+#addCircle .addContainer input {
+  border: none;
+  border-bottom: 2px solid #fff;
   outline: none;
+  background: none;
+  width: 80px;
+  margin: 0 6px;
+  color: #fff;
 }
-input::-webkit-input-placeholder{ 
-  color: white;
+
+#addCircle.active {
+  width: 164px;
 }
-input::-moz-input-placeholder{ 
-  color: white;
+
+#addCircle.active .extra {
+  opacity: 1;
+  pointer-events: all;
 }
-input::-ms-input-placeholder{ 
-  color: white;
+
+#addCircle .addContainer > * {
+  vertical-align: middle;
+}
+
+#addCircle .extra {
+  opacity: 0;
+  pointer-events: none;
 }
 
 
@@ -229,23 +203,15 @@ input::-ms-input-placeholder{
   margin-left: auto;
 }
 
-
 .roomBorder .mdc-chip__text{
   font-size: 16px;
   color: #4A4A4A;
   cursor: default;
 }
-#roomContainer .mdc-chip__text{
-  /*font-size: 18px;*/
-  /*color: #4A4A4A;*/
-  /*cursor: default;*/
-}
 .mdc-chip-set .mdc-chip{
   cursor: default;
 }
-/*.mdc-fab .mdc-fab--mini .mdc-fab--touch{
-  background-color: var(--platform-color-blue);
-}*/
+
 .mdc-touch-target-wrapper .mdc-fab{
   background-color: var(--platform-color-blue);
 }

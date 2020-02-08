@@ -75,6 +75,7 @@ router.get('/clubInfo',mid.checkFormat(function () {
 }),async function (ctx) {
     let cid = ctx.request.query.clubId;
     let result = await Club.getClubInfo(cid);
+    if (!result) throw new JSONError('社团未注册', 403);
     let info = {
         cid:result.cid,
         clubName: result.name,

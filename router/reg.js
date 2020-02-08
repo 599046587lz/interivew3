@@ -42,10 +42,10 @@ router.post('/', mid.checkFormat(function() {
     let fileName = data.cid + '-' + data.name + '-' + data.sid + '.jpg';
     let departInfo = await club.getClubInfo(data.cid);
     if(!departInfo || !(data.clubName == departInfo.name))
-       JSONError('社团id错误');
+        throw new JSONError('社团id错误');
 
     let studentInfo = await interviewee.getInterviewerInfo(data.sid, data.cid);
-    if(!!studentInfo)  JSONError('该学生已注册', 403);
+    if(!!studentInfo)  throw new JSONError('该学生已注册', 403);
     data.image = await utils.image_save(data.pic_url, fileName);
     let result = await interviewee.addStudent(data);
     ctx.response.status = 200;

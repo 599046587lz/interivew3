@@ -1,9 +1,6 @@
 let JSONError = function (message, status) {
-    const err = new Error(message);
-    err.status = status || 500;
-    err.expose = true;
-    throw err;
+    this.status = status || 500;
+    this.message = message;
 }
-
 
 module.exports = JSONError;

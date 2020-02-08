@@ -102,7 +102,7 @@ router.post('/login', mid.checkFormat(function () {
     let {user, password} = ctx.request.body;
     password = utils.md5(String(password));
     let clubInfo = await Club.getClubByName(user);
-    if (clubInfo && password == clubInfo.password && user == clubInfo.name) {
+    if (clubInfo && password === clubInfo.password && user === clubInfo.name) {
         clubInfo = clubInfo.toObject();
         delete clubInfo.password;
         ctx.session.club = clubInfo.name;

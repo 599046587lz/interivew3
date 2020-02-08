@@ -93,7 +93,12 @@ router.get('/clubInfo',mid.checkFormat(function () {
  * @return 204
  */
 
-router.post('/login',async function (ctx) {
+router.post('/login', mid.checkFormat(function () {
+    return Joi.object().keys({
+        user: Joi.string().required(),
+        password: Joi.string().required()
+    })
+}),async function (ctx) {
     let {user, password} = ctx.request.body;
     password = utils.md5(String(password));
     let clubInfo = await Club.getClubByName(user);

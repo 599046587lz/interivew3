@@ -1,5 +1,4 @@
 let fs = require('fs');
-let gm = require('gm').subClass({imageMagick: true});
 let request = require('request');
 let schedule = require('node-schedule');
 let clubModel = require('../models').Club;
@@ -11,7 +10,7 @@ let urlencode = require('urlencode');
 let crypto = require('crypto'); //加密
 let excel = require('xlsx');
 const path = require('path');
-global.departInfo = [ {
+global.departInfo = [{
     name: '节目部',
     location: '6教中307',
     phone: '18767123351'
@@ -63,7 +62,7 @@ exports.image_save = function (url, filename) {
         });
     }).then(response => {
         if (!fs.existsSync(storeFilesPath.image)) {
-            fs.mkdirSync(storeFilesPath.image, { recursive: true });
+            fs.mkdirSync(storeFilesPath.image, {recursive: true});
         }
         const filePath = path.join(storeFilesPath.image, filename);
         response.pipe(fs.createWriteStream(filePath));
@@ -75,8 +74,8 @@ exports.saveDb = function () {
     schedule.scheduleJob('0 0 0 * * *', function () {
         let date = new Date();
         const dbDirPath = path.join(storeFilesPath.db, date.toLocaleDateString());
-        if(!fs.existsSync(dbDirPath)) {
-            fs.mkdirSync(dbDirPath, { recursive: true });
+        if (!fs.existsSync(dbDirPath)) {
+            fs.mkdirSync(dbDirPath, {recursive: true});
         }
         clubModel.find().then(result => {
             let path = path.join(dbDirPath, 'clubs.json');
@@ -92,10 +91,10 @@ exports.saveDb = function () {
 };
 
 exports.deleteFolder = function (path) {
-    if( fs.existsSync(path) ) {
-        fs.readdirSync(path).forEach(function(file) {
+    if (fs.existsSync(path)) {
+        fs.readdirSync(path).forEach(function (file) {
             let curPath = path + "/" + file;
-            if(fs.statSync(curPath).isDirectory()) { // recurse
+            if (fs.statSync(curPath).isDirectory()) { // recurse
                 exports.deleteFolder(curPath);
             } else { // delete file
                 fs.unlinkSync(curPath);
@@ -108,7 +107,7 @@ exports.deleteFolder = function (path) {
 exports.sendMessage = function (data, reqData) {
     let oneDepart = {};
     global.departInfo.forEach(e => {
-        if(e.name === data.volunteer) {
+        if (e.name === data.volunteer) {
             oneDepart = e;
         }
     });
@@ -134,7 +133,7 @@ exports.sendMessage = function (data, reqData) {
     return rp(options).then(parseBody => {
         console.log(parseBody);
     })
-} ;
+};
 
 exports.sendMail = function (data) {
     return new Promise(function (resolve, reject) {
@@ -158,8 +157,8 @@ exports.sendMail = function (data) {
             html: data.html // html 内容
         };
 
-        transporter.sendMail(mailOptions, function(error, info){
-            if(error){
+        transporter.sendMail(mailOptions, function (error, info) {
+            if (error) {
                 return reject(error);
             }
             return resolve();
@@ -178,7 +177,7 @@ exports.getExcelInfo = function (file) {
     let header = {};
     let interviewerInfo = [];
     let result = [];
-    let workbook = excel.readFile(file.path);
+    let workbook = excel.readFile(file.files.path);
     let workSheet = workbook.Sheets[workbook.SheetNames[0]];
     let keys = Object.keys(workSheet);
     let key = keys.filter(k => k[0] !== '!');
@@ -212,8 +211,7 @@ exports.getExcelInfo = function (file) {
             //     result.push(oneDepart.did);
             // });
             interviewerInfo[row][header[col]] = value;
-        }
-        else {
+        } else {
             interviewerInfo[row][header[col]] = value;
         }
     });
@@ -231,10 +229,10 @@ exports.getExcelInfo = function (file) {
 exports.isExist = function (array, info) {
     let status = true;
     array.forEach(e => {
-        if(e === info) status = false;
+        if (e === info) status = false;
     });
 
-    if(status) {
+    if (status) {
         array.push(info);
     }
 };

@@ -41,7 +41,7 @@ exports.handleArchive = function (file, cid) {
         let department = clubInfo.departments;
         let interviewerInfo = [];
         let hearders = {};
-        let workbook = excel.readFile(file.path);
+        let workbook = excel.readFile(file.archive.path);
         let workSheet = workbook.Sheets[workbook.SheetNames[0]];
         let keys = Object.keys(workSheet);
         let key = keys.filter(k => k[0] !== '!');
@@ -220,15 +220,17 @@ exports.insertInfo = function (data) {
     });
 };
 
-exports.getRegNum = function (clubId) {
-    return studentModel.find({
-        clubID: clubId
+exports.getRegNum = function (cid) {
+    return IntervieweeModel.find({
+    //return studentModel.find({
+        cid: cid
     }).then(result => {
         return {
             count: result.length
         }
     })
 };
+
 
 exports.setRoomLocation = function (cid, info) {
     clubModel.findOne({

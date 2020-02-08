@@ -1,14 +1,16 @@
-let session = require('express-session');
-let MongoStore = require('connect-mongo')(session);
+let session = require('koa-session');
+let MongoStore = require('koa-session-mongo');
 let config = require('../config');
 let Joi = require('joi');
 let mongoUrl = require('../models').mongoUrl
 
-exports.checkLogin = function (req, res, next){
-    if (!!req.session['cid']){
+exports.checkLogin = function (ctx, next){
+    if (!!ctx.session.cid){
         next();
     } else {
-        res.status(403).send('Require Login');
+        ctx.response.status = 403;
+        ctx.response.body = 'Require Login';
+
     }
 };
 
@@ -25,6 +27,7 @@ exports.session = function() {
 };
 
 
+
 exports.checkFormat = function(format, option) {
     let errInfo;
     let joiFormat = format();
@@ -33,12 +36,12 @@ exports.checkFormat = function(format, option) {
         joiFormat = joiFormat.joi;
     }
 
-    return function(req, res, next) {
+    return async function(ctx, next) {
         let body;
-        if (req.method === 'GET' || req.method === 'DELETE') {
-            body = Object.assign({}, req.query, req.params);
+        if (ctx.request.method === 'GET' || ctx.request.method === 'DELETE') {
+            body = Object.assign({}, ctx.request.query, ctx.request.params);
         } else {
-            body = Object.assign({}, req.body, req.params);
+            body = Object.assign({}, ctx.request.body, ctx.request.params);
         }
 
         let result = Joi.validate(body, joiFormat, option);
@@ -47,10 +50,14 @@ exports.checkFormat = function(format, option) {
             let re = /(")([\u4E00-\u9FA5A-Za-z0-9_]+)(")/;
             let error = re.exec(result.error)[2];
             if(errInfo && errInfo[error]) {
-                return res.status(400).send(errInfo[error] + '格式错误');
+                ctx.response.status = 400;
+                ctx.response.body = errInfo[error] + '格式错误';
+                return ctx.response;
             }
-            return res.status(400).send('参数类型不合法');
+            ctx.response.status = 400 ;
+            ctx.response.body = '参数类型不合法';
+            return ctx.response;
         }
-        next();
+        await next();
     }
 };

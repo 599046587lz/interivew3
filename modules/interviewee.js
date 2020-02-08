@@ -5,6 +5,7 @@ let IntervieweeModel = require('../models').Interviewee;
 let clubModel = require('../models').Club;
 let config = require('../config');
 
+
 exports.getInterviewerInfo = function (sid, cid ) {
     return IntervieweeModel.findOneAndUpdate({
         sid: sid,
@@ -25,11 +26,11 @@ exports.delVolunteer = function (cid,sid, did) {
 }
 //result.volunteer.splice(result.volunteer.indexOf(did), 1);
 exports.getFinishInfo = function (cid) {
-    return IntervieweeModel.find({
+     return IntervieweeModel.find({
         cid:cid,
         ifsign : true,
         ifcall : true,
-        busy:false
+        busy: false
     }).then(result => result.length)
 }
 
@@ -139,15 +140,15 @@ exports.getSpecifyInterviewee = function (sid, cid, did) {
         })
 };
 
-exports.rateInterviewee = function (cid, sid, score, comment, did, interviewer) {
-        return IntervieweeModel.findOne({
+exports.rateInterviewee =  function (cid, sid, score, comment, did, interviewer) {
+    return IntervieweeModel.findOne({
             cid: cid,
             sid: sid
         }).then(result => {
-            if (!result.rate) result.rate = [];
+            if (!result.rate)  result.rate = [];
             result.rate.push({
                 did: did,
-                score: score,
+                score: String(score),
                 comment: comment,
                 interviewer: interviewer
             });
@@ -159,7 +160,6 @@ exports.rateInterviewee = function (cid, sid, score, comment, did, interviewer) 
             return result.save();
         });
 };
-
 
 exports.getDepartmentQueueLength = function (cid, did) {
         return IntervieweeModel.find({

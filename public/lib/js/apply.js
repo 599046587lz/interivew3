@@ -61,15 +61,36 @@ $(function () {
     var derpatmentNameMap = {};
     var attention = '';
 
+    // function getDepartInfo(clubID) {
+    //     return new Promise(function(resolve, reject) {
+    //         $.ajax({
+    //             url: "/common/clubInfo?clubId=" + clubID,
+    //             success: function (data) {
+    //                 localStorage.setItem("club", data.message.clubName);
+    //                 localStorage.setItem("maxDep", data.message.maxDep);
+    //                 attention = data.message.attention;
+    //                 loadList(departFormat(data.message.departments));
+    //                 return resolve();
+    //             },
+    //             error: function () {
+    //                 $container.html("");
+    //                 warning("找不到服务器");
+    //                 return reject();
+    //             }
+    //         })
+    //     })
+    //
+    // }
+
     function getDepartInfo(clubID) {
         return new Promise(function(resolve, reject) {
             $.ajax({
                 url: "/common/clubInfo?clubId=" + clubID,
                 success: function (data) {
-                    localStorage.setItem("club", data.message.clubName);
-                    localStorage.setItem("maxDep", data.message.maxDep);
-                    attention = data.message.attention;
-                    loadList(departFormat(data.message.departments));
+                    localStorage.setItem("club", data.clubName);
+                    localStorage.setItem("maxDep", data.maxDep);
+                    attention = data.attention;
+                    loadList(departFormat(data.departments));
                     return resolve();
                 },
                 error: function () {

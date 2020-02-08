@@ -5,8 +5,11 @@ let mongoose = require('mongoose');
 let config = require('./config');
 let mongoUserInfo = (!config.db.user || !config.db.password)? '' : config.db.user + ':' + config.db.password + '@';
 let mongoUrl = `mongodb://${mongoUserInfo}${config.db.host}/${config.db.db}`;
+mongoose.connect(mongoUrl, { useNewUrlParser: true });
 
-mongoose.connect(mongoUrl, { useNewUrlParser: true })
+mongoose.set('useFindAndModify', false);
+
+
 
 const db = mongoose.connection
 db.on('error', console.error.bind(console, 'MongoDB 连接错误'));
@@ -36,10 +39,11 @@ let Club = new mongoose.Schema({
 let rate = new mongoose.Schema({
     did: Number,
     score:  {
-        type: Number,
+        type: String,
         enum:
             {
-                values: [0, 1, 2], //0: 待录用  1:录用 2:不录用
+                //values: [0,1,2], //0: 待录用  1:录用 2:不录用
+                values: ["1","2","3","4","5"],
                 message: "请输入正确的分数"
             }
     },
@@ -113,8 +117,55 @@ let Interviewee = new mongoose.Schema({
     }
 });
 
+let Student = new mongoose.Schema({
+    clubName: String,
+    sid: Number,
+    cid: Number,
+    name: {
+        type: String,
+        default: ''
+    },
+    sex: {
+        type: Number,
+        default: 2   //0女1男2秀吉
+    },
+    major: {
+        type: String,
+    },
+    phone: {
+        type: String,
+    },
+    short_tel: {
+        type: String,
+    },
+    qq: {
+        type: String,
+    },
+    volunteer: [Number],
+    notion: {
+        type: String,
+        default: ''
+    },
+
+    email: {
+        type: String,
+        default: ''
+    },
+    pic_url: {
+        type: String,
+    },
+    image: {
+        type: String,
+    },
+    college: {
+        type: String
+    },
+
+});
+
 exports.Interviewee = mongoose.model('interviewee', Interviewee);
 exports.Club = mongoose.model('club', Club); // 添加表时mongoose自动为表名添加s
+exports.Student = mongoose.model('student', Student);
 exports.mongoUrl = mongoUrl;
 
 

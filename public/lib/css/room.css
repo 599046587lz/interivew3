@@ -7,6 +7,7 @@
 /*roomMain*/
 .roomMain{
   position: relative;
+  /*border: 1px solid black;*/
 }
 .bull::-webkit-scrollbar { width: 0 !important }
 .roomMain .bull{
@@ -22,11 +23,18 @@
   border: 1px solid var(--platform-color-blue);
   display: inline-block;
   position: relative;
-  padding: 16px;
-  width: 136.5px;
+  padding: 8px 14px;
+  width: 140px;
 }
-.roomBorroomVagueder .department{
-  margin-top: 16px;
+.roomBorder .stdName{
+  font-size: 24px;
+  color: var(--platform-color-blue);
+  text-align: center;
+  line-height: 40px;
+}
+.roomBorder .circleNumber{
+  float: left;
+  /*vertical-align: text-bottom; ???*/
 }
 .roomBorder .roomVague{
   right: 0;
@@ -36,13 +44,13 @@
   background-color: grey;
   opacity: 0.9;
   position: absolute;
-  padding: 10px;
+  padding: 8px;
   text-align: center;
 }
 .roomVague .skip{
   color: red;
   display: inline-block;
-  margin: 6px 0 0 14px; 
+  margin-left:14px; 
   font-size: 16px;
   cursor: pointer;
 }
@@ -72,19 +80,17 @@
 .direction{
   left: 0;
   right: 0;
-  z-index: 999;
+  /*z-index: 999;*/
   position: absolute;
   top: 30%;
 }
 .direction .turnRight{
   position: absolute;
   right: -25px;
-  z-index: 999;
 }
 .direction .turnLeft{
   left: -25px;
   position: absolute;
-  z-index: 999;
 }
 
 .direction .whiteCircle{
@@ -100,9 +106,6 @@
   justify-content: center;
   align-items: center;
   
-}
-.direction #left{
-  opacity: 0;
 }
 
 
@@ -120,7 +123,7 @@
   flex-wrap: wrap;
   align-items:center;
   justify-content: start;
-  padding: 12px;
+  padding: 8px 14px;
 }
 .circleNumber{
   width: 40px;
@@ -133,7 +136,7 @@
   line-height: 40px;
   text-align: center;
 }
-.stdName{
+.cover .stdName{
   font-size: 24px;
   color: var(--platform-color-blue);
   margin-left: 12px;
@@ -196,22 +199,17 @@
 
 /*框架使用*/
 .roomBorder .mdc-chip-set{
-  margin-top: 10px;
   justify-content: center;
+  clear: left;
 }
 .cover .mdc-chip-set{
   margin-left: auto;
 }
 
-.roomBorder .mdc-chip__text{
-  font-size: 16px;
-  color: #4A4A4A;
-  cursor: default;
-}
-.mdc-chip-set .mdc-chip{
-  cursor: default;
-}
-
 .mdc-touch-target-wrapper .mdc-fab{
   background-color: var(--platform-color-blue);
+}
+
+.whiteCircle .material-icons{
+  color: var(--platform-color-blue);
 }

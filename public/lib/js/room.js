@@ -1,11 +1,11 @@
     var number = 2;
     var addCircle = $("#addCircle");
     var submitCircle = $("#submitCircle");
-    var left = $("#left");
-    var right = $("#right");
     var $staffId = $('#staffId');
+    var left = $('#left');
+    var right = $('#right');
 
-   
+
     addCircle.on('click',function () {
         addCircle.toggleClass('active');
     })
@@ -64,30 +64,33 @@
             roomVague.parentNode.remove();
         });
     })
-    left.click(function(){stepLeft();});
-    right.click(function(){stepRight();});
 
+
+     left.click(function(){stepLeft();});
+     right.click(function(){stepRight();});
+
+
+    if ($("#wait").scrollLeft() == 0 )
+        left.fadeOut(0);
 
     $("#wait").on('scroll',function(e){
         if ($(this).scrollLeft() === 0) {
-            alert('到起点了');
-            left.css("opacity","0");
+            left.fadeOut();
         }
         if ($(this).scrollLeft() > $('.roomBorder').width()*11) {
-            alert('到最右侧了');
-            right.css("opacity","0");
-
+            right.fadeOut();
         }
     })
     function stepRight()
     {
         var scrollLeft = $("#wait").scrollLeft();
         $("#wait").scrollLeft(scrollLeft + 680);
-        left.css("opacity","1");
+        if (scrollLeft ==0)
+            left.fadeIn();
     }
     function stepLeft()
     {
         var scrollLeft = $("#wait").scrollLeft();
         $("#wait").scrollLeft(scrollLeft - 680);
-        right.css("opacity","1");    
+        right.fadeIn();
     }

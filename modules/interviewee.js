@@ -140,27 +140,6 @@ exports.getSpecifyInterviewee = function (sid, cid, did) {
         })
 };
 
-// exports.rateInterviewee = function (cid, sid, score, comment, did, interviewer) {
-//         return IntervieweeModel.findOne({
-//             cid: cid,
-//             sid: sid
-//         }).then(result => {
-//             if (!result.rate)  result.rate = [];
-//             result.rate.push({
-//                 did: did,
-//                 score: score,
-//                 comment: comment,
-//                 interviewer: interviewer
-//             });
-//             let done = [].concat(result.done);
-//             done.push(did);
-//             result.done = done;
-//             result.busy = false;
-//             result.signTime = new Date();
-//             return result.save();
-//         });
-// };
-
 exports.rateInterviewee =  function (cid, sid, score, comment, did, interviewer) {
     return IntervieweeModel.findOne({
             cid: cid,

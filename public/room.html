@@ -1,196 +1,165 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" >
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>叫号大厅</title>
-    <link rel="stylesheet" type="text/css" href="lib/css/reset.css">
     <link rel="stylesheet" type="text/css" href="lib/css/common.css">
     <link rel="stylesheet" type="text/css" href="lib/css/room.css">
-    <link rel="stylesheet" type="text/css" href="lib/css/square/blue.css"/>
+<!--    <link rel="stylesheet" type="text/css" href="lib/css/square/blue.css"/>-->
     <link rel="stylesheet" type="text/css" href="lib/css/jquery.jscrollpane.css"/>
-    <link rel="stylesheet" type="text/css" href="lib/css/notifIt.css"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
     <link rel="stylesheet" type="text/css" href="lib/css/select.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Round">
 </head>
 <body>
-    <div class="topBar">
-        <header class="header">
+<div class="topBar">
+    <header class="header">
             <span class="title">
                 <span class="redhome">redhome</span>
                 <span>interview</span>
             </span>
-            <span class="user">
+        <span class="user">
                 <span>UserName</span>
                 <div class="avatar">R</div>
             </span>
-        </header>
-    </div>
-    <div class="main">
-        <div class="roomMain" >
-            <div class="bull" id="wait">
-                <div class="roomBorder">
-                    <div>
-                        <div class="circleNumber">1</div>
-                        <div class="stdName">王源</div>
-                    </div>
-                    <div class="mdc-chip-set">
-                        <div class="mdc-chip">
-                            <span class="mdc-chip__text">技术部</span>
-                        </div>
-                    </div>
+    </header>
+</div>
+<div class="main">
+    <div class="roomMain">
+        <div class="bull" id="wait">
+            <div class="roomBorder">
+                <div>
+                    <div class="circleNumber">1</div>
+                    <div class="name">王源</div>
                 </div>
-                <div class="roomBorder">
-                    <div>
-                        <div class="circleNumber">2</div>
-                        <div class="stdName">王俊凯</div>
-                    </div>
-                    <div class="mdc-chip-set">
-                        <div class="mdc-chip">
-                            <span class="mdc-chip__text">媒体运营部</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="roomBorder">
-                    <div>
-                        <div class="circleNumber">3</div>
-                        <div class="stdName">易烊千玺</div>
-                    </div>
-                    <div class="mdc-chip-set">
-                        <div class="mdc-chip">
-                            <span class="mdc-chip__text">媒体运营部</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="roomBorder">
-                    <div>
-                        <div class="circleNumber">4</div>
-                        <div class="stdName">江南小霸...</div>
-                    </div>
-                    <div class="mdc-chip-set">
-                        <div class="mdc-chip">
-                            <span class="mdc-chip__text">媒体运营部</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="roomBorder">
-                    <div>
-                        <div class="circleNumber">5</div>
-                        <div class="stdName">Jerry</div>
-                    </div>
-                    <div class="mdc-chip-set">
-                        <div class="mdc-chip">
-                            <span class="mdc-chip__text">媒体运营部</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="roomBorder">
-                    <div>
-                        <div class="circleNumber">6</div>
-                        <div class="stdName">Jerry</div>
-                    </div>
-                    <div class="mdc-chip-set">
-                        <div class="mdc-chip">
-                            <span class="mdc-chip__text">媒体运营部</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="roomBorder">
-                    <div>
-                        <div class="circleNumber">7</div>
-                        <div class="stdName">Jerry</div>
-                    </div>
-                    <div class="mdc-chip-set">
-                        <div class="mdc-chip">
-                            <span class="mdc-chip__text">媒体运营部</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="roomBorder">
-                    <div>
-                        <div class="circleNumber">8</div>
-                        <div class="stdName">Jerry</div>
-                    </div>
-                    <div class="mdc-chip-set">
-                        <div class="mdc-chip">
-                            <span class="mdc-chip__text">媒体运营部</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="roomBorder">
-                    <div>
-                        <div class="circleNumber">9</div>
-                        <div class="stdName">Jerry</div>
-                    </div>
-                    <div class="mdc-chip-set">
-                        <div class="mdc-chip">
-                            <span class="mdc-chip__text">媒体运营部</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="roomBorder">
-                    <div>
-                        <div class="circleNumber">10</div>
-                        <div class="stdName">Jerry</div>
-                    </div>
-                    <div class="mdc-chip-set">
-                        <div class="mdc-chip">
-                            <span class="mdc-chip__text">媒体运营部</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="roomBorder">
-                    <div>
-                        <div class="circleNumber">11</div>
-                        <div class="stdName">Jerry</div>
-                    </div>
-                    <div class="mdc-chip-set">
-                        <div class="mdc-chip">
-                            <span class="mdc-chip__text">媒体运营部</span>
-                        </div>
-                    </div>
+                <div class="mdc-chip-set">
+                    <div class="mdc-chip"><span class="mdc-chip__text">技术部</span></div>
                 </div>
             </div>
-            <div class="direction">
-                <div class="turnLeft transparent" id="left">
-                    <i class="material-icons">arrow_back</i>
+            <div class="roomBorder">
+                <div>
+                    <div class="circleNumber">2</div>
+                    <div class="name">王俊凯</div>
                 </div>
-                <div class="turnRight" id="right">
-                    <i class="material-icons">arrow_forward</i>
+                <div class="mdc-chip-set">
+                    <div class="mdc-chip"><span class="mdc-chip__text">媒体运营部</span></div>
+                </div>
+            </div>
+            <div class="roomBorder">
+                <div>
+                    <div class="circleNumber">3</div>
+                    <div class="name">易烊千玺</div>
+                </div>
+                <div class="mdc-chip-set">
+                    <div class="mdc-chip"><span class="mdc-chip__text">媒体运营部</span></div>
+                </div>
+            </div>
+            <div class="roomBorder">
+                <div>
+                    <div class="circleNumber">4</div>
+                    <div class="name">江南小霸...</div>
+                </div>
+                <div class="mdc-chip-set">
+                    <div class="mdc-chip"><span class="mdc-chip__text">媒体运营部</span></div>
+                </div>
+            </div>
+            <div class="roomBorder">
+                <div>
+                    <div class="circleNumber">5</div>
+                    <div class="name">Jerry</div>
+                </div>
+                <div class="mdc-chip-set">
+                    <div class="mdc-chip"><span class="mdc-chip__text">媒体运营部</span></div>
+                </div>
+            </div>
+            <div class="roomBorder">
+                <div>
+                    <div class="circleNumber">6</div>
+                    <div class="name">Jerry</div>
+                </div>
+                <div class="mdc-chip-set">
+                    <div class="mdc-chip"><span class="mdc-chip__text">媒体运营部</span></div>
+                </div>
+            </div>
+            <div class="roomBorder">
+                <div>
+                    <div class="circleNumber">7</div>
+                    <div class="name">Jerry</div>
+                </div>
+                <div class="mdc-chip-set">
+                    <div class="mdc-chip"><span class="mdc-chip__text">媒体运营部</span></div>
+                </div>
+            </div>
+            <div class="roomBorder">
+                <div>
+                    <div class="circleNumber">8</div>
+                    <div class="name">Jerry</div>
+                </div>
+                <div class="mdc-chip-set">
+                    <div class="mdc-chip"><span class="mdc-chip__text">媒体运营部</span></div>
+                </div>
+            </div>
+            <div class="roomBorder">
+                <div>
+                    <div class="circleNumber">9</div>
+                    <div class="name">Jerry</div>
+                </div>
+                <div class="mdc-chip-set">
+                    <div class="mdc-chip"><span class="mdc-chip__text">媒体运营部</span></div>
+                </div>
+            </div>
+            <div class="roomBorder">
+                <div>
+                    <div class="circleNumber">10</div>
+                    <div class="name">Jerry</div>
+                </div>
+                <div class="mdc-chip-set">
+                    <div class="mdc-chip"><span class="mdc-chip__text">媒体运营部</span></div>
+                </div>
+            </div>
+            <div class="roomBorder">
+                <div>
+                    <div class="circleNumber">11</div>
+                    <div class="name">Jerry</div>
+                </div>
+                <div class="mdc-chip-set">
+                    <div class="mdc-chip"><span class="mdc-chip__text">媒体运营部</span></div>
                 </div>
             </div>
         </div>
-        <div id="roomContainer">
-            <div class="cover">
+        <div class="direction">
+            <div class="turnLeft turn transparent" id="left">
+                <i class="material-icons">arrow_back</i>
+            </div>
+            <div class="turnRight turn" id="right">
+                <i class="material-icons">arrow_forward</i>
+            </div>
+        </div>
+    </div>
+    <div id="roomContainer">
+        <div class="cover">
                 <span>
                     <div class="circleNumber">1</div>
-                    <span class="stdName">易烊千玺</span>
+                    <span class="name">易烊千玺</span>
                     <span class="stdNumber">19051716</span>
                 </span>
-                <div class="mdc-chip-set">
-                    <div class="mdc-chip">
-                        <span class="mdc-chip__text">技术部</span>
-                    </div>
-                    <div class="mdc-chip" >
-                        <span class="mdc-chip__text">媒体运营部</span>
-                    </div>
-                    <div class="mdc-chip">
-                        <span class="mdc-chip__text">媒体运营部</span>
-                    </div>
-                </div>
-                <!-- <button class="mdc-button mdc-button--raised submit button btn1"onclick="up($(this))">面试</button>    -->
+            <div class="mdc-chip-set">
+                <div class="mdc-chip"><span class="mdc-chip__text">技术部</span></div>
+                <div class="mdc-chip"><span class="mdc-chip__text">媒体运营部</span></div>
+                <div class="mdc-chip"><span class="mdc-chip__text">媒体运营部</span></div>
             </div>
         </div>
     </div>
-     <div id="addCircle">
-        <div class="addContainer">
-            <i class="material-icons">person_add</i>
-            <input id="staffId" class="extra" type="text" value="input staff id">
-            <i class="material-icons extra" id="done">done</i>
-        </div>
-    </div> 
-    <footer class="copyright"></footer>
+</div>
+<div id="addCircle">
+    <div class="addContainer">
+        <i class="material-icons">person_add</i>
+        <input id="staffId" class="transparent" type="text" value="input staff id">
+        <i class="material-icons transparent" id="done">done</i>
+    </div>
+</div>
+<footer class="copyright"></footer>
 </body>
 <script type="text/javascript" src="lib/js/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="lib/js/room.js"></script>

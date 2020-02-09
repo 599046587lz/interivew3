@@ -1,16 +1,18 @@
     var number = 2;
-    var addCircle = $("#addCircle");
-    var submitCircle = $("#submitCircle");
+    var $addCircle = $("#addCircle");
     var $staffId = $('#staffId');
-    var left = $('#left');
-    var right = $('#right');
+    var $left = $('#left');
+    var $right = $('#right');
+    var $wait = $('#wait');
+
+    var scrollLeft = 0;
 
 
-    addCircle.on('click',function () {
-        addCircle.toggleClass('active');
+    $addCircle.on('click',function () {
+        $addCircle.toggleClass('active');
     })
 
-    $(".extra").on('click',function (e) {
+    $(".transparent").on('click',function (e) {
         e.stopPropagation()
     })
 
@@ -20,17 +22,16 @@
         }
     })
 
-
-
     $("#done").on('click',function () {
-        addCircle.removeClass('active');
+        $addCircle.removeClass('active');
         var name = "好好学习天天向上";
-        if (name.length > 4)
+        if (name.length > 4){
             name = name.substring(0,4) + "...";
+        }
         var part = `<div class="cover">
                         <span>
                             <div class="circleNumber">${number}</div>
-                            <span class="stdName">${name}</span>
+                            <span class="name">${name}</span>
                             <span class="stdNumber">${$staffId.val()}</span>
                         </span>
                         <div class="mdc-chip-set">
@@ -43,7 +44,9 @@
         $("#roomContainer").append(part);
         $staffId.val("input staff id");
     })
-    $(".roomBorder").click(function () {
+
+    $(".roomBorder").on("click",function () {
+        var roomBorder = this;
         var room = `<div class="roomVague">
         <p class="tip">you need to go</p>
         <p class="classRoom">210 room</p>
@@ -55,40 +58,33 @@
             event.stopPropagation();
             this.remove();
         });
-        $(".ok").on("click",function(event){
-            var roomVague = this.parentNode;
-            roomVague.parentNode.remove();
+        $(".ok").on("click",function(){
+            roomBorder.remove();
         });
-        $(".skip").on("click",function(event){
-            var roomVague = this.parentNode;
-            roomVague.parentNode.remove();
+        $(".skip").on("click",function(){
+            roomBorder.remove();
         });
     })
 
-
-     left.click(function(){stepLeft();});
-     right.click(function(){stepRight();});
-
-
-    $("#wait").on('scroll',function(e){
+    $wait.on('scroll',function(){
         if ($(this).scrollLeft() === 0) {
-            left.addClass("transparent");
+            $left.addClass("transparent");
+        } else {
+            $left.removeClass('transparent')
         }
-        if ($(this).scrollLeft() > $('.roomBorder').width()*11) {
-            right.addClass("transparent");
+        var $bull = $('.bull');
+        if ($(this).scrollLeft() + $bull.width() > $bull[0].scrollWidth) {
+            $right.addClass("transparent");
+        } else {
+            $right.removeClass('transparent');
         }
     })
-    function stepRight()
-    {
-        var scrollLeft = $("#wait").scrollLeft();
-        $("#wait").scrollLeft(scrollLeft + 680);
-        if (scrollLeft ==0){
-            left.removeClass("transparent");
-        }
-    }
-    function stepLeft()
-    {
-        var scrollLeft = $("#wait").scrollLeft();
-        $("#wait").scrollLeft(scrollLeft - 680);
-        right.removeClass("transparent");
-    }
+    $right.on("click",function () {
+        scrollLeft = $wait.scrollLeft();
+        $wait.scrollLeft(scrollLeft + 680);
+    })
+    $left.on("click",function () {
+        scrollLeft = $wait.scrollLeft();
+        $wait.scrollLeft(scrollLeft - 680);
+    })
+

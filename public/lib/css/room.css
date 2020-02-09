@@ -2,14 +2,15 @@
 .main{
   max-width: 720px;
   margin: 30px auto;
-  padding: 20px;
+  padding: 20px 30px;
 }
 /*roomMain*/
 .roomMain{
   position: relative;
-  /*border: 1px solid black;*/
 }
-.bull::-webkit-scrollbar { width: 0 !important }
+.bull::-webkit-scrollbar {
+  width: 0 !important
+}
 .roomMain .bull{
   white-space: nowrap;
   overflow: auto;
@@ -26,7 +27,7 @@
   padding: 8px 14px;
   width: 140px;
 }
-.roomBorder .stdName{
+.roomBorder .name{
   font-size: 24px;
   color: var(--platform-color-blue);
   text-align: center;
@@ -34,7 +35,6 @@
 }
 .roomBorder .circleNumber{
   float: left;
-  /*vertical-align: text-bottom; ???*/
 }
 .roomBorder .roomVague{
   right: 0;
@@ -50,8 +50,7 @@
 .roomVague .skip{
   color: red;
   display: inline-block;
-  margin-left:14px; 
-  font-size: 16px;
+  margin-left:14px;
   cursor: pointer;
 }
 .roomVague .ok{
@@ -68,60 +67,53 @@
 }
 .roomVague .tip{
   color: white;
-  font-size: 16px;
 }
 .roomVague .classRoom{
   color: var(--platform-color-green);
-  font-size: 26px;
+  font-size: 24px;
 }
-
 
 /*direction*/
 .direction{
   left: 0;
   right: 0;
   position: absolute;
-  top: 30%;
+  top: 26%;
 }
 .direction .turnRight{
-  position: absolute;
   right: -25px;
-  transition: 1s;
 }
 .direction .turnLeft{
   left: -25px;
+}
+.direction .turn {
+  width: 50px;
+  height: 50px;
+  border-radius: 1000px;
+  background-color: white;
+  box-shadow: 0 0 3px black;
+  cursor: pointer;
+  text-align: center;
+  transition: .5s;
   position: absolute;
-  transition: 1s;
 }
 .transparent{
   opacity: 0;
   pointer-events: none;
 }
-.direction .turnRight, .direction .turnLeft{
-  width: 50px;
-  height: 50px;
-  border-radius: 1000px;
-  background-color: white;
-  -webkit-box-shadow: 0 0 3px black;
-  -moz-box-shadow: 0 0 3px black;
-  box-shadow: 0 0 3px black;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 
 /*roomContainer*/
 #roomContainer{
   height: 500px;
   overflow-y: scroll;
 }
-#roomContainer::-webkit-scrollbar { width: 0 !important }
- .cover{
+#roomContainer::-webkit-scrollbar {
+  width: 0 !important
+}
+.cover{
   border-radius: 5px;
-  border: 1px solid var(--platform-color-blue); 
-  margin: 20px 0; 
+  border: 1px solid var(--platform-color-blue);
+  margin: 20px 0;
   display: flex;
   flex-wrap: wrap;
   align-items:center;
@@ -139,7 +131,7 @@
   line-height: 40px;
   text-align: center;
 }
-.cover .stdName{
+.cover .name{
   font-size: 24px;
   color: var(--platform-color-blue);
   margin-left: 12px;
@@ -149,7 +141,6 @@
   margin-left: 14px;
   font-size: 12px;
 }
-
 
 /*addCircle*/
 #addCircle{
@@ -161,15 +152,13 @@
   right: 30px;
   bottom: 50px;
   color: white;
-  transition: 1s;
+  transition: .5s;
   text-align: center;
 }
-
 #addCircle .addContainer {
   width: 164px;
   line-height: 40px;
 }
-
 #addCircle .addContainer input {
   border: none;
   border-bottom: 2px solid #fff;
@@ -179,26 +168,16 @@
   margin: 0 6px;
   color: #fff;
 }
-
 #addCircle.active {
   width: 164px;
 }
-
-#addCircle.active .extra {
+#addCircle.active .transparent {
   opacity: 1;
   pointer-events: all;
 }
-
 #addCircle .addContainer > * {
   vertical-align: middle;
 }
-
-#addCircle .extra {
-  opacity: 0;
-  pointer-events: none;
-}
-
-
 
 /*框架使用*/
 .roomBorder .mdc-chip-set{
@@ -209,10 +188,7 @@
   margin-left: auto;
 }
 
-.mdc-touch-target-wrapper .mdc-fab{
-  background-color: var(--platform-color-blue);
-}
-
 .direction .material-icons{
   color: var(--platform-color-blue);
+  line-height: 50px;
 }

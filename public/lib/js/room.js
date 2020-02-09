@@ -70,27 +70,25 @@
      right.click(function(){stepRight();});
 
 
-    if ($("#wait").scrollLeft() == 0 )
-        left.fadeOut(0);
-
     $("#wait").on('scroll',function(e){
         if ($(this).scrollLeft() === 0) {
-            left.fadeOut();
+            left.addClass("transparent");
         }
         if ($(this).scrollLeft() > $('.roomBorder').width()*11) {
-            right.fadeOut();
+            right.addClass("transparent");
         }
     })
     function stepRight()
     {
         var scrollLeft = $("#wait").scrollLeft();
         $("#wait").scrollLeft(scrollLeft + 680);
-        if (scrollLeft ==0)
-            left.fadeIn();
+        if (scrollLeft ==0){
+            left.removeClass("transparent");
+        }
     }
     function stepLeft()
     {
         var scrollLeft = $("#wait").scrollLeft();
         $("#wait").scrollLeft(scrollLeft - 680);
-        right.fadeIn();
+        right.removeClass("transparent");
     }

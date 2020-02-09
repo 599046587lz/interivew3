@@ -48,8 +48,8 @@
     $(".roomBorder").on("click",function () {
         var roomBorder = this;
         var room = `<div class="roomVague">
-        <p class="tip">you need to go</p>
-        <p class="classRoom">210 room</p>
+        <div class="tip">you need to go</div>
+        <div class="classRoom">210 room</div>
         <div class="skip" onclick>skip</div>
         <div class="ok">ok</div>
         </div>`;

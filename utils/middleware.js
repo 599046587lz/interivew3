@@ -4,9 +4,9 @@ let config = require('../config');
 let Joi = require('joi');
 let mongoUrl = require('../models').mongoUrl
 
-exports.checkLogin = function (ctx, next){
+exports.checkLogin = async function (ctx, next){
     if (!!ctx.session.cid){
-        next();
+        await next();
     } else {
         ctx.response.status = 403;
         ctx.response.body = 'Require Login';

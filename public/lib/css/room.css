@@ -80,20 +80,24 @@
 .direction{
   left: 0;
   right: 0;
-  /*z-index: 999;*/
   position: absolute;
   top: 30%;
 }
 .direction .turnRight{
   position: absolute;
   right: -25px;
+  transition: 1s;
 }
 .direction .turnLeft{
   left: -25px;
   position: absolute;
+  transition: 1s;
 }
-
-.direction .whiteCircle{
+.transparent{
+  opacity: 0;
+  pointer-events: none;
+}
+.direction .turnRight, .direction .turnLeft{
   width: 50px;
   height: 50px;
   border-radius: 1000px;
@@ -105,7 +109,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  
 }
 
 
@@ -210,6 +213,6 @@
   background-color: var(--platform-color-blue);
 }
 
-.whiteCircle .material-icons{
+.direction .material-icons{
   color: var(--platform-color-blue);
 }

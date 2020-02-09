@@ -15,6 +15,32 @@ exports.getInterviewerInfo = function (sid, cid ) {
     })
 };
 
+exports.getConfirmInfo = function (sid,cid) {
+    return IntervieweeModel.findOneAndUpdate({
+        sid: sid,
+        cid: cid,
+        ifsign : true,
+        ifcall : true,
+        busy: false
+    },{
+        ifconfirm : true
+    })
+};
+
+exports.getStartInfo = function (sid,cid) {
+    return IntervieweeModel.findOneAndUpdate({
+        sid: sid,
+        cid: cid,
+        ifsign : true,
+        ifcall : true,
+        busy: false,
+        ifconfirm : true
+    },{
+        ifstart : true
+    })
+};
+
+
 exports.delVolunteer = function (cid,sid, did) {
     return IntervieweeModel.findOneAndUpdate({
         cid:cid,
@@ -22,8 +48,8 @@ exports.delVolunteer = function (cid,sid, did) {
     },{
         '$pull': {volunteer: did}
     })
-
-}
+    
+};
 //result.volunteer.splice(result.volunteer.indexOf(did), 1);
 exports.getFinishInfo = function (cid) {
      return IntervieweeModel.find({

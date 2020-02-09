@@ -109,4 +109,23 @@ router.get('/getDepartmentInfo', async function (ctx) {
     ctx.response.body = result;
 });
 
+/**
+ * 未测试
+ */
+
+//叫到号的同学进行确认
+router.get('/confirm', mid.checkFormat(function () {
+    return Joi.object().keys({
+        sid: Joi.number()
+    })
+}), async function (ctx) {
+    let cid = ctx.session.cid;
+    let sid = ctx.request.query.sid;
+    let info = await Interviewee.getConfirmInfo(sid,cid);
+    ctx.response.status = 200;
+    ctx.response.data = info;
+});
+
+
+
 module.exports = router;

@@ -99,6 +99,14 @@ let Interviewee = new mongoose.Schema({
         type: Boolean,
         default: false
     },
+    ifconfirm:{
+        type: Boolean,
+        default: false
+    },
+    ifstart:{
+        type: Boolean,
+        default: false
+    },
     email: {
         type: String,
         default: ''

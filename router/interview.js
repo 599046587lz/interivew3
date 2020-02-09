@@ -64,6 +64,22 @@ router.post('/rate', mid.checkFormat(function () {
 });
 
 /**
+ * 未测试
+ */
+
+//确认面试是否开始
+router.get('/start',  mid.checkFormat(function () {
+    return Joi.object().keys({
+        sid: Joi.number()
+    })
+}), async function (ctx) {
+    let cid = ctx.session.cid;
+    let sid = ctx.request.body.sid;
+    let info = await Interviewee.getStartInfo(sid,cid);
+    ctx.response.status = 200;
+    ctx.response.data = info;
+});
+/**
  * 测试通过(需要socket)(需测试)
  */
 

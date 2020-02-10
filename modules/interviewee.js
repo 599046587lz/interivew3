@@ -16,27 +16,17 @@ exports.getInterviewerInfo = function (sid, cid ) {
 };
 
 exports.getConfirmInfo = function (sid,cid) {
-    return IntervieweeModel.findOneAndUpdate({
+    let data = {
         sid: sid,
         cid: cid,
         ifsign : true,
         ifcall : true,
         busy: false
-    },{
-        ifconfirm : true
-    })
-};
-
-exports.getStartInfo = function (sid,cid) {
-    return IntervieweeModel.findOneAndUpdate({
-        sid: sid,
-        cid: cid,
-        ifsign : true,
-        ifcall : true,
-        busy: false,
-        ifconfirm : true
-    },{
-        ifstart : true
+    };
+    return IntervieweeModel.findOne(data).then(result => {
+        result.ifconfirm = true;
+        result.save();
+        return result;
     })
 };
 
@@ -48,7 +38,7 @@ exports.delVolunteer = function (cid,sid, did) {
     },{
         '$pull': {volunteer: did}
     })
-    
+
 };
 //result.volunteer.splice(result.volunteer.indexOf(did), 1);
 exports.getFinishInfo = function (cid) {
@@ -87,7 +77,7 @@ exports.getNextInterviewee = function (cid, did) {
             if(result === null) {
                 return result
             }
-            result.busy = true;
+            // result.busy = true;
             result.ifcall = true;
             result.calldid = did;
             console.log(result)
@@ -150,16 +140,31 @@ exports.recoverInterviewee = function (sid, cid, did) {
 };
 
 
+exports.tocallNextInterviewee = function (sid, cid, did) {
+    let data = {
+        sid: sid,
+        cid: cid,
+        volunteer: did,
+        signTime: {$ne: null}
+    };
+    return IntervieweeModel.findOne(data).then(result => {
+        if (result.done.indexOf(did * 1) != -1) reject(new Error('该同学已进行过面试'));
+        result.calldid = did;
+        result.ifcall = true;
+        result.save();
+        return result;
+    })
+};
+
 exports.getSpecifyInterviewee = function (sid, cid, did) {
         let data = {
                 sid: sid,
                 cid: cid,
-                volunteer: did
+                volunteer: did,
+                ifcall: true,
+                ifconfirm: true
         };
         return IntervieweeModel.findOne(data).then(result => {
-            if (result.done.indexOf(did * 1) != -1) reject(new Error('该同学已进行过面试'));
-            result.calldid = did;
-            result.ifcall = true;
             result.busy = true;
             result.save();
             return result;
@@ -289,7 +294,8 @@ exports.addStudent = function (data) {
         short_tel: data.short_tel,
         pic_url: data.pic_url,
         image: data.image,
-        email: data.email
+        email: data.email,
+        regTime: data.regTime
     });
 
     return Interviewee.save().then(result => {

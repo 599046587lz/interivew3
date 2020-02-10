@@ -81,6 +81,7 @@ let Interviewee = new mongoose.Schema({
         default: ''
     },
     signTime: Date,
+    regTime: Date,
     rate: [rate],//{did: Number,score: Number, comment: String, interviewer: String}
     done: [Number],
     busy: {

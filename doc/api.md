@@ -425,6 +425,8 @@
     busy: 是否正在面试(boolean),
     ifsign: 是否签到(boolean),
     ifcall: 是否被叫号(boolean),
+    ifconfirm : 是否确认叫号(boolean),
+    ifstart: 是否开始面试(boolean),
     email": 面试者邮箱(string),
     rate": 评价(Array)[{
         did: 部门ID(int),
@@ -512,6 +514,8 @@
     busy: 是否正在面试(boolean),
     ifsign: 是否签到(boolean),
     ifcall: 是否被叫号(boolean),
+    ifconfirm : 是否确认叫号(boolean),
+    ifstart: 是否开始面试(boolean),
     email": 面试者邮箱(string),
     rate": 评价(Array)[{
         did: 部门ID(int),
@@ -565,6 +569,8 @@
     busy: 是否正在面试(boolean),
     ifsign: 是否签到(boolean),
     ifcall: 是否被叫号(boolean),
+    ifconfirm : 是否确认叫号(boolean),
+    ifstart: 是否开始面试(boolean),
     email": 面试者邮箱(string),
     rate": 评价(Array)[{
         did: 部门ID(int),

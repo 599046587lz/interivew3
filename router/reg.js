@@ -46,6 +46,8 @@ router.post('/', mid.checkFormat(function() {
 
     let studentInfo = await interviewee.getInterviewerInfo(data.sid, data.cid);
     if(!!studentInfo)  throw new JSONError('该学生已注册', 403);
+
+    data.regTime = new Date();
     data.image = await utils.image_save(data.pic_url, fileName);
     // let result = await interviewee.addStudent(data);
     await interviewee.addStudent(data);

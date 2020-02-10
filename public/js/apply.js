@@ -462,7 +462,7 @@ $(function () {
             return;
         }
         var loading = "<div class='popup' style='height:200px'>" +
-            "<img src='../../img/apply/loading.gif'>" +
+            "<img src='../img/apply/loading.gif'>" +
             "<div>正在提交</div>" +
             "</div>";
         var form = new FormData(document.getElementById("formfile"));

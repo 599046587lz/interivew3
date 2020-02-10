@@ -24,50 +24,24 @@
  **返回示例**
 
 ``` 
- {
-  "interviewer": [],   
-  "cid": 1,                              cid:社团Id（int)
-  "name": "红色家园",                     name:社团名称（string）
-  "maxDep": 3,                           maxDep:应试者最多可以选择的部门(int)                 
-  "departments": [                       departments:社团介绍(Array)
-    {
-      "number": 1,                       number:报名该部门的人数(int)
-      "did": 0,                          did:部门ID(int)
-      "name": "设计部",                   name:部门名称(string)
-      "location": "501"                  location:部门面试地点(string)
-    },
-    {
-      "number": 8,
-      "did": 1,
-      "name": "技术部",
-      "location": "502"
-    },
-    {
-      "number": 0,
-      "did": 2,
-      "name": "推广部",
-      "location": "502"
-    },
-    {
-      "number": 0,
-      "did": 3,
-      "name": "媒体运营部",
-      "location": "502"
-    },
-    {
-      "number": 1,
-      "did": 4,
-      "name": "人力资源部",
-      "location": "502"
-    }
-  ],                                       attentin:注意事项(string)
-  "attention": "<p>1.准确日期请关注家园微信服务号「在杭电」</p><p>2.获取后续面试资讯，可以加入家园新生交流QQ群：893339804</p><p>3.家园工作室地址：学生活动中心南201</p><p>4.请如实填写以上信息</p>"      
-}
+200:
+  {
+  	cid:社团Id(int),
+  	name:社团名称(string),
+    maxDep:应试者最多可以选择的部门(int),                 
+    departments:社团介绍(Array)[{
+    	number:报名该部门的人数(int),
+      did:部门ID(int),
+      name:部门名称(string),
+      location:部门面试地点(string),
+    }],
+    attention:注意事项(string)
+  }
+403:
+  {
+    error：用户名或密码错误
+  }
 ```
-
-
-
-
 
 
 
@@ -94,12 +68,12 @@
  **返回示例**
 
 ``` 
-无
+200:
+  {
+     url: 头像文件url
+     key: 头像文件名
+}
 ```
-
-  
-
-
 
 
 
@@ -126,51 +100,26 @@
  **返回示例**
 
 ``` 
+  200:
   {
-  "cid": 1,                              cid:社团Id（int)
-  "name": "红色家园",                     name:社团名称（string）
-  "maxDep": 3,                           maxDep:应试者最多可以选择的部门(int)                 
-  "departments": [                       departments:社团介绍(Array)
-    {
-      "number": 1,                       number:报名该部门的人数(int)
-      "did": 0,                          did:部门ID(int)
-      "name": "设计部",                   name:部门名称(string)
-      "location": "501"                  location:部门面试地点(string)
-    },
-    {
-      "number": 11,
-      "did": 1,
-      "name": "技术部",
-      "location": "502"
-    },
-    {
-      "number": 0,
-      "did": 2,
-      "name": "推广部",
-      "location": "502"
-    },
-    {
-      "number": 0,
-      "did": 3,
-      "name": "媒体运营部",
-      "location": "502"
-    },
-    {
-      "number": 3,
-      "did": 4,
-      "name": "人力资源部",
-      "location": "502"
-    }
-  ],                                       attentin:注意事项(string)
-  "attention": "<p>1.准确日期请关注家园微信服务号「在杭电」</p><p>2.获取后续面试资讯，可以加入家园新生交流QQ群：893339804</p><p>3.家园工作室地址：学生活动中心南201</p><p>4.请如实填写以上信息</p>"
-}
+  	cid:社团Id(int),
+  	name:社团名称(string),
+    maxDep:应试者最多可以选择的部门(int),                 
+    departments:社团介绍(Array)[{
+    	number:报名该部门的人数(int),
+      did:部门ID(int),
+      name:部门名称(string),
+      location:部门面试地点(string),
+    }],
+    attention:注意事项(string)
+  }
+403:
+  {
+    error:社团未注册
+  }
 ```
 
   
-
-
-
-
 
 ## club.js里的接口
 
@@ -196,50 +145,20 @@
  **返回示例**
 
 ``` 
- {
-  "interviewer": [],
-  "cid": 1,                              cid:社团Id（int)
-  "name": "红色家园",                     name:社团名称（string）
-  "maxDep": 3,                           maxDep:应试者最多可以选择的部门(int)                 
-  "departments": [                       departments:社团介绍(Array)
-    {
-      "number": 1,                       number:报名该部门的人数(int)
-      "did": 0,                          did:部门ID(int)
-      "name": "设计部",                   name:部门名称(string)
-      "location": "501"                  location:部门面试地点(string)
-    },
-    {
-      "number": 8,
-      "did": 1,
-      "name": "技术部",
-      "location": "502"
-    },
-    {
-      "number": 0,
-      "did": 2,
-      "name": "推广部",
-      "location": "502"
-    },
-    {
-      "number": 0,
-      "did": 3,
-      "name": "媒体运营部",
-      "location": "502"
-    },
-    {
-      "number": 1,
-      "did": 4,
-      "name": "人力资源部",
-      "location": "502"
-    }
-  ],                                       attentin:注意事项(string)
-  "attention": "<p>1.准确日期请关注家园微信服务号「在杭电」</p><p>2.获取后续面试资讯，可以加入家园新生交流QQ群：893339804</p><p>3.家园工作室地址：学生活动中心南201</p><p>4.请如实填写以上信息</p>"
-}
+  200:
+  {
+  	cid:社团Id(int),
+  	name:社团名称(string),
+    maxDep:应试者最多可以选择的部门(int),                 
+    departments:社团介绍(Array)[{
+    	number:报名该部门的人数(int),
+      did:部门ID(int),
+      name:部门名称(string),
+      location:部门面试地点(string),
+    }],
+    attention:注意事项(string)
+  }
 ```
-
-
-
-
 
 
 
@@ -267,14 +186,10 @@
  **返回示例**
 
 ``` 
- 无
+无
 ```
 
  
-
-
-
-
 
 ###  POST    /club/upload/archive
 
@@ -300,14 +215,17 @@
  **返回示例**
 
 ``` 
-   9                  result：上传的面试人数(int)
+ 200:
+  {
+  	 data:上传的面试人数(int)
+  }
+ 403:
+  {
+     error:上传文件不合法
+  }
 ```
 
  
-
-
-
-
 
 ## reg.js里的接口
 
@@ -352,10 +270,6 @@
 
  
 
-
-
-
-
 ## room.js里的接口
 
 ###  GET    /room/sign
@@ -381,14 +295,17 @@
  **返回示例**
 
 ``` 
-  无                     info：该学生若已签到返回签到时间，未签到返回空(object)
+ 200:
+  {
+  	 data: 签到时间(string)
+  }
+ 403:
+  {
+     error: 该学生未报名
+  }
 ```
 
  
-
-
-
-
 
 ###  GET    /room/finish
 
@@ -414,14 +331,13 @@
  **返回示例**
 
 ``` 
- 无                        info:已经结束面试的人数(int)
+ 200:
+  {
+  	 data: 已经结束面试的人数(int)
+  }             
 ```
 
  
-
-
-
-
 
 ###  GET    /room/signed
 
@@ -447,14 +363,34 @@
  **返回示例**
 
 ``` 
- 无                      info:已签到的面试者的信息(object)
+200:
+  {
+    name: 面试者姓名(string),
+    sex: 面试者性别(int),
+    volunteer: 志愿部门(Array),
+    notion: 个人简介(string),
+    done": 已完成面试的部门(Array),
+    busy: 是否正在面试(boolean),
+    ifsign: 是否签到(boolean),
+    ifcall: 是否被叫号(boolean),
+    email": 面试者邮箱(string),
+    rate": 评价(Array)[{
+        did: 部门ID(int),
+        score: 面试者分数(int),
+        comment: 面试评价(string),
+        interviewer: 面试官(string),
+    }],
+    sid: 面试者学号(int),
+    major: 面试者专业(string),
+    phone: 面试者长号(string),
+    short_tel: 面试者短号(string),
+    qq: 面试者qq(string),
+    cid: 面试社团(int),
+    signTime: 签到时间(string),
+  }
 ```
 
  
-
-
-
-
 
 ###  GET    /room/calling
 
@@ -479,14 +415,34 @@
  **返回示例**
 
 ``` 
- 无                        info:下一个被叫到的面试者信息(object)
+ 200:
+  {
+    name: 面试者姓名(string),
+    sex: 面试者性别(int),
+    volunteer: 志愿部门(Array),
+    notion: 个人简介(string),
+    done": 已完成面试的部门(Array),
+    busy: 是否正在面试(boolean),
+    ifsign: 是否签到(boolean),
+    ifcall: 是否被叫号(boolean),
+    email": 面试者邮箱(string),
+    rate": 评价(Array)[{
+        did: 部门ID(int),
+        score: 面试者分数(int),
+        comment: 面试评价(string),
+        interviewer: 面试官(string),
+    }],
+    sid: 面试者学号(int),
+    major: 面试者专业(string),
+    phone: 面试者长号(string),
+    short_tel: 面试者短号(string),
+    qq: 面试者qq(string),
+    cid: 面试社团(int),
+    signTime: 签到时间(string),
+  }
 ```
 
  
-
-
-
-
 
 ## interview里的接口
 
@@ -513,14 +469,13 @@
  **返回示例**
 
 ``` 
- 无                         result:排队人数(int)
+200:
+  {
+  	 data:  排队人数(int)
+  }     
 ```
 
   
-
-
-
-
 
 ###  POST    /interview/skip
 
@@ -547,14 +502,34 @@
  **返回示例**
 
 ``` 
- result                        result:下一个面试者的信息(object)
+ 200:
+  {
+    name: 面试者姓名(string),
+    sex: 面试者性别(int),
+    volunteer: 志愿部门(Array),
+    notion: 个人简介(string),
+    done": 已完成面试的部门(Array),
+    busy: 是否正在面试(boolean),
+    ifsign: 是否签到(boolean),
+    ifcall: 是否被叫号(boolean),
+    email": 面试者邮箱(string),
+    rate": 评价(Array)[{
+        did: 部门ID(int),
+        score: 面试者分数(int),
+        comment: 面试评价(string),
+        interviewer: 面试官(string),
+    }],
+    sid: 面试者学号(int),
+    major:面试者专业(string),
+    phone:面试者长号(string),
+    short_tel: 面试者短号(string),
+    qq: 面试者qq(string),
+    cid:面试社团(int),
+    signTime:签到时间(string),
+  }
 ```
 
   
-
-
-
-
 
 ###  GET    /interview/call
 
@@ -580,12 +555,32 @@
  **返回示例**
 
 ``` 
-  无                        result:下一个面试者信息(object)
+  200:
+  {
+    name: 面试者姓名(string),
+    sex: 面试者性别(int),
+    volunteer: 志愿部门(Array),
+    notion: 个人简介(string),
+    done": 已完成面试的部门(Array),
+    busy: 是否正在面试(boolean),
+    ifsign: 是否签到(boolean),
+    ifcall: 是否被叫号(boolean),
+    email": 面试者邮箱(string),
+    rate": 评价(Array)[{
+        did: 部门ID(int),
+        score: 面试者分数(int),
+        comment: 面试评价(string),
+        interviewer: 面试官(string),
+    }],
+    sid: 面试者学号(int),
+    major:面试者专业(string),
+    phone:面试者长号(string),
+    short_tel: 面试者短号(string),
+    qq: 面试者qq(string),
+    cid:面试社团(int),
+    signTime:签到时间(string),
+  }
 ```
-
-
-
-
 
 
 
@@ -617,10 +612,6 @@
 ```
 
   
-
-
-
-
 
 ### POST    /interview/recommend
 

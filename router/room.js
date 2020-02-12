@@ -114,31 +114,18 @@ router.get('/getDepartmentInfo', async function (ctx) {
  */
 
 //叫到号的同学进行确认
-router.get('/ok', mid.checkFormat(function () {
+router.post('/confirm', mid.checkFormat(function () {
     return Joi.object().keys({
-        sid: Joi.number()
+        sid: Joi.number(),
+        confirm: Joi.boolean().required()
     })
 }), async function (ctx) {
-    let cid = ctx.session.cid;
-    let sid = ctx.request.query.sid;
-    let info = await Interviewee.getConfirmInfo(sid,cid);
+    let cid = ctx.session.cid;;
+    let sid = ctx.request.body.sid;
+    let confirm = ctx.request.body.confirm;
+    let info = await Interviewee.getConfirmInfo(sid,cid,confirm);
     ctx.response.status = 200;
     ctx.response.data = info;
-});
-
-router.get('/skip',mid.checkFormat(function () {
-    return Joi.object().keys({
-        sid: Joi.number()
-    })
-}),  async function (ctx) {
-    let cid = ctx.session.cid;
-    let sid = ctx.request.query.sid;
-
-    let info = await Interviewee.getSkipInfo(cid, sid);
-
-    ctx.response.status = 200;
-    ctx.response.body = info;
-
 });
 
 

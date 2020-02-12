@@ -104,12 +104,7 @@ router.get('/start',async function (ctx) {
     let result = await Interviewee.getSpecifyInterviewee(cid, department);
     result = result.toObject();
     if (!result.busy) {
-        let info = await Interviewee.thenGetNextInterviewee(cid, department);
-        if (info !== null) {
-            info = info.toObject();
-            info.did = department;
-        }
-        ctx.response.body = info;
+        ctx.response.body = result.sid + ' ' + result.ifconfirm ;
     } else {
         result.did = department;
         ctx.response.body = result;

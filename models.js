@@ -104,10 +104,6 @@ let Interviewee = new mongoose.Schema({
         type: Boolean,
         default: false
     },
-    ifskip:{
-        type: Boolean,
-        default: false
-    },
     email: {
         type: String,
         default: ''

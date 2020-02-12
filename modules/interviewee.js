@@ -16,7 +16,7 @@ exports.getInterviewerInfo = function (sid, cid ) {
     })
 };
 
-exports.getConfirmInfo = function (sid,cid) {
+exports.getConfirmInfo = function (sid,cid,confirm) {
     let data = {
         sid: sid,
         cid: cid,
@@ -25,22 +25,7 @@ exports.getConfirmInfo = function (sid,cid) {
         busy: false
     };
     return IntervieweeModel.findOne(data).then(result => {
-        result.ifconfirm = true;
-        result.save();
-        return result;
-    })
-};
-
-exports.getSkipInfo = function (cid,sid) {
-    let data = {
-        sid: sid,
-        cid: cid,
-        ifsign : true,
-        ifcall : true,
-        busy: false
-    };
-    return IntervieweeModel.findOne(data).then(result => {
-        result.ifskip = true;
+        result.ifconfirm = confirm;
         result.save();
         return result;
     })
@@ -104,33 +89,6 @@ exports.getNextInterviewee = function (cid, did) {
         });
 };
 
-exports.thenGetNextInterviewee = function (cid, did) {
-    return IntervieweeModel.findOne({
-        cid: cid,
-        volunteer: did,
-        busy: false,
-        signTime: {$ne: null},
-        ifskip: false,
-        ifconfirm: false
-    }).$where(new Function('let volunteer = this.volunteer;' +
-        'let done = this.done;' +
-        'return (volunteer.length != done.length) && (done.indexOf(' + did + ') == -1);'
-    )).sort({
-        signTime: 'asc'
-    }).then(result => {
-        if(result === null) {
-            return result
-        }
-        // result.busy = true;
-        result.ifcall = true;
-        result.calldid = did;
-        console.log(result)
-        result.save(function (err) {
-            console.log(err)
-        });
-        return result;
-    });
-};
 
 exports.callNextInterviewee = function (cid) {
     return  IntervieweeModel.find({
@@ -207,10 +165,7 @@ exports.getSpecifyInterviewee = function (cid, did) {
                 ifcall: true
         };
         return IntervieweeModel.findOne(data).then(result => {
-            if(result.ifconfirm || result.ifskip){
-                if (!!result.ifconfirm) {result.busy = true;}
-                else result.busy = false;
-            }
+            if (!!result.ifconfirm) result.busy = true;
             result.save();
             return result;
         })

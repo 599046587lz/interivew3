@@ -104,7 +104,7 @@ let Interviewee = new mongoose.Schema({
         type: Boolean,
         default: false
     },
-    ifstart:{
+    ifskip:{
         type: Boolean,
         default: false
     },

@@ -97,20 +97,23 @@ router.get('/call',  mid.checkFormat(function () {
 
 
 //确认面试是否开始
-router.get('/start', mid.checkFormat(function () {
-    return Joi.object().keys({
-        sid: Joi.number()
-    })
-}), async function (ctx) {
+router.get('/start',async function (ctx) {
     let department = ctx.session.did;
-    let sid = ctx.request.query.sid;
     let cid = ctx.session.cid;
 
-    let result = await Interviewee.getSpecifyInterviewee(sid, cid, department);
+    let result = await Interviewee.getSpecifyInterviewee(cid, department);
     result = result.toObject();
-    result.did = department;
-    ctx.response.body = result;
-
+    if (!result.busy) {
+        let info = await Interviewee.thenGetNextInterviewee(cid, department);
+        if (info !== null) {
+            info = info.toObject();
+            info.did = department;
+        }
+        ctx.response.body = info;
+    } else {
+        result.did = department;
+        ctx.response.body = result;
+    }
 });
 
 

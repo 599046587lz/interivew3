@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" >
     <title>录入信息</title>
     <link rel="stylesheet" href="lib/css/reset.css"/>
-    <link rel="stylesheet" href="lib/css/update.css"/>
     <link rel="stylesheet" type="text/css" href="lib/css/notifIt.css"/>
     <link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="lib/css/common.css"/>
+    <link rel="stylesheet" href="css/common.css"/>
+    <link rel="stylesheet" href="css/manage.css"/>
 </head>
 <body>
 <header class="header">
@@ -88,7 +88,7 @@
                     </div>
                 </div>
             </div>
-            <button class="mdc-fab mdc-fab--mini middle" aria-label="Favorite">
+            <button class="mdc-fab mdc-fab--mini middle" aria-label="Favorite" id="addFilter">
                 <div class="mdc-fab__ripple"></div>
                 <span class="mdc-fab__icon material-icons">add</span>
             </button>
@@ -99,8 +99,19 @@
             </table>
         </div>
     </div>
-
 </div>
+
+<div class="popUps">
+    <div>Create New Filter</div>
+    <input>
+    <div class="operation">
+        <div class="cancel">cancel</div>
+        <div class="ok">ok</div>
+    </div>
+</div>
+
+<footer class="copyright"></footer>
+
 
 <!--<div class="topBar">-->
 <!--	<a class="back">-->
@@ -134,6 +145,6 @@
 </body>
 <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
 <script type="text/javascript" src="lib/js/jquery-1.9.1.min.js"></script>
-<script type="text/javascript" src="js/update.js"></script>
+<script type="text/javascript" src="js/manage.js"></script>
 <script type="text/javascript" src="lib/js/notifIt.js"></script>
 </html>

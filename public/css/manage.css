@@ -116,6 +116,30 @@
 	flex-direction: column;
 }
 
+/*popUps*/
+.popUps {
+	position: absolute;
+	border: 1px solid #000;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	width: 500px;
+	height: 200px;
+	margin: auto;
+	background: #fff;
+}
+
+/*框架相关*/
+.mdc-data-table__header-cell, .mdc-data-table__cell {
+	line-height: 52px;
+}
+
+.mdc-fab {
+	width: 32px;
+	height: 32px;
+}
+
 /*#export {*/
 /*	display: none;*/
 /*}*/

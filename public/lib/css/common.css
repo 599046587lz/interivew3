@@ -16,7 +16,7 @@ body {
 }
 
 .topbar{
-    padding: 24px 70px;
+    padding: 16px 24px;
     font-size: 18px;
 }
 .topbar .redhome {
@@ -45,5 +45,25 @@ body {
     content: "Powered by Redhome Studio";
     text-align: center;
     color: var(--mdc-theme-text-hint-on-background);
-    margin-bottom: 24px;
+    margin: 24px 0;
+}
+
+.loading {
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  border: 2px solid var(--mdc-theme-primary);
+  border-bottom-color: transparent;
+  border-right-color: transparent;
+  border-radius: 1000px;
+  animation: am-loading 1s linear infinite;
+}
+
+@keyframes am-loading {
+  from {
+    transform: rotate(0deg)
+  }
+  to {
+    transform: rotate(360deg)
+  }
 }

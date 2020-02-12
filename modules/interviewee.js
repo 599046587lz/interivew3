@@ -4,6 +4,7 @@ let unit = require('../static/lib/unit.json');
 let IntervieweeModel = require('../models').Interviewee;
 let clubModel = require('../models').Club;
 let config = require('../config');
+let JSONError = require('../utils/JSONError');
 
 
 exports.getInterviewerInfo = function (sid, cid ) {
@@ -25,6 +26,21 @@ exports.getConfirmInfo = function (sid,cid) {
     };
     return IntervieweeModel.findOne(data).then(result => {
         result.ifconfirm = true;
+        result.save();
+        return result;
+    })
+};
+
+exports.getSkipInfo = function (cid,sid) {
+    let data = {
+        sid: sid,
+        cid: cid,
+        ifsign : true,
+        ifcall : true,
+        busy: false
+    };
+    return IntervieweeModel.findOne(data).then(result => {
+        result.ifskip = true;
         result.save();
         return result;
     })
@@ -88,6 +104,33 @@ exports.getNextInterviewee = function (cid, did) {
         });
 };
 
+exports.thenGetNextInterviewee = function (cid, did) {
+    return IntervieweeModel.findOne({
+        cid: cid,
+        volunteer: did,
+        busy: false,
+        signTime: {$ne: null},
+        ifskip: false,
+        ifconfirm: false
+    }).$where(new Function('let volunteer = this.volunteer;' +
+        'let done = this.done;' +
+        'return (volunteer.length != done.length) && (done.indexOf(' + did + ') == -1);'
+    )).sort({
+        signTime: 'asc'
+    }).then(result => {
+        if(result === null) {
+            return result
+        }
+        // result.busy = true;
+        result.ifcall = true;
+        result.calldid = did;
+        console.log(result)
+        result.save(function (err) {
+            console.log(err)
+        });
+        return result;
+    });
+};
 
 exports.callNextInterviewee = function (cid) {
     return  IntervieweeModel.find({
@@ -148,7 +191,8 @@ exports.tocallNextInterviewee = function (sid, cid, did) {
         signTime: {$ne: null}
     };
     return IntervieweeModel.findOne(data).then(result => {
-        if (result.done.indexOf(did * 1) != -1) reject(new Error('该同学已进行过面试'));
+        // if (result.done.indexOf(did * 1) != -1) reject(new Error('该同学已进行过面试'));
+        if (result.done.indexOf(did * 1) != -1) throw new JSONError('该同学已进行过面试');
         result.calldid = did;
         result.ifcall = true;
         result.save();
@@ -156,16 +200,17 @@ exports.tocallNextInterviewee = function (sid, cid, did) {
     })
 };
 
-exports.getSpecifyInterviewee = function (sid, cid, did) {
+exports.getSpecifyInterviewee = function (cid, did) {
         let data = {
-                sid: sid,
                 cid: cid,
                 volunteer: did,
-                ifcall: true,
-                ifconfirm: true
+                ifcall: true
         };
         return IntervieweeModel.findOne(data).then(result => {
-            result.busy = true;
+            if(result.ifconfirm || result.ifskip){
+                if (!!result.ifconfirm) {result.busy = true;}
+                else result.busy = false;
+            }
             result.save();
             return result;
         })
@@ -186,6 +231,7 @@ exports.rateInterviewee =  function (cid, sid, score, comment, did, interviewer)
             let done = [].concat(result.done);
             done.push(did);
             result.done = done;
+            result.ifcall = false;
             result.busy = false;
             result.signTime = new Date();
             return result.save();
@@ -319,7 +365,8 @@ exports.queryByClubAll = function (cid) {
     return IntervieweeModel.find({
         cid: cid
     }).then(result => {
-        if(!result) throw new Error('该社团没有人报名');
+        // if(!result) throw new Error('该社团没有人报名');
+        if(!result) throw new JSONError('该社团没有人报名');
         return result;
     })
 };

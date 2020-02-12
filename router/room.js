@@ -114,7 +114,7 @@ router.get('/getDepartmentInfo', async function (ctx) {
  */
 
 //叫到号的同学进行确认
-router.get('/confirm', mid.checkFormat(function () {
+router.get('/ok', mid.checkFormat(function () {
     return Joi.object().keys({
         sid: Joi.number()
     })
@@ -126,6 +126,20 @@ router.get('/confirm', mid.checkFormat(function () {
     ctx.response.data = info;
 });
 
+router.get('/skip',mid.checkFormat(function () {
+    return Joi.object().keys({
+        sid: Joi.number()
+    })
+}),  async function (ctx) {
+    let cid = ctx.session.cid;
+    let sid = ctx.request.query.sid;
+
+    let info = await Interviewee.getSkipInfo(cid, sid);
+
+    ctx.response.status = 200;
+    ctx.response.body = info;
+
+});
 
 
 module.exports = router;

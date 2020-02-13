@@ -81,6 +81,7 @@ let Interviewee = new mongoose.Schema({
         default: ''
     },
     signTime: Date,
+    regTime: Date,
     rate: [rate],//{did: Number,score: Number, comment: String, interviewer: String}
     done: [Number],
     busy: {
@@ -100,10 +101,6 @@ let Interviewee = new mongoose.Schema({
         default: false
     },
     ifconfirm:{
-        type: Boolean,
-        default: false
-    },
-    ifstart:{
         type: Boolean,
         default: false
     },

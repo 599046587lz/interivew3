@@ -67,24 +67,12 @@ router.post('/rate', mid.checkFormat(function () {
  * 未测试
  */
 
-//确认面试是否开始
-router.get('/start',  mid.checkFormat(function () {
-    return Joi.object().keys({
-        sid: Joi.number()
-    })
-}), async function (ctx) {
-    let cid = ctx.session.cid;
-    let sid = ctx.request.body.sid;
-    let info = await Interviewee.getStartInfo(sid,cid);
-    ctx.response.status = 200;
-    ctx.response.data = info;
-});
+
 /**
  * 测试通过(需要socket)(需测试)
  */
-
-
-router.get('/call', mid.checkFormat(function () {
+//插队的时候传sid
+router.get('/call',  mid.checkFormat(function () {
     return Joi.object().keys({
         sid: Joi.number()
     })
@@ -100,8 +88,24 @@ router.get('/call', mid.checkFormat(function () {
         }
         ctx.response.body = result;
     } else {
-        let result = await Interviewee.getSpecifyInterviewee(sid, cid, department);
+        let result = await Interviewee.tocallNextInterviewee(sid, cid, department);
         result = result.toObject();
+        result.did = department;
+        ctx.response.body = result;
+    }
+});
+
+
+//确认面试是否开始
+router.get('/start',async function (ctx) {
+    let department = ctx.session.did;
+    let cid = ctx.session.cid;
+
+    let result = await Interviewee.getSpecifyInterviewee(cid, department);
+    result = result.toObject();
+    if (!result.busy) {
+        ctx.response.body = result.sid + ' ' + result.ifconfirm ;
+    } else {
         result.did = department;
         ctx.response.body = result;
     }

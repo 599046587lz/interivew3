@@ -48,16 +48,16 @@ router.get('/finish', async function (ctx) {
     let cid = ctx.session.cid;
     let info = await Interviewee.getFinishInfo(cid);
     ctx.response.status = 200;
-    ctx.response.data = info;
+    ctx.response.body = info;
 });
 
 
 //返回ok
-router.get('/sighed', async function (ctx) {
+router.get('/signed', async function (ctx) {
     let cid = ctx.session.cid;
     let info = await Interviewee.getSignedInterviewee(cid);
     ctx.response.status = 200;
-    ctx.response.data = info;
+    ctx.response.body = info;
 });
 
 
@@ -66,7 +66,7 @@ router.get('/calling', async function (ctx) {
     let cid = ctx.session.cid;
     let info = await Interviewee.callNextInterviewee(cid);
     ctx.response.status = 200;
-    ctx.response.data = info;
+    ctx.response.body = info;
 });
 
 /**
@@ -114,18 +114,19 @@ router.get('/getDepartmentInfo', async function (ctx) {
  */
 
 //叫到号的同学进行确认
-router.get('/confirm', mid.checkFormat(function () {
+router.post('/confirm', mid.checkFormat(function () {
     return Joi.object().keys({
-        sid: Joi.number()
+        sid: Joi.number().required(),
+        confirm: Joi.boolean().required()
     })
 }), async function (ctx) {
     let cid = ctx.session.cid;
-    let sid = ctx.request.query.sid;
-    let info = await Interviewee.getConfirmInfo(sid,cid);
+    let sid = ctx.request.body.sid;
+    let confirm = ctx.request.body.confirm;
+    let info = await Interviewee.getConfirmInfo(sid,cid,confirm);
     ctx.response.status = 200;
     ctx.response.data = info;
 });
-
 
 
 module.exports = router;

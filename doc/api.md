@@ -138,9 +138,7 @@
 
 **参数：** 
 
-| 参数名 | 必选 | 类型 | 说明 |
-| :----- | :--- | :--- | ---- |
-| cid    | 是   | int  | 社团 |
+无
 
  **返回示例**
 
@@ -176,12 +174,11 @@
 **请求方式：**
 - POST 
 
-**参数：** 
+**参数：**  
 
-| 参数名 | 必选 | 类型   | 说明       |
-| :----- | :--- | :----- | ---------- |
-| info   | 是   | object | 面试者信息 |
-| cid    | 是   | int    | 社团ID     |
+| 参数名 | 必选 | 类型  | 说明       |
+| :----- | :--- | :---- | ---------- |
+| info   | 是   | Array | 面试者信息 |
 
  **返回示例**
 
@@ -210,7 +207,6 @@
 | 参数名 | 必选 | 类型   | 说明         |
 | :----- | :--- | :----- | ------------ |
 | file   | 是   | object | 要上传的文件 |
-| cid    | 是   | int    | 社团ID       |
 
  **返回示例**
 
@@ -285,12 +281,11 @@
 **请求方式：**
 - GET 
 
-**参数：** 
+**参数：**
 
 | 参数名 | 必选 | 类型 | 说明     |
 | :----- | :--- | :--- | -------- |
-| cid    | 是   | int  | 社团ID   |
-| sid    | 是   | int  | 学生学号 |
+| sid    | 是   | Int  | 学生学号 |
 
  **返回示例**
 
@@ -323,9 +318,7 @@
 
 **参数：** 
 
-| 参数名 | 必选 | 类型 | 说明   |
-| :----- | :--- | :--- | ------ |
-| cid    | 是   | int  | 社团ID |
+无
 
 
  **返回示例**
@@ -355,16 +348,14 @@
 
 **参数：** 
 
-| 参数名 | 必选 | 类型 | 说明   |
-| :----- | :--- | :--- | ------ |
-| cid    | 是   | int  | 社团ID |
+无
 
 
  **返回示例**
 
 ``` 
 200:
-  {
+  [{
     name: 面试者姓名(string),
     sex: 面试者性别(int),
     volunteer: 志愿部门(Array),
@@ -373,6 +364,7 @@
     busy: 是否正在面试(boolean),
     ifsign: 是否签到(boolean),
     ifcall: 是否被叫号(boolean),
+    ifconfirm: 确认/跳过(bolean),
     email": 面试者邮箱(string),
     rate": 评价(Array)[{
         did: 部门ID(int),
@@ -387,7 +379,8 @@
     qq: 面试者qq(string),
     cid: 面试社团(int),
     signTime: 签到时间(string),
-  }
+    regTime: 注册时间(string)
+  }]
 ```
 
  
@@ -407,16 +400,14 @@
 
 **参数：** 
 
-| 参数名 | 必选 | 类型 | 说明   |
-| :----- | :--- | :--- | ------ |
-| cid    | 是   | int  | 社团ID |
+无
 
 
  **返回示例**
 
 ``` 
  200:
-  {
+  [{
     name: 面试者姓名(string),
     sex: 面试者性别(int),
     volunteer: 志愿部门(Array),
@@ -425,8 +416,7 @@
     busy: 是否正在面试(boolean),
     ifsign: 是否签到(boolean),
     ifcall: 是否被叫号(boolean),
-    ifconfirm : 是否确认叫号(boolean),
-    ifstart: 是否开始面试(boolean),
+    ifconfirm: 确认/跳过(bolean),
     email": 面试者邮箱(string),
     rate": 评价(Array)[{
         did: 部门ID(int),
@@ -441,10 +431,39 @@
     qq: 面试者qq(string),
     cid: 面试社团(int),
     signTime: 签到时间(string),
-  }
+    regTime: 注册时间(string)
+  }]
 ```
 
- 
+
+
+### POST    /room/confirm
+
+**简要描述：** 
+
+- 叫到号的同学确认ok/skip
+
+**请求URL：** 
+- ` http://127.0.0.1:3001/room/confirm `
+  
+
+**请求方式：**
+- POST 
+
+**参数：** 
+
+| 参数名  | 必选 | 类型    | 说明    |
+| :------ | :--- | :------ | ------- |
+| sid     | 是   | int     | 学生ID  |
+| confirm | 是   | boolean | ok/skip |
+
+ **返回示例**
+
+``` 
+ 无
+```
+
+
 
 ## interview里的接口
 
@@ -463,10 +482,9 @@
 
 **参数：** 
 
-| 参数名 | 必选 | 类型 | 说明   |
-| :----- | :--- | :--- | ------ |
-| cid    | 是   | int  | 社团ID |
-| did    | 是   | int  | 部门ID |
+| 参数名   | 必选 | 类型   | 说明   |
+| :------- | :--- | :----- | ------ |
+| username | 是   | string | 用户名 |
 
  **返回示例**
 
@@ -493,19 +511,17 @@
 **请求方式：**
 - POST 
 
-**参数：** 
+**参数：**  
 
 | 参数名 | 必选 | 类型 | 说明   |
 | :----- | :--- | :--- | ------ |
-| sid    | 是   | int  | 学生ID |
-| cid    | 是   | int  | 社团ID |
-| did    | 是   | int  | 部门ID |
+| sid    | 是   | Int  | 用户名 |
 
  **返回示例**
 
 ``` 
- 200:
-  {
+200:
+  [{
     name: 面试者姓名(string),
     sex: 面试者性别(int),
     volunteer: 志愿部门(Array),
@@ -514,8 +530,7 @@
     busy: 是否正在面试(boolean),
     ifsign: 是否签到(boolean),
     ifcall: 是否被叫号(boolean),
-    ifconfirm : 是否确认叫号(boolean),
-    ifstart: 是否开始面试(boolean),
+    ifconfirm: 确认/跳过(bolean),
     email": 面试者邮箱(string),
     rate": 评价(Array)[{
         did: 部门ID(int),
@@ -524,13 +539,14 @@
         interviewer: 面试官(string),
     }],
     sid: 面试者学号(int),
-    major:面试者专业(string),
-    phone:面试者长号(string),
+    major: 面试者专业(string),
+    phone: 面试者长号(string),
     short_tel: 面试者短号(string),
     qq: 面试者qq(string),
-    cid:面试社团(int),
-    signTime:签到时间(string),
-  }
+    cid: 面试社团(int),
+    signTime: 签到时间(string),
+    regTime: 注册时间(string)
+  }]
 ```
 
   
@@ -560,7 +576,7 @@
 
 ``` 
   200:
-  {
+  [{
     name: 面试者姓名(string),
     sex: 面试者性别(int),
     volunteer: 志愿部门(Array),
@@ -569,8 +585,7 @@
     busy: 是否正在面试(boolean),
     ifsign: 是否签到(boolean),
     ifcall: 是否被叫号(boolean),
-    ifconfirm : 是否确认叫号(boolean),
-    ifstart: 是否开始面试(boolean),
+    ifconfirm: 确认/跳过(bolean),
     email": 面试者邮箱(string),
     rate": 评价(Array)[{
         did: 部门ID(int),
@@ -579,13 +594,14 @@
         interviewer: 面试官(string),
     }],
     sid: 面试者学号(int),
-    major:面试者专业(string),
-    phone:面试者长号(string),
+    major: 面试者专业(string),
+    phone: 面试者长号(string),
     short_tel: 面试者短号(string),
     qq: 面试者qq(string),
-    cid:面试社团(int),
-    signTime:签到时间(string),
-  }
+    cid: 面试社团(int),
+    signTime: 签到时间(string),
+    regTime: 注册时间(string)
+  }]
 ```
 
 
@@ -648,8 +664,59 @@
  无
 ```
 
- **返回参数说明** 
 
-| 参数名 | 类型 | 说明 |
-| :----- | :--- | ---- |
-| 无     | 无   | 无   |
+
+### GET    /interview/start 
+
+**简要描述：** 
+
+- 确认面试是否开始
+
+**请求URL：** 
+- ` http://127.0.0.1:3001/interview/start `
+  
+
+**请求方式：**
+- GET
+
+**参数：** 
+
+无
+
+
+ **返回示例**
+
+``` 
+ 选择ok：
+ {
+    name: 面试者姓名(string),
+    sex: 面试者性别(int),
+    volunteer: 志愿部门(Array),
+    notion: 个人简介(string),
+    done": 已完成面试的部门(Array),
+    busy: 是否正在面试(boolean),
+    ifsign: 是否签到(boolean),
+    ifcall: 是否被叫号(boolean),
+    ifconfirm: 确认/跳过(bolean),
+    email": 面试者邮箱(string),
+    rate": 评价(Array)[{
+        did: 部门ID(int),
+        score: 面试者分数(int),
+        comment: 面试评价(string),
+        interviewer: 面试官(string),
+    }],
+    sid: 面试者学号(int),
+    major: 面试者专业(string),
+    phone: 面试者长号(string),
+    short_tel: 面试者短号(string),
+    qq: 面试者qq(string),
+    cid: 面试社团(int),
+    signTime: 签到时间(string),
+    regTime: 注册时间(string)
+  }
+
+  选择skip：
+  {
+      sid(int):学生ID  +  false
+  }
+```

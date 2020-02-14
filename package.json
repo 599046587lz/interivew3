@@ -9,10 +9,10 @@
   "dependencies": {
     "archiver": "~2.0.0",
     "crypto": "^1.0.1",
-    "debug": "~0.7.4",
-    "gm": "~1.23.0",
+    "debug": "~4.1.1",
+    "file-type": "^14.1.2",
     "iconv-lite": "^0.4.17",
-    "joi": "^10.6.0",
+    "joi": "^14.3.1",
     "koa": "^2.11.0",
     "koa-body": "^4.1.1",
     "koa-bodyparser": "^4.2.1",
@@ -24,33 +24,20 @@
     "koa-session-mongo": "^1.1.0",
     "koa-static": "^5.0.0",
     "koa2-proxy": "^1.1.7",
-    "mongodb": "~2.2.29",
+    "mongodb": "~3.5.3",
     "mongoose": "^5.8.9",
     "node-schedule": "^1.2.4",
     "nodemailer": "^4.6.7",
     "officegen": "~0.4.5",
     "qiniu": "^7.2.1",
     "read-chunk": "^2.1.0",
-    "request": "^2.81.0",
+    "request": "^2.88.2",
     "request-promise": "^4.2.2",
     "require": "^2.4.20",
-    "socket.io": "^1.7.4",
     "urlencode": "^1.1.0",
     "xlsx": "~0.10.7"
   },
   "devDependencies": {
     "http-proxy-middleware": "^0.19.1"
-  },
-  "main": "app.js",
-  "bin": {
-    "registrationAndInterview": "www.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://ppvolow@bitbucket.org/redhomestudio/interview.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "homepage": "https://bitbucket.org/redhomestudio/interview#readme"
+  }
 }

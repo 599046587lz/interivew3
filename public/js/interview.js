@@ -80,6 +80,7 @@ $(function () {
   var $waitNum = $('.tip .waitNum')
   var did = 0;
   var interviewee = '';
+  var sid = 0;
 
   var stepCtl = new StepCtl()
   stepCtl.push(new Step(null, function () {
@@ -117,7 +118,7 @@ $(function () {
   })
 
   // open comment
-  $infomationCard.find('button.start').on('click', function () {
+  $informationCard.find('button.start').on('click', function () {
     stepCtl.next()
   })
 
@@ -143,7 +144,8 @@ $(function () {
 
   //获取排队人数
   var getQueueNumber = function(){
-    did = departments.indexOf(select.value)
+    did = departments.indexOf(select.value);
+    interviewee = $loginCard.find(' .mdc-text-field input').value;
     $.ajax({
       url:'/interview/queue',
       type:'get',
@@ -172,10 +174,31 @@ $(function () {
       data:obj,
       statusCode:{
         200 : function (data) {
-          $informationCard.find('.name')[0].innerText = data.name;
-          $informationCard.find('.specialty')[0].innerText = data.major;
-          $informationCard.find('.tags .mdc-chip__text')[0].innerText = data.sid;
-          $informationCard.find('.introduction')[0].innerText = data.notion;
+          $informationCard.find('.name')[0].innerText = data.name || '--';
+          $informationCard.find('.specialty')[0].innerText = data.major || '--';
+          $informationCard.find('.tags .mdc-chip__text')[0].innerText = data.sid || '--';
+          $informationCard.find('.introduction')[0].innerText = data.notion || '--';
+          sid = data.sid;
+        }
+      }
+    })
+  }
+
+  var submitComment = function(){
+    var score = slider.value;
+    var comment = $commentCard.find('.note textarea')[0].value
+
+    $.ajax({
+      url:'/interview/rate',
+      type:'post',
+      data:{
+        sid: sid,
+        score: score,
+        comment: comment
+      },
+      statusCode:{
+        204 : function (data) {
+          alert('评价成功，即将跳转回叫号页面');
         }
       }
     })

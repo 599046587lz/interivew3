@@ -1,3 +1,4 @@
+    //data + foreach + 模块写好 + 轮询
     var baseURL = '';
     var number = 2;
     var $addCircle = $("#addCircle");
@@ -6,9 +7,8 @@
     var $right = $('#right');
     var $wait = $('#wait');
     var sid;
-
     var scrollLeft = 0;
-
+    var department = ['设计部','技术部','推广部','媒体运营部','人力资源部'];
 
     $addCircle.on('click',function () {
     	$addCircle.toggleClass('active');
@@ -28,7 +28,6 @@
     	$addCircle.removeClass('active');
     	if (staffId.value == "input staff id" || staffId.value == ""){
     		err("请输入学号");
-    		//alert("请输入学号");
     		return false;
     	}
     	sid = staffId.value;
@@ -42,61 +41,50 @@
     		statusCode: {      
     			403: function () {
     				err("该学生未报名!");
-    				console(error);
+    				console.log(error);
     			},
-    			200: function () {
+    			204: function (data) {
     				success("签到成功!");
-    				console(data);
-    				getinformation();//返回签到者信息
-    				if (name.length > 4){
-    					name = name.substring(0,4) + "...";
-    				}
-    				var part = `
-    				<div class="cover">
-    					<span>
-    						<div class="circleNumber">${number}</div>
-    						<span class="name">${name}</span>
-    						<span class="stdNumber">${sid}</span>
-    					</span>
-    					<div class="mdc-chip-set">
-    						<div class="mdc-chip"><span class="mdc-chip__text">${did}</span></div>
-    						<div class="mdc-chip" ><span class="mdc-chip__text">媒体运营部</span></div>
-    						<div class="mdc-chip"><span class="mdc-chip__text">媒体运营部</span></div>
-    					</div>
-    				</div>`;
-    				number++;
-    				$("#roomContainer").append(part);
-                // data: 签到时间(string) ???
+    				// console.log(data);
+    				// callTemplate();
+    				getinformation();
             	}
         	}
     	});
     	$staffId.val("input staff id");
     })
-    //呼叫模板
+    //呼叫模板 返回所有被叫到的人的信息
     var callTemplate = function(){
     	$.ajax({
         	url: baseURL + '/room/calling',
         	type: 'get',
        		dataType: 'json',
         	statusCode: {
-            	200: function () {
-	    			var room = `<div class="roomBorder">
-                			<div>
-                    			<div class="circleNumber">${number}</div>
-                    			<div class="name">${name}</div>
-                			</div>
-                			<div class="mdc-chip-set">
-                    			<div class="mdc-chip"><span class="mdc-chip__text">${did}</span></div>
-                			</div>
-            			</div>`;
-            		$wait.append(room);
+            	200: function (data) {
+            		$wait.html("");
+            		data.forEach(function(element){
+            			var kk = '';
+            			element.volunteer.forEach(function(depart){
+            				kk += `<div class="mdc-chip"><span class="mdc-chip__text">${department[depart]}</span></div>`;
+            			})
+		   				var room = `<div class="roomBorder">
+	                			<div>
+	                    			<div class="circleNumber">${number}</div>
+	                    			<div class="name">${element.name}</div>
+	                			</div>
+	                			<div class="mdc-chip-set">` + kk
+	                			+`</div>
+	            			</div>`;
+	            		$wait.append(room);
+    				})
+
             	}
-        	}
+        	}	
     	});
     }
 
     //确认模板
-    var confirmTemplate = function(){
+    var confirmTemplate = function(confirm){
     	$.ajax({
         	url: baseURL + '/room/confirm',
         	type: 'get',
@@ -107,15 +95,37 @@
        		dataType: 'json',
     	});
     }
-    //返回签到者信息
+    //返回所有签到者信息
     var getinformation = function () {
     	$.ajax({
-        	url: baseURL + '/room/sighed',
+        	url: baseURL + '/room/signed',
         	type: 'get',
         	dataType: 'json',
         	statusCode: {
-            	200: function () {
-            		console("成功");
+            	200: function (data) {
+            		$("#roomContainer").html("");
+            		number = 1;
+            		data.forEach(function(element){
+	            			var kk = '';
+	            			element.volunteer.forEach(function(depart){
+	            				kk += `<div class="mdc-chip"><span class="mdc-chip__text">${department[depart]}</span></div>`;
+	            			})
+	             			if (element.name.length > 4){
+	    					 	element.name = element.name.substring(0,4) + "...";}
+	            			var part = `
+	    					<div class="cover">
+	    					<span>
+	    						<div class="circleNumber">${number}</div>
+	    						<span class="name">${element.name}</span>
+	    						<span class="stdNumber">${element.sid}</span>
+	    					</span>
+	    					<div class="mdc-chip-set">` +kk
+	    					+`</div>
+	    					</div>`;
+	    					number++;
+	    					$("#roomContainer").append(part);
+            		})
+
   				}
         	}
     	});
@@ -127,8 +137,8 @@
         	type: 'get',
         	dataType: 'json',
         	statusCode: {
-            	200: function () {
-            		console(data);
+            	200: function (data) {
+            		console.log(data);
             	}
         	}
     	});
@@ -149,11 +159,11 @@
             this.remove();
         });
         $(".ok").on("click",function(){
-        	confirmTemplate();
+        	confirmTemplate(true);
             roomBorder.remove();
         });
         $(".skip").on("click",function(){
-        	confirmTemplate();
+        	confirmTemplate(false);
             roomBorder.remove();
         });
     })

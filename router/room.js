@@ -125,7 +125,7 @@ router.post('/confirm', mid.checkFormat(function () {
     let confirm = ctx.request.body.confirm;
     let info = await Interviewee.getConfirmInfo(sid,cid,confirm);
     ctx.response.status = 200;
-    ctx.response.data = info;
+    ctx.response.body = info;
 });
 
 

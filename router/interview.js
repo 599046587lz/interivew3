@@ -1,8 +1,9 @@
 /**
  * Created by bangbang93 on 14-9-15.
  */
-let Router = require('koa-router')
+let Router = require('koa-router');
 let Interviewee = require('../modules/interviewee');
+let club = require('../modules/club');
 let Joi = require('joi');
 let mid = require('../utils/middleware');
 let JSONError = require('../utils/JSONError');
@@ -121,6 +122,9 @@ router.get('/start',async function (ctx) {
 router.get('/queue', async function (ctx) {
     let cid = ctx.session.cid;
     let did = ctx.session.did;
+
+    let info = await club.getClubInfo(cid);
+    if (did < 0 || did > info.departments.length) throw new JSONError('不存在该部门', 403);
 
     let result = await Interviewee.getDepartmentQueueLength(cid, did);
 

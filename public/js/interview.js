@@ -66,15 +66,24 @@ $(function () {
   var $callCard = $('.call')
   var $prepareStep = $('.prepareStep')
   var $commentStep = $('.commentStep')
-  var $infomationCard = $('.information')
+  var $informationCard = $('.information')
   var $commentCard = $('.comment')
   var $timer = $('#timer');
   var clock = new Clock(function (time){
     $timer[0].innerText = time;
   });
 
+  var departmentInfo = null;
+  var departments = []
+  var $mdcSelect = $('.mdc-select__menu .mdc-list')
+
+  var $waitNum = $('.tip .waitNum')
+  var did = 0;
+  var interviewee = '';
+
   var stepCtl = new StepCtl()
   stepCtl.push(new Step(null, function () {
+    getQueueNumber()
     $loginCard.removeClass('active').addClass('inactive')
     $callCard.removeClass('inactive').addClass('active')
   }))
@@ -86,6 +95,7 @@ $(function () {
   stepCtl.push(new Step(null, function () {
     $prepareStep.fadeOut(400, function () {
       $commentStep.fadeIn()
+      callNext();
     })
   }))
   stepCtl.push(new Step(null, function () {
@@ -110,4 +120,66 @@ $(function () {
   $infomationCard.find('button.start').on('click', function () {
     stepCtl.next()
   })
+
+  //获取社团信息
+  var getDepartmentInfo = function () {
+    $.ajax({
+      url:'/club/clubInfo',
+      type:'get',
+      statusCode:{
+        200 : function (data) {
+          departmentInfo = data;
+          var departmentsHtml = '';
+          departmentInfo.departments.forEach(item => {
+            departmentsHtml = departmentsHtml.concat(
+                `<li class="mdc-list-item" data-value="${item.name}">${item.name}</li>`)
+            departments[item.did] = departments[item.name]
+          })
+          $mdcSelect[0].innerHTML += departmentsHtml;
+        }
+      }
+    })
+  }
+
+  //获取排队人数
+  var getQueueNumber = function(){
+    did = departments.indexOf(select.value)
+    $.ajax({
+      url:'/interview/queue',
+      type:'get',
+      data:{
+        did:did
+      },
+      statusCode:{
+        200 : function (data) {
+          $waitNum[0].innerText = data
+        }
+      }
+    })
+  }
+  //call or call by staffId
+  var callNext = function (sid) {
+    var obj = {};
+    if(sid) {
+      obj = {
+        sid:sid
+      }
+    }
+
+    $.ajax({
+      url:'/interview/call',
+      type:'get',
+      data:obj,
+      statusCode:{
+        200 : function (data) {
+          $informationCard.find('.name')[0].innerText = data.name;
+          $informationCard.find('.specialty')[0].innerText = data.major;
+          $informationCard.find('.tags .mdc-chip__text')[0].innerText = data.sid;
+          $informationCard.find('.introduction')[0].innerText = data.notion;
+        }
+      }
+    })
+  }
+
+  getDepartmentInfo()
 })

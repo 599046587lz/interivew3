@@ -125,7 +125,7 @@ router.get('/queue', async function (ctx) {
     let result = await Interviewee.getDepartmentQueueLength(cid, did);
 
     ctx.response.status = 200;
-    ctx.response.count = result;
+    ctx.response.body = result;
 });
 
 /**

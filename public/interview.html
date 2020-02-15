@@ -5,11 +5,11 @@
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>正在进行面试</title>
-  <link rel="stylesheet" href="lib/css/reset.css"/>
+<!--  <link rel="stylesheet" href="lib/css/reset.css"/>-->
   <link rel="stylesheet" type="text/css" href="lib/css/notifIt.css"/>
-  <link rel="stylesheet" href="lib/css/jquery.jscrollpane.css"/>
-  <link rel="stylesheet" href="lib/css/square/blue.css"/>
-  <link rel="stylesheet" href="lib/css/jquery.qtip.min.css"/>
+<!--  <link rel="stylesheet" href="lib/css/jquery.jscrollpane.css"/>-->
+<!--  <link rel="stylesheet" href="lib/css/square/blue.css"/>-->
+<!--  <link rel="stylesheet" href="lib/css/jquery.qtip.min.css"/>-->
   <link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="css/common.css"/>
@@ -45,18 +45,10 @@
         </div>
         <div class="mdc-select__menu mdc-menu mdc-menu-surface" role="listbox">
           <ul class="mdc-list">
-            <li class="mdc-list-item">
-              媒体运营部
-            </li>
-            <li class="mdc-list-item">
-              技术部
-            </li>
-            <li class="mdc-list-item">
-              人力资源部
-            </li>
           </ul>
         </div>
       </div>
+
       <div class="mdc-text-field mdc-text-field--outlined">
         <input class="mdc-text-field__input">
         <div class="mdc-notched-outline">
@@ -111,8 +103,8 @@
     <div class="commentContainer">
       <div class="information card">
         <div class="avatar"></div>
-        <div class="name">Jerry</div>
-        <div class="specialty">计算机科学与技术</div>
+        <div class="name"></div>
+        <div class="specialty"></div>
         <div class="tags">
           <div class="mdc-chip" role="row">
             <div class="mdc-chip__ripple"></div>
@@ -122,13 +114,7 @@
           </span>
           </div>
         </div>
-        <div class="introduction">我真的很不错，我真的很不错，我是真的真的真的真的真的很不错！
-          我真的很不错，我真的很不错，我是真的真的真的真的真的很不错！
-          我真的很不错，我真的很不错，我是真的真的真的真的真的很不错！
-          我真的很不错，我真的很不错，我是真的真的真的真的真的很不错！
-          我真的很不错，我真的很不错，我是真的真的真的真的真的很不错！
-          我真的很不错，我真的很不错，我是真的真的真的真的真的很不错！
-          我真的很不错，我真的很不错，我是真的真的真的真的真的很不错！
+        <div class="introduction">
         </div>
         <div class="footer">
           <button class="mdc-button mdc-button--raised start"><span class="mdc-button__ripple"></span>start</button>
@@ -181,13 +167,13 @@
 </body>
 <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
 <script>
-  mdc.select.MDCSelect.attachTo(document.querySelector('.mdc-select'));
+  const select = mdc.select.MDCSelect.attachTo(document.querySelector('.mdc-select'));
   mdc.textField.MDCTextField.attachTo(document.querySelector('.mdc-text-field'));
   mdc.textField.MDCTextField.attachTo(document.querySelector('.note'));
   mdc.slider.MDCSlider.attachTo(document.querySelector('.mdc-slider'));
 </script>
-<script type="text/javascript" src="lib/js/notifIt.js"></script>
 <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript" src="lib/js/notifIt.js"></script>
 <script src="lib/js/jquery.raty.js"></script>
 <script src="lib/js/jquery.jscrollpane.min.js"></script>
 <script src="lib/js/jquery.mousewheel.js"></script>

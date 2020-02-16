@@ -46,8 +46,8 @@
 
     $("#done").on('click',function () {
     	$addCircle.removeClass('active');
-    	if (staffId.value == "input staff id" || staffId.value == ""){
-    		err("请输入学号");
+    	if (!(/^\d{8}$/.test(staffId.value))){
+    		err("请输入正确的学号");
     		return false;
     	}
     	sid = staffId.value;
@@ -168,17 +168,18 @@
 
     $(".roomBorder").on("click",function () {
         var roomBorder = this;
-        $($(this).find(".roomVague")).show();
+        var roomVague = $(this).find(".roomVague");
+        // $($(this).find(".roomVague")).show();
+        $(roomVague).show();
         $(".roomVague").on("click",function(event){
             event.stopPropagation();
-            // this.remove();
             $(this).hide();
         });
-        $(".ok").on("click",function(){
+        $($(roomVague).find(".ok")).on("click",function(){
         	confirmTemplate(true);
             roomBorder.remove();
         });
-        $(".skip").on("click",function(){
+        $($(roomVague).find(".skip")).on("click",function(){
         	confirmTemplate(false);
             roomBorder.remove();
         });

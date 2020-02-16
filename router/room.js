@@ -116,7 +116,7 @@ router.get('/getDepartmentInfo', async function (ctx) {
 router.post('/confirm', mid.checkFormat(function () {
     return Joi.object().keys({
         sid: Joi.number().required(),
-        confirm: Joi.boolean().required()
+        confirm: Joi.number().required()
     })
 }), async function (ctx) {
     let cid = ctx.session.cid;

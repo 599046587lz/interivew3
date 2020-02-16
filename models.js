@@ -101,8 +101,8 @@ let Interviewee = new mongoose.Schema({
         default: false
     },
     ifconfirm:{
-        type: Boolean,
-        default: false
+        type: Number,
+        default: 2        //0跳过 1确认 2等待
     },
     email: {
         type: String,

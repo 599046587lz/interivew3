@@ -150,6 +150,7 @@ exports.tocallNextInterviewee = function (sid, cid, did) {
     };
     return IntervieweeModel.findOne(data).then(result => {
         // if (result.done.indexOf(did * 1) != -1) reject(new Error('该同学已进行过面试'));
+        if (result == null) throw new JSONError('该同学未报名',403);
         if (result.done.indexOf(did * 1) != -1) throw new JSONError('该同学已进行过面试');
         result.calldid = did;
         result.ifcall = true;
@@ -165,8 +166,6 @@ exports.getSpecifyInterviewee = function (cid, did) {
                 ifcall: true
         };
         return IntervieweeModel.findOne(data).then(result => {
-            if (!!result.ifconfirm) result.busy = true;
-            result.save();
             return result;
         })
 };

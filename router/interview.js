@@ -105,7 +105,7 @@ router.get('/start',async function (ctx) {
     let result = await Interviewee.getSpecifyInterviewee(cid, department);
     result = result.toObject();
     if (!result.busy) {
-        ctx.response.body = result.sid + ' ' + result.ifconfirm ;
+        throw new JSONError('该学生跳过', 403);
     } else {
         result.did = department;
         ctx.response.body = result;

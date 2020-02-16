@@ -15,20 +15,20 @@ body {
   margin: 0;
 }
 
-.topbar{
+.topBar{
   padding: 16px 24px;
   font-size: 18px;
 }
-.topbar .redhome {
+.topBar .redhome {
   background:linear-gradient(150deg,rgba(255,170,133,1) 0%, rgba(179,49,95,1) 100%);
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
 }
-.topbar .user{
+.topBar .user{
   color:  var(--mdc-theme-primary);
   float: right;
 }
-.topbar .avatar{
+.topBar .avatar{
   background: var(--platform-color-red);
   height: 30px;
   width: 30px;

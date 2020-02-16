@@ -78,14 +78,13 @@ $(function () {
   var $mdcSelect = $('.mdc-select__menu .mdc-list')
 
   var $waitNum = $('.tip .waitNum')
-  var did = 0;
-  var interviewee = '';
   var sid = 0;
 
   var stepCtl = new StepCtl()
   stepCtl.push(new Step(null, function () {
-    getQueueNumber()
-    $loginCard.removeClass('active').addClass('inactive')
+    intervieweeLogin();
+    callNext();
+    $loginCard.removeClass('active').addClass('inactive');
     $callCard.removeClass('inactive').addClass('active')
   }))
   stepCtl.push(new Step(null, function () {
@@ -96,12 +95,14 @@ $(function () {
   stepCtl.push(new Step(null, function () {
     $prepareStep.fadeOut(400, function () {
       $commentStep.fadeIn()
-      callNext();
     })
   }))
   stepCtl.push(new Step(null, function () {
     $commentCard.removeClass('inactive').addClass('active')
     clock.start();
+  }))
+  stepCtl.push(new Step(null,function () {
+    submitComment();
   }))
 
   // login to wait to call
@@ -112,13 +113,18 @@ $(function () {
   // call to loading
   $callCard.find('button').on('click', function () {
     stepCtl.next()
-    setTimeout(function () {
-      stepCtl.next()
-    }, 2000)
+    // setTimeout(function () {
+    //   stepCtl.next()
+    // }, 2000)
   })
 
   // open comment
   $informationCard.find('button.start').on('click', function () {
+    stepCtl.next()
+  })
+
+  //submit comment
+  $commentCard.find('button.submit').on('click',function () {
     stepCtl.next()
   })
 
@@ -134,7 +140,7 @@ $(function () {
           departmentInfo.departments.forEach(item => {
             departmentsHtml = departmentsHtml.concat(
                 `<li class="mdc-list-item" data-value="${item.name}">${item.name}</li>`)
-            departments[item.did] = departments[item.name]
+            departments[item.did] = item.name
           })
           $mdcSelect[0].innerHTML += departmentsHtml;
         }
@@ -142,16 +148,30 @@ $(function () {
     })
   }
 
+  var intervieweeLogin = function () {
+    var did = departments.indexOf(select.value);
+    var interviewerName = $loginCard.find(' .mdc-text-field input')[0].value;
+    $.ajax({
+      url:'/club/setIdentify',
+      type:'post',
+      data:{
+        did:Number(did),
+        interviewerName:interviewerName
+      },
+      statusCode : {
+        204 : function(){
+          getQueueNumber(did);
+        }}
+    })
+  }
+
+
+
   //获取排队人数
   var getQueueNumber = function(){
-    did = departments.indexOf(select.value);
-    interviewee = $loginCard.find(' .mdc-text-field input').value;
     $.ajax({
       url:'/interview/queue',
       type:'get',
-      data:{
-        did:did
-      },
       statusCode:{
         200 : function (data) {
           $waitNum[0].innerText = data
@@ -159,6 +179,7 @@ $(function () {
       }
     })
   }
+
   //call or call by staffId
   var callNext = function (sid) {
     var obj = {};
@@ -172,16 +193,36 @@ $(function () {
       url:'/interview/call',
       type:'get',
       data:obj,
+      dataType:'json',
       statusCode:{
         200 : function (data) {
-          $informationCard.find('.name')[0].innerText = data.name || '--';
-          $informationCard.find('.specialty')[0].innerText = data.major || '--';
-          $informationCard.find('.tags .mdc-chip__text')[0].innerText = data.sid || '--';
-          $informationCard.find('.introduction')[0].innerText = data.notion || '--';
           sid = data.sid;
+          waitConfirm();
         }
       }
     })
+  }
+
+  var waitConfirm = function () {
+    $.ajax({
+      url:'/interview/start',
+      type:'get',
+      statusCode:{
+        200 : function (data) {
+          renderComment(data.name,data.major,data.sid,data.notion)
+        },
+        403 : function () {
+          alert('此人未确认，已被room跳过');
+        }
+      }
+    })
+  }
+
+  var renderComment = function (name,specialty,sid,introduction) {
+    $informationCard.find('.name')[0].innerText = name || '--';
+    $informationCard.find('.specialty')[0].innerText = specialty || '--';
+    $informationCard.find('.tags .mdc-chip__text')[0].innerText = sid || '--';
+    $informationCard.find('.introduction')[0].innerText = introduction || '--';
   }
 
   var submitComment = function(){
@@ -197,7 +238,7 @@ $(function () {
         comment: comment
       },
       statusCode:{
-        204 : function (data) {
+        204 : function () {
           alert('评价成功，即将跳转回叫号页面');
         }
       }

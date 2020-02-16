@@ -196,7 +196,7 @@ exports.rateInterviewee =  function (cid, sid, score, comment, did, interviewer)
 exports.getDepartmentQueueLength = function (cid, did) {
         return IntervieweeModel.find({
             cid: cid,
-            'volunteer.did': did,
+            volunteer: did,
             busy: {$ne: true},
             signTime: {$ne: null},
             done: {$ne: did}

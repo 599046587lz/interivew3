@@ -43,7 +43,7 @@ router.get('/sign', mid.checkFormat(function () {
 });
 
 
-//返回ok
+
 router.get('/finish', async function (ctx) {
     let cid = ctx.session.cid;
     let info = await Interviewee.getFinishInfo(cid);
@@ -52,7 +52,6 @@ router.get('/finish', async function (ctx) {
 });
 
 
-//返回ok
 router.get('/signed', async function (ctx) {
     let cid = ctx.session.cid;
     let info = await Interviewee.getSignedInterviewee(cid);
@@ -61,7 +60,7 @@ router.get('/signed', async function (ctx) {
 });
 
 
-//返回ok
+
 router.get('/calling', async function (ctx) {
     let cid = ctx.session.cid;
     let info = await Interviewee.callNextInterviewee(cid);

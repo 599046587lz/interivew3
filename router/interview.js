@@ -118,7 +118,7 @@ router.get('/start',async function (ctx) {
  */
 
 
-//返回ok
+
 router.get('/queue', async function (ctx) {
     let cid = ctx.session.cid;
     let did = ctx.session.did;

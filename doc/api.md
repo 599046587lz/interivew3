@@ -223,6 +223,32 @@
 
  
 
+### POST   /club/setIdentify
+
+**简要描述：** 
+
+- 面试官登陆
+
+**请求URL：** 
+- ` http://127.0.0.1:3001/club/setIdentify `
+  
+
+**请求方式：**
+- POST
+
+**参数：** 
+
+无
+
+
+ **返回示例**
+
+``` 
+无
+```
+
+
+
 ## reg.js里的接口
 
 ###  POST    /reg
@@ -364,7 +390,7 @@
     busy: 是否正在面试(boolean),
     ifsign: 是否签到(boolean),
     ifcall: 是否被叫号(boolean),
-    ifconfirm: 确认/跳过(bolean),
+    ifconfirm: 0跳过1确认2等待(int),
     email": 面试者邮箱(string),
     rate": 评价(Array)[{
         did: 部门ID(int),
@@ -416,7 +442,7 @@
     busy: 是否正在面试(boolean),
     ifsign: 是否签到(boolean),
     ifcall: 是否被叫号(boolean),
-    ifconfirm: 确认/跳过(bolean),
+    ifconfirm: 0跳过1确认2等待(int),
     email": 面试者邮箱(string),
     rate": 评价(Array)[{
         did: 部门ID(int),
@@ -530,7 +556,7 @@
     busy: 是否正在面试(boolean),
     ifsign: 是否签到(boolean),
     ifcall: 是否被叫号(boolean),
-    ifconfirm: 确认/跳过(bolean),
+    ifconfirm: 0跳过1确认2等待(int),
     email": 面试者邮箱(string),
     rate": 评价(Array)[{
         did: 部门ID(int),
@@ -585,7 +611,7 @@
     busy: 是否正在面试(boolean),
     ifsign: 是否签到(boolean),
     ifcall: 是否被叫号(boolean),
-    ifconfirm: 确认/跳过(bolean),
+    ifconfirm: 0跳过1确认2等待(int),
     email": 面试者邮箱(string),
     rate": 评价(Array)[{
         did: 部门ID(int),
@@ -602,6 +628,14 @@
     signTime: 签到时间(string),
     regTime: 注册时间(string)
   }]
+ 403:
+  {
+     error: 该学生未报名
+  }
+ 500:
+  {
+     error: 该同学已进行过面试
+  }
 ```
 
 
@@ -687,7 +721,7 @@
  **返回示例**
 
 ``` 
- 选择ok：
+ 200(选择ok)：
  {
     name: 面试者姓名(string),
     sex: 面试者性别(int),
@@ -697,7 +731,7 @@
     busy: 是否正在面试(boolean),
     ifsign: 是否签到(boolean),
     ifcall: 是否被叫号(boolean),
-    ifconfirm: 确认/跳过(bolean),
+    ifconfirm: 0跳过1确认2等待(int),
     email": 面试者邮箱(string),
     rate": 评价(Array)[{
         did: 部门ID(int),
@@ -715,8 +749,12 @@
     regTime: 注册时间(string)
   }
 
-  选择skip：
+  403(选择skip):
   {
-      sid(int):学生ID  +  false
+      data：该学生跳过
+  }
+  202(确认等待中):
+  {
+       data：等待确认中
   }
 ```

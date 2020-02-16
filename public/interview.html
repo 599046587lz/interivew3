@@ -1,125 +1,179 @@
 <!DOCTYPE html>
 <html>
 <head lang="en">
-    <meta charset="UTF-8">
-    <title>正在进行面试</title>
-    <link rel="stylesheet" href="lib/css/reset.css"/>
-    <link rel="stylesheet" href="css/common.css"/>
-    <link rel="stylesheet" href="css/interview.css"/>
-    <link rel="stylesheet" type="text/css" href="lib/css/notifIt.css"/>
-    <link rel="stylesheet" href="lib/css/jquery.jscrollpane.css"/>
-    <link rel="stylesheet" href="lib/css/square/blue.css"/>
-    <link rel="stylesheet" href="lib/css/jquery.qtip.min.css"/>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>正在进行面试</title>
+<!--  <link rel="stylesheet" href="lib/css/reset.css"/>-->
+  <link rel="stylesheet" type="text/css" href="lib/css/notifIt.css"/>
+<!--  <link rel="stylesheet" href="lib/css/jquery.jscrollpane.css"/>-->
+<!--  <link rel="stylesheet" href="lib/css/square/blue.css"/>-->
+<!--  <link rel="stylesheet" href="lib/css/jquery.qtip.min.css"/>-->
+  <link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="css/common.css"/>
+  <link rel="stylesheet" href="css/interview.css"/>
 </head>
-<body onunload="time_change()">
-<div class="topBar">
-    <a  class="back">
-        <img src="img/back.png" alt=""/>
-    </a>
-    <div class="right">
-        <span class="wait">等待人数：<span class="count">0</span></span>
-        <span class="done">已经完成：<span class="count">0</span></span>
-        <span class="time">当前已经面试： <span class="min">0</span> 分 <span class="sec">0</span> 秒</span>
-    </div>
-    <div class="title"></div>
-</div>
-
+<body>
+<header class="topbar">
+	    <span class="title">
+		    <span class="redhome">redhome</span>
+		    <span>interview</span>
+	    </span>
+  <span class="user">
+		    <span>UserName</span>
+		    <div class="avatar">R</div>
+	    </span>
+</header>
 <div class="main">
-    <div class="profile">
-        <span class="smallCircle"></span>
-        <span class="title">资料预览</span>
-        <div class="card">
-            <div class="scrollContainer">
-                <div class="basicInfo">
-                    <div class="infoName left floated">
-                        <div>学号</div>
-                        <div>姓名</div>
-                        <div>性别</div>
-                        <div>专业</div>
-                        <div>电话</div>
-                        <div>邮箱</div>
-                        <div>QQ</div>
-                        <div>个人想法</div>
-                    </div>
-                    <div class="infoDetail">
-                        <div>--</div>
-                        <div>--</div>
-                        <div>--</div>
-                        <div>--</div>
-                        <div>--</div>
-                        <div>--</div>
-                        <div>--</div>
-                        <div>--</div>
-                    </div>
-                </div>
+  <div class="prepareStep">
+    <div class="login card rotate">
+      <div class="header">interview</div>
+      <div class="mdc-select mdc-select--outlined">
+        <div class="mdc-select__anchor">
+          <i class="mdc-select__dropdown-icon"></i>
+          <div id="demo-selected-text" class="mdc-select__selected-text" role="button"
+               aria-haspopup="listbox" aria-labelledby="demo-label demo-selected-text"></div>
+          <div class="mdc-notched-outline">
+            <div class="mdc-notched-outline__leading"></div>
+            <div class="mdc-notched-outline__notch">
+              <label class="mdc-floating-label">Department</label>
             </div>
-            <div class="action">
-                <div class="recommend left floated">推荐</div>
-                <div class="skip right floated">跳过</div>
-            </div>
+            <div class="mdc-notched-outline__trailing"></div>
+          </div>
         </div>
-    </div>
-    <div class="rate right floated">
-        <span class="smallCircle"></span>
-        <span class="title">评价</span>
-        <div class="card">
-            <div class="rateInfo">
-                <div>
-                    <span>等级：</span>
-                    <div class="stars"></div>
-                    <input id="score" type="text" hidden/>
-                </div>
-                <div>
-                    <span>评语：</span>
-                    <textarea name="" class="comment" cols="32" rows="7"></textarea>
-                </div>
-                <div class="submit right floated">
-                    提交
-                </div>
-            </div>
-            <div class="action">
-                <div class="special left floated">插队</div>
-                <div class="next right floated">下一位</div>
-            </div>
+        <div class="mdc-select__menu mdc-menu mdc-menu-surface" role="listbox">
+          <ul class="mdc-list">
+          </ul>
         </div>
-    </div>
-</div>
+      </div>
 
-<div class="recommendContent hide">
-    <h3>请选择部门</h3>
-    <ul>
-        <li>
-            <input type="radio" name="depart" id="depart-1" value="1"/>
-            <label for="depart-1">人力资源中心</label>
-        </li>
-        <li>
-            <input type="radio" name="depart" id="depart-2" value="2"/>
-            <label for="depart-2">depart-2</label>
-        </li>
-        <li>
-            <input type="radio" name="depart" id="depart-3" value="3"/>
-            <label for="depart-3">depart-3</label>
-        </li>
-    </ul>
-    <div class="confirm">确定</div>
-</div>
-<div class="skipContent hide">
-    <h3>点击确定跳过此人</h3>
-    <div class="confirm">确定</div>
-</div>
-<div class="specialContent hide">
-    <h3>请输入学号</h3>
-    <div class="sid">
-        <input type="text" name="sid" id=""/>
+      <div class="mdc-text-field mdc-text-field--outlined">
+        <input class="mdc-text-field__input">
+        <div class="mdc-notched-outline">
+          <div class="mdc-notched-outline__leading"></div>
+          <div class="mdc-notched-outline__notch">
+            <label class="mdc-floating-label">Interviewer</label>
+          </div>
+          <div class="mdc-notched-outline__trailing"></div>
+        </div>
+      </div>
+
+      <div class="footer">
+        <button class="mdc-button mdc-button--raised">
+          <span class="mdc-button__ripple"></span>next
+        </button>
+      </div>
     </div>
-    <div class="confirm">确定</div>
+    <div class="call card rotate">
+      <div class="blurry">
+        <div class="skeleton">
+          <div class="avatar"></div>
+          <div class="line"></div>
+        </div>
+        <div class="skeleton">
+          <div class="line"></div>
+        </div>
+        <div class="skeleton">
+          <div class="line"></div>
+        </div>
+      </div>
+      <div class="tip">
+        队伍人数
+        <span class="waitNum">8</span>
+        人
+      </div>
+      <div class="operation" id="operation">
+        <button class="mdc-button mdc-button--raised">
+          <span class="mdc-button__ripple"></span> Call
+        </button>
+        <div class="or">
+          or
+        </div>
+        <span class="link">call by staff id</span>
+      </div>
+      <div class="waiting hide">
+        <div>waiting room confirm</div>
+        <div class="loading"></div>
+      </div>
+    </div>
+  </div>
+  <div class="commentStep hide">
+    <div class="commentContainer">
+      <div class="information card">
+        <div class="avatar"></div>
+        <div class="name"></div>
+        <div class="specialty"></div>
+        <div class="tags">
+          <div class="mdc-chip" role="row">
+            <div class="mdc-chip__ripple"></div>
+            <i class="material-icons mdc-chip__icon mdc-chip__icon--leading">account_box</i>
+            <span role="gridcell">
+              <span role="button" tabindex="0" class="mdc-chip__text"></span>
+          </span>
+          </div>
+        </div>
+        <div class="introduction">
+        </div>
+        <div class="footer">
+          <button class="mdc-button mdc-button--raised start"><span class="mdc-button__ripple"></span>start</button>
+          <button class="mdc-button skip"><span class="mdc-button__ripple"></span>skip</button>
+        </div>
+      </div>
+      <div class="comment card">
+        <div class="header">Evaluation</div>
+        <div class="score">
+          <label>score</label>
+          <div class="mdc-slider mdc-slider--discrete" tabindex="0" role="slider"
+               aria-valuemin="0" aria-valuemax="5" aria-valuenow="0"
+               aria-label="Select Value">
+            <div class="mdc-slider__track-container">
+              <div class="mdc-slider__track"></div>
+            </div>
+            <div class="mdc-slider__thumb-container">
+              <div class="mdc-slider__pin">
+                <span class="mdc-slider__pin-value-marker"></span>
+              </div>
+              <svg class="mdc-slider__thumb" width="21" height="21">
+                <circle cx="10.5" cy="10.5" r="7.875"></circle>
+              </svg>
+              <div class="mdc-slider__focus-ring"></div>
+            </div>
+          </div>
+        </div>
+        <div class="mdc-text-field mdc-text-field--fullwidth mdc-text-field--no-label mdc-text-field--textarea note">
+          <textarea class="mdc-text-field__input"></textarea>
+          <div class="mdc-notched-outline mdc-notched-outline--upgraded">
+            <div class="mdc-notched-outline__leading"></div>
+            <div class="mdc-notched-outline__notch">
+              <label class="mdc-floating-label">notes</label>
+            </div>
+            <div class="mdc-notched-outline__trailing"></div>
+          </div>
+        </div>
+        <div class="footer">
+          <button class="mdc-button mdc-button--raised submit"><span class="mdc-button__ripple"></span>submit</button>
+          <div class="clock">
+            <i class="material-icons clockIcon">timer</i>
+            <span id="timer">00:00</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+<footer class="copyright"></footer>
 </body>
+<script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+<script>
+  const select = mdc.select.MDCSelect.attachTo(document.querySelector('.mdc-select'));
+  mdc.textField.MDCTextField.attachTo(document.querySelector('.mdc-text-field'));
+  mdc.textField.MDCTextField.attachTo(document.querySelector('.note'));
+  const slider = mdc.slider.MDCSlider.attachTo(document.querySelector('.mdc-slider'));
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript" src="lib/js/notifIt.js"></script>
-<!--<script src="https://raw.githubusercontent.com/aui/artTemplate/master/dist/template.js"></script>-->
-<!--<script src="http://backbonejs.org/backbone-min.js"></script>-->
-<!--<script src="http://underscorejs.org/underscore-min.js"></script>-->
-<script src="lib/js/jquery-1.9.1.min.js"></script>
 <script src="lib/js/jquery.raty.js"></script>
 <script src="lib/js/jquery.jscrollpane.min.js"></script>
 <script src="lib/js/jquery.mousewheel.js"></script>

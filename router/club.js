@@ -129,7 +129,7 @@ router.get('/export', mid.checkFormat(function () {
     }
     let result = [];
     if(did === undefined){
-        result = await Club.exportAllInterviewees(cid);
+        result = await Club.exportInterviewees(cid);
     } else {
         result = await Club.exportInterviewees(cid,did)
     }

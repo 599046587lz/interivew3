@@ -1,6 +1,7 @@
     //data + foreach + 模块写好 + 轮询
     var baseURL = '';
-    var number = 2;
+    var numberTop;
+    var numberUnder;
     var $addCircle = $("#addCircle");
     var $staffId = $('#staffId');
     var $left = $('#left');
@@ -31,7 +32,6 @@
         	type: 'get',
         	statusCode: {
             	200: function (data) {
-            		console.log(data);
             		var i = 0;
             		data.departments.forEach(function(element){
 		   				department[element.did] = element.name;
@@ -46,10 +46,10 @@
 
     $("#done").on('click',function () {
     	$addCircle.removeClass('active');
-    	if (!(/^\d{8}$/.test(staffId.value))){
-    		err("请输入正确的学号");
-    		return false;
-    	}
+    	// if (!(/^\d{8}$/.test(staffId.value))){
+    	// 	err("请输入正确的学号");
+    	// 	return false;
+    	// }
     	sid = staffId.value;
     	$.ajax({
     		url: baseURL + '/room/sign',
@@ -66,8 +66,8 @@
     			204: function (data) {
     				success("签到成功!");
     				// console.log(data);
-    				// callTemplate();
-    				getinformation();   				
+    				callTemplate();
+    				// getinformation();   				
             	}
         	}
     	});
@@ -81,24 +81,25 @@
         	statusCode: {
             	200: function (data) {
             		$wait.html("");
-            		console.log(data);
+            		numberTop = 1;
             		data.forEach(function(element){
 		   				var room = `<div class="roomBorder">
 	                			<div>
-	                    			<div class="circleNumber">${number}</div>
+	                    			<div class="circleNumber">${numberTop}</div>
 	                    			<div class="name">${element.name}</div>
 	                			</div>
 	                			<div class="mdc-chip-set">
-	                				<div class="mdc-chip"><span class="mdc-chip__text">${department[element.rate.did]}</span></div>
+	                				<div class="mdc-chip"><span class="mdc-chip__text">${department[element.calldid]}</span></div>
 	                			</div>
 								<div class="roomVague">
  									<div class="tip">you need to go</div>
-       								<div class="classRoom">${interviewRoom[element.rate.did]}</div>
+       								<div class="classRoom">${interviewRoom[element.calldid]}</div>
         							<div class="skip" onclick>skip</div>
         							<div class="ok">ok</div>
         						</div>
 	            			</div>`;
 	            		$wait.append(room);
+	            		numberTop++;
     				})
 
             	}
@@ -126,7 +127,7 @@
         	statusCode: {
             	200: function (data) {
             		$("#roomContainer").html("");
-            		number = 1;
+            		numberUnder = 1;
             		data.forEach(function(element){
 	            			var kk = '';
 	            			element.volunteer.forEach(function(depart){
@@ -137,14 +138,14 @@
 	            			var part = `
 	    					<div class="cover">
 	    					<span>
-	    						<div class="circleNumber">${number}</div>
+	    						<div class="circleNumber">${numberUnder}</div>
 	    						<span class="name">${element.name}</span>
 	    						<span class="stdNumber">${element.sid}</span>
 	    					</span>
 	    					<div class="mdc-chip-set">` +kk
 	    					+`</div>
 	    					</div>`;
-	    					number++;
+	    					numberUnder++;
 	    					$("#roomContainer").append(part);
             		})
 
@@ -206,18 +207,16 @@
         $wait.scrollLeft(scrollLeft - 680);
     })
 
-    var toShow = function () {
-    getFinishNumber();
-    getinformation();
-    // callTemplate();
-}
+    var toShow = function (){
+    	getinformation();
+    	callTemplate();
+	}
 
     $(function () {
     	getDepartment();
-    // toShow();
-    // setInterval(toShow, 3000);               
-
-});
+     	toShow();
+    	setInterval(toShow, 3000);               
+	});
 
 
 

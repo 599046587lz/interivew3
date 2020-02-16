@@ -39,7 +39,7 @@ router.get('/sign', mid.checkFormat(function () {
         info.save();
     }
     ctx.response.status = 200;
-    ctx.response.data = info;
+    ctx.response.body = info;
 });
 
 

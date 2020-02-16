@@ -147,6 +147,7 @@
 	    					</div>`;
 	    					numberUnder++;
 	    					$("#roomContainer").append(part);
+	    					getVague();
             		})
 
   				}
@@ -165,26 +166,29 @@
         	}
     	});
 	}
+ 
+	var getVague = function () {
+		$(".roomBorder").on("click",function () {
+        	var roomBorder = this;
+        	var roomVague = $(this).find(".roomVague");
+        	// $($(this).find(".roomVague")).show();
+        	$(roomVague).show();
+        	$(".roomVague").on("click",function(event){
+            	event.stopPropagation();
+            	$(this).hide();
+        	});
+        	$($(roomVague).find(".ok")).on("click",function(){
+        		confirmTemplate(true);
+            	roomBorder.remove();
+        	});
+        	$($(roomVague).find(".skip")).on("click",function(){
+        		confirmTemplate(false);
+            	roomBorder.remove();
+        	});
+    	})
+	}
 
 
-    $(".roomBorder").on("click",function () {
-        var roomBorder = this;
-        var roomVague = $(this).find(".roomVague");
-        // $($(this).find(".roomVague")).show();
-        $(roomVague).show();
-        $(".roomVague").on("click",function(event){
-            event.stopPropagation();
-            $(this).hide();
-        });
-        $($(roomVague).find(".ok")).on("click",function(){
-        	confirmTemplate(true);
-            roomBorder.remove();
-        });
-        $($(roomVague).find(".skip")).on("click",function(){
-        	confirmTemplate(false);
-            roomBorder.remove();
-        });
-    })
     $wait.on('scroll',function(){
         if ($(this).scrollLeft() === 0) {
             $left.addClass("transparent");

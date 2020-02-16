@@ -1,22 +1,30 @@
-function Step(pre, next) {
+function Step(pre, nextOne, nextTwo) {
   this.pre = pre
-  this.next = next
+  this.nextOne = nextOne
+  this.nextTwo = nextTwo
 }
 
 function StepCtl() {
   this.stepNow = 0
   this.steps = []
 }
-StepCtl.prototype.next = function() {
-  this.steps[this.stepNow].next()
+StepCtl.prototype.nextOne = function() {
+  this.steps[this.stepNow].nextOne()
+  this.stepNow ++
+}
+StepCtl.prototype.nextTwo = function(){
+  this.steps[this.stepNow].nextTwo()
   this.stepNow ++
 }
 StepCtl.prototype.push = function (step) {
   this.steps.push(step)
 }
-StepCtl.prototype.pre = function () {
+StepCtl.prototype.pre = function (number) {
   this.steps[this.stepNow].pre()
-  this.stepNow --
+  this.stepNow = this.stepNow - number || 1
+}
+StepCtl.prototype.reStart = function () {
+  this.stepNow = 0;
 }
 
 function addZero(num) {
@@ -81,51 +89,72 @@ $(function () {
   var sid = 0;
 
   var stepCtl = new StepCtl()
+  //login to call
   stepCtl.push(new Step(null, function () {
     intervieweeLogin();
-    callNext();
     $loginCard.removeClass('active').addClass('inactive');
     $callCard.removeClass('inactive').addClass('active')
-  }))
-  stepCtl.push(new Step(null, function () {
+  },null))
+  //call or call by StaffId & waiting loading
+  stepCtl.push(new Step(function () {
+    $callCard.find('.waiting').fadeOut(400, function () {
+      $callCard.find('.operation').fadeIn(400)
+    })
+  }, function () {
+    callNext();
+    $callCard.find('.operation').fadeOut(400, function () {
+      $callCard.find('.waiting').fadeIn(400)
+    })
+  },function () {
+    getStaffId()
     $callCard.find('.operation').fadeOut(400, function () {
       $callCard.find('.waiting').fadeIn(400)
     })
   }))
+  //loading over and information
   stepCtl.push(new Step(null, function () {
     $prepareStep.fadeOut(400, function () {
       $commentStep.fadeIn()
     })
-  }))
+  },null))
+  //start or skip
   stepCtl.push(new Step(null, function () {
     $commentCard.removeClass('inactive').addClass('active')
     clock.start();
+  },function () {
+    //TODO SKIP
   }))
+  //submit
   stepCtl.push(new Step(null,function () {
     submitComment();
-  }))
+  },null))
 
   // login to wait to call
   $loginCard.find('button').on('click', function () {
-    stepCtl.next()
+    stepCtl.nextOne()
   })
 
   // call to loading
   $callCard.find('button').on('click', function () {
-    stepCtl.next()
+    stepCtl.nextOne()
     // setTimeout(function () {
     //   stepCtl.next()
     // }, 2000)
   })
+  //call by staffId
+  $callCard.find('.link').on('click',function () {
+    stepCtl.nextTwo()
+  })
 
   // open comment
   $informationCard.find('button.start').on('click', function () {
-    stepCtl.next()
+    stepCtl.nextOne()
   })
 
   //submit comment
   $commentCard.find('button.submit').on('click',function () {
-    stepCtl.next()
+    stepCtl.reStart()
+    submitComment()
   })
 
   //获取社团信息
@@ -166,7 +195,6 @@ $(function () {
   }
 
 
-
   //获取排队人数
   var getQueueNumber = function(){
     $.ajax({
@@ -177,6 +205,18 @@ $(function () {
           $waitNum[0].innerText = data
         }
       }
+    })
+  }
+
+  var getStaffId = function () {
+    dialog.open();
+    dialog.find('.cancel').on('click',function () {
+      dialog.close()
+      stepCtl.pre();
+    })
+    dialog.find('ok').on('click',function () {
+      sid = dialog.find('input').value;
+      callNext(sid)
     })
   }
 
@@ -195,13 +235,15 @@ $(function () {
       data:obj,
       dataType:'json',
       statusCode:{
-        200 : function (data) {
-          sid = data.sid;
+        200 : function () {
           waitConfirm();
+        },
+        403 : function () {
+          stepCtl.pre()
         }
       }
     })
-  }
+  };
 
   var waitConfirm = function () {
     $.ajax({
@@ -210,9 +252,15 @@ $(function () {
       statusCode:{
         200 : function (data) {
           renderComment(data.name,data.major,data.sid,data.notion)
+          sid = data.sid;
+          stepCtl.nextOne()
         },
         403 : function () {
           alert('此人未确认，已被room跳过');
+          stepCtl.pre(2);
+        },
+        202 : function () {
+          waitConfirm()
         }
       }
     })

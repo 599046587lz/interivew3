@@ -8,7 +8,8 @@
     var $wait = $('#wait');
     var sid;
     var scrollLeft = 0;
-    var department = ['设计部','技术部','推广部','媒体运营部','人力资源部'];
+    var department = [];
+    var interviewRoom = [];
 
     $addCircle.on('click',function () {
     	$addCircle.toggleClass('active');
@@ -23,6 +24,25 @@
     		$staffId.val("")
     	}
     })
+
+    var getDepartment = function(){
+    	$.ajax({
+        	url: baseURL + '/club/clubInfo',
+        	type: 'get',
+        	statusCode: {
+            	200: function (data) {
+            		console.log(data);
+            		var i = 0;
+            		data.departments.forEach(function(element){
+		   				department[element.did] = element.name;
+		   				interviewRoom[element.did] = element.location;
+    				})
+            	}
+        	}	
+    	});
+    }
+
+    
 
     $("#done").on('click',function () {
     	$addCircle.removeClass('active');
@@ -47,7 +67,7 @@
     				success("签到成功!");
     				// console.log(data);
     				// callTemplate();
-    				getinformation();
+    				getinformation();   				
             	}
         	}
     	});
@@ -58,22 +78,25 @@
     	$.ajax({
         	url: baseURL + '/room/calling',
         	type: 'get',
-       		dataType: 'json',
         	statusCode: {
             	200: function (data) {
             		$wait.html("");
+            		console.log(data);
             		data.forEach(function(element){
-            			var kk = '';
-            			element.volunteer.forEach(function(depart){
-            				kk += `<div class="mdc-chip"><span class="mdc-chip__text">${department[depart]}</span></div>`;
-            			})
 		   				var room = `<div class="roomBorder">
 	                			<div>
 	                    			<div class="circleNumber">${number}</div>
 	                    			<div class="name">${element.name}</div>
 	                			</div>
-	                			<div class="mdc-chip-set">` + kk
-	                			+`</div>
+	                			<div class="mdc-chip-set">
+	                				<div class="mdc-chip"><span class="mdc-chip__text">${department[element.rate.did]}</span></div>
+	                			</div>
+								<div class="roomVague">
+ 									<div class="tip">you need to go</div>
+       								<div class="classRoom">${interviewRoom[element.rate.did]}</div>
+        							<div class="skip" onclick>skip</div>
+        							<div class="ok">ok</div>
+        						</div>
 	            			</div>`;
 	            		$wait.append(room);
     				})
@@ -100,7 +123,6 @@
     	$.ajax({
         	url: baseURL + '/room/signed',
         	type: 'get',
-        	dataType: 'json',
         	statusCode: {
             	200: function (data) {
             		$("#roomContainer").html("");
@@ -135,7 +157,6 @@
     	$.ajax({
         	url: baseURL + '/room/finish',
         	type: 'get',
-        	dataType: 'json',
         	statusCode: {
             	200: function (data) {
             		console.log(data);
@@ -147,16 +168,11 @@
 
     $(".roomBorder").on("click",function () {
         var roomBorder = this;
-        var room = `<div class="roomVague">
-        <div class="tip">you need to go</div>
-        <div class="classRoom">210 room</div>
-        <div class="skip" onclick>skip</div>
-        <div class="ok">ok</div>
-        </div>`;
-        $(this).append(room);
+        $($(this).find(".roomVague")).show();
         $(".roomVague").on("click",function(event){
             event.stopPropagation();
-            this.remove();
+            // this.remove();
+            $(this).hide();
         });
         $(".ok").on("click",function(){
         	confirmTemplate(true);
@@ -188,6 +204,19 @@
         scrollLeft = $wait.scrollLeft();
         $wait.scrollLeft(scrollLeft - 680);
     })
+
+    var toShow = function () {
+    getFinishNumber();
+    getinformation();
+    // callTemplate();
+}
+
+    $(function () {
+    	getDepartment();
+    // toShow();
+    // setInterval(toShow, 3000);               
+
+});
 
 
 

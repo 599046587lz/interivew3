@@ -104,8 +104,8 @@ router.get('/start',async function (ctx) {
 
     let result = await Interviewee.getSpecifyInterviewee(cid, department);
     result = result.toObject();
-    if (result.ifconfirm == 0) throw new JSONError('该学生跳过', 403);
-    else if (result.ifconfirm == 2) {
+    if (result.ifconfirm === 0) throw new JSONError('该学生跳过', 403);
+    else if (result.ifconfirm === 2) {
         ctx.response.body = '等待确认中';
         ctx.response.status = 202;
     }

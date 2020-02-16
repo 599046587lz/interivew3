@@ -136,6 +136,7 @@ $(function () {
             }, delay)
         }
     }
+    var $tabContainer = $('.tabContainer')
 
     var getDepartmentInfo = function () {
         var departmentsHtml = ""
@@ -302,15 +303,15 @@ $(function () {
         getDepartmentData(did)
     })
 
-    $("#exchange").on('click', function () {
-        if (isBasic) {
-            this.innerHTML = "基本信息"
-        } else {
-            this.innerHTML = "面试信息"
-        }
-        isBasic = !isBasic
-        renderTable()
-    })
+    // $("#exchange").on('click', function () {
+    //     if (isBasic) {
+    //         this.innerHTML = "基本信息"
+    //     } else {
+    //         this.innerHTML = "面试信息"
+    //     }
+    //     isBasic = !isBasic
+    //     renderTable()
+    // })
 
     var searchAjax = debounce(function () {
         var did = judgeDepart($(".department.active").html())
@@ -325,6 +326,105 @@ $(function () {
     $('.back').on('click', (function () {
         window.history.back();
     }));
+
+    var bindSubmit = function(){
+
+        $("#submit").click(function () {
+            var self = $(this);
+            self.addClass('loading');
+            //提交修改表单
+            var dep = [];
+            $("input.room").each(function () {
+                var depart = $(this).attr("depart");
+                var dId = Number(depart);
+                var room = $(this).val();
+                if (depart && room) dep.push({departmentId: dId, roomLocation: room});
+            });
+            $.ajax({
+                url: baseURL + "club/upload/location",
+                type: "post",
+                data: JSON.stringify({
+                    info: dep
+                }),
+                contentType: 'application/json',
+                statusCode: {
+                    200: function () {
+                        alert("修改成功!");
+                    },
+                    204: function () {
+                        alert("修改成功!");
+                    },
+                    205: function () {
+                        alert("修改成功!");
+                    }
+                }, complete: function () {
+                    self.removeClass('loading');
+                }
+            });
+
+            //上传文件(有文件时上传文件)
+            var excelName = $('#file').val();
+            var fileTArr = excelName.split(".");
+            //切割出后缀文件名
+            var filetype = fileTArr[fileTArr.length - 1];
+            if (filetype != null && filetype != "") {
+                $(function () {
+                    let files = $('#file').prop('files');
+                    var data = new FormData();
+                    data.append('archive', files[0]);
+
+                    if (filetype == "xls" || filetype == "xlsx") {
+                        $.ajax({
+                            url: baseURL + "club/upload/archive",
+                            type: 'post',
+                            data: data,
+                            //async: false,
+                            cache: false,
+                            processData: false,
+                            contentType: false,
+                            success: function (data) {
+
+                                alert("上传文件成功！已成功上传 " + data.count + " 人的信息。");
+                            },
+                            error: function () {
+                                alert("与服务器通讯失败，请稍后再试！");
+                            }
+                        });
+                    } else {
+                        alert("请上传正确的Excel文件，只能上传后缀为'xls'的Excel文件！");
+                    }
+                });
+            }
+        });
+    }
+
+
+    var setUpload = function(){
+        var uploadHtml = `<div class="container">
+                            <div class="clubName"></div>
+                            <div class="writeInfo">
+                                <div class="department">
+                                    <span class="smallCircle"></span>
+                                    <span class="title">部门</span>
+                                </div>
+                                <div class="classroom">
+                                    <span class="smallCircle"></span>
+                                    <span class="title">教室</span>
+                                </div>
+                            </div>
+                          <div>
+                            <span id="select" class="select">
+                            <span >选择文件</span>
+                              <form enctype="multipart/form-data">
+                                <input type="file" name="archive" id="file" accept="application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"/>
+                                </form>
+                            </span>
+                          </div>
+                            <div id="submit">提交</div>
+                          </div>`
+        $tabContainer.html(uploadHtml)
+        bindSubmit()
+    }
 
 
     getDepartmentInfo()
@@ -341,6 +441,9 @@ $(function () {
                 isBasic = false;
                 renderTable()
                 console.log("INTERVIEW")
+                break;
+            case 3 :
+                setUpload()
                 break;
         }
     }

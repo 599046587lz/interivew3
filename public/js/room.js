@@ -8,9 +8,12 @@
     var $right = $('#right');
     var $wait = $('#wait');
     var sid;
+    var confirm;
     var scrollLeft = 0;
     var department = [];
     var interviewRoom = [];
+    var bool = [];
+    var f1 = false;
 
     $addCircle.on('click',function () {
     	$addCircle.toggleClass('active');
@@ -64,10 +67,7 @@
     				console.log(error);
     			},
     			204: function (data) {
-    				success("签到成功!");
-    				// console.log(data);
-    				callTemplate();
-    				// getinformation();   				
+    				success("签到成功!");			
             	}
         	}
     	});
@@ -80,9 +80,9 @@
         	type: 'get',
         	statusCode: {
             	200: function (data) {
-            		$wait.html("");
             		numberTop = 1;
             		data.forEach(function(element){
+            			if (bool[element.sid]){return true;} 
 		   				var room = `<div class="roomBorder">
 	                			<div>
 	                    			<div class="circleNumber">${numberTop}</div>
@@ -99,7 +99,9 @@
         						</div>
 	            			</div>`;
 	            		$wait.append(room);
+	            		getVague(element.sid);
 	            		numberTop++;
+	            		bool[element.sid] = true;
     				})
 
             	}
@@ -108,7 +110,7 @@
     }
 
     //确认模板
-    var confirmTemplate = function(confirm){
+    var confirmTemplate = function(confirm,sid){
     	$.ajax({
         	url: baseURL + '/room/confirm',
         	type: 'get',
@@ -117,6 +119,9 @@
         		confirm: confirm
         	},
        		dataType: 'json',
+       		success:function(){
+       			return true;
+       		}
     	});
     }
     //返回所有签到者信息
@@ -147,7 +152,6 @@
 	    					</div>`;
 	    					numberUnder++;
 	    					$("#roomContainer").append(part);
-	    					getVague();
             		})
 
   				}
@@ -167,23 +171,27 @@
     	});
 	}
  
-	var getVague = function () {
+	var getVague = function (sid) {
 		$(".roomBorder").on("click",function () {
         	var roomBorder = this;
         	var roomVague = $(this).find(".roomVague");
         	// $($(this).find(".roomVague")).show();
         	$(roomVague).show();
+        	f1 = true;
         	$(".roomVague").on("click",function(event){
             	event.stopPropagation();
             	$(this).hide();
+            	f1 = false;
         	});
         	$($(roomVague).find(".ok")).on("click",function(){
-        		confirmTemplate(true);
-            	roomBorder.remove();
+        		if (confirmTemplate(1,sid)){
+            		roomBorder.remove();
+            	}
         	});
         	$($(roomVague).find(".skip")).on("click",function(){
-        		confirmTemplate(false);
-            	roomBorder.remove();
+        		if (confirmTemplate(0,sid)){
+            		roomBorder.remove();
+            	}
         	});
     	})
 	}

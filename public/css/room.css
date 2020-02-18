@@ -193,3 +193,19 @@
   color: var(--platform-color-blue);
   line-height: 50px;
 }
+
+.mdc-snackbar{
+  justify-content: left;
+}
+.mdc-snackbar__surface{
+  /*background-color: red;*/
+}
+.fork{
+  color:white;
+  cursor: pointer;
+}
+.sign{
+  color:white;
+  margin-left: 16px;
+  display: none;
+}

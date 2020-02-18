@@ -13,7 +13,8 @@
     var department = [];
     var interviewRoom = [];
     var bool = [];
-    var f1 = false;
+    const snackbar = mdc.snackbar.MDCSnackbar.attachTo(document.querySelector('.mdc-snackbar'));
+    snackbar.timeoutMs = 10000;
 
     $addCircle.on('click',function () {
     	$addCircle.toggleClass('active');
@@ -63,15 +64,25 @@
     		dataType: 'json',
     		statusCode: {      
     			403: function () {
-    				err("该学生未报名!");
-    				console.log(error);
+                    snackbar.open();
+                    $(".mdc-snackbar__surface").css('background','var(--platform-color-red)');
+                    $("#signError").css('display','block');
+                    $("#signSuccess").css('display','none');
+                    snackbar.labelText = "该学生未报名";
+
     			},
     			204: function (data) {
-    				success("签到成功!");			
+                    snackbar.open();	
+                    $(".mdc-snackbar__surface").css('background','var(--platform-color-green)');
+                    $("#signSuccess").css('display','block');
+                    $("#signError").css('display','none');
+                    snackbar.labelText = "签到成功！";
+                    	
             	}
         	}
     	});
-    	$staffId.val("input staff id");
+        snackbar.labelText = "";
+        $staffId.val("input staff id");
     })
     //呼叫模板 返回所有被叫到的人的信息
     var callTemplate = function(){
@@ -113,7 +124,7 @@
     var confirmTemplate = function(confirm,sid){
     	$.ajax({
         	url: baseURL + '/room/confirm',
-        	type: 'get',
+        	type: 'post',
         	data: {
         		sid: sid,
         		confirm: confirm
@@ -181,7 +192,6 @@
         	$(".roomVague").on("click",function(event){
             	event.stopPropagation();
             	$(this).hide();
-            	f1 = false;
         	});
         	$($(roomVague).find(".ok")).on("click",function(){
         		if (confirmTemplate(1,sid)){
@@ -197,13 +207,14 @@
 	}
 
 
+    var $bull = $('.bull');
     $wait.on('scroll',function(){
         if ($(this).scrollLeft() === 0) {
             $left.addClass("transparent");
         } else {
             $left.removeClass('transparent')
         }
-        var $bull = $('.bull');
+       
         if ($(this).scrollLeft() + $bull.width() > $bull[0].scrollWidth) {
             $right.addClass("transparent");
         } else {
@@ -219,15 +230,30 @@
         $wait.scrollLeft(scrollLeft - 680);
     })
 
+    $(".fork").on('click',function () {
+        snackbar.close();
+    })
+
     var toShow = function (){
     	getinformation();
-    	callTemplate();
+    	callTemplate();  
 	}
+
+    var judge = function(){
+         if ($bull.width() == $bull[0].scrollWidth){
+            $right.addClass("transparent");
+        }
+        else{
+            $right.removeClass('transparent');
+        }   
+    }
 
     $(function () {
     	getDepartment();
      	toShow();
-    	setInterval(toShow, 3000);               
+        judge();
+    	setInterval(toShow, 3000); 
+        setInterval(judge, 1000);                    
 	});
 
 

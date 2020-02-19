@@ -81,7 +81,7 @@ $(function () {
   var $mdcSelect = $('.mdc-select__menu .mdc-list')
 
   var $waitNum = $('.tip .waitNum')
-  var sid = 0;
+  // var sid = 0;
 
   var stepCtl = new StepCtl()
   //login to call
@@ -98,12 +98,12 @@ $(function () {
   }, function (number) {
     if(number === 0){
       callNext();
+      $callCard.find('.operation').fadeOut(400, function () {
+        $callCard.find('.waiting').fadeIn(400)
+      })
     } else {
       getStaffId()
     }
-    $callCard.find('.operation').fadeOut(400, function () {
-      $callCard.find('.waiting').fadeIn(400)
-    })
   }))
   //loading over and information
   stepCtl.push(new Step(function () {
@@ -128,7 +128,14 @@ $(function () {
   //submit
   stepCtl.push(new Step(null,function () {
     submitComment();
+    getQueueNumber();
+    $callCard.find('.waiting').fadeOut()
+    $callCard.find('.operation').fadeIn()
+    $commentStep.fadeOut(400,function () {
+      $prepareStep.fadeIn()
+    })
   }))
+  //restart
 
   // login to call
   $loginCard.find('button').on('click', function () {
@@ -209,6 +216,7 @@ $(function () {
     })
   }
 
+  //call by staffId
   var getStaffId = function () {
     dialog.open();
     dialog.find('.cancel').on('click',function () {
@@ -216,8 +224,12 @@ $(function () {
       stepCtl.pre();
     })
     dialog.find('ok').on('click',function () {
-      sid = dialog.find('input').value;
+      var sid = dialog.find('input').value;
+      dialog.close()
       callNext(sid)
+      $callCard.find('.operation').fadeOut(400, function () {
+        $callCard.find('.waiting').fadeIn(400)
+      })
     })
   }
 
@@ -242,6 +254,7 @@ $(function () {
           stepCtl.next()
         },
         403 : function () {
+          err('叫号失败');
           stepCtl.pre()
         }
       }
@@ -279,6 +292,7 @@ $(function () {
   var submitComment = function(){
     var score = slider.value;
     var comment = $commentCard.find('.note textarea')[0].value
+    var sid = $informationCard.find('.mdc-chip .mdc-chip__text')[0].innerText;
 
     $.ajax({
       url:'/interview/rate',
@@ -290,7 +304,7 @@ $(function () {
       },
       statusCode:{
         204 : function () {
-          alert('评价成功，即将跳转回叫号页面');
+          success('评论成功，将跳转至叫号页面');
         }
       }
     })
@@ -308,4 +322,5 @@ $(function () {
   }
 
   getDepartmentInfo()
+  addSnackbar()
 })

@@ -1,19 +1,14 @@
-function Step(pre, nextOne, nextTwo) {
+function Step(pre, next) {
   this.pre = pre
-  this.nextOne = nextOne
-  this.nextTwo = nextTwo
+  this.next = next
 }
 
 function StepCtl() {
   this.stepNow = 0
   this.steps = []
 }
-StepCtl.prototype.nextOne = function() {
-  this.steps[this.stepNow].nextOne()
-  this.stepNow ++
-}
-StepCtl.prototype.nextTwo = function(){
-  this.steps[this.stepNow].nextTwo()
+StepCtl.prototype.next = function(number) {
+  this.steps[this.stepNow].next(number)
   this.stepNow ++
 }
 StepCtl.prototype.push = function (step) {
@@ -94,67 +89,73 @@ $(function () {
     intervieweeLogin();
     $loginCard.removeClass('active').addClass('inactive');
     $callCard.removeClass('inactive').addClass('active')
-  },null))
+  }))
   //call or call by StaffId & waiting loading
   stepCtl.push(new Step(function () {
     $callCard.find('.waiting').fadeOut(400, function () {
       $callCard.find('.operation').fadeIn(400)
     })
-  }, function () {
-    callNext();
-    $callCard.find('.operation').fadeOut(400, function () {
-      $callCard.find('.waiting').fadeIn(400)
-    })
-  },function () {
-    getStaffId()
+  }, function (number) {
+    if(number === 0){
+      callNext();
+    } else {
+      getStaffId()
+    }
     $callCard.find('.operation').fadeOut(400, function () {
       $callCard.find('.waiting').fadeIn(400)
     })
   }))
   //loading over and information
-  stepCtl.push(new Step(null, function () {
+  stepCtl.push(new Step(function () {
+    $callCard.find('.waiting').fadeOut(400, function () {
+      $callCard.find('.operation').fadeIn(400)
+    })
+  }, function () {
     $prepareStep.fadeOut(400, function () {
       $commentStep.fadeIn()
     })
-  },null))
+  }))
   //start or skip
-  stepCtl.push(new Step(null, function () {
+  stepCtl.push(new Step(function () {
+    skip()
+    $commentStep.fadeOut(400, function () {
+      $prepareStep.fadeIn()
+    })
+  }, function () {
     $commentCard.removeClass('inactive').addClass('active')
     clock.start();
-  },function () {
-    //TODO SKIP
   }))
   //submit
   stepCtl.push(new Step(null,function () {
     submitComment();
-  },null))
+  }))
 
-  // login to wait to call
+  // login to call
   $loginCard.find('button').on('click', function () {
-    stepCtl.nextOne()
+    stepCtl.next()
   })
 
-  // call to loading
+  // call to loading number 0
   $callCard.find('button').on('click', function () {
-    stepCtl.nextOne()
-    // setTimeout(function () {
-    //   stepCtl.next()
-    // }, 2000)
+    stepCtl.next(0)
   })
-  //call by staffId
+  //call by staffId number 1
   $callCard.find('.link').on('click',function () {
-    stepCtl.nextTwo()
+    stepCtl.next(1)
   })
 
-  // open comment
+  // open comment or skip
   $informationCard.find('button.start').on('click', function () {
-    stepCtl.nextOne()
+    stepCtl.next()
+  })
+  $informationCard.find('button.skip').on('click',function () {
+    stepCtl.pre()
   })
 
   //submit comment
   $commentCard.find('button.submit').on('click',function () {
+    stepCtl.next()
     stepCtl.reStart()
-    submitComment()
   })
 
   //获取社团信息
@@ -235,8 +236,10 @@ $(function () {
       data:obj,
       dataType:'json',
       statusCode:{
-        200 : function () {
-          waitConfirm();
+        200 : function (data) {
+          // waitConfirm();
+          renderComment(data.name,data.major,data.sid,data.notion)
+          stepCtl.next()
         },
         403 : function () {
           stepCtl.pre()
@@ -244,27 +247,27 @@ $(function () {
       }
     })
   };
-
-  var waitConfirm = function () {
-    $.ajax({
-      url:'/interview/start',
-      type:'get',
-      statusCode:{
-        200 : function (data) {
-          renderComment(data.name,data.major,data.sid,data.notion)
-          sid = data.sid;
-          stepCtl.nextOne()
-        },
-        403 : function () {
-          alert('此人未确认，已被room跳过');
-          stepCtl.pre(2);
-        },
-        202 : function () {
-          waitConfirm()
-        }
-      }
-    })
-  }
+  //
+  // var waitConfirm = function () {
+  //   $.ajax({
+  //     url:'/interview/start',
+  //     type:'get',
+  //     statusCode:{
+  //       200 : function (data) {
+  //         renderComment(data.name,data.major,data.sid,data.notion)
+  //         sid = data.sid;
+  //         stepCtl.next()
+  //       },
+  //       403 : function () {
+  //         alert('此人未确认，已被room跳过');
+  //         stepCtl.pre(2);
+  //       },
+  //       202 : function () {
+  //         waitConfirm()
+  //       }
+  //     }
+  //   })
+  // }
 
   var renderComment = function (name,specialty,sid,introduction) {
     $informationCard.find('.name')[0].innerText = name || '--';
@@ -289,6 +292,17 @@ $(function () {
         204 : function () {
           alert('评价成功，即将跳转回叫号页面');
         }
+      }
+    })
+  }
+
+  var skip = function(){
+    var sid = $informationCard.find('.mdc-chip .mdc-chip__text')[0].innerText;
+    $.ajax({
+      url:'/interview/skip',
+      type:'post',
+      data:{
+        sid:sid,
       }
     })
   }

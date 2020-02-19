@@ -107,7 +107,8 @@ exports.getSignedInterviewee = function (cid) {
        cid:cid,
        signTime: {$ne: null},
        busy : false,
-       volunteer: {$elemMatch:{$ne:null}}
+       volunteer: {$elemMatch:{$ne:null}},
+       ifcall: false,
    }).$where('this.volunteer.length != this.done.length')
 };
 

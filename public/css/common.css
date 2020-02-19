@@ -67,3 +67,24 @@ body {
     transform: rotate(360deg)
   }
 }
+
+.mdc-snackbar {
+  justify-content: left;
+}
+.mdc-snackbar .material-icons {
+  color: white;
+  margin-left: 16px;
+}
+.success .mdc-snackbar__surface {
+  background: var(--platform-color-green);
+}
+.success.mdc-snackbar .error {
+  display: none;
+}
+.error .mdc-snackbar__surface{
+  background: var(--platform-color-red);
+}
+.error.mdc-snackbar .done {
+  display: none;
+}
+

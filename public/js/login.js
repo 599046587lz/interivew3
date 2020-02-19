@@ -5,17 +5,17 @@ baseURL = '/';
 $(function () {
 
     var pass_input = $("#password")[0]
-    var icon = $("#visibility")[0]
+    var $visibility = $("#visibility")
 
-    $(".visibility").click(function () {
+    $visibility.on('mousedown',function () {
+        pass_input.focus()
         if(pass_input.type === 'password'){
             pass_input.type = 'text';
-            icon.style.color = '#3275E0'
+            $visibility[0].style.color = '#3275E0'
         } else {
             pass_input.type = 'password';
-            icon.style.color = '#919191'
+            $visibility[0].style.color = '#919191'
         }
-        pass_input.focus()
     })
 
     $("input").keyup(function (e) {

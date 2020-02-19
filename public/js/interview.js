@@ -92,9 +92,7 @@ $(function () {
   }))
   //call or call by StaffId & waiting loading
   stepCtl.push(new Step(function () {
-    $callCard.find('.waiting').fadeOut(400, function () {
-      $callCard.find('.operation').fadeIn(400)
-    })
+    backtoCall()
   }, function (number) {
     if(number === 0){
       callNext();
@@ -118,6 +116,7 @@ $(function () {
   //start or skip
   stepCtl.push(new Step(function () {
     skip()
+    backtoCall()
     $commentStep.fadeOut(400, function () {
       $prepareStep.fadeIn()
     })
@@ -129,8 +128,7 @@ $(function () {
   stepCtl.push(new Step(null,function () {
     submitComment();
     getQueueNumber();
-    $callCard.find('.waiting').fadeOut()
-    $callCard.find('.operation').fadeIn()
+    backtoCall()
     $commentStep.fadeOut(400,function () {
       $prepareStep.fadeIn()
     })
@@ -164,6 +162,11 @@ $(function () {
     stepCtl.next()
     stepCtl.reStart()
   })
+
+  var backtoCall = function () {
+    $callCard.find('.waiting').fadeOut()
+    $callCard.find('.operation').fadeIn()
+  }
 
   //获取社团信息
   var getDepartmentInfo = function () {
@@ -218,18 +221,18 @@ $(function () {
 
   //call by staffId
   var getStaffId = function () {
+    var $dialog = $('.mdc-dialog')
     dialog.open();
-    dialog.find('.cancel').on('click',function () {
+    $dialog.find('.cancel').on('click',function () {
       dialog.close()
       stepCtl.pre();
     })
-    dialog.find('ok').on('click',function () {
-      var sid = dialog.find('input').value;
+    $dialog.find('.ok').on('click',function () {
+      var sid = $dialog.find('input')[0].value;
       dialog.close()
+      $callCard.find('.operation').fadeOut()
+      $callCard.find('.waiting').fadeIn()
       callNext(sid)
-      $callCard.find('.operation').fadeOut(400, function () {
-        $callCard.find('.waiting').fadeIn(400)
-      })
     })
   }
 
@@ -248,39 +251,38 @@ $(function () {
       data:obj,
       dataType:'json',
       statusCode:{
-        200 : function (data) {
-          // waitConfirm();
-          renderComment(data.name,data.major,data.sid,data.notion)
+        200 : function () {
+          waitConfirm();
           stepCtl.next()
         },
         403 : function () {
-          err('叫号失败');
+          err('该同学未报名');
           stepCtl.pre()
         }
       }
     })
   };
-  //
-  // var waitConfirm = function () {
-  //   $.ajax({
-  //     url:'/interview/start',
-  //     type:'get',
-  //     statusCode:{
-  //       200 : function (data) {
-  //         renderComment(data.name,data.major,data.sid,data.notion)
-  //         sid = data.sid;
-  //         stepCtl.next()
-  //       },
-  //       403 : function () {
-  //         alert('此人未确认，已被room跳过');
-  //         stepCtl.pre(2);
-  //       },
-  //       202 : function () {
-  //         waitConfirm()
-  //       }
-  //     }
-  //   })
-  // }
+
+  var waitConfirm = function () {
+    $.ajax({
+      url:'/interview/start',
+      type:'get',
+      statusCode:{
+        200 : function (data) {
+          renderComment(data.name,data.major,data.sid,data.notion)
+          sid = data.sid;
+          stepCtl.next()
+        },
+        403 : function () {
+          alert('此人未确认，已被room跳过');
+          stepCtl.pre(2);
+        },
+        202 : function () {
+          waitConfirm()
+        }
+      }
+    })
+  }
 
   var renderComment = function (name,specialty,sid,introduction) {
     $informationCard.find('.name')[0].innerText = name || '--';

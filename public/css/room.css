@@ -46,6 +46,7 @@
   position: absolute;
   padding: 8px;
   text-align: center;
+  display: none;
 }
 .roomVague .skip{
   color: red;
@@ -191,4 +192,29 @@
 .direction .material-icons{
   color: var(--platform-color-blue);
   line-height: 50px;
+}
+
+.mdc-snackbar{
+  justify-content: left;
+}
+.mdc-snackbar__surface{
+  /*background-color: red;*/
+}
+.fork{
+  color:white;
+  cursor: pointer;
+}
+.sign{
+  color:white;
+  margin-left: 16px;
+  display: none;
+}
+.disBlock{
+  display: block;
+}
+.backGreen{
+  background-color: var(--platform-color-green);
+}
+.backRed{
+  background-color: var(--platform-color-red);
 }

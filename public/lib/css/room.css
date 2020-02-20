@@ -46,6 +46,7 @@
   position: absolute;
   padding: 8px;
   text-align: center;
+  display: none;
 }
 .roomVague .skip{
   color: red;

@@ -19,7 +19,12 @@ body {
   padding: 16px 24px;
   font-size: 18px;
 }
-.topBar .redhome {
+.topBar #back {
+  vertical-align: middle;
+  cursor: pointer;
+  color: #202124;
+}
+.redhome {
   background:linear-gradient(150deg,rgba(255,170,133,1) 0%, rgba(179,49,95,1) 100%);
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
@@ -75,16 +80,22 @@ body {
   color: white;
   margin-left: 16px;
 }
+.mdc-snackbar .sign , #snackOk{
+  display: none;
+}
 .success .mdc-snackbar__surface {
   background: var(--platform-color-green);
 }
-.success.mdc-snackbar .error {
-  display: none;
+.success.mdc-snackbar .done {
+  display: block;
 }
 .error .mdc-snackbar__surface{
   background: var(--platform-color-red);
 }
-.error.mdc-snackbar .done {
-  display: none;
+.error.mdc-snackbar .error {
+  display: block;
+}
+.confirm.mdc-snackbar #snackOk {
+  display: block;
 }
 

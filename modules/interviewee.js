@@ -109,7 +109,10 @@ exports.getSignedInterviewee = function (cid) {
        busy : false,
        volunteer: {$elemMatch:{$ne:null}},
        ifcall: false,
-   }).$where('this.volunteer.length != this.done.length')
+   }).$where('this.volunteer.length != this.done.length'
+   ).sort({
+       signTime: 'asc'
+   })
 };
 
 exports.getClubInfo = function (info) {

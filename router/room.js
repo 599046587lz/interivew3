@@ -55,16 +55,6 @@ router.get('/finish', async function (ctx) {
 router.get('/signed', async function (ctx) {
     let cid = ctx.session.cid;
     let info = await Interviewee.getSignedInterviewee(cid);
-    let i,j,k;
-    for (i = 0; i < info.length - 1; i++){
-        for(j = i + 1; j < info.length; j++){
-            if(info[i].signTime > info[j].signTime){
-                info[k] = info[i];
-                info[i] = info[j];
-                info[j] = info[k];
-            }
-        }
-    }
     ctx.response.status = 200;
     ctx.response.body = info;
 });

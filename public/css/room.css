@@ -209,3 +209,12 @@
   margin-left: 16px;
   display: none;
 }
+.disBlock{
+  display: block;
+}
+.backGreen{
+  background-color: var(--platform-color-green);
+}
+.backRed{
+  background-color: var(--platform-color-red);
+}

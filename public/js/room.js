@@ -2,19 +2,24 @@
     var baseURL = '';
     var numberTop;
     var numberUnder;
+    var $signSuccess = $("#signSuccess");
+    var $signError =  $("#signError");
     var $addCircle = $("#addCircle");
     var $staffId = $('#staffId');
     var $left = $('#left');
     var $right = $('#right');
     var $wait = $('#wait');
+    var $surface = $(".mdc-snackbar__surface");
     var sid;
     var confirm;
+    var $bull = $('.bull');
     var scrollLeft = 0;
     var department = [];
     var interviewRoom = [];
     var bool = [];
+    var f = false;
     const snackbar = mdc.snackbar.MDCSnackbar.attachTo(document.querySelector('.mdc-snackbar'));
-    snackbar.timeoutMs = 10000;
+    snackbar.timeoutMs = 4000;
 
     $addCircle.on('click',function () {
     	$addCircle.toggleClass('active');
@@ -65,17 +70,21 @@
     		statusCode: {      
     			403: function () {
                     snackbar.open();
-                    $(".mdc-snackbar__surface").css('background','var(--platform-color-red)');
-                    $("#signError").css('display','block');
-                    $("#signSuccess").css('display','none');
+                    // $(".mdc-snackbar__surface").css('background','var(--platform-color-red)');
+                    $surface.addClass("backRed");
+                    $surface.removeClass("backGreen");
+                    $signError.addClass("disBlock");
+                    $signSuccess.removeClass("disBlock");
                     snackbar.labelText = "该学生未报名";
 
     			},
-    			204: function (data) {
+    			200: function (data) {
                     snackbar.open();	
-                    $(".mdc-snackbar__surface").css('background','var(--platform-color-green)');
-                    $("#signSuccess").css('display','block');
-                    $("#signError").css('display','none');
+                    // $(".mdc-snackbar__surface").css('background','var(--platform-color-green)');
+                    $surface.addClass("backGreen");
+                    $surface.removeClass("backRed");
+                    $signSuccess.addClass("disBlock");
+                    $signError.removeClass("disBlock");
                     snackbar.labelText = "签到成功！";
                     	
             	}
@@ -121,18 +130,21 @@
     }
 
     //确认模板
-    var confirmTemplate = function(confirm,sid){
+    var confirmTemplate = function(confirm,sid,roomBorder){
     	$.ajax({
         	url: baseURL + '/room/confirm',
         	type: 'post',
-        	data: {
+        	data: JSON.stringify({
         		sid: sid,
-        		confirm: confirm
-        	},
-       		dataType: 'json',
-       		success:function(){
-       			return true;
-       		}
+        		confirm: confirm,
+        	}),
+       		contentType: "application/json",
+       		statusCode: {
+                200: function (data) {
+                    roomBorder.remove();
+                    judge();
+                }
+            }
     	});
     }
     //返回所有签到者信息
@@ -188,26 +200,21 @@
         	var roomVague = $(this).find(".roomVague");
         	// $($(this).find(".roomVague")).show();
         	$(roomVague).show();
-        	f1 = true;
         	$(".roomVague").on("click",function(event){
             	event.stopPropagation();
             	$(this).hide();
         	});
         	$($(roomVague).find(".ok")).on("click",function(){
-        		if (confirmTemplate(1,sid)){
-            		roomBorder.remove();
-            	}
+                confirmTemplate(1,sid,roomBorder);      
         	});
         	$($(roomVague).find(".skip")).on("click",function(){
-        		if (confirmTemplate(0,sid)){
-            		roomBorder.remove();
-            	}
+                confirmTemplate(0,sid,roomBorder);
         	});
     	})
 	}
 
 
-    var $bull = $('.bull');
+
     $wait.on('scroll',function(){
         if ($(this).scrollLeft() === 0) {
             $left.addClass("transparent");
@@ -240,10 +247,10 @@
 	}
 
     var judge = function(){
-         if ($bull.width() == $bull[0].scrollWidth){
+        if ($wait.scrollLeft() + $bull.width() > $bull[0].scrollWidth) {
             $right.addClass("transparent");
-        }
-        else{
+            } 
+        else {
             $right.removeClass('transparent');
         }   
     }
@@ -252,8 +259,7 @@
     	getDepartment();
      	toShow();
         judge();
-    	setInterval(toShow, 3000); 
-        setInterval(judge, 1000);                    
+    	setInterval(toShow, 3000);                  
 	});
 
 

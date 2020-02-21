@@ -109,6 +109,7 @@ $(function () {
   }))
   //loading over and information
   stepCtl.push(new Step(function () {
+    getQueueNumber()
     $callCard.find('.waiting').fadeOut(400, function () {
       $callCard.find('.operation').fadeIn(400)
     })
@@ -130,7 +131,6 @@ $(function () {
   //submit
   stepCtl.push(new Step(function () {
     $commentCard.removeClass('active').addClass('inactive')
-    stepCtl.pre()
   }, function () {
     submitComment();
     getQueueNumber();
@@ -159,10 +159,17 @@ $(function () {
 
   // open comment or skip
   $informationCard.find('button.start').on('click', function () {
-    stepCtl.next()
+    if($commentCard.hasClass('active')){
+      err('面试已开始')
+    } else {
+      stepCtl.next()
+    }
   })
   $informationCard.find('button.skip').on('click', function () {
     snackConfirm('确认跳过？',null,function () {
+      if($commentCard.hasClass('active')){
+        stepCtl.pre()
+      }
       stepCtl.pre()
       stepCtl.pre()
       skip()
@@ -259,10 +266,8 @@ $(function () {
       data: obj,
       dataType: 'json',
       statusCode: {
-        200: function (data) {
-          renderComment(data.name, data.major, data.sid, data.notion)
-          stepCtl.next()
-          // waitConfirm();
+        200: function () {
+          waitConfirm();
         },
         403: function () {
           err('该同学未报名');
@@ -274,27 +279,26 @@ $(function () {
 
   };
 
-  // var waitConfirm = function () {
-  //   $.ajax({
-  //     url: '/interview/start',
-  //     type: 'get',
-  //     statusCode: {
-  //       200: function (data) {
-  //         renderComment(data.name, data.major, data.sid, data.notion)
-  //         sid = data.sid;
-  //         stepCtl.next()
-  //       },
-  //       403: function () {
-  //         err('此人未确认，已被room跳过');
-  //         stepCtl.pre();
-  //         stepCtl.pre()
-  //       },
-  //       202: function () {
-  //         waitConfirm()
-  //       }
-  //     }
-  //   })
-  // }
+  var waitConfirm = function () {
+    $.ajax({
+      url: '/interview/start',
+      type: 'get',
+      statusCode: {
+        200: function (data) {
+          renderComment(data.name, data.major, data.sid, data.notion)
+          stepCtl.next()
+        },
+        403: function () {
+          err('此人未确认，已被room跳过');
+          stepCtl.pre();
+          stepCtl.pre();
+        },
+        202: function () {
+          waitConfirm()
+        }
+      }
+    })
+  }
 
   var renderComment = function (name, specialty, sid, introduction) {
     $informationCard.find('.name')[0].innerText = name || '--';
@@ -308,20 +312,26 @@ $(function () {
     var comment = $commentCard.find('.note textarea')[0].value
     var sid = $informationCard.find('.mdc-chip .mdc-chip__text')[0].innerText;
 
-    $.ajax({
-      url: '/interview/rate',
-      type: 'post',
-      data: {
-        sid: sid,
-        score: score,
-        comment: comment
-      },
-      statusCode: {
-        204: function () {
-          success('评论成功，将跳转至叫号页面');
+    if(score === 0){
+      err('请先进行评分')
+    } else if (comment === ''){
+      err('请先进行评论')
+    } else {
+      $.ajax({
+        url: '/interview/rate',
+        type: 'post',
+        data: {
+          sid: sid,
+          score: score,
+          comment: comment
+        },
+        statusCode: {
+          204: function () {
+            success('评论成功，将跳转至叫号页面');
+          }
         }
-      }
-    })
+      })
+    }
   }
 
   var skip = function () {
@@ -336,6 +346,4 @@ $(function () {
   }
 
   getDepartmentInfo()
-  success('test')
-  err('test2')
 })

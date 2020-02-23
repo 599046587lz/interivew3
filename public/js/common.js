@@ -4,17 +4,15 @@ $back.on('click',function () {
   window.history.back();
 })
 
-function addSnackbar(className,content) {
-  var $snackbars = $('.mdc-snackbar')
-  var bottom = $('.mdc-snackbar').length * 60 + 'px'
-  var id = Math.random().toString(36).substr(2);
-  var snackbarHtml =
-    `<div class="mdc-snackbar ${className}" id="${id}">
+
+
+function Snackbar() {
+  var $snackbarHtml = $
+    (`<div class="mdc-snackbar">
             <div class="mdc-snackbar__surface">
                 <i class="material-icons sign done">done_all</i>
                 <i class="material-icons sign error">error_outline</i>
                 <div class="mdc-snackbar__label" role="status" aria-live="polite">
-                    ${content}
                 </div>
                 <div class="mdc-snackbar__actions">
                     <button type="button" class="mdc-button mdc-snackbar__action">
@@ -25,35 +23,35 @@ function addSnackbar(className,content) {
                     </button>
                 </div>
             </div>
-        </div>`
-  $('body').append(snackbarHtml);
-  var snackbar = mdc.snackbar.MDCSnackbar.attachTo(document.querySelector(`#${id}`))
-  snackbar.root_.addEventListener('MDCSnackbar:closed',function (e) {
-    e.target.remove()
-  });
-  snackbar.root_.style.bottom = bottom;
-  snackbar.open();
-  return id
+        </div>`)
+  $('body').append($snackbarHtml);
+  this.element = $snackbarHtml[0]
+  this.snackbar = mdc.snackbar.MDCSnackbar.attachTo(this.element)
 }
 
-function success(content) {
-  addSnackbar('success', content)
+Snackbar.prototype.success = function (content) {
+  this.popup('success',content)
 }
-
-function err(content) {
-  addSnackbar('error',content)
+Snackbar.prototype.err = function(content){
+  this.popup('error',content)
 }
-
-function snackConfirm(content,cancel,ok) {
-  var id = addSnackbar('confirm',content)
-  var $snackbar = $(`#${id}`);
-  $snackbar.find('#snackCancel').on('click',function () {
+Snackbar.prototype.confirm = function(content,cancel,ok) {
+  this.snackbar.find('cancel').on('click',function () {
     cancel()
   })
-  $snackbar.find('#snackOk').on('click',function () {
+  this.snackbar.find('ok').on('click',function () {
     ok()
   })
+  this.popup('confirm',content)
 }
+
+Snackbar.prototype.popup = function(type,content){
+  $(this.element).addClass(type);
+  this.snackbar.labelText = content;
+  this.snackbar.open()
+}
+
+window.snackbar = new Snackbar()
 
 var relogin = function () {
   err("未登录或登录超时")
@@ -61,5 +59,3 @@ var relogin = function () {
     window.location.href = "login.html";
   }, 500);
 }
-
-

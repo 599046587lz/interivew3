@@ -1,28 +1,10 @@
-.header{
-  padding: 24px 70px;
-  font-size: 18px;
-}
-.user{
-  color: #3275E0;
-  float: right;
-}
-.avatar{
-  background: var(--platform-color-red);
-  height: 30px;
-  width: 30px;
-  border-radius: 100px;
-  display: inline-block;
-  text-align: center;
-  color: white;
-  line-height: 30px;
-  font-size: 14px;
-}
 .container{
   display: flex;
   margin: 44px 70px;
   justify-content: space-around;
   height: calc(100vh - 75px - 45px - 88px);
   align-items:center;
+  text-align: center;
 }
 .card{
   border-radius: 5px;

@@ -31,6 +31,7 @@ Clock.prototype.clear = function () {
   this.min = 0;
   this.sec = 0;
   clearInterval(this.timeInterval);
+  this.callback(this.time)
 }
 
 Clock.prototype.changeTime = function () {
@@ -74,6 +75,8 @@ $(function () {
   var departments = []
   var $mdcSelect = $('.mdc-select__menu .mdc-list')
   var $waitNum = $('.tip .waitNum')
+  var slider = null;
+  var sliderHasInitialize = false;
 
   var stepCtl = new StepCtl()
   //login to call
@@ -108,19 +111,26 @@ $(function () {
   }, function () {
     $commentCard.removeClass('inactive').addClass('active')
     clock.start();
+    if(!sliderHasInitialize){
+      sliderHasInitialize = true;
+      setTimeout(function () {
+        slider = mdc.slider.MDCSlider.attachTo(document.querySelector('.mdc-slider'));
+      },500)
+    }
   }))
   //submit
   stepCtl.push(new Step(function () {
     $commentCard.removeClass('active').addClass('inactive')
   }, function () {
     getQueueNumber();
+    $commentCard.removeClass('active').addClass('inactive')
     $callCard.find('.waiting').fadeOut()
     $callCard.find('.operation').fadeIn()
-    clock.clear()
+
     $commentStep.fadeOut(400, function () {
       $prepareStep.fadeIn()
     })
-    stepCtl.stepNow = 1;
+    stepCtl.stepNow = 0;
   }))
 
   // login to call
@@ -301,6 +311,9 @@ $(function () {
         statusCode: {
           204: function () {
             snackbar.success('评论成功，将跳转至叫号页面');
+            clock.clear()
+            node.value = '';
+            slider.value = 0;
             stepCtl.next()
           }
         }

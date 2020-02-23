@@ -23,26 +23,16 @@ StepCtl.prototype.reStart = function () {
   this.stepNow = 1;
 }
 
-function addZero(num) {
-  return num < 10 ? '0' + num : num;
-}
-
 function Clock(callback, intervalTime) {
   this.min = 0;
   this.sec = 0;
-  this.time = "00:00"
-  this.callback = function () {
-    this.timeInterval = window.setInterval(function () {
-      this.changeTime()
-      callback(this.time)
-    }.bind(this), intervalTime || 1000)
-  }
+  this.callback = callback;
+  this.intervalTime = intervalTime;
 }
 
 Clock.prototype.clear = function () {
   this.min = 0;
   this.sec = 0;
-  this.time = "00:00";
   clearInterval(this.timeInterval);
 }
 
@@ -53,18 +43,28 @@ Clock.prototype.changeTime = function () {
   } else {
     this.sec++;
   }
-  this.time = addZero(this.min) + ":" + addZero(this.sec);
 }
 
 Clock.prototype.start = function () {
-  this.callback();
+    this.timeInterval = window.setInterval(function () {
+      this.changeTime()
+      this.callback(this.time)
+    }.bind(this), this.intervalTime || 1000)
 }
+
+Object.defineProperty(Clock.prototype,'time',{
+  get:function () {
+    var min = this.min < 10 ? '0' + this.min : this.min;
+    var sec = this.sec < 10 ? '0' + this.sec : this.sec;
+    return min + ':' + sec;
+  }
+})
 
 
 $(function () {
   var $loginCard = $('.login')
   var $callCard = $('.call')
-  var $prevpareStep = $('.prevpareStep')
+  var $prepareStep = $('.prepareStep')
   var $commentStep = $('.commentStep')
   var $informationCard = $('.information')
   var $commentCard = $('.comment')
@@ -73,6 +73,7 @@ $(function () {
     $timer[0].innerText = time;
   });
 
+  
   var departmentInfo = null;
   var departments = []
   var $mdcSelect = $('.mdc-select__menu .mdc-list')
@@ -111,7 +112,7 @@ $(function () {
       $callCard.find('.operation').fadeIn(400)
     })
   }, function () {
-    $prevpareStep.fadeOut(400, function () {
+    $prepareStep.fadeOut(400, function () {
       $commentStep.fadeIn()
     })
   }))
@@ -119,7 +120,7 @@ $(function () {
   stepCtl.push(new Step(function () {
     getQueueNumber()
     $commentStep.fadeOut(400, function () {
-      $prevpareStep.fadeIn()
+      $prepareStep.fadeIn()
     })
   }, function () {
     $commentCard.removeClass('inactive').addClass('active')
@@ -135,7 +136,7 @@ $(function () {
     $callCard.find('.operation').fadeIn()
     clock.clear()
     $commentStep.fadeOut(400, function () {
-      $prevpareStep.fadeIn()
+      $prepareStep.fadeIn()
     })
   }))
   //restart
@@ -265,6 +266,7 @@ $(function () {
       statusCode: {
         200: function () {
           waitConfirm();
+          stepCtl.next()
         },
         403: function () {
           err('该同学未报名');

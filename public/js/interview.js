@@ -1,5 +1,5 @@
-function Step(pre, next) {
-  this.pre = pre
+function Step(prev, next) {
+  this.prev = prev
   this.next = next
 }
 
@@ -15,8 +15,8 @@ StepCtl.prototype.next = function (number) {
 StepCtl.prototype.push = function (step) {
   this.steps.push(step)
 }
-StepCtl.prototype.pre = function () {
-  this.steps[this.stepNow].pre()
+StepCtl.prototype.prev = function () {
+  this.steps[this.stepNow].prev()
   this.stepNow--
 }
 StepCtl.prototype.reStart = function () {
@@ -31,7 +31,6 @@ function Clock(callback, intervalTime) {
   this.min = 0;
   this.sec = 0;
   this.time = "00:00"
-  // TODO init Clock
   this.callback = function () {
     this.timeInterval = window.setInterval(function () {
       this.changeTime()
@@ -44,7 +43,6 @@ Clock.prototype.clear = function () {
   this.min = 0;
   this.sec = 0;
   this.time = "00:00";
-  // TODO Clock clear
   clearInterval(this.timeInterval);
 }
 
@@ -61,13 +59,12 @@ Clock.prototype.changeTime = function () {
 Clock.prototype.start = function () {
   this.callback();
 }
-// TODO Clock start
 
 
 $(function () {
   var $loginCard = $('.login')
   var $callCard = $('.call')
-  var $prepareStep = $('.prepareStep')
+  var $prevpareStep = $('.prevpareStep')
   var $commentStep = $('.commentStep')
   var $informationCard = $('.information')
   var $commentCard = $('.comment')
@@ -96,7 +93,7 @@ $(function () {
     if (number === 0) {
       if ($waitNum[0].innerText === '0') {
         err('暂时无人面试')
-        stepCtl.pre()
+        stepCtl.prev()
       } else {
         callNext();
         $callCard.find('.operation').fadeOut(400, function () {
@@ -114,15 +111,15 @@ $(function () {
       $callCard.find('.operation').fadeIn(400)
     })
   }, function () {
-    $prepareStep.fadeOut(400, function () {
+    $prevpareStep.fadeOut(400, function () {
       $commentStep.fadeIn()
     })
   }))
-  //start or skip
+  //start or Skip
   stepCtl.push(new Step(function () {
     getQueueNumber()
     $commentStep.fadeOut(400, function () {
-      $prepareStep.fadeIn()
+      $prevpareStep.fadeIn()
     })
   }, function () {
     $commentCard.removeClass('inactive').addClass('active')
@@ -138,7 +135,7 @@ $(function () {
     $callCard.find('.operation').fadeIn()
     clock.clear()
     $commentStep.fadeOut(400, function () {
-      $prepareStep.fadeIn()
+      $prevpareStep.fadeIn()
     })
   }))
   //restart
@@ -157,7 +154,7 @@ $(function () {
     stepCtl.next(1)
   })
 
-  // open comment or skip
+  // open comment or Skip
   $informationCard.find('button.start').on('click', function () {
     if($commentCard.hasClass('active')){
       err('面试已开始')
@@ -168,11 +165,11 @@ $(function () {
   $informationCard.find('button.skip').on('click', function () {
     snackConfirm('确认跳过？',null,function () {
       if($commentCard.hasClass('active')){
-        stepCtl.pre()
+        stepCtl.prev()
       }
-      stepCtl.pre()
-      stepCtl.pre()
-      skip()
+      stepCtl.prev()
+      stepCtl.prev()
+      apiSkip()
     })
   })
 
@@ -240,7 +237,7 @@ $(function () {
     dialog.open();
     $dialog.find('.cancel').on('click', function () {
       dialog.close()
-      stepCtl.pre();
+      stepCtl.prev();
     })
     $dialog.find('.ok').on('click', function () {
       var sid = $dialog.find('input')[0].value;
@@ -249,7 +246,7 @@ $(function () {
         callNext(sid)
       } else {
         err('学号格式有误！请重新输入')
-        stepCtl.pre()
+        stepCtl.prev()
       }
     })
   }
@@ -271,8 +268,8 @@ $(function () {
         },
         403: function () {
           err('该同学未报名');
-          stepCtl.pre()
-          stepCtl.pre()
+          stepCtl.prev()
+          stepCtl.prev()
         }
       }
     })
@@ -290,8 +287,8 @@ $(function () {
         },
         403: function () {
           err('此人未确认，已被room跳过');
-          stepCtl.pre();
-          stepCtl.pre();
+          stepCtl.prev();
+          stepCtl.prev();
         },
         202: function () {
           waitConfirm()
@@ -334,7 +331,7 @@ $(function () {
     }
   }
 
-  var skip = function () {
+  var apiSkip = function () {
     var sid = $informationCard.find('.mdc-chip .mdc-chip__text')[0].innerText;
     $.ajax({
       url: '/interview/skip',

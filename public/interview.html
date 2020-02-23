@@ -198,8 +198,7 @@
 <script>
     const select = mdc.select.MDCSelect.attachTo(document.querySelector('.mdc-select'));
     mdc.textField.MDCTextField.attachTo(document.querySelector('.mdc-text-field'));
-    mdc.textField.MDCTextField.attachTo(document.querySelector('.note'));
-    const slider = mdc.slider.MDCSlider.attachTo(document.querySelector('.mdc-slider'));
+    const node = mdc.textField.MDCTextField.attachTo(document.querySelector('.note'));
     const dialog = mdc.dialog.MDCDialog.attachTo(document.querySelector('.mdc-dialog'))
 </script>
 <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>

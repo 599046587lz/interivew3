@@ -3,13 +3,14 @@
     var numberTop;
     var numberUnder;
     var $signSuccess = $("#signSuccess");
+    var $filt = $(".filt");
+    var $blur = $(".blur");
     var $signError =  $("#signError");
     var $addCircle = $("#addCircle");
     var $staffId = $('#staffId');
     var $left = $('#left');
     var $right = $('#right');
     var $wait = $('#wait');
-    var $surface = $(".mdc-snackbar__surface");
     var sid;
     var confirm;
     var $bull = $('.bull');
@@ -69,24 +70,10 @@
     		dataType: 'json',
     		statusCode: {      
     			403: function () {
-                    // snackbar.open();
-                    // $(".mdc-snackbar__surface").css('background','var(--platform-color-red)');
-                    // $surface.addClass("backRed");
-                    // $surface.removeClass("backGreen");
-                    // $signError.addClass("disBlock");
-                    // $signSuccess.removeClass("disBlock");
-                    // snackbar.labelText = "该学生未报名";
                     snackbar.err("该学生未报名");
 
     			},
     			200: function () {
-                    // snackbar.open();	
-                    // $(".mdc-snackbar__surface").css('background','var(--platform-color-green)');
-                    // $surface.addClass("backGreen");
-                    // $surface.removeClass("backRed");
-                    // $signSuccess.addClass("disBlock");
-                    // $signError.removeClass("disBlock");
-                    // snackbar.labelText = "签到成功！";
                     snackbar.success("签到成功！");
                     	
             	},
@@ -106,7 +93,9 @@
         	statusCode: {
             	200: function (data) {
             		numberTop = 1;
+                    $filt.removeClass("disnone");
             		data.forEach(function(element){
+                        $filt.addClass("disnone");
             			if (bool[element.sid]){return true;} 
 		   				var room = `<div class="roomBorder">
 	                			<div>
@@ -127,8 +116,8 @@
 	            		getVague(element.sid);
 	            		numberTop++;
 	            		bool[element.sid] = true;
+                        
     				})
-
             	}
         	}	
     	});
@@ -160,6 +149,23 @@
         	statusCode: {
             	200: function (data) {
             		$("#roomContainer").html("");
+                    var blank = `<div class="cover blur disblock">
+            <div class="blurry">
+                <div class="skeleton">
+                    <div class="avatar"></div>
+                    <div class="line"></div>
+                </div>
+            </div>
+        </div>
+        <div class="cover blur disblock">
+            <div class="blurry">
+                <div class="skeleton">
+                    <div class="avatar"></div>
+                    <div class="line"></div>
+                </div>
+            </div>
+        </div>`;
+        $("#roomContainer").append(blank);
             		numberUnder = 1;
             		data.forEach(function(element){
 	            			var kk = '';
@@ -180,6 +186,7 @@
 	    					</div>`;
 	    					numberUnder++;
 	    					$("#roomContainer").append(part);
+                            $blur.removeClass("disblock");
             		})
 
   				}

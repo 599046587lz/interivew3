@@ -215,3 +215,44 @@
 .backRed{
   background-color: var(--platform-color-red);
 }*/
+.blurry {
+  filter: blur(4px);
+}
+.filt{
+  filter: blur(4px);
+}
+.skeleton {
+  display: flex;
+  align-items: center;
+}
+.skeleton .avatar {
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--mdc-theme-primary);
+  border-radius: 100px;
+  margin-right: 20px;
+}
+.skeleton .line {
+  flex-grow: 1;
+}
+.skeleton .line::before, .skeleton .line::after {
+  content: '';
+  display: block;
+  margin: 12px 0;
+  height: 4px;
+  border: 1px solid var(--mdc-theme-primary);
+  border-radius: 100px;
+}
+.skeleton .line::after {
+  width: 60%;
+}
+.disnone{
+  display: none;
+}
+.blur{
+  filter: blur(4px);
+  display: none;
+}
+.disblock{
+  display: block;
+}

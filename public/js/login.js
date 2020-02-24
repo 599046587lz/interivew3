@@ -41,7 +41,7 @@ $(function () {
             },
             statusCode: {
                 200: function () {
-                    success('登陆成功!');
+                    snackbar.success('登陆成功!');
                     setTimeout(function () {
                         window.location.href = "select.html";
                     }, 500);

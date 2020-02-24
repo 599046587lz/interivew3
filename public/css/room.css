@@ -197,10 +197,7 @@
 .mdc-snackbar{
   justify-content: left;
 }
-.mdc-snackbar__surface{
-  /*background-color: red;*/
-}
-.fork{
+/*.fork{
   color:white;
   cursor: pointer;
 }
@@ -217,4 +214,4 @@
 }
 .backRed{
   background-color: var(--platform-color-red);
-}
+}*/

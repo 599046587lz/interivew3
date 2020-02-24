@@ -18,7 +18,7 @@
     var interviewRoom = [];
     var bool = [];
     var f = false;
-    const snackbar = mdc.snackbar.MDCSnackbar.attachTo(document.querySelector('.mdc-snackbar'));
+    // const snackbar = mdc.snackbar.MDCSnackbar.attachTo(document.querySelector('.mdc-snackbar'));
     snackbar.timeoutMs = 4000;
 
     $addCircle.on('click',function () {
@@ -69,25 +69,30 @@
     		dataType: 'json',
     		statusCode: {      
     			403: function () {
-                    snackbar.open();
+                    // snackbar.open();
                     // $(".mdc-snackbar__surface").css('background','var(--platform-color-red)');
-                    $surface.addClass("backRed");
-                    $surface.removeClass("backGreen");
-                    $signError.addClass("disBlock");
-                    $signSuccess.removeClass("disBlock");
-                    snackbar.labelText = "该学生未报名";
+                    // $surface.addClass("backRed");
+                    // $surface.removeClass("backGreen");
+                    // $signError.addClass("disBlock");
+                    // $signSuccess.removeClass("disBlock");
+                    // snackbar.labelText = "该学生未报名";
+                    snackbar.err("该学生未报名");
 
     			},
-    			200: function (data) {
-                    snackbar.open();	
+    			200: function () {
+                    // snackbar.open();	
                     // $(".mdc-snackbar__surface").css('background','var(--platform-color-green)');
-                    $surface.addClass("backGreen");
-                    $surface.removeClass("backRed");
-                    $signSuccess.addClass("disBlock");
-                    $signError.removeClass("disBlock");
-                    snackbar.labelText = "签到成功！";
+                    // $surface.addClass("backGreen");
+                    // $surface.removeClass("backRed");
+                    // $signSuccess.addClass("disBlock");
+                    // $signError.removeClass("disBlock");
+                    // snackbar.labelText = "签到成功！";
+                    snackbar.success("签到成功！");
                     	
-            	}
+            	},
+                204: function()  {
+                    snackbar.err("该学生已签到");
+                }
         	}
     	});
         snackbar.labelText = "";

@@ -197,54 +197,24 @@
 .mdc-snackbar{
   justify-content: left;
 }
-/*.fork{
-  color:white;
-  cursor: pointer;
-}
-.sign{
-  color:white;
-  margin-left: 16px;
-  display: none;
-}
-.disBlock{
-  display: block;
-}
-.backGreen{
-  background-color: var(--platform-color-green);
-}
-.backRed{
-  background-color: var(--platform-color-red);
-}*/
 .blurry {
-  filter: blur(4px);
+  position: static;
 }
 .filt{
   filter: blur(4px);
 }
 .skeleton {
-  display: flex;
-  align-items: center;
+  margin-bottom: 0;
 }
 .skeleton .avatar {
   width: 40px;
   height: 40px;
-  border: 1px solid var(--mdc-theme-primary);
-  border-radius: 100px;
-  margin-right: 20px;
 }
-.skeleton .line {
-  flex-grow: 1;
-}
+
 .skeleton .line::before, .skeleton .line::after {
-  content: '';
-  display: block;
   margin: 12px 0;
   height: 4px;
-  border: 1px solid var(--mdc-theme-primary);
-  border-radius: 100px;
-}
-.skeleton .line::after {
-  width: 60%;
+
 }
 .disnone{
   display: none;

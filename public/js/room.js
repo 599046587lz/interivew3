@@ -2,10 +2,9 @@
     var baseURL = '';
     var numberTop;
     var numberUnder;
-    var $signSuccess = $("#signSuccess");
+    var $roomContainer = $("#roomContainer");
     var $filt = $(".filt");
-    var $blur = $(".blur");
-    var $signError =  $("#signError");
+    // var $blur = $(".blur");
     var $addCircle = $("#addCircle");
     var $staffId = $('#staffId');
     var $left = $('#left');
@@ -18,8 +17,7 @@
     var department = [];
     var interviewRoom = [];
     var bool = [];
-    var f = false;
-    // const snackbar = mdc.snackbar.MDCSnackbar.attachTo(document.querySelector('.mdc-snackbar'));
+
     snackbar.timeoutMs = 4000;
 
     $addCircle.on('click',function () {
@@ -57,8 +55,7 @@
     $("#done").on('click',function () {
     	$addCircle.removeClass('active');
     	// if (!(/^\d{8}$/.test(staffId.value))){
-    	// 	err("请输入正确的学号");
-    	// 	return false;
+    	// 	snackbar.err("请输入正确的学号");
     	// }
     	sid = staffId.value;
     	$.ajax({
@@ -96,27 +93,27 @@
                     $filt.removeClass("disnone");
             		data.forEach(function(element){
                         $filt.addClass("disnone");
-            			if (bool[element.sid]){return true;} 
-		   				var room = `<div class="roomBorder">
-	                			<div>
-	                    			<div class="circleNumber">${numberTop}</div>
-	                    			<div class="name">${element.name}</div>
-	                			</div>
-	                			<div class="mdc-chip-set">
-	                				<div class="mdc-chip"><span class="mdc-chip__text">${department[element.calldid]}</span></div>
-	                			</div>
-								<div class="roomVague">
- 									<div class="tip">you need to go</div>
-       								<div class="classRoom">${interviewRoom[element.calldid]}</div>
-        							<div class="skip" onclick>skip</div>
-        							<div class="ok">ok</div>
-        						</div>
-	            			</div>`;
-	            		$wait.append(room);
-	            		getVague(element.sid);
-	            		numberTop++;
-	            		bool[element.sid] = true;
-                        
+            			if (!bool[element.sid]){ 
+    		   				var room = `<div class="roomBorder">
+    	                			<div>
+    	                    			<div class="circleNumber">${numberTop}</div>
+    	                    			<div class="name">${element.name}</div>
+    	                			</div>
+    	                			<div class="mdc-chip-set">
+    	                				<div class="mdc-chip"><span class="mdc-chip__text">${department[element.calldid]}</span></div>
+    	                			</div>
+    								<div class="roomVague">
+     									<div class="tip">you need to go</div>
+           								<div class="classRoom">${interviewRoom[element.calldid]}</div>
+            							<div class="skip" onclick>skip</div>
+            							<div class="ok">ok</div>
+            						</div>
+    	            			</div>`;
+    	            		$wait.append(room);
+    	            		getVague(element.sid);
+    	            		numberTop++;
+    	            		bool[element.sid] = true;
+                        }
     				})
             	}
         	}	
@@ -148,10 +145,12 @@
         	type: 'get',
         	statusCode: {
             	200: function (data) {
-            		$("#roomContainer").html("");
-                    var blank = `<div class="cover blur disblock">
-            <div class="blurry">
-                <div class="skeleton">
+            		$roomContainer.html("");
+            		numberUnder = 1;
+                    if (data.length == 0){
+                         var blank = `<div class="cover blur disblock">
+                        <div class="blurry">
+                            <div class="skeleton">
                     <div class="avatar"></div>
                     <div class="line"></div>
                 </div>
@@ -165,8 +164,8 @@
                 </div>
             </div>
         </div>`;
-        $("#roomContainer").append(blank);
-            		numberUnder = 1;
+        $roomContainer.append(blank);
+                    }
             		data.forEach(function(element){
 	            			var kk = '';
 	            			element.volunteer.forEach(function(depart){
@@ -185,26 +184,12 @@
 	    					+`</div>
 	    					</div>`;
 	    					numberUnder++;
-	    					$("#roomContainer").append(part);
-                            $blur.removeClass("disblock");
+	    					$roomContainer.append(part);
             		})
-
   				}
         	}
     	});
     }
-    //返回已完成面试人数
-    var getFinishNumber = function () {
-    	$.ajax({
-        	url: baseURL + '/room/finish',
-        	type: 'get',
-        	statusCode: {
-            	200: function (data) {
-            		console.log(data);
-            	}
-        	}
-    	});
-	}
  
 	var getVague = function (sid) {
 		$(".roomBorder").on("click",function () {
@@ -259,7 +244,7 @@
 	}
 
     var judge = function(){
-        if ($wait.scrollLeft() + $bull.width() > $bull[0].scrollWidth) {
+        if ($wait.scrollLeft() + $bull.width() >= $bull[0].scrollWidth) {
             $right.addClass("transparent");
             } 
         else {

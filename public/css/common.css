@@ -98,4 +98,39 @@ body {
 .confirm.mdc-snackbar #snackOk {
   display: block;
 }
+/*blurry & skeleton*/
+.blurry {
+  position: absolute;
+  top: 24px;
+  left: 28px;
+  right: 28px;
+  filter: blur(4px);
+  z-index: -1;
+}
 
+.skeleton {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+}
+.skeleton .avatar {
+  width: 60px;
+  height: 60px;
+  border: 1px solid var(--mdc-theme-primary);
+  border-radius: 100px;
+  margin-right: 20px;
+}
+.skeleton .line {
+  flex-grow: 1;
+}
+.skeleton .line::before, .skeleton .line::after {
+  content: '';
+  display: block;
+  margin: 16px 0;
+  height: 6px;
+  border: 1px solid var(--mdc-theme-primary);
+  border-radius: 100px;
+}
+.skeleton .line::after {
+  width: 60%;
+}

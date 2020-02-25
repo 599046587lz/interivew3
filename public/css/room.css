@@ -200,7 +200,7 @@
 .blurry {
   position: static;
 }
-.filt{
+.blur{
   filter: blur(4px);
 }
 .skeleton {
@@ -219,10 +219,6 @@
 .disnone{
   display: none;
 }
-.blur{
-  filter: blur(4px);
-  display: block;
-}
-.disblock{
+.cover .blur{
   display: block;
 }

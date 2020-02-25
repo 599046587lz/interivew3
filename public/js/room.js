@@ -6,42 +6,45 @@ $(function () {
     var $right = $('#right');
     var $wait = $('#wait');
     var $bull = $('.bull');
+    var $roomContainer = $("#roomContainer");
+    var $roomBorder = $(".roomBorder");
     var scrollLeft = 0;
     var department = [];
     var interviewRoom = [];
-    var ifstaffidCalled = [];
-    var blank = `<div class="cover blur">
-    <div class="blurry">
-    <div class="skeleton">
-    <div class="avatar"></div>
-    <div class="line"></div>
-    </div>
-    </div>
-    </div>`;
-    var room = `<div class="roomBorder">
-    <div>
-    <div class="circleNumber">_numberTop</div>
-    <div class="name">_name</div>
-    </div>
-    <div class="mdc-chip-set">
-    <div class="mdc-chip"><span class="mdc-chip__text">_department</span></div>
-    </div>
-    <div class="roomVague">
-    <div class="tip">you need to go</div>
-    <div class="classRoom">_interviewRoom</div>
-    <div class="skip" onclick>skip</div>
-    <div class="ok">ok</div>
-    </div>
-    </div>`;
-    var part = `<div class="cover">
-    <span>
-    <div class="circleNumber">_numberUnder</div>
-    <span class="name">_name</span>
-    <span class="stdNumber">_sid</span>
-    </span>
-    <div class="mdc-chip-set">_allDepartment
-    </div>
-    </div>`;
+    var ifStaffidCalled = [];
+    var templateHtml = [];
+    templateHtml['blank'] = `<div class="cover blur">
+                                <div class="blurry">
+                                    <div class="skeleton">
+                                        <div class="avatar"></div>
+                                        <div class="line"></div>
+                                    </div>
+                                </div>
+                            </div>`;
+    templateHtml['room'] = `<div class="roomBorder">
+                                <div>
+                                    <div class="circleNumber">_numberTop</div>
+                                    <div class="name">_name</div>
+                                </div>
+                                <div class="mdc-chip-set">
+                                    <div class="mdc-chip"><span class="mdc-chip__text">_department</span></div>
+                                </div>
+                                <div class="roomVague">
+                                    <div class="tip">you need to go</div>
+                                    <div class="classRoom">_interviewRoom</div>
+                                    <div class="skip" onclick>skip</div>
+                                    <div class="ok">ok</div>
+                                </div>
+                            </div>`;
+    templateHtml['part'] = `<div class="cover">
+                                <span>
+                                    <div class="circleNumber">_numberUnder</div>
+                                    <span class="name">_name</span>
+                                    <span class="stdNumber">_sid</span>
+                                </span>
+                                    <div class="mdc-chip-set">_allDepartment
+                                </div>
+                            </div>`;
 
     $addCircle.on('click',function () {
         $addCircle.toggleClass('active');
@@ -79,6 +82,7 @@ $(function () {
         // if (!(/^\d{8}$/.test(staffId.value))){
         //  snackbar.err("请输入正确的学号");
         // }
+        // else{}
         var sid = staffId.value;
         $.ajax({
             url: baseURL + '/room/sign',
@@ -103,8 +107,7 @@ $(function () {
         $staffId.val("input staff id");
     })
     //呼叫模板 返回所有被叫到的人的信息
-    var callTemplate = function(){
-        var $filt = $(".filt");
+    var callMember = function(){
         $.ajax({
             url: baseURL + '/room/calling',
             type: 'get',
@@ -112,18 +115,21 @@ $(function () {
                 200: function (data) {
                     var numberTop = 1;
                     if (data.length == 0){
-                        $filt.removeClass("disnone");
+                        $roomBorder.removeClass("disnone");
                     }
                     else{
-                        $filt.addClass("disnone");
+                        $roomBorder.addClass("disnone");
                     }
                     data.forEach(function(element){  
-                        if (!ifstaffidCalled[element.sid]){
-                            var beCalled = room.replace('_name',element.name).replace('_numberTop',numberTop).replace('_department',department[element.calldid]).replace('_interviewRoom',interviewRoom[element.calldid]);
+                        if (!ifStaffidCalled[element.sid]){
+                            var beCalled = templateHtml['room'].replace('_name',element.name)
+                                               .replace('_numberTop',numberTop)
+                                               .replace('_department',department[element.calldid])
+                                               .replace('_interviewRoom',interviewRoom[element.calldid]);
                             $wait.append(beCalled);
                             getVague(element.sid);
                             numberTop++;
-                            ifstaffidCalled[element.sid] = true;  
+                            ifStaffidCalled[element.sid] = true;  
                             judgeScroll();
                         }
                     })
@@ -133,7 +139,7 @@ $(function () {
     }
 
     //确认模板
-    var confirmTemplate = function(confirm,sid,roomBorder){
+    var confirmCalled = function(confirm,sid,roomBorder){
         $.ajax({
             url: baseURL + '/room/confirm',
             type: 'post',
@@ -152,7 +158,6 @@ $(function () {
     }
     //返回所有签到者信息
     var getInformation = function () {
-        var $roomContainer = $("#roomContainer");
         $.ajax({
             url: baseURL + '/room/signed',
             type: 'get',
@@ -161,8 +166,8 @@ $(function () {
                     $roomContainer.html("");
                     var numberUnder = 1;
                     if (data.length === 0){
-                        $roomContainer.append(blank);
-                        $roomContainer.append(blank);
+                        $roomContainer.append(templateHtml['blank']);
+                        $roomContainer.append(templateHtml['blank']);
                     }
                     data.forEach(function(element){
                         var allDepartment = '';
@@ -171,11 +176,10 @@ $(function () {
                         })
                         if (element.name.length > 4){
                             element.name = element.name.substring(0,4) + "...";}
-                            var beSigned = part.replace('_name',element.name).replace('_numberUnder',numberUnder).replace('_sid',element.sid).replace('_allDepartment',allDepartment);
-                            // beSigned = part.replace('_name',element.name);
-                            // beSigned = beSigned.replace('_numberUnder',numberUnder);
-                            // beSigned = beSigned.replace('_sid',element.sid);
-                            // beSigned = beSigned.replace('_allDepartment',allDepartment);
+                            var beSigned = templateHtml['part'].replace('_name',element.name)
+                                               .replace('_numberUnder',numberUnder)
+                                               .replace('_sid',element.sid)
+                                               .replace('_allDepartment',allDepartment);
                             numberUnder++;
                             $roomContainer.append(beSigned);
                         })
@@ -189,15 +193,15 @@ $(function () {
             var roomBorder = this;
             var roomVague = $(this).find(".roomVague");
             $(roomVague).show();
-            $(".roomVague").on("click",function(event){
+            roomVague.on("click",function(event){
                 event.stopPropagation();
                 $(this).hide();
             });
             $($(roomVague).find(".ok")).on("click",function(){
-                confirmTemplate(1,sid,roomBorder);      
+                confirmCalled(1,sid,roomBorder);      
             });
             $($(roomVague).find(".skip")).on("click",function(){
-                confirmTemplate(0,sid,roomBorder);
+                confirmCalled(0,sid,roomBorder);
             });
         })
     }
@@ -230,7 +234,7 @@ $(function () {
 
     var roundCall = function (){
         getInformation();
-        callTemplate();  
+        callMember();  
     }
 
     var judgeScroll = function(){

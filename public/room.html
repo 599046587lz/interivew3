@@ -2,9 +2,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport"
-          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>叫号大厅</title>
-<!--    <link rel="stylesheet" type="text/css" href="lib/css/square/blue.css"/>-->
+    <!--    <link rel="stylesheet" type="text/css" href="lib/css/square/blue.css"/>-->
     <link rel="stylesheet" type="text/css" href="lib/css/jquery.jscrollpane.css"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
@@ -12,41 +12,85 @@
     <link rel="stylesheet" type="text/css" href="css/room.css">
 </head>
 <body>
-<header class="topBar">
-    <i class="material-icons" id="back">arrow_back</i>
+    <header class="topBar">
+        <i class="material-icons" id="back">arrow_back</i>
         <span class="title">
             <span class="redhome">redhome</span>
             <span>interview</span>
         </span>
-    <span class="user">
-        <span>UserName</span>
-        <div class="avatar">R</div>
-    </span>
-</header>
-<div class="main">
-    <div class="roomMain">
-        <div class="bull" id="wait">
-        </div>
-        <div class="direction">
-            <div class="turnLeft turn transparent" id="left">
-                <i class="material-icons">arrow_back</i>
+        <span class="user">
+            <span>UserName</span>
+            <div class="avatar">R</div>
+        </span>
+    </header>
+    <div class="main">
+        <div class="roomMain">
+            <div class="bull" id="wait">
+                <div class="roomBorder filt">
+                    <div class="blurry">
+                        <div class="skeleton">
+                            <div class="avatar"></div>
+                            <div class="line"></div>
+                        </div>
+                        <div class="skeleton">
+                            <div class="line"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="roomBorder filt">
+                    <div class="blurry">
+                        <div class="skeleton">
+                            <div class="avatar"></div>
+                            <div class="line"></div>
+                        </div>
+                        <div class="skeleton">
+                            <div class="line"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="roomBorder filt">
+                    <div class="blurry">
+                        <div class="skeleton">
+                            <div class="avatar"></div>
+                            <div class="line"></div>
+                        </div>
+                        <div class="skeleton">
+                            <div class="line"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="roomBorder filt">
+                    <div class="blurry">
+                        <div class="skeleton">
+                            <div class="avatar"></div>
+                            <div class="line"></div>
+                        </div>
+                        <div class="skeleton">
+                            <div class="line"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="turnRight turn transparent" id="right">
-                <i class="material-icons">arrow_forward</i>
+            <div class="direction">
+                <div class="turnLeft turn transparent" id="left">
+                    <i class="material-icons">arrow_back</i>
+                </div>
+                <div class="turnRight turn transparent" id="right">
+                    <i class="material-icons">arrow_forward</i>
+                </div>
             </div>
         </div>
+        <div id="roomContainer">
+        </div>
     </div>
-    <div id="roomContainer">
+    <div id="addCircle">
+        <div class="addContainer">
+            <i class="material-icons">person_add</i>
+            <input id="staffId" class="transparent" type="text" value="input staff id">
+            <i class="material-icons transparent" id="done">done</i>
+        </div>
     </div>
-</div>
-<div id="addCircle">
-    <div class="addContainer">
-        <i class="material-icons">person_add</i>
-        <input id="staffId" class="transparent" type="text" value="input staff id">
-        <i class="material-icons transparent" id="done">done</i>
-    </div>
-</div>
-<footer class="copyright"></footer>
+    <footer class="copyright"></footer>
 </body>
 <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
 <script type="text/javascript" src="lib/js/jquery-1.9.1.min.js"></script>

@@ -6,54 +6,42 @@ $(function () {
     var $right = $('#right');
     var $wait = $('#wait');
     var $bull = $('.bull');
-    var f = false;
     var scrollLeft = 0;
     var department = [];
     var interviewRoom = [];
     var ifstaffidCalled = [];
-    var blankUnder = `<div class="cover blur">
-                    <div class="blurry">
-                    <div class="skeleton">
-                    <div class="avatar"></div>
-                    <div class="line"></div>
-                    </div>
-                    </div>
-                    </div>`;
-    var blankTop = `<div class="roomBorder filt">
-                    <div class="blurry">
-                    <div class="skeleton">
-                    <div class="avatar"></div>
-                    <div class="line"></div>
-                    </div>
-                    <div class="skeleton">
-                    <div class="line"></div>
-                    </div>
-                    </div>
-                    </div>`;
+    var blank = `<div class="cover blur">
+    <div class="blurry">
+    <div class="skeleton">
+    <div class="avatar"></div>
+    <div class="line"></div>
+    </div>
+    </div>
+    </div>`;
     var room = `<div class="roomBorder">
-                    <div>
-                    <div class="circleNumber">_numberTop</div>
-                    <div class="name">_name</div>
-                    </div>
-                    <div class="mdc-chip-set">
-                    <div class="mdc-chip"><span class="mdc-chip__text">_department</span></div>
-                    </div>
-                    <div class="roomVague">
-                    <div class="tip">you need to go</div>
-                    <div class="classRoom">_interviewRoom</div>
-                    <div class="skip" onclick>skip</div>
-                    <div class="ok">ok</div>
-                    </div>
-                    </div>`;
+    <div>
+    <div class="circleNumber">_numberTop</div>
+    <div class="name">_name</div>
+    </div>
+    <div class="mdc-chip-set">
+    <div class="mdc-chip"><span class="mdc-chip__text">_department</span></div>
+    </div>
+    <div class="roomVague">
+    <div class="tip">you need to go</div>
+    <div class="classRoom">_interviewRoom</div>
+    <div class="skip" onclick>skip</div>
+    <div class="ok">ok</div>
+    </div>
+    </div>`;
     var part = `<div class="cover">
-                    <span>
-                    <div class="circleNumber">_numberUnder</div>
-                    <span class="name">_name</span>
-                    <span class="stdNumber">_sid</span>
-                    </span>
-                    <div class="mdc-chip-set">_allDepartment
-                    </div>
-                    </div>`;
+    <span>
+    <div class="circleNumber">_numberUnder</div>
+    <span class="name">_name</span>
+    <span class="stdNumber">_sid</span>
+    </span>
+    <div class="mdc-chip-set">_allDepartment
+    </div>
+    </div>`;
 
     $addCircle.on('click',function () {
         $addCircle.toggleClass('active');
@@ -123,15 +111,12 @@ $(function () {
             statusCode: {
                 200: function (data) {
                     var numberTop = 1;
-                    console.log(data.length);
-                    if (data.length === 0 && f == false){
-                        $wait.append(blankTop);
-                        $wait.append(blankTop);
-                        $wait.append(blankTop);
-                        $wait.append(blankTop);
-                        f = true;
+                    if (data.length == 0){
+                        $filt.removeClass("disnone");
                     }
-                    if (data.length != 0){f = false;}
+                    else{
+                        $filt.addClass("disnone");
+                    }
                     data.forEach(function(element){  
                         if (!ifstaffidCalled[element.sid]){
                             var beCalled = room.replace('_name',element.name).replace('_numberTop',numberTop).replace('_department',department[element.calldid]).replace('_interviewRoom',interviewRoom[element.calldid]);
@@ -176,8 +161,8 @@ $(function () {
                     $roomContainer.html("");
                     var numberUnder = 1;
                     if (data.length === 0){
-                        $roomContainer.append(blankUnder);
-                        $roomContainer.append(blankUnder);
+                        $roomContainer.append(blank);
+                        $roomContainer.append(blank);
                     }
                     data.forEach(function(element){
                         var allDepartment = '';
@@ -186,14 +171,14 @@ $(function () {
                         })
                         if (element.name.length > 4){
                             element.name = element.name.substring(0,4) + "...";}
-                        var beSigned = part.replace('_name',element.name).replace('_numberUnder',numberUnder).replace('_sid',element.sid).replace('_allDepartment',allDepartment);
+                            var beSigned = part.replace('_name',element.name).replace('_numberUnder',numberUnder).replace('_sid',element.sid).replace('_allDepartment',allDepartment);
                             // beSigned = part.replace('_name',element.name);
                             // beSigned = beSigned.replace('_numberUnder',numberUnder);
                             // beSigned = beSigned.replace('_sid',element.sid);
                             // beSigned = beSigned.replace('_allDepartment',allDepartment);
-                        numberUnder++;
-                        $roomContainer.append(beSigned);
-                    })
+                            numberUnder++;
+                            $roomContainer.append(beSigned);
+                        })
                 }
             }
         });
@@ -201,8 +186,8 @@ $(function () {
 
     var getVague = function (sid) {
         $(".roomBorder").on("click",function () {
-        var roomBorder = this;
-        var roomVague = $(this).find(".roomVague");
+            var roomBorder = this;
+            var roomVague = $(this).find(".roomVague");
             $(roomVague).show();
             $(".roomVague").on("click",function(event){
                 event.stopPropagation();

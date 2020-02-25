@@ -55,6 +55,7 @@ let Interviewee = new mongoose.Schema({
     clubName: String,
     sid: Number,
     cid: Number,
+    number: Number,
     name: {
         type: String,
         default: ''

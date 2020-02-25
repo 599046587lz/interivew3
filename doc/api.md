@@ -405,7 +405,8 @@
     qq: 面试者qq(string),
     cid: 面试社团(int),
     signTime: 签到时间(string),
-    regTime: 注册时间(string)
+    regTime: 注册时间(string),
+    number: 排队序号(int)
   }]
 ```
 
@@ -457,7 +458,8 @@
     qq: 面试者qq(string),
     cid: 面试社团(int),
     signTime: 签到时间(string),
-    regTime: 注册时间(string)
+    regTime: 注册时间(string),
+    number: 排队序号(int)
   }]
 ```
 
@@ -571,7 +573,8 @@
     qq: 面试者qq(string),
     cid: 面试社团(int),
     signTime: 签到时间(string),
-    regTime: 注册时间(string)
+    regTime: 注册时间(string),
+    number: 排队序号(int)
   }]
 ```
 
@@ -626,7 +629,8 @@
     qq: 面试者qq(string),
     cid: 面试社团(int),
     signTime: 签到时间(string),
-    regTime: 注册时间(string)
+    regTime: 注册时间(string),
+    number: 排队序号(int)
   }]
  403:
   {
@@ -746,7 +750,8 @@
     qq: 面试者qq(string),
     cid: 面试社团(int),
     signTime: 签到时间(string),
-    regTime: 注册时间(string)
+    regTime: 注册时间(string),
+    number: 排队序号(int)
   }
 
   403(选择skip):

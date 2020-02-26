@@ -46,6 +46,7 @@ Snackbar.prototype.confirm = function(content,cancel,ok) {
 }
 
 Snackbar.prototype.popup = function(type,content){
+  $(this.element).removeClass('success error confirm');
   $(this.element).addClass(type);
   this.snackbar.labelText = content;
   this.snackbar.open()

@@ -169,6 +169,12 @@
   margin: 0 6px;
   color: #fff;
 }
+input::-webkit-input-placeholder {
+    color: #fff;
+}
+input:-ms-input-placeholder {
+    color: #BDCADA;
+}
 #addCircle.active {
   width: 164px;
 }
@@ -197,24 +203,28 @@
 .mdc-snackbar{
   justify-content: left;
 }
-.mdc-snackbar__surface{
-  /*background-color: red;*/
+.blurry {
+  position: static;
 }
-.fork{
-  color:white;
-  cursor: pointer;
+.blur{
+  filter: blur(4px);
 }
-.sign{
-  color:white;
-  margin-left: 16px;
+.skeleton {
+  margin-bottom: 0;
+}
+.skeleton .avatar {
+  width: 40px;
+  height: 40px;
+}
+
+.skeleton .line::before, .skeleton .line::after {
+  margin: 12px 0;
+  height: 4px;
+
+}
+.disnone{
   display: none;
 }
-.disBlock{
+.cover .blur{
   display: block;
-}
-.backGreen{
-  background-color: var(--platform-color-green);
-}
-.backRed{
-  background-color: var(--platform-color-red);
 }

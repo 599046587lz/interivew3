@@ -2,85 +2,107 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport"
-          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>叫号大厅</title>
-<!--    <link rel="stylesheet" type="text/css" href="lib/css/square/blue.css"/>-->
+    <!--    <link rel="stylesheet" type="text/css" href="lib/css/square/blue.css"/>-->
     <link rel="stylesheet" type="text/css" href="lib/css/jquery.jscrollpane.css"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
     <link rel="stylesheet" type="text/css" href="css/common.css">
     <link rel="stylesheet" type="text/css" href="css/room.css">
 </head>
-<!--[if lt IE 9]>
-<script src="http://www.redhome.cc/wp-content/themes/redhome/js/html5.js"></script>
-<![endif]-->
 <body>
-<header class="topBar">
-    <i class="material-icons" id="back">arrow_back</i>
+    <header class="topBar">
+        <i class="material-icons" id="back">arrow_back</i>
         <span class="title">
             <span class="redhome">redhome</span>
             <span>interview</span>
         </span>
-    <span class="user">
-        <span>UserName</span>
-        <div class="avatar">R</div>
-    </span>
-</header>
-<div class="main">
-    <div class="roomMain">
-        <div class="bull" id="wait">
+        <span class="user">
+            <span>UserName</span>
+            <div class="avatar">R</div>
+        </span>
+    </header>
+    <div class="main">
+        <div class="roomMain">
+            <div class="bull" id="wait">
+                <div class="roomBorder blur">
+                    <div class="blurry">
+                        <div class="skeleton">
+                            <div class="avatar"></div>
+                            <div class="line"></div>
+                        </div>
+                        <div class="skeleton">
+                            <div class="line"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="roomBorder blur">
+                    <div class="blurry">
+                        <div class="skeleton">
+                            <div class="avatar"></div>
+                            <div class="line"></div>
+                        </div>
+                        <div class="skeleton">
+                            <div class="line"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="roomBorder blur">
+                    <div class="blurry">
+                        <div class="skeleton">
+                            <div class="avatar"></div>
+                            <div class="line"></div>
+                        </div>
+                        <div class="skeleton">
+                            <div class="line"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="roomBorder blur">
+                    <div class="blurry">
+                        <div class="skeleton">
+                            <div class="avatar"></div>
+                            <div class="line"></div>
+                        </div>
+                        <div class="skeleton">
+                            <div class="line"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="direction">
+                <div class="turnLeft turn transparent" id="left">
+                    <i class="material-icons">arrow_back</i>
+                </div>
+                <div class="turnRight turn transparent" id="right">
+                    <i class="material-icons">arrow_forward</i>
+                </div>
+            </div>
         </div>
-        <div class="direction">
-            <div class="turnLeft turn transparent" id="left">
-                <i class="material-icons">arrow_back</i>
-            </div>
-            <div class="turnRight turn" id="right">
-                <i class="material-icons">arrow_forward</i>
-            </div>
+        <div id="roomContainer">
         </div>
     </div>
-    <div id="roomContainer">
-        <div class="cover">
-                <span>
-                    <div class="circleNumber">1</div>
-                    <span class="name">易烊千玺</span>
-                    <span class="stdNumber">19051716</span>
-                </span>
-            <div class="mdc-chip-set">
-                <div class="mdc-chip"><span class="mdc-chip__text">技术部</span></div>
-                <div class="mdc-chip"><span class="mdc-chip__text">媒体运营部</span></div>
-                <div class="mdc-chip"><span class="mdc-chip__text">媒体运营部</span></div>
-            </div>
+    <div id="addCircle">
+        <div class="addContainer">
+            <i class="material-icons">person_add</i>
+            <input id="staffId" class="transparent" type="text" placeholder="input staff id">
+            <i class="material-icons transparent" id="done">done</i>
         </div>
     </div>
-</div>
-<div id="addCircle">
-    <div class="addContainer">
-        <i class="material-icons">person_add</i>
-        <input id="staffId" class="transparent" type="text" value="input staff id">
-        <i class="material-icons transparent" id="done">done</i>
-    </div>
-</div>
-<div class="mdc-snackbar">
-  <div class="mdc-snackbar__surface">
-    <i class="material-icons sign" id="signError">error_outline</i>
-    <i class="material-icons sign" id="signSuccess">done_all</i>
-    <div class="mdc-snackbar__label" role="status"aria-live="polite"></div>
-    <i class="material-icons fork">clear</i>
-  </div>
-</div>
-<footer class="copyright"></footer>
+    <footer class="copyright"></footer>
 </body>
 <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
 <script type="text/javascript" src="lib/js/jquery-1.9.1.min.js"></script>
-<!--<script type="text/javascript" src="lib/js/notifIt.js"></script>-->
 <script type="text/javascript" src="js/common.js"></script>
 <script type="text/javascript" src="js/room.js"></script>
-<script type="text/javascript" src="lib/js/socket.io.js"></script>
-<script type="text/javascript" src="lib/js/jquery.jscrollpane.min.js"></script>
-<script type="text/javascript" src="lib/js/jquery.mousewheel.js"></script>
-<script type="text/javascript" src="lib/js/icheck.min.js"></script>
+<!-- <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script> -->
+<!-- <script type="text/javascript" src="lib/js/socket.io.js"></script> -->
+<!-- <script type="text/javascript" src="lib/js/jquery.jscrollpane.min.js"></script> -->
+<!-- <script type="text/javascript" src="lib/js/jquery.mousewheel.js"></script> -->
+<!-- <script type="text/javascript" src="lib/js/icheck.min.js"></script> -->
 <script type="text/javascript" src="lib/js/jquery.enplaceholder.js"></script>
+<!-- <script src="http://www.redhome.cc/wp-content/themes/redhome/js/html5.js"></script> -->
 <script type="text/javascript">
     $(document).ready(function () {
         $('input').placeholder({isUseSpan: false});

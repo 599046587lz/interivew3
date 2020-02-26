@@ -23,7 +23,7 @@ $(function () {
                             </div>`;
     templateHtml['room'] = `<div class="roomBorder">
                                 <div>
-                                    <div class="circleNumber">_numberTop</div>
+                                    <div class="circleNumber">_number</div>
                                     <div class="name">_name</div>
                                 </div>
                                 <div class="mdc-chip-set">
@@ -38,7 +38,7 @@ $(function () {
                             </div>`;
     templateHtml['part'] = `<div class="cover">
                                 <span>
-                                    <div class="circleNumber">_numberUnder</div>
+                                    <div class="circleNumber">_number</div>
                                     <span class="name">_name</span>
                                     <span class="stdNumber">_sid</span>
                                 </span>
@@ -113,7 +113,7 @@ $(function () {
             type: 'get',
             statusCode: {
                 200: function (data) {
-                    var numberTop = 1;
+                    // var numberTop = 1;
                     if (data.length == 0){
                         $roomBorder.removeClass("disnone");
                     }
@@ -123,12 +123,12 @@ $(function () {
                     data.forEach(function(element){  
                         if (!ifStaffidCalled[element.sid]){
                             var beCalled = templateHtml['room'].replace('_name',element.name)
-                                               .replace('_numberTop',numberTop)
+                                               .replace('_number',element.number)
                                                .replace('_department',department[element.calldid])
                                                .replace('_interviewRoom',interviewRoom[element.calldid]);
                             $wait.append(beCalled);
                             getVague(element.sid);
-                            numberTop++;
+                            // numberTop++;
                             ifStaffidCalled[element.sid] = true;  
                             judgeScroll();
                         }
@@ -164,7 +164,7 @@ $(function () {
             statusCode: {
                 200: function (data) {
                     $roomContainer.html("");
-                    var numberUnder = 1;
+                    // var numberUnder = 1;
                     if (data.length === 0){
                         $roomContainer.append(templateHtml['blank']);
                         $roomContainer.append(templateHtml['blank']);
@@ -177,10 +177,10 @@ $(function () {
                         if (element.name.length > 4){
                             element.name = element.name.substring(0,4) + "...";}
                             var beSigned = templateHtml['part'].replace('_name',element.name)
-                                               .replace('_numberUnder',numberUnder)
+                                               .replace('_number',element.number)
                                                .replace('_sid',element.sid)
                                                .replace('_allDepartment',allDepartment);
-                            numberUnder++;
+                            // numberUnder++;
                             $roomContainer.append(beSigned);
                         })
                 }

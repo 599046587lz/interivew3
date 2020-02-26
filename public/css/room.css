@@ -169,6 +169,12 @@
   margin: 0 6px;
   color: #fff;
 }
+input::-webkit-input-placeholder {
+    color: #fff;
+}
+input:-ms-input-placeholder {
+    color: #BDCADA;
+}
 #addCircle.active {
   width: 164px;
 }

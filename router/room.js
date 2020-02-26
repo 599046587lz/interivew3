@@ -36,8 +36,8 @@ router.get('/sign', mid.checkFormat(function () {
         info = null;
     } else {
         info.signTime = new Date();
-        let result = await Interviewee.getNumber(cid);
-        info.number = result;
+        let result = await Interviewee.getSignNumber(cid);
+        info.signNumber = result;
         info.save();
     }
     ctx.response.status = 200;

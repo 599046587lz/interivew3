@@ -16,7 +16,7 @@ exports.getInterviewerInfo = function (sid, cid ) {
     })
 };
 
-exports.getNumber = function (cid) {
+exports.getSignNumber = function (cid) {
     return IntervieweeModel.find({
         cid:cid,
         ifsign : true

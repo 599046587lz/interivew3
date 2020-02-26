@@ -123,7 +123,7 @@ $(function () {
                     data.forEach(function(element){  
                         if (!ifStaffidCalled[element.sid]){
                             var beCalled = templateHtml['room'].replace('_name',element.name)
-                                               .replace('_number',element.number)
+                                               .replace('_number',element.signNumber)
                                                .replace('_department',department[element.calldid])
                                                .replace('_interviewRoom',interviewRoom[element.calldid]);
                             $wait.append(beCalled);
@@ -177,7 +177,7 @@ $(function () {
                         if (element.name.length > 4){
                             element.name = element.name.substring(0,4) + "...";}
                             var beSigned = templateHtml['part'].replace('_name',element.name)
-                                               .replace('_number',element.number)
+                                               .replace('_number',element.signNumber)
                                                .replace('_sid',element.sid)
                                                .replace('_allDepartment',allDepartment);
                             // numberUnder++;

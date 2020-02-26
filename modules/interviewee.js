@@ -16,6 +16,13 @@ exports.getInterviewerInfo = function (sid, cid ) {
     })
 };
 
+exports.getNumber = function (cid) {
+    return IntervieweeModel.find({
+        cid:cid,
+        ifsign : true
+    }).then(result => result.length)
+};
+
 exports.getConfirmInfo = function (sid,cid,confirm) {
     let data = {
         sid: sid,

@@ -144,7 +144,7 @@
 }
 
 /*addCircle*/
-#addCircle{
+.addCircle{
   background-color: var(--platform-color-blue);
   width:40px;
   height: 40px;
@@ -156,11 +156,11 @@
   transition: .5s;
   text-align: center;
 }
-#addCircle .addContainer {
+.addCircle .addContainer {
   width: 164px;
   line-height: 40px;
 }
-#addCircle .addContainer input {
+.addCircle .addContainer input {
   border: none;
   border-bottom: 2px solid #fff;
   outline: none;
@@ -175,14 +175,14 @@ input::-webkit-input-placeholder {
 input:-ms-input-placeholder {
     color: #BDCADA;
 }
-#addCircle.active {
+.addCircle.active {
   width: 164px;
 }
-#addCircle.active .transparent {
+.addCircle.active .transparent {
   opacity: 1;
   pointer-events: all;
 }
-#addCircle .addContainer > * {
+.addCircle .addContainer > * {
   vertical-align: middle;
 }
 

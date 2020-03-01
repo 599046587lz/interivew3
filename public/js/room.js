@@ -1,3 +1,30 @@
+function SignButton(signMember) {
+    var $signbuttonHtml = $
+    (`<div class="addCircle">
+            <div class="addContainer">
+                <i class="material-icons">person_add</i>
+                <input class="staffId transparent"  type="text" placeholder="input staff id">
+                <i class="material-icons transparent done">done</i>
+            </div>
+        </div>`)
+    $('body').append($signbuttonHtml);
+
+    $signbuttonHtml.on('click', function (event) {
+        if (event.target.classList.contains('done')) {
+            $(this).removeClass('active');
+            var $staffId = $signbuttonHtml.find("input");
+            var sid = $staffId.val();
+            $staffId.val("");
+            signMember(sid);
+            return;
+        }
+        if (event.target.classList.contains('material-icons')||event.target.classList.contains('addContainer')) {
+            $(this).toggleClass('active');
+            return;
+        }
+    })
+}
+
 $(function () {
     var baseURL = '';
     var $addCircle = $("#addCircle");
@@ -48,40 +75,33 @@ $(function () {
                             </div>`
     };
 
-    $addCircle.on('click', function () {
-        $addCircle.toggleClass('active');
+    $wait.on('scroll', function () {
+        if ($(this).scrollLeft() === 0) {
+            $left.addClass("transparent");
+        } else {
+            $left.removeClass('transparent')
+        }
+
+        if ($(this).scrollLeft() + $bull.width() > $bull[0].scrollWidth) {
+            $right.addClass("transparent");
+        } else {
+            $right.removeClass('transparent');
+        }
     })
 
-    $(".transparent").on('click', function (e) {
-        e.stopPropagation()
+    $right.on("click", function () {
+        scrollLeft = $wait.scrollLeft();
+        $wait.scrollLeft(scrollLeft + 680);
     })
 
-    var getDepartment = function () {
-        $.ajax({
-            url: baseURL + '/club/clubInfo',
-            type: 'get',
-            statusCode: {
-                200: function (data) {
-                    data.departments.forEach(function (element) {
-                        department[element.did] = element.name;
-                        interviewRoom[element.did] = element.location;
-                    })
-                }
-            }
-        });
-    }
+    $left.on("click", function () {
+        scrollLeft = $wait.scrollLeft();
+        $wait.scrollLeft(scrollLeft - 680);
+    })
 
-
-    $("#done").on('click', function () {
-        $addCircle.removeClass('active');
-        //投入使用时的8位数字学号判断，此处先注释掉
-        // if (!(/^\d{8}$/.test(staffId.value))){
-        //  snackbar.err("请输入正确的学号");
-        // }
-        // else{}
-        var sid = staffId.value;
+    var signMember = function (sid) {
         $.ajax({
-            url: baseURL + '/room/sign',
+            url: '/room/sign',
             type: 'get',
             data: {
                 sid: sid,
@@ -99,9 +119,25 @@ $(function () {
                 }
             }
         });
-        snackbar.labelText = "";
-        $staffId.val("");
-    })
+    }
+
+    var signbutton = new SignButton(signMember);
+
+    var getDepartment = function () {
+        $.ajax({
+            url: baseURL + '/club/clubInfo',
+            type: 'get',
+            statusCode: {
+                200: function (data) {
+                    data.departments.forEach(function (element) {
+                        department[element.did] = element.name;
+                        interviewRoom[element.did] = element.location;
+                    })
+                }
+            }
+        });
+    }
+
     //呼叫模板 返回所有被叫到的人的信息
     var callMember = function () {
         $.ajax({
@@ -202,30 +238,6 @@ $(function () {
         })
     }
 
-
-    $wait.on('scroll', function () {
-        if ($(this).scrollLeft() === 0) {
-            $left.addClass("transparent");
-        } else {
-            $left.removeClass('transparent')
-        }
-
-        if ($(this).scrollLeft() + $bull.width() > $bull[0].scrollWidth) {
-            $right.addClass("transparent");
-        } else {
-            $right.removeClass('transparent');
-        }
-    })
-    $right.on("click", function () {
-        scrollLeft = $wait.scrollLeft();
-        $wait.scrollLeft(scrollLeft + 680);
-    })
-    $left.on("click", function () {
-        scrollLeft = $wait.scrollLeft();
-        $wait.scrollLeft(scrollLeft - 680);
-    })
-
-
     var roundCall = function () {
         getInformation();
         callMember();
@@ -238,6 +250,7 @@ $(function () {
             $right.removeClass('transparent');
         }
     }
+
     getDepartment();
     roundCall();
     judgeScroll();

@@ -34,7 +34,7 @@ function Queue(rootDom, department, promise) {
 }
 
 Queue.prototype.render = function (renderTemplate) {
-  this.rootDom.find('.blur').removeClass('disNone')
+  this.rootDom.find('.blur').addClass('disNone')
   var renderHtml = this.replaceData(renderTemplate)
   this.rootDom.append(renderHtml)
 }
@@ -49,7 +49,7 @@ Queue.prototype.getData = function () {
 }
 
 Queue.prototype.renderSkeleton = function () {
-  this.rootDom.find('.blur').addClass('disNone')
+  this.rootDom.find('.blur').removeClass('disNone')
 }
 
 Queue.prototype.deffer = function () {
@@ -156,6 +156,8 @@ CalledQueue.prototype.replaceData = function (element) {
     }
     $roomVague.show();
   }.bind(this))
+
+  return $render
 }
 
 $(function () {

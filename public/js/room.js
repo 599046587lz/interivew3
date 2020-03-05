@@ -41,7 +41,7 @@ Queue.prototype.render = function (renderTemplate) {
 
 Queue.prototype.getData = function () {
   window.setInterval(function () {
-    this.promise.then((data) => {
+    this.promise().then((data) => {
       this.newData = data
     })
     this.deffer()
@@ -59,13 +59,13 @@ Queue.prototype.deffer = function () {
     return
   }
   this.newData.forEach(item => {
-    if (!this.queueData.includes(item)) {
+    if (!this.queueData.find(function(value){return value.sid === item.sid})) {
       this.render(item)
       this.queueData = this.queueData.concat(item)
     }
   })
   this.queueData.forEach(item => {
-    if (!this.newData.includes(item)) {
+    if (!this.newData.find(function(value){return value.sid === item.sid})) {
       var index = this.queueData.indexOf(item)
       this.queueData.splice(index, 1)
       this.removeDom(item)
@@ -189,30 +189,34 @@ $(function () {
   }
 
   //呼叫 返回所有被叫到的人的信息
-  var callMember = new Promise(function (resolve) {
-    $.ajax({
-      url: baseURL + '/room/calling',
-      type: 'get',
-      statusCode: {
-        200: function (data) {
-          resolve(data)
+  var callMember = function () {
+    return new Promise(function (resolve) {
+      $.ajax({
+        url: baseURL + '/room/calling',
+        type: 'get',
+        statusCode: {
+          200: function (data) {
+            resolve(data)
+          }
         }
-      }
-    });
-  })
+      });
+    })
+  }
 
   //返回所有签到者信息
-  var getInformation = new Promise(function (resolve) {
-    $.ajax({
-      url: baseURL + '/room/signed',
-      type: 'get',
-      statusCode: {
-        200: function (data) {
-          resolve(data)
+  var getInformation =function () {
+    return new Promise(function (resolve) {
+      $.ajax({
+        url: baseURL + '/room/signed',
+        type: 'get',
+        statusCode: {
+          200: function (data) {
+            resolve(data)
+          }
         }
-      }
-    });
-  })
+      });
+    })
+  }
 
   //确认
   var confirmCalled = function (confirm, sid, roomBorder) {

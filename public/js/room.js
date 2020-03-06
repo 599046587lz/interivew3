@@ -24,27 +24,24 @@ function SignButton(signMember) {
   })
 }
 
-function Queue(rootDom, department, promise) {
-  this.body = $('body')
+function Queue(rootDom, department) {
   this.rootDom = rootDom;
-  this.newData = [];
   this.queueData = [];
   this.department = department
-  this.promise = promise
 }
 
-Queue.prototype.render = function (renderTemplate) {
+Queue.prototype.render = function (renderItem) {
   this.rootDom.find('.blur').addClass('disNone')
-  var renderHtml = this.replaceData(renderTemplate)
-  this.rootDom.append(renderHtml)
+  var $renderHtml = this.replaceData(renderItem)
+  $renderHtml[0].dataset.sid = renderItem.sid;
+  this.rootDom.append($renderHtml)
 }
 
 Queue.prototype.getData = function () {
   window.setInterval(function () {
     this.promise().then((data) => {
-      this.newData = data
+      this.diff(data)
     })
-    this.deffer()
   }.bind(this), 3000)
 }
 
@@ -52,42 +49,43 @@ Queue.prototype.renderSkeleton = function () {
   this.rootDom.find('.blur').removeClass('disNone')
 }
 
-Queue.prototype.deffer = function () {
-  if (this.newData.length === 0) {
+Queue.prototype.diff = function (newData) {
+  var queueLonger = true;
+  if (newData.length === 0) {
     this.renderSkeleton()
     this.queueData = []
     return
   }
-  this.newData.forEach(item => {
-    if (!this.queueData.find(function(value){return value.sid === item.sid})) {
-      this.render(item)
+  newData.forEach((item,index) => {
+    if(!this.queueData[index]){
+      this.render(item);
       this.queueData = this.queueData.concat(item)
+      queueLonger = false;
+    }
+    if(this.queueData[index].sid !== item.sid){
+      this.removeDom(this.queueData[index])
+      this.render(item)
+      this.queueData[index] = item;
     }
   })
-  this.queueData.forEach(item => {
-    if (!this.newData.find(function(value){return value.sid === item.sid})) {
-      var index = this.queueData.indexOf(item)
-      this.queueData.splice(index, 1)
+  if(queueLonger){
+    this.queueData.slice(newData.length).forEach(item => {
       this.removeDom(item)
-    }
-  })
+    })
+    this.queueData = this.queueData.slice(0,newData.length)
+  }
 }
 
 Queue.prototype.removeDom = function (item) {
-  this.rootDom.find(`[data-id=${item.sid}]`).remove()
+  this.rootDom.find(`[data-sid=${item.sid}]`).remove()
 }
 
-function SignedQueue(rootDom, department, promise) {
-  Queue.call(this, rootDom, department, promise)
-  this.renderTemplate = `<div class="cover" data-id="_sid">
-                                <span>
-                                    <div class="circleNumber">_number</div>
-                                    <span class="name">_name</span>
-                                    <span class="stdNumber">_sid</span>
-                                </span>
-                                    <div class="mdc-chip-set">_allDepartment
-                                </div>
-                            </div>`
+Queue.prototype.replaceData = null; // 需要子类实现
+Queue.prototype.promise = null; //需要子类实现
+
+function SignedQueue(rootDom, department, renderTemplate) {
+  Queue.call(this, rootDom, department)
+  this.renderTemplate = renderTemplate
 }
 
 SignedQueue.prototype = Object.create(Queue.prototype)
@@ -101,32 +99,32 @@ SignedQueue.prototype.replaceData = function (element) {
   if (element.name.length > 4) {
     element.name = element.name.substring(0, 4) + "...";
   }
-  var beSigned = this.renderTemplate.replace('_name', element.name)
+  var $beSigned = $(this.renderTemplate.replace('_name', element.name)
     .replace('_number', element.signNumber)
-    .replace(/_sid/g, element.sid)
-    .replace('_allDepartment', allDepartment)
+    .replace('_sid', element.sid)
+    .replace('_allDepartment', allDepartment));
 
-  return beSigned
+  return $beSigned
 }
 
-function CalledQueue(rootDom, department, promise, confirmCalled) {
-  Queue.call(this, rootDom, department, promise)
+SignedQueue.prototype.promise = function () {
+  return new Promise(function (resolve) {
+    $.ajax({
+      url: '/room/signed',
+      type: 'get',
+      statusCode: {
+        200: function (data) {
+          resolve(data)
+        }
+      }
+    });
+  })
+}
+
+function CalledQueue(rootDom, department, renderTemplate, confirmCalled) {
+  Queue.call(this, rootDom, department)
   this.confirmCalled = confirmCalled
-  this.renderTemplate = `<div class="roomBorder" data-id="_sid">
-                                <div>
-                                    <div class="circleNumber">_number</div>
-                                    <div class="name">_name</div>
-                                </div>
-                                <div class="mdc-chip-set">
-                                    <div class="mdc-chip"><span class="mdc-chip__text">_department</span></div>
-                                </div>
-                                <div class="roomVague">
-                                    <div class="tip">you need to go</div>
-                                    <div class="classRoom">_interviewRoom</div>
-                                    <div class="skip">skip</div>
-                                    <div class="ok">ok</div>
-                                </div>
-                            </div>`
+  this.renderTemplate = renderTemplate
 }
 
 CalledQueue.prototype = Object.create(Queue.prototype)
@@ -134,7 +132,6 @@ CalledQueue.prototype.constructor = CalledQueue
 
 CalledQueue.prototype.replaceData = function (element) {
   var $render = $(this.renderTemplate.replace('_name', element.name)
-    .replace('_sid', element.sid)
     .replace('_number', element.signNumber)
     .replace('_department', this.department[element.calldid].name)
     .replace('_interviewRoom', this.department[element.calldid].location));
@@ -160,6 +157,20 @@ CalledQueue.prototype.replaceData = function (element) {
   return $render
 }
 
+CalledQueue.prototype.promise = function () {
+  return new Promise(function (resolve) {
+    $.ajax({
+      url:'/room/calling',
+      type: 'get',
+      statusCode: {
+        200: function (data) {
+          resolve(data)
+        }
+      }
+    });
+  })
+}
+
 $(function () {
   var baseURL = '';
   var $left = $('#left');
@@ -170,6 +181,33 @@ $(function () {
 
   var scrollLeft = 0;
   var department = [];
+
+  var templateHtml = {
+    called : `<div class="roomBorder">
+                                <div>
+                                    <div class="circleNumber">_number</div>
+                                    <div class="name">_name</div>
+                                </div>
+                                <div class="mdc-chip-set">
+                                    <div class="mdc-chip"><span class="mdc-chip__text">_department</span></div>
+                                </div>
+                                <div class="roomVague">
+                                    <div class="tip">you need to go</div>
+                                    <div class="classRoom">_interviewRoom</div>
+                                    <div class="skip">skip</div>
+                                    <div class="ok">ok</div>
+                                </div>
+                            </div>`,
+    signed : `<div class="cover">
+                                <span>
+                                    <div class="circleNumber">_number</div>
+                                    <span class="name">_name</span>
+                                    <span class="stdNumber">_sid</span>
+                                </span>
+                                    <div class="mdc-chip-set">_allDepartment
+                                </div>
+                            </div>`
+  }
 
   var getDepartment = function () {
     $.ajax({
@@ -189,34 +227,34 @@ $(function () {
   }
 
   //呼叫 返回所有被叫到的人的信息
-  var callMember = function () {
-    return new Promise(function (resolve) {
-      $.ajax({
-        url: baseURL + '/room/calling',
-        type: 'get',
-        statusCode: {
-          200: function (data) {
-            resolve(data)
-          }
-        }
-      });
-    })
-  }
+  // var callMember = function () {
+  //   return new Promise(function (resolve) {
+  //     $.ajax({
+  //       url: baseURL + '/room/calling',
+  //       type: 'get',
+  //       statusCode: {
+  //         200: function (data) {
+  //           resolve(data)
+  //         }
+  //       }
+  //     });
+  //   })
+  // }
 
   //返回所有签到者信息
-  var getInformation =function () {
-    return new Promise(function (resolve) {
-      $.ajax({
-        url: baseURL + '/room/signed',
-        type: 'get',
-        statusCode: {
-          200: function (data) {
-            resolve(data)
-          }
-        }
-      });
-    })
-  }
+  // var getInformation =function () {
+  //   return new Promise(function (resolve) {
+  //     $.ajax({
+  //       url: baseURL + '/room/signed',
+  //       type: 'get',
+  //       statusCode: {
+  //         200: function (data) {
+  //           resolve(data)
+  //         }
+  //       }
+  //     });
+  //   })
+  // }
 
   //确认
   var confirmCalled = function (confirm, sid, roomBorder) {
@@ -295,8 +333,8 @@ $(function () {
 
   new SignButton(signMember);
 
-  var calledQueue = new CalledQueue($wait, department, callMember, confirmCalled)
-  var signedQueue = new SignedQueue($roomContainer, department, getInformation)
+  var calledQueue = new CalledQueue($wait, department, templateHtml.called, confirmCalled)
+  var signedQueue = new SignedQueue($roomContainer, department, templateHtml.signed)
 
   calledQueue.getData()
   signedQueue.getData()

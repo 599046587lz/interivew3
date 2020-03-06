@@ -253,6 +253,7 @@ $(function () {
                       <th class="mdc-data-table__header-cell"  role="columnheader" scope="col">状态</th>
                       <th class="mdc-data-table__header-cell"  role="columnheader" scope="col">报名部门</th>
                       <th class="mdc-data-table__header-cell"  role="columnheader" scope="col">个人简介</th>
+                      <th class="mdc-data-table__header-cell"  role="columnheader" scope="col">报名时间</th>
                       </tr>
                       </thead>`
             data = data.map(item => `<tr class="mdc-data-table__row">
@@ -265,6 +266,7 @@ $(function () {
                        <td class="mdc-data-table__cell">${item.state}</td>
                        <td class="mdc-data-table__cell">${item.volunteer.map(item => departmentsName[item])}</td>
                        <td class="mdc-data-table__cell">${item.notion}</td>
+                       <td class="mdc-data-table__cell">${item.regTime}</td>
                        </tr>`)
         } else {
             thead = `<thead>

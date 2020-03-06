@@ -1,28 +1,176 @@
+function SignButton(signMember) {
+  var $signButtonHtml = $
+  (`<div class="addCircle">
+            <div class="addContainer">
+                <i class="material-icons">person_add</i>
+                <input class="staffId transparent"  type="text" placeholder="input staff id">
+                <i class="material-icons transparent done">done</i>
+            </div>
+        </div>`)
+  $('body').append($signButtonHtml);
+
+  $signButtonHtml.on('click', function (event) {
+    if (event.target.classList.contains('done')) {
+      $(this).removeClass('active');
+      var $staffId = $signButtonHtml.find("input");
+      var sid = $staffId.val();
+      $staffId.val("");
+      signMember(sid);
+      return;
+    }
+    if (event.target.classList.contains('material-icons') || event.target.classList.contains('addContainer')) {
+      $(this).toggleClass('active');
+    }
+  })
+}
+
+function Queue(rootDom, department) {
+  this.rootDom = rootDom;
+  this.queueData = [];
+  this.department = department
+
+  this.getData()
+}
+
+Queue.prototype.render = function (renderItem) {
+  this.rootDom.find('.blur').addClass('disNone')
+  var $renderHtml = this.replaceData(renderItem)
+  $renderHtml[0].dataset.sid = renderItem.sid;
+  this.rootDom.append($renderHtml)
+}
+
+Queue.prototype.getData = function () {
+  window.setInterval(() => {
+    this.fetchData().then((data) => {
+      this.diff(data)
+    }).catch(() => {
+      snackbar.err('请重新登录')
+      relogin()
+    })
+  }, 3000)
+}
+
+Queue.prototype.renderSkeleton = function () {
+  this.rootDom.find('.blur').removeClass('disNone')
+}
+
+Queue.prototype.diff = function (newData) {
+  var queueLonger = Boolean(this.queueData.length > newData.length)
+  if (newData.length === 0) {
+    this.renderSkeleton()
+    this.queueData.forEach(item => {
+      this.removeDom(item)
+    })
+    this.queueData = []
+    return
+  }
+  newData.forEach((item,index) => {
+    if(!this.queueData[index]){
+      this.render(item);
+      this.queueData = this.queueData.concat(item)
+    }
+    if(this.queueData[index].sid !== item.sid){
+      this.removeDom(this.queueData[index])
+      this.render(item)
+      this.queueData[index] = item;
+    }
+  })
+  if(queueLonger){
+    this.queueData.slice(newData.length).forEach(item => {
+      this.removeDom(item)
+    })
+    this.queueData = this.queueData.slice(0,newData.length)
+  }
+}
+
+Queue.prototype.removeDom = function (item) {
+  this.rootDom.find(`[data-sid=${item.sid}]`).remove()
+}
+
+Queue.prototype.replaceData = null; // 需要子类实现
+Queue.prototype.fetchData = null; //需要子类实现
+
+function SignedQueue(rootDom, department, renderTemplate) {
+  Queue.call(this, rootDom, department)
+  this.renderTemplate = renderTemplate
+}
+
+SignedQueue.prototype = Object.create(Queue.prototype)
+SignedQueue.prototype.constructor = SignedQueue
+
+SignedQueue.prototype.replaceData = function (element) {
+  var allDepartment = "";
+  element.volunteer.forEach((depart) => {
+    allDepartment += `<div class="mdc-chip"><span class="mdc-chip__text">${this.department[depart].name}</span></div>`;
+  })
+  return $(this.renderTemplate.replace('_name', element.name)
+    .replace('_number', element.signNumber)
+    .replace('_sid', element.sid)
+    .replace('_allDepartment', allDepartment));
+}
+
+SignedQueue.prototype.fetchData = function () {
+  return new Promise(function (resolve,reject) {
+    $.ajax({
+      url: '/room/signed',
+      type: 'get',
+      statusCode: {
+        200: function (data) {
+          resolve(data)
+        },
+        403: function () {
+          reject()
+        }
+      }
+    });
+  })
+}
+
+function CalledQueue(rootDom, department, renderTemplate) {
+  Queue.call(this, rootDom, department)
+  this.renderTemplate = renderTemplate
+}
+
+CalledQueue.prototype = Object.create(Queue.prototype)
+CalledQueue.prototype.constructor = CalledQueue
+
+CalledQueue.prototype.replaceData = function (element) {
+  return $(this.renderTemplate.replace('_name', element.name)
+    .replace('_number', element.signNumber)
+    .replace('_department', this.department[element.calldid].name)
+    .replace('_interviewRoom', this.department[element.calldid].location));
+}
+
+CalledQueue.prototype.fetchData = function () {
+  return new Promise(function (resolve,reject) {
+    $.ajax({
+      url:'/room/calling',
+      type: 'get',
+      statusCode: {
+        200: function (data) {
+          resolve(data)
+        },
+        403: function () {
+          reject()
+        }
+      }
+    });
+  })
+}
+
 $(function () {
-    var baseURL = '';
-    var $addCircle = $("#addCircle");
-    var $staffId = $('#staffId');
-    var $left = $('#left');
-    var $right = $('#right');
-    var $wait = $('#wait');
-    var $bull = $('.bull');
-    var $roomContainer = $("#roomContainer");
-    var $roomBorder = $(".roomBorder");
-    var scrollLeft = 0;
-    var allDepartment;
-    var department = [];
-    var interviewRoom = [];
-    var ifStaffidCalled = [];
-    var templateHtml = {
-        blank: `<div class="cover blur">
-                                <div class="blurry">
-                                    <div class="skeleton">
-                                        <div class="avatar"></div>
-                                        <div class="line"></div>
-                                    </div>
-                                </div>
-                            </div>`,
-        room: `<div class="roomBorder">
+  var baseURL = '';
+  var $left = $('#left');
+  var $right = $('#right');
+  var $wait = $('#wait');
+  var $bull = $('.bull');
+  var $roomContainer = $("#roomContainer");
+
+  var scrollLeft = 0;
+  var department = [];
+
+  var templateHtml = {
+    called : `<div class="roomBorder">
                                 <div>
                                     <div class="circleNumber">_number</div>
                                     <div class="name">_name</div>
@@ -33,11 +181,11 @@ $(function () {
                                 <div class="roomVague">
                                     <div class="tip">you need to go</div>
                                     <div class="classRoom">_interviewRoom</div>
-                                    <div class="skip" onclick>skip</div>
+                                    <div class="skip">skip</div>
                                     <div class="ok">ok</div>
                                 </div>
                             </div>`,
-        part: `<div class="cover">
+    signed : `<div class="cover">
                                 <span>
                                     <div class="circleNumber">_number</div>
                                     <span class="name">_name</span>
@@ -46,203 +194,122 @@ $(function () {
                                     <div class="mdc-chip-set">_allDepartment
                                 </div>
                             </div>`
-    };
+  }
 
-    $addCircle.on('click', function () {
-        $addCircle.toggleClass('active');
-    })
-
-    $(".transparent").on('click', function (e) {
-        e.stopPropagation()
-    })
-
-    var getDepartment = function () {
-        $.ajax({
-            url: baseURL + '/club/clubInfo',
-            type: 'get',
-            statusCode: {
-                200: function (data) {
-                    data.departments.forEach(function (element) {
-                        department[element.did] = element.name;
-                        interviewRoom[element.did] = element.location;
-                    })
-                }
+  var getDepartment = function () {
+    $.ajax({
+      url: baseURL + '/club/clubInfo',
+      type: 'get',
+      statusCode: {
+        200: function (data) {
+          data.departments.forEach(function (element) {
+            department[element.did] = {
+              name: element.name,
+              location: element.location
             }
-        });
-    }
-
-
-    $("#done").on('click', function () {
-        $addCircle.removeClass('active');
-        //投入使用时的8位数字学号判断，此处先注释掉
-        // if (!(/^\d{8}$/.test(staffId.value))){
-        //  snackbar.err("请输入正确的学号");
-        // }
-        // else{}
-        var sid = staffId.value;
-        $.ajax({
-            url: baseURL + '/room/sign',
-            type: 'get',
-            data: {
-                sid: sid,
-            },
-            dataType: 'json',
-            statusCode: {
-                403: function () {
-                    snackbar.err("该学生未报名");
-                },
-                200: function () {
-                    snackbar.success("签到成功！");
-                },
-                204: function () {
-                    snackbar.err("该学生已签到");
-                }
-            }
-        });
-        snackbar.labelText = "";
-        $staffId.val("");
-    })
-    //呼叫模板 返回所有被叫到的人的信息
-    var callMember = function () {
-        $.ajax({
-            url: baseURL + '/room/calling',
-            type: 'get',
-            statusCode: {
-                200: function (data) {
-                    if (data.length == 0) {
-                        $roomBorder.removeClass("disnone");
-                    } else {
-                        $roomBorder.addClass("disnone");
-                    }
-                    data.forEach(function (element) {
-                        if (!ifStaffidCalled[element.sid]) {
-                            var beCalled = templateHtml.room.replace('_name', element.name)
-                                .replace('_number', element.signNumber)
-                                .replace('_department', department[element.calldid])
-                                .replace('_interviewRoom', interviewRoom[element.calldid]);
-                            $wait.append(beCalled);
-                            getVague(element.sid);
-                            ifStaffidCalled[element.sid] = true;
-                            judgeScroll();
-                        }
-                    })
-                }
-            }
-        });
-    }
-
-    //确认模板
-    var confirmCalled = function (confirm, sid, roomBorder) {
-        $.ajax({
-            url: baseURL + '/room/confirm',
-            type: 'post',
-            data: JSON.stringify({
-                sid: sid,
-                confirm: confirm,
-            }),
-            contentType: "application/json",
-            statusCode: {
-                200: function () {
-                    roomBorder.remove();
-                    judgeScroll();
-                }
-            }
-        });
-    }
-    //返回所有签到者信息
-    var getInformation = function () {
-        $.ajax({
-            url: baseURL + '/room/signed',
-            type: 'get',
-            statusCode: {
-                200: function (data) {
-                    $roomContainer.html("");
-                    if (data.length === 0) {
-                        $roomContainer.append(templateHtml.blank);
-                        $roomContainer.append(templateHtml.blank);
-                    }
-                    data.forEach(function (element) {
-                        getallDepartment(element.volunteer);
-                        if (element.name.length > 4) {
-                            element.name = element.name.substring(0, 4) + "...";
-                        }
-                        var beSigned = templateHtml.part.replace('_name', element.name)
-                            .replace('_number', element.signNumber)
-                            .replace('_sid', element.sid)
-                            .replace('_allDepartment', allDepartment);
-                        $roomContainer.append(beSigned);
-                    })
-                }
-            }
-        });
-    }
-
-    var getallDepartment = function (volunteer) {
-        allDepartment = "";
-        volunteer.forEach(function (depart) {
-            allDepartment += `<div class="mdc-chip"><span class="mdc-chip__text">${department[depart]}</span></div>`;
-        })
-    }
-
-    var getVague = function (sid) {
-        $(".roomBorder").on("click", function () {
-            var roomBorder = this;
-            var roomVague = $(this).find(".roomVague");
-            $(roomVague).show();
-            roomVague.on("click", function (event) {
-                event.stopPropagation();
-                $(this).hide();
-            });
-            $(roomVague).find(".ok").on("click", function () {
-                confirmCalled(1, sid, roomBorder);
-            });
-            $(roomVague).find(".skip").on("click", function () {
-                confirmCalled(0, sid, roomBorder);
-            });
-        })
-    }
-
-
-    $wait.on('scroll', function () {
-        if ($(this).scrollLeft() === 0) {
-            $left.addClass("transparent");
-        } else {
-            $left.removeClass('transparent')
+          })
         }
+      }
+    });
+  }
 
-        if ($(this).scrollLeft() + $bull.width() > $bull[0].scrollWidth) {
-            $right.addClass("transparent");
-        } else {
-            $right.removeClass('transparent');
+  //确认
+  var confirmCalled = function (confirm, sid, roomBorder) {
+    $.ajax({
+      url: baseURL + '/room/confirm',
+      type: 'post',
+      data: JSON.stringify({
+        sid: sid,
+        confirm: confirm,
+      }),
+      contentType: "application/json",
+      statusCode: {
+        200: function () {
+          roomBorder.remove();
+          judgeScroll();
+          snackbar.success('确认成功')
         }
-    })
-    $right.on("click", function () {
-        scrollLeft = $wait.scrollLeft();
-        $wait.scrollLeft(scrollLeft + 680);
-    })
-    $left.on("click", function () {
-        scrollLeft = $wait.scrollLeft();
-        $wait.scrollLeft(scrollLeft - 680);
-    })
+      }
+    });
+  }
 
+  var signMember = function (sid) {
+    $.ajax({
+      url: baseURL + '/room/sign',
+      type: 'get',
+      data: {
+        sid: sid,
+      },
+      dataType: 'json',
+      statusCode: {
+        403: function () {
+          snackbar.err("该学生未报名");
+        },
+        200: function () {
+          snackbar.success("签到成功！");
+        },
+        204: function () {
+          snackbar.err("该学生已签到");
+        }
+      }
+    });
+  }
 
-    var roundCall = function () {
-        getInformation();
-        callMember();
+  $wait.on('scroll', function () {
+    if ($(this).scrollLeft() === 0) {
+      $left.addClass("transparent");
+    } else {
+      $left.removeClass('transparent')
     }
 
-    var judgeScroll = function () {
-        if ($wait.scrollLeft() + $bull.width() >= $bull[0].scrollWidth) {
-            $right.addClass("transparent");
-        } else {
-            $right.removeClass('transparent');
-        }
+    if ($(this).scrollLeft() + $bull.width() > $bull[0].scrollWidth) {
+      $right.addClass("transparent");
+    } else {
+      $right.removeClass('transparent');
     }
-    getDepartment();
-    roundCall();
-    judgeScroll();
-    setInterval(roundCall, 3000);
+  })
+  $right.on("click", function () {
+    scrollLeft = $wait.scrollLeft();
+    $wait.scrollLeft(scrollLeft + 680);
+  })
+  $left.on("click", function () {
+    scrollLeft = $wait.scrollLeft();
+    $wait.scrollLeft(scrollLeft - 680);
+  })
+
+  $wait.on('click',function (e) {
+    var roomBorder = $(e.target).parents('.roomBorder');
+    var $roomVague = $(roomBorder).find(".roomVague");
+    var sid = roomBorder.data("sid");
+    if (e.target.classList.contains('ok')) {
+      confirmCalled(1, sid, roomBorder);
+      return
+    }
+    if (e.target.classList.contains('skip')) {
+      confirmCalled(0, sid, roomBorder);
+      return
+    }
+    if (e.target.classList.contains('classRoom') || e.target.classList.contains('tip') || e.target.classList.contains('roomVague')) {
+      $roomVague.hide();
+      return;
+    }
+    $roomVague.show();
+  })
+
+  var judgeScroll = function () {
+    if ($wait.scrollLeft() + $bull.width() >= $bull[0].scrollWidth) {
+      $right.addClass("transparent");
+    } else {
+      $right.removeClass('transparent');
+    }
+  }
+
+  getDepartment();
+  judgeScroll();
+
+  new SignButton(signMember);
+
+  new CalledQueue($wait, department, templateHtml.called)
+  new SignedQueue($roomContainer, department, templateHtml.signed)
+
 });
-
-
-

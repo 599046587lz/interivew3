@@ -309,9 +309,7 @@ $(function () {
 
   new SignButton(signMember);
 
-  var calledQueue = new CalledQueue($wait, department, templateHtml.called)
-  var signedQueue = new SignedQueue($roomContainer, department, templateHtml.signed)
+  new CalledQueue($wait, department, templateHtml.called)
+  new SignedQueue($roomContainer, department, templateHtml.signed)
 
-  calledQueue.getData()
-  signedQueue.getData()
 });

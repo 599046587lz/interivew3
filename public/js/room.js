@@ -28,6 +28,8 @@ function Queue(rootDom, department) {
   this.rootDom = rootDom;
   this.queueData = [];
   this.department = department
+
+  this.getData()
 }
 
 Queue.prototype.render = function (renderItem) {
@@ -38,11 +40,14 @@ Queue.prototype.render = function (renderItem) {
 }
 
 Queue.prototype.getData = function () {
-  window.setInterval(function () {
-    this.promise().then((data) => {
+  window.setInterval(() => {
+    this.fetchData().then((data) => {
       this.diff(data)
+    }).catch(() => {
+      snackbar.err('请重新登录')
+      relogin()
     })
-  }.bind(this), 3000)
+  }, 3000)
 }
 
 Queue.prototype.renderSkeleton = function () {
@@ -50,9 +55,12 @@ Queue.prototype.renderSkeleton = function () {
 }
 
 Queue.prototype.diff = function (newData) {
-  var queueLonger = true;
+  var queueLonger = Boolean(this.queueData.length > newData.length)
   if (newData.length === 0) {
     this.renderSkeleton()
+    this.queueData.forEach(item => {
+      this.removeDom(item)
+    })
     this.queueData = []
     return
   }
@@ -60,7 +68,6 @@ Queue.prototype.diff = function (newData) {
     if(!this.queueData[index]){
       this.render(item);
       this.queueData = this.queueData.concat(item)
-      queueLonger = false;
     }
     if(this.queueData[index].sid !== item.sid){
       this.removeDom(this.queueData[index])
@@ -81,7 +88,7 @@ Queue.prototype.removeDom = function (item) {
 }
 
 Queue.prototype.replaceData = null; // 需要子类实现
-Queue.prototype.promise = null; //需要子类实现
+Queue.prototype.fetchData = null; //需要子类实现
 
 function SignedQueue(rootDom, department, renderTemplate) {
   Queue.call(this, rootDom, department)
@@ -96,34 +103,31 @@ SignedQueue.prototype.replaceData = function (element) {
   element.volunteer.forEach((depart) => {
     allDepartment += `<div class="mdc-chip"><span class="mdc-chip__text">${this.department[depart].name}</span></div>`;
   })
-  if (element.name.length > 4) {
-    element.name = element.name.substring(0, 4) + "...";
-  }
-  var $beSigned = $(this.renderTemplate.replace('_name', element.name)
+  return $(this.renderTemplate.replace('_name', element.name)
     .replace('_number', element.signNumber)
     .replace('_sid', element.sid)
     .replace('_allDepartment', allDepartment));
-
-  return $beSigned
 }
 
-SignedQueue.prototype.promise = function () {
-  return new Promise(function (resolve) {
+SignedQueue.prototype.fetchData = function () {
+  return new Promise(function (resolve,reject) {
     $.ajax({
       url: '/room/signed',
       type: 'get',
       statusCode: {
         200: function (data) {
           resolve(data)
+        },
+        403: function () {
+          reject()
         }
       }
     });
   })
 }
 
-function CalledQueue(rootDom, department, renderTemplate, confirmCalled) {
+function CalledQueue(rootDom, department, renderTemplate) {
   Queue.call(this, rootDom, department)
-  this.confirmCalled = confirmCalled
   this.renderTemplate = renderTemplate
 }
 
@@ -131,40 +135,23 @@ CalledQueue.prototype = Object.create(Queue.prototype)
 CalledQueue.prototype.constructor = CalledQueue
 
 CalledQueue.prototype.replaceData = function (element) {
-  var $render = $(this.renderTemplate.replace('_name', element.name)
+  return $(this.renderTemplate.replace('_name', element.name)
     .replace('_number', element.signNumber)
     .replace('_department', this.department[element.calldid].name)
     .replace('_interviewRoom', this.department[element.calldid].location));
-  $render.on("click", function (e) {
-    var roomBorder = e.currentTarget;
-    var $roomVague = $(roomBorder).find(".roomVague");
-    var sid = roomBorder.dataset.id
-    if (e.target.classList.contains('ok')) {
-      this.confirmCalled(1, sid, roomBorder);
-      return
-    }
-    if (e.target.classList.contains('skip')) {
-      this.confirmCalled(0, sid, roomBorder);
-      return
-    }
-    if (e.target.classList.contains('classRoom') || e.target.classList.contains('tip') || e.target.classList.contains('roomVague')) {
-      $roomVague.hide();
-      return;
-    }
-    $roomVague.show();
-  }.bind(this))
-
-  return $render
 }
 
-CalledQueue.prototype.promise = function () {
-  return new Promise(function (resolve) {
+CalledQueue.prototype.fetchData = function () {
+  return new Promise(function (resolve,reject) {
     $.ajax({
       url:'/room/calling',
       type: 'get',
       statusCode: {
         200: function (data) {
           resolve(data)
+        },
+        403: function () {
+          reject()
         }
       }
     });
@@ -225,36 +212,6 @@ $(function () {
       }
     });
   }
-
-  //呼叫 返回所有被叫到的人的信息
-  // var callMember = function () {
-  //   return new Promise(function (resolve) {
-  //     $.ajax({
-  //       url: baseURL + '/room/calling',
-  //       type: 'get',
-  //       statusCode: {
-  //         200: function (data) {
-  //           resolve(data)
-  //         }
-  //       }
-  //     });
-  //   })
-  // }
-
-  //返回所有签到者信息
-  // var getInformation =function () {
-  //   return new Promise(function (resolve) {
-  //     $.ajax({
-  //       url: baseURL + '/room/signed',
-  //       type: 'get',
-  //       statusCode: {
-  //         200: function (data) {
-  //           resolve(data)
-  //         }
-  //       }
-  //     });
-  //   })
-  // }
 
   //确认
   var confirmCalled = function (confirm, sid, roomBorder) {
@@ -320,6 +277,25 @@ $(function () {
     $wait.scrollLeft(scrollLeft - 680);
   })
 
+  $wait.on('click',function (e) {
+    var roomBorder = $(e.target).parents('.roomBorder');
+    var $roomVague = $(roomBorder).find(".roomVague");
+    var sid = roomBorder.data("sid");
+    if (e.target.classList.contains('ok')) {
+      confirmCalled(1, sid, roomBorder);
+      return
+    }
+    if (e.target.classList.contains('skip')) {
+      confirmCalled(0, sid, roomBorder);
+      return
+    }
+    if (e.target.classList.contains('classRoom') || e.target.classList.contains('tip') || e.target.classList.contains('roomVague')) {
+      $roomVague.hide();
+      return;
+    }
+    $roomVague.show();
+  })
+
   var judgeScroll = function () {
     if ($wait.scrollLeft() + $bull.width() >= $bull[0].scrollWidth) {
       $right.addClass("transparent");
@@ -333,7 +309,7 @@ $(function () {
 
   new SignButton(signMember);
 
-  var calledQueue = new CalledQueue($wait, department, templateHtml.called, confirmCalled)
+  var calledQueue = new CalledQueue($wait, department, templateHtml.called)
   var signedQueue = new SignedQueue($roomContainer, department, templateHtml.signed)
 
   calledQueue.getData()

@@ -123,55 +123,8 @@ let Interviewee = new mongoose.Schema({
     }
 });
 
-let Student = new mongoose.Schema({
-    clubName: String,
-    sid: Number,
-    cid: Number,
-    name: {
-        type: String,
-        default: ''
-    },
-    sex: {
-        type: Number,
-        default: 2   //0女1男2秀吉
-    },
-    major: {
-        type: String,
-    },
-    phone: {
-        type: String,
-    },
-    short_tel: {
-        type: String,
-    },
-    qq: {
-        type: String,
-    },
-    volunteer: [Number],
-    notion: {
-        type: String,
-        default: ''
-    },
-
-    email: {
-        type: String,
-        default: ''
-    },
-    pic_url: {
-        type: String,
-    },
-    image: {
-        type: String,
-    },
-    college: {
-        type: String
-    },
-
-});
-
 exports.Interviewee = mongoose.model('interviewee', Interviewee);
 exports.Club = mongoose.model('club', Club); // 添加表时mongoose自动为表名添加s
-exports.Student = mongoose.model('student', Student);
 exports.mongoUrl = mongoUrl;
 
 

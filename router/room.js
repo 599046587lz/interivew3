@@ -1,14 +1,14 @@
 /**
  * Created by bangbang93 on 14-9-15.
  */
-let Router = require('koa-router');
-let Interviewee = require("../modules/interviewee");
-let Joi = require('joi');
-let mid = require('../utils/middleware');
-let JSONError = require('../utils/JSONError');
-let club = require('../modules/club');
+const Router = require('koa-router');
+const Joi = require('joi');
+const Interviewee = require("../modules/interviewee");
+const club = require('../modules/club');
+const mid = require('../utils/middleware');
+const JSONError = require('../utils/JSONError');
 
-let router = new Router({
+const router = new Router({
     prefix: '/room'
 });
 
@@ -19,7 +19,6 @@ let router = new Router({
 /**
  * 测试通过
  */
-
 
 router.get('/sign', mid.checkFormat(function () {
     return Joi.object().keys({
@@ -44,8 +43,6 @@ router.get('/sign', mid.checkFormat(function () {
     ctx.response.body = info;
 });
 
-
-
 router.get('/finish', async function (ctx) {
     let cid = ctx.session.cid;
     let info = await Interviewee.getFinishInfo(cid);
@@ -53,15 +50,12 @@ router.get('/finish', async function (ctx) {
     ctx.response.body = info;
 });
 
-
 router.get('/signed', async function (ctx) {
     let cid = ctx.session.cid;
     let info = await Interviewee.getSignedInterviewee(cid);
     ctx.response.status = 200;
     ctx.response.body = info;
 });
-
-
 
 router.get('/calling', async function (ctx) {
     let cid = ctx.session.cid;
@@ -100,9 +94,6 @@ router.post('/addDep', mid.checkFormat(function () {
     ctx.response.body = result;
 });
 
-
-
-//成功
 router.get('/getDepartmentInfo', async function (ctx) {
     let cid = ctx.session.cid;
     let result = await club.getDepartmentInfo(cid);
@@ -128,6 +119,5 @@ router.post('/confirm', mid.checkFormat(function () {
     ctx.response.status = 200;
     ctx.response.body = info;
 });
-
 
 module.exports = router;

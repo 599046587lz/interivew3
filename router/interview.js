@@ -1,14 +1,14 @@
 /**
  * Created by bangbang93 on 14-9-15.
  */
-let Router = require('koa-router');
-let Interviewee = require('../modules/interviewee');
-let club = require('../modules/club');
-let Joi = require('joi');
-let mid = require('../utils/middleware');
-let JSONError = require('../utils/JSONError');
+const Router = require('koa-router');
+const Joi = require('joi');
+const Interviewee = require('../modules/interviewee');
+const club = require('../modules/club');
+const mid = require('../utils/middleware');
+const JSONError = require('../utils/JSONError');
 
-let router = new Router({
+const router = new Router({
     prefix: '/interview'
 });
 
@@ -32,18 +32,19 @@ router.post('/recommend',mid.checkFormat(function () {
     let interviewer = ctx.session.interviewer;
     await Interviewee.rateInterviewee(cid, sid, score, comment, departmentId, interviewer);
     let interviewerInfo = await Interviewee.getInterviewerInfo(sid, cid);
-    if (interviewerInfo.volunteer.indexOf(departmentId) >= 0) throw new JSONError('不能重复推荐部门', 403);
+    if (interviewerInfo.volunteer.indexOf(departmentId) >= 0) {
+        throw new JSONError('不能重复推荐部门', 403);
+    }
     interviewerInfo.volunteer.push(departmentId);
     interviewerInfo.busy = false;
     interviewerInfo.save();
-    await Interviewee.delVolunteer(cid,sid, departmentId)
+    await Interviewee.delVolunteer(cid,sid, departmentId);
     ctx.response.status = 204;
 });
 
 /**
  * 测试成功
  */
-
 
 router.post('/rate', mid.checkFormat(function () {
     return Joi.object().keys({
@@ -67,7 +68,6 @@ router.post('/rate', mid.checkFormat(function () {
 /**
  * 未测试
  */
-
 
 /**
  * 测试通过(需要socket)(需测试)
@@ -104,7 +104,9 @@ router.get('/start',async function (ctx) {
 
     let result = await Interviewee.getSpecifyInterviewee(cid, department);
     result = result.toObject();
-    if (result.ifconfirm === 0) throw new JSONError('该学生跳过', 403);
+    if (result.ifconfirm === 0) {
+        throw new JSONError('该学生跳过', 403);
+    }
     else if (result.ifconfirm === 2) {
         ctx.response.body = '等待确认中';
         ctx.response.status = 202;
@@ -116,19 +118,18 @@ router.get('/start',async function (ctx) {
     }
 });
 
-
 /**
  * 测试成功
  */
-
-
 
 router.get('/queue', async function (ctx) {
     let cid = ctx.session.cid;
     let did = ctx.session.did;
 
     let info = await club.getClubInfo(cid);
-    if (did < 0 || did > info.departments.length) throw new JSONError('不存在该部门', 403);
+    if (did < 0 || did > info.departments.length) {
+        throw new JSONError('不存在该部门', 403);
+    }
 
     let result = await Interviewee.getDepartmentQueueLength(cid, did);
 
@@ -139,7 +140,6 @@ router.get('/queue', async function (ctx) {
 /**
  * 测试成功
  */
-
 
 //跳过  测试成功
 router.post('/skip',mid.checkFormat(function () {
@@ -157,6 +157,5 @@ router.post('/skip',mid.checkFormat(function () {
     ctx.response.body = result;
 
 });
-
 
 module.exports = router;

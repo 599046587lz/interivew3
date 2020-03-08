@@ -1,18 +1,15 @@
-let interviewee = require('../modules/interviewee');
-let utils = require('../utils/utils');
-let club = require('../modules/club');
-let mid = require('../utils/middleware');
-let Router = require('koa-router');
-let Joi = require('joi');
-let JSONError = require('../utils/JSONError');
+const Router = require('koa-router');
+const Joi = require('joi');
+const interviewee = require('../modules/interviewee');
+const club = require('../modules/club');
+const utils = require('../utils/utils');
+const mid = require('../utils/middleware');
+const JSONError = require('../utils/JSONError');
 
-let router = new Router({
+const router = new Router({
     prefix: '/reg'
 });
 
-
-
-//成功  返回204
 router.post('/', mid.checkFormat(function() {
     return {
         joi: Joi.object().keys({
@@ -41,11 +38,14 @@ router.post('/', mid.checkFormat(function() {
     let data = ctx.request.body;
     let fileName = data.cid + '-' + data.name + '-' + data.sid + '.jpg';
     let departInfo = await club.getClubInfo(data.cid);
-    if(!departInfo || !(data.clubName == departInfo.name))
+    if(!departInfo || !(data.clubName === departInfo.name)){
         throw new JSONError('社团id错误');
+    }
 
     let studentInfo = await interviewee.getInterviewerInfo(data.sid, data.cid);
-    if(!!studentInfo)  throw new JSONError('该学生已注册', 403);
+    if(!!studentInfo) {
+        throw new JSONError('该学生已注册', 403);
+    }
 
     data.regTime = new Date();
     data.image = await utils.image_save(data.pic_url, fileName);

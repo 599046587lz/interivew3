@@ -1,20 +1,18 @@
-let qiniu = require('../utils/qiniu');
-let path = require('path');
-let Router = require('koa-router');
-let mid = require('../utils/middleware');
-let Interview = require('../modules/interviewee');
-let Club = require('../modules/club');
-let office = require('../utils/office');
-let utils = require('../utils/utils');
-let JSONError = require('../utils/JSONError');
-let Joi = require('joi');
-let send = require('koa-send');
-
+const path = require('path');
+const Router = require('koa-router');
+const send = require('koa-send');
+const Joi = require('joi');
+const Interview = require('../modules/interviewee');
+const Club = require('../modules/club');
+const qiniu = require('../utils/qiniu');
+const mid = require('../utils/middleware');
+const office = require('../utils/office');
+const utils = require('../utils/utils');
+const JSONError = require('../utils/JSONError');
 
 let router = new Router({
    prefix: '/common'
 });
-
 
 router.post('/uploadFile',  async function (ctx) {
 
@@ -26,7 +24,6 @@ router.post('/uploadFile',  async function (ctx) {
     ctx.response.status = 200;
     ctx.response.body = result;
 });
-
 
 router.get('/download', mid.checkFormat(function () {
     return Joi.object().keys({
@@ -75,7 +72,9 @@ router.get('/clubInfo',mid.checkFormat(function () {
 }),async function (ctx) {
     let cid = ctx.request.query.clubId;
     let result = await Club.getClubInfo(cid);
-    if (!result) throw new JSONError('社团未注册', 403);
+    if (!result) {
+        throw new JSONError('社团未注册', 403);
+    }
     let info = {
         cid:result.cid,
         clubName: result.name,
@@ -103,16 +102,16 @@ router.post('/login', mid.checkFormat(function () {
     let {user, password} = ctx.request.body;
     password = utils.md5(String(password));
     let clubInfo = await Club.getClubByName(user);
-    if (clubInfo && password === clubInfo.password && user === clubInfo.name) {
+    if (!(clubInfo && password === clubInfo.password && user === clubInfo.name)){
+        throw new JSONError('用户名或密码错误', 403);
+    }
         clubInfo = clubInfo.toObject();
         delete clubInfo.password;
         ctx.session.club = clubInfo.name;
         ctx.session.cid = clubInfo.cid;
         ctx.response.status = 200;
         ctx.response.body = clubInfo;
-    } else {
-        throw new JSONError('用户名或密码错误', 403);
     }
-});
+);
 
 module.exports = router;

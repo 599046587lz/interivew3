@@ -71,19 +71,19 @@ router.get('/call',  mid.checkFormat(function () {
         sid: Joi.number()
     })
 }), async function (ctx) {
-    const {department,cid} = ctx.session;
+    const {did,cid} = ctx.session;
     const sid = ctx.request.query.sid;
     if (!sid) {
-        let result = await Interviewee.getNextInterviewee(cid, department);
+        let result = await Interviewee.getNextInterviewee(cid, did);
         if(result !== null){
             result = result.toObject();
-            result.did = department;
+            result.did = did;
         }
         ctx.response.body = result;
     } else {
-        let result = await Interviewee.tocallNextInterviewee(sid, cid, department);
+        let result = await Interviewee.tocallNextInterviewee(sid, cid, did);
         result = result.toObject();
-        result.did = department;
+        result.did = did;
         ctx.response.body = result;
     }
 });

@@ -199,8 +199,12 @@ exports.getExcelInfo = function (file) {
             }
             return;
         }
-        if (!interviewerInfo[row]) interviewerInfo[row] = {};
-        if (header[col] === undefined) return;
+        if (!interviewerInfo[row]) {
+            interviewerInfo[row] = {};
+        }
+        if (header[col] === undefined) {
+            return;
+        }
         if (header[col] === 'volunteer') {
             // let departInfo = value.split(',');
             // let result = [];
@@ -229,7 +233,9 @@ exports.getExcelInfo = function (file) {
 exports.isExist = function (array, info) {
     let status = true;
     array.forEach(e => {
-        if (e === info) status = false;
+        if (e === info) {
+            status = false;
+        }
     });
 
     if (status) {

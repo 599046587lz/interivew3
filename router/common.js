@@ -16,10 +16,10 @@ let router = new Router({
 
 router.post('/uploadFile',  async function (ctx) {
 
-    let file = ctx.request.files;
-    let fileName = file.file.name;
+    const file = ctx.request.files;
+    const fileName = file.file.name;
 
-    let result = await qiniu.qiniuUpload(file.file.path, fileName)
+    const result = await qiniu.qiniuUpload(file.file.path, fileName)
 
     ctx.response.status = 200;
     ctx.response.body = result;
@@ -30,9 +30,9 @@ router.get('/download', mid.checkFormat(function () {
         cid: Joi.number()
     })
 }),async function (ctx) {
-    let cid = ctx.request.query.cid;
-    let dbData = await Interview.queryByClubAll(cid);
-    let departments = (await Club.getClubInfo(cid)).departments;
+    const cid = ctx.request.query.cid;
+    const dbData = await Interview.queryByClubAll(cid);
+    const departments = (await Club.getClubInfo(cid)).departments;
     let departName = {};
     departments.forEach(e => {
        departName[e.did] = e.name;
@@ -70,12 +70,12 @@ router.get('/clubInfo',mid.checkFormat(function () {
             clubId: Joi.number()
         })
 }),async function (ctx) {
-    let cid = ctx.request.query.clubId;
-    let result = await Club.getClubInfo(cid);
+    const cid = ctx.request.query.clubId;
+    const result = await Club.getClubInfo(cid);
     if (!result) {
         throw new JSONError('社团未注册', 403);
     }
-    let info = {
+    const info = {
         cid:result.cid,
         clubName: result.name,
         departments: result.departments,

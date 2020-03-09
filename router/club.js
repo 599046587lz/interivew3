@@ -20,9 +20,8 @@ let router = new Router({
  */
 
 router.post('/setIdentify', function (ctx) {
-    let name = ctx.session.club;
-    let did = ctx.request.body.did;
-    let interviewerName = ctx.request.body.interviewerName;
+    const name = ctx.session.club;
+    const {did,interviewerName} = ctx.request.body;
     if (!name) {
         return ctx.response.status = 403;
     }
@@ -49,8 +48,8 @@ router.post('/upload/location',mid.checkFormat(function () {
             info: Joi.array(),
         })
     }), async function (ctx) {
-        let cid = ctx.session.cid;
-        let info = ctx.request.body.info;
+        const {cid} = ctx.session;
+        const {info} = ctx.request.body;
 
         await Club.setRoomLocation(cid, info);
         ctx.response.status = 200;
@@ -61,13 +60,13 @@ router.post('/upload/archive', mid.checkFormat(function() {
         cid: Joi.number(),
     })
 }), async function (ctx) {
-    let file = ctx.request.files;
-    let cid = ctx.session.cid;
-    let xlsxReg = /\.xlsx$/i;
+    const file = ctx.request.files;
+    const {cid} = ctx.session;
+    const xlsxReg = /\.xlsx$/i;
     if (!xlsxReg.test(file.archive.name)) {
         throw new JSONError('上传文件不合法', 403);
     }
-    let result = await Club.handleArchive(file, cid);
+    const result = await Club.handleArchive(file, cid);
     ctx.response.status = 200;
     ctx.response.body = result;
 
@@ -77,12 +76,12 @@ router.post('/upload/archive', mid.checkFormat(function() {
  * ??未测试
  */
 router.get('/extra',async function (ctx) {
-    let cid = ctx.session.cid;
+    const {cid} = ctx.session;
     if (!cid) {
         throw new JSONError('参数不完整', 403);
     }
 
-    let result = await Interviewee.getIntervieweeBySid({$ne: null}, cid);
+    const result = await Interviewee.getIntervieweeBySid({$ne: null}, cid);
     let fields = [];
     for (let i in result.extra) {
         if (result.extra.hasOwnProperty(i)) {
@@ -105,8 +104,8 @@ router.get('/export', mid.checkFormat(function () {
         pageSize: Joi.number()
     })
 }),async function (ctx) {
-    let cid = ctx.session.cid;
-    let did = ctx.request.query.did;
+    const {cid} = ctx.session;
+    const did = ctx.request.query.did;
 
     if (!cid) {
         throw new JSONError('参数不完整', 403);
@@ -125,9 +124,9 @@ router.get('/clubInfo',  mid.checkFormat(function () {
         clubId: Joi.number()
     })
 }), async function (ctx) {
-    let cid = ctx.session.cid;
-    let result = await Club.getClubInfo(cid);
-    let info = {
+    const {cid} = ctx.session;
+    const result = await Club.getClubInfo(cid);
+    const info = {
         cid:result.cid,
         clubName: result.name,
         departments: result.departments,
@@ -143,7 +142,7 @@ router.post('/verifyInfo', async function (ctx) {
     let info = {};
     info.cid = ctx.request.body.cid;
     info.clubName = ctx.request.body.name;
-    let result = await Club.verifyInfo(info);
+    const result = await Club.verifyInfo(info);
     ctx.response.body = result;
 });
 /**

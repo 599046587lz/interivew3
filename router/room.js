@@ -25,8 +25,8 @@ router.get('/sign', mid.checkFormat(function () {
         sid: Joi.number()
     })
 }), async function (ctx) {
-    let cid = ctx.session.cid;
-    let sid = ctx.request.query.sid;
+    const {cid} = ctx.session;
+    const sid = ctx.request.query.sid;
     let info = await Interviewee.getInterviewerInfo(sid, cid);
     if (!info) {
         throw new JSONError('该学生未报名', 403);
@@ -35,7 +35,7 @@ router.get('/sign', mid.checkFormat(function () {
         info = null;
     } else {
         info.signTime = new Date();
-        let result = await Interviewee.getSignNumber(cid);
+        const result = await Interviewee.getSignNumber(cid);
         info.signNumber = result;
         info.save();
     }
@@ -44,22 +44,22 @@ router.get('/sign', mid.checkFormat(function () {
 });
 
 router.get('/finish', async function (ctx) {
-    let cid = ctx.session.cid;
-    let info = await Interviewee.getFinishInfo(cid);
+    const {cid} = ctx.session;
+    const info = await Interviewee.getFinishInfo(cid);
     ctx.response.status = 200;
     ctx.response.body = info;
 });
 
 router.get('/signed', async function (ctx) {
-    let cid = ctx.session.cid;
-    let info = await Interviewee.getSignedInterviewee(cid);
+    const {cid} = ctx.session;
+    const info = await Interviewee.getSignedInterviewee(cid);
     ctx.response.status = 200;
     ctx.response.body = info;
 });
 
 router.get('/calling', async function (ctx) {
-    let cid = ctx.session.cid;
-    let info = await Interviewee.callNextInterviewee(cid);
+    const {cid} = ctx.session;
+    const info = await Interviewee.callNextInterviewee(cid);
     ctx.response.status = 200;
     ctx.response.body = info;
 });
@@ -79,7 +79,7 @@ router.post('/addDep', mid.checkFormat(function () {
         phone: Joi.number()
     })
 }),async function (ctx) {
-    let info = {
+    const info = {
         sid: ctx.request.body.sid,
         volunteer: ctx.request.body.did,
         sex: ctx.request.body.sex,
@@ -89,14 +89,14 @@ router.post('/addDep', mid.checkFormat(function () {
         signTime: new Date()
     };
 
-    let result = await Interviewee.addInterviewee(info, cid);
+    const result = await Interviewee.addInterviewee(info, cid);
     ctx.response.status = 200;
     ctx.response.body = result;
 });
 
 router.get('/getDepartmentInfo', async function (ctx) {
-    let cid = ctx.session.cid;
-    let result = await club.getDepartmentInfo(cid);
+    const {cid} = ctx.session;
+    const result = await club.getDepartmentInfo(cid);
     ctx.response.status = 200;
     ctx.response.body = result;
 });
@@ -112,10 +112,9 @@ router.post('/confirm', mid.checkFormat(function () {
         confirm: Joi.number().required()
     })
 }), async function (ctx) {
-    let cid = ctx.session.cid;
-    let sid = ctx.request.body.sid;
-    let confirm = ctx.request.body.confirm;
-    let info = await Interviewee.getConfirmInfo(sid,cid,confirm);
+    const {cid} = ctx.session;
+    const {sid,confirm} = ctx.request.body;
+    const info = await Interviewee.getConfirmInfo(sid,cid,confirm);
     ctx.response.status = 200;
     ctx.response.body = info;
 });

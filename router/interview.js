@@ -24,12 +24,9 @@ router.post('/recommend',mid.checkFormat(function () {
         comment: Joi.string()
     })
 }), async function (ctx) {
-    let sid = ctx.request.body.sid;
-    let departmentId = ctx.request.body.departmentId;
-    let cid = ctx.session.cid;
-    let score = ctx.request.body.score;
-    let comment = ctx.request.body.comment;
-    let interviewer = ctx.session.interviewer;
+    const {sid,departmentId,score,comment} = ctx.request.body;
+    const {interviewer,cid} = ctx.session;
+
     await Interviewee.rateInterviewee(cid, sid, score, comment, departmentId, interviewer);
     let interviewerInfo = await Interviewee.getInterviewerInfo(sid, cid);
     if (interviewerInfo.volunteer.indexOf(departmentId) >= 0) {
@@ -53,12 +50,8 @@ router.post('/rate', mid.checkFormat(function () {
         comment: Joi.string()
     })
 }),async function (ctx) {
-    let sid = ctx.request.body.sid;
-    let score = ctx.request.body.score;
-    let comment = ctx.request.body.comment;
-    let did = ctx.session.did;
-    let interviewer = ctx.session.interviewer;
-    let cid = ctx.session.cid;
+    const {sid,score,comment} = ctx.request.body;
+    const {did,interviewer,cid} = ctx.session;
 
     await Interviewee.rateInterviewee(cid, sid, score, comment, did, interviewer);
 
@@ -78,9 +71,8 @@ router.get('/call',  mid.checkFormat(function () {
         sid: Joi.number()
     })
 }), async function (ctx) {
-    let department = ctx.session.did;
-    let sid = ctx.request.query.sid;
-    let cid = ctx.session.cid;
+    const {department,cid} = ctx.session;
+    const sid = ctx.request.query.sid;
     if (!sid) {
         let result = await Interviewee.getNextInterviewee(cid, department);
         if(result !== null){
@@ -99,8 +91,7 @@ router.get('/call',  mid.checkFormat(function () {
 
 //确认面试是否开始
 router.get('/start',async function (ctx) {
-    let department = ctx.session.did;
-    let cid = ctx.session.cid;
+    const {department,cid} = ctx.session;
 
     let result = await Interviewee.getSpecifyInterviewee(cid, department);
     result = result.toObject();
@@ -123,15 +114,14 @@ router.get('/start',async function (ctx) {
  */
 
 router.get('/queue', async function (ctx) {
-    let cid = ctx.session.cid;
-    let did = ctx.session.did;
+    const {cid,did} = ctx.session;
 
-    let info = await club.getClubInfo(cid);
+    const info = await club.getClubInfo(cid);
     if (did < 0 || did > info.departments.length) {
         throw new JSONError('不存在该部门', 403);
     }
 
-    let result = await Interviewee.getDepartmentQueueLength(cid, did);
+    const result = await Interviewee.getDepartmentQueueLength(cid, did);
 
     ctx.response.status = 200;
     ctx.response.body = result;
@@ -147,11 +137,10 @@ router.post('/skip',mid.checkFormat(function () {
         sid: Joi.number()
     })
 }),  async function (ctx) {
-    let cid = ctx.session.cid;
-    let sid = ctx.request.body.sid;
-    let did = ctx.session.did;
+    const {cid,did} = ctx.session;
+    const {sid} = ctx.request.body;
 
-    let result = await Interviewee.skip(cid, sid, did);
+    const result = await Interviewee.skip(cid, sid, did);
 
     ctx.response.status = 200;
     ctx.response.body = result;

@@ -35,14 +35,14 @@ router.post('/', mid.checkFormat(function() {
             short_tel: '短号',
         }
 }}), async function(ctx) {
-    let data = ctx.request.body;
-    let fileName = data.cid + '-' + data.name + '-' + data.sid + '.jpg';
-    let departInfo = await club.getClubInfo(data.cid);
+    const data = ctx.request.body;
+    const fileName = data.cid + '-' + data.name + '-' + data.sid + '.jpg';
+    const departInfo = await club.getClubInfo(data.cid);
     if(!departInfo || !(data.clubName === departInfo.name)){
         throw new JSONError('社团id错误');
     }
 
-    let studentInfo = await interviewee.getInterviewerInfo(data.sid, data.cid);
+    const studentInfo = await interviewee.getInterviewerInfo(data.sid, data.cid);
     if(!!studentInfo) {
         throw new JSONError('该学生已注册', 403);
     }

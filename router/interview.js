@@ -91,9 +91,9 @@ router.get('/call',  mid.checkFormat(function () {
 
 //确认面试是否开始
 router.get('/start',async function (ctx) {
-    const {department,cid} = ctx.session;
+    const {did,cid} = ctx.session;
 
-    let result = await Interviewee.getSpecifyInterviewee(cid, department);
+    let result = await Interviewee.getSpecifyInterviewee(cid, did);
     result = result.toObject();
     if (result.ifconfirm === 0) {
         throw new JSONError('该学生跳过', 403);
@@ -104,7 +104,7 @@ router.get('/start',async function (ctx) {
     }
     else {
         result.busy = true;
-        result.did = department;
+        result.did = did;
         ctx.response.body = result;
     }
 });

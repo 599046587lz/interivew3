@@ -161,8 +161,12 @@ exports.tocallNextInterviewee = function (sid, cid, did) {
     };
     return IntervieweeModel.findOne(data).then(result => {
         // if (result.done.indexOf(did * 1) != -1) reject(new Error('该同学已进行过面试'));
-        if (result == null) throw new JSONError('该同学未报名',403);
-        if (result.done.indexOf(did * 1) != -1) throw new JSONError('该同学已进行过面试');
+        if (result == null) {
+            throw new JSONError('该同学未报名',403);
+        }
+        if (result.done.indexOf(did * 1) !== -1) {
+            throw new JSONError('该同学已进行过面试');
+        }
         result.calldid = did;
         result.ifcall = true;
         result.save();
@@ -186,7 +190,9 @@ exports.rateInterviewee =  function (cid, sid, score, comment, did, interviewer)
             cid: cid,
             sid: sid
         }).then(result => {
-            if (!result.rate)  result.rate = [];
+            if (!result.rate)  {
+                result.rate = [];
+            }
             result.rate.push({
                 did: did,
                 score: String(score),
@@ -222,9 +228,7 @@ exports.getIntervieweeBySid = function (sid, cid) {
             sid: sid,
             cid: cid,
         };
-        return IntervieweeModel.findOne(data).then(result => {
-            return result;
-        })
+        return IntervieweeModel.findOne(data);
 };
 
 
@@ -330,8 +334,9 @@ exports.queryByClubAll = function (cid) {
     return IntervieweeModel.find({
         cid: cid
     }).then(result => {
-        // if(!result) throw new Error('该社团没有人报名');
-        if(!result) throw new JSONError('该社团没有人报名');
+        if(!result) {
+            throw new JSONError('该社团没有人报名');
+        }
         return result;
     })
 };

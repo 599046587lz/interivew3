@@ -1,12 +1,10 @@
-const koa = require('koa');
+const Koa = require('koa');
 const proxy =require('koa2-proxy');
 const logger = require('koa-logger');
 const bodyParser = require('koa-bodyparser');
 const json = require('koa-json');
 const koaStatic = require('koa-static');
 const session = require('koa-session');
-const koaBody = require('koa-body');
-const JSONError = require('./utils/JSONError');
 
 const club = require('./router/club');
 const interview = require('./router/interview');
@@ -14,11 +12,12 @@ const room = require('./router/room');
 const common = require('./router/common');
 const reg = require('./router/reg');
 
-const mid = require('./utils/middleware');
 const config = require('./config');
+const mid = require('./utils/middleware');
+const JSONError = require('./utils/JSONError');
 const utils = require('./utils/utils');
 
-const app = new koa();
+const app = new Koa();
 
 app.use(async function(ctx, next) {
     try {
@@ -38,7 +37,6 @@ utils.saveDb();
 app.keys = [config.koaKeys];
 app.use(session(app));
 
-app.use(koaBody({"multipart": true}));
 app.use(koaStatic(__dirname + '/public'));
 
 if (process.env.ENABLE_PROXY) {
@@ -47,9 +45,8 @@ if (process.env.ENABLE_PROXY) {
 
 app.use(bodyParser({
     enableTypes:['json', 'form', 'text']
-}))
+}));
 
-app.use(json());
 if(config.environment !== 'dev'){
     app.use(logger());
 }

@@ -185,7 +185,7 @@ exports.getExcelInfo = function (file) {
         let col = k.substring(0, 1); //A
         let row = parseInt(k.substring(1)); //11
         let value = workSheet[k].v;
-        if (row == 1) {
+        if (row === 1) {
             switch (value) {
                 case '姓名':
                     header[col] = 'name';
@@ -199,9 +199,13 @@ exports.getExcelInfo = function (file) {
             }
             return;
         }
-        if (!interviewerInfo[row]) interviewerInfo[row] = {};
-        if (header[col] == undefined) return;
-        if (header[col] == 'volunteer') {
+        if (!interviewerInfo[row]) {
+            interviewerInfo[row] = {};
+        }
+        if (header[col] === undefined) {
+            return;
+        }
+        if (header[col] === 'volunteer') {
             // let departInfo = value.split(',');
             // let result = [];
             // departInfo.forEach(e => {
@@ -229,7 +233,9 @@ exports.getExcelInfo = function (file) {
 exports.isExist = function (array, info) {
     let status = true;
     array.forEach(e => {
-        if (e === info) status = false;
+        if (e === info) {
+            status = false;
+        }
     });
 
     if (status) {

@@ -25,7 +25,7 @@ router.get('/sign', mid.checkFormat(function () {
         sid: Joi.number()
     })
 }), async function (ctx) {
-    const {cid} = ctx.session;
+    const cid = ctx.session.cid;
     const sid = ctx.request.query.sid;
     let info = await Interviewee.getInterviewerInfo(sid, cid);
     if (!info) {
@@ -44,21 +44,21 @@ router.get('/sign', mid.checkFormat(function () {
 });
 
 router.get('/finish', async function (ctx) {
-    const {cid} = ctx.session;
+    const cid = ctx.session.cid;
     const info = await Interviewee.getFinishInfo(cid);
     ctx.response.status = 200;
     ctx.response.body = info;
 });
 
 router.get('/signed', async function (ctx) {
-    const {cid} = ctx.session;
+    const cid = ctx.session.cid;
     const info = await Interviewee.getSignedInterviewee(cid);
     ctx.response.status = 200;
     ctx.response.body = info;
 });
 
 router.get('/calling', async function (ctx) {
-    const {cid} = ctx.session;
+    const cid = ctx.session.cid;
     const info = await Interviewee.callNextInterviewee(cid);
     ctx.response.status = 200;
     ctx.response.body = info;
@@ -95,7 +95,7 @@ router.post('/addDep', mid.checkFormat(function () {
 });
 
 router.get('/getDepartmentInfo', async function (ctx) {
-    const {cid} = ctx.session;
+    const cid = ctx.session.cid;
     const result = await club.getDepartmentInfo(cid);
     ctx.response.status = 200;
     ctx.response.body = result;
@@ -112,7 +112,7 @@ router.post('/confirm', mid.checkFormat(function () {
         confirm: Joi.number().required()
     })
 }), async function (ctx) {
-    const {cid} = ctx.session;
+    const cid = ctx.session.cid;
     const {sid,confirm} = ctx.request.body;
     const info = await Interviewee.getConfirmInfo(sid,cid,confirm);
     ctx.response.status = 200;

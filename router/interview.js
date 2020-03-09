@@ -138,7 +138,7 @@ router.post('/skip',mid.checkFormat(function () {
     })
 }),  async function (ctx) {
     const {cid,did} = ctx.session;
-    const {sid} = ctx.request.body;
+    const sid = ctx.request.body.sid;
 
     const result = await Interviewee.skip(cid, sid, did);
 

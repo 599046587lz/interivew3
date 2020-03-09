@@ -9,7 +9,7 @@ const mid = require('../utils/middleware');
 const utils = require('../utils/utils');
 const JSONError = require('../utils/JSONError');
 
-let router = new Router({
+const router = new Router({
     prefix: '/club'
 });
 
@@ -48,8 +48,8 @@ router.post('/upload/location',mid.checkFormat(function () {
             info: Joi.array(),
         })
     }), async function (ctx) {
-        const {cid} = ctx.session;
-        const {info} = ctx.request.body;
+        const cid = ctx.session.cid;
+        const info = ctx.request.body.info;
 
         await Club.setRoomLocation(cid, info);
         ctx.response.status = 200;
@@ -61,7 +61,7 @@ router.post('/upload/archive', mid.checkFormat(function() {
     })
 }), async function (ctx) {
     const file = ctx.request.files;
-    const {cid} = ctx.session;
+    const cid = ctx.session.cid;
     const xlsxReg = /\.xlsx$/i;
     if (!xlsxReg.test(file.archive.name)) {
         throw new JSONError('上传文件不合法', 403);
@@ -76,7 +76,7 @@ router.post('/upload/archive', mid.checkFormat(function() {
  * ??未测试
  */
 router.get('/extra',async function (ctx) {
-    const {cid} = ctx.session;
+    const cid = ctx.session.cid;
     if (!cid) {
         throw new JSONError('参数不完整', 403);
     }
@@ -104,7 +104,7 @@ router.get('/export', mid.checkFormat(function () {
         pageSize: Joi.number()
     })
 }),async function (ctx) {
-    const {cid} = ctx.session;
+    const cid = ctx.session.cid;
     const did = ctx.request.query.did;
 
     if (!cid) {
@@ -124,7 +124,7 @@ router.get('/clubInfo',  mid.checkFormat(function () {
         clubId: Joi.number()
     })
 }), async function (ctx) {
-    const {cid} = ctx.session;
+    const cid = ctx.session.cid;
     const result = await Club.getClubInfo(cid);
     const info = {
         cid:result.cid,

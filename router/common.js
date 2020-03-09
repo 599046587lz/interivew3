@@ -10,7 +10,7 @@ const office = require('../utils/office');
 const utils = require('../utils/utils');
 const JSONError = require('../utils/JSONError');
 
-let router = new Router({
+const router = new Router({
    prefix: '/common'
 });
 

@@ -94,8 +94,11 @@ router.get('/start',async function (ctx) {
     const {did,cid} = ctx.session;
 
     let result = await Interviewee.getSpecifyInterviewee(cid, did);
-    result = result.toObject();
+    //result = result.toObject();
     if (result.ifconfirm === 0) {
+        result.ifsign = false;
+        result.ifcall = false;
+        result.save();
         throw new JSONError('该学生跳过', 403);
     }
     else if (result.ifconfirm === 2) {
@@ -104,8 +107,10 @@ router.get('/start',async function (ctx) {
     }
     else {
         result.busy = true;
+        result.save();
         result.did = did;
         ctx.response.body = result;
+        ctx.response.status = 200;
     }
 });
 

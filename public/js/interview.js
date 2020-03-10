@@ -122,7 +122,6 @@ $(function () {
   stepCtl.push(new Step(function () {
     $commentCard.removeClass('active').addClass('inactive')
   }, function () {
-    getQueueNumber();
     $commentCard.removeClass('active').addClass('inactive')
     $callCard.find('.waiting').fadeOut()
     $callCard.find('.operation').fadeIn()
@@ -174,8 +173,7 @@ $(function () {
     }
   })
   $informationCard.find('button.skip').on('click', function () {
-    getQueueNumber()
-    snackbar.confirm('确认跳过？', null, function () {
+    snackbar.confirm('确认跳过？', ()=>{}, function () {
       apiSkip()
     })
   })
@@ -274,7 +272,6 @@ $(function () {
         403: function () {
           snackbar.err('此人未确认，已被room跳过');
           stepCtl.prev();
-          stepCtl.prev();
         },
         202: function () {
           waitConfirm()
@@ -315,6 +312,7 @@ $(function () {
             node.value = '';
             slider.value = 0;
             stepCtl.next()
+            getQueueNumber()
           }
         }
       })
@@ -331,6 +329,7 @@ $(function () {
       },
       statusCode:{
         200 : function () {
+          getQueueNumber()
           if ($commentCard.hasClass('active')) {
             stepCtl.prev()
           }

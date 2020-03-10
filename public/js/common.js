@@ -16,10 +16,10 @@ function Snackbar() {
                 </div>
                 <div class="mdc-snackbar__actions">
                     <button type="button" class="mdc-button mdc-snackbar__action">
-                    <i class="material-icons" id="snackCancel">clear</i>
+                    <i class="material-icons cancel">clear</i>
                     </button>
                      <button type="button" class="mdc-button mdc-snackbar__action">
-                    <i class="material-icons" id="snackOk">done</i>
+                    <i class="material-icons ok">done</i>
                     </button>
                 </div>
             </div>
@@ -27,6 +27,7 @@ function Snackbar() {
   $('body').append($snackbarHtml);
   this.element = $snackbarHtml[0]
   this.snackbar = mdc.snackbar.MDCSnackbar.attachTo(this.element)
+  this.$snackbar = $snackbarHtml
 }
 
 Snackbar.prototype.success = function (content) {
@@ -36,18 +37,18 @@ Snackbar.prototype.err = function(content){
   this.popup('error',content)
 }
 Snackbar.prototype.confirm = function(content,cancel,ok) {
-  this.snackbar.find('cancel').on('click',function () {
+  this.$snackbar.find('.cancel').on('click',function () {
     cancel()
   })
-  this.snackbar.find('ok').on('click',function () {
+  this.$snackbar.find('.ok').on('click',function () {
     ok()
   })
   this.popup('confirm',content)
 }
 
 Snackbar.prototype.popup = function(type,content){
-  $(this.element).removeClass('success error confirm');
-  $(this.element).addClass(type);
+  this.$snackbar.removeClass('success error confirm');
+  this.$snackbar.addClass(type);
   this.snackbar.labelText = content;
   this.snackbar.open()
 }

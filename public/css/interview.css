@@ -193,6 +193,10 @@ html,body {
   outline: none;
 }
 
+.mdc-select.mdc-select--focused .mdc-select__dropdown-icon {
+  filter: hue-rotate(300deg) saturate(150%);
+}
+
 /*animate*/
 @keyframes am-comment-active {
   0% {

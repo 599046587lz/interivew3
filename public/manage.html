@@ -2,7 +2,8 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" >
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>录入信息</title>
     <link rel="stylesheet" href="lib/css/reset.css"/>
     <link rel="stylesheet" type="text/css" href="lib/css/notifIt.css"/>
@@ -74,30 +75,57 @@
     <!--tabContainer-->
     <div class="tabContainer">
         <!--        filter-->
-        <div class="filter">
-            <i class="material-icons middle">filter_list</i>
-            <div class="conditions middle">
-                <div class="mdc-chip-set" role="grid">
-                    <div class="mdc-chip" role="row">
-                        <div class="mdc-chip__ripple"></div>
-                        <span role="gridcell">
+        <div class="tableContainer">
+            <div class="filter">
+                <i class="material-icons middle">filter_list</i>
+                <div class="conditions middle">
+                    <div class="mdc-chip-set" role="grid">
+                        <div class="mdc-chip" role="row">
+                            <div class="mdc-chip__ripple"></div>
+                            <span role="gridcell">
                             <span role="button" tabindex="0" class="mdc-chip__text">Jane Smith</span>
                         </span>
-                        <span role="gridcell">
-                            <i class="material-icons mdc-chip__icon mdc-chip__icon--trailing" tabindex="-1" role="button">cancel</i>
+                            <span role="gridcell">
+                            <i class="material-icons mdc-chip__icon mdc-chip__icon--trailing" tabindex="-1"
+                               role="button">cancel</i>
                         </span>
+                        </div>
                     </div>
                 </div>
+                <button class="mdc-fab mdc-fab--mini middle" aria-label="Favorite" id="addFilter">
+                    <div class="mdc-fab__ripple"></div>
+                    <span class="mdc-fab__icon material-icons">add</span>
+                </button>
             </div>
-            <button class="mdc-fab mdc-fab--mini middle" aria-label="Favorite" id="addFilter">
-                <div class="mdc-fab__ripple"></div>
-                <span class="mdc-fab__icon material-icons">add</span>
-            </button>
+
+            <div class="mdc-data-table">
+                <table id="export" class="mdc-data-table__table" aria-label="Dessert calories">
+                </table>
+            </div>
         </div>
 
-        <div class="mdc-data-table">
-            <table id="export" class="mdc-data-table__table" aria-label="Dessert calories">
-            </table>
+        <div class="uploadContainer">
+            <div class="clubName"></div>
+            <div class="writeInfo">
+                <div class="department">
+                    <span class="smallCircle"></span>
+                    <span class="title">部门</span>
+                </div>
+                <div class="classroom">
+                    <span class="smallCircle"></span>
+                    <span class="title">教室</span>
+                </div>
+            </div>
+            <div>
+                <span id="select" class="select">
+                    <span>选择文件</span>
+                    <form enctype="multipart/form-data">
+                        <input type="file" name="archive" id="file"
+                               accept="application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"/>
+                    </form>
+                </span>
+            </div>
+            <div id="submit">提交</div>
         </div>
     </div>
 </div>

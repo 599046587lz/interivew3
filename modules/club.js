@@ -155,7 +155,6 @@ exports.exportInterviewees = function (cid, did, search) {
     return IntervieweeModel.find(obj).then(result => {
         result = result.map(e => {
             e = e.toObject()
-            e.rate = e.rate.filter(ele => did === ele.did)
             e.state = "已报名"
             if (e.ifsign === true) {
                 e.state = "已签到"

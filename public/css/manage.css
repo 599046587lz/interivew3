@@ -140,7 +140,15 @@
 	height: 32px;
 }
 
-/*#export {*/
-/*	display: none;*/
-/*}*/
+/*提交*/
+.uploadContainer {
+	display: none;
+}
 
+.appear {
+	display: block;
+}
+
+.disappear {
+	display: none;
+}

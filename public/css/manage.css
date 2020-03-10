@@ -116,20 +116,6 @@
 	flex-direction: column;
 }
 
-/*popUps*/
-.popUps {
-	position: absolute;
-	border: 1px solid #000;
-	left: 0;
-	right: 0;
-	top: 0;
-	bottom: 0;
-	width: 500px;
-	height: 200px;
-	margin: auto;
-	background: #fff;
-}
-
 /*框架相关*/
 .mdc-data-table__header-cell, .mdc-data-table__cell {
 	line-height: 52px;
@@ -151,4 +137,21 @@
 
 .disappear {
 	display: none;
+}
+
+/*dialog*/
+.mdc-select__anchor, .mdc-text-field {
+	display: flex;
+	margin-top: 20px;
+}
+
+.mdc-dialog__surface,.mdc-dialog__content {
+	overflow: initial;
+}
+
+.mdc-text-field--focused:not(.mdc-text-field--disabled) .mdc-floating-label {
+	color: var(--mdc-theme-primary);
+}
+.mdc-select--outlined:not(.mdc-select--disabled).mdc-select--focused .mdc-floating-label {
+	color: var(--mdc-theme-primary);
 }

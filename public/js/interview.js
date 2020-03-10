@@ -147,21 +147,22 @@ $(function () {
   })
   //call by staffId number 1
   $callCard.find('.link').on('click', function () {
-    var $dialog = $('.mdc-dialog')
-    dialog.open();
-    $dialog.find('.cancel').on('click', function () {
-      dialog.close()
-      stepCtl.prev();
-    })
-    $dialog.find('.ok').on('click', function () {
-      var sid = $dialog.find('input')[0].value;
-      if ((/[0-9]{8}/).test(sid)) {
-        dialog.close()
-        callNext(sid)
-      } else {
-        snackbar.err('学号格式有误！请重新输入')
-      }
-    })
+    // var $dialog = $('.mdc-dialog')
+    // dialog.open();
+    // $dialog.find('.cancel').on('click', function () {
+    //   dialog.close()
+    //   stepCtl.prev();
+    // })
+    // $dialog.find('.ok').on('click', function () {
+    //   var sid = $dialog.find('input')[0].value;
+    //   if ((/[0-9]{8}/).test(sid)) {
+    //     dialog.close()
+    //     callNext(sid)
+    //   } else {
+    //     snackbar.err('学号格式有误！请重新输入')
+    //   }
+    // })
+    dialog.open()
   })
 
   // open comment or Skip
@@ -339,6 +340,21 @@ $(function () {
       }
     })
   }
+
+  dialog.confirm('input StaffId',function () {
+    var sid = $dialog.find('input')[0].value;
+    if ((/[0-9]{8}/).test(sid)) {
+      dialog.close()
+      callNext(sid)
+    } else {
+      snackbar.err('学号格式有误！请重新输入')
+    }
+  },function () {
+    $dialog.find('.cancel').on('click', function () {
+      dialog.close()
+      stepCtl.prev();
+    })
+  })
 
   getDepartmentInfo()
 

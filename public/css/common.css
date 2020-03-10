@@ -134,3 +134,7 @@ body {
 .skeleton .line::after {
   width: 60%;
 }
+
+.mdc-select.mdc-select--focused .mdc-select__dropdown-icon {
+  filter: hue-rotate(300deg) saturate(150%);
+}

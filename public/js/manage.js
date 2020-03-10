@@ -117,7 +117,6 @@ baseURL = '/';
 
 $(function () {
 
-
   var departmentsName = []
   var intervieweesData = []
   var renderData = []
@@ -127,6 +126,11 @@ $(function () {
   var exportTable = $("#export");
   var $tableContainer = $('.tableContainer')
   var $uploadContainer = $('.uploadContainer')
+  var $addFilter = $('#addFilter')
+  // window.setTimeout(function () {
+  //   const mdcSelect = mdc.select.MDCSelect.attachTo(document.querySelector('.mdc-select'));
+  //   mdc.textField.MDCTextField.attachTo(document.querySelector('.mdc-text-field'));
+  // },500)
 
   function debounce(fun, delay) {
     var id = null
@@ -419,6 +423,18 @@ $(function () {
     tab_index = event.detail.index;
     change_index()
   });
+
+  $addFilter.on('click',function () {
+    dialog.open()
+  })
+
+  dialog.confirm('input the filter',function () {
+    var a = dialog.$dialog.find('input').val()
+    console.log(a)
+    console.log(mdcSelect.value)
+  },function () {
+
+  })
 
 
   // const chipSetEl = document.querySelector('.mdc-chip-set');

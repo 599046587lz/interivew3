@@ -187,15 +187,7 @@ html,body {
   vertical-align: text-bottom;
 }
 
-.mdc-dialog input {
-  border: none;
-  border-bottom: 2px solid #eee;
-  outline: none;
-}
 
-.mdc-select.mdc-select--focused .mdc-select__dropdown-icon {
-  filter: hue-rotate(300deg) saturate(150%);
-}
 
 /*animate*/
 @keyframes am-comment-active {
@@ -286,6 +278,9 @@ html,body {
 }
 .mdc-slider {
   --mdc-theme-secondary: var(--mdc-theme-primary);
+}
+.mdc-dialog__content .mdc-select {
+  display: none;
 }
 
 @media screen and (max-width: 620px) {

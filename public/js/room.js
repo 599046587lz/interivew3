@@ -59,7 +59,7 @@ Queue.prototype.diff = function (newData) {
   if (newData.length === 0) {
     this.renderSkeleton()
     this.queueData.forEach(item => {
-      this.removeDom(item)
+      this.removeDom(item.sid)
     })
     this.queueData = []
     return
@@ -70,21 +70,22 @@ Queue.prototype.diff = function (newData) {
       this.queueData = this.queueData.concat(item)
     }
     if(this.queueData[index].sid !== item.sid){
-      this.removeDom(this.queueData[index])
+      this.removeDom(this.queueData[index].sid)
       this.render(item)
       this.queueData[index] = item;
     }
   })
   if(queueLonger){
     this.queueData.slice(newData.length).forEach(item => {
-      this.removeDom(item)
+      this.removeDom(item.sid)
     })
     this.queueData = this.queueData.slice(0,newData.length)
   }
 }
 
-Queue.prototype.removeDom = function (item) {
-  this.rootDom.find(`[data-sid=${item.sid}]`).remove()
+Queue.prototype.removeDom = function (sid) {
+  // this.rootDom.find(`[data-sid=${item.sid}]`).remove();
+  this.rootDom.find(`[data-sid=${sid}]`).remove();
 }
 
 Queue.prototype.replaceData = null; // 需要子类实现
@@ -226,6 +227,7 @@ $(function () {
       statusCode: {
         200: function () {
           roomBorder.remove();
+          CalledQueue.removeDom(sid);
           judgeScroll();
           snackbar.success('确认成功')
         }

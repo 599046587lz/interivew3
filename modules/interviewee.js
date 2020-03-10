@@ -19,8 +19,9 @@ exports.getInterviewerInfo = function (sid, cid ) {
 exports.getSignNumber = function (cid) {
     return IntervieweeModel.find({
         cid:cid,
-        ifsign : true
-    }).then(result => result.length)
+        // ifsign : true
+        signTime: {$ne: null}
+    }).then(result => result.length+1)
 };
 
 exports.getConfirmInfo = function (sid,cid,confirm) {
@@ -75,7 +76,8 @@ exports.getNextInterviewee = function (cid, did) {
             cid: cid,
             volunteer: did,
             busy: false,
-            signTime: {$ne: null}
+            signTime: {$ne: null},
+            ifconfirm: 2
         }).$where(new Function('let volunteer = this.volunteer;' +
             'let done = this.done;' +
             'return (volunteer.length != done.length) && (done.indexOf(' + did + ') == -1);'
@@ -102,7 +104,8 @@ exports.callNextInterviewee = function (cid) {
         cid:cid,
         ifcall: true,
         signTime: {$ne: null},
-        volunteer: {$elemMatch:{$ne:null}}
+        volunteer: {$elemMatch:{$ne:null}},
+        ifconfirm: 2
     }).sort({
         signTime: 'asc'
     })
@@ -112,7 +115,8 @@ exports.callNextInterviewee = function (cid) {
 exports.getSignedInterviewee = function (cid) {
    return IntervieweeModel.find({
        cid:cid,
-       signTime: {$ne: null},
+       // signTime: {$ne: null},
+       ifsign: true,
        busy : false,
        volunteer: {$elemMatch:{$ne:null}},
        ifcall: false,
@@ -157,7 +161,8 @@ exports.tocallNextInterviewee = function (sid, cid, did) {
         sid: sid,
         cid: cid,
         volunteer: did,
-        signTime: {$ne: null}
+        signTime: {$ne: null},
+        ifconfirm: 2
     };
     return IntervieweeModel.findOne(data).then(result => {
         // if (result.done.indexOf(did * 1) != -1) reject(new Error('该同学已进行过面试'));
@@ -178,11 +183,10 @@ exports.getSpecifyInterviewee = function (cid, did) {
         let data = {
                 cid: cid,
                 volunteer: did,
-                ifcall: true
+                ifcall: true,
+                ifsign: true
         };
-        return IntervieweeModel.findOne(data).then(result => {
-            return result;
-        })
+        return IntervieweeModel.findOne(data)
 };
 
 exports.rateInterviewee =  function (cid, sid, score, comment, did, interviewer) {
@@ -204,6 +208,7 @@ exports.rateInterviewee =  function (cid, sid, score, comment, did, interviewer)
             result.done = done;
             result.ifcall = false;
             result.busy = false;
+            result.ifconfirm = 2;
             result.signTime = new Date();
             return result.save();
         });
@@ -215,7 +220,8 @@ exports.getDepartmentQueueLength = function (cid, did) {
             volunteer: did,
             busy: {$ne: true},
             signTime: {$ne: null},
-            done: {$ne: did}
+            done: {$ne: did},
+            ifconfirm:2
         }).then(result => {
             return result.length;
         });

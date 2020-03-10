@@ -5,6 +5,7 @@ const bodyParser = require('koa-bodyparser');
 const json = require('koa-json');
 const koaStatic = require('koa-static');
 const session = require('koa-session');
+const koaBody = require('koa-body')
 
 const club = require('./router/club');
 const interview = require('./router/interview');
@@ -37,6 +38,7 @@ utils.saveDb();
 app.keys = [config.koaKeys];
 app.use(session(app));
 
+app.use(koaBody({"multipart":true}));
 app.use(koaStatic(__dirname + '/public'));
 
 if (process.env.ENABLE_PROXY) {
@@ -47,6 +49,7 @@ app.use(bodyParser({
     enableTypes:['json', 'form', 'text']
 }));
 
+app.use(json());
 if(config.environment !== 'dev'){
     app.use(logger());
 }

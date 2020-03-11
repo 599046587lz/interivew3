@@ -116,38 +116,36 @@ baseURL = '/';
 // });
 
 $(function () {
-
-  var departmentsName = []
-  var intervieweesData = []
-  var renderData = []
-  var searchValue = ""
-  var thead = ""
-  var isBasic = true
   var exportTable = $("#export");
   var $tableContainer = $('.tableContainer')
   var $uploadContainer = $('.uploadContainer')
   var $addFilter = $('#addFilter')
-  // window.setTimeout(function () {
-  //   const mdcSelect = mdc.select.MDCSelect.attachTo(document.querySelector('.mdc-select'));
-  //   mdc.textField.MDCTextField.attachTo(document.querySelector('.mdc-text-field'));
-  // },500)
+  var filterTemplate = `<div class="mdc-chip" role="row">
+                            <div class="mdc-chip__ripple"></div>
+                            <span role="gridcell">
+                            <span role="button" tabindex="0" class="mdc-chip__text">_filter</span>
+                        </span>
+                            <span role="gridcell">
+                            <i class="material-icons mdc-chip__icon mdc-chip__icon--trailing" tabindex="-1"
+                               role="button">cancel</i>
+                        </span>
+                        </div>`
+  var $mdcChipSet = $('.mdc-chip-set')
+  const tabBar = mdc.tabBar.MDCTabBar.attachTo(document.querySelector('.mdc-tab-bar'));
 
-  function debounce(fun, delay) {
-    var id = null
-    return function () {
-      var that = this
-      var args = Array.prototype.slice.call(arguments)
-      clearTimeout(id)
-      id = setTimeout(function () {
-        fun.apply(that, args)
-      }, delay)
-    }
-  }
+  var selectNameChange = {}
+  var tab_index = 0;
+  var departmentsName = []
+  var intervieweesData = []
+  var renderData = []
+  var searchValue = {}
+  var thead = ""
+  var isBasic = true
 
   var getDepartmentInfo = function () {
     var departmentsHtml = ""
     $.ajax({
-      url: '/club/clubinfo',
+      url: baseURL + 'club/clubinfo',
       type: 'get',
       statusCode: {
         200: function (data) {
@@ -160,8 +158,7 @@ $(function () {
             })
           }
           $("#departments").prepend(departmentsHtml)
-          getDepartmentData()
-
+          getIntervieweesData()
           $("#download").attr('href', `./common/download?cid=${data.cid}`)
         },
         403: function () {
@@ -170,18 +167,18 @@ $(function () {
       }
     })
   }
-
-  var judgeDepart = function (data) {
-    for (let i in departmentsName) {
-      if (data.indexOf(departmentsName[i]) !== -1) {
-        return Number(i)
-      }
-    }
-    if (data.indexOf("所有部门") !== -1) {
-      return -1
-    }
-    return undefined
-  }
+  //
+  // var judgeDepart = function (data) {
+  //   for (let i in departmentsName) {
+  //     if (data.indexOf(departmentsName[i]) !== -1) {
+  //       return Number(i)
+  //     }
+  //   }
+  //   if (data.indexOf("所有部门") !== -1) {
+  //     return -1
+  //   }
+  //   return undefined
+  // }
   //
   // var getDepartmentInterNumber = function () {
   //     var department = $(".department")
@@ -200,10 +197,11 @@ $(function () {
   //     }
   // }
 
-  var getDepartmentData = function (did) {
+  var getIntervieweesData = function () {
     var obj = {
-      url: '/club/export',
-      type: 'get',
+      url: baseURL + 'club/export',
+      type: 'post',
+      contentType:"application/json",
       success: function (data) {
         intervieweesData = data
         renderData = intervieweesData
@@ -211,20 +209,18 @@ $(function () {
       }
     }
     obj.data = {}
-    if (did !== undefined && did !== -1) {
-      obj.data.did = did
-    }
-    if (searchValue !== "") {
+    if (Object.keys(searchValue).length !== 0) {
       obj.data.search = searchValue
     }
-    if (did === undefined && searchValue === "") {
-      obj.success = function (data) {
-        intervieweesData = data
-        renderData = intervieweesData
-        renderTable()
-        // getDepartmentInterNumber()
-      }
-    }
+    // if (Object.keys(searchValue).length === 0) {
+    //   obj.success = function (data) {
+    //     intervieweesData = data
+    //     renderData = intervieweesData
+    //     renderTable()
+    //     // getDepartmentInterNumber()
+    //   }
+    // }
+    obj.data = JSON.stringify(obj.data)
     $.ajax(obj);
   }
 
@@ -242,13 +238,6 @@ $(function () {
     $tableContainer.removeClass('disappear')
     exportTable.html("")
     var data = renderData
-    if (searchValue !== "") {
-      data = renderData.filter(function (ele) {
-        if (ele.information.indexOf(searchValue) !== -1) {
-          return ele
-        }
-      })
-    }
     if (isBasic) {
       thead = ` <thead>
                       <tr class="mdc-data-table__header-row">
@@ -299,36 +288,14 @@ $(function () {
                         ${item.rate.slice(1).map(item => `<tr class="mdc-data-table__row"><td class="mdc-data-table__cell">${departmentsName[item.did]}</td><td class="mdc-data-table__cell">${item.score}</td><td class="mdc-data-table__cell">${item.comment}</td><td class="mdc-data-table__cell">${item.interviewer}</td></tr>`)}`
       })
     }
-
     exportTable.append(`${thead}<tbody class="mdc-data-table__content">${data.join('')}</tbody>`);
   }
-
-  $("#departments").on('click', 'a', function () {
-    var did = judgeDepart(this.innerHTML)
-    if (!$(this).hasClass('department')) {
-      return
-    }
-    $(".department.item.active").removeClass('active')
-    $(this).addClass('active')
-    getDepartmentData(did)
-  })
-
-  var searchAjax = debounce(function () {
-    var did = judgeDepart($(".department.active").html())
-    getDepartmentData(did)
-  }, 1000)
-
-  $("#search").on('input', function () {
-    searchValue = this.value
-    searchAjax(searchValue)
-  })
 
   $('.back').on('click', (function () {
     window.history.back();
   }));
 
-
-  $("#submit").click(function () {
+  $("#submit").on('click',function () {
     var self = $(this);
     self.addClass('loading');
     //提交修改表单
@@ -346,17 +313,10 @@ $(function () {
         info: dep
       }),
       contentType: 'application/json',
-      statusCode: {
-        200: function () {
-          alert("修改成功!");
-        },
-        204: function () {
-          alert("修改成功!");
-        },
-        205: function () {
-          alert("修改成功!");
-        }
-      }, complete: function () {
+      success: function(){
+        snackbar.success('修改成功！')
+      },
+      complete: function () {
         self.removeClass('loading');
       }
     });
@@ -372,7 +332,7 @@ $(function () {
         var data = new FormData();
         data.append('archive', files[0]);
 
-        if (filetype == "xls" || filetype == "xlsx") {
+        if (filetype === "xls" || filetype === "xlsx") {
           $.ajax({
             url: baseURL + "club/upload/archive",
             type: 'post',
@@ -382,15 +342,14 @@ $(function () {
             processData: false,
             contentType: false,
             success: function (data) {
-
-              alert("上传文件成功！已成功上传 " + data.count + " 人的信息。");
+              snackbar.success("上传文件成功！已成功上传 " + data.count + " 人的信息。");
             },
             error: function () {
-              alert("与服务器通讯失败，请稍后再试！");
+              snackbar.err("与服务器通讯失败，请稍后再试！");
             }
           });
         } else {
-          alert("请上传正确的Excel文件，只能上传后缀为'xls'的Excel文件！");
+          snackbar.err("请上传正确的Excel文件，只能上传后缀为'xls'的Excel文件！");
         }
       });
     }
@@ -415,9 +374,7 @@ $(function () {
     }
   }
 
-  const tabBar = mdc.tabBar.MDCTabBar.attachTo(document.querySelector('.mdc-tab-bar'));
   // const tabs = document.querySelectorAll('.mdc-tab');
-  var tab_index = 0;
 
   tabBar.listen('MDCTabBar:activated', function (event) {
     tab_index = event.detail.index;
@@ -428,27 +385,44 @@ $(function () {
     dialog.open()
   })
 
-  dialog.confirm('input the filter',function () {
-    var a = dialog.$dialog.find('input').val()
-    console.log(a)
-    console.log(mdcSelect.value)
+  dialog.init('input the filter',function () {
+    var searchString = dialog.text.value;
+    var field = dialog.select.value;
+    var showField =  dialog.select.selectedText_.innerHTML
+    var showString = searchString
+    if(showField === '报名部门'){
+      searchString = departmentsName.indexOf(searchString)
+      if(searchString === -1){
+        snackbar.err('部门不存在！')
+        dialog.reset()
+        return
+      }
+    }
+    if(!searchValue[field]){
+      searchValue[field] = [searchString];
+    } else {
+      searchValue[field].push(searchString);
+    }
+    if(!selectNameChange[showField]){
+      selectNameChange[showField] = field
+    }
+    getIntervieweesData()
+    $mdcChipSet.append(filterTemplate.replace('_filter',`${showField}=${showString}`))
+    dialog.reset()
   },function () {
-
+    dialog.reset()
   })
 
-
-  // const chipSetEl = document.querySelector('.mdc-chip-set');
-  // const chipSet = new MDCChipSet(chipSetEl);
-  // input.addEventListener('keydown', function(event) {
-  //     if (event.key === 'Enter' || event.keyCode === 13) {
-  //         const chipEl = document.createElement('div');
-  //         // ... perform operations to properly populate/decorate chip element ...
-  //         chipSetEl.appendChild(chipEl);
-  //         chipSet.addChip(chipEl);
-  //     }
-  // });
-  // chipSet.listen('MDCChip:removal', function(event) {
-  //     chipSetEl.removeChild(event.detail.root);
-  // });
-
+  $mdcChipSet.on('click',function (e) {
+    if(e.target.classList.contains('material-icons')){
+      var $mdcChip = $(e.target).parents('.mdc-chip')
+      var conditions = $mdcChip.find('.mdc-chip__text').text().match(/(.*)=(.*)/)
+      var showField = conditions[1]
+      var condition = conditions[2]
+      var searchField = searchValue[selectNameChange[showField]]
+      searchField.splice(searchField.indexOf(condition),1)
+      $mdcChip.remove()
+      getIntervieweesData()
+    }
+  })
 });

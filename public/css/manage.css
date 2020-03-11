@@ -96,13 +96,11 @@
 }
 
 .filter {
-	padding: 0 40px;
+	padding: 10px 40px;
 }
-
 .filter .conditions {
 	display: inline-block;
 }
-
 .filter .middle {
 	vertical-align: middle;
 }
@@ -116,16 +114,6 @@
 	flex-direction: column;
 }
 
-/*框架相关*/
-.mdc-data-table__header-cell, .mdc-data-table__cell {
-	line-height: 52px;
-}
-
-.mdc-fab {
-	width: 32px;
-	height: 32px;
-}
-
 /*提交*/
 .uploadContainer {
 	display: none;
@@ -134,24 +122,32 @@
 .appear {
 	display: block;
 }
-
 .disappear {
 	display: none;
 }
 
-/*dialog*/
-.mdc-select__anchor, .mdc-text-field {
+/*mdc*/
+.mdc-data-table {
 	display: flex;
-	margin-top: 20px;
+}
+.mdc-data-table__header-cell, .mdc-data-table__cell {
+	line-height: 52px;
 }
 
 .mdc-dialog__surface,.mdc-dialog__content {
 	overflow: initial;
 }
-
+.mdc-select__anchor, .mdc-text-field {
+	display: flex;
+	margin-top: 20px;
+}
 .mdc-text-field--focused:not(.mdc-text-field--disabled) .mdc-floating-label {
 	color: var(--mdc-theme-primary);
 }
 .mdc-select--outlined:not(.mdc-select--disabled).mdc-select--focused .mdc-floating-label {
 	color: var(--mdc-theme-primary);
+}
+.mdc-fab {
+	width: 32px;
+	height: 32px;
 }

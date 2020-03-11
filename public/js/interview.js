@@ -341,8 +341,8 @@ $(function () {
     })
   }
 
-  dialog.confirm('input StaffId',function () {
-    var sid = $dialog.find('input')[0].value;
+  dialog.init('input StaffId',function () {
+    var sid = dialog.text.value;
     if ((/[0-9]{8}/).test(sid)) {
       dialog.close()
       callNext(sid)
@@ -350,10 +350,8 @@ $(function () {
       snackbar.err('学号格式有误！请重新输入')
     }
   },function () {
-    $dialog.find('.cancel').on('click', function () {
       dialog.close()
       stepCtl.prev();
-    })
   })
 
   getDepartmentInfo()

@@ -147,11 +147,8 @@ exports.createClub = function (data) {
 };
 
 
-exports.exportInterviewees = function (cid, did, search) {
+exports.exportInterviewees = function (cid, search) {
     let obj = {cid: cid}
-    if (did !== undefined) {
-        obj.volunteer = did
-    }
     return IntervieweeModel.find(obj).then(result => {
         result = result.map(e => {
             e = e.toObject()
@@ -170,14 +167,7 @@ exports.exportInterviewees = function (cid, did, search) {
             }
             return e
         })
-        if (did !== undefined) {
-            result = result.map(e => {
-                e.rate = e.rate.filter(ele => did === ele.did)
-                return e
-            })
-        }
-
-        if (search) {
+        if (search && Object.keys(search).length !== 0) {
             result = result.map(e => {
                 let rate = ""
                 if (e.rate.length > 0) {
@@ -185,13 +175,17 @@ exports.exportInterviewees = function (cid, did, search) {
                 }
                 e["information"] = [e.name, e.sid, e.major, e.email, e.phone, e.qq, e.notion, rate].join('#')
                 return e
-            }).filter(ele => {
-                if (ele["information"].indexOf(search) !== -1) {
-                    return ele
-                }
+            })
+            Object.keys(search).forEach(item => {
+                search[item].forEach(condition => {
+                    result = result.filter(ele => {
+                        if (String(ele[item]).indexOf(condition) !== -1) {
+                            return ele
+                        }
+                    })
+                })
             })
         }
-
         return result
     })
 };

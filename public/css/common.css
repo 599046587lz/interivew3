@@ -79,24 +79,19 @@ body {
 .mdc-snackbar .material-icons {
   color: white;
   margin-left: 16px;
-}
-.mdc-snackbar .sign , #snackOk{
   display: none;
+}
+.mdc-snackbar .cancel {
+  display: block;
 }
 .success .mdc-snackbar__surface {
   background: var(--platform-color-green);
 }
-.success.mdc-snackbar .done {
+.success.mdc-snackbar .done,.error.mdc-snackbar .error,.confirm.mdc-snackbar .ok{
   display: block;
 }
-.error .mdc-snackbar__surface{
+.error .mdc-snackbar__surface {
   background: var(--platform-color-red);
-}
-.error.mdc-snackbar .error {
-  display: block;
-}
-.confirm.mdc-snackbar #snackOk {
-  display: block;
 }
 /*blurry & skeleton*/
 .blurry {

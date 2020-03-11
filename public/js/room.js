@@ -1,4 +1,4 @@
-var baseURL = '';
+var baseURL = '/';
 function SignButton(signMember) {
     var $signButtonHtml = $
     (`<div class="addCircle">
@@ -109,7 +109,7 @@ SignedQueue.prototype.replaceData = function (element) {
 SignedQueue.prototype.fetchData = function () {
     return new Promise(function (resolve, reject) {
         $.ajax({
-            url: baseURL + '/room/signed',
+            url: baseURL + 'room/signed',
             type: 'get',
             statusCode: {
                 200: function (data) {
@@ -141,7 +141,7 @@ CalledQueue.prototype.replaceData = function (element) {
 CalledQueue.prototype.fetchData = function () {
     return new Promise(function (resolve, reject) {
         $.ajax({
-            url: baseURL + '/room/calling',
+            url: baseURL + 'room/calling',
             type: 'get',
             statusCode: {
                 200: function (data) {
@@ -195,7 +195,7 @@ $(function () {
 
     var getDepartment = function () {
         $.ajax({
-            url: baseURL + '/club/clubInfo',
+            url: baseURL + 'club/clubInfo',
             type: 'get',
             statusCode: {
                 200: function (data) {
@@ -213,7 +213,7 @@ $(function () {
     //确认
     var confirmCalled = function (confirm, sid, roomBorder) {
         $.ajax({
-            url: baseURL + '/room/confirm',
+            url: baseURL + 'room/confirm',
             type: 'post',
             data: JSON.stringify({
                 sid: sid,
@@ -237,7 +237,7 @@ $(function () {
 
     var signMember = function (sid) {
         $.ajax({
-            url: baseURL + '/room/sign',
+            url: baseURL + 'room/sign',
             type: 'get',
             data: {
                 sid: sid,

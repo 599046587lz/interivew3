@@ -255,6 +255,10 @@ $(function () {
         403: function () {
           snackbar.err('该同学未报名');
           stepCtl.prev()
+        },
+        500: function () {
+          snackbar.err('该同学已进行过面试或与服务器通讯错误')
+          stepCtl.prev()
         }
       }
     })
@@ -341,7 +345,7 @@ $(function () {
     })
   }
 
-  dialog.init('input StaffId',function () {
+  dialog.init('Input StaffId',function () {
     var sid = dialog.text.value;
     if ((/[0-9]{8}/).test(sid)) {
       dialog.close()
@@ -349,9 +353,12 @@ $(function () {
     } else {
       snackbar.err('学号格式有误！请重新输入')
     }
+    callNext(sid)
+    dialog.reset()
   },function () {
       dialog.close()
       stepCtl.prev();
+      dialog.reset()
   })
 
   getDepartmentInfo()

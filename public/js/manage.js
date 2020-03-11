@@ -1,120 +1,5 @@
 baseURL = '/';
 
-// $(function () {
-// $(".back").click(function () {
-//     window.history.back();
-// });
-//
-// //获取clubinfo
-// $.ajax({
-//     url: baseURL + "club/clubInfo",
-//     type: "get",
-//     statusCode: {
-//         200 : function (data) {
-//             $(".clubName").html(data.message.name);
-//             var $container = $(".container");
-//             var $department = $(".department");
-//             var $classroom = $(".classroom");
-//             $container.css('height', $container.height() + 35 * data.message.departments.length + 'px');
-//             for (var i in data.message.departments) {
-//                 $department.append("<input value='" + data.message.departments[i]["name"] + "' readonly/>");
-//                 $classroom.append("<input class='room' depart='" + data.message.departments[i]["did"] + "' value='" + data.message.departments[i]["location"] + "' />");
-//             }
-//         },
-//         403 : function () {
-//             relogin()
-//         }
-//     }
-// });
-//
-//
-// $("#submit").click(function () {
-//     var self = $(this);
-//     self.addClass('loading');
-//     //提交修改表单
-//     var dep = [];
-//     $("input.room").each(function () {
-//         var depart = $(this).attr("depart");
-//         var dId = Number(depart);
-//         var room = $(this).val();
-//         if (depart && room) dep.push({departmentId: dId, roomLocation: room});
-//     });
-//     $.ajax({
-//         url: baseURL + "club/upload/location",
-//         type: "post",
-//         data: JSON.stringify({
-//             info: dep
-//         }),
-//         contentType: 'application/json',
-//         statusCode: {
-//             200: function () {
-//                 alert("修改成功!");
-//             },
-//             204: function () {
-//                 alert("修改成功!");
-//             },
-//             205: function () {
-//                 alert("修改成功!");
-//             }
-//         }, complete: function () {
-//             self.removeClass('loading');
-//         }
-//     });
-//
-//     //上传文件(有文件时上传文件)
-//     var excelName = $('#file').val();
-//     var fileTArr = excelName.split(".");
-//     //切割出后缀文件名
-//     var filetype = fileTArr[fileTArr.length - 1];
-//     if (filetype != null && filetype != "") {
-//         $(function () {
-//             let files = $('#file').prop('files');
-//             var data = new FormData();
-//             data.append('archive', files[0]);
-//
-//             if (filetype == "xls" || filetype == "xlsx") {
-//                 $.ajax({
-//                     url: baseURL + "club/upload/archive",
-//                     type: 'post',
-//                     data: data,
-//                     //async: false,
-//                     cache: false,
-//                     processData: false,
-//                     contentType: false,
-//                     success: function (data) {
-//
-//                         alert("上传文件成功！已成功上传 " + data.count + " 人的信息。");
-//                     },
-//                     error: function () {
-//                         alert("与服务器通讯失败，请稍后再试！");
-//                     }
-//                 });
-//             } else {
-//                 alert("请上传正确的Excel文件，只能上传后缀为'xls'的Excel文件！");
-//             }
-//         });
-//     }
-// });
-//
-//
-// $("#file").on("click", function (event) {
-//     var select = $('#select');
-//     select.addClass('loading');
-//     if (confirm("上传文件,是否继续？")) {
-//         setTimeout(function () {
-//             select.removeClass('loading');
-//         }, 1500);
-//     } else {
-//         //取消上传文件关闭inputfile窗口
-//         event.preventDefault();
-//         setTimeout(function () {
-//             select.removeClass('loading');
-//         }, 100);
-//     }
-//     //confirm是同步的 confirm时不能渲染页面
-// });
-// });
-
 $(function () {
   var exportTable = $("#export");
   var $tableContainer = $('.tableContainer')
@@ -151,15 +36,19 @@ $(function () {
         200: function (data) {
           var departmentsInfo = data.departments
           if (departmentsInfo) {
-            departmentsHtml += "<a class='item department active'>所有部门</a>"
             departmentsInfo.forEach(item => {
               departmentsName[item.did] = item.name
               departmentsHtml += `<a class='item department'>${item.name}</a>`
             })
           }
-          $("#departments").prepend(departmentsHtml)
           getIntervieweesData()
           $("#download").attr('href', `./common/download?cid=${data.cid}`)
+
+          var $classroom = $uploadContainer.find(".classroom");
+          for (var i in departmentsInfo) {
+            $classroom.append(`<div><div class="departmentName">${departmentsInfo[i].name}</div>
+                        <input class='room' depart=${departmentsInfo[i].did} value=${departmentsInfo[i].location}></div>`);
+          }
         },
         403: function () {
           relogin()
@@ -201,7 +90,7 @@ $(function () {
     var obj = {
       url: baseURL + 'club/export',
       type: 'post',
-      contentType:"application/json",
+      contentType: "application/json",
       success: function (data) {
         intervieweesData = data
         renderData = intervieweesData
@@ -212,14 +101,6 @@ $(function () {
     if (Object.keys(searchValue).length !== 0) {
       obj.data.search = searchValue
     }
-    // if (Object.keys(searchValue).length === 0) {
-    //   obj.success = function (data) {
-    //     intervieweesData = data
-    //     renderData = intervieweesData
-    //     renderTable()
-    //     // getDepartmentInterNumber()
-    //   }
-    // }
     obj.data = JSON.stringify(obj.data)
     $.ajax(obj);
   }
@@ -295,7 +176,7 @@ $(function () {
     window.history.back();
   }));
 
-  $("#submit").on('click',function () {
+  $("#submit").on('click', function () {
     var self = $(this);
     self.addClass('loading');
     //提交修改表单
@@ -313,7 +194,7 @@ $(function () {
         info: dep
       }),
       contentType: 'application/json',
-      success: function(){
+      success: function () {
         snackbar.success('修改成功！')
       },
       complete: function () {
@@ -326,7 +207,7 @@ $(function () {
     var fileTArr = excelName.split(".");
     //切割出后缀文件名
     var filetype = fileTArr[fileTArr.length - 1];
-    if (filetype != null && filetype != "") {
+    if (filetype != null && filetype !== "") {
       $(function () {
         let files = $('#file').prop('files');
         var data = new FormData();
@@ -355,8 +236,6 @@ $(function () {
     }
   });
 
-  getDepartmentInfo()
-
   var change_index = function () {
     switch (tab_index) {
       case 1 :
@@ -374,55 +253,56 @@ $(function () {
     }
   }
 
-  // const tabs = document.querySelectorAll('.mdc-tab');
-
   tabBar.listen('MDCTabBar:activated', function (event) {
     tab_index = event.detail.index;
     change_index()
   });
 
-  $addFilter.on('click',function () {
+  //dialogs
+  $addFilter.on('click', function () {
     dialog.open()
   })
 
-  dialog.init('input the filter',function () {
+  dialog.init('Input the Filter', function () {
     var searchString = dialog.text.value;
     var field = dialog.select.value;
-    var showField =  dialog.select.selectedText_.innerHTML
+    var showField = dialog.select.selectedText_.innerHTML
     var showString = searchString
-    if(showField === '报名部门'){
+    if (showField === '报名部门') {
       searchString = departmentsName.indexOf(searchString)
-      if(searchString === -1){
+      if (searchString === -1) {
         snackbar.err('部门不存在！')
         dialog.reset()
         return
       }
     }
-    if(!searchValue[field]){
+    if (!searchValue[field]) {
       searchValue[field] = [searchString];
     } else {
       searchValue[field].push(searchString);
     }
-    if(!selectNameChange[showField]){
+    if (!selectNameChange[showField]) {
       selectNameChange[showField] = field
     }
     getIntervieweesData()
-    $mdcChipSet.append(filterTemplate.replace('_filter',`${showField}=${showString}`))
+    $mdcChipSet.append(filterTemplate.replace('_filter', `${showField}=${showString}`))
     dialog.reset()
-  },function () {
+  }, function () {
     dialog.reset()
   })
 
-  $mdcChipSet.on('click',function (e) {
-    if(e.target.classList.contains('material-icons')){
+  $mdcChipSet.on('click', function (e) {
+    if (e.target.classList.contains('material-icons')) {
       var $mdcChip = $(e.target).parents('.mdc-chip')
       var conditions = $mdcChip.find('.mdc-chip__text').text().match(/(.*)=(.*)/)
       var showField = conditions[1]
       var condition = conditions[2]
       var searchField = searchValue[selectNameChange[showField]]
-      searchField.splice(searchField.indexOf(condition),1)
+      searchField.splice(searchField.indexOf(condition), 1)
       $mdcChip.remove()
       getIntervieweesData()
     }
   })
+
+  getDepartmentInfo()
 });

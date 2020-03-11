@@ -117,6 +117,34 @@
 /*提交*/
 .uploadContainer {
 	display: none;
+	text-align: center;
+}
+.uploadContainer > div {
+	margin: 10px;
+}
+
+.uploadContainer .department, .uploadContainer .classroom {
+	display: inline-block;
+}
+.uploadContainer .title {
+	font-size: 24px;
+	color: var(--mdc-theme-primary);
+}
+.uploadContainer .material-icons{
+	color: var(--mdc-theme-primary);
+	vertical-align: text-bottom;
+}
+
+.uploadContainer input {
+	line-height: 24px;
+	margin: 8px;
+}
+
+.uploadContainer .classroom .departmentName {
+	line-height: 24px;
+	margin: 8px;
+	display: inline-block;
+	width: 80px;
 }
 
 .appear {

@@ -97,25 +97,35 @@
         <div class="uploadContainer">
             <div class="clubName"></div>
             <div class="writeInfo">
-                <div class="department">
-                    <span class="smallCircle"></span>
-                    <span class="title">部门</span>
-                </div>
                 <div class="classroom">
-                    <span class="smallCircle"></span>
+                    <i class="material-icons">location_on</i>
                     <span class="title">教室</span>
                 </div>
             </div>
             <div>
                 <span id="select" class="select">
-                    <span>选择文件</span>
+                    <div>
+                        <i class="material-icons">insert_drive_file</i>
+                        <span class="title">选择文件</span>
+                    </div>
                     <form enctype="multipart/form-data">
                         <input type="file" name="archive" id="file"
                                accept="application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"/>
                     </form>
                 </span>
+                <button class="mdc-button mdc-button--raised" id="submit">
+                    <span class="mdc-button__ripple"></span> 提交
+                </button>
             </div>
-            <div id="submit">提交</div>
+            <div>
+                <div>
+                    <i class="material-icons">cloud_download</i>
+                    <span class="title">下载报名信息</span>
+                </div>
+                <a class="mdc-button mdc-button--raised" id="download">
+                    <span class="mdc-button__ripple"></span> 下载
+                </a>
+            </div>
         </div>
     </div>
 </div>

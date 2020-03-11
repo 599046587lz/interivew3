@@ -77,7 +77,8 @@ exports.getNextInterviewee = function (cid, did) {
             volunteer: did,
             busy: false,
             signTime: {$ne: null},
-            ifconfirm: 2
+            ifconfirm: 2,
+            calldid: null
         }).$where(new Function('let volunteer = this.volunteer;' +
             'let done = this.done;' +
             'return (volunteer.length != done.length) && (done.indexOf(' + did + ') == -1);'
@@ -162,7 +163,8 @@ exports.tocallNextInterviewee = function (sid, cid, did) {
         cid: cid,
         volunteer: did,
         signTime: {$ne: null},
-        ifconfirm: 2
+        ifconfirm: 2,
+        calldid: null
     };
     return IntervieweeModel.findOne(data).then(result => {
         // if (result.done.indexOf(did * 1) != -1) reject(new Error('该同学已进行过面试'));
@@ -170,7 +172,7 @@ exports.tocallNextInterviewee = function (sid, cid, did) {
             throw new JSONError('该同学未报名',403);
         }
         if (result.done.indexOf(did * 1) !== -1) {
-            throw new JSONError('该同学已进行过面试');
+            throw new JSONError('该同学已进行过面试',403);
         }
         result.calldid = did;
         result.ifcall = true;
@@ -210,6 +212,7 @@ exports.rateInterviewee =  function (cid, sid, score, comment, did, interviewer)
             result.busy = false;
             result.ifconfirm = 2;
             result.signTime = new Date();
+            result.calldid = null;
             return result.save();
         });
 };

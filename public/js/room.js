@@ -58,7 +58,6 @@ Queue.prototype.renderSkeleton = function () {
 }
 
 Queue.prototype.diff = function (newData) {
-    var queueLonger = Boolean(this.queueData.length > newData.length)
     if (newData.length === 0) {
         this.renderSkeleton()
         this.queueData.forEach(item => {
@@ -68,16 +67,16 @@ Queue.prototype.diff = function (newData) {
         return
     }
     newData.forEach((item) => {
-        if (!(this.queueData.find(val => val.sid == item.sid))) {
+        if (!(this.queueData.find(val => val.sid === item.sid))) {
             this.render(item);
-            this.queueData = this.queueData.concat(item)
         }
     })
     this.queueData.forEach((val) => {
-        if (!(newData.find(item => item.sid == val.sid))) {
+        if (!(newData.find(item => item.sid === val.sid))) {
             this.removeDom(val.sid);
         }
     })
+    this.queueData = newData;
 }
 
 Queue.prototype.removeDom = function (sid) {

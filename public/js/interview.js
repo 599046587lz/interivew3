@@ -1,3 +1,5 @@
+baseURL = '/';
+
 function Step(prev, next) {
   this.prev = prev
   this.next = next
@@ -172,7 +174,7 @@ $(function () {
   //获取社团信息
   var getDepartmentInfo = function () {
     $.ajax({
-      url: '/club/clubInfo',
+      url: baseURL + 'club/clubInfo',
       type: 'get',
       statusCode: {
         200: function (data) {
@@ -193,7 +195,7 @@ $(function () {
     var did = departments.indexOf(select.value);
     var interviewerName = $loginCard.find(' .mdc-text-field input').val();
     $.ajax({
-      url: '/club/setIdentify',
+      url: baseURL + 'club/setIdentify',
       type: 'post',
       data: {
         did: Number(did),
@@ -211,7 +213,7 @@ $(function () {
   //获取排队人数
   var getQueueNumber = function () {
     $.ajax({
-      url: '/interview/queue',
+      url: baseURL + 'interview/queue',
       type: 'get',
       statusCode: {
         200: function (data) {
@@ -228,7 +230,7 @@ $(function () {
       obj = {sid: sid}
     }
     $.ajax({
-      url: '/interview/call',
+      url: baseURL + 'interview/call',
       type: 'get',
       data: obj,
       dataType: 'json',
@@ -237,12 +239,12 @@ $(function () {
           waitConfirm();
           stepCtl.next()
         },
-        403: function () {
-          snackbar.err('该同学未报名');
+        403: function (errInfo) {
+          snackbar.err(errInfo.responseText);
           stepCtl.prev()
         },
         500: function () {
-          snackbar.err('该同学已进行过面试或与服务器通讯错误')
+          snackbar.err('与服务器通讯错误')
           stepCtl.prev()
         }
       }
@@ -252,7 +254,7 @@ $(function () {
 
   var waitConfirm = function () {
     $.ajax({
-      url: '/interview/start',
+      url: baseURL + 'interview/start',
       type: 'get',
       statusCode: {
         200: function (data) {
@@ -288,7 +290,7 @@ $(function () {
       snackbar.err('请先进行评论')
     } else {
       $.ajax({
-        url: '/interview/rate',
+        url: baseURL + 'interview/rate',
         type: 'post',
         data: {
           sid: sid,
@@ -312,7 +314,7 @@ $(function () {
   var apiSkip = function () {
     var sid = $informationCard.find('.mdc-chip .mdc-chip__text').text();
     $.ajax({
-      url: '/interview/skip',
+      url: baseURL + 'interview/skip',
       type: 'post',
       data: {
         sid: sid,
@@ -333,15 +335,12 @@ $(function () {
   dialog.init('Input StaffId',function () {
     var sid = dialog.text.value;
     if ((/[0-9]{8}/).test(sid)) {
-      dialog.close()
       callNext(sid)
     } else {
       snackbar.err('学号格式有误！请重新输入')
     }
-    callNext(sid)
     dialog.reset()
   },function () {
-      dialog.close()
       stepCtl.prev();
       dialog.reset()
   })

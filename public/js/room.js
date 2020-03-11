@@ -1,3 +1,4 @@
+var baseURL = '';
 function SignButton(signMember) {
     var $signButtonHtml = $
     (`<div class="addCircle">
@@ -108,7 +109,7 @@ SignedQueue.prototype.replaceData = function (element) {
 SignedQueue.prototype.fetchData = function () {
     return new Promise(function (resolve, reject) {
         $.ajax({
-            url: '/room/signed',
+            url: baseURL + '/room/signed',
             type: 'get',
             statusCode: {
                 200: function (data) {
@@ -140,7 +141,7 @@ CalledQueue.prototype.replaceData = function (element) {
 CalledQueue.prototype.fetchData = function () {
     return new Promise(function (resolve, reject) {
         $.ajax({
-            url: '/room/calling',
+            url: baseURL + '/room/calling',
             type: 'get',
             statusCode: {
                 200: function (data) {
@@ -155,7 +156,6 @@ CalledQueue.prototype.fetchData = function () {
 }
 
 $(function () {
-    var baseURL = '';
     var $left = $('#left');
     var $right = $('#right');
     var $wait = $('#wait');
@@ -225,7 +225,11 @@ $(function () {
                     roomBorder.remove();
                     calledQueue.removeDom(sid);
                     judgeScroll();
-                    snackbar.success('确认成功')
+                    if (confirm === 1){
+                        snackbar.success('确认成功');
+                        return;
+                    }
+                    snackbar.success('跳过成功');
                 }
             }
         });

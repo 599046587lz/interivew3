@@ -67,23 +67,17 @@ Queue.prototype.diff = function (newData) {
         this.queueData = []
         return
     }
-    newData.forEach((item, index) => {
-        if (!this.queueData[index]) {
+    newData.forEach((item) => {
+        if (!(this.queueData.find(val => val.sid == item.sid))) {
             this.render(item);
             this.queueData = this.queueData.concat(item)
         }
-        if (this.queueData[index].sid !== item.sid) {
-            this.removeDom(this.queueData[index].sid)
-            this.render(item)
-            this.queueData[index] = item;
+    })
+    this.queueData.forEach((val) => {
+        if (!(newData.find(item => item.sid == val.sid))) {
+            this.removeDom(val.sid);
         }
     })
-    if (queueLonger) {
-        this.queueData.slice(newData.length).forEach(item => {
-            this.removeDom(item.sid)
-        })
-        this.queueData = this.queueData.slice(0, newData.length)
-    }
 }
 
 Queue.prototype.removeDom = function (sid) {

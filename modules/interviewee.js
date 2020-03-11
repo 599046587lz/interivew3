@@ -292,6 +292,7 @@ exports.addInterviewee = function (data, cid) {
         delete interviewee[e];
     });
     IntervieweeEntity.cid = cid;
+    IntervieweeEntity.regTime = new Date();
     if (!!interviewee.signTime) {
         IntervieweeEntity.signTime = interviewee.signTime;
         delete interviewee.signTime;

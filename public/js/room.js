@@ -62,7 +62,7 @@ Queue.prototype.diff = function (newData) {
     if (newData.length === 0) {
         this.renderSkeleton()
         this.queueData.forEach(item => {
-            this.returnmoveDom(item.sid)
+            this.removeDom(item.sid)
         })
         this.queueData = []
         return

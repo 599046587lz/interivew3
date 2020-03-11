@@ -96,26 +96,20 @@ router.get('/extra',async function (ctx) {
  * 测试通过
  */
 
-router.get('/export', mid.checkFormat(function () {
+router.post('/export', mid.checkFormat(function () {
     return Joi.object().keys({
-        did: Joi.number(),
-        search: Joi.string() || '',
+        search: Joi.object() || null,
         page: Joi.number(),
         pageSize: Joi.number()
     })
 }),async function (ctx) {
     const cid = ctx.session.cid;
-    const did = ctx.request.query.did;
+    const search = ctx.request.body.search;
 
     if (!cid) {
         throw new JSONError('参数不完整', 403);
     }
-    let result = [];
-    if(did === undefined){
-        result = await Club.exportInterviewees(cid);
-    } else {
-        result = await Club.exportInterviewees(cid,did);
-    }
+    const result = await Club.exportInterviewees(cid,search);
     ctx.response.body = result;
 });
 

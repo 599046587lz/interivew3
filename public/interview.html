@@ -166,32 +166,6 @@
         </div>
     </div>
 </div>
-<div class="mdc-dialog"
-     role="alertdialog"
-     aria-modal="true"
-     aria-labelledby="my-dialog-title"
-     aria-describedby="my-dialog-content">
-    <div class="mdc-dialog__container">
-        <div class="mdc-dialog__surface">
-            <!-- Title cannot contain leading whitespace due to mdc-typography-baseline-top() -->
-            <h2 class="mdc-dialog__title" id="my-dialog-title"><!--
-     -->Call by StaffId<!--
-   --></h2>
-            <div class="mdc-dialog__content" id="my-dialog-content">
-                <input>
-            </div>
-            <footer class="mdc-dialog__actions">
-                <button type="button" class="mdc-button mdc-dialog__button cancel" data-mdc-dialog-action="cancel">
-                    <span class="mdc-button__label">CANCEL</span>
-                </button>
-                <button type="button" class="mdc-button mdc-dialog__button ok" data-mdc-dialog-action="ok">
-                    <span class="mdc-button__label">OK</span>
-                </button>
-            </footer>
-        </div>
-    </div>
-    <div class="mdc-dialog__scrim"></div>
-</div>
 <footer class="copyright"></footer>
 </body>
 <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
@@ -199,7 +173,6 @@
     const select = mdc.select.MDCSelect.attachTo(document.querySelector('.mdc-select'));
     mdc.textField.MDCTextField.attachTo(document.querySelector('.mdc-text-field'));
     const node = mdc.textField.MDCTextField.attachTo(document.querySelector('.note'));
-    const dialog = mdc.dialog.MDCDialog.attachTo(document.querySelector('.mdc-dialog'))
 </script>
 <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
 <!--<script type="text/javascript" src="lib/js/notifIt.js"></script>-->

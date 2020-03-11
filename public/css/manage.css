@@ -96,13 +96,11 @@
 }
 
 .filter {
-	padding: 0 40px;
+	padding: 10px 40px;
 }
-
 .filter .conditions {
 	display: inline-block;
 }
-
 .filter .middle {
 	vertical-align: middle;
 }
@@ -116,31 +114,68 @@
 	flex-direction: column;
 }
 
-/*popUps*/
-.popUps {
-	position: absolute;
-	border: 1px solid #000;
-	left: 0;
-	right: 0;
-	top: 0;
-	bottom: 0;
-	width: 500px;
-	height: 200px;
-	margin: auto;
-	background: #fff;
+/*提交*/
+.uploadContainer {
+	display: none;
+	text-align: center;
+}
+.uploadContainer > div {
+	margin: 10px;
 }
 
-/*框架相关*/
+.uploadContainer .department, .uploadContainer .classroom {
+	display: inline-block;
+}
+.uploadContainer .title {
+	font-size: 24px;
+	color: var(--mdc-theme-primary);
+}
+.uploadContainer .material-icons{
+	color: var(--mdc-theme-primary);
+	vertical-align: text-bottom;
+}
+
+.uploadContainer input {
+	line-height: 24px;
+	margin: 8px;
+}
+
+.uploadContainer .classroom .departmentName {
+	line-height: 24px;
+	margin: 8px;
+	display: inline-block;
+	width: 80px;
+}
+
+.appear {
+	display: block;
+}
+.disappear {
+	display: none;
+}
+
+/*mdc*/
+.mdc-data-table {
+	display: flex;
+}
 .mdc-data-table__header-cell, .mdc-data-table__cell {
 	line-height: 52px;
 }
 
+.mdc-dialog__surface,.mdc-dialog__content {
+	overflow: initial;
+}
+.mdc-select__anchor, .mdc-text-field {
+	display: flex;
+	margin-top: 20px;
+}
+.mdc-text-field--focused:not(.mdc-text-field--disabled) .mdc-floating-label {
+	color: var(--mdc-theme-primary);
+}
+.mdc-select--outlined:not(.mdc-select--disabled).mdc-select--focused .mdc-floating-label {
+	color: var(--mdc-theme-primary);
+}
 .mdc-fab {
 	width: 32px;
 	height: 32px;
 }
-
-/*#export {*/
-/*	display: none;*/
-/*}*/
-

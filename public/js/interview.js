@@ -122,7 +122,6 @@ $(function () {
   stepCtl.push(new Step(function () {
     $commentCard.removeClass('active').addClass('inactive')
   }, function () {
-    getQueueNumber();
     $commentCard.removeClass('active').addClass('inactive')
     $callCard.find('.waiting').fadeOut()
     $callCard.find('.operation').fadeIn()
@@ -148,21 +147,7 @@ $(function () {
   })
   //call by staffId number 1
   $callCard.find('.link').on('click', function () {
-    var $dialog = $('.mdc-dialog')
-    dialog.open();
-    $dialog.find('.cancel').on('click', function () {
-      dialog.close()
-      stepCtl.prev();
-    })
-    $dialog.find('.ok').on('click', function () {
-      var sid = $dialog.find('input')[0].value;
-      if ((/[0-9]{8}/).test(sid)) {
-        dialog.close()
-        callNext(sid)
-      } else {
-        snackbar.err('学号格式有误！请重新输入')
-      }
-    })
+    dialog.open()
   })
 
   // open comment or Skip
@@ -174,8 +159,7 @@ $(function () {
     }
   })
   $informationCard.find('button.skip').on('click', function () {
-    getQueueNumber()
-    snackbar.confirm('确认跳过？', null, function () {
+    snackbar.confirm('确认跳过？', ()=>{}, function () {
       apiSkip()
     })
   })
@@ -256,6 +240,10 @@ $(function () {
         403: function () {
           snackbar.err('该同学未报名');
           stepCtl.prev()
+        },
+        500: function () {
+          snackbar.err('该同学已进行过面试或与服务器通讯错误')
+          stepCtl.prev()
         }
       }
     })
@@ -273,7 +261,6 @@ $(function () {
         },
         403: function () {
           snackbar.err('此人未确认，已被room跳过');
-          stepCtl.prev();
           stepCtl.prev();
         },
         202: function () {
@@ -315,6 +302,7 @@ $(function () {
             node.value = '';
             slider.value = 0;
             stepCtl.next()
+            getQueueNumber()
           }
         }
       })
@@ -331,6 +319,7 @@ $(function () {
       },
       statusCode:{
         200 : function () {
+          getQueueNumber()
           if ($commentCard.hasClass('active')) {
             stepCtl.prev()
           }
@@ -340,6 +329,22 @@ $(function () {
       }
     })
   }
+
+  dialog.init('Input StaffId',function () {
+    var sid = dialog.text.value;
+    if ((/[0-9]{8}/).test(sid)) {
+      dialog.close()
+      callNext(sid)
+    } else {
+      snackbar.err('学号格式有误！请重新输入')
+    }
+    callNext(sid)
+    dialog.reset()
+  },function () {
+      dialog.close()
+      stepCtl.prev();
+      dialog.reset()
+  })
 
   getDepartmentInfo()
 

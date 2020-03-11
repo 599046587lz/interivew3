@@ -187,11 +187,7 @@ html,body {
   vertical-align: text-bottom;
 }
 
-.mdc-dialog input {
-  border: none;
-  border-bottom: 2px solid #eee;
-  outline: none;
-}
+
 
 /*animate*/
 @keyframes am-comment-active {
@@ -282,6 +278,9 @@ html,body {
 }
 .mdc-slider {
   --mdc-theme-secondary: var(--mdc-theme-primary);
+}
+.mdc-dialog__content .mdc-select {
+  display: none;
 }
 
 @media screen and (max-width: 620px) {

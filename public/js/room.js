@@ -225,7 +225,11 @@ $(function () {
                     roomBorder.remove();
                     calledQueue.removeDom(sid);
                     judgeScroll();
-                    snackbar.success('确认成功')
+                    if (confirm === 1){
+                        snackbar.success('确认成功');
+                        return;
+                    }
+                    snackbar.success('跳过成功');
                 }
             }
         });

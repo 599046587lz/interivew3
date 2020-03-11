@@ -172,7 +172,7 @@ exports.tocallNextInterviewee = function (sid, cid, did) {
             throw new JSONError('该同学未报名',403);
         }
         if (result.done.indexOf(did * 1) !== -1) {
-            throw new JSONError('该同学已进行过面试');
+            throw new JSONError('该同学已进行过面试',403);
         }
         result.calldid = did;
         result.ifcall = true;

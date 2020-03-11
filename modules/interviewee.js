@@ -163,11 +163,13 @@ exports.tocallNextInterviewee = function (sid, cid, did) {
         cid: cid,
         volunteer: did,
         signTime: {$ne: null},
-        ifconfirm: 2,
-        calldid: null
+        ifconfirm: 2
     };
     return IntervieweeModel.findOne(data).then(result => {
         // if (result.done.indexOf(did * 1) != -1) reject(new Error('该同学已进行过面试'));
+        if (result.calldid !== null) {
+            throw new JSONError('该同学已被别的部门叫走',403);
+        }
         if (result == null) {
             throw new JSONError('该同学未报名',403);
         }
@@ -184,9 +186,10 @@ exports.tocallNextInterviewee = function (sid, cid, did) {
 exports.getSpecifyInterviewee = function (cid, did) {
         let data = {
                 cid: cid,
-                volunteer: did,
+                // volunteer: did,
                 ifcall: true,
-                ifsign: true
+                ifsign: true,
+                calldid: did
         };
         return IntervieweeModel.findOne(data)
 };

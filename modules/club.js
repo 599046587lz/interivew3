@@ -13,7 +13,7 @@ exports.login = function (user, password) {
     return clubModel.findOne({
         name: user
     }).then(result => {
-        if (result && password == result.password) {
+        if (result && password === result.password) {
             result = result.toObject();
             delete result.password;
             return result;
@@ -84,7 +84,9 @@ exports.handleArchive = function (file, cid) {
                 }
                 return;
             }
-            if (!interviewerInfo[row]) interviewerInfo[row] = {};
+            if (!interviewerInfo[row]) {
+                interviewerInfo[row] = {};
+            }
             if (hearders[col] === undefined) return;
             if (hearders[col] === 'volunteer') {
                 let departInfo = value.split(',');
@@ -205,7 +207,7 @@ exports.verifyInfo = function (data) {
     return clubModel.findOne({
         cid: data.cid
     }).then(result => {
-        if (!result || !(data.clubName == result.name)) throw new Error("社团id错误！");
+        if (!result || !(data.clubName === result.name)) throw new Error("社团id错误！");
         result = result.toObject();
         delete result.password;
         return result;
@@ -238,7 +240,7 @@ exports.setRoomLocation = function (cid, info) {
     }).then(result => {
         result.departments.forEach(e => {
             info.forEach(i => {
-                if (i.departmentId == e.did) {
+                if (i.departmentId === e.did) {
                     e.location = i.roomLocation;
                 }
             });

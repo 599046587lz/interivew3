@@ -77,7 +77,8 @@ exports.getNextInterviewee = function (cid, did) {
             volunteer: did,
             busy: false,
             signTime: {$ne: null},
-            ifconfirm: 2
+            ifconfirm: 2,
+            calldid: {$ne: null}
         }).$where(new Function('let volunteer = this.volunteer;' +
             'let done = this.done;' +
             'return (volunteer.length != done.length) && (done.indexOf(' + did + ') == -1);'

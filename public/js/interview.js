@@ -186,6 +186,9 @@ $(function () {
             departments[item.did] = item.name
           })
           $mdcSelect[0].innerHTML += departmentsHtml;
+        },
+        403 : function () {
+          relogin()
         }
       }
     })

@@ -110,7 +110,10 @@ $(function () {
       return `<td colspan="4">未进行面试</td>>`
     } else {
       data = data[0]
-      return `<td>${departmentsName[data.did]}</td><td>${data.score}</td><td>${data.comment}</td><td>${data.interviewer}</td>`
+      return `<td class="mdc-data-table__cell">${departmentsName[data.did]}</td>
+              <td class="mdc-data-table__cell">${data.score}</td>
+              <td class="mdc-data-table__cell">${data.comment}</td>
+              <td class="mdc-data-table__cell">${data.interviewer}</td>`
     }
   }
 
@@ -166,7 +169,12 @@ $(function () {
                        <td class="mdc-data-table__cell" rowspan="${rowNumber}">${item.volunteer.map(item => departmentsName[item])}</td>
                        ${renderInterviewers(item.rate.slice(0, 1))}
                        </tr>
-                        ${item.rate.slice(1).map(item => `<tr class="mdc-data-table__row"><td class="mdc-data-table__cell">${departmentsName[item.did]}</td><td class="mdc-data-table__cell">${item.score}</td><td class="mdc-data-table__cell">${item.comment}</td><td class="mdc-data-table__cell">${item.interviewer}</td></tr>`)}`
+                        ${item.rate.slice(1).map(item => `<tr class="mdc-data-table__row">
+                                                                        <td class="mdc-data-table__cell">${departmentsName[item.did]}</td>
+                                                                        <td class="mdc-data-table__cell">${item.score}</td>
+                                                                        <td class="mdc-data-table__cell">${item.comment}</td>
+                                                                        <td class="mdc-data-table__cell">${item.interviewer}</td>
+                                                                     </tr>`)}`
       })
     }
     exportTable.append(`${thead}<tbody class="mdc-data-table__content">${data.join('')}</tbody>`);

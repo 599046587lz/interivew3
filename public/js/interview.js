@@ -279,7 +279,7 @@ $(function () {
           stepCtl.prev();
         },
         202: function () {
-          waitConfirm()
+          waitConfirm(sid)
         }
       }
     })

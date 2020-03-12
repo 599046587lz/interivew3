@@ -167,11 +167,11 @@ exports.tocallNextInterviewee = function (sid, cid, did) {
     };
     return IntervieweeModel.findOne(data).then(result => {
         // if (result.done.indexOf(did * 1) != -1) reject(new Error('该同学已进行过面试'));
-        if (result.calldid !== null) {
-            throw new JSONError('该同学已被别的部门叫走',403);
-        }
         if (result == null) {
             throw new JSONError('该同学未报名',403);
+        }
+        if (result.calldid !== null) {
+            throw new JSONError('该同学已被别的部门叫走',403);
         }
         if (result.done.indexOf(did * 1) !== -1) {
             throw new JSONError('该同学已进行过面试',403);

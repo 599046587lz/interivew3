@@ -183,18 +183,6 @@ exports.tocallNextInterviewee = function (sid, cid, did) {
     })
 };
 
-exports.getCalledInterviewee = function (cid,did,sid){
-    let data = {
-        cid: cid,
-        sid: sid,
-        ifcall: true,
-        ifsign: true,
-        busy: false,
-        calldid: did
-    };
-    return IntervieweeModel.findOne(data)
-};
-
 exports.getSpecifyInterviewee = function (cid, did, sid) {
         let data = {
                 cid: cid,
@@ -204,12 +192,10 @@ exports.getSpecifyInterviewee = function (cid, did, sid) {
                 busy: false,
                 calldid: did
         };
-        return IntervieweeModel.findOne(data).then(result => {
-            if(sid){
-                data.sid = sid;
-            }
-            return IntervieweeModel.findOne(data);
-        })
+        if(sid){
+            data.sid = sid;
+        }
+        return IntervieweeModel.findOne(data);
 };
 
 exports.rateInterviewee =  function (cid, sid, score, comment, did, interviewer) {

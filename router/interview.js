@@ -90,27 +90,29 @@ router.get('/call',  mid.checkFormat(function () {
 
 
 //确认面试是否开始
-router.get('/start',async function (ctx) {
-    const {did,cid} = ctx.session;
+router.get('/start',mid.checkFormat(function () {
+    return Joi.object().keys({
+        sid: Joi.number()
+    })
+}), async function (ctx) {
+    const {did, cid} = ctx.session;
+    const sid = ctx.request.query.sid;
 
-    let result = await Interviewee.getSpecifyInterviewee(cid, did);
-    //result = result.toObject();
+    let result = await Interviewee.getSpecifyInterviewee(cid, did, sid);
     if (result.ifconfirm === 0) {
-        result.ifsign = false;
-        result.ifcall = false;
-        result.save();
-        throw new JSONError('该学生跳过', 403);
-    }
-    else if (result.ifconfirm === 2) {
-        ctx.response.body = '等待确认中';
-        ctx.response.status = 202;
-    }
-    else {
-        result.busy = true;
-        result.save();
-        result.did = did;
-        ctx.response.body = result;
-        ctx.response.status = 200;
+            result.ifsign = false;
+            result.ifcall = false;
+            result.save();
+            throw new JSONError('该学生跳过', 403);
+    } else if (result.ifconfirm === 2) {
+            ctx.response.body = '等待确认中';
+            ctx.response.status = 202;
+    } else {
+            result.busy = true;
+            result.save();
+            result.did = did;
+            ctx.response.body = result;
+            ctx.response.status = 200;
     }
 });
 

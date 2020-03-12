@@ -183,7 +183,7 @@ exports.tocallNextInterviewee = function (sid, cid, did) {
     })
 };
 
-exports.getSpecifyInterviewee = function (cid, did) {
+exports.getSpecifyInterviewee = function (cid, did, sid) {
         let data = {
                 cid: cid,
                 // volunteer: did,
@@ -192,7 +192,10 @@ exports.getSpecifyInterviewee = function (cid, did) {
                 busy: false,
                 calldid: did
         };
-        return IntervieweeModel.findOne(data)
+        if(sid){
+            data.sid = sid;
+        }
+        return IntervieweeModel.findOne(data);
 };
 
 exports.rateInterviewee =  function (cid, sid, score, comment, did, interviewer) {
@@ -255,6 +258,7 @@ exports.skip = function (cid, sid, did) {
             result.signTime = new Date();
             result.busy = false;
             result.volunteer.splice(result.volunteer.indexOf(did), 1);
+            result.ifcall = false;
             result.save();
             return '跳过成功';
         })

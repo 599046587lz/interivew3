@@ -113,11 +113,11 @@ $(function () {
   }, function () {
     $commentCard.removeClass('inactive').addClass('active')
     clock.start();
-    if(!sliderHasInitialize){
+    if (!sliderHasInitialize) {
       sliderHasInitialize = true;
       setTimeout(function () {
         slider = mdc.slider.MDCSlider.attachTo(document.querySelector('.mdc-slider'));
-      },500)
+      }, 500)
     }
   }))
   //submit
@@ -161,7 +161,8 @@ $(function () {
     }
   })
   $informationCard.find('button.skip').on('click', function () {
-    snackbar.confirm('确认跳过？', ()=>{}, function () {
+    snackbar.confirm('确认跳过？', () => {
+    }, function () {
       apiSkip()
     })
   })
@@ -187,7 +188,7 @@ $(function () {
           })
           $mdcSelect[0].innerHTML += departmentsHtml;
         },
-        403 : function () {
+        403: function () {
           relogin()
         }
       }
@@ -239,7 +240,7 @@ $(function () {
       dataType: 'json',
       statusCode: {
         200: function () {
-          waitConfirm();
+          waitConfirm(sid);
           stepCtl.next()
         },
         204: function () {
@@ -255,10 +256,18 @@ $(function () {
     })
   };
 
-  var waitConfirm = function () {
+  var waitConfirm = function (sid) {
+    var obj = {};
+    if (sid) {
+      obj = {
+        sid: sid
+      }
+    }
     $.ajax({
       url: baseURL + 'interview/start',
       type: 'get',
+      data: obj,
+      dataType: 'json',
       statusCode: {
         200: function (data) {
           renderComment(data.name, data.major, data.sid, data.notion)
@@ -323,8 +332,8 @@ $(function () {
       data: {
         sid: sid,
       },
-      statusCode:{
-        200 : function () {
+      statusCode: {
+        200: function () {
           getQueueNumber()
           if ($commentCard.hasClass('active')) {
             stepCtl.prev()
@@ -336,7 +345,7 @@ $(function () {
     })
   }
 
-  dialog.init('Input StaffId',function () {
+  dialog.init('Input StaffId', function () {
     var sid = dialog.text.value;
     if ((/[0-9]{8}/).test(sid)) {
       callNext(sid)
@@ -344,9 +353,9 @@ $(function () {
       snackbar.err('学号格式有误！请重新输入')
     }
     dialog.reset()
-  },function () {
-      stepCtl.prev();
-      dialog.reset()
+  }, function () {
+    stepCtl.prev();
+    dialog.reset()
   })
 
   getDepartmentInfo()

@@ -203,7 +203,7 @@ $(function () {
       },
       statusCode: {
         204: function () {
-          getQueueNumber(did);
+          getQueueNumber();
           stepCtl.next()
         }
       }
@@ -238,6 +238,10 @@ $(function () {
         200: function () {
           waitConfirm();
           stepCtl.next()
+        },
+        204: function () {
+          snackbar.err('暂时无人面试');
+          stepCtl.prev()
         },
         403: function (errInfo) {
           snackbar.err(errInfo.responseText);

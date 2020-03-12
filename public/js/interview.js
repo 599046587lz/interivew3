@@ -241,19 +241,15 @@ $(function () {
         },
         204: function () {
           snackbar.err('暂时无人面试');
-          stepCtl.prev()
         },
         403: function (errInfo) {
           snackbar.err(errInfo.responseText);
-          stepCtl.prev()
         },
         500: function () {
           snackbar.err('与服务器通讯错误')
-          stepCtl.prev()
         }
       }
     })
-
   };
 
   var waitConfirm = function () {
@@ -267,6 +263,7 @@ $(function () {
         },
         403: function () {
           snackbar.err('此人未确认，已被room跳过');
+          getQueueNumber()
           stepCtl.prev();
         },
         202: function () {

@@ -98,38 +98,21 @@ router.get('/start',mid.checkFormat(function () {
     const {did, cid} = ctx.session;
     const sid = ctx.request.query.sid;
 
-    if (sid) {
-        let result = await Interviewee.getCalledInterviewee(cid, did, sid);
-        if (result.ifconfirm === 0) {
+    let result = await Interviewee.getSpecifyInterviewee(cid, did, sid);
+    if (result.ifconfirm === 0) {
             result.ifsign = false;
             result.ifcall = false;
             result.save();
             throw new JSONError('该学生跳过', 403);
-        } else if (result.ifconfirm === 2) {
+    } else if (result.ifconfirm === 2) {
             ctx.response.body = '等待确认中';
             ctx.response.status = 202;
-        } else {
-            result.busy = true;
-            result.save();
-            result.did = did;
-            ctx.response.body = result;
-        }
     } else {
-        let result = await Interviewee.getSpecifyInterviewee(cid, did);
-        if (result.ifconfirm === 0) {
-            result.ifsign = false;
-            result.ifcall = false;
-            result.save();
-            throw new JSONError('该学生跳过', 403);
-        } else if (result.ifconfirm === 2) {
-            ctx.response.body = '等待确认中';
-            ctx.response.status = 202;
-        } else {
             result.busy = true;
             result.save();
             result.did = did;
             ctx.response.body = result;
-        }
+            ctx.response.status = 200;
     }
 });
 

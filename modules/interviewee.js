@@ -195,7 +195,7 @@ exports.getCalledInterviewee = function (cid,did,sid){
     return IntervieweeModel.findOne(data)
 };
 
-exports.getSpecifyInterviewee = function (cid, did) {
+exports.getSpecifyInterviewee = function (cid, did, sid) {
         let data = {
                 cid: cid,
                 // volunteer: did,
@@ -204,7 +204,12 @@ exports.getSpecifyInterviewee = function (cid, did) {
                 busy: false,
                 calldid: did
         };
-        return IntervieweeModel.findOne(data)
+        return IntervieweeModel.findOne(data).then(result => {
+            if(sid){
+                data.sid = sid;
+            }
+            return IntervieweeModel.findOne(data);
+        })
 };
 
 exports.rateInterviewee =  function (cid, sid, score, comment, did, interviewer) {

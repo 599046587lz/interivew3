@@ -73,26 +73,36 @@ body {
   }
 }
 
-.mdc-snackbar {
-  justify-content: left;
-}
-.mdc-snackbar .material-icons {
+.mdc-snackbar i {
   color: white;
-  margin-left: 16px;
-  display: none;
 }
-.mdc-snackbar .cancel {
-  display: block;
+.mdc-snackbar .icon::before {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  margin-left: 16px;
+}
+.success.mdc-snackbar .icon::before {
+  content: 'done_all';
+}
+.error.mdc-snackbar .icon::before {
+  content: 'error_outline'
 }
 .success .mdc-snackbar__surface {
   background: var(--platform-color-green);
 }
-.success.mdc-snackbar .done,.error.mdc-snackbar .error,.confirm.mdc-snackbar .ok{
-  display: block;
-}
 .error .mdc-snackbar__surface {
   background: var(--platform-color-red);
 }
+.mdc-snackbar .ok {
+  display: none;
+}
+.confirm.mdc-snackbar .ok{
+  display: block;
+}
+
+
 /*blurry & skeleton*/
 .blurry {
   position: absolute;

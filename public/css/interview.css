@@ -270,6 +270,9 @@ html,body {
 .mdc-select .mdc-select__anchor, .mdc-text-field {
   display: flex;
 }
+.mdc-text-field {
+  margin-top: 8px;
+}
 .mdc-text-field--focused:not(.mdc-text-field--disabled) .mdc-floating-label {
   color: var(--mdc-theme-primary);
 }

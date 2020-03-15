@@ -153,6 +153,9 @@ exports.exportInterviewees = function (cid, search) {
         result = result.map(e => {
             e = e.toObject()
             e.state = "已报名"
+            if(e.signTime){
+                e.state = "被跳过"
+            }
             if (e.ifsign === true) {
                 e.state = "已签到"
             }
@@ -165,6 +168,7 @@ exports.exportInterviewees = function (cid, search) {
             if (e.ifsign && e.ifcall && !e.busy) {
                 e.state = "面试结束"
             }
+
             return e
         })
         if (search && Object.keys(search).length !== 0) {

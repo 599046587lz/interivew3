@@ -57,7 +57,7 @@ Snackbar.prototype.confirm = function (content, ok, cancel) {
     $okButton.off('click', okCallback)
     $cancelButton.off('click', cancelCallback)
   }
-  
+
   $okButton.on('click', okCallback)
   $cancelButton.on('click', cancelCallback)
   this.popup('confirm', content, -1)
@@ -130,24 +130,37 @@ function Dialog() {
   $('body').append($dialogHtml);
   this.dialog = mdc.dialog.MDCDialog.attachTo($dialogHtml[0]);
   this.$dialog = $dialogHtml;
-}
-
-Dialog.prototype.open = function () {
-  this.dialog.open()
-}
-
-Dialog.prototype.init = function (content, ok, cancel) {
-  this.$dialog.html(this.$dialog.html().replace('_content', content))
   this.select = mdc.select.MDCSelect.attachTo(this.$dialog.find('.mdc-select')[0]);
   this.text = mdc.textField.MDCTextField.attachTo(this.$dialog.find('.mdc-text-field')[0]);
-  this.$dialog.find('.ok').unbind('click')
-  this.$dialog.find('.cancel').unbind('click')
-  this.$dialog.find('.ok').on('click', function () {
-    ok()
-  })
-  this.$dialog.find('.cancel').on('click', function () {
-    cancel()
-  })
+  this.$cancelButton = this.$dialog.find('.cancel')
+  this.$okButton = this.$dialog.find('.ok')
+  this.$title = this.$dialog.find('.mdc-dialog__title')
+}
+
+Dialog.prototype.open = function (content, ok, cancel) {
+  this.$title.html(`<!---->_content<!---->`.replace('_content', content))
+  var $okButton = this.$okButton;
+  var $cancelButton = this.$cancelButton;
+
+  var cancelCallback =  function () {
+    if (typeof cancel === 'function') {
+      cancel()
+    }
+    $cancelButton.off('click',cancelCallback)
+    $okButton.off('click',okCallback)
+  }
+
+  var okCallback = function(){
+    if (typeof ok === 'function') {
+      ok()
+    }
+    $cancelButton.off('click',cancelCallback)
+    $okButton.off('click',okCallback)
+  }
+
+  $okButton.on('click', okCallback)
+  $cancelButton.on('click',cancelCallback)
+  this.dialog.open()
 }
 
 Dialog.prototype.reset = function(){

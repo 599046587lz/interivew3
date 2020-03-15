@@ -180,10 +180,6 @@ $(function () {
     exportTable.append(`${thead}<tbody class="mdc-data-table__content">${data.join('')}</tbody>`);
   }
 
-  $('.back').on('click', (function () {
-    window.history.back();
-  }));
-
   $("#submit").on('click', function () {
     var self = $(this);
     self.addClass('loading');
@@ -268,36 +264,36 @@ $(function () {
 
   //dialogs
   $addFilter.on('click', function () {
-    dialog.open()
+    dialog.open('Input the Filter', function () {
+      var searchString = dialog.text.value;
+      var field = dialog.select.value;
+      var showField = dialog.select.selectedText_.innerHTML
+      var showString = searchString
+      if (showField === '报名部门') {
+        searchString = departmentsName.indexOf(searchString)
+        if (searchString === -1) {
+          snackbar.err('部门不存在！')
+          dialog.reset()
+          return
+        }
+      }
+      if (!searchValue[field]) {
+        searchValue[field] = [searchString];
+      } else {
+        searchValue[field].push(searchString);
+      }
+      if (!selectNameChange[showField]) {
+        selectNameChange[showField] = field
+      }
+      getIntervieweesData()
+      $mdcChipSet.append(filterTemplate.replace('_filter', `${showField}=${showString}`))
+      dialog.reset()
+    }, function () {
+      dialog.reset()
+    })
   })
 
-  dialog.init('Input the Filter', function () {
-    var searchString = dialog.text.value;
-    var field = dialog.select.value;
-    var showField = dialog.select.selectedText_.innerHTML
-    var showString = searchString
-    if (showField === '报名部门') {
-      searchString = departmentsName.indexOf(searchString)
-      if (searchString === -1) {
-        snackbar.err('部门不存在！')
-        dialog.reset()
-        return
-      }
-    }
-    if (!searchValue[field]) {
-      searchValue[field] = [searchString];
-    } else {
-      searchValue[field].push(searchString);
-    }
-    if (!selectNameChange[showField]) {
-      selectNameChange[showField] = field
-    }
-    getIntervieweesData()
-    $mdcChipSet.append(filterTemplate.replace('_filter', `${showField}=${showString}`))
-    dialog.reset()
-  }, function () {
-    dialog.reset()
-  })
+
 
   $mdcChipSet.on('click', function (e) {
     if (e.target.classList.contains('material-icons')) {

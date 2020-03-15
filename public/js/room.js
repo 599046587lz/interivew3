@@ -16,6 +16,10 @@ function SignButton(signMember) {
       $(this).removeClass('active');
       var $staffId = $signButtonHtml.find("input");
       var sid = $staffId.val();
+      if(!(/[0-9]{8}/).test(sid)){
+        snackbar.err('请输入正确格式的学号！')
+        return;
+      }
       $staffId.val("");
       signMember(sid);
       return;

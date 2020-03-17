@@ -5,7 +5,14 @@ let mongoose = require('mongoose');
 let config = require('./config');
 let mongoUserInfo = (!config.db.user || !config.db.password)? '' : config.db.user + ':' + config.db.password + '@';
 let mongoUrl = `mongodb://${mongoUserInfo}${config.db.host}/${config.db.db}`;
-mongoose.connect(mongoUrl, { useNewUrlParser: true })
+mongoose.connect(mongoUrl, { useNewUrlParser: true });
+
+mongoose.set('useFindAndModify', false);
+
+
+
+const db = mongoose.connection
+db.on('error', console.error.bind(console, 'MongoDB 连接错误'));
 
 let Department = new mongoose.Schema({
     did: Number,
@@ -32,10 +39,11 @@ let Club = new mongoose.Schema({
 let rate = new mongoose.Schema({
     did: Number,
     score:  {
-        type: Number,
+        type: String,
         enum:
             {
-                values: [0, 1, 2], //0: 待录用  1:录用 2:不录用
+                //values: [0,1,2], //0: 待录用  1:录用 2:不录用
+                values: ["1","2","3","4","5"],
                 message: "请输入正确的分数"
             }
     },
@@ -47,6 +55,7 @@ let Interviewee = new mongoose.Schema({
     clubName: String,
     sid: Number,
     cid: Number,
+    signNumber: Number,
     name: {
         type: String,
         default: ''
@@ -73,6 +82,7 @@ let Interviewee = new mongoose.Schema({
         default: ''
     },
     signTime: Date,
+    regTime: Date,
     rate: [rate],//{did: Number,score: Number, comment: String, interviewer: String}
     done: [Number],
     busy: {
@@ -84,12 +94,16 @@ let Interviewee = new mongoose.Schema({
             default: false
         } //是否正在和叫号大厅传输该学生信息*/
     ifsign:{
-        type: String,
-        default: 1
+        type: Boolean,
+        default: false
     },
     ifcall:{
         type: Boolean,
         default: false
+    },
+    ifconfirm:{
+        type: Number,
+        default: 2        //0跳过 1确认 2等待
     },
     email: {
         type: String,

@@ -1,14 +1,14 @@
-let express = require('express');
-let interviewee = require('../modules/interviewee');
-let utils = require('../utils/utils');
-let club = require('../modules/club');
-let mid = require('../utils/middleware');
-let router = express.Router();
-let Joi = require('joi');
-let JSONError = require('../utils/JSONError');
+const Router = require('koa-router');
+const Joi = require('joi');
+const interviewee = require('../modules/interviewee');
+const club = require('../modules/club');
+const utils = require('../utils/utils');
+const mid = require('../utils/middleware');
+const JSONError = require('../utils/JSONError');
 
-
-let wrap = fn => (...args) => fn(...args).catch(args[2]);
+const router = new Router({
+    prefix: '/reg'
+});
 
 router.post('/', mid.checkFormat(function() {
     return {
@@ -34,20 +34,25 @@ router.post('/', mid.checkFormat(function() {
             qq: 'qq',
             short_tel: '短号',
         }
-}}), wrap(async function(req, res) {
-    let data = req.body;
-    let fileName = data.cid + '-' + data.name + '-' + data.sid + '.jpg';
-    let departInfo = await club.getClubInfo(data.cid);
-    if(!departInfo || !(data.clubName == departInfo.name)) throw new JSONError('社团id错误');
+}}), async function(ctx) {
+    const data = ctx.request.body;
+    const fileName = data.cid + '-' + data.name + '-' + data.sid + '.jpg';
+    const departInfo = await club.getClubInfo(data.cid);
+    if(!departInfo || !(data.clubName === departInfo.name)){
+        throw new JSONError('社团id错误');
+    }
 
-    let studentInfo = await interviewee.getInterviewerInfo(data.sid, data.cid);
-    if(!!studentInfo) throw new JSONError('该学生已注册', 403);
+    const studentInfo = await interviewee.getInterviewerInfo(data.sid, data.cid);
+    if(!!studentInfo) {
+        throw new JSONError('该学生已注册', 403);
+    }
+
+    data.regTime = new Date();
     data.image = await utils.image_save(data.pic_url, fileName);
-    let result = await interviewee.addStudent(data);
-    res.send({
-        status: 200,
-        message: result
-    });
+    // let result = await interviewee.addStudent(data);
+    await interviewee.addStudent(data);
+    ctx.response.status = 200;
+    //ctx.response.body = result;
+});
 
-}));
 module.exports = router;

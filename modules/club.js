@@ -13,7 +13,7 @@ exports.login = function (user, password) {
     return clubModel.findOne({
         name: user
     }).then(result => {
-        if (result && password == result.password) {
+        if (result && password === result.password) {
             result = result.toObject();
             delete result.password;
             return result;
@@ -41,7 +41,7 @@ exports.handleArchive = function (file, cid) {
         let department = clubInfo.departments;
         let interviewerInfo = [];
         let hearders = {};
-        let workbook = excel.readFile(file.path);
+        let workbook = excel.readFile(file.archive.path);
         let workSheet = workbook.Sheets[workbook.SheetNames[0]];
         let keys = Object.keys(workSheet);
         let key = keys.filter(k => k[0] !== '!');
@@ -49,7 +49,7 @@ exports.handleArchive = function (file, cid) {
             let col = k.substring(0, 1); //A
             let row = parseInt(k.substring(1)); //11
             let value = workSheet[k].v;
-            if (row == 1) {
+            if (row === 1) {
                 switch (value) {
                     case '姓名':
                         hearders[col] = 'name';
@@ -84,14 +84,16 @@ exports.handleArchive = function (file, cid) {
                 }
                 return;
             }
-            if (!interviewerInfo[row]) interviewerInfo[row] = {};
-            if (hearders[col] == undefined) return;
-            if (hearders[col] == 'volunteer') {
+            if (!interviewerInfo[row]) {
+                interviewerInfo[row] = {};
+            }
+            if (hearders[col] === undefined) return;
+            if (hearders[col] === 'volunteer') {
                 let departInfo = value.split(',');
                 let result = [];
                 departInfo.forEach(e => {
                     let oneDepart = department.filter(k => {
-                        return k.name == e
+                        return k.name === e
                     })[0];
                     result.push(oneDepart.did);
                 });
@@ -101,7 +103,7 @@ exports.handleArchive = function (file, cid) {
             }
         }); //interviewerInfo的长度永远多2个
         interviewerInfo = interviewerInfo.filter(e => {
-            return e != undefined;
+            return e !== undefined;
         });
         for (let interviewer of interviewerInfo) {
             count++;
@@ -112,7 +114,7 @@ exports.handleArchive = function (file, cid) {
                 if (!!result) {
                     result.volunteer.forEach(e => {
                         interviewer.volunteer.forEach((i, j) => {
-                            if (e == i) {
+                            if (e === i) {
                                 interviewer.volunteer[j] = null;
                             }
                         })
@@ -127,7 +129,7 @@ exports.handleArchive = function (file, cid) {
                 }
                 interviewer.volunteer.forEach(e => {
                     clubInfo.departments.forEach(i => {
-                        if (i.did == e) {
+                        if (i.did === e) {
                             i.number++;
                         }
                     })
@@ -144,26 +146,50 @@ exports.createClub = function (data) {
     return clubModel.create(data);
 };
 
-exports.exportAllInterviewees = function (cid) {
-    return IntervieweeModel.find({
-        cid: cid,
-    }, 'name sid rate volunteer notion phone qq short_tel major sex email').then(result => {
-        result = result.map(e => e.toObject())
 
-        return result;
-    })
-}
-
-exports.exportInterviewees = function (cid, did) {
-    return IntervieweeModel.find({
-        cid: cid,
-        volunteer: did
-    }, 'name sid rate volunteer notion phone qq short_tel major sex email').then(result => {
+exports.exportInterviewees = function (cid, search) {
+    let obj = {cid: cid}
+    return IntervieweeModel.find(obj).then(result => {
         result = result.map(e => {
             e = e.toObject()
-            e.rate = e.rate.filter(ele => did === ele.did)
+            e.state = "已报名"
+            if(e.signTime){
+                e.state = "被跳过"
+            }
+            if (e.ifsign === true) {
+                e.state = "已签到"
+            }
+            if (e.ifcall === true) {
+                e.state = "已叫号"
+            }
+            if (e.busy === true) {
+                e.state = "面试中"
+            }
+            if (e.ifsign && e.ifcall && !e.busy) {
+                e.state = "面试结束"
+            }
+
             return e
         })
+        if (search && Object.keys(search).length !== 0) {
+            result = result.map(e => {
+                let rate = ""
+                if (e.rate.length > 0) {
+                    rate = e.rate.map(item => `#${item.score}#${item.comment}#${item.interviewer}`).join('#')
+                }
+                e["information"] = [e.name, e.sid, e.major, e.email, e.phone, e.qq, e.notion, rate].join('#')
+                return e
+            })
+            Object.keys(search).forEach(item => {
+                search[item].forEach(condition => {
+                    result = result.filter(ele => {
+                        if (String(ele[item]).indexOf(condition) !== -1) {
+                            return ele
+                        }
+                    })
+                })
+            })
+        }
         return result
     })
 };
@@ -172,14 +198,13 @@ exports.getClubInfo = function (cid) {
     return clubModel.findOne({
         cid: cid
     });
-
 };
 
 exports.verifyInfo = function (data) {
     return clubModel.findOne({
         cid: data.cid
     }).then(result => {
-        if (!result || !(data.clubName == result.name)) throw new Error("社团id错误！");
+        if (!result || !(data.clubName === result.name)) throw new Error("社团id错误！");
         result = result.toObject();
         delete result.password;
         return result;
@@ -194,9 +219,10 @@ exports.insertInfo = function (data) {
     });
 };
 
-exports.getRegNum = function (clubId) {
-    return studentModel.find({
-        clubID: clubId
+exports.getRegNum = function (cid) {
+    return IntervieweeModel.find({
+    //return studentModel.find({
+        cid: cid
     }).then(result => {
         return {
             count: result.length
@@ -204,13 +230,14 @@ exports.getRegNum = function (clubId) {
     })
 };
 
+
 exports.setRoomLocation = function (cid, info) {
     clubModel.findOne({
         cid: cid
     }).then(result => {
         result.departments.forEach(e => {
             info.forEach(i => {
-                if (i.departmentId == e.did) {
+                if (i.departmentId === e.did) {
                     e.location = i.roomLocation;
                 }
             });
@@ -238,5 +265,4 @@ exports.getDepartmentInfo = function (cid) {
     }, {
         departments: 1
     })
-
 };

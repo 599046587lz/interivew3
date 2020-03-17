@@ -1,35 +1,38 @@
-let express = require('express');
-let qiniu = require('../utils/qiniu');
 const path = require('path');
-let router = express.Router();
-let mid = require('../utils/middleware');
-let Interview = require('../modules/interviewee');
-let Club = require('../modules/club');
-let office = require('../utils/office');
-let utils = require('../utils/utils');
-let upload = require('multer')({dest: utils.storeFilesPath.upload});
-let JSONError = require('../utils/JSONError');
-let Joi = require('joi');
-let wrap = fn => (...args) => fn(...args).catch(args[2]);
+const Router = require('koa-router');
+const send = require('koa-send');
+const Joi = require('joi');
+const Interview = require('../modules/interviewee');
+const Club = require('../modules/club');
+const qiniu = require('../utils/qiniu');
+const mid = require('../utils/middleware');
+const office = require('../utils/office');
+const utils = require('../utils/utils');
+const JSONError = require('../utils/JSONError');
 
-router.post('/uploadFile', upload.single('file'), wrap(async function (req, res) {
+const router = new Router({
+   prefix: '/common'
+});
 
-    let file = req.file;
-    let fileName = file.originalname;
+router.post('/uploadFile',  async function (ctx) {
 
-    let result = await qiniu.qiniuUpload(file.path, fileName)
+    const file = ctx.request.files;
+    const fileName = file.file.name;
 
-    res.send(200, result);
-}));
+    const result = await qiniu.qiniuUpload(file.file.path, fileName)
+
+    ctx.response.status = 200;
+    ctx.response.body = result;
+});
 
 router.get('/download', mid.checkFormat(function () {
     return Joi.object().keys({
         cid: Joi.number()
     })
-}), wrap(async function (req, res) {
-    let cid = req.query.cid;
-    let dbData = await Interview.queryByClubAll(cid);
-    let departments = (await Club.getClubInfo(cid)).departments;
+}),async function (ctx) {
+    const cid = ctx.request.query.cid;
+    const dbData = await Interview.queryByClubAll(cid);
+    const departments = (await Club.getClubInfo(cid)).departments;
     let departName = {};
     departments.forEach(e => {
        departName[e.did] = e.name;
@@ -49,36 +52,40 @@ router.get('/download', mid.checkFormat(function () {
         ext: '.zip'
     });
     const filename = path.format({
-        name: cid,
+        name: '/files/zip/1/'+ cid,
         ext: '.zip'
     });
-    res.download(file, filename);
-}));
+
+    ctx.attachment(file);
+    await send(ctx,filename);
+});
 
 /**
  * @params Number clubId 社团Id
  * @return 204
  */
 //报名界面获取社团信息
-router.get('/clubInfo', mid.checkFormat(function () {
+router.get('/clubInfo',mid.checkFormat(function () {
         return Joi.object().keys({
             clubId: Joi.number()
         })
-}), wrap(async function (req, res) {
-    let cid = req.query.clubId;
-    let result = await Club.getClubInfo(cid);
-    let info = {
+}),async function (ctx) {
+    const cid = ctx.request.query.clubId;
+    const result = await Club.getClubInfo(cid);
+    if (!result) {
+        throw new JSONError('社团未注册', 403);
+    }
+    const info = {
+        cid:result.cid,
         clubName: result.name,
         departments: result.departments,
         maxDep: result.maxDep,
         attention: result.attention
     };
 
-    return res.json({
-        status: 200,
-        message: info
-    });
-}));
+    ctx.response.status = 200;
+    ctx.response.body = info;
+});
 
 /**
  * @params String user 登录用户名
@@ -91,22 +98,20 @@ router.post('/login', mid.checkFormat(function () {
         user: Joi.string().required(),
         password: Joi.string().required()
     })
-}), wrap(async function (req, res) {
-    let user = req.body.user;
-    let password = utils.md5(req.body.password);
+}),async function (ctx) {
+    let {user, password} = ctx.request.body;
+    password = utils.md5(String(password));
     let clubInfo = await Club.getClubByName(user);
-    if (clubInfo && password == clubInfo.password && user == clubInfo.name) {
-        clubInfo = clubInfo.toObject();
-        delete clubInfo.password;
-        req.session.club = clubInfo.name;
-        req.session.cid = clubInfo.cid;
-        return res.json({
-            status: 200,
-            message: clubInfo
-        });
-    } else {
+    if (!(clubInfo && password === clubInfo.password && user === clubInfo.name)){
         throw new JSONError('用户名或密码错误', 403);
     }
-}));
+        clubInfo = clubInfo.toObject();
+        delete clubInfo.password;
+        ctx.session.club = clubInfo.name;
+        ctx.session.cid = clubInfo.cid;
+        ctx.response.status = 200;
+        ctx.response.body = clubInfo;
+    }
+);
 
 module.exports = router;

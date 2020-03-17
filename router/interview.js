@@ -1,41 +1,43 @@
 /**
  * Created by bangbang93 on 14-9-15.
  */
-let wrap = fn => (...args) => fn(...args).catch(args[2]);
-let express = require('express');
-let router = express.Router();
-let Interviewee = require('../modules/interviewee');
-let Joi = require('joi');
-let mid = require('../utils/middleware');
-let JSONError = require('../utils/JSONError');
+const Router = require('koa-router');
+const Joi = require('joi');
+const Interviewee = require('../modules/interviewee');
+const club = require('../modules/club');
+const mid = require('../utils/middleware');
+const JSONError = require('../utils/JSONError');
+
+const router = new Router({
+    prefix: '/interview'
+});
 
 /**
  * 测试成功
  */
 
-router.post('/recommend', mid.checkFormat(function () {
+router.post('/recommend',mid.checkFormat(function () {
     return Joi.object().keys({
         sid: Joi.number(),
         departmentId: Joi.number(),
         score: Joi.number().valid([1, 2, 3, 4, 5]),
         comment: Joi.string()
     })
-}), wrap(async function (req, res) {
-    let sid = req.body.sid;
-    let departmentId = req.body.departmentId;
-    let cid = req.session.cid;
-    let score = req.body.score;
-    let comment = req.body.comment;
-    let interviewer = req.session.interviewer;
+}), async function (ctx) {
+    const {sid,departmentId,score,comment} = ctx.request.body;
+    const {interviewer,cid} = ctx.session;
+
     await Interviewee.rateInterviewee(cid, sid, score, comment, departmentId, interviewer);
     let interviewerInfo = await Interviewee.getInterviewerInfo(sid, cid);
-    if (interviewerInfo.volunteer.indexOf(departmentId) >= 0) throw new JSONError('不能重复推荐部门', 403);
+    if (interviewerInfo.volunteer.indexOf(departmentId) >= 0) {
+        throw new JSONError('不能重复推荐部门', 403);
+    }
     interviewerInfo.volunteer.push(departmentId);
     interviewerInfo.busy = false;
     interviewerInfo.save();
-    await Interviewee.delVolunteer(cid,sid, departmentId)
-    return res.send(204);
-}));
+    await Interviewee.delVolunteer(cid,sid, departmentId);
+    ctx.response.status = 204;
+});
 
 /**
  * 测试成功
@@ -47,81 +49,111 @@ router.post('/rate', mid.checkFormat(function () {
         score: Joi.number().valid([1, 2, 3, 4, 5]),
         comment: Joi.string()
     })
-}), wrap(async function (req, res) {
-    let sid = req.body.sid;
-    let score = req.body.score;
-    let comment = req.body.comment;
-    let did = req.session.did;
-    let interviewer = req.session.interviewer;
-    let cid = req.session.cid;
+}),async function (ctx) {
+    const {sid,score,comment} = ctx.request.body;
+    const {did,interviewer,cid} = ctx.session;
 
     await Interviewee.rateInterviewee(cid, sid, score, comment, did, interviewer);
+    ctx.session.sid = undefined;
 
-    res.sendStatus(204);
-}));
+    ctx.response.status = 204;
+});
+
+/**
+ * 未测试
+ */
 
 /**
  * 测试通过(需要socket)(需测试)
  */
-
-router.get('/call', mid.checkFormat(function () {
+//插队的时候传sid
+router.get('/call',  mid.checkFormat(function () {
     return Joi.object().keys({
         sid: Joi.number()
     })
-}), wrap(async function (req, res) {
-    let department = req.session.did;
-    let sid = req.query.sid;
-    let cid = req.session.cid;
+}), async function (ctx) {
+    const {did,cid} = ctx.session;
+    const sid = ctx.request.query.sid;
     if (!sid) {
-        let result = await Interviewee.getNextInterviewee(cid, department);
+        let result = await Interviewee.getNextInterviewee(cid, did);
         if(result !== null){
             result = result.toObject();
-            result.did = department;
+            result.did = did;
         }
-        res.json(result);
+        ctx.response.body = result;
     } else {
-        let result = await Interviewee.getSpecifyInterviewee(sid, cid, department);
+        let result = await Interviewee.tocallNextInterviewee(sid, cid, did);
         result = result.toObject();
-        result.did = department;
-        res.json(result);
+        result.did = did;
+        ctx.response.body = result;
     }
-}));
+});
 
-/**
- * 测试成功
- */
 
-router.get('/queue', wrap(async function (req, res) {
-    let cid = req.session.cid;
-    let did = req.session.did;
-
-    let result = await Interviewee.getDepartmentQueueLength(cid, did);
-
-    res.json({
-        status: 200,
-        count: result
-    })
-}));
-
-/**
- * 测试成功
- */
-
-router.post('/skip', mid.checkFormat(function () {
+//确认面试是否开始
+router.get('/start',mid.checkFormat(function () {
     return Joi.object().keys({
         sid: Joi.number()
     })
-}), wrap(async function (req, res) {
-    let cid = req.session.cid;
-    let sid = req.body.sid;
-    let did = req.session.did;
+}), async function (ctx) {
+    const {did, cid} = ctx.session;
+    const sid = ctx.request.query.sid;
 
-    let result = await Interviewee.skip(cid, sid, did);
+    let result = await Interviewee.getSpecifyInterviewee(cid, did, sid);
 
-    res.json({
-        status: 200,
-        message: result
-    });
-}));
+    if(result === null){
+        ctx.response.body = '等待确认中';
+        ctx.response.status = 202;
+        return;
+    }
+    if(result.ifconfirm === 1){
+        result.did = did;
+        ctx.response.body = result;
+        ctx.response.status = 200;
+        return;
+    }
+    if(result.ifconfirm === 0){
+        throw new JSONError('该人已被跳过',403)
+    }
+
+});
+
+/**
+ * 测试成功
+ */
+
+router.get('/queue', async function (ctx) {
+    const {cid,did} = ctx.session;
+
+    const info = await club.getClubInfo(cid);
+    if (did < 0 || did > info.departments.length) {
+        throw new JSONError('不存在该部门', 403);
+    }
+
+    const result = await Interviewee.getDepartmentQueueLength(cid, did);
+
+    ctx.response.status = 200;
+    ctx.response.body = result;
+});
+
+/**
+ * 测试成功
+ */
+
+//跳过  测试成功
+router.post('/skip',mid.checkFormat(function () {
+    return Joi.object().keys({
+        sid: Joi.number()
+    })
+}),  async function (ctx) {
+    const {cid,did} = ctx.session;
+    const sid = ctx.request.body.sid;
+
+    const result = await Interviewee.skip(cid, sid, did);
+
+    ctx.response.status = 200;
+    ctx.response.body = result;
+
+});
 
 module.exports = router;

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>录入信息</title>
+    <link rel="stylesheet" href="lib/css/reset.css"/>
+    <link rel="stylesheet" type="text/css" href="lib/css/notifIt.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="css/common.css"/>
+    <link rel="stylesheet" href="css/manage.css"/>
+</head>
+<body>
+<header class="topBar">
+    <i class="material-icons" id="back">arrow_back</i>
+    <span class="title">
+		<span class="redhome">redhome</span>
+		<span>interview</span>
+	</span>
+    <span class="user">
+		<span>UserName</span>
+		<div class="avatar">R</div>
+	</span>
+</header>
+<div class="container">
+    <!--tabList-->
+    <div class="tabList">
+        <div class="mdc-tab-bar" role="tablist">
+            <div class="mdc-tab-scroller">
+                <div class="mdc-tab-scroller__scroll-area">
+                    <div class="mdc-tab-scroller__scroll-content">
+                        <button class="mdc-tab" role="tab" aria-selected="true" tabindex="0">
+                            <span class="mdc-tab__content">
+                                <span class="mdc-tab__text-label">Statistics</span>
+                             </span>
+                            <span class="mdc-tab-indicator">
+                                <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                            </span>
+                            <span class="mdc-tab__ripple"></span>
+                        </button>
+                        <button class="mdc-tab" role="tab" aria-selected="false" tabindex="-1">
+                            <span class="mdc-tab__content">
+                                <span class="mdc-tab__text-label">apply</span>
+                            </span>
+                            <span class="mdc-tab-indicator">
+                                <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                            </span>
+                            <span class="mdc-tab__ripple"></span>
+                        </button>
+                        <button class="mdc-tab" role="tab" aria-selected="false" tabindex="-1">
+                            <span class="mdc-tab__content">
+                                <span class="mdc-tab__text-label">Interview</span>
+                            </span>
+                            <span class="mdc-tab-indicator">
+                                <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                            </span>
+                            <span class="mdc-tab__ripple"></span>
+                        </button>
+                        <button class="mdc-tab" role="tab" aria-selected="false" tabindex="-1">
+                            <span class="mdc-tab__content">
+                                <span class="mdc-tab__text-label">Settings</span>
+                            </span>
+                            <span class="mdc-tab-indicator">
+                                <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                            </span>
+                            <span class="mdc-tab__ripple"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--tabContainer-->
+    <div class="tabContainer">
+        <!--        filter-->
+        <div class="tableContainer">
+            <div class="filter">
+                <i class="material-icons middle">filter_list</i>
+                <div class="conditions middle">
+                    <div class="mdc-chip-set" role="grid">
+                    </div>
+                </div>
+                <button class="mdc-fab mdc-fab--mini middle" aria-label="Favorite" id="addFilter">
+                    <div class="mdc-fab__ripple"></div>
+                    <span class="mdc-fab__icon material-icons">add</span>
+                </button>
+            </div>
+
+            <div class="mdc-data-table">
+                <table id="export" class="mdc-data-table__table" aria-label="Dessert calories">
+                </table>
+            </div>
+        </div>
+
+        <div class="uploadContainer">
+            <div class="clubName"></div>
+            <div class="writeInfo">
+                <div class="classroom">
+                    <i class="material-icons">location_on</i>
+                    <span class="title">教室</span>
+                </div>
+            </div>
+            <div>
+                <span id="select" class="select">
+                    <div>
+                        <i class="material-icons">insert_drive_file</i>
+                        <span class="title">选择文件</span>
+                    </div>
+                    <form enctype="multipart/form-data">
+                        <input type="file" name="archive" id="file"
+                               accept="application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"/>
+                    </form>
+                </span>
+                <button class="mdc-button mdc-button--raised" id="submit">
+                    <span class="mdc-button__ripple"></span> 提交
+                </button>
+            </div>
+            <div>
+                <div>
+                    <i class="material-icons">cloud_download</i>
+                    <span class="title">下载报名信息</span>
+                </div>
+                <a class="mdc-button mdc-button--raised" id="download">
+                    <span class="mdc-button__ripple"></span> 下载
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<footer class="copyright"></footer>
+</body>
+<script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+<script type="text/javascript" src="lib/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
+<script type="text/javascript" src="js/manage.js"></script>
+</html>

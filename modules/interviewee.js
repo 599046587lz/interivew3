@@ -78,7 +78,7 @@ exports.getNextInterviewee = function (cid, did) {
             busy: false,
             signTime: {$ne: null},
             ifconfirm: 2,
-            calldid: undefined
+            calldid: null
         }).$where(new Function('let volunteer = this.volunteer;' +
             'let done = this.done;' +
             'return (volunteer.length != done.length) && (done.indexOf(' + did + ') == -1);'
@@ -124,6 +124,11 @@ exports.getSignedInterviewee = function (cid) {
    }).$where('this.volunteer.length != this.done.length'
    ).sort({
        signTime: 'asc'
+   }).then(result => {
+       result.forEach(i => {
+           i.volunteer = i.volunteer.filter(function (e) {return i.done.indexOf(e) === -1});
+       });
+       return result;
    })
 };
 
@@ -170,7 +175,7 @@ exports.tocallNextInterviewee = function (sid, cid, did) {
         if (result === null) {
             throw new JSONError('该同学未报名',403);
         }
-        if (result.calldid !== undefined) {
+        if (result.calldid !== null ) {
             throw new JSONError('该同学已被别的部门叫走',403);
         }
         if (result.done.indexOf(did * 1) !== -1) {
@@ -190,12 +195,22 @@ exports.getSpecifyInterviewee = function (cid, did, sid) {
                 ifcall: true,
                 ifsign: true,
                 busy: false,
-                calldid: did
+                calldid: did,
+                ifconfirm : 1
         };
         if(sid){
             data.sid = sid;
         }
-        return IntervieweeModel.findOne(data);
+
+    return IntervieweeModel.findOneAndUpdate(data,{busy:true}).then(result => {
+        if(result !== null){
+            return result;
+        } else {
+            data.ifconfirm = 0;
+            return  IntervieweeModel.findOneAndUpdate(data,{ifsign:false,ifcall:false})
+        }
+    })
+
 };
 
 exports.rateInterviewee =  function (cid, sid, score, comment, did, interviewer) {
@@ -219,7 +234,7 @@ exports.rateInterviewee =  function (cid, sid, score, comment, did, interviewer)
             result.busy = false;
             result.ifconfirm = 2;
             result.signTime = new Date();
-            result.calldid = undefined;
+            result.calldid = null;
             return result.save();
         });
 };
@@ -231,7 +246,8 @@ exports.getDepartmentQueueLength = function (cid, did) {
             busy: {$ne: true},
             signTime: {$ne: null},
             done: {$ne: did},
-            ifconfirm:2
+            ifconfirm:2,
+            calldid: null
         }).then(result => {
             return result.length;
         });
@@ -258,6 +274,8 @@ exports.skip = function (cid, sid, did) {
             result.signTime = new Date();
             result.busy = false;
             result.volunteer.splice(result.volunteer.indexOf(did), 1);
+            result.ifconfirm = 2;
+            result.calldid = null;
             result.ifcall = false;
             result.save();
             return '跳过成功';

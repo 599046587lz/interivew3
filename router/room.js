@@ -31,10 +31,12 @@ router.get('/sign', mid.checkFormat(function () {
     if (!info) {
         throw new JSONError('该学生未报名', 403);
     }
-    if (info.signTime) {
+    if (info.ifsign) {
         info = null;
     } else {
         info.signTime = new Date();
+        info.calldid = null;
+        info.ifconfirm = 2;
         const result = await Interviewee.getSignNumber(cid);
         info.signNumber = result;
         info.save();

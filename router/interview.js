@@ -99,21 +99,22 @@ router.get('/start',mid.checkFormat(function () {
     const sid = ctx.request.query.sid;
 
     let result = await Interviewee.getSpecifyInterviewee(cid, did, sid);
-    if (result.ifconfirm === 0) {
-            result.ifsign = false;
-            result.ifcall = false;
-            result.save();
-            throw new JSONError('该学生跳过', 403);
-    } else if (result.ifconfirm === 2) {
-            ctx.response.body = '等待确认中';
-            ctx.response.status = 202;
-    } else {
-            result.busy = true;
-            result.save();
-            result.did = did;
-            ctx.response.body = result;
-            ctx.response.status = 200;
+
+    if(result === null){
+        ctx.response.body = '等待确认中';
+        ctx.response.status = 202;
+        return;
     }
+    if(result.ifconfirm === 1){
+        result.did = did;
+        ctx.response.body = result;
+        ctx.response.status = 200;
+        return;
+    }
+    if(result.ifconfirm === 0){
+        throw new JSONError('该人已被跳过',403)
+    }
+
 });
 
 /**

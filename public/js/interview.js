@@ -149,7 +149,18 @@ $(function () {
   })
   //call by staffId number 1
   $callCard.find('.link').on('click', function () {
-    dialog.open()
+    dialog.open('Input StaffId', function () {
+      var sid = dialog.text.value;
+      if ((/[0-9]{8}/).test(sid)) {
+        callNext(sid)
+      } else {
+        snackbar.err('学号格式有误！请重新输入')
+      }
+      dialog.reset()
+    }, function () {
+      stepCtl.prev();
+      dialog.reset()
+    })
   })
 
   // open comment or Skip
@@ -209,6 +220,13 @@ $(function () {
         204: function () {
           getQueueNumber();
           stepCtl.next()
+        },
+        200: function (data) {
+          stepCtl.next()
+          stepCtl.next()
+          stepCtl.next()
+          renderComment(data.name, data.major, data.sid, data.notion)
+          snackbar.success('您还有人未面试结束！请先结束此次面试！')
         }
       }
     })
@@ -279,7 +297,9 @@ $(function () {
           stepCtl.prev();
         },
         202: function () {
-          waitConfirm(sid)
+          setTimeout(() => {
+            waitConfirm(sid) //降低start请求的频繁程度
+          },500)
         }
       }
     })
@@ -299,30 +319,33 @@ $(function () {
 
     if (score === 0) {
       snackbar.err('请先进行评分')
-    } else if (comment === '') {
-      snackbar.err('请先进行评论')
-    } else {
-      $.ajax({
-        url: baseURL + 'interview/rate',
-        type: 'post',
-        data: {
-          sid: sid,
-          score: score,
-          comment: comment
-        },
-        statusCode: {
-          204: function () {
-            snackbar.success('评论成功，将跳转至叫号页面');
-            clock.clear()
-            node.value = '';
-            slider.value = 0;
-            stepCtl.next()
-            getQueueNumber()
-          }
-        }
-      })
+      return
     }
+    if (comment === '') {
+      snackbar.err('请先进行评论')
+      return
+    }
+    $.ajax({
+      url: baseURL + 'interview/rate',
+      type: 'post',
+      data: {
+        sid: sid,
+        score: score,
+        comment: comment
+      },
+      statusCode: {
+        204: function () {
+          snackbar.success('评论成功，将跳转至叫号页面');
+          clock.clear()
+          node.value = '';
+          slider.value = 0;
+          stepCtl.next()
+          getQueueNumber()
+        }
+      }
+    })
   }
+
 
   var apiSkip = function () {
     var sid = $informationCard.find('.mdc-chip .mdc-chip__text').text();
@@ -345,18 +368,7 @@ $(function () {
     })
   }
 
-  dialog.init('Input StaffId', function () {
-    var sid = dialog.text.value;
-    if ((/[0-9]{8}/).test(sid)) {
-      callNext(sid)
-    } else {
-      snackbar.err('学号格式有误！请重新输入')
-    }
-    dialog.reset()
-  }, function () {
-    stepCtl.prev();
-    dialog.reset()
-  })
+
 
   getDepartmentInfo()
 

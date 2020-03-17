@@ -1,57 +1,66 @@
-var $back = $('.topBar #back')
-
-$back.on('click', function () {
+$('#back').on('click', function () {
   window.history.back();
 })
 
 
 function Snackbar() {
-  var $snackbarHtml = $
-  (`<div class="mdc-snackbar">
+  var $snackbar = $
+  (`<div class="mdc-snackbar mdc-snackbar--leading">
             <div class="mdc-snackbar__surface">
-                <i class="material-icons sign done">done_all</i>
-                <i class="material-icons sign error">error_outline</i>
+                <i class="icon"></i>
                 <div class="mdc-snackbar__label" role="status" aria-live="polite">
                 </div>
                 <div class="mdc-snackbar__actions">
-                    <button type="button" class="mdc-button mdc-snackbar__action">
-                    <i class="material-icons cancel">clear</i>
+                    <button type="button" class="mdc-button mdc-snackbar__action cancel">
+                    <i class="material-icons">clear</i>
                     </button>
-                     <button type="button" class="mdc-button mdc-snackbar__action">
-                    <i class="material-icons ok">done</i>
+                     <button type="button" class="mdc-button mdc-snackbar__action ok">
+                    <i class="material-icons">done</i>
                     </button>
                 </div>
             </div>
         </div>`)
-  $('body').append($snackbarHtml);
-  this.element = $snackbarHtml[0]
-  this.snackbar = mdc.snackbar.MDCSnackbar.attachTo(this.element)
-  this.$snackbar = $snackbarHtml
+  $('body').append($snackbar);
+  this.snackbar = mdc.snackbar.MDCSnackbar.attachTo($snackbar[0])
+  this.$snackbar = $snackbar
+  this.$cancelButton = $snackbar.find('.cancel')
+  this.$okButton = $snackbar.find('.ok')
 }
-
-Snackbar.prototype.success = function (content) {
-  this.popup('success', content)
-}
-Snackbar.prototype.err = function (content) {
-  this.popup('error', content)
-}
-Snackbar.prototype.confirm = function (content, cancel, ok) {
-  this.$snackbar.find('.cancel').unbind('click')
-  this.$snackbar.find('.ok').unbind('click')
-  this.$snackbar.find('.cancel').on('click', function () {
-    cancel()
-  })
-  this.$snackbar.find('.ok').on('click', function () {
-    ok()
-  })
-  this.popup('confirm', content)
-}
-
-Snackbar.prototype.popup = function (type, content) {
+Snackbar.prototype.popup = function (type, content, timeout) {
   this.$snackbar.removeClass('success error confirm');
   this.$snackbar.addClass(type);
   this.snackbar.labelText = content;
+  this.snackbar.timeoutMs = timeout || 5000;
   this.snackbar.open()
+}
+Snackbar.prototype.success = function (content) {
+  return this.popup('success', content)
+}
+Snackbar.prototype.err = function (content) {
+  return this.popup('error', content)
+}
+Snackbar.prototype.confirm = function (content, ok, cancel) {
+  var $okButton = this.$okButton
+  var $cancelButton =  this.$cancelButton
+
+  var okCallback = function() {
+    if (typeof ok === 'function') {
+      ok()
+    }
+    $okButton.off('click', okCallback)
+    $cancelButton.off('click', cancelCallback)
+  }
+  var cancelCallback = function() {
+    if (typeof cancel === 'function') {
+      cancel()
+    }
+    $okButton.off('click', okCallback)
+    $cancelButton.off('click', cancelCallback)
+  }
+
+  $okButton.on('click', okCallback)
+  $cancelButton.on('click', cancelCallback)
+  this.popup('confirm', content, -1)
 }
 
 window.snackbar = new Snackbar()
@@ -121,24 +130,37 @@ function Dialog() {
   $('body').append($dialogHtml);
   this.dialog = mdc.dialog.MDCDialog.attachTo($dialogHtml[0]);
   this.$dialog = $dialogHtml;
-}
-
-Dialog.prototype.open = function () {
-  this.dialog.open()
-}
-
-Dialog.prototype.init = function (content, ok, cancel) {
-  this.$dialog.html(this.$dialog.html().replace('_content', content))
   this.select = mdc.select.MDCSelect.attachTo(this.$dialog.find('.mdc-select')[0]);
   this.text = mdc.textField.MDCTextField.attachTo(this.$dialog.find('.mdc-text-field')[0]);
-  this.$dialog.find('.ok').unbind('click')
-  this.$dialog.find('.cancel').unbind('click')
-  this.$dialog.find('.ok').on('click', function () {
-    ok()
-  })
-  this.$dialog.find('.cancel').on('click', function () {
-    cancel()
-  })
+  this.$cancelButton = this.$dialog.find('.cancel')
+  this.$okButton = this.$dialog.find('.ok')
+  this.$title = this.$dialog.find('.mdc-dialog__title')
+}
+
+Dialog.prototype.open = function (content, ok, cancel) {
+  this.$title.html(`<!---->_content<!---->`.replace('_content', content))
+  var $okButton = this.$okButton;
+  var $cancelButton = this.$cancelButton;
+
+  var cancelCallback =  function () {
+    if (typeof cancel === 'function') {
+      cancel()
+    }
+    $cancelButton.off('click',cancelCallback)
+    $okButton.off('click',okCallback)
+  }
+
+  var okCallback = function(){
+    if (typeof ok === 'function') {
+      ok()
+    }
+    $cancelButton.off('click',cancelCallback)
+    $okButton.off('click',okCallback)
+  }
+
+  $okButton.on('click', okCallback)
+  $cancelButton.on('click',cancelCallback)
+  this.dialog.open()
 }
 
 Dialog.prototype.reset = function(){

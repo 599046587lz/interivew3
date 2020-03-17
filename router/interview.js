@@ -54,6 +54,7 @@ router.post('/rate', mid.checkFormat(function () {
     const {did,interviewer,cid} = ctx.session;
 
     await Interviewee.rateInterviewee(cid, sid, score, comment, did, interviewer);
+    ctx.session.sid = undefined;
 
     ctx.response.status = 204;
 });

@@ -19,11 +19,16 @@ const router = new Router({
  * @return HTTP 204
  */
 
-router.post('/setIdentify', function (ctx) {
-    const name = ctx.session.club;
+router.post('/setIdentify',async function (ctx) {
+    const {cid,club} = ctx.session;
     const {did,interviewerName} = ctx.request.body;
-    if (!name) {
-        return ctx.response.status = 403;
+    if (!club) {
+        throw new JSONError('此社团不存在或未登录',403);
+    }
+    if(ctx.session.did === did && ctx.session.interviewer === interviewerName && ctx.session.sid){
+        const result = await Interviewee.getIntervieweeBySid(ctx.session.sid,cid)
+        ctx.response.body = result
+        return
     }
     ctx.session.did = did;
     ctx.session.interviewer = interviewerName;

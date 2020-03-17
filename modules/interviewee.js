@@ -195,12 +195,22 @@ exports.getSpecifyInterviewee = function (cid, did, sid) {
                 ifcall: true,
                 ifsign: true,
                 busy: false,
-                calldid: did
+                calldid: did,
+                ifconfirm : 1
         };
         if(sid){
             data.sid = sid;
         }
-        return IntervieweeModel.findOne(data);
+
+    return IntervieweeModel.findOneAndUpdate(data,{busy:true}).then(result => {
+        if(result !== null){
+            return result;
+        } else {
+            data.ifconfirm = 0;
+            return  IntervieweeModel.findOneAndUpdate(data,{ifsign:false,ifcall:false})
+        }
+    })
+
 };
 
 exports.rateInterviewee =  function (cid, sid, score, comment, did, interviewer) {

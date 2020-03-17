@@ -236,7 +236,8 @@ exports.getDepartmentQueueLength = function (cid, did) {
             busy: {$ne: true},
             signTime: {$ne: null},
             done: {$ne: did},
-            ifconfirm:2
+            ifconfirm:2,
+            calldid: null
         }).then(result => {
             return result.length;
         });

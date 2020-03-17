@@ -298,7 +298,7 @@ $(function () {
         },
         202: function () {
           setTimeout(() => {
-            waitConfirm(sid)
+            waitConfirm(sid) //降低start请求的频繁程度
           },500)
         }
       }

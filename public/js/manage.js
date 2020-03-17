@@ -227,7 +227,7 @@ $(function () {
             processData: false,
             contentType: false,
             success: function (data) {
-              snackbar.success("上传文件成功！已成功上传 " + data.count + " 人的信息。");
+              snackbar.success("上传文件成功！已成功上传 " + data + " 人的信息。");
             },
             error: function () {
               snackbar.err("与服务器通讯失败，请稍后再试！");

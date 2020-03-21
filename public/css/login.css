@@ -47,6 +47,19 @@ body {
     margin-bottom: 40px;
 }
 
+.loading{
+    border: 2px solid white;
+    border-bottom-color: transparent;
+    border-right-color: transparent;
+    display: none;
+}
+#login.load .loading {
+    display: inline-block;
+}
+#login.load .mdc-button__label {
+    display: none;
+}
+
 .mdc-text-field--with-trailing-icon.mdc-text-field--outlined .mdc-text-field__icon.visibility {
     pointer-events: auto;
     /*display: none;*/

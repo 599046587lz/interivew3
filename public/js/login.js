@@ -6,6 +6,7 @@ $(function () {
 
     var pass_input = $("#password")[0]
     var $visibility = $("#visibility")
+    var $login = $('#login');
 
     $visibility.on('mousedown',function () {
         pass_input.focus()
@@ -24,7 +25,7 @@ $(function () {
         }
     })
 
-    $(".button").click(function (e) {
+    $login.click(function (e) {
         e.preventDefault()
 
         var account = $("[name=username]").val();
@@ -37,27 +38,27 @@ $(function () {
             contentType: "application/json",
             // dataType: 'json',
             beforeSend: function () {
-                $(".button").addClass('loading');
+                $login.addClass('load')
             },
             statusCode: {
                 200: function () {
                     snackbar.success('登陆成功!');
                     setTimeout(function () {
-                        window.location.href = "select.html";
+                        window.location.href = "./select.html";
                     }, 500);
                 },
                 403: function () {
-                    err("帐号或密码错误！");
+                    snackbar.err("帐号或密码错误！");
                 },
                 404: function () {
-                    err("Page not found!");
+                    snackbar.err("Page not found!");
                 },
                 500: function () {
-                    err('服务器错误,请重试!');
+                    snackbar.err('服务器错误,请重试!');
                 }
             },
             complete: function () {
-                $(".button").removeClass('loading');
+                $login.removeClass('load');
             }
         });
     });

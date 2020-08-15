@@ -204,6 +204,7 @@ warning .check {
     width: 17px;
     height: 17px;
     padding: 10px;
+    cursor: pointer;
 }
 
 .popup .pop_title {
@@ -338,4 +339,8 @@ footer p:before,.footer:before {
     width: 175px;
     height: 20px;
     line-height: 20px;
+}
+
+.hide{
+    display: none;
 }

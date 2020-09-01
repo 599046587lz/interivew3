@@ -392,7 +392,7 @@ $(function () {
             return;
         }
 
-        var regSid = /^1[0-9]{7}$/;
+        var regSid = /^[1-9][0-9]{7}$/;
         if(!finalData.sid){
             warning("还没有填写学号哦~");
             return;

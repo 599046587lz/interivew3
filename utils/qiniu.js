@@ -10,7 +10,7 @@ let getUploadToken = function(filePath) {
     let bucket = config.QINIU_BUCKET;
     let buffer = readChunk.sync(filePath, 0, 4100);
     let isImg = '';
-    let type = filetype(buffer);
+    let type = filetype.fromFile(buffer);
     if(type.ext === "gif" || type.ext === "png" || type.ext === "jpg") isImg = '?imageView2/0/format/jpg/q/75|imageslim'
     let options = {
         scope: bucket,
